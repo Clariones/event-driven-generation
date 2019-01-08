@@ -66,6 +66,9 @@ public class EventInfo extends BaseEventElement{
 		return Utils.toCamelCase(name);
 	}
 	public boolean isHasBranch() {
+		if (branches == null) {
+			return false;
+		}
 		return branches.size() > 1;
 	}
 	public List<EventProcessResultBranch> getDefinedBranches(){
@@ -84,6 +87,9 @@ public class EventInfo extends BaseEventElement{
 		return bchs;
 	}
 	public EventProcessResultBranch getDefaultBranch() {
+		if (branches == null || branches.isEmpty()) {
+			return new EventProcessResultBranch();
+		}
 		if (branches.size() == 1) {
 			return branches.values().iterator().next();
 		}
@@ -97,4 +103,5 @@ public class EventInfo extends BaseEventElement{
 		String key = keyList.get(0);
 		return branches.get(key);
 	}
+	
 }

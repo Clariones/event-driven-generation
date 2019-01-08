@@ -1,4 +1,4 @@
-	// ///////////////////////////// ${event.comments} //////////////////////////////////
+	// ///////////////////////////// ${event.comments!} //////////////////////////////////
 	<#if event.externalEvent>public<#else>protected</#if> void on${event.javaName}(${context_name} ctx) throws Exception{
 		checkCanDo${event.javaName}(ctx);
 <#if event.hasBranch>

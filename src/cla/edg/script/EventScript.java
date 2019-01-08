@@ -1,7 +1,10 @@
 package cla.edg.script;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class EventScript extends BasicEventScriptInfo {
-	public EventScript handle_event(String eventName) {
+	public EventScript on_event(String eventName) {
 		EventInfo newEvent = new EventInfo();
 		newEvent.setName(eventName);
 		addEventInfo(newEvent);
@@ -72,7 +75,31 @@ public class EventScript extends BasicEventScriptInfo {
 	}
 
 	
+	public List<String> getAllBranchCode(){
+		if (this.events == null) {
+			return new ArrayList<>();
+		}
+		
+		List<String> result = new ArrayList<>();
+		result.add("by default");
+		for(EventInfo event : this.events) {
+			if (event.branches == null) {
+				continue;
+			}
+			for(EventProcessResultBranch bch : event.branches.values()) {
+				if (result.contains(bch.getConditionCode())) {
+					continue;
+				}
+				result.add(bch.getConditionCode());
+			}
+		}
+		return result;
+	}
 
+	public EventScript done() {
+		setCurrentOperation((EventInfo)null);
+		return this;
+	}
 	
 
 }
