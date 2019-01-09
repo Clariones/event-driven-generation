@@ -79,17 +79,23 @@ public class Generator {
 	}
 	
 	private void verifyScriptWasFinished(EventScript script) {
+		// 事件不能定义多个处理
 		// 所有事件涟漪必须被处理
 		// 所有 internal event 必须被触发
 		Set<String> eventRippleSet = new HashSet<>();
 		Set<String> publicEventSet = new HashSet<>();
 		Set<String> internalEventSet = new HashSet<>();
+		Set<String> duplicateEventSet = new HashSet<>();
 		// 先收集所有数据
 		for(EventInfo eventInfo : script.getEvents()) {
+			boolean added = false;
 			if (eventInfo.isExternalEvent()) {
-				publicEventSet.add(eventInfo.getName());
+				added = publicEventSet.add(eventInfo.getName());
 			}else {
-				internalEventSet.add(eventInfo.getName());
+				added = internalEventSet.add(eventInfo.getName());
+			}
+			if (!added) {
+				duplicateEventSet.add(eventInfo.getName());
 			}
 			if (eventInfo.getBranches() == null) {
 				continue;
@@ -102,6 +108,10 @@ public class Generator {
 					eventRippleSet.add(evtRpl.getEventCode());
 				}
 			}
+		}
+		// 事件不能定义多个处理
+		if (duplicateEventSet.size() > 0) {
+			throw new RuntimeException("以下事件被重复定义："+duplicateEventSet);
 		}
 		// 所有事件涟漪必须被处理
 		Set<String> allEvtRpls = new HashSet<>(eventRippleSet);

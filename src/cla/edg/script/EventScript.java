@@ -100,6 +100,10 @@ public class EventScript extends BasicEventScriptInfo {
 		setCurrentOperation((EventInfo)null);
 		return this;
 	}
+
+	public EventScript when_others() {
+		return when("by default");
+	}
 	
 
 }
