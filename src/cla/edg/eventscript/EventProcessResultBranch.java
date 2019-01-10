@@ -1,4 +1,4 @@
-package cla.edg.script;
+package cla.edg.eventscript;
 
 import java.util.LinkedList;
 import java.util.List;

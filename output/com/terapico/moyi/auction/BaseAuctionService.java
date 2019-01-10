@@ -108,9 +108,10 @@ public abstract class BaseAuctionService extends CustomMoyiCheckerManager{
 		checkCanDoSellerPutInkDeedToSale(ctx);
 		int processResult = processSellerPutInkDeedToSale(ctx);
 		switch(processResult) {
-		case PERMITTED: // 可以正常发售墨契
+		case PERMITTED: {// 可以正常发售墨契
 			sync().onFreezeSellerDepositBecauseOfInkDeedSold(ctx);
 			sync().onCreateInkDeedTransaction(ctx);
+			}
 			break;
 		default: // 卖家的保证金不足以支持此次墨契的发售
 			sync().onLackOfSellerDeposit(ctx);
@@ -194,9 +195,10 @@ public abstract class BaseAuctionService extends CustomMoyiCheckerManager{
 		checkCanDoBidderBookAuction(ctx);
 		int processResult = processBidderBookAuction(ctx);
 		switch(processResult) {
-		case HAS_REFEREE: // 是通过荐宝人的链接触发的
+		case HAS_REFEREE: {// 是通过荐宝人的链接触发的
 			sync().onRecordRefereeForBidder(ctx);
 			sync().onRegisterBidder(ctx);
+			}
 			break;
 		default: // 不是荐宝人推荐的
 			sync().onRegisterBidder(ctx);
@@ -262,11 +264,13 @@ public abstract class BaseAuctionService extends CustomMoyiCheckerManager{
 		checkCanDoBidderOfferPrice(ctx);
 		int processResult = processBidderOfferPrice(ctx);
 		switch(processResult) {
-		case NOT_CONFIRMED_BIDDER: // 未交足够的保证金
+		case NOT_CONFIRMED_BIDDER: {// 未交足够的保证金
 			sync().onLackOfBidderDeposit(ctx);
+			}
 			break;
-		case NOT_REGISTER_BIDDER: // 未注册过的竞拍者
+		case NOT_REGISTER_BIDDER: {// 未注册过的竞拍者
 			sync().onRegisterBidder(ctx);
+			}
 			break;
 		default: // 可以正常出价
 			sync().onUpdateBiddingPrice(ctx);
@@ -291,6 +295,7 @@ public abstract class BaseAuctionService extends CustomMoyiCheckerManager{
 	protected void onAuctionClosedAsDeal(MoyiUserContext ctx) throws Exception{
 		checkCanDoAuctionClosedAsDeal(ctx);
 		processAuctionClosedAsDeal(ctx);
+		sync().onReleaseBidderDeposit(ctx);
 		sync().onCreateAuctionOrders(ctx);
 		writeLogsForAuctionClosedAsDeal(ctx);
 		async().notifyRelevantPersonsWhenAuctionClosedAsDeal(ctx);
@@ -311,7 +316,6 @@ public abstract class BaseAuctionService extends CustomMoyiCheckerManager{
 	public void onBuyerPayAuctionOrders(MoyiUserContext ctx) throws Exception{
 		checkCanDoBuyerPayAuctionOrders(ctx);
 		processBuyerPayAuctionOrders(ctx);
-		sync().onReleaseBidderDeposit(ctx);
 		writeLogsForBuyerPayAuctionOrders(ctx);
 		async().notifyRelevantPersonsWhenBuyerPayAuctionOrders(ctx);
 	}
@@ -352,7 +356,6 @@ public abstract class BaseAuctionService extends CustomMoyiCheckerManager{
 		processBuyerConfirmPurchase(ctx);
 		sync().onPlatformExchangeInkDeed(ctx);
 		sync().onReleaseSellerDepositWithoutDrawback(ctx);
-		sync().onReleaseBidderDeposit(ctx);
 		sync().onSellerGetTheSalesIncome(ctx);
 		sync().onAuctionTradeFinish(ctx);
 		writeLogsForBuyerConfirmPurchase(ctx);
@@ -452,8 +455,9 @@ public abstract class BaseAuctionService extends CustomMoyiCheckerManager{
 		checkCanDoAuctionClosedByTime(ctx);
 		int processResult = processAuctionClosedByTime(ctx);
 		switch(processResult) {
-		case DEAL: // deal
+		case DEAL: {// deal
 			sync().onAuctionClosedAsDeal(ctx);
+			}
 			break;
 		default: // 流拍
 			sync().onAuctionClosedAsBoughtIn(ctx);
@@ -542,10 +546,11 @@ public abstract class BaseAuctionService extends CustomMoyiCheckerManager{
 		checkCanDoAuctionClosedAsBoughtIn(ctx);
 		int processResult = processAuctionClosedAsBoughtIn(ctx);
 		switch(processResult) {
-		case NO_INK_DEED_SOLD: // 没有成交的墨契
+		case NO_INK_DEED_SOLD: {// 没有成交的墨契
 			sync().onReleaseSellerDepositWithoutDrawback(ctx);
 			sync().onReleaseBidderDeposit(ctx);
 			sync().onAuctionTradeTerminate(ctx);
+			}
 			break;
 		default: // 有已销售的墨契
 			sync().onDrawbackInkDeed(ctx);
@@ -635,18 +640,17 @@ public abstract class BaseAuctionService extends CustomMoyiCheckerManager{
 		checkCanDoBuyerBreached(ctx);
 		int processResult = processBuyerBreached(ctx);
 		switch(processResult) {
-		case NO_INK_DEED_SOLD: // 没有成交的墨契
+		case NO_INK_DEED_SOLD: {// 没有成交的墨契
 			sync().onConfiscateBuyerDeposit(ctx);
 			sync().onReleaseSellerDepositWithoutDrawback(ctx);
-			sync().onReleaseBidderDeposit(ctx);
 			sync().onRouteBuyerPenalty(ctx);
 			sync().onAuctionTradeTerminate(ctx);
+			}
 			break;
 		default: // 有已销售的墨契
 			sync().onConfiscateBuyerDeposit(ctx);
 			sync().onDrawbackInkDeed(ctx);
 			sync().onReleaseSellerDepositBecauseOfInkDeedDrawback(ctx);
-			sync().onReleaseBidderDeposit(ctx);
 			sync().onRouteBuyerPenalty(ctx);
 			sync().onAuctionTradeTerminate(ctx);
 			break;

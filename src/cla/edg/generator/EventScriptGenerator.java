@@ -1,4 +1,4 @@
-package cla.edg;
+package cla.edg.generator;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -8,46 +8,15 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import cla.edg.script.EventInfo;
-import cla.edg.script.EventProcessResultBranch;
-import cla.edg.script.EventRipple;
-import cla.edg.script.EventScript;
+import cla.edg.Utils;
+import cla.edg.eventscript.EventInfo;
+import cla.edg.eventscript.EventProcessResultBranch;
+import cla.edg.eventscript.EventRipple;
+import cla.edg.eventscript.EventScript;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 
-public class Generator {
-	protected String baseOutputFolder;
-	protected String baseTempalteFolder;
-	public String getBaseOutputFolder() {
-		return baseOutputFolder;
-	}
-	public void setBaseOutputFolder(String baseOutputFolder) {
-		this.baseOutputFolder = baseOutputFolder;
-	}
-	public String getBaseTempalteFolder() {
-		return baseTempalteFolder;
-	}
-	public void setBaseTempalteFolder(String baseTempalteFolder) {
-		this.baseTempalteFolder = baseTempalteFolder;
-	}
-	
-	protected String basePackageName;
-	protected String projectName;
-	
-	public String getProjectName() {
-		return projectName;
-	}
-	public void setProjectName(String projectName) {
-		this.projectName = projectName;
-	}
-	public String getBasePackageName() {
-		return basePackageName;
-	}
-	public void setBasePackageName(String basePackageName) {
-		this.basePackageName = basePackageName;
-	}
-	
-	
+public class EventScriptGenerator extends BasicGenerator{
 	public void generateWithScript(EventScript script) throws Exception {
 		verifyScriptWasFinished(script);
 		

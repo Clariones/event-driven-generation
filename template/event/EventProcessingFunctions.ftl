@@ -5,8 +5,9 @@
 		int processResult = process${event.javaName}(ctx);
 		switch(processResult) {
 	<#list event.definedBranches as branch>
-		case ${branch.conditionCodeConst}: // ${branch.comments!}
+		case ${branch.conditionCodeConst}: {// ${branch.comments!}
 			<@event_ripples branch false/>
+			}
 			break;
 	</#list>
 	<#assign branch = event.defaultBranch>

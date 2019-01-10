@@ -1,0 +1,100 @@
+package cla.edg.project.moyi;
+
+import cla.edg.pageflow.BasePageFlowDescriptionScript;
+import cla.edg.pageflow.BasePageFlowScript;
+
+public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
+
+	private static final BasePageFlowScript SCRIPT = $("NativeAppServiceV2").need_login()
+			.request("open shop locating application")
+				.comments("打开店铺入驻申请页面").no_footprint()
+				.got_page("shop locating application")
+			.request("submit shop locating application form").with_form("shop locating application")
+				.comments("提交入驻基本信息form")
+				.got_page("shop deposit selection")
+			.request("submit shop deposit selection form").with_form("deposit selection")
+				.comments("提交保证金档次选择结果")
+				.got_page("pay shop deposite order")
+			.request("shop deposit paid").with_form("shop deposit payment")
+				.comments("完成店铺保证金的支付")
+				.got_page("shop locating success")
+			.request("my shop")
+				.comments("查看我的店铺")
+				.got_page("my shop")
+			.request("artwork list in shop").with_string("shop id").with_string("filter name").with_integer("page no").with_boolean("continue to load")
+				.comments("店铺的作品")
+				.got_page("my shop")
+			.request("ink deed list in shop").with_string("shop id").with_string("filter name").with_integer("page no").with_boolean("continue to load")
+				.comments("店铺的墨契")
+				.got_page("my shop")
+			.request("order list in shop").with_string("shop id").with_string("filter name").with_integer("page no").with_boolean("continue to load")
+				.comments("店铺的墨契")
+				.got_page("my shop")
+			.request("start ownership certificate application").with_string("artwork id")
+				.comments("开始进行 确权并生成所有权证书")
+				.got_page("ownership certificate application")
+			.request("open ownership certificate application form for owner").with_string("artwork id")
+				.comments("持有人打开\"确权并生成所有权证书\"表单")
+				.got_page("ownership certificate application form1")
+			.request("open ownership certificate application form for author").with_string("artwork id")
+				.comments("作者兼持有人打开\"确权并生成所有权证书\"表单")
+				.got_page("ownership certificate application form2")
+			.request("not a holder").with_string("artwork id")
+				.comments("不是持有人（对应：以上都不是）")
+				.got_page("")
+			.request("put artwork to sale").with_string("artwork id")
+				.comments("上架销售艺术品")
+				.got_page("artwork sale application")
+			.request("submit artwork sale application form").with_form("artwork sale application")
+				.comments("提交作品交易信息表单")
+				.got_page("artwork put to sale success")
+			
+				
+			.in_page("shop locating application")
+				.comments("店铺入驻申请表单")
+				.may_request("submit shop locating application form")
+			.in_page("shop deposit selection")
+				.comments("选择店铺保证金等级表单")
+				.may_request("submit shop deposit selection form")
+			.in_page("pay shop deposite order")
+				.comments("支付店铺保证金")
+				.may_request("shop deposit paid")
+			.in_page("my shop")
+				.comments("我的店铺")
+				.TBD()
+			.in_page("artwork list in shop")
+				.comments("我的店铺")
+				.may_request("artwork detail in shop")
+				.may_request("artwork list in shop")
+				.may_request("open ownership certificate application form")
+				.may_request("put artwork to sale")
+			.in_page("ink deed list in shop")
+				.comments("我的店铺")
+				.may_request("ink deed list in shop")
+			.in_page("order list in shop")
+				.comments("我的店铺")
+				.may_request("order list in shop")
+			.in_page("ownership certificate application")
+				.comments("确权并生成所有权证书")
+				.may_request("open ownership certificate application form for owner")
+				.may_request("open ownership certificate application form for author")
+				.TBD()
+			.in_page("artwork sale application")
+				.comments("作品交易申请表单")
+				.TBD()
+			.in_page("artwork put to sale success")
+				.comments("作品上架销售申请通过")
+			.in_page("ownership certificate application form1")
+				.comments("持有人填写的确权表单")
+			.in_page("ownership certificate application form2")
+				.comments("作者兼持有人填写的确权表单")
+			;
+		
+//			
+
+	@Override
+	public BasePageFlowScript getScript() {
+		return SCRIPT;
+	}
+
+}

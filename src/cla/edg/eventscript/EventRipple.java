@@ -1,4 +1,4 @@
-package cla.edg.script;
+package cla.edg.eventscript;
 
 import cla.edg.Utils;
 

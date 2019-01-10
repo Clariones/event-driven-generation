@@ -3,7 +3,7 @@ package cla.edg;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import cla.edg.script.EventScript;
+import cla.edg.eventscript.EventScript;
 
 public class Utils {
 

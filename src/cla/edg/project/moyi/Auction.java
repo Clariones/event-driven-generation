@@ -1,7 +1,7 @@
 package cla.edg.project.moyi;
 
-import cla.edg.script.BaseEventDescriptionScript;
-import cla.edg.script.EventScript;
+import cla.edg.eventscript.BaseEventDescriptionScript;
+import cla.edg.eventscript.EventScript;
 
 public class Auction extends BaseEventDescriptionScript{
 	private static final EventScript SCRIPT = $("auction")
