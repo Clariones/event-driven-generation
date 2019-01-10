@@ -1,12 +1,14 @@
 package cla.edg.pageflow;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class BasePageFlowScript extends BasePageFlowElement{
 
 	protected List<Request> requests;
-	protected List<Page> pages;
+	protected Map<String, Page> pages;
 	protected transient BasePageFlowElement currentWork;
 	protected transient Request currentRequest;
 	protected transient Branch currentBranch;
@@ -43,9 +45,18 @@ public class BasePageFlowScript extends BasePageFlowElement{
 	}
 
 	protected void addNewPage(Page page) {
+		ensurePages();
+		pages.put(page.getName(), page);
+	}
+
+	private void ensurePages() {
 		if (pages == null) {
-			pages = new ArrayList<>();
+			pages = new HashMap<>();
 		}
-		pages.add(page);
+	}
+
+	protected Page findPageByName(String pageName) {
+		ensurePages();
+		return pages.get(pageName);
 	}
 }

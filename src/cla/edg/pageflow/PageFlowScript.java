@@ -12,7 +12,7 @@ public class PageFlowScript extends BasePageFlowScript {
 		}
 		return this;
 	}
-	public BasePageFlowScript no_login() {
+	public PageFlowScript no_login() {
 		if (currentWork == null) {
 			this.needLoginByDefault = false;
 		}else if (currentWork instanceof Request) {
@@ -22,7 +22,7 @@ public class PageFlowScript extends BasePageFlowScript {
 		}
 		return this;
 	}
-	public BasePageFlowScript has_footprint() {
+	public PageFlowScript has_footprint() {
 		if (currentWork == null) {
 			this.hasFootPrintDefault = true;
 		}else if (currentWork instanceof Request) {
@@ -61,12 +61,21 @@ public class PageFlowScript extends BasePageFlowScript {
 			return when("by default").got_page(pageName);
 		}
 		if (currentWork instanceof Branch) {
-			Page page = currentBranch.setPage(pageName);
-//			setCurrentWork(page);
+			Page page = findPageByName(pageName);
+			if (page == null) {
+				page = new Page();
+				page.setName(pageName);
+				addNewPage(page);
+			}
+			currentBranch.setPage(pageName);
+			setCurrentWork(page);
 		}else {
 			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能指定结果页面");
 		}
 		return this;
+	}
+	public PageFlowScript when_others() {
+		return when("by default");
 	}
 	public PageFlowScript when(String code) {
 		if (currentWork instanceof Request) {

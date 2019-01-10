@@ -1,20 +1,15 @@
 package cla.edg.pageflow;
 
 public class Branch extends BasePageFlowElement{
-	protected Page page;
-	
-	public Page getPage() {
+	protected String page;
+
+	public String getPage() {
 		return page;
 	}
 
-	public void setPage(Page page) {
+	public void setPage(String page) {
 		this.page = page;
 	}
-
-	public Page setPage(String pageName) {
-		page = new Page();
-		page.setName(pageName);
-		return page;
-	}
-
+	
+	
 }
