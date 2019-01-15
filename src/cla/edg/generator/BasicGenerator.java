@@ -82,7 +82,9 @@ public class BasicGenerator {
 		data.put("project_name", projectName);
 		data.put("class_name", className);
 		data.put("context_name", Utils.toCamelCase(projectName)+"UserContext");
+		data.put("custom_context_name", "Custom"+Utils.toCamelCase(projectName)+"UserContextImpl");
 		data.put("script", script);
+		data.put("NAMING", new Utils());
 		return data;
 	}
 

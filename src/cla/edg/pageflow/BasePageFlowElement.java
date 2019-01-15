@@ -1,5 +1,7 @@
 package cla.edg.pageflow;
 
+import cla.edg.Utils;
+
 public class BasePageFlowElement {
 	protected String name;
 	protected String comments;
@@ -16,5 +18,7 @@ public class BasePageFlowElement {
 		this.comments = comments;
 	}
 	
-	
+	public String getJavaName() {
+		return Utils.toCamelCase(getName());
+	}
 }

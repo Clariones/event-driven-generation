@@ -6,8 +6,16 @@ import java.util.List;
 public class Request extends BasePageFlowElement{
 	protected boolean needLogin = false;
 	protected boolean hasFootprint = false;
+	protected boolean handleForm = false;
 	protected List<Branch> branches;
 	
+	
+	public boolean isHandleForm() {
+		return handleForm;
+	}
+	public void setHandleForm(boolean handleForm) {
+		this.handleForm = handleForm;
+	}
 	public List<Branch> getBranches() {
 		return branches;
 	}
@@ -53,6 +61,10 @@ public class Request extends BasePageFlowElement{
 	}
 
 	public AccessParameter addFormParameter(String formName) {
+		if (!parameters.isEmpty()) {
+			throw new RuntimeException("请求的参数要么是form，要么是其它。不能既有form又有普通参数");
+		}
+		this.setHandleForm(true);
 		return newParam("form", "formData", formName);
 	}
 	private AccessParameter newParam(String typeName, String paramName, String formName) {
@@ -64,14 +76,22 @@ public class Request extends BasePageFlowElement{
 		return p;
 	}
 	public AccessParameter addStringParameter(String paramName) {
+		if(this.isHandleForm()) {
+			throw new RuntimeException("请求的参数要么是form，要么是其它。不能既有form又有普通参数");
+		}
 		return newParam("String", paramName, null);
 	}
 	public AccessParameter addIntegerParameter(String paramName) {
+		if(this.isHandleForm()) {
+			throw new RuntimeException("请求的参数要么是form，要么是其它。不能既有form又有普通参数");
+		}
 		return newParam("Integer", paramName, null);
 	}
 	public AccessParameter addBooleanParameter(String paramName) {
+		if(this.isHandleForm()) {
+			throw new RuntimeException("请求的参数要么是form，要么是其它。不能既有form又有普通参数");
+		}
 		return newParam("Boolean", paramName, null);
-		
 	}
 	
 }

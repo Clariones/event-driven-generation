@@ -1,9 +1,10 @@
 package cla.edg;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
-import cla.edg.eventscript.EventScript;
 
 public class Utils {
 
@@ -42,4 +43,5 @@ public class Utils {
 		return sb.toString();
 	}
 
+	
 }

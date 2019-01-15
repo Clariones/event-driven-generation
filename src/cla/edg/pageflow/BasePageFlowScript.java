@@ -16,6 +16,22 @@ public class BasePageFlowScript extends BasePageFlowElement{
 	protected transient boolean needLoginByDefault = false;
 	protected transient boolean hasFootPrintDefault = false;
 	
+	public List<Request> getRequests() {
+		return requests;
+	}
+
+	public void setRequests(List<Request> requests) {
+		this.requests = requests;
+	}
+
+	public Map<String, Page> getPages() {
+		return pages;
+	}
+
+	public void setPages(Map<String, Page> pages) {
+		this.pages = pages;
+	}
+
 	protected void addNewRequest(Request page) {
 		ensureRequests();
 		requests.add(page);

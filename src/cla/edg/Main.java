@@ -1,8 +1,12 @@
 package cla.edg;
 
+import java.net.URLEncoder;
+
 import cla.edg.eventscript.EventScript;
 import cla.edg.generator.EventScriptGenerator;
+import cla.edg.generator.PageFlowGenerator;
 import cla.edg.pageflow.BasePageFlowScript;
+import cla.edg.pageflow.PageFlowScript;
 import cla.edg.project.moyi.Auction;
 import cla.edg.project.moyi.NativeAppServiceV2;
 
@@ -13,10 +17,21 @@ public class Main {
 //		test_auction();
 
 		NativeAppServiceV2 test = new NativeAppServiceV2();
-		BasePageFlowScript script = test.getScript();
+		PageFlowScript script = test.getScript();
 		String jsonStr = Utils.toJson(script, true);
 
 		System.out.println(jsonStr);
+		
+		PageFlowGenerator generator = new PageFlowGenerator();
+		
+		generator.setBaseOutputFolder("./output");
+		generator.setBaseTempalteFolder("./template");
+		generator.setBasePackageName("com.terapico.moyi");
+		generator.setProjectName("moyi");
+		generator.setParentClassName("NativeAppService");
+		generator.setParentClassPackage("com.terapico.moyi.appservice");
+		
+		generator.generateWithScript(script);
 	}
 
 	private static void test_auction() throws Exception {
