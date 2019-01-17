@@ -13,7 +13,7 @@ import cla.edg.pageflow.Request;
 import freemarker.template.Template;
 
 public class PageFlowGenerator extends BasicGenerator {
-	public static final boolean force = true;
+	public static final boolean force = false;
 	
 	protected String parentClassName;
 	protected String parentClassPackage;
@@ -41,6 +41,7 @@ public class PageFlowGenerator extends BasicGenerator {
 		// 	BasicXXXViewBizService 这个是基类，声明所有自动生成的方法，框架方法等
 		//	XXXViewBizService 这个是用户自己去扩展的方法。 非虚。 这样可以让新生成的接口报错，方便添加新方法。
 		//  XXXViewService 这个是组装页面流的地方。生成的。
+		// 和一套 ViewPage文件
 		
 		String packageName = this.getBasePackageName()+"."+Utils.toCamelCase(script.getName()).toLowerCase();
 		String fileNameEtyma = Utils.toCamelCase(script.getName());
@@ -95,14 +96,44 @@ public class PageFlowGenerator extends BasicGenerator {
 		tmplFileName = "pageflow/ViewService.java.ftl";
 		template = getTemplate(tmplFileName);
 		doGeneration(outputFile, data, template);
+		
+		// 和一套 ViewPage文件
+		packageName += "pageview";
+		for(Page page: script.getPages().values()) {
+			className = Utils.toCamelCase(page.getName());
+			data.put("class_name", className);
+			outputFileName = className+"Page.java";
+			outputFile = new File(getBaseOutputFolderFile(), Utils.packageNameToPath(packageName)+"/"+outputFileName);
+			if (!force && outputFile.exists()) {
+				System.out.println(outputFile.getCanonicalPath()+" exists, skip.");
+			} else {
+				System.out.println("Write to " + outputFile.getCanonicalPath());
+				tmplFileName = "pageflow/ViewPage.java.ftl";
+				template = getTemplate(tmplFileName);
+				doGeneration(outputFile, data, template);
+			}
+		}
 	}
 
 	private void verifyScriptWasFinished(PageFlowScript script) {
 		// 1. 所有page 的 may_request都被声明了
+		// 2. 所有的request，至少有一个返回结果
 		Set<String> mayRequestUrls = new HashSet<>();
 		Set<String> allRequestUrls = new HashSet<>();
+		
+		Set<String> anyRequestNoResponse = new HashSet<>();
 		for(Request req : script.getRequests()) {
 			allRequestUrls.add(req.getName());
+			if (req.getBranches() == null || req.getBranches().isEmpty()) {
+				anyRequestNoResponse.add(req.getName());
+				continue;
+			}
+			for(Branch bch : req.getBranches()) {
+				if (bch.getPage() == null || bch.getPage().trim().isEmpty()){
+					anyRequestNoResponse.add(req.getName());
+					continue;
+				}
+			}
 		}
 		for(Page page: script.getPages().values()) {
 			if (page.getPossibleRequests() == null) {
@@ -116,6 +147,10 @@ public class PageFlowGenerator extends BasicGenerator {
 		allUrls.removeAll(allRequestUrls);
 		if (allUrls.size()>0) {
 			throw new RuntimeException("以下页面请求未定义："+allUrls);
+		}
+		// 2. 所有的request，至少有一个返回结果
+		if (anyRequestNoResponse.size() > 0){
+			throw new RuntimeException("以下页面请求没有定义返回值："+anyRequestNoResponse);
 		}
 	}
 }

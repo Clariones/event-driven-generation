@@ -24,7 +24,8 @@ public class Main {
 		
 		PageFlowGenerator generator = new PageFlowGenerator();
 		
-		generator.setBaseOutputFolder("./output");
+//		generator.setBaseOutputFolder("./output");
+		generator.setBaseOutputFolder("/works/jobs/moyi_v2/workspace/moyi-biz-suite/bizcore/WEB-INF/moyi_v2_src");
 		generator.setBaseTempalteFolder("./template");
 		generator.setBasePackageName("com.terapico.moyi");
 		generator.setProjectName("moyi");

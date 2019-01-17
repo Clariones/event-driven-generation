@@ -3,6 +3,10 @@ package ${package};
 
 import ${base_package}.${context_name};
 import ${base_package}.${custom_context_name};
+import ${base_package}.BaseViewPage;
+<#list helper.getAllForms(script) as form>
+import ${base_package}.${NAMING.toCamelCase(form)?lower_case}.${NAMING.toCamelCase(form)}FormProcessor;
+</#list>
 
 /**
  * 此类负责：所有的页面入口。 以及页面的组装
@@ -26,7 +30,7 @@ public class ${class_name}ViewService extends ${class_name}ViewBizService{
 		${custom_context_name} ctx = (${custom_context_name}) userContext;
 		<@getRequestUser request />
 	<#if request.hasFootprint>
-		ctx.addFootPrint(this);
+		ctx.addFootprint(this);
 	</#if>
 	<#if request.parameters?has_content>
 		<#list request.parameters as param>
@@ -41,54 +45,58 @@ public class ${class_name}ViewService extends ${class_name}ViewBizService{
 <#macro formPostHanlingMethod request>
 	public Object ${T.getRequestProcessingMethodName(request)}(${context_name} userContext<@T.getRequestProcessingMethodParameters request/>) throws Exception {
 		${custom_context_name} ctx = (${custom_context_name}) userContext;
-		<@getRequestUser request />
+		try{
+			<@getRequestUser request "	"/>
 	<#if request.hasFootprint>
-		ctx.addFootPrint(this);
+			ctx.addFootPrint(this);
 	</#if>
 		<#assign formName = request.parameters[0].formName />
-		${NAMING.toCamelCase(formName)}FormProcessor form = new ${NAMING.toCamelCase(formName)}FormProcessor().initByRequest(formData);
-		form.verifyInput();
-		ctx.setInputFormData(form);
-	<@requestProcessAndReturn request>
-	</@>
+			${NAMING.toCamelCase(formName)}FormProcessor form = new ${NAMING.toCamelCase(formName)}FormProcessor().initByRequest(formData);
+			form.verifyInputs();
+			ctx.setInputFormData(form);
+		<@requestProcessAndReturn request "	">
+		</@>
+		}finally {
+			ctx.clearFormResubmitFlag();
+		}
 	}
 </#macro>
 
 
 
-<#macro getRequestUser request>
+<#macro getRequestUser request prefix="">
 	<#if request.needLogin>
-		ensureCurrentUser(ctx);
+		${prefix}ensureCurrentUser(ctx);
 	<#else>
-		getCurrentUser(ctx);
+		${prefix}getCurrentUser(ctx);
 	</#if>
 </#macro>
 
 
-<#macro requestProcessAndReturn request>
+<#macro requestProcessAndReturn request prefix="">
 	<#if helper.isRequestHasBranch(request)>
 		<#assign otherBranches=helper.getAllOtherBranches(request)/>
-		int resultCode = processRequest${T.getRequestProcessingMethodName(request)?cap_first}(ctx);
-		BaseViewPage page = null;
-		switch(resultCode){
+		${prefix}int resultCode = processRequest${T.getRequestProcessingMethodName(request)?cap_first}(ctx);
+		${prefix}BaseViewPage page = null;
+		${prefix}switch(resultCode){
 		<#list otherBranches as branch>
-			case PRC_${NAMING.toJavaConstStyle(branch.name)}:{
-				// ${branch.comments!}
-				page = assembler${NAMING.toCamelCase(branch.page)}Page(ctx, "${T.getRequestProcessingMethodName(request)}");
-				break;
-			}
+			${prefix}case PRC_${NAMING.toJavaConstStyle(branch.name)}:{
+				${prefix}// ${branch.comments!}
+				${prefix}page = assembler${NAMING.toCamelCase(branch.page)}Page(ctx, "${T.getRequestProcessingMethodName(request)}");
+				${prefix}break;
+			${prefix}}
 		</#list>
 			<#assign branch=helper.getDefaultBranch(request)/>
-			default: { // ${NAMING.toJavaConstStyle(branch.name)} ${branch.comments!}
-				page = assembler${NAMING.toCamelCase(branch.page)}Page(ctx, "${T.getRequestProcessingMethodName(request)}");
-				break;
-			}
-		}
-		return page.doRender(ctx);
+			${prefix}default: { // ${NAMING.toJavaConstStyle(branch.name)} ${branch.comments!}
+				${prefix}page = assembler${NAMING.toCamelCase(branch.page)}Page(ctx, "${T.getRequestProcessingMethodName(request)}");
+				${prefix}break;
+			${prefix}}
+		${prefix}}
+		${prefix}return page.doRender(ctx);
 	<#else>
 		<#assign branch=helper.getDefaultBranch(request)/>
-		processRequest${T.getRequestProcessingMethodName(request)?cap_first}(ctx);
-		BaseViewPage page = assembler${NAMING.toCamelCase(branch.page)}Page(ctx, "${T.getRequestProcessingMethodName(request)}");
-		return page.doRender(ctx);
+		${prefix}processRequest${T.getRequestProcessingMethodName(request)?cap_first}(ctx);
+		${prefix}BaseViewPage page = assembler${NAMING.toCamelCase(branch.page)}Page(ctx, "${T.getRequestProcessingMethodName(request)}");
+		${prefix}return page.doRender(ctx);
 	</#if>
 </#macro>

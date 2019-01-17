@@ -1,9 +1,13 @@
 <#import "tools.ftl" as T/>
 package ${package};
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 import ${base_package}.${context_name};
 import ${base_package}.${custom_context_name};
 import ${parent_class_package}.${parent_class_name};
+import ${package}pageview.*;
 
 /**
  * 此类负责：声明所有${class_name}ViewService中所使用的方法和常量。 单独列出的目的是便于维护。
@@ -36,7 +40,7 @@ public abstract class Base${class_name}ViewService extends ${parent_class_name}{
 	}
 <#list script.requests as request>
 	// 处理请求：${request.comments!}
-	protected String make${T.getRequestProcessingMethodName(request)?cap_first}Url(${custom_context_name} ctx<@T.getRequestProcessingMethodParameters request/>){
+	protected String make${T.getRequestProcessingMethodName(request)?cap_first}Url(${custom_context_name} ctx<@T.getRequestProcessingUrlMethodParameters request/>){
 		return makeUrl("${T.getRequestProcessingMethodName(request)}"<@T.getRequestProcessingMethodParameterNames request/>);
 	}
 </#list>
