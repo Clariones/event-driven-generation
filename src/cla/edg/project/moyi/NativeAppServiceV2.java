@@ -95,6 +95,11 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 				.got_page("ink deed entry order detail")
 					.may_request("ink deed entry order detail")  // 可以在同一个作品的墨契单之间跳来跳去
 					.may_request("resale ink deed")
+					.may_request("more ink deed holding record")
+					.may_request("view ink deed entry order with artwork")
+			.request("more ink deed holding record").with_string("ink deed entry order id")
+				.comments("查看全部墨契持有情况")
+				.got_page("ink deed holding list")
 			.request("resale ink deed").with_string("ink deed entry order id")
 				.comments("转售墨契")
 				.got_page("resale ink deed form")
