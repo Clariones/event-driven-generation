@@ -2,6 +2,7 @@
 package ${package};
 
 import java.io.UnsupportedEncodingException;
+import java.math.BigDecimal;
 import java.net.URLEncoder;
 
 import ${base_package}.${context_name};

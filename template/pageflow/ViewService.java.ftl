@@ -4,6 +4,9 @@ package ${package};
 import ${base_package}.${context_name};
 import ${base_package}.${custom_context_name};
 import ${base_package}.BaseViewPage;
+
+import java.math.BigDecimal;
+
 <#list helper.getAllForms(script) as form>
 import ${base_package}.${NAMING.toCamelCase(form)?lower_case}.${NAMING.toCamelCase(form)}FormProcessor;
 </#list>
@@ -34,7 +37,7 @@ public class ${class_name}ViewService extends ${class_name}ViewBizService{
 	</#if>
 	<#if request.parameters?has_content>
 		<#list request.parameters as param>
-		ctx.set${NAMING.toCamelCase(param.paramName)}Param(${NAMING.toCamelCase(param.paramName)?uncap_first});
+		ctx.set${NAMING.toCamelCase(param.paramName)}(${NAMING.toCamelCase(param.paramName)?uncap_first});
 		</#list>
 	</#if>
 	<@requestProcessAndReturn request>

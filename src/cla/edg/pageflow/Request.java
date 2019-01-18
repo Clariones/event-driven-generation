@@ -87,6 +87,12 @@ public class Request extends BasePageFlowElement{
 		}
 		return newParam("Integer", paramName, null);
 	}
+	public AccessParameter addFloatParameter(String paramName) {
+		if(this.isHandleForm()) {
+			throw new RuntimeException("请求的参数要么是form，要么是其它。不能既有form又有普通参数");
+		}
+		return newParam("BigDecimal", paramName, null);
+	}
 	public AccessParameter addBooleanParameter(String paramName) {
 		if(this.isHandleForm()) {
 			throw new RuntimeException("请求的参数要么是form，要么是其它。不能既有form又有普通参数");

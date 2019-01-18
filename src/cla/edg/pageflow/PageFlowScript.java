@@ -107,6 +107,14 @@ public class PageFlowScript extends BasePageFlowScript {
 		}
 		return this;
 	}
+	public PageFlowScript with_float(String paramName) {
+		if (currentWork instanceof Request) {
+			AccessParameter p = currentRequest.addFloatParameter(paramName);
+		}else {
+			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能指定浮点型参数");
+		}
+		return this;
+	}
 	public PageFlowScript with_boolean(String paramName) {
 		if (currentWork instanceof Request) {
 			AccessParameter p = currentRequest.addBooleanParameter(paramName);
@@ -140,6 +148,10 @@ public class PageFlowScript extends BasePageFlowScript {
 	}
 	public PageFlowScript TBD() {
 		throw new RuntimeException("TBD");
+	}
+	public PageFlowScript go_back_previous_page() {
+		got_page("go back");
+		return this;
 	}
 	
 

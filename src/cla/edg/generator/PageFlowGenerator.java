@@ -118,12 +118,16 @@ public class PageFlowGenerator extends BasicGenerator {
 	private void verifyScriptWasFinished(PageFlowScript script) {
 		// 1. 所有page 的 may_request都被声明了
 		// 2. 所有的request，至少有一个返回结果
+		// 3. 所有的请求，不能重复定义
 		Set<String> mayRequestUrls = new HashSet<>();
 		Set<String> allRequestUrls = new HashSet<>();
+		Set<String> redundantRequestUrls = new HashSet<>();
 		
 		Set<String> anyRequestNoResponse = new HashSet<>();
 		for(Request req : script.getRequests()) {
-			allRequestUrls.add(req.getName());
+			if (!allRequestUrls.add(req.getName())) {
+				redundantRequestUrls.add(req.getName());
+			}
 			if (req.getBranches() == null || req.getBranches().isEmpty()) {
 				anyRequestNoResponse.add(req.getName());
 				continue;
@@ -151,6 +155,10 @@ public class PageFlowGenerator extends BasicGenerator {
 		// 2. 所有的request，至少有一个返回结果
 		if (anyRequestNoResponse.size() > 0){
 			throw new RuntimeException("以下页面请求没有定义返回值："+anyRequestNoResponse);
+		}
+		// 3. 所有的请求，不能重复定义
+		if (redundantRequestUrls.size() > 0){
+			throw new RuntimeException("以下页面请求重复定义："+redundantRequestUrls);
 		}
 	}
 }
