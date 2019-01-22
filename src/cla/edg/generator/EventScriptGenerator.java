@@ -23,6 +23,7 @@ public class EventScriptGenerator extends BasicGenerator{
 		System.out.println("Write to " + outputFile.getCanonicalPath());
 		
 		Map<String, Object> data = prepareData(script, packageName, className);
+		data.put("helper", new EventScriptGeneratorHelper());
 		
 		String tmplFileName = "event/Service.java.ftl";
 		Template template = getTemplate(tmplFileName);

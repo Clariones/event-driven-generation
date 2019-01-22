@@ -10,29 +10,35 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 			/**
 			 * 店铺入驻
 			 */
-			.request("open shop locating application")
-				.comments("打开店铺入驻申请页面").no_footprint()
-				.got_page("shop locating application")
-					.comments("店铺入驻申请表单")
-					.may_request("submit shop locating application form")
-			.request("submit shop locating application form").with_form("moyi shop") // FORM name TBD
-				.comments("提交入驻基本信息form")
-				.got_page("shop deposit selection")
-					.comments("选择店铺保证金等级表单")
+			.request("start shop authentication")
+				.comments("开始店铺入驻实名认证").no_footprint()
+				.got_page("shop authentication starting")
+					.may_request("open personal certificate info form")
+					.may_request("open enterprise certificate info form")
+			.request("open personal certificate info form")
+				.comments("填写个人店铺认证信息").no_footprint()
+				.got_page("personal certificate form")
+					.may_request("submit shop certification form")
+			.request("open enterprise certificate info form")
+				.comments("填写企业店铺认证信息").no_footprint()
+				.got_page("enterprise certificate form")
+					.may_request("submit shop certification form")
+			.request("submit shop certification form").with_form("moyi shop certification").customize()
+				.comments("提交店铺认证信息,准备填写店铺基本信息").no_footprint()
+				.got_page("shop info form")
+					.may_request("submit shop info form")
+			.request("submit shop info form").with_form("moyi_shop")
+				.comments("提交店铺基本信息，准备选择保证金等级").no_footprint()
+				.got_page("shop deposit selection form")
 					.may_request("submit shop deposit selection form")
-			.request("submit shop deposit selection form").with_form("deposit selection")
-				.comments("提交保证金档次选择结果")
-				.got_page("pay shop deposite bill")
-					.comments("选择店铺保证金等级表单")
-					.may_request("shop deposit paid")
-			.request("shop deposit paid").with_form("shop deposit payment")
-				.comments("店铺保证金支付完成")
-				.got_page("shop locating success")	// 是单独页面还是店铺首页，TBD
-					.comments("店铺入驻成功")
-					.may_request("view my shop")
-			
-			
-				
+			.request("submit shop deposit selection form").with_form("shop deposit")
+				.comments("提交保证金选择结果，准备支付保证金").no_footprint()
+				.got_page("pay shop deposit bill")
+					.may_request("paid shop deposit bill")
+			.request("paid shop deposit bill").with_string("payment id")
+				.comments("店铺入驻成功").no_footprint()
+				.got_page("shop location success")
+					.may_request("TBD")
 			/**
 			 * 发行墨契
 			 */
@@ -100,7 +106,7 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 			.request("more ink deed holding record").with_string("ink deed entry order id")
 				.comments("查看全部墨契持有情况")
 				.got_page("ink deed holding list")
-			.request("resale ink deed").with_string("ink deed entry order id")
+			.request("resale ink deed").with_string("auction id")
 				.comments("转售墨契")
 				.got_page("resale ink deed form")
 					.may_request("submit resale ink deed form")
@@ -125,7 +131,16 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 			.request("ink deed entry order paid")
 				.comments("墨契交易支付完成")
 				.got_page("ink deed entry order detail")
-						
+				
+			/**
+			 * 个人的墨契查看
+			 */
+//			.request("view my ink deed").with_string("filter")
+//				.comments("查看‘我的墨契’")
+//				.got_page("my ink deed")
+//					.may_request("next page of my ink deed")
+//					.may_request("view my ink deed")
+//					.may_request("resale ink deed")
 			/**
 			 * 各种充值
 			 */

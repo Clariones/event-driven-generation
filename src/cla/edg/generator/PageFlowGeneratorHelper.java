@@ -3,6 +3,7 @@ package cla.edg.generator;
 import java.util.ArrayList;
 import java.util.List;
 
+import cla.edg.Utils;
 import cla.edg.pageflow.AccessParameter;
 import cla.edg.pageflow.Branch;
 import cla.edg.pageflow.PageFlowScript;
@@ -62,8 +63,8 @@ public class PageFlowGeneratorHelper {
 		}
 		return result;
 	}
-	public List<String> getAllForms(PageFlowScript script){
-		List<String> result = new ArrayList<>();
+	public List<AccessParameter> getAllForms(PageFlowScript script){
+		List<AccessParameter> result = new ArrayList<>();
 		for(Request req : script.getRequests()) {
 //			System.out.println("check request " + req.getName());
 			if (req.getParameters() == null || req.getParameters().isEmpty()) {
@@ -76,9 +77,15 @@ public class PageFlowGeneratorHelper {
 				if (result.contains(param.getFormName())) {
 					continue;
 				}
-				result.add(param.getFormName());
+				result.add(param);
 			}
 		}
 		return result;
+	}
+	public String getFormClassName(AccessParameter param) {
+		if (param.isCustomized()) {
+			return Utils.toCamelCase(param.getFormName()) + "FormCustomProcessor";
+		}
+		return Utils.toCamelCase(param.getFormName()) + "FormProcessor";
 	}
 }

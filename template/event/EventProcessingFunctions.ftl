@@ -1,5 +1,5 @@
 	// ///////////////////////////// ${event.comments!} //////////////////////////////////
-	<#if event.externalEvent>public<#else>protected</#if> void on${event.javaName}(${context_name} ctx) throws Exception{
+	<#if event.externalEvent>public<#else>protected</#if> void on${event.javaName}(${custom_context_name} ctx) throws Exception{
 		checkCanDo${event.javaName}(ctx);
 <#if event.hasBranch>
 		int processResult = process${event.javaName}(ctx);
@@ -24,14 +24,18 @@
 		async().notifyRelevantPersonsWhen${event.javaName}(ctx);
 	}
 	
-	protected abstract int process${event.javaName}(${context_name} ctx) throws Exception;
-	protected void checkCanDo${event.javaName}(${context_name} ctx) throws Exception {
+	/**
+	 * 处理 ${event.comments!}
+	 * 返回值：<#list helper.getAllBranch(event) as branch> ${branch.conditionCodeConst}:${branch.comments!}</#list>
+	 */
+	protected abstract int process${event.javaName}(${custom_context_name} ctx) throws Exception;
+	protected void checkCanDo${event.javaName}(${custom_context_name} ctx) throws Exception {
 		// by default, nothing was checked
 	}
-	protected void writeLogsFor${event.javaName}(${context_name} ctx) {
+	protected void writeLogsFor${event.javaName}(${custom_context_name} ctx) {
 		// by default, nothing was logged
 	}
-	protected void notifyRelevantPersonsWhen${event.javaName}(${context_name} ctx) throws Exception {
+	protected void notifyRelevantPersonsWhen${event.javaName}(${custom_context_name} ctx) throws Exception {
 		// by default, nobody was notified
 	}
 	

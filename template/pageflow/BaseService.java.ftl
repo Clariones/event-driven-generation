@@ -47,7 +47,7 @@ public abstract class Base${class_name}ViewService extends ${parent_class_name}{
 </#list>
 
 <#list script.requests as request>
-	// 处理请求：${request.comments!}
+	/** 处理请求：${request.comments!}. 返回值：<#list request.branches as branch>PRC_${NAMING.toJavaConstStyle(branch.name)}: ${branch.comments!}; </#list> */
 	protected abstract int processRequest${T.getRequestProcessingMethodName(request)?cap_first}(${custom_context_name} ctx) throws Exception;
 </#list>
 

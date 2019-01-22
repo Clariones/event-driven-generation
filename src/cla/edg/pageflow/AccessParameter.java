@@ -4,8 +4,14 @@ public class AccessParameter extends BasePageFlowElement{
 	protected String typeName;
 	protected String paramName;
 	protected String formName;
+	protected boolean customized = false;
 	
-	
+	public boolean isCustomized() {
+		return customized;
+	}
+	public void setCustomized(boolean customized) {
+		this.customized = customized;
+	}
 	public String getFormName() {
 		return formName;
 	}

@@ -1,5 +1,7 @@
 package cla.edg.pageflow;
 
+import java.util.List;
+
 public class PageFlowScript extends BasePageFlowScript {
 
 	public PageFlowScript need_login() {
@@ -87,6 +89,22 @@ public class PageFlowScript extends BasePageFlowScript {
 			setCurrentWork(bch);
 //		}else {
 //			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能指定分支");
+		}
+		return this;
+	}
+	public PageFlowScript customize() {
+		if (currentWork instanceof Request) {
+			List<AccessParameter> ps = currentRequest.getParameters();
+			if (ps == null) {
+				throw new RuntimeException("没有指定任何参数，不能标记定制化");
+			}
+			AccessParameter p = ps.get(ps.size()-1);
+			if (!p.getTypeName().equals("form")) {
+				throw new RuntimeException("不是Form参数，不能标记定制化");
+			}
+			p.setCustomized(true);
+		}else {
+			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能标记定制化");
 		}
 		return this;
 	}

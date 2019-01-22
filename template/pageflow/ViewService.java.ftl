@@ -8,7 +8,7 @@ import ${base_package}.BaseViewPage;
 import java.math.BigDecimal;
 
 <#list helper.getAllForms(script) as form>
-import ${base_package}.${NAMING.toCamelCase(form)?lower_case}.${NAMING.toCamelCase(form)}FormProcessor;
+import ${base_package}.${NAMING.toCamelCase(form.formName)?lower_case}.${helper.getFormClassName(form)};
 </#list>
 
 /**
@@ -54,7 +54,7 @@ public class ${class_name}ViewService extends ${class_name}ViewBizService{
 			ctx.addFootPrint(this);
 	</#if>
 		<#assign formName = request.parameters[0].formName />
-			${NAMING.toCamelCase(formName)}FormProcessor form = new ${NAMING.toCamelCase(formName)}FormProcessor().initByRequest(formData);
+			${helper.getFormClassName(request.parameters[0])} form = new ${helper.getFormClassName(request.parameters[0])}().initByRequest(ctx, formData);
 			form.verifyInputs();
 			ctx.setInputFormData(form);
 		<@requestProcessAndReturn request "	">

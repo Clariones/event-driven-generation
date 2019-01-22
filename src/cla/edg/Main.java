@@ -9,13 +9,17 @@ import cla.edg.pageflow.BasePageFlowScript;
 import cla.edg.pageflow.PageFlowScript;
 import cla.edg.project.moyi.Auction;
 import cla.edg.project.moyi.NativeAppServiceV2;
+import cla.edg.project.moyi.ShopLocating;
 
 public class Main {
 
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 //		test_auction();
-
+		test_shopLocating();
+		test_appServiceV2();
+	}
+	private static void test_appServiceV2() throws Exception {
 		NativeAppServiceV2 test = new NativeAppServiceV2();
 		PageFlowScript script = test.getScript();
 		String jsonStr = Utils.toJson(script, true);
@@ -34,7 +38,7 @@ public class Main {
 		
 		generator.generateWithScript(script);
 	}
-
+//、、ShopLocating
 	private static void test_auction() throws Exception {
 		Auction  test = new Auction();
 		EventScript script = test.getScript();
@@ -51,4 +55,19 @@ public class Main {
 		generator.generateWithScript(script);
 	}
 
+	private static void test_shopLocating() throws Exception {
+		ShopLocating  test = new ShopLocating();
+		EventScript script = test.getScript();
+		String jsonStr = Utils.toJson(script, true);
+		
+		System.out.println(jsonStr);
+		
+		EventScriptGenerator generator = new EventScriptGenerator();
+		generator.setBaseOutputFolder("/works/jobs/moyi_v2/workspace/moyi-biz-suite/bizcore/WEB-INF/moyi_v2_src");
+		generator.setBaseTempalteFolder("./template");
+		generator.setBasePackageName("com.terapico.moyi");
+		generator.setProjectName("moyi");
+		
+		generator.generateWithScript(script);
+	}
 }

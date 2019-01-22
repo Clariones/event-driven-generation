@@ -14,7 +14,7 @@ public class BasePageFlowScript extends BasePageFlowElement{
 	protected transient Branch currentBranch;
 	protected transient Page currentPage;
 	protected transient boolean needLoginByDefault = false;
-	protected transient boolean hasFootPrintDefault = false;
+	protected transient boolean hasFootPrintDefault = true;
 	
 	public List<Request> getRequests() {
 		return requests;
