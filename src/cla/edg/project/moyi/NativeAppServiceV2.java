@@ -34,7 +34,12 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 			.request("submit shop deposit selection form").with_form("shop deposit")
 				.comments("提交保证金选择结果，准备支付保证金").no_footprint()
 				.got_page("pay shop deposit bill")
+					.may_request("pay bill or order")
+			.request("pay bill or order").with_form("pay method selection")
+				.comments("支付订单或账单")
+				.got_page("pay result")
 					.may_request("paid shop deposit bill")
+					.may_request("TBD") // 更多支付结果，待处理
 			.request("paid shop deposit bill").with_string("payment id")
 				.comments("店铺入驻成功").no_footprint()
 				.got_page("shop location success")
