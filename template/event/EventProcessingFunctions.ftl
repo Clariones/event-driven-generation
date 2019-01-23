@@ -46,12 +46,12 @@
 			<#if ripple.comments?has_content>
 		<#if !shortPrefix>	</#if>// ${ripple.comments}
 			</#if>
-		<#if !shortPrefix>	</#if>async().on${ripple.eventJavaName}(ctx);
+		<#if !shortPrefix>	</#if><#if ripple.serviceName?has_content>get${NAMING.toCamelCase(ripple.serviceName)}Service().</#if>async().on${ripple.eventJavaName}(ctx);
 		<#else>
 			<#if ripple.comments?has_content>
 		<#if !shortPrefix>	</#if>// ${ripple.comments}
 			</#if>
-		<#if !shortPrefix>	</#if>sync().on${ripple.eventJavaName}(ctx);
+		<#if !shortPrefix>	</#if><#if ripple.serviceName?has_content>get${NAMING.toCamelCase(ripple.serviceName)}Service().</#if>sync().on${ripple.eventJavaName}(ctx);
 		</#if>
 	</#list>
 	</#if>

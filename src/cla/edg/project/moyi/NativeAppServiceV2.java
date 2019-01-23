@@ -43,6 +43,13 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 			.request("paid shop deposit bill").with_string("payment id")
 				.comments("店铺入驻成功").no_footprint()
 				.got_page("shop location success")
+					.may_request("view my shop")
+			/**
+			 * 我的店铺 的管理相关
+			 */
+			.request("view my shop")
+				.comments("查看我的店铺")
+				.got_page("my shop")
 					.may_request("TBD")
 			/**
 			 * 发行墨契
@@ -160,9 +167,6 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 			/**
 			 * 各种临时声明
 			 */
-			.request("view my shop")		// 店铺查看部分还没有弄
-				.comments("查看我的店铺").has_footprint()
-				.got_page("my shop")
 			.request("TBD")		// 店铺查看部分还没有弄
 				.comments("TBD").has_footprint()
 				.got_page("TBD")

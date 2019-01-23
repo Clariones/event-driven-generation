@@ -4,7 +4,7 @@ import cla.edg.eventscript.BaseEventDescriptionScript;
 import cla.edg.eventscript.EventScript;
 
 public class ShopLocating extends BaseEventDescriptionScript{
-	private static final EventScript SCRIPT = $("ShopLocating")
+	private static final EventScript SCRIPT = $("shop locating")
 			/**
 			 * 店铺入驻
 			 */
@@ -28,6 +28,10 @@ public class ShopLocating extends BaseEventDescriptionScript{
 				.comments("新店铺创建")
 			.on_event("update shop info").internal_only()
 				.comments("新店铺创建")
+			.on_event("deposit paid")
+				.comments("店铺保证金成功支付")
+				.event_ripple("income deposit").to("shop deposit")
+			
 			/**
 			 * 未完全定义的事件
 			 */

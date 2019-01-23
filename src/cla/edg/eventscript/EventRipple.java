@@ -6,6 +6,15 @@ public class EventRipple extends BaseEventElement{
 	protected String eventCode;
 	protected String comments;
 	protected boolean isAsync = false;
+	protected String serviceName;
+	
+	
+	public String getServiceName() {
+		return serviceName;
+	}
+	public void setServiceName(String serviceName) {
+		this.serviceName = serviceName;
+	}
 	public String getEventCode() {
 		return eventCode;
 	}

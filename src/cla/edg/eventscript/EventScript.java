@@ -104,6 +104,16 @@ public class EventScript extends BasicEventScriptInfo {
 	public EventScript when_others() {
 		return when("by default");
 	}
+
+	public EventScript to(String serviceName) {
+		if (currentOperation instanceof EventRipple) {
+			EventRipple evtRp = currentEventRipple;
+			evtRp.setServiceName(serviceName);
+		} else {
+			throw new RuntimeException("当前任务是" + currentOperation.getClass().getSimpleName() + ",不能指定消息处理者");
+		}
+		return this;
+	}
 	
 
 }

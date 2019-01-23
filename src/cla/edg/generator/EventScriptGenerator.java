@@ -58,6 +58,9 @@ public class EventScriptGenerator extends BasicGenerator{
 					continue;
 				}
 				for(EventRipple evtRpl : bch.getEventRipples()) {
+					if (evtRpl.getServiceName() != null) {
+						continue;
+					}
 					eventRippleSet.add(evtRpl.getEventCode());
 				}
 			}
