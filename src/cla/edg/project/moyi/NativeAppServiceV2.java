@@ -48,7 +48,7 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 			/**
 			 * 艺术品上架
 			 */
-			.request("start ownership certificate").with_string("artwork id")
+			.request("start ownership certificate").with_string("artwork id").with_string("from where")
 				.comments("开始艺术品确权").no_footprint()
 				.got_page("start ownership certificate")
 					.may_request("ownership certificate as author")
@@ -80,8 +80,13 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 					.may_request("submit artwork auction application")
 			.request("submit artwork auction application").with_form("artwork auction")
 				.comments("提交上架信息表单").no_footprint()
-				.got_page("artwork auction detail")
-					
+				.when("lack of deposit").comments("店铺保证金不足")
+					.got_page("recharge shop deposit")
+						.may_request("pay bill or order")
+				.when_others().comments("正常流程")
+					.got_page("artwork auction detail")
+						
+			
 			/**
 			 * 发行墨契
 			 */
@@ -201,12 +206,12 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 			.request("TBD")		// 店铺查看部分还没有弄
 				.comments("TBD").has_footprint()
 				.got_page("TBD")
-			.request("view my shop")
+			.request("view my shop").with_string("filter")
 				.comments("查看我的店铺")
 				.got_page("my shop")
 					.may_request("TBD")
 			.request("view artwork product").with_string("artwork id")
-				.comments("TBD").has_footprint()
+				.comments("TBD").has_footprint().no_login()
 				.got_page("TBD")
 			;
 		

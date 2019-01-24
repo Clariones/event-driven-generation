@@ -20,6 +20,7 @@ public class Main {
 //		test_auction();
 		testEventService(new ShopLocating());
 		testEventService(new ShopDeposit());
+		testEventService(new Auction());
 		test_appServiceV2();
 	}
 	private static void test_appServiceV2() throws Exception {
@@ -41,6 +42,7 @@ public class Main {
 		
 		generator.generateWithScript(script);
 	}
+	
 	private static void testEventService(BaseEventDescriptionScript testScript) throws Exception {
 		BaseEventDescriptionScript  test = testScript;
 		EventScript script = test.getScript();
