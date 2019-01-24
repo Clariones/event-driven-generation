@@ -44,13 +44,44 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 				.comments("店铺入驻成功").no_footprint()
 				.got_page("shop location success")
 					.may_request("view my shop")
+					
 			/**
-			 * 我的店铺 的管理相关
+			 * 艺术品上架
 			 */
-			.request("view my shop")
-				.comments("查看我的店铺")
-				.got_page("my shop")
-					.may_request("TBD")
+			.request("start ownership certificate").with_string("artwork id")
+				.comments("开始艺术品确权").no_footprint()
+				.got_page("start ownership certificate")
+					.may_request("ownership certificate as author")
+					.may_request("ownership certificate as owner")
+			.request("ownership certificate as author").with_string("artwork id")
+				.comments("作者+作品持有人对作品进行确权").no_footprint()
+				.got_page("ownership certificate form author")
+					.may_request("submit ownership certificate application")
+			.request("ownership certificate as owner").with_string("artwork id")
+				.comments("作品持有人(不是作者)对作品进行确权").no_footprint()
+				.got_page("ownership certificate form owner")
+					.may_request("submit ownership certificate application")
+			.request("submit ownership certificate application").with_form("artwork ownership certificate")
+				.comments("提交确权表单").no_footprint()
+				.got_page("ownership certificate preview")
+					.may_request("pay ownership certificate bill")
+			.request("pay ownership certificate bill").with_string("certificate id")
+				.comments("支付确权服务费").no_footprint()
+				.got_page("ownership certificate bill payment")
+					.may_request("paid ownership certificate bill")
+			.request("paid ownership certificate bill").with_string("payment id")
+				.comments("支付完成，确权成功").no_footprint()
+				.got_page("ownership certificate success")
+					.may_request("view artwork product")
+					.may_request("put product on sale")
+			.request("put product on sale").with_string("artwork id")
+				.comments("开始上架作品").no_footprint()
+				.got_page("artwork auction application")
+					.may_request("submit artwork auction application")
+			.request("submit artwork auction application").with_form("artwork auction")
+				.comments("提交上架信息表单").no_footprint()
+				.got_page("artwork auction detail")
+					
 			/**
 			 * 发行墨契
 			 */
@@ -168,6 +199,13 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 			 * 各种临时声明
 			 */
 			.request("TBD")		// 店铺查看部分还没有弄
+				.comments("TBD").has_footprint()
+				.got_page("TBD")
+			.request("view my shop")
+				.comments("查看我的店铺")
+				.got_page("my shop")
+					.may_request("TBD")
+			.request("view artwork product").with_string("artwork id")
 				.comments("TBD").has_footprint()
 				.got_page("TBD")
 			;
