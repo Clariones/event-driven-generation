@@ -6,6 +6,7 @@ import cla.edg.eventscript.BaseEventDescriptionScript;
 import cla.edg.eventscript.EventScript;
 import cla.edg.generator.EventScriptGenerator;
 import cla.edg.generator.PageFlowGenerator;
+import cla.edg.pageflow.BasePageFlowDescriptionScript;
 import cla.edg.pageflow.BasePageFlowScript;
 import cla.edg.pageflow.PageFlowScript;
 import cla.edg.project.moyi.Auction;
@@ -21,10 +22,10 @@ public class Main {
 		testEventService(new ShopLocating());
 		testEventService(new ShopDeposit());
 		testEventService(new Auction());
-		test_appServiceV2();
+		testPageFlow(new NativeAppServiceV2());
 	}
-	private static void test_appServiceV2() throws Exception {
-		NativeAppServiceV2 test = new NativeAppServiceV2();
+
+	private static void testPageFlow(BasePageFlowDescriptionScript test) throws Exception {
 		PageFlowScript script = test.getScript();
 		String jsonStr = Utils.toJson(script, true);
 

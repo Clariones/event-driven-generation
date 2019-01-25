@@ -158,10 +158,14 @@ public class PageFlowScript extends BasePageFlowScript {
 		return this;
 	}
 	public PageFlowScript in_page(String pageName) {
-		Page page = new Page();
-		page.setName(pageName);
-		this.addNewPage(page);
-		this.setCurrentWork(page);
+		Page page = findPageByName(pageName);
+		if (page == null) {
+			page = new Page();
+			page.setName(pageName);
+			addNewPage(page);
+		}
+		setCurrentWork((Request)null);
+		setCurrentWork(page);
 		return this;
 	}
 	public PageFlowScript TBD() {

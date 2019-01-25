@@ -1,11 +1,18 @@
 package cla.edg.generator;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import cla.edg.Utils;
 import cla.edg.pageflow.AccessParameter;
 import cla.edg.pageflow.Branch;
+import cla.edg.pageflow.Page;
 import cla.edg.pageflow.PageFlowScript;
 import cla.edg.pageflow.Request;
 
@@ -87,5 +94,97 @@ public class PageFlowGeneratorHelper {
 			return Utils.toCamelCase(param.getFormName()) + "FormCustomProcessor";
 		}
 		return Utils.toCamelCase(param.getFormName()) + "FormProcessor";
+	}
+	
+	public Collection<Page> getAllPages(PageFlowScript script) {
+		return script.getPages().values();
+	}
+	public List<Request> getAllRequestDispatchNode(PageFlowScript script) {
+		return script.getRequests();
+	}
+	public List<Map<String, Object>> getAllPageOutRequest(PageFlowScript script) {
+		List<Map<String, Object>> result = new ArrayList<>();
+		script.getPages().forEach((name, page)->{
+			if (page.getPossibleRequests() == null) {
+				return;
+			}
+			for(String req : page.getPossibleRequests()) {
+				Map<String, Object> edge = new HashMap<>();
+				edge.put("page", page.getName());
+				edge.put("request", req);
+				edge.put("name", findRequestComments(script, req));
+				result.add(edge);
+			}
+		});
+		return result;
+	}
+	private Object findRequestComments(PageFlowScript script, String req) {
+		return script.getRequests().stream().filter(it->it.getName().equals(req)).findFirst().get().getComments();
+	}
+	public List<Map<String, Object>> getAllRequestBranchPages(PageFlowScript script) {
+		List<Map<String, Object>> result = new ArrayList<>();
+		script.getRequests().forEach(req->{
+			if (req.getBranches() == null) {
+				return;
+			}
+			for(Branch bch : req.getBranches()) {
+				
+				Map<String, Object> edge = new HashMap<>();
+				edge.put("request", req.getName());
+				edge.put("branch", bch.getName());
+				edge.put("page", bch.getPage());
+				edge.put("name", bch.getComments());
+				result.add(edge);
+			}
+			
+		});
+		return result;
+	}
+	public Set<String> getRootPageRequest(PageFlowScript script) {
+		Set<String> allReqNames = script.getRequests().stream().map(it->it.getName()).collect(Collectors.toSet());
+		Set<String> reqNames = new HashSet<>();
+		for(Page page : script.getPages().values()) {
+			if (page.getPossibleRequests() == null) {
+				continue;
+			}
+			reqNames.addAll(page.getPossibleRequests());
+		}
+		allReqNames.removeAll(reqNames);
+		return allReqNames;
+	}
+	public Map<String, Object> getAllRequestBranches(PageFlowScript script) {
+		HashSet<String> allPageNames = new HashSet<>(script.getPages().keySet());
+		List<Map<String, Object>> result = new ArrayList<>();
+		for(Page page : script.getPages().values()) {
+			if (page.getPossibleRequests() == null) {
+				continue;
+			}
+			for(String reqName : page.getPossibleRequests()) {
+				Request req = findRequestByName(script, reqName);
+				if (req.getBranches() == null) {
+					continue;
+				}
+				for(Branch bch : req.getBranches()) {
+					Map<String, Object> edge = new HashMap<>();
+					edge.put("from", page);
+					edge.put("to", bch.getPage());
+					allPageNames.remove(bch.getPage());
+					
+					if (bch.getComments() == null) {
+						edge.put("path", req.getComments());
+					}else {
+						edge.put("path", req.getComments()+"/"+bch.getComments());
+					}
+					result.add(edge);
+				}
+			}
+		}
+		Map<String, Object> returnMap = new HashMap<>();
+		returnMap.put("edges", result);
+		returnMap.put("rootPages", allPageNames);
+		return returnMap;
+	}
+	private Request findRequestByName(PageFlowScript script, String req) {
+		return script.getRequests().stream().filter(it->it.getName().equals(req)).findFirst().get();
 	}
 }
