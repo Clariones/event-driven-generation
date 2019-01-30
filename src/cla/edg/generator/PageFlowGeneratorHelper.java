@@ -181,7 +181,23 @@ public class PageFlowGeneratorHelper {
 		}
 		Map<String, Object> returnMap = new HashMap<>();
 		returnMap.put("edges", result);
-		returnMap.put("rootPages", allPageNames);
+		
+		List<Map<String, Object>> rootEdges = new ArrayList<>();
+		for(Request req : script.getRequests()) {
+			if (req.getBranches() == null) {
+				continue;
+			}
+			for(Branch bch : req.getBranches()) {
+				if (!allPageNames.contains(bch.getPage())) {
+					continue;
+				}
+				Map<String, Object> edge = new HashMap<>();
+				edge.put("request", req);
+				edge.put("page", bch.getPage());
+				rootEdges.add(edge);
+			}
+		}
+		returnMap.put("rootPages", rootEdges);
 		return returnMap;
 	}
 	private Request findRequestByName(PageFlowScript script, String req) {

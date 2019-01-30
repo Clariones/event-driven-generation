@@ -24,45 +24,38 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 				.got_page("enterprise certificate form").comments("企业店铺认证信息表单")
 					.may_request("submit shop certification form")
 			.request("submit shop certification form").with_form("moyi shop certification").customize()
-				.comments("提交店铺认证信息,准备填写店铺基本信息").no_footprint()
+				.comments("提交店铺认证信息,准备支付店铺保证金").no_footprint()
 				.got_page("shop info form").comments("店铺基本信息表单")
 					.may_request("submit shop info form")
 			.request("submit shop info form").with_form("moyi_shop")
-				.comments("提交店铺基本信息，准备选择保证金等级").no_footprint()
-				.got_page("shop deposit selection form").comments("选择店铺保证金表单")
-					.may_request("submit shop deposit selection form")
-			.request("submit shop deposit selection form").with_form("shop deposit")
-				.comments("提交保证金选择结果，准备支付保证金").no_footprint()
+				.comments("提交店铺基本信息，准备支付店铺保证金").no_footprint()
 				.got_page("pay shop deposit bill").comments("支付店铺保证金")
 					.may_request("pay bill or order")
-			.request("pay bill or order").with_form("pay method selection")
-				.comments("支付订单或账单")
-				.got_page("pay result").comments("支付结果")
-					.may_request("paid shop deposit bill")
-					.may_request("TBD") // 更多支付结果，待处理
+			
 			.request("paid shop deposit bill").with_string("payment id")
 				.comments("店铺入驻成功").no_footprint()
 				.got_page("shop location success").comments("店铺入驻成功")
 					.may_request("view my shop")
 					
 			/**
-			 * 艺术品上架
+			 * 艺术品确权 
 			 */
 			.request("start ownership certificate").with_string("artwork id").with_string("from where")
 				.comments("开始艺术品确权").no_footprint()
-				.got_page("start ownership certificate").comments("选择是作者确权还是持有者确权")
+				.got_page("choose role of holder for ownership certificate").comments("选择确权者身份")
 					.may_request("ownership certificate as author")
 					.may_request("ownership certificate as owner")
 			.request("ownership certificate as author").with_string("artwork id")
 				.comments("作者+作品持有人对作品进行确权").no_footprint()
-				.got_page("ownership certificate form author").comments("作者+持有者确权信息表单")
+				.got_page("ownership certificate form for author").comments("作者+持有者确权信息表单")
 					.may_request("submit ownership certificate application")
 			.request("ownership certificate as owner").with_string("artwork id")
 				.comments("作品持有人(不是作者)对作品进行确权").no_footprint()
-				.got_page("ownership certificate form owner").comments("持有者确权信息表单")
+				.got_page("ownership certificate form for owner").comments("持有者确权信息表单")
 					.may_request("submit ownership certificate application")
 			.request("submit ownership certificate application").with_form("artwork ownership certificate")
 				.comments("提交确权表单").no_footprint()
+				.when("no shop deposit charged").comments("没交过店铺保证金")
 				.got_page("ownership certificate preview").comments("预览艺术品数字证书，费用")
 					.may_request("pay ownership certificate bill")
 			.request("pay ownership certificate bill").with_string("certificate id")
@@ -72,21 +65,54 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 			.request("paid ownership certificate bill").with_string("payment id")
 				.comments("支付完成，确权成功").no_footprint()
 				.got_page("ownership certificate success").comments("数字证书成功")
-					.may_request("view artwork product")
+					.may_request("view my shop")
 					.may_request("put product on sale")
+					
+			/**
+			 * 艺术品上架
+			 */
 			.request("put product on sale").with_string("artwork id")
 				.comments("开始上架作品").no_footprint()
 				.got_page("artwork auction application").comments("艺术品上架销售表单")
 					.may_request("submit artwork auction application")
 			.request("submit artwork auction application").with_form("artwork auction")
 				.comments("提交上架信息表单").no_footprint()
+				.when("no shop deposit").comments("没有店铺保证金")
+					.got_page("pay shop deploist when AOC").comments("确权中触发的首次缴付店铺保证金")
+						.may_request("pay bill or order")
 				.when("lack of deposit").comments("店铺保证金不足")
-					.got_page("recharge shop deposit").comments("店铺保证金充值")
+					.got_page("recharge shop deposit").comments("确权中触发的店铺保证金充值")
 						.may_request("pay bill or order")
 				.when_others().comments("正常流程")
 					.got_page("artwork auction detail").comments("艺术品拍卖详情")
+					
 						
-			
+			/**
+			 * 支付页面。带各种回跳，处理混合支付
+			 */
+			.request("pay bill or order").with_form("payment detail")
+				.comments("支付订单或账单")
+				.when("need pay by ditital asset").comments("需要使用数字资产支付（墨贝，余额）")
+					.got_page("confirm ditital asset pay").comments("短信验证数字资产（墨贝，余额）支付")
+						.may_request("confirm ditial asset payment")
+				.when("all by cash").comments("所有支付都使用现金支付")
+					.got_page("ext payment").comments("外部支付集成")
+						.may_request("paid success")
+			.request("confirm ditial asset payment").with_form("confirm digital asset payment")
+				.comments("确认数字资产支付")
+				.when("need cash pay").comments("还需要现金支付其他部分")
+					.got_page("pay by cash")
+				.when("all done").comments("全部支付完成")
+					.got_page("paid success")
+			.request("pay by cash").with_string("payment id").with_string("scene code").with_string("object type").with_string("object id")
+				.comments("使用现金支付")
+				.got_page("ext payment")
+			.request("paid success").with_string("payment id").with_string("scene code").with_string("object type").with_string("object id")
+				.comments("支付成功")
+				.got_page("paid success").comments("支付成功")
+					.may_request("paid ownership certificate bill")
+					.may_request("ink deed entry order fee paid")
+					.may_request("paid shop deposit bill")
 			/**
 			 * 发行墨契
 			 */
@@ -205,14 +231,15 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 			 */
 			.request("TBD")		// 店铺查看部分还没有弄
 				.comments("TBD").has_footprint()
-				.got_page("TBD")
+				.got_page("TBD").comments("待定")
+				
 			.request("view my shop").with_string("filter")
 				.comments("查看我的店铺")
-				.got_page("my shop")
-					.may_request("TBD")
+				.got_page("my shop").comments("店主的店铺管理")
+					
 			.request("view artwork product").with_string("artwork id")
-				.comments("TBD").has_footprint().no_login()
-				.got_page("TBD")
+				.comments("查看艺术品拍卖").has_footprint().no_login()
+				.got_page("artwork auction detail").comments("艺术品拍卖详情")
 			.in_page("TBD")
 			;
 		

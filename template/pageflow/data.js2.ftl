@@ -33,7 +33,7 @@ var allData = [
 	{	data: { 
 			id:'root_${NAMING.toCamelCase(req)}', 
 			source: 'ROOT',
-			target: '${NAMING.toCamelCase(req)}_DN',
+			target: '${NAMING.toCamelCase(req)}_DN'
 		}
 	},
 </#list>
