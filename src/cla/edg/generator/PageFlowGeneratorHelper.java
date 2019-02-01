@@ -140,7 +140,7 @@ public class PageFlowGeneratorHelper {
 		});
 		return result;
 	}
-	public Set<String> getRootPageRequest(PageFlowScript script) {
+	public Set<Request> getRootPageRequest(PageFlowScript script) {
 		Set<String> allReqNames = script.getRequests().stream().map(it->it.getName()).collect(Collectors.toSet());
 		Set<String> reqNames = new HashSet<>();
 		for(Page page : script.getPages().values()) {
@@ -150,7 +150,13 @@ public class PageFlowGeneratorHelper {
 			reqNames.addAll(page.getPossibleRequests());
 		}
 		allReqNames.removeAll(reqNames);
-		return allReqNames;
+		Set<Request> result = new HashSet<>();
+		for(Request req : script.getRequests()) {
+			if (allReqNames.contains(req.getName())) {
+				result.add(req);
+			}
+		}
+		return result;
 	}
 	public Map<String, Object> getAllRequestBranches(PageFlowScript script) {
 		HashSet<String> allPageNames = new HashSet<>(script.getPages().keySet());

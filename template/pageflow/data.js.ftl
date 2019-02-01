@@ -31,9 +31,10 @@ var allData = [
 </#list>
 <#list helper.getRootPageRequest(script) as req>
 	{	data: { 
-			id:'root_${NAMING.toCamelCase(req)}', 
+			id:'root_${NAMING.toCamelCase(req.name)}', 
 			source: 'ROOT',
-			target: '${NAMING.toCamelCase(req)}_DN',
+			target: '${NAMING.toCamelCase(req.name)}_DN',
+			name:'${req.comments!}'
 		}
 	},
 </#list>
