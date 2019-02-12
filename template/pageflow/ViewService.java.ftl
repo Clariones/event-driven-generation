@@ -8,8 +8,12 @@ import ${base_package}.BaseViewPage;
 import java.math.BigDecimal;
 
 <#list helper.getAllForms(script) as form>
+	<#if form.customized>
+import ${base_package}.${NAMING.toCamelCase(form.formName)?lower_case}.${helper.getBaseFormClassName(form)};
+	</#if>
 import ${base_package}.${NAMING.toCamelCase(form.formName)?lower_case}.${helper.getFormClassName(form)};
 </#list>
+
 
 /**
  * 此类负责：所有的页面入口。 以及页面的组装
@@ -54,7 +58,7 @@ public class ${class_name}ViewService extends ${class_name}ViewBizService{
 			ctx.addFootPrint(this);
 	</#if>
 		<#assign formName = request.parameters[0].formName />
-			${helper.getFormClassName(request.parameters[0])} form = new ${helper.getFormClassName(request.parameters[0])}().initByRequest(ctx, formData);
+			${helper.getBaseFormClassName(request.parameters[0])} form = new ${helper.getFormClassName(request.parameters[0])}().initByRequest(ctx, formData);
 			form.verifyInputs();
 			ctx.setInputFormData(form);
 		<@requestProcessAndReturn request "	">

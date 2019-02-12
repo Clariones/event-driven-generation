@@ -95,6 +95,9 @@ public class PageFlowGeneratorHelper {
 		}
 		return Utils.toCamelCase(param.getFormName()) + "FormProcessor";
 	}
+	public String getBaseFormClassName(AccessParameter param) {
+		return Utils.toCamelCase(param.getFormName()) + "FormProcessor";
+	}
 	
 	public Collection<Page> getAllPages(PageFlowScript script) {
 		return script.getPages().values();
