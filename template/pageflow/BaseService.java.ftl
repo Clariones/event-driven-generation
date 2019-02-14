@@ -22,6 +22,9 @@ public abstract class Base${class_name}ViewService extends ${parent_class_name}{
 
 
 	protected String makeUrl(String methodName, Object ... params) {
+		return makeUrlF(methodName, true, params);
+	}
+	protected String makeUrlF(String methodName, boolean encode, Object ... params) {
 		StringBuilder sb = new StringBuilder(methodName).append("/");
 		if (params != null) {
 			for(Object param : params) {
@@ -29,10 +32,18 @@ public abstract class Base${class_name}ViewService extends ${parent_class_name}{
 					sb.append('+').append('/');
 					continue;
 				}
-				try {
-					sb.append(URLEncoder.encode(String.valueOf(param), "utf-8"));
-				} catch (UnsupportedEncodingException e) {
-					sb.append(URLEncoder.encode(String.valueOf(param)));
+				boolean isVariable = false;
+				if (param instanceof String) {
+					isVariable = ((String) param).charAt(0) == ':';
+				}
+				if (encode && !isVariable) {
+					try {
+						sb.append(URLEncoder.encode(String.valueOf(param), "utf-8"));
+					} catch (UnsupportedEncodingException e) {
+						sb.append(URLEncoder.encode(String.valueOf(param)));
+					}
+				} else {
+					sb.append(String.valueOf(param));
 				}
 				sb.append('/');
 			}

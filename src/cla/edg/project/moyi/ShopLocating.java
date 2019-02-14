@@ -35,7 +35,10 @@ public class ShopLocating extends BaseEventDescriptionScript{
 			.on_event("deposit paid")
 				.comments("店铺保证金成功支付")
 				.event_ripple("income deposit").to("shop deposit")
-			
+			.on_event("certificate failed")
+				.comments("店铺入驻审核失败")
+			.on_event("certificate success")
+				.comments("店铺入驻审核成功")
 			/**
 			 * 未完全定义的事件
 			 */

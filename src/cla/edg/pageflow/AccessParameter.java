@@ -5,6 +5,7 @@ public class AccessParameter extends BasePageFlowElement{
 	protected String paramName;
 	protected String formName;
 	protected boolean customized = false;
+	protected boolean asVariable = false;
 	
 	public boolean isCustomized() {
 		return customized;
@@ -30,5 +31,12 @@ public class AccessParameter extends BasePageFlowElement{
 	public void setParamName(String paramName) {
 		this.paramName = paramName;
 	}
+	public boolean isAsVariable() {
+		return asVariable;
+	}
+	public void setAsVariable(boolean asVariable) {
+		this.asVariable = asVariable;
+	}
+	
 	
 }

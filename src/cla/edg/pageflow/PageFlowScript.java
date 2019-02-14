@@ -149,6 +149,19 @@ public class PageFlowScript extends BasePageFlowScript {
 		}
 		return this;
 	}
+	public PageFlowScript variable() {
+		if (currentWork instanceof Request) {
+			List<AccessParameter> params = currentRequest.getParameters();
+			if (params == null || params.isEmpty()) {
+				throw new RuntimeException("variable()必须用于with_xxx()之后，用于指定某个参数在构造URL时留为变量格式");
+			}
+			AccessParameter p = params.get(params.size()-1);
+			p.setAsVariable(true);
+		}else {
+			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能指定字符串参数");
+		}
+		return this;
+	}
 	public PageFlowScript may_request(String requestName) {
 		if (currentWork instanceof Page) {
 			currentPage.addPossibleRequest(requestName);
@@ -157,6 +170,8 @@ public class PageFlowScript extends BasePageFlowScript {
 		}
 		return this;
 	}
+	
+	
 	public PageFlowScript in_page(String pageName) {
 		Page page = findPageByName(pageName);
 		if (page == null) {

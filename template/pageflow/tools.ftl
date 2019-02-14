@@ -17,6 +17,7 @@
 		<#if request.parameters?has_content>
 			<#list request.parameters as param>
 				<#if param.typeName == "form">
+				<#elseif param.asVariable>
 				<#else>
 				,
 				${param.typeName} ${NAMING.toCamelCase(param.paramName)?uncap_first}
@@ -32,6 +33,8 @@
 				,
 				<#if param.typeName == "form">
 				"formData"
+				<#elseif param.asVariable>
+				":${NAMING.toCamelCase(param.paramName)?uncap_first}"
 				<#else>
 				${NAMING.toCamelCase(param.paramName)?uncap_first}
 				</#if>
