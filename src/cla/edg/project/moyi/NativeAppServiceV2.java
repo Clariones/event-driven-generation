@@ -71,7 +71,7 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 				.comments("开始上架作品").no_footprint()
 				.got_page("artwork auction application").comments("艺术品上架销售表单")
 					.may_request("submit artwork auction application")
-			.request("submit artwork auction application").with_form("artwork auction")
+			.request("submit artwork auction application").with_form("artwork auction").customize()
 				.comments("提交上架信息表单").no_footprint()
 				.when("lack of deposit").comments("保证金不足以支持该商品的起拍价")
 					.got_page("adjust price or recharge deposit pop up").comments("选择‘调价’还是‘补保’的弹出页面")
