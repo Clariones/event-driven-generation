@@ -1,41 +1,29 @@
 var allData = [
 <#list helper.getAllPages(script) as page>
 	{	
-		data: { id:'${NAMING.toCamelCase(page.name)}', name:'${page.comments!}页面', type: 'rectangle'} 
+		data: { id:'${NAMING.toCamelCase(page.name)}', name:'${page.comments!}页面', type: 'rectangle', size: 30} 
 	},
 </#list>
-<#list helper.getAllRequestDispatchNode(script) as reqNode>
-	{	
-		data: { id:'${NAMING.toCamelCase(reqNode.name)}_DN', name:'?', type: 'diamond'} 
-	},
-</#list>
-<#list helper.getAllPageOutRequest(script) as edge>
+<#assign tempMap = helper.getAllRequestBranches(script)/>
+<#list tempMap.edges as edge>
 	{	
 		data: { 
-			id:'${NAMING.toCamelCase(edge.page)}_${NAMING.toCamelCase(edge.request)}', 
-			source: '${NAMING.toCamelCase(edge.page)}',
-			target: '${NAMING.toCamelCase(edge.request)}_DN',
-			name:'${edge.name}'
+			id:'${NAMING.toCamelCase(edge.from.name)}_${NAMING.toCamelCase(edge.to)}', 
+			source: '${NAMING.toCamelCase(edge.from.name)}',
+			target: '${NAMING.toCamelCase(edge.to)}',
+			name:'${edge.path}'
 		} 
 	},
 </#list>
-<#list helper.getAllRequestBranchPages(script) as edge>
-	{
+<#list tempMap.rootPages as link>
+	{	
 		data: { 
-			id:'${NAMING.toCamelCase(edge.request)}_${NAMING.toCamelCase(edge.page)}', 
-			source: '${NAMING.toCamelCase(edge.request)}_DN',
-			target: '${NAMING.toCamelCase(edge.page)}',
-			name:'${edge.name!}'
-		}
-	},
-</#list>
-<#list helper.getRootPageRequest(script) as req>
-	{	data: { 
-			id:'root_${NAMING.toCamelCase(req.name)}', 
+			id:'ROOT_${NAMING.toCamelCase(link.page)}', 
 			source: 'ROOT',
-			target: '${NAMING.toCamelCase(req.name)}_DN',
-			name:'${req.comments!}'
-		}
+			target: '${NAMING.toCamelCase(link.page)}',
+			name:'${link.request.comments}',
+			size: 80
+		} 
 	},
 </#list>
 	{

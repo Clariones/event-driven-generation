@@ -15,7 +15,7 @@ var allData = [
 			id:'${NAMING.toCamelCase(edge.page)}_${NAMING.toCamelCase(edge.request)}', 
 			source: '${NAMING.toCamelCase(edge.page)}',
 			target: '${NAMING.toCamelCase(edge.request)}_DN',
-			name:'${edge.name}'
+			name:'${edge.name!}'
 		} 
 	},
 </#list>

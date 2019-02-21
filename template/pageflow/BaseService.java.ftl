@@ -16,15 +16,16 @@ import ${package}pageview.*;
  *
  */
 public abstract class Base${class_name}ViewService extends ${parent_class_name}{
+	public static final int $PRC_RESULT_OBJECT_WAS_SET = 0;
 <#list helper.getAllBrachNames(script) as branchName>
-	public static final int PRC_${NAMING.toJavaConstStyle(branchName)} = ${branchName?index};
+	public static final int PRC_${NAMING.toJavaConstStyle(branchName)} = ${branchName?index+1};
 </#list>
 
 
-	protected String makeUrl(String methodName, Object ... params) {
+	protected static String makeUrl(String methodName, Object ... params) {
 		return makeUrlF(methodName, true, params);
 	}
-	protected String makeUrlF(String methodName, boolean encode, Object ... params) {
+	protected static String makeUrlF(String methodName, boolean encode, Object ... params) {
 		StringBuilder sb = new StringBuilder(methodName).append("/");
 		if (params != null) {
 			for(Object param : params) {
@@ -52,7 +53,7 @@ public abstract class Base${class_name}ViewService extends ${parent_class_name}{
 	}
 <#list script.requests as request>
 	// 处理请求：${request.comments!}
-	protected String make${T.getRequestProcessingMethodName(request)?cap_first}Url(${custom_context_name} ctx<@T.getRequestProcessingUrlMethodParameters request/>){
+	public static String make${T.getRequestProcessingMethodName(request)?cap_first}Url(${custom_context_name} ctx<@T.getRequestProcessingUrlMethodParameters request/>){
 		return makeUrl("${T.getRequestProcessingMethodName(request)}"<@T.getRequestProcessingMethodParameterNames request/>);
 	}
 </#list>

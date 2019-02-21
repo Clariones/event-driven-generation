@@ -22,7 +22,7 @@ import ${base_package}.${NAMING.toCamelCase(form.formName)?lower_case}.${helper.
  */
 public class ${class_name}ViewService extends ${class_name}ViewBizService{
 <#list script.requests as request>
-	// ${request.comments!}
+	// ${request.comments!}(${request.name})
 	<#if request.handleForm>
 		<@formPostHanlingMethod request />
 	<#else>
@@ -84,6 +84,9 @@ public class ${class_name}ViewService extends ${class_name}ViewBizService{
 	<#if helper.isRequestHasBranch(request)>
 		<#assign otherBranches=helper.getAllOtherBranches(request)/>
 		${prefix}int resultCode = processRequest${T.getRequestProcessingMethodName(request)?cap_first}(ctx);
+		${prefix}if ($PRC_RESULT_OBJECT_WAS_SET == resultCode){
+		${prefix}	return ctx.getResultObject();
+		${prefix}}
 		${prefix}BaseViewPage page = null;
 		${prefix}switch(resultCode){
 		<#list otherBranches as branch>
@@ -102,7 +105,10 @@ public class ${class_name}ViewService extends ${class_name}ViewBizService{
 		${prefix}return page.doRender(ctx);
 	<#else>
 		<#assign branch=helper.getDefaultBranch(request)/>
-		${prefix}processRequest${T.getRequestProcessingMethodName(request)?cap_first}(ctx);
+		${prefix}int resultCode = processRequest${T.getRequestProcessingMethodName(request)?cap_first}(ctx);
+		${prefix}if ($PRC_RESULT_OBJECT_WAS_SET == resultCode){
+		${prefix}	return ctx.getResultObject();
+		${prefix}}
 		${prefix}BaseViewPage page = assembler${NAMING.toCamelCase(branch.page)}Page(ctx, "${T.getRequestProcessingMethodName(request)}");
 		${prefix}return page.doRender(ctx);
 	</#if>
