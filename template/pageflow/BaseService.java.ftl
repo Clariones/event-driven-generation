@@ -34,7 +34,7 @@ public abstract class Base${class_name}ViewService extends ${parent_class_name}{
 					continue;
 				}
 				boolean isVariable = false;
-				if (param instanceof String) {
+				if (param instanceof String && ((String) param).length() > 0) {
 					isVariable = ((String) param).charAt(0) == ':';
 				}
 				if (encode && !isVariable) {
@@ -66,4 +66,7 @@ public abstract class Base${class_name}ViewService extends ${parent_class_name}{
 <#list script.pages as name,page>
 	protected abstract ${NAMING.toCamelCase(page.name)}Page assembler${NAMING.toCamelCase(page.name)}Page(${custom_context_name} ctx, String requestName)throws Exception;
 </#list>
+
+	protected abstract void getCurrentUser(${custom_context_name} ctx);
+	protected abstract void ensureCurrentUser(${custom_context_name} ctx) throws Exception;
 }

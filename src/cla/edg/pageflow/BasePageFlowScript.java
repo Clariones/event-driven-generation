@@ -15,7 +15,27 @@ public class BasePageFlowScript extends BasePageFlowElement{
 	protected transient Page currentPage;
 	protected transient boolean needLoginByDefault = false;
 	protected transient boolean hasFootPrintDefault = true;
+	protected List<QueryInfo> queryInfoList;
+	protected transient QueryInfo currentQuery;
 	
+	
+	
+	public List<QueryInfo> getQueryInfoList() {
+		return queryInfoList;
+	}
+
+	public void setQueryInfoList(List<QueryInfo> queryInfoList) {
+		this.queryInfoList = queryInfoList;
+	}
+
+	public QueryInfo getCurrentQuery() {
+		return currentQuery;
+	}
+
+	public void setCurrentQuery(QueryInfo currentQuery) {
+		this.currentQuery = currentQuery;
+	}
+
 	public List<Request> getRequests() {
 		return requests;
 	}
@@ -49,17 +69,24 @@ public class BasePageFlowScript extends BasePageFlowElement{
 		currentRequest = work;
 		currentBranch = null;
 		currentPage = null;
+		currentQuery = null;
 	}
 	protected void setCurrentWork(Branch work) {
 		currentWork = work;
 		currentBranch = work;
 		currentPage = null;
+		currentQuery = null;
 	}
 	protected void setCurrentWork(Page work) {
 		currentWork = work;
 		currentPage = work;
+		currentQuery = null;
 	}
-
+	protected void setCurrentWork(QueryInfo work) {
+		currentWork = work;
+		currentQuery = work;
+	}
+	
 	protected void addNewPage(Page page) {
 		ensurePages();
 		pages.put(page.getName(), page);
@@ -74,5 +101,12 @@ public class BasePageFlowScript extends BasePageFlowElement{
 	protected Page findPageByName(String pageName) {
 		ensurePages();
 		return pages.get(pageName);
+	}
+
+	protected void addQueryInfo(QueryInfo qInfo) {
+		if (queryInfoList == null) {
+			queryInfoList = new ArrayList<>();
+		}
+		queryInfoList.add(qInfo);
 	}
 }

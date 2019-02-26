@@ -11,9 +11,9 @@ import java.util.stream.Collectors;
 
 import cla.edg.Utils;
 import cla.edg.pageflow.AccessParameter;
+import cla.edg.pageflow.BasePageFlowScript;
 import cla.edg.pageflow.Branch;
 import cla.edg.pageflow.Page;
-import cla.edg.pageflow.PageFlowScript;
 import cla.edg.pageflow.Request;
 
 public class PageFlowGeneratorHelper {
@@ -56,7 +56,7 @@ public class PageFlowGeneratorHelper {
 		result.remove(0);
 		return result;
 	}
-	public List<String> getAllBrachNames(PageFlowScript script){
+	public List<String> getAllBrachNames(BasePageFlowScript script){
 		List<String> result = new ArrayList<>();
 		result.add("by default");
 		for(Request req : script.getRequests()) {
@@ -70,7 +70,7 @@ public class PageFlowGeneratorHelper {
 		}
 		return result;
 	}
-	public List<AccessParameter> getAllForms(PageFlowScript script){
+	public List<AccessParameter> getAllForms(BasePageFlowScript script){
 		List<AccessParameter> result = new ArrayList<>();
 		for(Request req : script.getRequests()) {
 //			System.out.println("check request " + req.getName());
@@ -99,13 +99,13 @@ public class PageFlowGeneratorHelper {
 		return Utils.toCamelCase(param.getFormName()) + "FormProcessor";
 	}
 	
-	public Collection<Page> getAllPages(PageFlowScript script) {
+	public Collection<Page> getAllPages(BasePageFlowScript script) {
 		return script.getPages().values();
 	}
-	public List<Request> getAllRequestDispatchNode(PageFlowScript script) {
+	public List<Request> getAllRequestDispatchNode(BasePageFlowScript script) {
 		return script.getRequests();
 	}
-	public List<Map<String, Object>> getAllPageOutRequest(PageFlowScript script) {
+	public List<Map<String, Object>> getAllPageOutRequest(BasePageFlowScript script) {
 		List<Map<String, Object>> result = new ArrayList<>();
 		script.getPages().forEach((name, page)->{
 			if (page.getPossibleRequests() == null) {
@@ -121,10 +121,10 @@ public class PageFlowGeneratorHelper {
 		});
 		return result;
 	}
-	private Object findRequestComments(PageFlowScript script, String req) {
+	private Object findRequestComments(BasePageFlowScript script, String req) {
 		return script.getRequests().stream().filter(it->it.getName().equals(req)).findFirst().get().getComments();
 	}
-	public List<Map<String, Object>> getAllRequestBranchPages(PageFlowScript script) {
+	public List<Map<String, Object>> getAllRequestBranchPages(BasePageFlowScript script) {
 		List<Map<String, Object>> result = new ArrayList<>();
 		script.getRequests().forEach(req->{
 			if (req.getBranches() == null) {
@@ -143,7 +143,7 @@ public class PageFlowGeneratorHelper {
 		});
 		return result;
 	}
-	public Set<Request> getRootPageRequest(PageFlowScript script) {
+	public Set<Request> getRootPageRequest(BasePageFlowScript script) {
 		Set<String> allReqNames = script.getRequests().stream().map(it->it.getName()).collect(Collectors.toSet());
 		Set<String> reqNames = new HashSet<>();
 		for(Page page : script.getPages().values()) {
@@ -161,7 +161,7 @@ public class PageFlowGeneratorHelper {
 		}
 		return result;
 	}
-	public Map<String, Object> getAllRequestBranches(PageFlowScript script) {
+	public Map<String, Object> getAllRequestBranches(BasePageFlowScript script) {
 		HashSet<String> allPageNames = new HashSet<>(script.getPages().keySet());
 		List<Map<String, Object>> result = new ArrayList<>();
 		for(Page page : script.getPages().values()) {
@@ -209,7 +209,7 @@ public class PageFlowGeneratorHelper {
 		returnMap.put("rootPages", rootEdges);
 		return returnMap;
 	}
-	private Request findRequestByName(PageFlowScript script, String req) {
+	private Request findRequestByName(BasePageFlowScript script, String req) {
 		return script.getRequests().stream().filter(it->it.getName().equals(req)).findFirst().get();
 	}
 }

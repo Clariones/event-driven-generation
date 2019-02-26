@@ -2,11 +2,10 @@ package cla.edg.project.moyi;
 
 import cla.edg.pageflow.BasePageFlowDescriptionScript;
 import cla.edg.pageflow.BasePageFlowScript;
-import cla.edg.pageflow.PageFlowScript;
 
 public class NativeAppServiceV2_bakcup extends BasePageFlowDescriptionScript {
 
-	private static final PageFlowScript SCRIPT = $("native app v2").need_login()
+	private static final BasePageFlowScript SCRIPT = $("native app v2").need_login()
 			/**
 			 * 店铺入驻
 			 */
@@ -151,7 +150,7 @@ public class NativeAppServiceV2_bakcup extends BasePageFlowDescriptionScript {
 //			
 
 	@Override
-	public PageFlowScript getScript() {
+	public BasePageFlowScript getScript() {
 		return SCRIPT;
 	}
 

@@ -20,7 +20,7 @@ import ${base_package}.${NAMING.toCamelCase(form.formName)?lower_case}.${helper.
  * @author clariones
  *
  */
-public class ${class_name}ViewService extends ${class_name}ViewBizService{
+public abstract class ${class_name}ViewService extends Base${class_name}ViewService{
 <#list script.requests as request>
 	// ${request.comments!}(${request.name})
 	<#if request.handleForm>

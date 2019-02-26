@@ -11,7 +11,7 @@ import ${base_package}.FootprintProducer;
  * @author clariones
  *
  */
-public abstract class Basic${class_name}ViewBizService extends Base${class_name}ViewService implements FootprintProducer {
+public abstract class Basic${class_name}ViewBizService extends ${class_name}ViewService implements FootprintProducer {
 	protected void getCurrentUser(CustomMoyiUserContextImpl ctx) {
 		// TODO 从redis的数据中获得当前用户
 	}

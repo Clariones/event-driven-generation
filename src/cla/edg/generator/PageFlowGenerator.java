@@ -6,9 +6,9 @@ import java.util.Map;
 import java.util.Set;
 
 import cla.edg.Utils;
+import cla.edg.pageflow.BasePageFlowScript;
 import cla.edg.pageflow.Branch;
 import cla.edg.pageflow.Page;
-import cla.edg.pageflow.PageFlowScript;
 import cla.edg.pageflow.Request;
 import freemarker.template.Template;
 
@@ -34,7 +34,7 @@ public class PageFlowGenerator extends BasicGenerator {
 		this.parentClassPackage = parentClassPackage;
 	}
 
-	public void generateWithScript(PageFlowScript script) throws Exception {
+	public void generateWithScript(BasePageFlowScript script) throws Exception {
 		verifyScriptWasFinished(script);
 		// 一共输出4个文件： 
 		//	BaseXXXViewService 这个基类，声明所有生成的处理框架中用到的方法和常量。方便维护。
@@ -114,8 +114,22 @@ public class PageFlowGenerator extends BasicGenerator {
 			}
 		}
 		
-		
-		// 调试用：增肌一个自动布局的JS数据文件
+		if (script.getQueryInfoList() != null && script.getQueryInfoList().size() > 0) {
+			// 第五个文件，XXXDBQueryHelper 和 ，XXXDBQueryHelperImpl（这个手动）
+			packageName = this.getBasePackageName()+"."+Utils.toCamelCase(script.getName()).toLowerCase();
+			fileNameEtyma = Utils.toCamelCase(script.getName());
+			className = String.format("%s", fileNameEtyma);
+			data.put("class_name", className);
+			outputFileName = className + "DBQueryHelper.java";
+			outputFile = new File(getBaseOutputFolderFile(),
+					Utils.packageNameToPath(packageName) + "/" + outputFileName);
+			System.out.println("Write to " + outputFile.getCanonicalPath());
+			tmplFileName = "pageflow/DbQuery.java.ftl";
+			template = getTemplate(tmplFileName);
+			doGeneration(outputFile, data, template);
+		}
+				
+		// 调试用：增加一个自动布局的JS数据文件
 		outputFileName = "datanodes.js";
 		File outputFolder = new File("/works/jobs/moyi_v2/workspace/agl");
 		outputFile = new File(outputFolder, outputFileName);
@@ -125,7 +139,7 @@ public class PageFlowGenerator extends BasicGenerator {
 		doGeneration(outputFile, data, template);
 	}
 
-	private void verifyScriptWasFinished(PageFlowScript script) {
+	private void verifyScriptWasFinished(BasePageFlowScript script) {
 		// 1. 所有page 的 may_request都被声明了
 		// 2. 所有的request，至少有一个返回结果
 		// 3. 所有的请求，不能重复定义

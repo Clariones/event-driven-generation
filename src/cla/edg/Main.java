@@ -8,7 +8,6 @@ import cla.edg.generator.EventScriptGenerator;
 import cla.edg.generator.PageFlowGenerator;
 import cla.edg.pageflow.BasePageFlowDescriptionScript;
 import cla.edg.pageflow.BasePageFlowScript;
-import cla.edg.pageflow.PageFlowScript;
 import cla.edg.project.moyi.Auction;
 import cla.edg.project.moyi.NativeAppServiceV2;
 import cla.edg.project.moyi.ShopDeposit;
@@ -26,7 +25,7 @@ public class Main {
 	}
 
 	private static void testPageFlow(BasePageFlowDescriptionScript test) throws Exception {
-		PageFlowScript script = test.getScript();
+		BasePageFlowScript script = test.getScript();
 		String jsonStr = Utils.toJson(script, true);
 
 		System.out.println(jsonStr);

@@ -1,8 +1,10 @@
 	// ///////////////////////////// ${event.comments!} //////////////////////////////////
+	/** ${event.comments!} */
 	<#if event.externalEvent>public<#else>protected</#if> void on${event.javaName}(${custom_context_name} ctx) throws Exception{
 		checkCanDo${event.javaName}(ctx);
 <#if event.hasBranch>
 		int processResult = process${event.javaName}(ctx);
+		ctx.setEventResult(EVENT_${NAMING.toJavaConstStyle(event.name)}, processResult);
 		switch(processResult) {
 	<#list event.definedBranches as branch>
 		case ${branch.conditionCodeConst}: {// ${branch.comments!}
@@ -16,7 +18,8 @@
 			break;
 		}
 <#else>
-		process${event.javaName}(ctx);
+		int processResult = process${event.javaName}(ctx);
+		ctx.setEventResult(EVENT_${NAMING.toJavaConstStyle(event.name)}, processResult);
 	<#assign branch = event.defaultBranch>
 	<@event_ripples branch />
 </#if>

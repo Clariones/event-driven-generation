@@ -62,6 +62,9 @@ public class PageFlowScript extends BasePageFlowScript {
 		if (currentWork instanceof Request) {
 			return when("by default").got_page(pageName);
 		}
+		if (currentWork instanceof QueryInfo) {
+			return when("by default").got_page(pageName);
+		}
 		if (currentWork instanceof Branch) {
 			Page page = findPageByName(pageName);
 			if (page == null) {
@@ -120,6 +123,8 @@ public class PageFlowScript extends BasePageFlowScript {
 	public PageFlowScript with_integer(String paramName) {
 		if (currentWork instanceof Request) {
 			AccessParameter p = currentRequest.addIntegerParameter(paramName);
+		}else if (currentWork instanceof QueryInfo) {
+			currentQuery.addIntegerParameter(paramName);
 		}else {
 			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能指定整型参数");
 		}
@@ -128,6 +133,8 @@ public class PageFlowScript extends BasePageFlowScript {
 	public PageFlowScript with_float(String paramName) {
 		if (currentWork instanceof Request) {
 			AccessParameter p = currentRequest.addFloatParameter(paramName);
+		}else if (currentWork instanceof QueryInfo) {
+			currentQuery.addFloatParameter(paramName);
 		}else {
 			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能指定浮点型参数");
 		}
@@ -136,6 +143,8 @@ public class PageFlowScript extends BasePageFlowScript {
 	public PageFlowScript with_boolean(String paramName) {
 		if (currentWork instanceof Request) {
 			AccessParameter p = currentRequest.addBooleanParameter(paramName);
+		}else if (currentWork instanceof QueryInfo) {
+			currentQuery.addBooleanParameter(paramName);
 		}else {
 			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能指定布尔参数");
 		}
@@ -144,6 +153,8 @@ public class PageFlowScript extends BasePageFlowScript {
 	public PageFlowScript with_string(String paramName) {
 		if (currentWork instanceof Request) {
 			AccessParameter p = currentRequest.addStringParameter(paramName);
+		}else if (currentWork instanceof QueryInfo) {
+			currentQuery.addStringParameter(paramName);
 		}else {
 			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能指定字符串参数");
 		}
@@ -183,14 +194,49 @@ public class PageFlowScript extends BasePageFlowScript {
 		setCurrentWork(page);
 		return this;
 	}
-	public PageFlowScript TBD() {
+	public BasePageFlowScript TBD() {
 		throw new RuntimeException("TBD");
 	}
-	public PageFlowScript go_back_previous_page() {
+	public BasePageFlowScript go_back_previous_page() {
 		got_page("go back");
 		return this;
 	}
 	
+	public PageFlowScript query(String tgtName) {
+		QueryInfo qInfo = new QueryInfo();
+		qInfo.setObjectName(tgtName);
+		addQueryInfo(qInfo);
+		setCurrentWork(qInfo);
+		return this;
+	}
+	public PageFlowScript which(String whichDescription) {
+		if (currentQuery == null) {
+			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能描述搜索");
+		}
+		currentQuery.setName(whichDescription);
+		return this;
+	}
+	public PageFlowScript in_pages() {
+		if (currentQuery == null) {
+			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能指定分页");
+		}
+		currentQuery.setPagination(true);
+		return this;
+	}
+	public BasePageFlowScript one_page() {
+		if (currentQuery == null) {
+			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能指定分页");
+		}
+		currentQuery.setPagination(false);
+		return this;
+	}
+	public PageFlowScript rule_comments(String string) {
+		if (currentQuery == null) {
+			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能添加query规则描述");
+		}
+		currentQuery.addRuleComments(string);
+		return this;
+	}
 
 	
 }
