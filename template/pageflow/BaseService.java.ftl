@@ -53,7 +53,7 @@ public abstract class Base${class_name}ViewService extends ${parent_class_name}{
 	}
 <#list script.requests as request>
 	// 处理请求：${request.comments!}
-	public static String make${T.getRequestProcessingMethodName(request)?cap_first}Url(${custom_context_name} ctx<@T.getRequestProcessingUrlMethodParameters request/>){
+	public static String make${NAMING.toCamelCase(request.name)}Url(${custom_context_name} ctx<@T.getRequestProcessingUrlMethodParameters request/>){
 		return makeUrl("${T.getRequestProcessingMethodName(request)}"<@T.getRequestProcessingMethodParameterNames request/>);
 	}
 </#list>
