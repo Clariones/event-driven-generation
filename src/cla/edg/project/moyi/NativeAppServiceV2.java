@@ -30,16 +30,16 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 				.comments("提交店铺基本信息，准备支付店铺保证金").no_footprint()
 				.got_page("pay shop deposit bill").comments("支付店铺保证金")
 					.may_request("pay bill or order")
-					.may_request("repricing shop deposit bill")
+//					.may_request("repricing shop deposit bill")
 			
-			.request("repricing shop deposit bill").with_string("scene code").with_string("order id").with_boolean("use ib balance").with_boolean("use cash balance").with_float("amount")
-				.comments("根据用户的支付选项，计算订单的支付金额")
-				.got_page("pay shop deposit bill")
-				
-			.request("paid shop deposit bill").with_string("payment id")
-				.comments("店铺入驻提交成功").no_footprint()
-				.got_page("shop location success").comments("店铺入驻成功")
-					.may_request("view my shop")
+//			.request("repricing shop deposit bill").with_string("scene code").with_string("order id").with_boolean("use ib balance").with_boolean("use cash balance").with_float("amount")
+//				.comments("根据用户的支付选项，计算订单的支付金额")
+//				.got_page("pay shop deposit bill")
+//				
+//			.request("paid shop deposit bill").with_string("payment id")
+//				.comments("店铺入驻提交成功").no_footprint()
+//				.got_page("shop location success").comments("店铺入驻成功")
+//					.may_request("view my shop")
 					
 			/**
 			 * 艺术品确权 
@@ -350,7 +350,7 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 			.in_page("paid success").comments("支付成功")
 				.may_request("put product on sale")
 //				.may_request("ink deed entry order fee paid")
-				.may_request("paid shop deposit bill")
+//				.may_request("paid shop deposit bill")
 				
 				
 				

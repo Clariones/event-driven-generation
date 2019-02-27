@@ -47,12 +47,11 @@ public abstract class ${class_name}DBQueryHelper{
 		}
 	</#if>
 		List<Object> params = new ArrayList<>();
-		String sql = "select D.* from ${query.objectName}_data D ";
 	<#if query.pagination>
 		int pageSize = getPageSize("query${typeClass}ListOf${NAMING.toCamelCase(query.name)}");
-		sql = sql + prepareWhereClauseAndParamsForQuery${typeClass}ListOf${NAMING.toCamelCase(query.name)}(ctx, lastRecord, pageSize+1, params<@T.getRequestProcessingMethodParameterNames query/>);
+		String sql = prepareSqlAndParamsForQuery${typeClass}ListOf${NAMING.toCamelCase(query.name)}(ctx, lastRecord, pageSize+1, params<@T.getRequestProcessingMethodParameterNames query/>);
 	<#else>
-		sql = sql + prepareWhereClauseAndParamsForQuery${typeClass}ListOf${NAMING.toCamelCase(query.name)}(ctx, params<@T.getRequestProcessingMethodParameterNames query/>);
+		String sql = prepareSqlAndParamsForQuery${typeClass}ListOf${NAMING.toCamelCase(query.name)}(ctx, params<@T.getRequestProcessingMethodParameterNames query/>);
 	</#if>
 		SmartList<${typeClass}> list = ctx.getDAOGroup().get${typeClass}DAO().queryList(sql, params.toArray());
 		if (list == null || list.isEmpty()){
@@ -72,14 +71,20 @@ public abstract class ${class_name}DBQueryHelper{
 	}
 	
 	${''}<@compress single_line=true>
-	protected String prepareWhereClauseAndParamsForQuery${typeClass}ListOf${NAMING.toCamelCase(query.name)}(
+	protected String prepareSqlAndParamsForQuery${typeClass}ListOf${NAMING.toCamelCase(query.name)}(
 		${custom_context_name} ctx
 		<#if query.pagination>, ${typeClass} lastRecord, int limit</#if>
 		, List<Object> params<@T.getRequestProcessingUrlMethodParameters query/>
 		) throws Exception {
 	</@>${''}
 		// TODO: 你需要自己实现这个部分
-		return <#if query.pagination>" limit "+limit<#else>""</#if>;
+		String sql = "select D.* from ${query.objectName}_data D ";
+	<#if query.pagination>
+		params.add(limit);
+		return sql + " limit ?";
+	<#else>
+		return sql;
+	</#if>
 	}
 	
 	protected void enhance${typeClass}List(${custom_context_name} ctx, SmartList<${typeClass}> list, String queryName) throws Exception {
