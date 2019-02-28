@@ -39,11 +39,7 @@ public class ShopLocating extends BaseEventDescriptionScript{
 				.comments("店铺入驻审核失败")
 			.on_event("certificate success")
 				.comments("店铺入驻审核成功")
-			/**
-			 * 未完全定义的事件
-			 */
-			.on_event("TBD")
-				.comments("待定")
+			
 			;
 	
 

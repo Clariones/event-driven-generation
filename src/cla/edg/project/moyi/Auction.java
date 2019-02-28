@@ -46,9 +46,6 @@ public class Auction extends BaseEventDescriptionScript{
 				.event_ripple("artwork sold").comments("标记改作品已售")
 				.event_ripple("calculate order price").comments("计算所有艺术品拍卖的订单价格条目")
 				.event_ripple("create order").comments("创建艺术品拍卖订单")
-			.on_event("closed").internal_only()
-				.comments("拍卖结束")
-				.event_ripple("refund losed bidder deposit").comments("退还未中标竞拍者的保证金")
 			.on_event("paid").comments("订单已支付")
 			.on_event("delivered").comments("卖家填写了物流信息，表示已经发货")
 			.on_event("confirm reception").comments("买家确认收货，交易best luck结束")
@@ -57,6 +54,7 @@ public class Auction extends BaseEventDescriptionScript{
 				.event_ripple("pay recommendation commission").comments("发放荐宝佣金")
 				.event_ripple("transfer artwork ownership to buyer").comments("修改艺术品的当前所有者")
 			.on_event("submit complain").comments("用户提交了售后申请表单")
+				.event_ripple("froze related money").comments("冻结所有相关的资金，等待投诉处理完毕")
 			.on_event("complain resolved").comments("经调解协商，售后问题解决")
 				.when("return to seller").comments("协商结果为退回卖家")
 					.event_ripple("artwork rollback to wait for sale")
@@ -69,6 +67,9 @@ public class Auction extends BaseEventDescriptionScript{
 					.event_ripple("transfer artwork ownership to buyer").comments("修改艺术品的当前所有者")
 					.event_ripple("manually confirm reception").comments("根据指定的协商结果，处理账目")
 			/**内部事件*/
+			.on_event("closed").internal_only()
+				.comments("拍卖结束")
+				.event_ripple("refund losed bidder deposit").comments("退还未中标竞拍者的保证金")
 			.on_event("cash ink deed from seller deposit").comments("用卖家的保证金兑付墨契").internal_only()
 			.on_event("release seller deposit frozen by inke deed").comments("释放发行墨契时冻结的保证金").internal_only()
 			.on_event("artwork sold").comments("标记改作品已售").internal_only()
@@ -81,6 +82,7 @@ public class Auction extends BaseEventDescriptionScript{
 			.on_event("manually return to seller").comments("根据指定的协商结果，处理账目").internal_only()
 			.on_event("manually confirm reception").comments("根据指定的协商结果，处理账目").internal_only()
 			.on_event("refund losed bidder deposit").comments("退还未中标竞拍者的保证金").internal_only()
+			.on_event("froze related money").comments("有售后纠纷后，冻结所有相关的资金，等待协商处理").internal_only()
 			;
 	
 

@@ -32,9 +32,13 @@
 	 * 返回值：<#list helper.getAllBranch(event) as branch> ${branch.conditionCodeConst}:${branch.comments!}</#list>
 	 */
 	protected abstract int process${event.javaName}(${custom_context_name} ctx) throws Exception;
+<#if event.externalEvent> <#-- 外部事件必须写自己的校验方法 -->
+	protected abstract void checkCanDo${event.javaName}(${custom_context_name} ctx) throws Exception;
+<#else>
 	protected void checkCanDo${event.javaName}(${custom_context_name} ctx) throws Exception {
 		// by default, nothing was checked
 	}
+</#if>
 	protected void writeLogsFor${event.javaName}(${custom_context_name} ctx) {
 		// by default, nothing was logged
 	}
