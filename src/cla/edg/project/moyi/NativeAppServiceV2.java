@@ -105,9 +105,15 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 			 * 商家中台
 			 * 大部分都没定
 			 */
-			.request("view product list").with_string("filter").with_integer("page no")
-				.comments("艺术品列表页面。filter可能为：待确权|拍卖中|已。。。。")
-				.got_page("TBD")
+			.request("view auction list as seller").with_string("filter")
+				.comments("卖家：我的拍品列表")
+				.query("artwork_auction").which("mine filtered").pagination().with_string("user id").with_string("filter")
+					.comments("按照filter来查询拍卖的列表")
+				.got_page("auction list")
+					.may_request("view next page auction list as seller")
+			.request("view next page auction list as seller").with_string("filter").with_string("last record id")
+				.comments("卖家：我的拍品列表 翻页")
+				.got_page("auction list")
 				
 			/**
 			 * 拍卖订单 
@@ -120,7 +126,7 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 					.may_request("view auction order detail")
 			.request("view auction order list as seller").with_string("filter")
 				.comments("卖家查看自己的（艺术品拍卖）订单列表").has_footprint()
-				.query("artwork_auction_order").which("mine filtered").in_pages().with_string("buyer id").with_string("filter")
+				.query("artwork_auction_order").which("mine filtered").pagination().with_string("buyer id").with_string("filter")
 					.comments("根据filter的代码，查找卖家的订单列表")
 					.rule_comments("待付款,还包括了付款中")
 					.rule_comments("待发货")

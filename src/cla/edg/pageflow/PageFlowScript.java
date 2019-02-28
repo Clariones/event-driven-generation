@@ -116,7 +116,7 @@ public class PageFlowScript extends BasePageFlowScript {
 			AccessParameter p = currentRequest.addFormParameter(formName);
 			currentRequest.setHasFootprint(false);
 		}else {
-			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能指定提交的form");
+			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能指定提交的form"+formName);
 		}
 		return this;
 	}
@@ -126,7 +126,7 @@ public class PageFlowScript extends BasePageFlowScript {
 		}else if (currentWork instanceof QueryInfo) {
 			currentQuery.addIntegerParameter(paramName);
 		}else {
-			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能指定整型参数");
+			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能指定整型参数"+paramName);
 		}
 		return this;
 	}
@@ -136,7 +136,7 @@ public class PageFlowScript extends BasePageFlowScript {
 		}else if (currentWork instanceof QueryInfo) {
 			currentQuery.addFloatParameter(paramName);
 		}else {
-			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能指定浮点型参数");
+			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能指定浮点型参数"+paramName);
 		}
 		return this;
 	}
@@ -146,7 +146,7 @@ public class PageFlowScript extends BasePageFlowScript {
 		}else if (currentWork instanceof QueryInfo) {
 			currentQuery.addBooleanParameter(paramName);
 		}else {
-			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能指定布尔参数");
+			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能指定布尔参数"+paramName);
 		}
 		return this;
 	}
@@ -156,7 +156,7 @@ public class PageFlowScript extends BasePageFlowScript {
 		}else if (currentWork instanceof QueryInfo) {
 			currentQuery.addStringParameter(paramName);
 		}else {
-			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能指定字符串参数");
+			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能指定字符串参数"+paramName);
 		}
 		return this;
 	}
@@ -216,7 +216,7 @@ public class PageFlowScript extends BasePageFlowScript {
 		currentQuery.setName(whichDescription);
 		return this;
 	}
-	public PageFlowScript in_pages() {
+	public PageFlowScript pagination() {
 		if (currentQuery == null) {
 			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能指定分页");
 		}

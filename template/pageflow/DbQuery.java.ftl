@@ -54,19 +54,24 @@ public abstract class ${class_name}DBQueryHelper{
 		String sql = prepareSqlAndParamsForQuery${typeClass}ListOf${NAMING.toCamelCase(query.name)}(ctx, params<@T.getRequestProcessingMethodParameterNames query/>);
 	</#if>
 		SmartList<${typeClass}> list = ctx.getDAOGroup().get${typeClass}DAO().queryList(sql, params.toArray());
+	<#if query.pagination>
+		list.setRowsPerPage(pageSize);
+	<#else>
+		list.setRowsPerPage(Integer.MAX_VALUE);
+	</#if>
 		if (list == null || list.isEmpty()){
 			return list;
 		}
 	<#if query.pagination>
-		list.setRowsPerPage(pageSize);
 		if (list.size() > pageSize){
 			ctx.setLastRecordId(list.last().getId());
+		}else{
+			ctx.setLastRecordId(null);
 		}
 	<#else>
-		list.setRowsPerPage(Integer.MAX_VALUE);
 		ctx.setLastRecordId(null);
 	</#if>
-		enhance${typeClass}List(ctx, list, "query${typeClass}ListOf${NAMING.toCamelCase(query.name)}");
+		enhance${typeClass}List(ctx, list, "query${typeClass}ListOf${NAMING.toCamelCase(query.name)}"<@T.getRequestProcessingMethodParameterNames query/>);
 		return list;
 	}
 	
@@ -80,14 +85,18 @@ public abstract class ${class_name}DBQueryHelper{
 		// TODO: 你需要自己实现这个部分
 		String sql = "select D.* from ${query.objectName}_data D ";
 	<#if query.pagination>
+		if (lastRecord != null) {
+			params.add(lastRecord.getId());
+			sql += " where D.id <= ? ";
+		}
 		params.add(limit);
-		return sql + " limit ?";
+		return sql + " order by D.id desc limit ?";
 	<#else>
-		return sql;
+		return sql + " order by D.id desc";
 	</#if>
 	}
 	
-	protected void enhance${typeClass}List(${custom_context_name} ctx, SmartList<${typeClass}> list, String queryName) throws Exception {
+	protected void enhance${typeClass}List(${custom_context_name} ctx, SmartList<${typeClass}> list, String queryName<@T.getRequestProcessingUrlMethodParameters query/>) throws Exception {
 		// TODO: 你需要自己实现这个部分
 	}
 
