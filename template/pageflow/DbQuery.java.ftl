@@ -31,6 +31,16 @@ public abstract class ${class_name}DBQueryHelper{
 		return 20;
 	}
 <#list script.queryInfoList as query >
+	/**
+	 * ${query.comments!}.
+	<#if query.ruleComments?has_content>
+	 * <p/>
+	 * 规则：<br/>
+		<#list query.ruleComments as comments>
+	 * ${comments_index+1}. ${comments}<br/>
+		</#list>
+	</#if>
+	 */
 	<#assign typeClass=NAMING.toCamelCase(query.objectName)/>
 	${''}<@compress single_line=true>
 	public SmartList<${typeClass}> 
@@ -71,7 +81,7 @@ public abstract class ${class_name}DBQueryHelper{
 	<#else>
 		ctx.setLastRecordId(null);
 	</#if>
-		enhance${typeClass}List(ctx, list, "query${typeClass}ListOf${NAMING.toCamelCase(query.name)}"<@T.getRequestProcessingMethodParameterNames query/>);
+		enhance${typeClass}ListOf${NAMING.toCamelCase(query.name)}(ctx, list, "query${typeClass}ListOf${NAMING.toCamelCase(query.name)}"<@T.getRequestProcessingMethodParameterNames query/>);
 		return list;
 	}
 	
@@ -96,7 +106,7 @@ public abstract class ${class_name}DBQueryHelper{
 	</#if>
 	}
 	
-	protected void enhance${typeClass}List(${custom_context_name} ctx, SmartList<${typeClass}> list, String queryName<@T.getRequestProcessingUrlMethodParameters query/>) throws Exception {
+	protected void enhance${typeClass}ListOf${NAMING.toCamelCase(query.name)}(${custom_context_name} ctx, SmartList<${typeClass}> list, String queryName<@T.getRequestProcessingUrlMethodParameters query/>) throws Exception {
 		// TODO: 你需要自己实现这个部分
 	}
 
