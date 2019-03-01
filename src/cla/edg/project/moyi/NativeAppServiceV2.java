@@ -101,10 +101,15 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 			.request("view trading list by type").with_string("filter").with_string("artwork type id")
 				.comments("按照艺术品类型查看拍卖列表").has_footprint().no_login()
 				.got_page("view trading list")
+					
 			/**
 			 * 商家中台
 			 * 大部分都没定
 			 */
+			.request("view my shop").with_string("filter")
+				.comments("查看我的店铺")
+				.got_page("my shop").comments("店主的店铺管理")
+				
 			.request("view auction list as seller").with_string("filter")
 				.comments("卖家：我的拍品列表")
 				.query("artwork_auction").which("mine filtered").pagination().with_string("user id").with_string("filter")
@@ -125,6 +130,12 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 				.comments("卖家：我的拍品列表 翻页")
 				.got_page("auction list")
 				
+			.request("view artwork need certificate list")
+				.comments("查看待确权艺术品列表").need_login().has_footprint()
+				.query("artwork").which("need certification").pagination().with_string("owner id")
+					.comments("查找需要确权的艺术品列表")
+				.got_page("artwork need certificate").comments("待确权的艺术品列表")
+					.may_request("put product on sale")
 			/**
 			 * 拍卖订单 
 			 * list页面，卖家和买家是不同的入口
@@ -155,13 +166,6 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 				.got_page("auction order list")
 			.request("view auction order detail").with_string("order id")
 				.comments("查看艺术品拍卖订单详情").has_footprint()
-//				.when("need_fill_address").comments("需要填写收货人地址")
-//					.got_page("fill order address info").comments("填写收货人信息表单")
-//						.may_request("submit auction order address form")
-//				.when("need_fill_shipping").comments("需要填写物流信息")
-//					.got_page("fill order shipping info").comments("填写物流信息表单")
-//						.may_request("submit auction order shipping form")
-//				.when_others().comments("其他情况")
 					.got_page("auction order detail").comments("订单详情页")
 						.may_request("confirm auction order received")
 						.may_request("complain auction order")
@@ -305,8 +309,13 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 				.got_page("store detail").comments("游客看到的店铺详情")
 			.request("view artwork product").with_string("artwork auction id")
 				.comments("查看艺术品拍卖详情").has_footprint().no_login()
+				.query("artwork_auction").which("recommend for viewing auction").no_pagination().with_string("artwork auction id")
+					.comments("为当前浏览的拍卖品搜索几个推荐的拍卖")
 				.got_page("artwork auction detail").comments("艺术品拍卖详情")
-					.may_request("TBD")
+					.may_request("partial refresh artwork auction")
+					.may_request("bidding artwork auction")
+					.may_request("view bidding history")
+					.may_request("view auction recommendation")
 			.request("partial refresh artwork auction").with_string("artwork auction id")
 				.comments("刷新艺术品拍卖的部分信息").no_footprint().no_login()
 				.got_page("artwork auction refresh result").comments("艺术品拍卖的刷新结果")
@@ -368,21 +377,15 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 //				.may_request("ink deed entry order fee paid")
 //				.may_request("paid shop deposit bill")
 				
-				
-				
+			/**
+			 * 其他杂项
+			 */
+			.request("import contact book").with_form("import contact book")
+				.comments("导入通讯录")
+				.got_page("contact book import result").comments("导入结果")
 			/**
 			 * 各种临时声明
 			 */
-			.request("TBD")		// 店铺查看部分还没有弄
-				.comments("TBD").has_footprint()
-				.got_page("TBD").comments("待定")
-				
-			.request("view my shop").with_string("filter")
-				.comments("查看我的店铺")
-				.got_page("my shop").comments("店主的店铺管理")
-					
-
-			.in_page("TBD")
 			;
 		
 //			

@@ -223,7 +223,7 @@ public class PageFlowScript extends BasePageFlowScript {
 		currentQuery.setPagination(true);
 		return this;
 	}
-	public BasePageFlowScript one_page() {
+	public PageFlowScript no_pagination() {
 		if (currentQuery == null) {
 			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能指定分页");
 		}

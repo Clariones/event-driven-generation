@@ -16,8 +16,13 @@ import ${parent_class_package}.${parent_class_name};
 import ${package}pageview.*;
 
 import com.terapico.utils.TextUtil;
+<#assign imported = []>
 <#list script.queryInfoList as query >
+	<#if imported?seq_contains(query.objectName)>
+	<#else>
 import ${base_package}.${NAMING.toCamelCase(query.objectName)?lower_case}.${NAMING.toCamelCase(query.objectName)};
+	<#assign imported = imported + [query.objectName] />
+	</#if>
 </#list>
 
 /**
