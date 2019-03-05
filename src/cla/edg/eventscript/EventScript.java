@@ -7,6 +7,7 @@ public class EventScript extends BasicEventScriptInfo {
 	public EventScript on_event(String eventName) {
 		EventInfo newEvent = new EventInfo();
 		newEvent.setName(eventName);
+		newEvent.setExternalEvent(!internalEvent);
 		addEventInfo(newEvent);
 		setCurrentOperation(newEvent);
 		return this;
@@ -112,6 +113,11 @@ public class EventScript extends BasicEventScriptInfo {
 		} else {
 			throw new RuntimeException("当前任务是" + currentOperation.getClass().getSimpleName() + ",不能指定消息处理者");
 		}
+		return this;
+	}
+
+	public EventScript internal_only_bydefault() {
+		internalEvent = true;
 		return this;
 	}
 	

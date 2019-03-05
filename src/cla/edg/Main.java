@@ -9,6 +9,7 @@ import cla.edg.generator.PageFlowGenerator;
 import cla.edg.pageflow.BasePageFlowDescriptionScript;
 import cla.edg.pageflow.BasePageFlowScript;
 import cla.edg.project.moyi.Auction;
+import cla.edg.project.moyi.InkDeed;
 import cla.edg.project.moyi.NativeAppServiceV2;
 import cla.edg.project.moyi.ShopDeposit;
 import cla.edg.project.moyi.ShopLocating;
@@ -21,6 +22,7 @@ public class Main {
 		testEventService(new ShopLocating());
 		testEventService(new ShopDeposit());
 		testEventService(new Auction());
+		testEventService(new InkDeed());
 		testPageFlow(new NativeAppServiceV2());
 	}
 

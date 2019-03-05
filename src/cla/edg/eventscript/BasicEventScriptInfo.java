@@ -18,6 +18,16 @@ public class BasicEventScriptInfo {
 	protected transient EventProcessResultBranch currentBranch;
 	protected transient Object currentOperation;
 	protected transient EventRipple currentEventRipple;
+	protected boolean internalEvent = false;
+
+	
+	public boolean isInternalEvent() {
+		return internalEvent;
+	}
+
+	public void setInternalEvent(boolean internalEvent) {
+		this.internalEvent = internalEvent;
+	}
 
 	public String getBussinessName() {
 		return bussinessName;

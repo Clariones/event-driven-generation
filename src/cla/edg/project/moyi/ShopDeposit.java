@@ -10,15 +10,10 @@ public class ShopDeposit extends BaseEventDescriptionScript{
 			 */
 			.on_event("income deposit")
 				.comments("有保证金入账")
-				.when("has debt").comments("还有欠账")
-					.event_ripple("still has debt")
-				.when("debt repaid").comments("欠账偿还完毕")
-					.event_ripple("debt has been repaid")
-				.when_others().comments("没有变化")
-			.on_event("still has debt")
-				.comments("缴费后还有欠费")
-			.on_event("debt has been repaid")
-				.comments("缴费后还清欠费")
+			.on_event("release seller deposit by ink deed cahsed")
+				.comments("兑付墨契后释放保证金")
+			.on_event("froze deposit by ink deed issuing")
+				.comments("发行墨契时,需要冻结相应的保证金")
 			/**
 			 * 未完全定义的事件
 			 */
