@@ -9,6 +9,7 @@ import cla.edg.Utils;
 import cla.edg.pageflow.BasePageFlowScript;
 import cla.edg.pageflow.Branch;
 import cla.edg.pageflow.Page;
+import cla.edg.pageflow.QueryInfo;
 import cla.edg.pageflow.Request;
 import freemarker.template.Template;
 
@@ -183,6 +184,12 @@ public class PageFlowGenerator extends BasicGenerator {
 		// 3. 所有的请求，不能重复定义
 		if (redundantRequestUrls.size() > 0){
 			throw new RuntimeException("以下页面请求重复定义："+redundantRequestUrls);
+		}
+		// 4. 所有的query的名字必须是合法的
+		for(QueryInfo query: script.getQueryInfoList()) {
+			if (query.getObjectName().contains(" ")) {
+				throw new RuntimeException("查询的对象名字不正常："+query.getObjectName());
+			}
 		}
 	}
 }
