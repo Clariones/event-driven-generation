@@ -214,10 +214,30 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 			/**
 			 * 购买墨契
 			 */
+			.request("preview of buy ink deed order").with_string("order id")
+				.comments("预览要购买的墨契的信息")
+				.got_page("buy ink deed preview")
+					.may_request("buy ink deed")
 			.request("buy ink deed").with_string("order id")
 				.comments("购买墨契")
-				.got_page("pay ink deed order")
-					.may_request("pay bill or order")
+				.got_page("ext payment")
+			.request("modify ink deed order price").with_string("order id").with_float("amount")
+				.comments("修改墨契订单总价")
+				.got_page("ink deed order detail")
+			.request("pay ink deed order").with_string("order id")
+				.comments("从墨契订单列表/详情进入支付页面.")
+				.got_page("ext payment")
+			.request("cancel ink deed order").with_string("order id")
+				.comments("买家取消购买墨契的订单")
+				.got_page("simple popup").comments("只包含一个popup的页面")
+					.may_request("do cancel ink deed order")
+			.request("do cancel ink deed order").with_string("order id").with_string("verify code")
+				.comments("买家确认取消墨契购买订单")
+				.got_page("ink deed order detail")
+			
+			/**
+			 * 墨契订单列表
+			 */
 			.request("view my ink deed order list").with_string("filter")
 				.comments("查看墨契订单列表")
 				.query("ink_deed_order").which("my filtered by filter").with_string("user id").with_string("filter")
@@ -225,6 +245,7 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 				.got_page("ink deed order list").comments("墨契订单列表")
 					.may_request("view ink deed order detail")
 					.may_request("view my next page deed order list")
+					.may_request("view auction related ink deed entry order list")
 			.request("view my next page deed order list").with_string("filter").with_string("last record id")
 				.comments("查看墨契订单列表 翻页")
 				.got_page("ink deed order list")
@@ -232,9 +253,9 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 				.comments("查看墨契订单详情")
 				.got_page("ink deed order detail").comments("墨契交易订单详情")
 					.may_request("pay ink deed order")
-			.request("pay ink deed order").with_string("order id")
-				.comments("支付墨契交易订单")
-				.got_page("ext payment")
+					.may_request("cancel ink deed order")
+					.may_request("modify ink deed order price")
+			
 			/**
 			 * 查看我的墨契
 			 */
@@ -280,9 +301,12 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 			.request("view next page of all other ink deed entry order").with_string("artwork auction id").with_string("last record id")
 				.comments("查看其它人对当前拍卖的艺术品的墨契挂单 翻页")
 				.got_page("all other ink deed entry order list")
+			/**
+			 * 墨契挂单
+			 */
 			.request("start sell holding ink deed").with_string("artwork auction id")
 				.comments("开始墨契挂单")
-				.got_page("sell holding ink deed ").comments("挂单销售墨契")
+				.got_page("sell holding ink deed ").comments("挂单销售墨契表单")
 					.may_request("submit ink deed entry order")
 			.request("submit ink deed entry order").with_form("put ink deed entry order")
 				.comments("提交墨契挂单")
@@ -296,9 +320,7 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 			.request("apply withdraw ink deed").with_string("artwork auction id")
 				.comments("申请墨契退款")
 				.got_page("apply withdraw ink deed result")
-			.request("modify ink deed order price").with_string("order id").with_float("amount")
-				.comments("修改墨契订单总价")
-				.got_page("modify ink deed order price result")
+			
 
 			/**
 			 * 墨契交易区
