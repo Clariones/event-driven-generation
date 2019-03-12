@@ -109,7 +109,20 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 			.request("view my shop").with_string("filter")
 				.comments("查看我的店铺")
 				.got_page("my shop").comments("店主的店铺管理")
-				
+					.may_request("view shop deposit")
+			.request("view shop deposit")
+				.comments("管理店铺保证金")
+				.got_page("shop deposit").comments("店铺保证金管理")
+					.may_request("view shop deposit record list")
+			.request("view shop deposit record list")
+				.comments("店铺保证金明细列表")
+				.query("moyi_shop_deposit_record").which("my shop").pagination().with_string("shop id")
+					.comments("查询我的店铺的保证金明细")
+				.got_page("shop deposit record list")
+					.may_request("view next page shop deposit record list")
+			.request("view next page shop deposit record list").with_string("last record id")
+				.comments("店铺保证金明细列表 翻页")
+				.got_page("shop deposit record list")
 			.request("view auction list as seller").with_string("filter")
 				.comments("卖家：我的拍品列表")
 				.query("artwork_auction").which("mine filtered").pagination().with_string("user id").with_string("filter")
@@ -217,11 +230,11 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 			.request("preview of buy ink deed order").with_string("order id")
 				.comments("预览要购买的墨契的信息")
 				.got_page("buy ink deed preview")
-					.may_request("buy ink deed")
-			.request("buy ink deed").with_string("order id")
+					.may_request("buy ink deed entry order")
+			.request("buy ink deed entry order").with_string("order id")
 				.comments("购买墨契")
 				.got_page("ext payment")
-			.request("modify ink deed order price").with_string("order id").with_float("amount")
+			.request("modify ink deed order price").with_string("order id").with_float("amount").variable()
 				.comments("修改墨契订单总价")
 				.got_page("ink deed order detail")
 			.request("pay ink deed order").with_string("order id")
@@ -240,13 +253,13 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 			 */
 			.request("view my ink deed order list").with_string("filter")
 				.comments("查看墨契订单列表")
-				.query("ink_deed_order").which("my filtered by filter").with_string("user id").with_string("filter")
+				.query("ink_deed_order").which("my filtered by filter").with_string("user id").with_string("filter").pagination()
 					.comments("根据订单状态，查看不同的墨契交易订单列表")
 				.got_page("ink deed order list").comments("墨契订单列表")
 					.may_request("view ink deed order detail")
-					.may_request("view my next page deed order list")
+					.may_request("view my next page ink deed order list")
 					.may_request("view auction related ink deed entry order list")
-			.request("view my next page deed order list").with_string("filter").with_string("last record id")
+			.request("view my next page ink deed order list").with_string("filter").with_string("last record id")
 				.comments("查看墨契订单列表 翻页")
 				.got_page("ink deed order list")
 			.request("view ink deed order detail").with_string("order id")
@@ -373,10 +386,10 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 			.request("do cancel ink deed entry order").with_string("order id").with_string("verify code")
 				.comments("确认取消墨契挂单")
 				.got_page("my holding ink deed detail")
-			.request("buy ink deed entry order").with_string("order id")
-				.comments("购买墨契挂单")
-				.got_page("pay ink deed entry order").comments("购买墨契挂单的支付页面")
-					.may_request("pay bill or order")
+//			.request("buy ink deed entry order").with_string("order id")
+//				.comments("购买墨契挂单")
+//				.got_page("pay ink deed entry order").comments("购买墨契挂单的支付页面")
+//					.may_request("pay bill or order")
 			/**
 			 * 各种充值
 			 */
@@ -470,11 +483,27 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 //				.may_request("paid shop deposit bill")
 				
 			/**
+			 * 我的 页面
+			 */
+			.request("view my account")
+				.comments("查看 我的账户").need_login().has_footprint()
+				.got_page("my account").comments("我的账户页面. 包括提现,明细,墨贝等")
+				
+			/**
+			 * 荐宝联盟
+			 */
+//			.request("view recommendation allians")
+//				.comments("查看荐宝联盟的H5页面")
+				
+			/**
 			 * 其他杂项
 			 */
 			.request("import contact book").with_form("import contact book")
 				.comments("导入通讯录")
 				.got_page("contact book import result").comments("导入结果")
+			.request("notify ink deed buyer to pay").with_string("order id")
+				.comments("提醒墨契买家付款")
+				.got_page("simple popup")
 			/**
 			 * 各种临时声明
 			 */
