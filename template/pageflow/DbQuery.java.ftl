@@ -38,13 +38,6 @@ public abstract class ${class_name}DBQueryHelper{
 <#list script.queryInfoList as query >
 	/**
 	 * ${query.comments!}.
-	<#if query.ruleComments?has_content>
-	 * <p/>
-	 * 规则：<br/>
-		<#list query.ruleComments as comments>
-	 * ${comments_index+1}. ${comments}<br/>
-		</#list>
-	</#if>
 	 */
 	<#assign typeClass=NAMING.toCamelCase(query.objectName)/>
 	${''}<@compress single_line=true>
@@ -90,6 +83,16 @@ public abstract class ${class_name}DBQueryHelper{
 		return list;
 	}
 	
+	/**
+	 * ${query.comments!}.
+	<#if query.ruleComments?has_content>
+	 * <p/>
+	 * 规则：<br/>
+		<#list query.ruleComments as comments>
+	 * ${comments_index+1}. ${comments}<br/>
+		</#list>
+	</#if>
+	 */
 	${''}<@compress single_line=true>
 	protected String prepareSqlAndParamsForQuery${typeClass}ListOf${NAMING.toCamelCase(query.name)}(
 		${custom_context_name} ctx
