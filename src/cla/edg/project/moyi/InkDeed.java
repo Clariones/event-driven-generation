@@ -24,6 +24,12 @@ public class InkDeed extends BaseEventDescriptionScript{
 				.event_ripple("create ink deed entry order").comments("创建墨契挂单")
 				.event_ripple("update holding statistic by new entry order").comments("根据墨契挂单，更新持有人的持有情况")
 			/**
+			 * 改价
+			 */
+			.on_event("price changed")
+				.comments("墨契订单改价. 这里需要将价格更改了.")
+				.event_ripple("update order price info").comments("根据新价格数据,更改价格和支付数据")
+			/**
 			 * 撤销
 			 */
 			.on_event("entry order cancelled")
@@ -92,6 +98,8 @@ public class InkDeed extends BaseEventDescriptionScript{
 				.comments("挂单成功交易后,转移墨契ID,并释放绑定")
 			.on_event("ink deed need release from entry order")
 				.comments("挂单成功交易后,释放绑定")
+			.on_event("update order price info")
+				.comments("根据新价格数据,更改价格和支付数据")
 			;
 	
 
