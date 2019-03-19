@@ -35,6 +35,9 @@ public class InkDeed extends BaseEventDescriptionScript{
 			.on_event("entry order cancelled")
 				.comments("持有者取消了墨契挂单")
 				.event_ripple("ink deed need release from entry order").comments("释放ink deed 绑定的 entry order")
+			.on_event("order cancelled")
+				.comments("墨契购买者取消了墨契订单")
+				.event_ripple("unlock entry order because order cancelled").comments("释放entry order的lock")
 			/**
 			 * 购买
 			 */
@@ -100,6 +103,8 @@ public class InkDeed extends BaseEventDescriptionScript{
 				.comments("挂单成功交易后,释放绑定")
 			.on_event("update order price info")
 				.comments("根据新价格数据,更改价格和支付数据")
+			.on_event("unlock entry order because order cancelled")
+				.comments("由于超时而释放被锁定的墨契挂单")
 			;
 	
 

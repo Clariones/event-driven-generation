@@ -252,7 +252,7 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 					.may_request("do cancel ink deed order")
 			.request("do cancel ink deed order").with_string("order id").with_string("verify code")
 				.comments("买家确认取消墨契购买订单")
-				.got_page("ink deed order detail")
+				.got_page("ink deed order list")
 			
 			/**
 			 * 墨契订单列表
@@ -563,8 +563,36 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 			/**
 			 * 荐宝联盟
 			 */
-//			.request("view recommendation allians")
-//				.comments("查看荐宝联盟的H5页面")
+			.request("view affiliate alliance")
+				.comments("查看荐宝联盟的H5页面").need_login().has_footprint()
+				.got_page("affiliate home").comments("荐宝联盟-首页")
+					.may_request("view affiliate auction list by artwork type")
+					.may_request("view presenter dashboard")
+					.may_request("view affiliate auction detail")
+			.request("view affiliate auction list by artwork type").with_string("artwork type id")
+				.comments("查看荐宝联盟-某个艺术品类型下的所有公示中或竞拍中的拍卖列表").need_login().has_footprint()
+				.got_page("affiliate auction list in artwork type").comments("荐宝联盟-某个艺术品类型下的所有公示中或竞拍中的拍卖列表")
+					.may_request("view next page affiliate auction list by artwork type")
+					.may_request("view affiliate auction detail")
+					.may_request("view presenter dashboard")
+			.request("view next page affiliate auction list by artwork type").with_string("artwork type id").with_string("last record id")
+				.comments("查看荐宝联盟-某个艺术品类型下的所有公示中或竞拍中的拍卖列表 翻页").need_login().has_footprint()
+				.got_page("affiliate auction list in artwork type")
+			.request("view affiliate auction detail").with_string("artwork auction id").with_string("user id")
+				.comments("荐宝联盟-荐宝详情. 和拍卖详情很类似,但是actions不同").no_login().has_footprint()
+				.got_page("affiliate auction detail").comments("荐宝详情. 主要作用是有一个分享按钮")
+					.may_request("view artwork product")
+					.may_request("refresh affiliate auction detail")
+			.request("refresh affiliate auction detail").with_string("artwork auction id")
+				.comments("刷新当前浏览的拍卖推荐页面")
+				.got_page("affiliate auction detail")
+			.request("view presenter dashboard")
+				.comments("荐宝人在荐宝联盟上的简单个人主页").need_login().has_footprint()
+				.got_page("presenter dashboard").comments("荐宝人在荐宝联盟上的简单个人主页")
+					.may_request("view my bonus")
+			.request("view my bonus")
+				.comments("查看我的奖励金")
+				.got_page("preseter bonus").comments("我的奖励金")
 				
 			/**
 			 * 其他杂项
