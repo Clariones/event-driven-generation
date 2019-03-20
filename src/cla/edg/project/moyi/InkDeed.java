@@ -49,8 +49,8 @@ public class InkDeed extends BaseEventDescriptionScript{
 			.on_event("ink deed order paid")
 				.comments("用户支付了墨契购买订单")
 				.event_ripple("close ink deed order").comments("关闭墨契交易订单")
-				.event_ripple("update holding statistic by trade").comments("更新持有人信息")
 				.event_ripple("lock down entry order forever").comments("永久锁定墨契挂单")
+				.event_ripple("update holding statistic by trade").comments("更新持有人信息")
 			/**
 			 * 拍卖交易成功,自动兑付
 			 */
