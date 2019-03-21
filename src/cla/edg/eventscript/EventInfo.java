@@ -14,7 +14,24 @@ public class EventInfo extends BaseEventElement{
 	protected String comments;
 	protected Map<String, EventProcessResultBranch> branches;
 	protected boolean externalEvent = true;
-	
+	protected List<String> ruleComments;
+	protected List<String> actors;
+
+	public List<String> getActors() {
+		return actors;
+	}
+
+	public void setActors(List<String> actors) {
+		this.actors = actors;
+	}
+
+	public List<String> getRuleComments() {
+		return ruleComments;
+	}
+
+	public void setRuleComments(List<String> ruleComments) {
+		this.ruleComments = ruleComments;
+	}
 
 	public Map<String, EventProcessResultBranch> getBranches() {
 		return branches;
@@ -102,6 +119,27 @@ public class EventInfo extends BaseEventElement{
 		Collections.sort(keyList);
 		String key = keyList.get(0);
 		return branches.get(key);
+	}
+
+	public void addRuleComments(String ruleCommentsStr) {
+		ensureRuleComments();
+		ruleComments.add(ruleCommentsStr);
+	}
+
+	private void ensureRuleComments() {
+		if (ruleComments == null) {
+			ruleComments = new ArrayList<>(4);
+		}
+	}
+
+	public void addActor(String actorName) {
+		ensureActors();
+		actors.add(actorName);
+	}
+	private void ensureActors() {
+		if (actors == null) {
+			actors = new ArrayList<>(4);
+		}
 	}
 	
 }

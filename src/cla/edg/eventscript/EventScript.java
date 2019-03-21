@@ -120,6 +120,26 @@ public class EventScript extends BasicEventScriptInfo {
 		internalEvent = true;
 		return this;
 	}
+
+	public EventScript rule_comments(String comments) {
+		if (currentOperation instanceof EventInfo) {
+			EventInfo evtInfo = currentEventInfo;
+			evtInfo.addRuleComments(comments);
+		} else {
+			throw new RuntimeException("当前任务是" + currentOperation.getClass().getSimpleName() + ",不能添加详细注释");
+		}
+		return this;
+	}
+
+	public EventScript with(String actorName) {
+		if (currentOperation instanceof EventInfo) {
+			EventInfo evtInfo = currentEventInfo;
+			evtInfo.addActor(actorName);
+		} else {
+			throw new RuntimeException("当前任务是" + currentOperation.getClass().getSimpleName() + ",不能添加详细注释");
+		}
+		return this;
+	}
 	
 
 }

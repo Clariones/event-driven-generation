@@ -1,6 +1,21 @@
 	// ///////////////////////////// ${event.comments!} //////////////////////////////////
+	<#if event.ruleComments?has_content>
+	/** <p>${event.comments!}</p>
+		<#list event.ruleComments as rComments>
+	 * ${rComments_index+1}. ${rComments} <br/>
+		</#list>
+	 */
+	<#else>
 	/** ${event.comments!} */
+	</#if>
 	<#if event.externalEvent>public<#else>protected</#if> void on${event.javaName}(${custom_context_name} ctx) throws Exception{
+	<#if event.actors?has_content>
+		<#list event.actors as actor>
+		if(null == ctx.get${NAMING.toCamelCase(actor)}()) {
+			throw new Exception("on${event.javaName}()需要用户上下文中提供${actor}");
+		}
+		</#list>
+	</#if>
 		checkCanDo${event.javaName}(ctx);
 <#if event.hasBranch>
 		int processResult = process${event.javaName}(ctx);
