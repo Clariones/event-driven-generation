@@ -20,10 +20,11 @@ public class Auction extends BaseEventDescriptionScript{
 					.event_ripple("refund losed bidder deposit").comments("退还未中标竞拍者的保证金")
 					.event_ripple("auction bought in").comments("拍卖以 '流拍' 告终")
 				.when_others().comments("无需处理墨契")
+					.event_ripple("refund losed bidder deposit").comments("退还未中标竞拍者的保证金")
 					.event_ripple("auction closed").comments("拍卖全部处理完毕")
 				
 			.on_event("closed as deal").with("artwork auction")
-				.comments("竞拍结束,有人出价后的处理")
+				.comments("竞拍结束,有人出价后的处理.")
 					.rule_comments("本次拍卖状态变为 成交")
 					.rule_comments("当场退还竞拍失败者的竞拍保证金")
 					.rule_comments("计算所有艺术品拍卖的订单价格条目")
@@ -39,6 +40,7 @@ public class Auction extends BaseEventDescriptionScript{
 			.on_event("paid").with("artwork auction order")
 				.comments("拍卖订单订单已支付")
 					.rule_comments("订单状态变成 已支付=待发货")
+					.rule_comments("买家的竞拍保证金, 状态变成 支付扣除")
 
 			.on_event("delivered").with("artwork auction order")
 				.comments("卖家填写了物流信息，表示已经发货")
