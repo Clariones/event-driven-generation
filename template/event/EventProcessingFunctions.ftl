@@ -1,12 +1,12 @@
-	// ///////////////////////////// ${event.comments!} //////////////////////////////////
+	// ///////////////////////////// ${event.comments!?replace("\n", "\n    // ")} //////////////////////////////////
 	<#if event.ruleComments?has_content>
-	/** <p>${event.comments!}</p>
+	/** <p>${event.comments!?replace("\n", "\n     * ")}</p>
 		<#list event.ruleComments as rComments>
 	 * ${rComments_index+1}. ${rComments} <br/>
 		</#list>
 	 */
 	<#else>
-	/** ${event.comments!} */
+	/** ${event.comments!?replace("\n", "\n     * ")} */
 	</#if>
 	<#if event.externalEvent>public<#else>protected</#if> void on${event.javaName}(${custom_context_name} ctx) throws Exception{
 	<#if event.actors?has_content>
@@ -43,7 +43,8 @@
 	}
 	
 	/**
-	 * 处理 ${event.comments!}
+	 * 处理 ${event.name}
+	 * ${event.comments!?replace("\n", "\n     * ")}
 	 * 返回值：<#list helper.getAllBranch(event) as branch> ${branch.conditionCodeConst}:${branch.comments!}</#list>
 	 */
 	protected abstract int process${event.javaName}(${custom_context_name} ctx) throws Exception;

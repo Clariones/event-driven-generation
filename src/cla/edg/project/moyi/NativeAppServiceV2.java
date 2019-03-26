@@ -341,8 +341,12 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 //				.comments("查看我的墨契-已兑付")
 //				.got_page("cashed ink deed detail")
 			.request("apply withdraw ink deed").with_string("artwork auction id")
-				.comments("申请墨契退款")
-				.got_page("apply withdraw ink deed result")
+				.comments("申请墨契退款").need_login().no_footprint()
+				.got_page("simple popup")
+					.may_request("confirm withdraw ink deed")
+			.request("confirm withdraw ink deed").with_string("artwork auction id").with_string("user id").with_string("verify code")
+				.comments("客户确认墨契退款")
+				.got_page("simple popup")
 			
 
 			/**
@@ -437,7 +441,7 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 			.request("view next page ink deed opening in shop").with_string("user id").with_string("last record id")
 				.comments("游客浏览店铺 在售墨契翻页")
 				.got_page("store detail")
-			.request("view artwork product").with_string("artwork auction id")
+			.request("view artwork product").with_string("artwork auction id").with_string("user id")
 				.comments("查看艺术品拍卖详情").has_footprint().no_login()
 				.query("artwork_auction").which("recommend for viewing auction").no_pagination().with_string("artwork auction id")
 					.comments("为当前浏览的拍卖品搜索几个推荐的拍卖")
@@ -564,7 +568,7 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 			 * 荐宝联盟
 			 */
 			.request("view affiliate alliance")
-				.comments("查看荐宝联盟的H5页面").need_login().has_footprint()
+				.comments("查看荐宝联盟的H5页面").no_login().has_footprint()
 				.got_page("affiliate home").comments("荐宝联盟-首页")
 					.may_request("view affiliate auction list by artwork type")
 					.may_request("view presenter dashboard")
@@ -591,7 +595,7 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 				.got_page("presenter dashboard").comments("荐宝人在荐宝联盟上的简单个人主页")
 					.may_request("view my bonus")
 			.request("view my bonus")
-				.comments("查看我的奖励金")
+				.comments("查看我的奖励金").need_login().has_footprint()
 				.got_page("preseter bonus").comments("我的奖励金")
 				
 			/**
@@ -615,6 +619,10 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 			.request("close bidding immediately").with_string("artwork auction id")
 				.comments("修改拍卖结束时间为当前时间")
 				.got_page("simple popup")
+			.request("push wechat code to server").with_string("code").variable()
+				.comments("拿到微信的code后, 通知服务器的页面").need_login().no_footprint()
+				.got_page("wechat code exchagne").comments("拿到用户code的结果页面, 包括")
+			
 			/**
 			 * 各种临时声明
 			 */
