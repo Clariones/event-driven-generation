@@ -101,6 +101,14 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 			.request("view trading list by type").with_string("filter").with_string("artwork type id")
 				.comments("按照艺术品类型查看拍卖列表").has_footprint().no_login()
 				.got_page("view trading list")
+			.request("search artwork auction list").with_string("search key")
+				.comments("按照作者和作品名称搜索拍卖").no_login().no_footprint()
+				.query("artwork_auction").which("existed").pagination().with_string("search key")
+					.comments("按照作者和作品名称搜索拍卖")
+				.got_page("view trading list")
+			.request("search next page artwork auction list").with_string("search key").with_string("last record id")
+				.comments("按照作者和作品名称搜索拍卖").no_login().no_footprint()
+				.got_page("view trading list")
 					
 			/**
 			 * 商家中台
@@ -196,6 +204,10 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 			.request("submit auction order shipping form").with_form("shipping info")
 				.comments("卖家发货后提交订单的物流信息，然后买家等待收货").no_footprint()
 				.got_page("auction order detail")
+			.request("auction order received").with_string("order id")
+				.comments("买家点击确认收货").no_footprint().need_login()
+				.got_page("simple popup")
+					.may_request("confirm auction order received")
 			.request("confirm auction order received").with_string("order id")
 				.comments("买家确认收货").no_footprint()
 				.got_page("auction order detail")
@@ -622,6 +634,15 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 			.request("push wechat code to server").with_string("code").variable()
 				.comments("拿到微信的code后, 通知服务器的页面").need_login().no_footprint()
 				.got_page("wechat code exchagne").comments("拿到用户code的结果页面, 包括")
+			.request("view artist list").with_string("search key").variable()
+				.comments("查看所有的艺术家").no_login().has_footprint()
+				.query("artist").which("existed").pagination().with_string("search key")
+					.comments("查询所有的艺术家, 按名字拼音排序")
+				.got_page("artist list").comments("艺术家列表")
+					.may_request("view next page artist list")
+			.request("view next page artist list").with_string("last record id").with_string("search key")
+				.comments("查看所有的艺术家的翻页").no_login().no_footprint()
+				.got_page("artist list")
 			
 			/**
 			 * 各种临时声明
