@@ -237,6 +237,14 @@ public class PageFlowScript extends BasePageFlowScript {
 		currentQuery.addRuleComments(string);
 		return this;
 	}
+	public PageFlowScript cache_in_seconds(int cacheTimeInSeconds) {
+		if (currentWork instanceof Request) {
+			currentRequest.setCacheTimeInSeconds(cacheTimeInSeconds);
+		}else {
+			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能设置缓存时间");
+		}
+		return this;
+	}
 
 	
 }

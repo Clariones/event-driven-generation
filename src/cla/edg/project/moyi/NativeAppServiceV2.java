@@ -89,7 +89,7 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 			 * 查看拍卖
 			 */
 			.request("view trading zone").with_string("filter")
-				.comments("查看交易区").has_footprint().no_login()
+				.comments("查看交易区").has_footprint().no_login().cache_in_seconds(10)
 				.got_page("view trading list").comments("按分类以及/或者状态过滤的交易列表")
 					.may_request("view trading zone").comments("点击tab时切换页面")
 					.may_request("view trading list by type").comments("点击类别button时查看列表")
@@ -99,7 +99,7 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 				.comments("查看交易区 的翻页请求").no_login()
 				.got_page("view trading list")
 			.request("view trading list by type").with_string("filter").with_string("artwork type id")
-				.comments("按照艺术品类型查看拍卖列表").has_footprint().no_login()
+				.comments("按照艺术品类型查看拍卖列表").has_footprint().no_login().cache_in_seconds(10)
 				.got_page("view trading list")
 			.request("search artwork auction list").with_string("search key")
 				.comments("按照作者和作品名称搜索拍卖").no_login().no_footprint()
@@ -112,10 +112,9 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 					
 			/**
 			 * 商家中台
-			 * 大部分都没定
 			 */
 			.request("view my shop").with_string("filter")
-				.comments("查看我的店铺")
+				.comments("查看我的店铺").cache_in_seconds(10)
 				.got_page("my shop").comments("店主的店铺管理")
 					.may_request("view shop deposit")
 			.request("view shop deposit")

@@ -26,6 +26,20 @@
 		</#if>
 	</@>
 </#macro>
+<#macro getRequestProcessingUrlMethodParametersWithoutType request>
+	<@compress single_line=true>
+		<#if request.parameters?has_content>
+			<#list request.parameters as param>
+				<#if param.typeName == "form">
+				<#elseif param.asVariable>
+				<#else>
+				,
+				 ${NAMING.toCamelCase(param.paramName)?uncap_first}
+				</#if>
+			</#list>
+		</#if>
+	</@>
+</#macro>
 <#macro getRequestProcessingMethodParameterNames request>
 	<@compress single_line=true>
 		<#if request.parameters?has_content>

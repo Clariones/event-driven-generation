@@ -6,6 +6,7 @@ import ${base_package}.${custom_context_name};
 import ${base_package}.BaseViewPage;
 
 import java.math.BigDecimal;
+import java.util.Map;
 
 <#list helper.getAllForms(script) as form>
 	<#if form.customized>
@@ -34,6 +35,14 @@ public abstract class ${class_name}ViewService extends Base${class_name}ViewServ
 
 <#macro commonRequestHanlingMethod request>
 	public Object ${T.getRequestProcessingMethodName(request)}(${context_name} userContext<@T.getRequestProcessingMethodParameters request/>) throws Exception {
+	<#-- 缓存功能 -->
+	<#if request.cacheTimeInSeconds gt 0>
+		String key = makeUrlF("${T.getRequestProcessingMethodName(request)}", false<@T.getRequestProcessingUrlMethodParametersWithoutType request/><#if request.needLogin>, userContext.tokenId()</#if>);
+		Map<String, Object> existedResult = (Map<String, Object>) userContext.getCachedObject(key, Map.class);
+		if (!(existedResult == null || existedResult.isEmpty())) {
+			return existedResult;
+		}
+	</#if>
 		${custom_context_name} ctx = (${custom_context_name}) userContext;
 		<@getRequestUser request />
 	<#if request.hasFootprint>
@@ -102,7 +111,13 @@ public abstract class ${class_name}ViewService extends Base${class_name}ViewServ
 				${prefix}break;
 			${prefix}}
 		${prefix}}
+		<#if request.cacheTimeInSeconds gt 0>
+		${prefix}existedResult = page.doRender(ctx);
+		${prefix}userContext.putToCache(key, existedResult, ${request.cacheTimeInSeconds});
+		${prefix}return existedResult;
+		<#else>
 		${prefix}return page.doRender(ctx);
+		</#if>
 	<#else>
 		<#assign branch=helper.getDefaultBranch(request)/>
 		${prefix}int resultCode = processRequest${T.getRequestProcessingMethodName(request)?cap_first}(ctx);
@@ -110,6 +125,12 @@ public abstract class ${class_name}ViewService extends Base${class_name}ViewServ
 		${prefix}	return ctx.getResultObject();
 		${prefix}}
 		${prefix}BaseViewPage page = assembler${NAMING.toCamelCase(branch.page)}Page(ctx, "${T.getRequestProcessingMethodName(request)}");
+		<#if request.cacheTimeInSeconds gt 0>
+		${prefix}existedResult = page.doRender(ctx);
+		${prefix}userContext.putToCache(key, existedResult, ${request.cacheTimeInSeconds});
+		${prefix}return existedResult;
+		<#else>
 		${prefix}return page.doRender(ctx);
+		</#if>
 	</#if>
 </#macro>
