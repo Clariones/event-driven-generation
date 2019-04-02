@@ -32,7 +32,7 @@ import ${base_package}.${NAMING.toCamelCase(query.objectName)?lower_case}.${NAMI
  */
 public abstract class ${class_name}DBQueryHelper{
 	public static final Map<String, Object> EO = new HashMap<>();
-	public static int getPageSize(String queryName) {
+	public int getPageSize(String queryName) {
 		return 20;
 	}
 <#list script.queryInfoList as query >
