@@ -7,6 +7,7 @@ import java.net.URLEncoder;
 
 import ${base_package}.${context_name};
 import ${base_package}.${custom_context_name};
+import ${base_package}.FootprintProducer;
 import ${parent_class_package}.${parent_class_name};
 import ${package}pageview.*;
 import com.terapico.utils.TextUtil;
@@ -16,7 +17,7 @@ import com.terapico.utils.TextUtil;
  * @author clariones
  *
  */
-public abstract class Base${class_name}ViewService extends ${parent_class_name}{
+public abstract class Base${class_name}ViewService extends ${parent_class_name} implements FootprintProducer{
 	public static final int $PRC_RESULT_OBJECT_WAS_SET = 0;
 <#list helper.getAllBrachNames(script) as branchName>
 	public static final int PRC_${NAMING.toJavaConstStyle(branchName)} = ${branchName?index+1};

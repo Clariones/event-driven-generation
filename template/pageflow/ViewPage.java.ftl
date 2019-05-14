@@ -7,12 +7,16 @@ import ${base_package}.BaseViewPage;
 public class ${class_name}Page extends BaseViewPage{
 	private static final long serialVersionUID = 1L;
 	protected static final SerializeScope SCOPE = SerializeScope.INCLUDE()
+			.field("title")
 			.field("popup")
+			.field("toast", SerializeScope.EXCLUDE())
 			.field("refreshAction")
 			.field("actions", SerializeScope.EXCLUDE())
 			.field("actionList")
 <#if page.listOfTemplate??>
 			.field("displayMode")
+			.field("emptyMessage")
+			.field("list")
 </#if>
 			;
 	@Override

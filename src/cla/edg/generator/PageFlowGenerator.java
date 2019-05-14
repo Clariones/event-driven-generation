@@ -187,10 +187,13 @@ public class PageFlowGenerator extends BasicGenerator {
 			throw new RuntimeException("以下页面请求重复定义："+redundantRequestUrls);
 		}
 		// 4. 所有的query的名字必须是合法的
-		for(QueryInfo query: script.getQueryInfoList()) {
-			if (query.getObjectName().contains(" ")) {
-				throw new RuntimeException("查询的对象名字不正常："+query.getObjectName());
+		if(script.getQueryInfoList() != null) {
+			for(QueryInfo query: script.getQueryInfoList()) {
+				if (query.getObjectName().contains(" ")) {
+					throw new RuntimeException("查询的对象名字不正常："+query.getObjectName());
+				}
 			}
+			
 		}
 	}
 }

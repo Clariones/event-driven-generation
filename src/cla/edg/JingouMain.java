@@ -8,12 +8,7 @@ import cla.edg.generator.EventScriptGenerator;
 import cla.edg.generator.PageFlowGenerator;
 import cla.edg.pageflow.BasePageFlowDescriptionScript;
 import cla.edg.pageflow.BasePageFlowScript;
-import cla.edg.project.moyi.Affiliate;
-import cla.edg.project.moyi.Auction;
-import cla.edg.project.moyi.InkDeed;
-import cla.edg.project.moyi.NativeAppServiceV2;
-import cla.edg.project.moyi.ShopDeposit;
-import cla.edg.project.moyi.ShopLocating;
+import cla.edg.project.jingou.WxappService;
 
 public class JingouMain {
 
@@ -26,7 +21,7 @@ public class JingouMain {
 //		testEventService(new InkDeed());
 //		testEventService(new Affiliate());
 		
-//		testPageFlow(new NativeAppServiceV2());
+		testPageFlow(new WxappService());
 	}
 
 	private static void testPageFlow(BasePageFlowDescriptionScript test) throws Exception {
