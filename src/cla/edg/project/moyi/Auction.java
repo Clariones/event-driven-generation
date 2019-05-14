@@ -21,6 +21,8 @@ public class Auction extends BaseEventDescriptionScript{
 					.event_ripple("auction bought in").comments("拍卖以 '流拍' 告终")
 				.when_others().comments("无需处理墨契")
 					.event_ripple("refund losed bidder deposit").comments("退还未中标竞拍者的保证金")
+					.event_ripple("handle ink deed when bought in without ink deed sold").comments("标记所有墨契已经处理完毕")
+					.event_ripple("release seller deposit frozen by inke deed").comments("释放发行墨契时冻结的保证金")
 					.event_ripple("auction closed").comments("拍卖全部处理完毕")
 				
 			.on_event("closed as deal").with("artwork auction")
@@ -52,6 +54,8 @@ public class Auction extends BaseEventDescriptionScript{
 					.rule_comments("然后根据分账明细处理订单和所涉及的人,作品")
 				.event_ripple("calculate split details when confirm reception").comments("根据订单自动计算分账明细")
 				.event_ripple("close auction trade with split details").comments("交易成功时,根据分账明细处理订单和所涉及的人,作品")
+				.event_ripple("reward for first deal").comments("对首单成交者发放奖励")
+//				.event_ripple("release shop deposit when receiption confirmed").comments("确认收货后, 退还卖家的店铺保证金")
 				
 				
 			.on_event("submit complain").with("artwork auction order")
@@ -70,6 +74,7 @@ public class Auction extends BaseEventDescriptionScript{
 					.event_ripple("process when negotiate to invalid").comments("根据协商的结果,处理退回卖家的相关事项")
 				.when("bought finally").comments("协商结果是买家同意购买")
 					.event_ripple("close auction trade with split details")
+//					.event_ripple("release shop deposit when receiption confirmed")
 					
 			.on_event("timeout for seller").with("artwork auction order")
 				.comments("卖家超时未发货. \n罚卖家的店铺保证金: 起拍价3倍\n兑付墨契: 按发行价兑付, 从冻结的保证金里出")
@@ -174,6 +179,9 @@ public class Auction extends BaseEventDescriptionScript{
 			.on_event("platform earn buyer penalty").comments("平台收入罚没的保证金")
 			.on_event("seller got buyer penalty").comments("卖家收入买家的保证金")
 			.on_event("return ink deed to applied user").comments("将墨契按发行价退回给持有者")
+			.on_event("handle ink deed when bought in without ink deed sold").comments("流拍但是没有别人持有墨契时,标记所有墨契已经处理完毕")
+//			.on_event("release shop deposit when receiption confirmed").comments("确认收货后, 退还卖家的店铺保证金")
+			.on_event("reward for first deal").comments("对首单成交者发放奖励")
 			;
 	
 

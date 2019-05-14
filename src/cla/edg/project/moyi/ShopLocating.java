@@ -39,6 +39,10 @@ public class ShopLocating extends BaseEventDescriptionScript{
 				.comments("店铺入驻审核失败")
 			.on_event("certificate success")
 				.comments("店铺入驻审核成功")
+			.on_event("want close")
+				.comments("店主想关闭店铺")
+			.on_event("deposit withdraw submitted")
+				.comments("店主提交了保证金提现申请")
 			
 			;
 	

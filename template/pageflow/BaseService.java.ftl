@@ -9,6 +9,7 @@ import ${base_package}.${context_name};
 import ${base_package}.${custom_context_name};
 import ${parent_class_package}.${parent_class_name};
 import ${package}pageview.*;
+import com.terapico.utils.TextUtil;
 
 /**
  * 此类负责：声明所有${class_name}ViewService中所使用的方法和常量。 单独列出的目的是便于维护。
@@ -29,7 +30,7 @@ public abstract class Base${class_name}ViewService extends ${parent_class_name}{
 		StringBuilder sb = new StringBuilder(methodName).append("/");
 		if (params != null) {
 			for(Object param : params) {
-				if (param == null) {
+				if (param == null || ((param instanceof String) && TextUtil.isBlank((String) param))) {
 					sb.append('+').append('/');
 					continue;
 				}

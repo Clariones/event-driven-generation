@@ -245,6 +245,22 @@ public class PageFlowScript extends BasePageFlowScript {
 		}
 		return this;
 	}
-
+	public PageFlowScript list_of(String templateName) {
+		if (currentWork instanceof Page) {
+			currentPage.setListOfTemplate(templateName);
+		}else {
+			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能增加页面请求");
+		}
+		return this;
+	}
+	public PageFlowScript can_refresh() {
+		if (currentWork instanceof Page) {
+			currentPage.setRefreshAction(true);
+		}else {
+			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能设定刷新行为");
+		}
+		return this;
+	}
+	
 	
 }

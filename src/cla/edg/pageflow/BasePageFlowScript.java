@@ -18,8 +18,6 @@ public class BasePageFlowScript extends BasePageFlowElement{
 	protected List<QueryInfo> queryInfoList;
 	protected transient QueryInfo currentQuery;
 	
-	
-	
 	public List<QueryInfo> getQueryInfoList() {
 		return queryInfoList;
 	}

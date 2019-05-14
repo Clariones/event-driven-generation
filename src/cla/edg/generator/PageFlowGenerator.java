@@ -103,6 +103,7 @@ public class PageFlowGenerator extends BasicGenerator {
 		for(Page page: script.getPages().values()) {
 			className = Utils.toCamelCase(page.getName());
 			data.put("class_name", className);
+			data.put("page", page);
 			outputFileName = className+"Page.java";
 			outputFile = new File(getBaseOutputFolderFile(), Utils.packageNameToPath(packageName)+"/"+outputFileName);
 			if (!force && outputFile.exists()) {
