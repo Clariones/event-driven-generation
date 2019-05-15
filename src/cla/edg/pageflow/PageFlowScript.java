@@ -232,7 +232,7 @@ public class PageFlowScript extends BasePageFlowScript {
 	}
 	public PageFlowScript rule_comments(String string) {
 		if (currentQuery == null) {
-			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能添加query规则描述");
+			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能添加query规则描述:"+string);
 		}
 		currentQuery.addRuleComments(string);
 		return this;
