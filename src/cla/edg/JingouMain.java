@@ -8,6 +8,7 @@ import cla.edg.generator.EventScriptGenerator;
 import cla.edg.generator.PageFlowGenerator;
 import cla.edg.pageflow.BasePageFlowDescriptionScript;
 import cla.edg.pageflow.BasePageFlowScript;
+import cla.edg.project.jingou.JobOrder;
 import cla.edg.project.jingou.WxappService;
 
 public class JingouMain {
@@ -15,7 +16,7 @@ public class JingouMain {
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 //		test_auction();
-//		testEventService(new ShopLocating());
+		testEventService(new JobOrder());
 //		testEventService(new ShopDeposit());
 //		testEventService(new Auction());
 //		testEventService(new InkDeed());

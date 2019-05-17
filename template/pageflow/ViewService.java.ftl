@@ -36,7 +36,7 @@ public abstract class ${class_name}ViewService extends Base${class_name}ViewServ
 <#macro commonRequestHanlingMethod request>
 	public Object ${T.getRequestProcessingMethodName(request)}(${context_name} userContext<@T.getRequestProcessingMethodParameters request/>) throws Exception {
 	<#-- 缓存功能 -->
-		String accessUrl = makeUrlF("${T.getRequestProcessingMethodName(request)}", false<@T.getRequestProcessingUrlMethodParametersWithoutType request/><#if request.needLogin>, userContext.tokenId()</#if>);
+		String accessUrl = makeUrlF("${T.getRequestProcessingMethodName(request)}", false<@T.getRequestProcessingUrlMethodParametersWithoutType request/><#if request.needLogin></#if>);
 		
 	<#if request.cacheTimeInSeconds gt 0>
 		Map<String, Object> existedResult = (Map<String, Object>) userContext.getCachedObject(accessUrl, Map.class);
@@ -108,7 +108,8 @@ public abstract class ${class_name}ViewService extends Base${class_name}ViewServ
 			${prefix}}
 		</#list>
 			<#assign branch=helper.getDefaultBranch(request)/>
-			${prefix}default: { // ${NAMING.toJavaConstStyle(branch.name)} ${branch.comments!}
+			${prefix}case PRC_${NAMING.toJavaConstStyle(branch.name)}:
+			${prefix}default: { //  ${branch.comments!}
 				${prefix}page = assembler${NAMING.toCamelCase(branch.page)}Page(ctx, "${T.getRequestProcessingMethodName(request)}");
 				${prefix}break;
 			${prefix}}

@@ -3,9 +3,11 @@ package ${package}pageview;
 
 import com.terapico.caf.viewpage.SerializeScope;
 import ${base_package}.BaseViewPage;
+import ${base_package}.${NAMING.toCamelCase(project_name)}ViewScope;
 
 public class ${class_name}Page extends BaseViewPage{
 	private static final long serialVersionUID = 1L;
+	private static ${NAMING.toCamelCase(project_name)}ViewScope ViewScope = ${NAMING.toCamelCase(project_name)}ViewScope.getInstance();
 	protected static final SerializeScope SCOPE = SerializeScope.INCLUDE()
 			.field("title")
 			.field("popup")

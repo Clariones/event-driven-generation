@@ -50,6 +50,7 @@ public class PageFlowGenerator extends BasicGenerator {
 		Map<String, Object> data = prepareData(script, packageName, fileNameEtyma);
 		data.put("parent_class_name", getParentClassName());
 		data.put("parent_class_package", getParentClassPackage());
+		data.put("project_name", getProjectName());
 		data.put("helper", new PageFlowGeneratorHelper());
 		
 		// 第一个文件, BaseXXXViewService

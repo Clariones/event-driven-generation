@@ -5,7 +5,7 @@ import cla.edg.pageflow.BasePageFlowScript;
 
 public class WxappService extends BasePageFlowDescriptionScript {
 
-	private static final BasePageFlowScript SCRIPT = $("wxapp service").need_login()
+	private static final BasePageFlowScript SCRIPT = $("wxapp service").need_login().no_footprint()
 		/** 首页及登录 */
 		.request("home page")
 			.comments("打开首页").has_footprint()
@@ -25,10 +25,10 @@ public class WxappService extends BasePageFlowDescriptionScript {
 					.may_request("open stock out form")
 					.may_request("scan to weight")
 		.request("query wechat mobile").with_string("wechat encrypted data").with_string("wechat iv")
-			.comments("解密微信的敏感信息,获得手机号").no_login().no_footprint()
+			.comments("解密微信的敏感信息,获得手机号").no_login()
 			.got_page("ajax response")
-		.request("login with mobile and vcode").with_string("mobile").with_string("verify code")
-			.comments("手动输入手机号和验证码登录").no_login().no_footprint()
+		.request("login with mobile and vcode").with_string("mobile").variable().with_string("verify code").variable()
+			.comments("手动输入手机号和验证码登录").no_login()
 			.got_page("user dashboard")
 		/** 辅助功能 */
 		.request("start to change warehouse").with_string("warehouse id")
@@ -41,6 +41,9 @@ public class WxappService extends BasePageFlowDescriptionScript {
 		.request("select warehouse for working").with_string("warehouse id")
 			.comments("选择切换打包厂/回收站")
 			.got_page("user dashboard")
+		.request("send login verify code").with_string("mobile").variable()
+			.comments("发送手机登录验证码").no_login().no_footprint()
+			.got_page("simple toast")
 		/** 订单相关 */
 		.request("view orders history").with_string("warehouse id").with_string("filter")
 			.comments("查看当前用户的所有订单\n\t//如果用户没有warehouse, 查看所有的订单\n\t//如果用户有warehouse, 查看当前warehouse下的所有订单")
@@ -97,7 +100,7 @@ public class WxappService extends BasePageFlowDescriptionScript {
 			.got_page("stock out form")
 				.comments("出库记录表单")
 				.may_request("submit stock in form")
-		.request("submit stock out form").with_string("access token")
+		.request("submit stock out form").with_string("form key")
 			.comments("提交出库记录")
 			.got_page("simple popup")
 		/** 扫码称重 */
@@ -174,7 +177,7 @@ public class WxappService extends BasePageFlowDescriptionScript {
 		.request("confirm tare weight").with_string("order id").with_string("mobile")
 			.comments("确认称皮重的结果")
 			.got_page("order detail")
-		.request("submit pricing").with_form("pricing_job_order")
+		.request("submit pricing").with_form("job_order_pricing")
 			.comments("提交核对后的结果")
 			.got_page("order detail")
 		.request("confirm pricing").with_string("order id")
@@ -182,6 +185,11 @@ public class WxappService extends BasePageFlowDescriptionScript {
 			.got_page("user dashboard")
 		// TODO: 详情页上的各种request
 		
+		.query("merchant_warehouse").which("related to user").no_pagination().with_string("user id")
+			.comments("查询和某个用户相关的所有的merchant_warehouse")
+			.rule_comments("名下的merchant下的merchant_warehouse")
+			.rule_comments("通过employee_assignment指定了工作岗位的merchant_warehouse")
+			.rule_comments("通过merchant_warehouse_stakeholder指定了(共享)所有权的merchant_warehouse")
 			;
 		
 //			
