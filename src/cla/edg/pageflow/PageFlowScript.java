@@ -79,6 +79,19 @@ public class PageFlowScript extends BasePageFlowScript {
 		}
 		return this;
 	}
+	public PageFlowScript got_page_same_as_request(String requestName) {
+		Request referedRequest = findRequestByName(requestName);
+		if (referedRequest == null) {
+			throw new RuntimeException("请求"+requestName+"不存在");
+		}
+		if (currentWork instanceof Request) {
+			((Request) currentWork).setBranches(referedRequest.getBranches());
+		}else {
+			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能引用结果页面");
+		}
+		return this;
+	}
+	
 	public PageFlowScript when_others() {
 		return when("by default");
 	}

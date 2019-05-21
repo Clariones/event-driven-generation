@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public class BasePageFlowScript extends BasePageFlowElement{
 
@@ -55,7 +56,7 @@ public class BasePageFlowScript extends BasePageFlowElement{
 		requests.add(page);
 	}
 
-	private void ensureRequests() {
+	protected void ensureRequests() {
 		if (requests == null) {
 			requests = new ArrayList<>();
 		}
@@ -90,7 +91,7 @@ public class BasePageFlowScript extends BasePageFlowElement{
 		pages.put(page.getName(), page);
 	}
 
-	private void ensurePages() {
+	protected void ensurePages() {
 		if (pages == null) {
 			pages = new HashMap<>();
 		}
@@ -106,5 +107,14 @@ public class BasePageFlowScript extends BasePageFlowElement{
 			queryInfoList = new ArrayList<>();
 		}
 		queryInfoList.add(qInfo);
+	}
+
+	protected Request findRequestByName(String requestName) {
+		ensureRequests();
+		Optional<Request> rst = requests.stream().filter(it->it.getName().equals(requestName)).findFirst();
+		if (rst.isPresent()) {
+			return rst.get();
+		}
+		return null;
 	}
 }

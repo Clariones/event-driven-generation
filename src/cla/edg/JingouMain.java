@@ -9,7 +9,7 @@ import cla.edg.generator.PageFlowGenerator;
 import cla.edg.pageflow.BasePageFlowDescriptionScript;
 import cla.edg.pageflow.BasePageFlowScript;
 import cla.edg.project.jingou.JobOrder;
-import cla.edg.project.jingou.WxappService;
+import cla.edg.project.jingou.WxappServiceScript;
 
 public class JingouMain {
 
@@ -22,7 +22,7 @@ public class JingouMain {
 //		testEventService(new InkDeed());
 //		testEventService(new Affiliate());
 		
-		testPageFlow(new WxappService());
+		testPageFlow(new WxappServiceScript());
 	}
 
 	private static void testPageFlow(BasePageFlowDescriptionScript test) throws Exception {

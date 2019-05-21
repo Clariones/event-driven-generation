@@ -9,6 +9,9 @@
 	/** ${event.comments!?replace("\n", "\n     * ")} */
 	</#if>
 	<#if event.externalEvent>public<#else>protected</#if> void on${event.javaName}(${custom_context_name} ctx) throws Exception{
+		if(null == ctx.getSourceEvent()) {
+			throw new Exception("on${event.javaName}()需要用户上下文中提供SourceEvent");
+		}
 	<#if event.actors?has_content>
 		<#list event.actors as actor>
 		if(null == ctx.get${NAMING.toCamelCase(actor)}()) {
@@ -20,6 +23,9 @@
 <#if event.hasBranch>
 		int processResult = process${event.javaName}(ctx);
 		ctx.setEventResult(EVENT_${NAMING.toJavaConstStyle(event.name)}, processResult);
+		if (processResult == STOP) {
+			return;
+		}
 		switch(processResult) {
 	<#list event.definedBranches as branch>
 		case ${branch.conditionCodeConst}: {// ${branch.comments!}
@@ -28,6 +34,7 @@
 			break;
 	</#list>
 	<#assign branch = event.defaultBranch>
+		case ${branch.conditionCodeConst}:
 		default: // ${branch.comments!}
 			<@event_ripples branch false/>
 			break;
@@ -35,6 +42,9 @@
 <#else>
 		int processResult = process${event.javaName}(ctx);
 		ctx.setEventResult(EVENT_${NAMING.toJavaConstStyle(event.name)}, processResult);
+		if (processResult == STOP) {
+			return;
+		}
 	<#assign branch = event.defaultBranch>
 	<@event_ripples branch />
 </#if>

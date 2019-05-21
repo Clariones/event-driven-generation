@@ -7,5 +7,5 @@ public abstract class BasePageFlowDescriptionScript {
 		return result;
 	}
 
-	public abstract BasePageFlowScript getScript();
+	public abstract PageFlowScript getScript();
 }
