@@ -207,10 +207,10 @@ public class PageFlowScript extends BasePageFlowScript {
 		setCurrentWork(page);
 		return this;
 	}
-	public BasePageFlowScript TBD() {
+	public PageFlowScript TBD() {
 		throw new RuntimeException("TBD");
 	}
-	public BasePageFlowScript go_back_previous_page() {
+	public PageFlowScript go_back_previous_page() {
 		got_page("go back");
 		return this;
 	}
@@ -274,6 +274,7 @@ public class PageFlowScript extends BasePageFlowScript {
 		}
 		return this;
 	}
+	
 	
 	
 }
