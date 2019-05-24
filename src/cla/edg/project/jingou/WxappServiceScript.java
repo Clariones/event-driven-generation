@@ -149,6 +149,8 @@ public class WxappServiceScript extends BasePageFlowDescriptionScript {
 		
 		.request("job order detail").with_string("order id").with_string("warehouse id")
 			.comments("订单详情")
+			.when("need gross weight").comments("工作单待确认毛重")
+				.got_page("scan to weight job order")
 			.when("need confirm gross weight").comments("工作单待确认毛重")
 				.got_page("confirm gross weight")
 					.comments("待称毛重页面")
