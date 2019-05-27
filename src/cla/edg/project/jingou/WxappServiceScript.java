@@ -55,10 +55,10 @@ public class WxappServiceScript extends BasePageFlowDescriptionScript {
 		/** 订单相关 */
 		.request("view orders history").with_string("warehouse id").with_string("filter")
 			.comments("查看当前用户的所有订单\n\t//如果用户没有warehouse, 查看所有的订单\n\t//如果用户有warehouse, 查看当前warehouse下的所有订单")
-			.query("main_order").which("all by user and warehouse").pagination().with_string("user id").with_string("warehouse id")
+			.query("main_order").which("all by user and warehouse").pagination().with_string("user id").with_string("warehouse id").with_string("filter")
 				.comments("根据打包厂ID查询所有的订单")
 				.rule_comments("这个查询的前提条件是用户有打包厂厂长的角色")
-			.query("main_order").which("all by user").pagination().with_string("user id")
+			.query("main_order").which("all by user").pagination().with_string("user id").with_string("filter")
 				.comments("根据用户ID查询所有的订单")
 				.rule_comments("这个查询的前提条件是用户没有厂长的角色, 只可能是司机角色")
 			.got_page("order list")
