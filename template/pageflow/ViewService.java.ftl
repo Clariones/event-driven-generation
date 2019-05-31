@@ -36,14 +36,16 @@ public abstract class ${class_name}ViewService extends Base${class_name}ViewServ
 <#macro commonRequestHanlingMethod request>
 	public Object ${T.getRequestProcessingMethodName(request)}(${context_name} userContext<@T.getRequestProcessingMethodParameters request/>) throws Exception {
 	<#-- 缓存功能 -->
+		String accessUrl = makeUrlF("${T.getRequestProcessingMethodName(request)}", false<@T.getRequestProcessingUrlMethodParametersWithoutType request/><#if request.needLogin></#if>);
+		
 	<#if request.cacheTimeInSeconds gt 0>
-		String key = makeUrlF("${T.getRequestProcessingMethodName(request)}", false<@T.getRequestProcessingUrlMethodParametersWithoutType request/><#if request.needLogin>, userContext.tokenId()</#if>);
-		Map<String, Object> existedResult = (Map<String, Object>) userContext.getCachedObject(key, Map.class);
+		Map<String, Object> existedResult = (Map<String, Object>) userContext.getCachedObject(accessUrl, Map.class);
 		if (!(existedResult == null || existedResult.isEmpty())) {
 			return existedResult;
 		}
 	</#if>
 		${custom_context_name} ctx = (${custom_context_name}) userContext;
+		ctx.setAccessUrl(accessUrl);
 		<@getRequestUser request />
 	<#if request.hasFootprint>
 		ctx.addFootprint(this);
@@ -106,14 +108,15 @@ public abstract class ${class_name}ViewService extends Base${class_name}ViewServ
 			${prefix}}
 		</#list>
 			<#assign branch=helper.getDefaultBranch(request)/>
-			${prefix}default: { // ${NAMING.toJavaConstStyle(branch.name)} ${branch.comments!}
+			${prefix}case PRC_${NAMING.toJavaConstStyle(branch.name)}:
+			${prefix}default: { //  ${branch.comments!}
 				${prefix}page = assembler${NAMING.toCamelCase(branch.page)}Page(ctx, "${T.getRequestProcessingMethodName(request)}");
 				${prefix}break;
 			${prefix}}
 		${prefix}}
 		<#if request.cacheTimeInSeconds gt 0>
 		${prefix}existedResult = page.doRender(ctx);
-		${prefix}userContext.putToCache(key, existedResult, ${request.cacheTimeInSeconds});
+		${prefix}userContext.putToCache(accessUrl, existedResult, ${request.cacheTimeInSeconds});
 		${prefix}return existedResult;
 		<#else>
 		${prefix}return page.doRender(ctx);
@@ -127,7 +130,7 @@ public abstract class ${class_name}ViewService extends Base${class_name}ViewServ
 		${prefix}BaseViewPage page = assembler${NAMING.toCamelCase(branch.page)}Page(ctx, "${T.getRequestProcessingMethodName(request)}");
 		<#if request.cacheTimeInSeconds gt 0>
 		${prefix}existedResult = page.doRender(ctx);
-		${prefix}userContext.putToCache(key, existedResult, ${request.cacheTimeInSeconds});
+		${prefix}userContext.putToCache(accessUrl, existedResult, ${request.cacheTimeInSeconds});
 		${prefix}return existedResult;
 		<#else>
 		${prefix}return page.doRender(ctx);

@@ -12,10 +12,10 @@ import ${base_package}.FootprintProducer;
  *
  */
 public abstract class Basic${class_name}ViewBizService extends ${class_name}ViewService implements FootprintProducer {
-	protected void getCurrentUser(CustomMoyiUserContextImpl ctx) {
+	protected void getCurrentUser(${custom_context_name} ctx) {
 		// TODO 从redis的数据中获得当前用户
 	}
-	protected void ensureCurrentUser(CustomMoyiUserContextImpl ctx) throws Exception{
+	protected void ensureCurrentUser(${custom_context_name} ctx) throws Exception{
 		getCurrentUser(ctx);
 		if (ctx.getCurrentUser() == null){
 			throw new Exception("请先登录");

@@ -50,6 +50,7 @@ public class PageFlowGenerator extends BasicGenerator {
 		Map<String, Object> data = prepareData(script, packageName, fileNameEtyma);
 		data.put("parent_class_name", getParentClassName());
 		data.put("parent_class_package", getParentClassPackage());
+		data.put("project_name", getProjectName());
 		data.put("helper", new PageFlowGeneratorHelper());
 		
 		// 第一个文件, BaseXXXViewService
@@ -103,6 +104,7 @@ public class PageFlowGenerator extends BasicGenerator {
 		for(Page page: script.getPages().values()) {
 			className = Utils.toCamelCase(page.getName());
 			data.put("class_name", className);
+			data.put("page", page);
 			outputFileName = className+"Page.java";
 			outputFile = new File(getBaseOutputFolderFile(), Utils.packageNameToPath(packageName)+"/"+outputFileName);
 			if (!force && outputFile.exists()) {
@@ -186,10 +188,13 @@ public class PageFlowGenerator extends BasicGenerator {
 			throw new RuntimeException("以下页面请求重复定义："+redundantRequestUrls);
 		}
 		// 4. 所有的query的名字必须是合法的
-		for(QueryInfo query: script.getQueryInfoList()) {
-			if (query.getObjectName().contains(" ")) {
-				throw new RuntimeException("查询的对象名字不正常："+query.getObjectName());
+		if(script.getQueryInfoList() != null) {
+			for(QueryInfo query: script.getQueryInfoList()) {
+				if (query.getObjectName().contains(" ")) {
+					throw new RuntimeException("查询的对象名字不正常："+query.getObjectName());
+				}
 			}
+			
 		}
 	}
 }

@@ -5,7 +5,26 @@ import java.util.List;
 
 public class Page extends BasePageFlowElement {
 	protected List<String> possibleRequests;
+	protected String listOfTemplate;
+	protected boolean refreshAction = false;
 	
+	
+	public boolean isRefreshAction() {
+		return refreshAction;
+	}
+
+	public void setRefreshAction(boolean refreshAction) {
+		this.refreshAction = refreshAction;
+	}
+
+	public String getListOfTemplate() {
+		return listOfTemplate;
+	}
+
+	public void setListOfTemplate(String listOfTemplate) {
+		this.listOfTemplate = listOfTemplate;
+	}
+
 	public List<String> getPossibleRequests() {
 		return possibleRequests;
 	}

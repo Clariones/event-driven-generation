@@ -79,6 +79,19 @@ public class PageFlowScript extends BasePageFlowScript {
 		}
 		return this;
 	}
+	public PageFlowScript got_page_same_as_request(String requestName) {
+		Request referedRequest = findRequestByName(requestName);
+		if (referedRequest == null) {
+			throw new RuntimeException("请求"+requestName+"不存在");
+		}
+		if (currentWork instanceof Request) {
+			((Request) currentWork).setBranches(referedRequest.getBranches());
+		}else {
+			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能引用结果页面");
+		}
+		return this;
+	}
+	
 	public PageFlowScript when_others() {
 		return when("by default");
 	}
@@ -194,10 +207,10 @@ public class PageFlowScript extends BasePageFlowScript {
 		setCurrentWork(page);
 		return this;
 	}
-	public BasePageFlowScript TBD() {
+	public PageFlowScript TBD() {
 		throw new RuntimeException("TBD");
 	}
-	public BasePageFlowScript go_back_previous_page() {
+	public PageFlowScript go_back_previous_page() {
 		got_page("go back");
 		return this;
 	}
@@ -232,7 +245,7 @@ public class PageFlowScript extends BasePageFlowScript {
 	}
 	public PageFlowScript rule_comments(String string) {
 		if (currentQuery == null) {
-			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能添加query规则描述");
+			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能添加query规则描述:"+string);
 		}
 		currentQuery.addRuleComments(string);
 		return this;
@@ -245,6 +258,23 @@ public class PageFlowScript extends BasePageFlowScript {
 		}
 		return this;
 	}
-
+	public PageFlowScript list_of(String templateName) {
+		if (currentWork instanceof Page) {
+			currentPage.setListOfTemplate(templateName);
+		}else {
+			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能增加页面请求");
+		}
+		return this;
+	}
+	public PageFlowScript can_refresh() {
+		if (currentWork instanceof Page) {
+			currentPage.setRefreshAction(true);
+		}else {
+			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能设定刷新行为");
+		}
+		return this;
+	}
+	
+	
 	
 }

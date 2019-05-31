@@ -4,24 +4,35 @@ package ${package};
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.net.URLEncoder;
+import java.util.HashMap;
+import java.util.Map;
 
 import ${base_package}.${context_name};
 import ${base_package}.${custom_context_name};
+import ${base_package}.FootprintProducer;
 import ${parent_class_package}.${parent_class_name};
 import ${package}pageview.*;
+import com.terapico.utils.TextUtil;
 
 /**
  * 此类负责：声明所有${class_name}ViewService中所使用的方法和常量。 单独列出的目的是便于维护。
  * @author clariones
  *
  */
-public abstract class Base${class_name}ViewService extends ${parent_class_name}{
+public abstract class Base${class_name}ViewService extends ${parent_class_name} implements FootprintProducer{
 	public static final int $PRC_RESULT_OBJECT_WAS_SET = 0;
 <#list helper.getAllBrachNames(script) as branchName>
 	public static final int PRC_${NAMING.toJavaConstStyle(branchName)} = ${branchName?index+1};
 </#list>
 
-
+	protected Map<String, Object> makeToast(String content, int duration, String type) {
+		HashMap<String, Object> toast = new HashMap<String, Object>();
+		toast.put("text", content);
+		toast.put("duration", duration * 1000);
+		toast.put("icon", type);
+		toast.put("position", "center");
+		return toast;
+	}
 	protected static String makeUrl(String methodName, Object ... params) {
 		return makeUrlF(methodName, true, params);
 	}
@@ -29,7 +40,7 @@ public abstract class Base${class_name}ViewService extends ${parent_class_name}{
 		StringBuilder sb = new StringBuilder(methodName).append("/");
 		if (params != null) {
 			for(Object param : params) {
-				if (param == null) {
+				if (param == null || ((param instanceof String) && TextUtil.isBlank((String) param))) {
 					sb.append('+').append('/');
 					continue;
 				}

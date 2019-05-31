@@ -2,10 +2,11 @@ package cla.edg.project.moyi;
 
 import cla.edg.pageflow.BasePageFlowDescriptionScript;
 import cla.edg.pageflow.BasePageFlowScript;
+import cla.edg.pageflow.PageFlowScript;
 
 public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 
-	private static final BasePageFlowScript SCRIPT = $("native app v2").need_login()
+	private static final PageFlowScript SCRIPT = $("native app v2").need_login()
 			/**
 			 * 店铺入驻
 			 */
@@ -31,7 +32,23 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 				.got_page("pay shop deposit bill").comments("支付店铺保证金")
 					.may_request("pay bill or order")
 //					.may_request("repricing shop deposit bill")
-			
+			/** 关闭店铺 */
+			.request("start close shop procedure").with_string("shop id")
+				.comments("开始关店流程").need_login().no_footprint()
+				.got_page("close shop application")
+					.may_request("fill shop deposit withdraw form")
+					.may_request("confirm to close shop without deposit")
+			.request("fill shop deposit withdraw form").with_string("shop id").with_boolean("agreed").variable()
+				.comments("填写店铺保证金提现申请表").need_login().no_footprint()
+				.got_page("balance withdraw application form")
+					.comments("复用余额提现申请表页面 同时处理余额,竞拍保证金,店铺保证金的提现申请处理")
+			.request("confirm to close shop without deposit").with_string("shop id").with_boolean("agreed").variable()
+				.comments("没有店铺保证金的情况下,快速关店确认页面").need_login().no_footprint()
+				.got_page("simple popup")
+					.may_request("close shop without deposit")
+			.request("close shop without deposit").with_string("shop id")
+				.comments("没有店铺保证金的情况下,快速关店").need_login().no_footprint()
+				.got_page("customer v2 home page")
 //			.request("repricing shop deposit bill").with_string("scene code").with_string("order id").with_boolean("use ib balance").with_boolean("use cash balance").with_float("amount")
 //				.comments("根据用户的支付选项，计算订单的支付金额")
 //				.got_page("pay shop deposit bill")
@@ -89,17 +106,49 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 			 * 查看拍卖
 			 */
 			.request("view trading zone").with_string("filter")
-				.comments("查看交易区").has_footprint().no_login().cache_in_seconds(10)
+				.comments("查看交易区").has_footprint().no_login()
 				.got_page("view trading list").comments("按分类以及/或者状态过滤的交易列表")
 					.may_request("view trading zone").comments("点击tab时切换页面")
 					.may_request("view trading list by type").comments("点击类别button时查看列表")
 					.may_request("view next page trading list").comments("翻页")
 					.may_request("view artwork product").comments("点击单个作品时去详情页")
+					
+			.request("view 4tab trading zone").with_string("filter").has_footprint().no_login()
+				.comments("查看4-tab交易区,2019-4-19新定的UI.").has_footprint().no_login()
+				.query("artwork_auction").which("just newly published").pagination()
+					.comments("4月18日重新定义了 最新上架 的规则")
+				.query("artwork_auction").which("in bidding hotly").pagination()
+					.comments("4月18日重新定义了 正在热拍 的规则")
+				.query("artwork_auction").which("all in one artwork type").with_string("artwork type id").pagination()
+					.comments("4月18日重新定义了 全部分类 中对应的拍卖的规则")
+				.got_page("view 4tab trading zone").comments("4/18重新设计的交易区页面")
+					.may_request("view next page 4tab trading list").comments("翻页")
+					.may_request("search in 4tab trading zone").comments("搜索")
+					.may_request("view trading list with filter").comments("新设计的交易区按类型进入后的列表")
+			.request("view next page 4tab trading list").with_string("filter").with_string("last record id")
+				.comments("新交易区中的翻页请求").no_login().no_footprint()
+				.got_page("view 4tab trading zone")
+			.request("search in 4tab trading zone").with_string("search key")
+				.comments("新交易区中的搜索功能").no_login().no_footprint()
+				.query("artwork_auction").which("can be searched").pagination().with_string("search key")
+					.comments("4月18日指定的搜索条件")
+				.got_page("view 4tab trading list")
+			.request("search next page in 4tab trading zone").with_string("search key").with_string("last record id")
+				.comments("新交易区中的搜索功能").no_login().no_footprint()
+				.got_page("view 4tab trading list")
+			.request("view trading list with filter").with_string("filter").with_string("artwork type id")
+				.comments("新设计的交易区按类型进入后的列表").no_login().no_footprint()
+				.got_page("view 4tab trading list").comments("新设计的交易区按类型进入后的列表页面").list_of("arwork_auction")
+					.may_request("view next page trading list with filter")
+			.request("view next page trading list with filter").with_string("filter").with_string("artwork type id").with_string("last record id")
+				.comments("新设计的交易区按类型进入后的列表翻页").no_login().no_footprint()
+				.got_page("view 4tab trading list")
+				
 			.request("view next page trading list").with_string("filter").with_string("artwork type id").with_string("artwork auction id")
 				.comments("查看交易区 的翻页请求").no_login()
 				.got_page("view trading list")
 			.request("view trading list by type").with_string("filter").with_string("artwork type id")
-				.comments("按照艺术品类型查看拍卖列表").has_footprint().no_login().cache_in_seconds(10)
+				.comments("按照艺术品类型查看拍卖列表").has_footprint().no_login()
 				.got_page("view trading list")
 			.request("search artwork auction list").with_string("search key")
 				.comments("按照作者和作品名称搜索拍卖").no_login().no_footprint()
@@ -111,7 +160,7 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 				.got_page("view trading list")
 					
 			/**
-			 * 商家中台
+			 * 商家店铺
 			 */
 			.request("view my shop").with_string("filter")
 				.comments("查看我的店铺").cache_in_seconds(10)
@@ -162,6 +211,10 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 					.comments("查找需要确权的艺术品列表")
 				.got_page("artwork need certificate").comments("待确权的艺术品列表")
 					.may_request("put product on sale")
+					.may_request("view next page artwork need certificate list")
+			.request("view next page artwork need certificate list").with_string("last record id")
+				.comments("查看待确权艺术品列表 翻页")
+				.got_page("artwork need certificate")
 			/**
 			 * 拍卖订单 
 			 * list页面，卖家和买家是不同的入口
@@ -436,6 +489,10 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 					.comments("查询店铺的在售拍卖")
 					.rule_comments("公示中 和 拍卖中 的都有效")
 					.rule_comments("以开始时间倒序")
+				.query("artwork_auction").which("closed in shop").pagination().with_string("shop id")
+					.comments("查询店铺的已截拍拍卖")
+					.rule_comments("除 待公示, 公示中 和 拍卖中 以外的都有效")
+					.rule_comments("以截拍时间倒序")
 				.query("ink_deed_entry_order").which("opening in shop").pagination().with_string("user id")
 					.comments("查询店铺的在售墨契")
 					.rule_comments("未开始的才有效")
@@ -449,6 +506,9 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 			.request("view next page auction opening in shop").with_string("shop id").with_string("last record id")
 				.comments("游客浏览店铺 在售商品翻页")
 				.got_page("store detail")
+			.request("view next page auction closed in shop").with_string("shop id").with_string("last record id")
+				.comments("游客浏览店铺 在售商品翻页")
+				.got_page("store detail")
 			.request("view next page ink deed opening in shop").with_string("user id").with_string("last record id")
 				.comments("游客浏览店铺 在售墨契翻页")
 				.got_page("store detail")
@@ -456,7 +516,7 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 				.comments("查看艺术品拍卖详情").has_footprint().no_login()
 				.query("artwork_auction").which("recommend for viewing auction").no_pagination().with_string("artwork auction id")
 					.comments("为当前浏览的拍卖品搜索几个推荐的拍卖")
-				.got_page("artwork auction detail").comments("艺术品拍卖详情")
+				.got_page("artwork auction detail").comments("艺术品拍卖详情").can_refresh()
 					.may_request("partial refresh artwork auction")
 					.may_request("bidding artwork auction")
 					.may_request("view bidding history")
@@ -492,7 +552,15 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 //						.may_request("pay bill or order")
 //				.when_others()
 					.got_page("artwork auction detail")
-			
+			.request("notify ink deed buyer to pay").with_string("order id")
+				.comments("提醒墨契买家付款")
+				.got_page("simple popup")
+			.request("notify seller to deliver").with_string("order id")
+				.comments("提醒卖家发货")
+				.got_page("simple popup")
+			.request("one click to notify").with_string("user id").with_string("scene code").with_string("object type").with_string("object id")
+				.comments("一键通知. 消息根据scene code来, 参数根据object type+id来").no_footprint().no_login()
+				.got_page("simple popup")
 			
 			/**
 			 * 支付页面。带各种回跳，处理混合支付
@@ -534,6 +602,7 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 				.comments("查看 我的账户").need_login().has_footprint()
 				.got_page("my account").comments("我的账户页面. 包括提现,明细,墨贝等")
 					.may_request("view account balance")
+					.may_request("view user deposit history")
 			.request("view account balance")
 				.comments("查看 我的账户余额")
 				.got_page("my account balance detail")
@@ -575,6 +644,16 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 			.request("view next page withdraw history").with_string("last record id")
 				.comments("查看提现记录 翻页").no_footprint()
 				.got_page("widthdraw list")
+			.request("view user deposit history")
+				.comments("查看用户保证金记录(竞拍保证金)").no_footprint()
+				.query("auction_bidding_deposit").which("user").with_string("user id").pagination()
+					.comments("查询用户保证金记录")
+				.got_page("user deposit list").comments("用户保证金记录列表")
+					.list_of("account-record")
+					.may_request("view user next page deposit history")
+			.request("view user next page deposit history").with_string("last record id")
+				.comments("查看提现记录 翻页").no_footprint()
+				.got_page("user deposit list")
 			/**
 			 * 荐宝联盟
 			 */
@@ -585,13 +664,13 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 					.may_request("view presenter dashboard")
 					.may_request("view affiliate auction detail")
 			.request("view affiliate auction list by artwork type").with_string("artwork type id")
-				.comments("查看荐宝联盟-某个艺术品类型下的所有公示中或竞拍中的拍卖列表").need_login().has_footprint()
+				.comments("查看荐宝联盟-某个艺术品类型下的所有公示中或竞拍中的拍卖列表").no_login().has_footprint()
 				.got_page("affiliate auction list in artwork type").comments("荐宝联盟-某个艺术品类型下的所有公示中或竞拍中的拍卖列表")
 					.may_request("view next page affiliate auction list by artwork type")
 					.may_request("view affiliate auction detail")
 					.may_request("view presenter dashboard")
 			.request("view next page affiliate auction list by artwork type").with_string("artwork type id").with_string("last record id")
-				.comments("查看荐宝联盟-某个艺术品类型下的所有公示中或竞拍中的拍卖列表 翻页").need_login().has_footprint()
+				.comments("查看荐宝联盟-某个艺术品类型下的所有公示中或竞拍中的拍卖列表 翻页").no_login().has_footprint()
 				.got_page("affiliate auction list in artwork type")
 			.request("view affiliate auction detail").with_string("artwork auction id").with_string("user id")
 				.comments("荐宝联盟-荐宝详情. 和拍卖详情很类似,但是actions不同").no_login().has_footprint()
@@ -615,15 +694,6 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 			.request("import contact book").with_form("import contact book")
 				.comments("导入通讯录")
 				.got_page("contact book import result").comments("导入结果")
-			.request("notify ink deed buyer to pay").with_string("order id")
-				.comments("提醒墨契买家付款")
-				.got_page("simple popup")
-			.request("notify seller to deliver").with_string("order id")
-				.comments("提醒卖家发货")
-				.got_page("simple popup")
-			.request("one click to notify").with_string("user id").with_string("scene code").with_string("object type").with_string("object id")
-				.comments("一键通知. 消息根据scene code来, 参数根据object type+id来").no_footprint().no_login()
-				.got_page("simple popup")
 			.request("start bidding immediately").with_string("artwork auction id")
 				.comments("修改拍卖开始时间为当前时间")
 				.got_page("simple popup")
@@ -642,16 +712,29 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 			.request("view next page artist list").with_string("last record id").with_string("search key")
 				.comments("查看所有的艺术家的翻页").no_login().no_footprint()
 				.got_page("artist list")
-			
+			.request("get current user info")
+				.comments("获取当前用户信息").no_footprint().no_login()
+				.got_page("user info").comments("用户信息. 没有用户时对象为空")
+			.request("test request").no_login()
+				.comments("测试用接口")
+				.got_page("tesst request result").comments("test").list_of("auction")
 			/**
 			 * 各种临时声明
 			 */
+			.query("artwork_auction_order").which("will pay timeout").pagination()
+				.comments("查询即将支付超时的拍卖订单")
+			.query("artwork_auction_order").which("will auto confirm receiption").pagination()
+				.comments("查询即将自动确认收货拍卖订单")
+			.query("artwork_auction_order").which("will deliver timeout").pagination()
+				.comments("查询即将发货超时的拍卖订单")
+			.query("artwork_auction").which("will close").pagination()
+				.comments("查询即将截拍的拍卖")
 			;
 		
 //			
 
 	@Override
-	public BasePageFlowScript getScript() {
+	public PageFlowScript getScript() {
 		return SCRIPT;
 	}
 
