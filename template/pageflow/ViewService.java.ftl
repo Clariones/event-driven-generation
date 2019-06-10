@@ -84,9 +84,9 @@ public abstract class ${class_name}ViewService extends Base${class_name}ViewServ
 
 <#macro getRequestUser request prefix="">
 	<#if request.needLogin>
-		${prefix}ensureCurrentUser(ctx);
+		${prefix}ensureCurrentUserInfo(ctx);
 	<#else>
-		${prefix}getCurrentUser(ctx);
+		${prefix}getCurrentUserInfo(ctx);
 	</#if>
 </#macro>
 
@@ -114,6 +114,9 @@ public abstract class ${class_name}ViewService extends Base${class_name}ViewServ
 				${prefix}break;
 			${prefix}}
 		${prefix}}
+		<#if request.canRefresh>
+		${prefix}page.setLinkToUrl(accessUrl);
+		</#if>
 		<#if request.cacheTimeInSeconds gt 0>
 		${prefix}existedResult = page.doRender(ctx);
 		${prefix}userContext.putToCache(accessUrl, existedResult, ${request.cacheTimeInSeconds});
@@ -128,6 +131,9 @@ public abstract class ${class_name}ViewService extends Base${class_name}ViewServ
 		${prefix}	return ctx.getResultObject();
 		${prefix}}
 		${prefix}BaseViewPage page = assembler${NAMING.toCamelCase(branch.page)}Page(ctx, "${T.getRequestProcessingMethodName(request)}");
+		<#if request.canRefresh>
+		${prefix}page.setLinkToUrl(accessUrl);
+		</#if>
 		<#if request.cacheTimeInSeconds gt 0>
 		${prefix}existedResult = page.doRender(ctx);
 		${prefix}userContext.putToCache(accessUrl, existedResult, ${request.cacheTimeInSeconds});

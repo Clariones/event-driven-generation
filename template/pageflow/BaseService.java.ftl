@@ -78,6 +78,6 @@ public abstract class Base${class_name}ViewService extends ${parent_class_name} 
 	protected abstract ${NAMING.toCamelCase(page.name)}Page assembler${NAMING.toCamelCase(page.name)}Page(${custom_context_name} ctx, String requestName)throws Exception;
 </#list>
 
-	protected abstract void getCurrentUser(${custom_context_name} ctx);
-	protected abstract void ensureCurrentUser(${custom_context_name} ctx) throws Exception;
+	protected abstract void getCurrentUserInfo(${custom_context_name} ctx);
+	protected abstract void ensureCurrentUserInfo(${custom_context_name} ctx) throws Exception;
 }

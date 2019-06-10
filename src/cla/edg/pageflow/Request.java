@@ -7,10 +7,17 @@ public class Request extends BasePageFlowElement{
 	protected boolean needLogin = false;
 	protected boolean hasFootprint = false;
 	protected boolean handleForm = false;
+	protected boolean canRefresh = false;
 	protected List<Branch> branches;
 	protected int cacheTimeInSeconds = 0;
 	
 	
+	public boolean isCanRefresh() {
+		return canRefresh;
+	}
+	public void setCanRefresh(boolean canRefresh) {
+		this.canRefresh = canRefresh;
+	}
 	public int getCacheTimeInSeconds() {
 		return cacheTimeInSeconds;
 	}

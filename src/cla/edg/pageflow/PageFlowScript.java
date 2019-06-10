@@ -269,6 +269,8 @@ public class PageFlowScript extends BasePageFlowScript {
 	public PageFlowScript can_refresh() {
 		if (currentWork instanceof Page) {
 			currentPage.setRefreshAction(true);
+		}else if (currentWork instanceof Request) {
+			currentRequest.setCanRefresh(true);
 		}else {
 			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能设定刷新行为");
 		}
