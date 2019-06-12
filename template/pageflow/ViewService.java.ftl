@@ -66,7 +66,7 @@ public abstract class ${class_name}ViewService extends Base${class_name}ViewServ
 		try{
 			<@getRequestUser request "	"/>
 	<#if request.hasFootprint>
-			ctx.addFootPrint(this);
+			ctx.addFootprint(this);
 	</#if>
 		<#assign formName = request.parameters[0].formName />
 			${helper.getBaseFormClassName(request.parameters[0])} form = new ${helper.getFormClassName(request.parameters[0])}().initByRequest(ctx, formData);

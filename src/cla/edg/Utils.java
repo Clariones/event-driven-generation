@@ -16,15 +16,28 @@ public class Utils {
 	}
 
 	public static String toCamelCase(String name) {
-		String[] strSegs = name.trim().split("[\\s\\-_]");
-		StringBuilder sb = new StringBuilder();
-		for(String str : strSegs) {
-			sb.append(Character.toUpperCase(str.charAt(0)));
-			if (str.length() > 1) {
-				sb.append(str.substring(1).toLowerCase());
-			}
+		if (name == null || name.isEmpty()) {
+			return name;
 		}
-		return sb.toString();
+		if (name.matches("^[A-Z][a-zA-Z0-9]+$")) {
+			return name;
+		}
+		if (name.matches("^[a-z][a-zA-Z0-9]+$")) {
+			return Character.toUpperCase(name.charAt(0)) + name.substring(1);
+		}
+		if (name.matches("^[\\w_\\- ]+$")) {
+			String[] segments = name.split("\\s*[ \\-_]\\s*");
+			StringBuilder sb = new StringBuilder();
+			for (String seg : segments) {
+				if (seg.length() == 1) {
+					sb.append(seg.toUpperCase());
+				} else {
+					sb.append(Character.toUpperCase(seg.charAt(0)) + seg.substring(1));
+				}
+			}
+			return sb.toString();
+		}
+		throw new RuntimeException("无法处理名称: " + name);
 	}
 
 	public static String packageNameToPath(String packageName) {

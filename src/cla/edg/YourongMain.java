@@ -7,6 +7,7 @@ import cla.edg.generator.PageFlowGenerator;
 import cla.edg.pageflow.BasePageFlowDescriptionScript;
 import cla.edg.pageflow.BasePageFlowScript;
 import cla.edg.project.jingou.JobOrder;
+import cla.edg.project.yourong.Project;
 import cla.edg.project.yourong.UnifyClientService;
 
 public class YourongMain {
@@ -21,6 +22,7 @@ public class YourongMain {
 //		testEventService(new Affiliate());
 		
 		testPageFlow(new UnifyClientService());
+		testEventService(new Project());
 	}
 
 	private static void testPageFlow(BasePageFlowDescriptionScript test) throws Exception {
