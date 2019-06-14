@@ -7,7 +7,16 @@ public class Page extends BasePageFlowElement {
 	protected List<String> possibleRequests;
 	protected String listOfTemplate;
 	protected boolean refreshAction = false;
+	protected String pageTitle;
 	
+	
+	public String getPageTitle() {
+		return pageTitle;
+	}
+
+	public void setPageTitle(String pageTitle) {
+		this.pageTitle = pageTitle;
+	}
 	
 	public boolean isRefreshAction() {
 		return refreshAction;

@@ -26,6 +26,14 @@ public class ${class_name}Page extends BaseViewPage{
 		return SCOPE;
 	}
 
+<#if page.pageTitle??>
+	public String getPageTitle() {
+		if (pageTitle == null) {
+			return "${page.pageTitle}";
+		}
+		return pageTitle;
+	}
+</#if>
 <#if page.listOfTemplate??>
 	@Override
 	protected void beforeDoRendering() {

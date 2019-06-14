@@ -266,6 +266,14 @@ public class PageFlowScript extends BasePageFlowScript {
 		}
 		return this;
 	}
+	public PageFlowScript title(String name) {
+		if (currentWork instanceof Page) {
+			currentPage.setPageTitle(name);
+		}else {
+			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能指定页面标题");
+		}
+		return this;
+	}
 	public PageFlowScript can_refresh() {
 		if (currentWork instanceof Page) {
 			currentPage.setRefreshAction(true);
