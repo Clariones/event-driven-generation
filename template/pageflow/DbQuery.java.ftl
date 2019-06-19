@@ -32,7 +32,7 @@ import ${base_package}.${NAMING.toCamelCase(query.objectName)?lower_case}.${NAMI
  */
 public abstract class ${class_name}DBQueryHelper{
 	public static final Map<String, Object> EO = new HashMap<>();
-	public int getPageSize(String queryName) {
+	public int getPageSize(${custom_context_name} ctx, String queryName) {
 		return 20;
 	}
 <#list script.queryInfoList as query >
@@ -56,7 +56,7 @@ public abstract class ${class_name}DBQueryHelper{
 	</#if>
 		List<Object> params = new ArrayList<>();
 	<#if query.pagination>
-		int pageSize = getPageSize("query${typeClass}ListOf${NAMING.toCamelCase(query.name)}");
+		int pageSize = getPageSize(ctx, "query${typeClass}ListOf${NAMING.toCamelCase(query.name)}");
 		String sql = prepareSqlAndParamsForQuery${typeClass}ListOf${NAMING.toCamelCase(query.name)}(ctx, lastRecord, pageSize+1, params<@T.getRequestProcessingMethodParameterNames query/>);
 	<#else>
 		String sql = prepareSqlAndParamsForQuery${typeClass}ListOf${NAMING.toCamelCase(query.name)}(ctx, params<@T.getRequestProcessingMethodParameterNames query/>);
