@@ -2,6 +2,8 @@ package cla.edg.pageflow;
 
 import java.util.List;
 
+import cla.edg.project.yourong.pageflow.S0_Query;
+
 public class PageFlowScript extends BasePageFlowScript {
 
 	public PageFlowScript need_login() {
@@ -281,6 +283,17 @@ public class PageFlowScript extends BasePageFlowScript {
 			currentRequest.setCanRefresh(true);
 		}else {
 			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能设定刷新行为");
+		}
+		return this;
+	}
+	public PageFlowScript import_from(PieceOfScript scriptOfQuery) {
+		return scriptOfQuery.makeSequel(this);
+	}
+	public PageFlowScript todo() {
+		if (currentWork instanceof Request) {
+			this.got_page("TODO").comments("TODO");
+		}else {
+			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+",还没支持 TODO 的定义");
 		}
 		return this;
 	}

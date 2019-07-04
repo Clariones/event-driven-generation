@@ -19,6 +19,7 @@ public class ${class_name}Page extends BaseViewPage{
 			.field("displayMode")
 			.field("emptyMessage")
 			.field("list")
+			.field("tabs")
 </#if>
 			;
 	@Override

@@ -1,4 +1,4 @@
-package cla.edg.project.yourong;
+package cla.edg.project.yourong.events;
 
 import cla.edg.eventscript.BaseEventDescriptionScript;
 import cla.edg.eventscript.EventScript;

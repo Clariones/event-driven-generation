@@ -20,9 +20,9 @@ import com.terapico.utils.TextUtil;
  *
  */
 public abstract class Base${class_name}ViewService extends ${parent_class_name} implements FootprintProducer{
-	public static final int $PRC_RESULT_OBJECT_WAS_SET = 0;
+	public static final int $PRC_RESULT_OBJECT_WAS_SET = -1;
 <#list helper.getAllBrachNames(script) as branchName>
-	public static final int PRC_${NAMING.toJavaConstStyle(branchName)} = ${branchName?index+1};
+	public static final int PRC_${NAMING.toJavaConstStyle(branchName)} = ${branchName?index};
 </#list>
 
 	protected Map<String, Object> makeToast(String content, int duration, String type) {
