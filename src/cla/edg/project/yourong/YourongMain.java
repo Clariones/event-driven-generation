@@ -1,26 +1,37 @@
-package cla.edg;
+package cla.edg.project.yourong;
 
+import cla.edg.Utils;
 import cla.edg.eventscript.BaseEventDescriptionScript;
 import cla.edg.eventscript.EventScript;
 import cla.edg.generator.EventScriptGenerator;
+import cla.edg.generator.ExploreGenerator;
 import cla.edg.generator.PageFlowGenerator;
+import cla.edg.objlifescript.BaseObjectLifeScriptFactory;
+import cla.edg.objlifescript.ObjectLifeScript;
 import cla.edg.pageflow.BasePageFlowDescriptionScript;
 import cla.edg.pageflow.BasePageFlowScript;
-import cla.edg.project.yourong.YourongServiceMainScript;
+import cla.edg.project.yourong.objlife.ProjectLifeScriptFactory;
 
 public class YourongMain {
 
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
-//		test_auction();
-//		testEventService(new JobOrder());
-//		testEventService(new ShopDeposit());
-//		testEventService(new Auction());
-//		testEventService(new InkDeed());
-//		testEventService(new Affiliate());
+
 		
-		testPageFlow(new YourongServiceMainScript());
+//		testPageFlow(new YourongServiceMainScript());
 //		testEventService(new Project());
+		testExplore(new ProjectLifeScriptFactory());
+	}
+
+	private static void testExplore(BaseObjectLifeScriptFactory scriptFactory) throws Exception {
+		ObjectLifeScript script = scriptFactory.getScript();
+		String json = Utils.toJson(script, true);
+		System.out.println(json);
+		ExploreGenerator generator = new ExploreGenerator();
+		generator.setBaseOutputFolder("/works/jobs/yourong_v2/workspace/yourong-biz-suite/bizcore/WEB-INF/yourong_custom_src");
+		generator.setBaseTempalteFolder("./template");
+		
+		generator.generateWithScript(script);
 	}
 
 	private static void testPageFlow(BasePageFlowDescriptionScript test) throws Exception {
