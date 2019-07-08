@@ -8,6 +8,7 @@ import java.util.Map;
 
 public class ExploreNode extends ExploreElement{
 	public transient boolean needChildren = false;
+	public transient boolean childrenDone = false;
 	public transient String curSubGroupName = null;
 	public List<ExploreBranch> branches = null;
 	protected transient ExploreBranch curBranch = null;
@@ -99,6 +100,9 @@ public class ExploreNode extends ExploreElement{
 
 	public void addSubNode(ExploreNode subNode) {
 		ensureSubNodeGroups();
+		if (curSubGroupName == null) {
+			throw new RuntimeException("节点"+subNode.getName()+"不能加入未命名子组");
+		}
 		subNodeGroups.get(curSubGroupName).add(subNode);
 	}
 
@@ -188,6 +192,9 @@ public class ExploreNode extends ExploreElement{
 	}
 
 	public void setSubStartName(String nodeName) {
+		if (curSubGroupName == null) {
+			throw new RuntimeException("节点"+nodeName+"不能加入未命名子组");
+		}
 		subNodeStartNode.put(curSubGroupName, nodeName);
 	}
 
@@ -199,6 +206,7 @@ public class ExploreNode extends ExploreElement{
 			if (this.loopFlag && this.curSubGroupName.equals("loop")) {
 				if (tagName.equals(this.loopTagName)) {
 					// 我自己的loop 描述写完了
+					childrenDone = true;
 					return SUB_DONE;
 				}
 			}
@@ -221,6 +229,7 @@ public class ExploreNode extends ExploreElement{
 //		if (this.loopFlag) {
 //			return SUB_DONE;
 //		}
+		childrenDone = true;
 		return SUB_DONE;
 //		throw new RuntimeException("当前子组有名称, 又不是loop, 又不是one-of");
 	}

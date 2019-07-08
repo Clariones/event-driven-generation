@@ -34,4 +34,15 @@ public class ExploreElement {
 	}
 
 
+	public List<String> getCommentSegments() {
+		return commentSegments;
+	}
+
+
+	public void setCommentSegments(List<String> commentSegments) {
+		this.commentSegments = commentSegments;
+	}
+
+	
+
 }

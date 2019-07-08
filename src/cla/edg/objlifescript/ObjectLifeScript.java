@@ -37,7 +37,7 @@ public class ObjectLifeScript {
 			throw new RuntimeException(nodeName+"已存在");
 		}
 		if (curNode != null) {
-			if (curNode.needChildren) {
+			if (curNode.needChildren && !curNode.childrenDone) {
 				parentNodes.push(curNode);
 			}
 		}
@@ -45,14 +45,16 @@ public class ObjectLifeScript {
 		curNode.name = nodeName;
 		curWorker = curNode;
 		allNodes.put(nodeName, curNode);
-		nodeList.add(curNode);
+		
 		if (!parentNodes.isEmpty()) {
 			ExploreNode parentNode = parentNodes.peek();
 			if (parentNode != null) {
 				curNode.parentNode = parentNode;
 				parentNode.addSubNode(curNode);
+				return;
 			}
 		}
+		nodeList.add(curNode);
 	}
 	private void ensureWorkerType(String errMessage, Class<?> ...classes ) {
 		for(Class<?> clazz:classes) {
@@ -108,7 +110,7 @@ public class ObjectLifeScript {
 		}
 		ExploreNode parentNode = parentNodes.peek();
 		if (parentNode != null) {
-			parentNode.setSubStartName(nodeName);
+			parentNode.setSubStartName(curNode.name);
 		}
 		return this;
 	}
@@ -161,10 +163,10 @@ public class ObjectLifeScript {
 	public ObjectLifeScript finally_result(String string) {
 		ensureWorkerType("不能指定阶段标志", ExploreNode.class);
 		int rst = curNode.onFinishTag(string);
-		if (rst ==  ExploreElement.SUB_DONE) {
+		if (rst ==  ExploreElement.SUB_DONE && !parentNodes.isEmpty()) {
 			curNode = this.parentNodes.pop();
 			curWorker = curNode;
-			curNode.onFinishTag(string);
+			rst = curNode.onFinishTag(string);
 		}
 		return this;
 	}

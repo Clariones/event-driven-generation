@@ -106,7 +106,7 @@ public class ProjectLifeScriptFactory extends BaseObjectLifeScriptFactory{
 				.when_has_no().stop_with("ask store to create contruction work package")
 			.then("check construction work packages")
 				.for_each("work package")
-					.start_from("check construction tasks was created").comments("")
+					.start_from("check construction tasks was created").comments("检查每个工作包里是不是有至少一个Task被创建")
 						.when_has_no().stop_with("ask store to create tasks in construction work package")
 					.then("check contruction task")
 						.for_each("task")

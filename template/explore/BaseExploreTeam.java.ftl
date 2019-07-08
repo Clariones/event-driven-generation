@@ -14,6 +14,24 @@ public abstract class ${class_name} extends BaseExplorer<${custom_context_name}>
 <#list helper.allConditionCodes as code>
 	protected static final int CODE_${NAMING.toJavaConstStyle(code)} = ${code?index+100};
 </#list>
+
+	protected static Map<Integer, String> codeNames = new HashMap<>();
+	static {
+		codeNames.put(CODE_CONTINUE, "continue");
+		codeNames.put(CODE_JUMP, "jump");
+<#list helper.allConditionCodes as code>
+		codeNames.put(CODE_${NAMING.toJavaConstStyle(code)},"${code}");
+</#list>
+	}
+
+<#list helper.allTaskNames as taskName>
+	protected static final String TASK_${NAMING.toJavaConstStyle(taskName)} = "${taskName}";
+</#list>
+
+	@Override
+	protected Map<Integer, String> getCodeNames() {
+		return codeNames;
+	}
 	@Override
 	public String getStartFromName() {
 		return "${script.nodeList[0].name}";
@@ -87,7 +105,7 @@ public abstract class ${class_name} extends BaseExplorer<${custom_context_name}>
 				teamMap.put("${subGroupName}", subTeamMap);
 			<#list subNodeList as subNode>
 				${''}<@compress single_line=true>
-					subTeamMap.put("${node.name}", 
+					subTeamMap.put("${subNode.name}", 
 						newAdventurer${NAMING.toCamelCase(subNode.name)}().next(
 				<#if subNode?is_last>
 						null
@@ -102,20 +120,31 @@ public abstract class ${class_name} extends BaseExplorer<${custom_context_name}>
 		
 			}
 	</#if>
-	// TODO
 		};
 	}
 	
+	<#if node.commentSegments?has_content>
+		<#list node.commentSegments as comments>
+	/* ${comments} */
+		</#list>
+	</#if>	
 	protected void adventurer${NAMING.toCamelCase(node.name)}DoHisJob(${custom_context_name} ctx, ExplorationResults result, Object targetObject) throws Exception{
 		int processResult = executeExplore${NAMING.toCamelCase(node.name)}(ctx, targetObject);
+		log(ctx, "${node.name}",  processResult);
 	<#if node.branches?has_content>
 		switch (processResult) {
 		<#list node.branches as branch>
 		case CODE_${NAMING.toJavaConstStyle(branch.conditionCode)}:
-			<#if branch.taskName != "nothing_to_do">
+			<#if branch.jumpFlag>
+			result.setNextAdventurerName("${branch.taskName}");
+			result.setStop(false);
+			result.setJump(true);
+			<#else>
+				<#if branch.taskName != "nothing_to_do">
 			result.addTask(makeTask${NAMING.toCamelCase(branch.taskName)}(ctx, targetObject));
-			</#if>
+				</#if>
 			result.setStop(<#if branch.stopFlag>true<#else>false</#if>);
+			</#if>
 			return;
 		</#list>
 		case CODE_CONTINUE:
