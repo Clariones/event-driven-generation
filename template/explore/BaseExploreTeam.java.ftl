@@ -46,11 +46,9 @@ public abstract class ${class_name} extends BaseExplorer<${custom_context_name}>
 	// ////////////////////////////////////// ${node.name} ////////////////////////////////////// //
 	protected PathFinder<${custom_context_name}> newAdventurer${NAMING.toCamelCase(node.name)}() {
 		return new PathFinder<${custom_context_name}>() {
-	<#if !node.needChildren>
 			public void doSelfJob(${custom_context_name} ctx, ExplorationResults result, Object targetObject) throws Exception{
 				adventurer${NAMING.toCamelCase(node.name)}DoHisJob(ctx, result, targetObject);
 			}
-	</#if>
 	<#if node.loopFlag>
 			@Override
 			protected List<Object> prepareLoopingTargetList(${custom_context_name} ctx, Object targetObject) throws Exception {
@@ -60,6 +58,49 @@ public abstract class ${class_name} extends BaseExplorer<${custom_context_name}>
 			public boolean isLoopingAdventurer() {
 				return true;
 			};
+	</#if>
+	<#if node.needChildren>
+			@Override
+			protected ExplorationResults decideFinalResult(${custom_context_name} ctx, Object targetObject, String sceneCode, List<ExplorationResults> allResults) throws Exception{
+				return decideFinalResultForAdventurer${NAMING.toCamelCase(node.name)}(ctx, targetObject, sceneCode, allResults);
+			}
+	</#if>
+	<#if node.chooseFlag?has_content && "one_of" == node.chooseFlag>
+			@Override
+			protected String chooseOneSubTeam(${custom_context_name} ctx, Object targetObject) {
+				return ${NAMING.toCamelCase(node.chooseTaskName)?uncap_first}(ctx, targetObject);
+			}
+			@Override
+			public TeamType getTypeType() {return TeamType.DO_ONE_OF;};
+	</#if>
+	<#if node.chooseFlag?has_content && "all_of" == node.chooseFlag>
+			@Override
+			public TeamType getTypeType() {return TeamType.DO_ALL_OF;};
+	</#if>
+	<#if node.needChildren>
+			@Override
+			protected void buildSubTeam(Map<String, Map<String, PathFinder<CustomYourongUserContextImpl>>> teamMap, Map<String, String> teamStartMap) {
+				Map<String, PathFinder<CustomYourongUserContextImpl>> subTeamMap = null;
+		<#list node.subNodeGroups as subGroupName, subNodeList>
+				teamStartMap.put("${subGroupName}", "${node.subNodeStartNode[subGroupName]}");
+				subTeamMap = new HashMap<>();
+				teamMap.put("${subGroupName}", subTeamMap);
+			<#list subNodeList as subNode>
+				${''}<@compress single_line=true>
+					subTeamMap.put("${node.name}", 
+						newAdventurer${NAMING.toCamelCase(subNode.name)}().next(
+				<#if subNode?is_last>
+						null
+				<#else>
+						"${subNodeList[subNode?index +1].name}"
+				</#if>
+						));
+				</@compress>
+				
+			</#list>
+		</#list>
+		
+			}
 	</#if>
 	// TODO
 		};
@@ -90,7 +131,12 @@ public abstract class ${class_name} extends BaseExplorer<${custom_context_name}>
 	<#if node.loopFlag>
 	protected abstract List<Object> prepareLoopingTargetListForAdventurer${NAMING.toCamelCase(node.name)}(${custom_context_name} ctx, Object targetObject) throws Exception;
 	</#if>
-	
+	<#if node.needChildren>
+	protected abstract ExplorationResults decideFinalResultForAdventurer${NAMING.toCamelCase(node.name)}(${custom_context_name} ctx, Object targetObject, String sceneCode, List<ExplorationResults> allResults) throws Exception;
+	</#if>
+	<#if node.chooseFlag?has_content && "one_of" == node.chooseFlag>
+	protected abstract String ${NAMING.toCamelCase(node.chooseTaskName)?uncap_first}(${custom_context_name} ctx, Object targetObject);
+	</#if>
 	
 </#list>
 

@@ -17,6 +17,8 @@ public class ExploreNode extends ExploreElement{
 	public String chooseTaskName = null;
 	public transient String chooseFlag = null;
 	public transient ExploreNode parentNode = null;
+	protected Map<String, List<ExploreNode>> subNodeGroups;
+	protected Map<String, String> subNodeStartNode;
 	
 	public boolean isNeedChildren() {
 		return needChildren;
@@ -58,8 +60,6 @@ public class ExploreNode extends ExploreElement{
 		this.subNodeStartNode = subNodeStartNode;
 	}
 
-	protected Map<String, List<ExploreNode>> subNodeGroups;
-	protected Map<String, String> subNodeStartNode;
 	
 	public String getChooseTaskName() {
 		return chooseTaskName;
