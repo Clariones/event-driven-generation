@@ -18,7 +18,7 @@ public class YourongMain {
 		// TODO Auto-generated method stub
 
 		
-//		testPageFlow(new YourongServiceMainScript());
+		testPageFlow(new YourongServiceMainScript());
 //		testEventService(new Project());
 		testExplore(new ProjectLifeScriptFactory());
 	}

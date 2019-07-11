@@ -8,8 +8,9 @@ import com.terapico.uccaf.explorer.ExplorationResults;
 import com.terapico.uccaf.explorer.PathFinder;
 import com.terapico.uccaf.explorer.TodoTask;
 import ${base_package}.${custom_context_name};
+import ${base_package}.${NAMING.toCamelCase(script.configuration.projectName)}BaseExplorer;
 
-public abstract class ${class_name} extends BaseExplorer<${custom_context_name}>{
+public abstract class ${class_name} extends ${NAMING.toCamelCase(script.configuration.projectName)}BaseExplorer<${custom_context_name}>{
 	protected static final int CODE_XXXX = 100; //
 <#list helper.allConditionCodes as code>
 	protected static final int CODE_${NAMING.toJavaConstStyle(code)} = ${code?index+100};
@@ -148,22 +149,36 @@ public abstract class ${class_name} extends BaseExplorer<${custom_context_name}>
 			return;
 		</#list>
 		case CODE_CONTINUE:
-		default:
 			result.setStop(false);
 			return;
+		default:
+			throw new Exception(String.format("处理结果 %d(%s) 未定义,请检查代码和LifeScript")); 
 		}
 	<#else>
 		result.setStop(false);
 	</#if>
 	}
+	/** 执行操作 ${node.name}
+	<#if node.branches?has_content>
+	 * 返回值: <@compress single_line=true>
+	    <#list node.branches as branch>
+			CODE_${NAMING.toJavaConstStyle(branch.conditionCode)},
+	    </#list>
+	    CODE_CONTINUE
+	 </@>
+	</#if>${''}
+	 */
 	protected abstract int executeExplore${NAMING.toCamelCase(node.name)}(${custom_context_name} ctx, Object targetObject) throws Exception;
 	<#if node.loopFlag>
+	// 为操作 ${node.name} 找出需要遍历的对象, 放入list中
 	protected abstract List<Object> prepareLoopingTargetListForAdventurer${NAMING.toCamelCase(node.name)}(${custom_context_name} ctx, Object targetObject) throws Exception;
 	</#if>
 	<#if node.needChildren>
+	// 为操作 ${node.name} 的子操作合并结果,得出结论
 	protected abstract ExplorationResults decideFinalResultForAdventurer${NAMING.toCamelCase(node.name)}(${custom_context_name} ctx, Object targetObject, String sceneCode, List<ExplorationResults> allResults) throws Exception;
 	</#if>
 	<#if node.chooseFlag?has_content && "one_of" == node.chooseFlag>
+	// 为操作 ${node.name} 执行 ${node.chooseTaskName}, 选择其子任务中的一个分支
 	protected abstract String ${NAMING.toCamelCase(node.chooseTaskName)?uncap_first}(${custom_context_name} ctx, Object targetObject);
 	</#if>
 	
@@ -180,6 +195,7 @@ public abstract class ${class_name} extends BaseExplorer<${custom_context_name}>
 			}
 		};
 	}
+	// 执行探索的结果中的任务 ${taskName}
 	protected void executeTask${NAMING.toCamelCase(taskName)}(${custom_context_name} ctx, TodoTask task, Object targetObject) {
 		addTaskNameIntoResultSet(ctx, task.getName());
 	}

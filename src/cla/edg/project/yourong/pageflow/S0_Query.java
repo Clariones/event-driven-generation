@@ -42,6 +42,15 @@ public class S0_Query extends PieceOfScript{
 				.rule_comments("可看的人群包括项目所在公司的所有雇员,以及项目组织中指定的人")
 				.rule_comments("指定接收人的,无论什么角色都可以看")
 				.rule_comments("此外除了服务商工人角色外, 都可以看")
+			/** 项目组织查询 */
+			.query("project_job_assignment").which("project").no_pagination().with_string("project id")
+				.comments("加载项目的组织结构")
+			/** 项目订单查询 */
+			.query("yourong_bill").which("some type in project").no_pagination().with_string("project id").with_string("fee type")
+				.comments("查询项目中的某类账单")
+			.query("main_order").which("some type in project").no_pagination().with_string("project id").with_string("fee type")
+				.comments("查询项目中的某类账单的'主订单'")
+				
 				;
 	}
 
