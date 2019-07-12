@@ -66,8 +66,9 @@ public class S3_ProjectForPropertyOwner extends PieceOfScript{
 				.comments("打开'确认文档'表单, 让业主可以确认文档").need_login().no_footprint()
 				.got_page("document confirmation form for property owner").title("文档确认")
 					.comments("确认/同意文档内容的表单")
+			/** 5书 */
 			.request("view project books as owner").with_string("project id")
-				.comments("以业主身份查看项目中的5书").need_login().no_footprint()
+				.comments("以业主身份查看项目中的5书").need_login().has_footprint()
 				.got_page("yourong book list for project").list_of("project_book").title("优容5书")
 					.comments("项目中的五书")
 					.may_request("open yourong project book confirmation form")
@@ -80,8 +81,10 @@ public class S3_ProjectForPropertyOwner extends PieceOfScript{
 				.comments("提交表单,以业主身份确认/拒绝项目中的5书").need_login().no_footprint()
 				.got_page("yourong book list for project")
 				
+			.request("view project organization").with_string("project id")
+				.comments("查看项目组织的信息").need_login().has_footprint()
+				.got_page("project organization").title("项目组织")
 		 // TODO
-				.request("view project organization").comments("查看项目组织的信息").todo()
 				.request("view project contracts as owner").comments("查看项目的合同").todo()
 				.request("view project base info as owner").comments("查看项目的基本信息").todo()
 				.request("view need confirmed project documents as owner").comments("查看以附件形式存在的, 有确认流程的文档").todo()
