@@ -105,6 +105,9 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 			/**
 			 * 查看拍卖
 			 */
+			.request("view trading zone test").with_string("filter")
+				.comments("查看交易区").has_footprint().no_login()
+				.got_page("view trading list of page").comments("按分类以及/或者状态过滤的交易列表")
 			.request("view trading zone").with_string("filter")
 				.comments("查看交易区").has_footprint().no_login()
 				.got_page("view trading list").comments("按分类以及/或者状态过滤的交易列表")
@@ -483,6 +486,9 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 			/**
 			 * 浏览
 			 */
+			.request("view store of user").with_string("user id")
+				.comments("查看用户的商铺").no_login().has_footprint()
+				.got_page("store detail")
 			.request("view store detail").with_string("shop id").with_string("filter")
 				.comments("游客浏览店铺").has_footprint().no_login()
 				.query("artwork_auction").which("opening in shop").pagination().with_string("shop id")
@@ -521,6 +527,13 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 					.may_request("bidding artwork auction")
 					.may_request("view bidding history")
 					.may_request("view auction recommendation")
+					.may_request("sold it now")
+			.request("sold it now").with_string("artwork auction id")
+				.comments("以当前价售出该作品").need_login().no_footprint()
+				.got_page("simple popup")
+			.request("confirm sold it now").with_string("artwork auction id").with_string("user id").with_float("amount")
+				.comments("卖家以当前价售出该作品").need_login().no_footprint()
+				.got_page("artwork auction detail")
 			.request("partial refresh artwork auction").with_string("artwork auction id")
 				.comments("刷新艺术品拍卖的部分信息").no_footprint().no_login()
 				.got_page("artwork auction refresh result").comments("艺术品拍卖的刷新结果")
@@ -529,8 +542,19 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 				.when("lack of deposit").comments("预约这保证金不足")
 					.got_page("recharge bidding deposit popup").comments("补缴竞拍保证金的提示页面")
 						.may_request("pay bidding deposit")
+				.when("buy it now").comments("直接以一口价买下")
+					.got_page("auction order detail").comments("一口价买下后, 直接打开订单页面")
 				.when_others()
 					.got_page("artwork auction refresh result")
+			.request("confirm bid with self").with_string("artwork auction id").with_float("amount")
+				.comments("在当前出价者为当前用户本人时, 确认在自己的出价基础上再次出价").no_footprint()
+				.when("lack of deposit").comments("预约这保证金不足")
+					.got_page("recharge bidding deposit popup").comments("补缴竞拍保证金的提示页面")
+						.may_request("pay bidding deposit")
+				.when("buy it now").comments("直接以一口价买下")
+					.got_page("auction order detail").comments("一口价买下后, 直接打开订单页面")
+				.when_others()
+					.got_page("artwork auction detail")
 			.request("pay bidding deposit").with_string("artwork auction id")
 				.comments("支付竞拍保证金")
 //					.got_page("pay bidding deposit").comments("去支付保证金")
@@ -729,6 +753,12 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 				.comments("查询即将发货超时的拍卖订单")
 			.query("artwork_auction").which("will close").pagination()
 				.comments("查询即将截拍的拍卖")
+			.query("artwork_auction").which("appointed by me").pagination().with_string("user id").with_string("filter")
+				.comments("查询'我的-拍品订单-已预约'的列表")
+				.rule_comments("filter 表示状态, 例如公示中和竞拍中, 用 'not_close' 表示")
+			.query("artwork_auction").which("bidded by me").pagination().with_string("user id").with_string("filter")
+				.comments("查询'我的-拍品订单-已预约'的列表")
+				
 			;
 		
 //			

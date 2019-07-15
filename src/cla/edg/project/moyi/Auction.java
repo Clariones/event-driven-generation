@@ -24,7 +24,7 @@ public class Auction extends BaseEventDescriptionScript{
 					.event_ripple("handle ink deed when bought in without ink deed sold").comments("标记所有墨契已经处理完毕")
 					.event_ripple("release seller deposit frozen by inke deed").comments("释放发行墨契时冻结的保证金")
 					.event_ripple("auction closed").comments("拍卖全部处理完毕")
-				
+			// 成交
 			.on_event("closed as deal").with("artwork auction")
 				.comments("竞拍结束,有人出价后的处理.")
 					.rule_comments("本次拍卖状态变为 成交")
@@ -38,12 +38,18 @@ public class Auction extends BaseEventDescriptionScript{
 				.event_ripple("refund losed bidder deposit").comments("退还未中标竞拍者的保证金")
 				.event_ripple("calculate order price").comments("计算所有艺术品拍卖的订单价格条目")
 				.event_ripple("create order").comments("创建艺术品拍卖订单")
+			// 卖家主动低价成交
+			.on_event("sold it now").with("artwork auction")
+				.comments("卖家决定以当前价格成交, 无论是否超过了一口价")
+					.rule_comments("")
+				.event_ripple("closed as deal")
 				
+			// 买家付款成功
 			.on_event("paid").with("artwork auction order")
 				.comments("拍卖订单订单已支付")
 					.rule_comments("订单状态变成 已支付=待发货")
 					.rule_comments("买家的竞拍保证金, 状态变成 支付扣除")
-
+			// 卖家发货
 			.on_event("delivered").with("artwork auction order")
 				.comments("卖家填写了物流信息，表示已经发货")
 					.rule_comments("订单状态变成 已发货=待确认收货")
@@ -91,10 +97,12 @@ public class Auction extends BaseEventDescriptionScript{
 					.event_ripple("redeem ink deed when seller timeout").comments("卖家违约的情况下, 兑付墨契")
 					.event_ripple("penalty of seller triple starting price").comments("卖家店铺保证金,罚款3倍起拍价")
 					.event_ripple("return buyer money").comments("买家的支付金额,全部退还")
+					.event_ripple("auction closed").comments("拍卖全部处理完毕")
 				.when_others().comments("没有其他人持有墨契")
 					.event_ripple("take off seller reserved deposit for ink deed").comments("扣除墨契兑付保证金后,释放其余保证金")
 					.event_ripple("penalty of seller triple starting price").comments("卖家店铺保证金,罚款3倍起拍价")
 					.event_ripple("return buyer money").comments("买家的支付金额,全部退还")
+					.event_ripple("auction closed").comments("拍卖全部处理完毕")
 					
 			.on_event("timeout for buyer").with("artwork auction order")
 				.comments("买家超时未付款.\n罚买家的竞拍保证金: 全部\n兑付墨契: 按发行价兑付, 买家保证金出\n剩下的钱,平台和卖家平分")
@@ -112,11 +120,13 @@ public class Auction extends BaseEventDescriptionScript{
 					.event_ripple("redeem ink deed when buyer timeout").comments("买家违约的情况下, 兑付墨契")
 					.event_ripple("platform earn buyer penalty").comments("平台收入罚没的保证金")
 					.event_ripple("seller got buyer penalty").comments("卖家收入买家的保证金")
+					.event_ripple("auction closed").comments("拍卖全部处理完毕")
 				.when_others().comments("没有其他人持有墨契")
 					.event_ripple("penalty of buyer bidding deposit").comments("罚没买家的竞拍保证金")
 					.event_ripple("release seller deposit frozen by inke deed").comments("释放发行墨契时冻结的保证金")
 					.event_ripple("platform earn buyer penalty").comments("平台收入罚没的保证金")
 					.event_ripple("seller got buyer penalty").comments("卖家收入买家的保证金")
+					.event_ripple("auction closed").comments("拍卖全部处理完毕")
 					
 			.on_event("ink deed withdraw applied").with("artwork auction").with("user id")
 				.comments("用户提交了墨契退款申请")

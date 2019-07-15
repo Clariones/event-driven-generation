@@ -36,7 +36,7 @@ public abstract class ${class_name}ViewService extends Base${class_name}ViewServ
 <#macro commonRequestHanlingMethod request>
 	public Object ${T.getRequestProcessingMethodName(request)}(${context_name} userContext<@T.getRequestProcessingMethodParameters request/>) throws Exception {
 	<#-- 缓存功能 -->
-		String accessUrl = makeUrlF("${T.getRequestProcessingMethodName(request)}", false<@T.getRequestProcessingUrlMethodParametersWithoutType request/><#if request.needLogin></#if>);
+		String accessUrl = makeUrlF("${T.getRequestProcessingMethodName(request)}", false<@T.getRequestProcessingUrlMethodParametersWithoutType request/><#if request.needLogin>, userContext.tokenId()</#if>);
 		
 	<#if request.cacheTimeInSeconds gt 0>
 		Map<String, Object> existedResult = (Map<String, Object>) userContext.getCachedObject(accessUrl, Map.class);
@@ -66,7 +66,7 @@ public abstract class ${class_name}ViewService extends Base${class_name}ViewServ
 		try{
 			<@getRequestUser request "	"/>
 	<#if request.hasFootprint>
-			ctx.addFootPrint(this);
+			ctx.addFootprint(this);
 	</#if>
 		<#assign formName = request.parameters[0].formName />
 			${helper.getBaseFormClassName(request.parameters[0])} form = new ${helper.getFormClassName(request.parameters[0])}().initByRequest(ctx, formData);
