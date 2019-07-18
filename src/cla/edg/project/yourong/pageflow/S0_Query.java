@@ -50,6 +50,12 @@ public class S0_Query extends PieceOfScript{
 				.comments("查询项目中的某类账单")
 			.query("main_order").which("some type in project").no_pagination().with_string("project id").with_string("fee type")
 				.comments("查询项目中的某类账单的'主订单'")
+			
+			/** 项目日报列表查询 */
+			.query("project_daily_report").which("project").pagination().with_string("project id").with_string("owner type")
+				.comments("查询项目的项目日报列表")
+				.rule_comments("除 工人 外, 其他人都可以看到所有的项目日报")
+				.rule_comments("工人 只能看到自己写的项目日报")
 				
 				;
 	}
