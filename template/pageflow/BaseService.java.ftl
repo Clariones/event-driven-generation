@@ -10,6 +10,7 @@ import java.util.Map;
 import ${base_package}.${context_name};
 import ${base_package}.${custom_context_name};
 import ${base_package}.FootprintProducer;
+import ${base_package}.${NAMING.toCamelCase(project_name)}BaseConstants;
 import ${parent_class_package}.${parent_class_name};
 import ${package}pageview.*;
 import com.terapico.utils.TextUtil;
@@ -25,6 +26,16 @@ public abstract class Base${class_name}ViewService extends ${parent_class_name} 
 	public static final int PRC_${NAMING.toJavaConstStyle(branchName)} = ${branchName?index};
 </#list>
 
+	protected boolean hasFormResubmitFlag(${custom_context_name}  ctx) {
+		Object flag = ctx.getFromContextLocalStorage(${NAMING.toCamelCase(project_name)}BaseConstants.KEY_RE_SUBMIT);
+		if (flag == null) {
+			return false;
+		}
+		if (flag instanceof Boolean) {
+			return ((Boolean) flag).booleanValue();
+		}
+		return false;
+	}
 	protected Map<String, Object> makeToast(String content, int duration, String type) {
 		HashMap<String, Object> toast = new HashMap<String, Object>();
 		toast.put("text", content);
