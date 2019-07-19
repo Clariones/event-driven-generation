@@ -165,6 +165,9 @@ public class PageFlowScript extends BasePageFlowScript {
 		}
 		return this;
 	}
+	public PageFlowScript with_last_record_id() {
+		return with_string("last record id");
+	}
 	public PageFlowScript with_string(String paramName) {
 		if (currentWork instanceof Request) {
 			AccessParameter p = currentRequest.addStringParameter(paramName);

@@ -57,6 +57,15 @@ public class S0_Query extends PieceOfScript{
 				.rule_comments("除 工人 外, 其他人都可以看到所有的项目日报")
 				.rule_comments("工人 只能看到自己写的项目日报")
 				
+			/** 项目合同 */
+			.query("project_running_contract").which("project").pagination().with_string("project id")
+				.comments("查询项目的合同列表")
+				
+				
+				
+			/** 文章相关查询 */
+			.query("article").which("article category").pagination().with_string("category id")
+				.comments("查询某类文章的列表")
 				;
 	}
 

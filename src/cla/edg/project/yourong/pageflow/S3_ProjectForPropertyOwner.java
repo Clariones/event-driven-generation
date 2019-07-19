@@ -93,8 +93,16 @@ public class S3_ProjectForPropertyOwner extends PieceOfScript{
 			.request("view project daily report as owner").with_string("report id")
 				.comments("查看项目日报").need_login().has_footprint().can_refresh()
 				.got_page("project daily report detail").title("日报详情")
+				
+			.request("view project contracts as owner").with_string("project id")
+				.comments("查看项目合同").need_login().has_footprint().can_refresh()
+				.got_page("project running contract list").title("合同任务")
+					.may_request("view next page project contracts as owner")
+			.request("view next page project contracts as owner").with_string("project id").with_last_record_id()
+				.comments("查看项目合同: 翻页").need_login().no_footprint()
+				.got_page("project running contract list")
+				
 		 // TODO
-				.request("view project contracts as owner").comments("查看项目的合同").todo()
 				.request("view project base info as owner").comments("查看项目的基本信息").todo()
 				.request("view need confirmed project documents as owner").comments("查看以附件形式存在的, 有确认流程的文档").todo()
 				.request("open project notification as owner").comments("打开项目通知, 可读, 可新建").todo()

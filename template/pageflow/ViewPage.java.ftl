@@ -45,7 +45,7 @@ public class ${class_name}Page extends BaseViewPage{
 	@Override
 	protected void afterDoRendering() {
 		super.afterDoRendering();
-		userContext.forceResponseXClassHeader("com.terapico.moyi.appview.ListOfPage");
+		forceResponseAsListOfPage();
 	}
 </#if>
 }

@@ -47,8 +47,7 @@ public class S2_HomePage extends PieceOfScript{
 				.comments("提交 品牌合作登记表").no_login().no_footprint()
 				.got_page_same_as_request("home page")
 		// TODO
-			.request("view article category").comments("按照文章分类, 查看该分类下的所有文章").todo()
-			.request("view article detail").comments("查看文章内容").todo()
+			
 				;
 	}
 
