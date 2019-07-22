@@ -15,6 +15,9 @@ public class Utils {
 		return new GsonBuilder().setPrettyPrinting().create().toJson(object);
 	}
 
+	public static String removeSeperator(String name) {
+		return name.replace("_", " ");
+	}
 	public static String toCamelCase(String name) {
 		if (name == null || name.isEmpty()) {
 			return name;

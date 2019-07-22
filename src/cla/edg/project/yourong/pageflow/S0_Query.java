@@ -61,6 +61,9 @@ public class S0_Query extends PieceOfScript{
 			.query("project_running_contract").which("project").pagination().with_string("project id")
 				.comments("查询项目的合同列表")
 				
+			/** 项目进度 */
+			.query("project_progress").which("project phase").pagination().with_string("project id").with_string("phase id")
+				.comments("查询项目中的某个阶段的进度记录")
 				
 				
 			/** 文章相关查询 */
