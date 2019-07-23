@@ -55,6 +55,7 @@ public abstract class ${class_name}ViewService extends Base${class_name}ViewServ
 		ctx.set${NAMING.toCamelCase(param.paramName)}(${NAMING.toCamelCase(param.paramName)?uncap_first});
 		</#list>
 	</#if>
+		commonLog(ctx, "${T.getRequestProcessingMethodName(request)}", "${request.comments!}", null, null, null, null);
 	<@requestProcessAndReturn request>
 	</@>
 	}
@@ -75,6 +76,7 @@ public abstract class ${class_name}ViewService extends Base${class_name}ViewServ
 			${helper.getBaseFormClassName(request.parameters[0])} form = new ${helper.getFormClassName(request.parameters[0])}().initByRequest(ctx, formData);
 			form.verifyInputs();
 			ctx.setInputFormData(form);
+			commonLog(ctx, "${T.getRequestProcessingMethodName(request)}", "${request.comments!}", null, null, null, null);
 		<@requestProcessAndReturn request "	">
 		</@>
 		}finally {
