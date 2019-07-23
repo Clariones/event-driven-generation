@@ -95,8 +95,18 @@ public class S3_ProjectForPropertyOwner extends PieceOfScript{
 				.comments("查看项目合同").need_login().has_footprint().can_refresh()
 				.got_page("project running contract list").title("合同任务")
 					.may_request("view next page project contracts as owner")
+					.may_request("feedback project contracts as owner")
 			.request("view next page project contracts as owner").with_string("project id").with_last_record_id()
 				.comments("查看项目合同: 翻页").need_login().no_footprint()
+				.got_page("project running contract list")
+			.request("feedback project contracts as owner").with_string("contract id")
+				.comments("打开反馈项目合同的popup").need_login().no_footprint()
+				.got_page("simple popup")
+			.request("confirm project contracts as owner").with_string("contract id").with_string("verify code")
+				.comments("确认项目合同").need_login().no_footprint()
+				.got_page("project running contract list")
+			.request("reject project contracts as owner").with_string("contract id").with_string("verify code")
+				.comments("不同意项目合同").need_login().no_footprint()
 				.got_page("project running contract list")
 			// 项目进度
 			.request("view project progress list in phase").with_string("project id").with_string("phase id")
@@ -115,7 +125,14 @@ public class S3_ProjectForPropertyOwner extends PieceOfScript{
 				.comments("查看项目通知详情").need_login().has_footprint().can_refresh()
 				.got_page("project notification detail")
 					.comments("项目通知详情页面")
-					
+			.request("open project notification form as owner").with_string("project id").with_string("workpackage id").with_string("task id")
+				.comments("以业主身份打开 项目通知表单, 准备写通知").need_login().no_footprint()
+				.got_page("project notification form").title("写通知")
+					.comments("写项目通知的表单页面")
+					.may_request("submit project notification as owner")
+			.request("submit project notification as owner").with_form("ProjectNotification")
+				.comments("业主提交项目通知").need_login().no_footprint()
+				.got_page("project notification detail")
 				;
 			
 				

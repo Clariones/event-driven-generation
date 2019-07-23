@@ -10,6 +10,7 @@ import cla.edg.objlifescript.BaseObjectLifeScriptFactory;
 import cla.edg.objlifescript.ObjectLifeScript;
 import cla.edg.pageflow.BasePageFlowDescriptionScript;
 import cla.edg.pageflow.BasePageFlowScript;
+import cla.edg.project.yourong.events.Contract;
 import cla.edg.project.yourong.objlife.ProjectLifeScriptFactory;
 
 public class YourongMain {
@@ -20,6 +21,7 @@ public class YourongMain {
 		
 		testPageFlow(new YourongServiceMainScript());
 //		testEventService(new Project());
+		testEventService(new Contract());
 		testExplore(new ProjectLifeScriptFactory());
 	}
 
