@@ -65,11 +65,27 @@ public class S0_Query extends PieceOfScript{
 			.query("project_progress").which("project phase").pagination().with_string("project id").with_string("phase id")
 				.comments("查询项目中的某个阶段的进度记录")
 				
-				
+			/* ============================================================================================================== */
 			/** 文章相关查询 */
 			.query("article").which("article category").pagination().with_string("category id")
 				.comments("查询某类文章的列表")
-				;
+				
+		
+				
+				
+			/* ============================================================================================================== */
+
+			/** 账户相关查询 */
+			.query("generic_account_book_item").which("account book").pagination().with_string("account book id")
+				.comments("查询账簿内记录的条目")
+			.query("running_account_record").which("account book").pagination().with_string("account book id")
+				.comments("查询账簿的流水")
+			
+			/* ============================================================================================================== */
+			/** 订单相关查询 */
+			.query("main_order").which("property owner").pagination().with_string("filter").with_string("owner type").with_object("com.yrdec.yourong.employeenomination.EmployeeNomination as user info")
+				.comments("查询当前用户可以查看的业主订单")
+			;
 	}
 
 	

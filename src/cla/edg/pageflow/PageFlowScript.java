@@ -178,6 +178,15 @@ public class PageFlowScript extends BasePageFlowScript {
 		}
 		return this;
 	}
+	public PageFlowScript with_object(String paramName) {
+		if (currentWork instanceof QueryInfo) {
+			String[] names = paramName.split("\\s+as\\s+");
+			currentQuery.addObjectParameter(names[1], names[0]);
+		}else {
+			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能指定对象参数"+paramName);
+		}
+		return this;
+	}
 	public PageFlowScript variable() {
 		if (currentWork instanceof Request) {
 			List<AccessParameter> params = currentRequest.getParameters();
@@ -300,6 +309,7 @@ public class PageFlowScript extends BasePageFlowScript {
 		}
 		return this;
 	}
+	
 	
 	
 	

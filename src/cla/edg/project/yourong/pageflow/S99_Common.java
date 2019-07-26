@@ -13,7 +13,9 @@ public class S99_Common extends PieceOfScript{
 				.comments("发送验证码").no_footprint().no_login()
 				.got_page("simple toast")
 				
-			
+			.request("do some testing").with_string("message")
+				.comments("debug").no_login().no_footprint()
+				.todo()
 				;
 	}
 

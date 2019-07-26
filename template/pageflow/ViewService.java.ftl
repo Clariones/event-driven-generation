@@ -55,7 +55,7 @@ public abstract class ${class_name}ViewService extends Base${class_name}ViewServ
 		ctx.set${NAMING.toCamelCase(param.paramName)}(${NAMING.toCamelCase(param.paramName)?uncap_first});
 		</#list>
 	</#if>
-		commonLog(ctx, "${T.getRequestProcessingMethodName(request)}", "${request.comments!}", null, null, null, null);
+		commonLog(ctx, "${T.getRequestProcessingMethodName(request)}", "${request.comments!}", ctx.getRemoteIP(), null, null, null);
 	<@requestProcessAndReturn request>
 	</@>
 	}
@@ -68,6 +68,8 @@ public abstract class ${class_name}ViewService extends Base${class_name}ViewServ
 			if (hasFormResubmitFlag(ctx)) {
 				throwExceptionWithMessage(ctx, "请不要重复提交");
 			}
+			String accessUrl = makeUrlF("${T.getRequestProcessingMethodName(request)}", false, "formData");
+			ctx.setAccessUrl(accessUrl);
 			<@getRequestUser request "	"/>
 	<#if request.hasFootprint>
 			ctx.addFootprint(this);
@@ -76,7 +78,7 @@ public abstract class ${class_name}ViewService extends Base${class_name}ViewServ
 			${helper.getBaseFormClassName(request.parameters[0])} form = new ${helper.getFormClassName(request.parameters[0])}().initByRequest(ctx, formData);
 			form.verifyInputs();
 			ctx.setInputFormData(form);
-			commonLog(ctx, "${T.getRequestProcessingMethodName(request)}", "${request.comments!}", null, null, null, null);
+			commonLog(ctx, "${T.getRequestProcessingMethodName(request)}", "${request.comments!}", ctx.getRemoteIP(), formData, null, null);
 		<@requestProcessAndReturn request "	">
 		</@>
 		}finally {

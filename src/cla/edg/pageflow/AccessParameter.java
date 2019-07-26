@@ -6,7 +6,14 @@ public class AccessParameter extends BasePageFlowElement{
 	protected String formName;
 	protected boolean customized = false;
 	protected boolean asVariable = false;
+	protected boolean extType = false;
 	
+	public boolean isExtType() {
+		return extType;
+	}
+	public void setExtType(boolean extType) {
+		this.extType = extType;
+	}
 	public boolean isCustomized() {
 		return customized;
 	}
