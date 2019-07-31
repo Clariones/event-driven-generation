@@ -65,6 +65,12 @@ public class S0_Query extends PieceOfScript{
 			.query("project_progress").which("project phase").pagination().with_string("project id").with_string("phase id")
 				.comments("查询项目中的某个阶段的进度记录")
 				
+			/** 维护任务查询 */
+			.query("task").which("maintainance by project").pagination().with_string("project id").with_string("owner type")
+				.comments("查询一个项目中的维护任务")
+			.query("maintainance_requirement").list_of("task").pagination().with_string("task id").with_string("filter")
+				.comments("查询一个维护任务下关联的维护请求")
+		
 			/* ============================================================================================================== */
 			/** 文章相关查询 */
 			.query("article").which("article category").pagination().with_string("category id")
@@ -85,6 +91,13 @@ public class S0_Query extends PieceOfScript{
 			/** 订单相关查询 */
 			.query("main_order").which("property owner").pagination().with_string("filter").with_string("owner type").with_object("com.yrdec.yourong.employeenomination.EmployeeNomination as user info")
 				.comments("查询当前用户可以查看的业主订单")
+			.query("yourong_bill").which("main order").with_string("order id")
+				.comments("查询主订单中引用的'优荣账单'")
+				
+			/* ============================================================================================================== */
+			/** 项目申请相关查询 */	
+			.query("customer_project_application").list_of("current user as owner").pagination().with_string("filter").with_object("com.yrdec.yourong.employeenomination.EmployeeNomination as user info")
+				.comments("查询当前用户相关的项目申请")
 			;
 	}
 

@@ -1,11 +1,15 @@
 package cla.edg.generator;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import cla.edg.Utils;
+import cla.edg.pageflow.AccessParameter;
 import cla.edg.pageflow.BasePageFlowScript;
 import cla.edg.pageflow.Branch;
 import cla.edg.pageflow.Page;
@@ -189,12 +193,38 @@ public class PageFlowGenerator extends BasicGenerator {
 		}
 		// 4. 所有的query的名字必须是合法的
 		if(script.getQueryInfoList() != null) {
+			Set<String> allObjectParamTypes = new HashSet<>();
 			for(QueryInfo query: script.getQueryInfoList()) {
 				if (query.getObjectName().contains(" ")) {
 					throw new RuntimeException("查询的对象名字不正常："+query.getObjectName());
 				}
+				List<AccessParameter> params = query.getParameters();
+				if (params == null || params.isEmpty()) {
+					continue;
+				}
+				for(AccessParameter param : params) {
+					if (param.isExtType()) {
+						String typeName = param.getTypeName();
+						if (allObjectParamTypes.contains(typeName)) {
+							continue;
+						} else {
+							int pos = typeName.lastIndexOf('.');
+							if (pos > 0) {
+								allObjectParamTypes.add(typeName);
+								param.setTypeName(typeName.substring(pos+1));
+							}
+						}
+					}
+				}
 			}
 			
+			if (allObjectParamTypes.size() > 0) {
+				List<String> objTypeNames = new ArrayList<>(allObjectParamTypes);
+				Collections.sort(objTypeNames);
+				script.setObjectParamTypes(objTypeNames);
+			}else {
+				script.setObjectParamTypes(new ArrayList<>());
+			}
 		}
 	}
 }

@@ -26,7 +26,7 @@ public class S1_LoginAndMe extends PieceOfScript{
 					.may_request("view project list as owner")
 					.may_request("view account list as owner")
 					.may_request("view main order list as owner")
-					.may_request("view application list as owner")
+					.may_request("view project application list as owner")
 			// 账户
 			.request("view account list as owner").with_string("filter")
 				.comments("查看我的账户列表页面").need_login().no_footprint()
@@ -47,7 +47,7 @@ public class S1_LoginAndMe extends PieceOfScript{
 				.got_page("account detail")
 			.request("view running account record").with_string("account book id")
 				.comments("查看账本内的流水").need_login().no_footprint()
-				.got_page("running account list").list_of("running_account").title("账目详情")
+				.got_page("running account list").list_of("running-account").title("账目详情")
 					.comments("账本流水列表")
 					.may_request("view next page running account record")
 			.request("view next page running account record").with_string("account book id").with_string("last record id")
@@ -55,14 +55,30 @@ public class S1_LoginAndMe extends PieceOfScript{
 				.got_page("running account list")
 			
 			// 项目申请
-			.request("view application list as owner").with_string("filter")
-				.comments("查看我的项目列表页面").need_login().no_footprint()
-				.when("only one").comments("只有一个账户, 直接去")
+			.request("view project application list as owner").with_string("filter")
+				.comments("查看我的项目申请页面").need_login().no_footprint()
+				.when("only one").comments("只有一个申请, 直接去")
 					.got_page("project application detail").title("申请详情")
 						.comments("项目申请详情")
 				.when_others().comments("通常情况下, 有多个账户可看")
-					.got_page("project application list").list_of("project_application").title("申请列表")
+					.got_page("project application list").list_of("project-application").title("申请列表")
 						.comments("项目申请列表")
+						.may_request("view next page project application list as owner")
+			.request("view next page project application list as owner").with_string("filter").with_last_record_id()
+				.comments("查看我的项目申请页面 翻页").need_login().no_footprint()
+				.got_page("project application list")
+			.request("view project application detail as owner").with_string("application id")
+				.comments("查看项目申请详情").need_login().no_footprint()
+				.got_page("project application detail").title("项目申请")
+					.comments("项目申请详情")
+					
+			// 切换角色
+			.request("open profile")
+				.comments("个人信息及角色切换页面").need_login()
+				.got_page("profile editing").title("个人信息")
+			.request("select employee nomination").with_string("employee nomination id")
+				.comments("用户选择了新的角色").need_login()
+				.got_page("profile editing").title("个人信息")
 		;
 	}
 

@@ -57,6 +57,7 @@
 	</@>
 </#macro>
 
+
 <#function getRequestProcessingMethodName request>
 	<#if request.needLogin>
 		<#return "customer"+NAMING.toCamelCase(request.name) />

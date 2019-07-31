@@ -55,7 +55,7 @@ public abstract class ${class_name}ViewService extends Base${class_name}ViewServ
 		ctx.set${NAMING.toCamelCase(param.paramName)}(${NAMING.toCamelCase(param.paramName)?uncap_first});
 		</#list>
 	</#if>
-		commonLog(ctx, "${T.getRequestProcessingMethodName(request)}", "${request.comments!}", ctx.getRemoteIP(), null, null, null);
+		commonLog(ctx, "${T.getRequestProcessingMethodName(request)}", "${request.comments!}", ctx.getRemoteIP(), ctx.tokenId(), makeUrlF("", false<@T.getRequestProcessingUrlMethodParametersWithoutType request/>), null);
 	<@requestProcessAndReturn request>
 	</@>
 	}
@@ -78,7 +78,7 @@ public abstract class ${class_name}ViewService extends Base${class_name}ViewServ
 			${helper.getBaseFormClassName(request.parameters[0])} form = new ${helper.getFormClassName(request.parameters[0])}().initByRequest(ctx, formData);
 			form.verifyInputs();
 			ctx.setInputFormData(form);
-			commonLog(ctx, "${T.getRequestProcessingMethodName(request)}", "${request.comments!}", ctx.getRemoteIP(), formData, null, null);
+			commonLog(ctx, "${T.getRequestProcessingMethodName(request)}", "${request.comments!}", ctx.getRemoteIP(), ctx.tokenId(), formData, null);
 		<@requestProcessAndReturn request "	">
 		</@>
 		}finally {

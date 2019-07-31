@@ -236,6 +236,7 @@ public class PageFlowScript extends BasePageFlowScript {
 		setCurrentWork(qInfo);
 		return this;
 	}
+	
 	public PageFlowScript which(String whichDescription) {
 		if (currentQuery == null) {
 			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能描述搜索");
@@ -275,6 +276,8 @@ public class PageFlowScript extends BasePageFlowScript {
 	public PageFlowScript list_of(String templateName) {
 		if (currentWork instanceof Page) {
 			currentPage.setListOfTemplate(templateName);
+		}else if (currentWork instanceof QueryInfo) {
+			return which(templateName);
 		}else {
 			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能增加页面请求");
 		}

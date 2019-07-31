@@ -18,7 +18,16 @@ public class BasePageFlowScript extends BasePageFlowElement{
 	protected transient boolean hasFootPrintDefault = true;
 	protected List<QueryInfo> queryInfoList;
 	protected transient QueryInfo currentQuery;
+	protected List<String> objectParamTypes;
 	
+
+	public List<String> getObjectParamTypes() {
+		return objectParamTypes;
+	}
+
+	public void setObjectParamTypes(List<String> objectParamTypes) {
+		this.objectParamTypes = objectParamTypes;
+	}
 
 	public List<QueryInfo> getQueryInfoList() {
 		return queryInfoList;

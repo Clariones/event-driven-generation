@@ -26,7 +26,7 @@ public class S4_OrderForPropertyOwner extends PieceOfScript{
 		return script
 			.request("view main order list as owner").with_string("filter")
 				.comments("以业主身份查看订单").need_login().has_footprint().can_refresh()
-				.got_page("main order list for owner").list_of("main_order").title("我的订单")
+				.got_page("main order list for owner").list_of("main-order").title("我的订单")
 					.comments("订单分类列表")
 					.may_request("view next page main order list as owner")
 					.may_request("view property owner main order detail")

@@ -11,7 +11,7 @@ public class S5_Article extends PieceOfScript{
 		return script
 			.request("view article category").with_string("category id")
 				.comments("查看文章分类").has_footprint().no_login().can_refresh()
-				.got_page("article list in category").title("文章分类").list_of("article_small")
+				.got_page("article list in category").title("文章分类").list_of("article")
 					.comments("某个分类下的所有文件列表")
 					.may_request("view article detail")
 					.may_request("view next page article in category")
