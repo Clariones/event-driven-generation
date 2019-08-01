@@ -60,13 +60,16 @@ public class S4_OrderForPropertyOwner extends PieceOfScript{
 				.got_page("main order detail")
 			.request("to pay owner order").with_string("order id")
 				.comments("支付业主订单").need_login().no_footprint()
-				.got_page("select payment method")
-					.comments("选择支付方式")
-					.may_request("submit order payment options")
+				.when("need pay").comments("需要进行支付流程")
+					.got_page("select payment method")
+						.comments("选择支付方式")
+						.may_request("submit order payment options")
+				.when("treat as paid").comments("可以认为支付已经成功的情况. 例如零元购")
+					.got_page("order paid success")
 					
 			/** 支付相关 */
 			.request("submit order payment options").with_form("PaymentOptionSelection")
-				.comments("提交支付选项结果,启动支付")
+				.comments("提交支付选项结果,启动支付").need_login().no_footprint()
 				.when("need proof").comments("选择线下支付后, 需要上传支付凭证")
 					.got_page("upload payment proof")
 					.comments("支付凭证上传")
@@ -76,7 +79,13 @@ public class S4_OrderForPropertyOwner extends PieceOfScript{
 				.when("paid success").comments("直接支付成功,例如全用余额支付了")
 					.got_page("order paid success")
 					.comments("支付成功页面")
-					
+			.request("check need payment verify code").with_form("PaymentOptionSelection")
+				.comments("检查当前支付选项是否需要支付验证码").need_login().no_footprint()
+				.got_page("ajax response")
+					.comments("本请求是AJAX请求")
+			.request("send payment verify code").with_string("mobile").variable()
+				.comments("发送支付验证码").need_login()
+				.got_page("ajax response")
 				;
 	}
 

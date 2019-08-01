@@ -25,6 +25,9 @@ public abstract class Base${class_name}ViewService extends ${parent_class_name} 
 <#list helper.getAllBrachNames(script) as branchName>
 	public static final int PRC_${NAMING.toJavaConstStyle(branchName)} = ${branchName?index};
 </#list>
+	protected boolean returnRightNow(int resultCode) {
+		return $PRC_RESULT_OBJECT_WAS_SET == resultCode;
+	}
 	protected abstract void commonLog(CustomYourongUserContextImpl ctx, String eventCode, String title, 
 			String key1, String key2, String key3, Object detailInfo);
 			

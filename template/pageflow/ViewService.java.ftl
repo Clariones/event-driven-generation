@@ -102,7 +102,7 @@ public abstract class ${class_name}ViewService extends Base${class_name}ViewServ
 	<#if helper.isRequestHasBranch(request)>
 		<#assign otherBranches=helper.getAllOtherBranches(request)/>
 		${prefix}int resultCode = processRequest${T.getRequestProcessingMethodName(request)?cap_first}(ctx);
-		${prefix}if ($PRC_RESULT_OBJECT_WAS_SET == resultCode){
+		${prefix}if (returnRightNow(resultCode)){
 		${prefix}	return ctx.getResultObject();
 		${prefix}}
 		${prefix}BaseViewPage page = null;
@@ -115,10 +115,13 @@ public abstract class ${class_name}ViewService extends Base${class_name}ViewServ
 			${prefix}}
 		</#list>
 			<#assign branch=helper.getDefaultBranch(request)/>
-			${prefix}case PRC_${NAMING.toJavaConstStyle(branch.name)}:
-			${prefix}default: { //  ${branch.comments!}
+			${prefix}case PRC_${NAMING.toJavaConstStyle(branch.name)}:<#if branch.name != 'by default'>
+			${prefix}case PRC_BY_DEFAULT:</#if> {
 				${prefix}page = assembler${NAMING.toCamelCase(branch.page)}Page(ctx, "${T.getRequestProcessingMethodName(request)}");
 				${prefix}break;
+			${prefix}}
+			${prefix}default: {
+				${prefix}throw new Exception("未定义的分支代码"+resultCode);
 			${prefix}}
 		${prefix}}
 		<#if request.canRefresh>
@@ -134,7 +137,7 @@ public abstract class ${class_name}ViewService extends Base${class_name}ViewServ
 	<#else>
 		<#assign branch=helper.getDefaultBranch(request)/>
 		${prefix}int resultCode = processRequest${T.getRequestProcessingMethodName(request)?cap_first}(ctx);
-		${prefix}if ($PRC_RESULT_OBJECT_WAS_SET == resultCode){
+		${prefix}if (returnRightNow(resultCode)){
 		${prefix}	return ctx.getResultObject();
 		${prefix}}
 		${prefix}BaseViewPage page = assembler${NAMING.toCamelCase(branch.page)}Page(ctx, "${T.getRequestProcessingMethodName(request)}");
