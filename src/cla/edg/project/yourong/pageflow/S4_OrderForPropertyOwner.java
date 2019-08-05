@@ -83,9 +83,9 @@ public class S4_OrderForPropertyOwner extends PieceOfScript{
 				.comments("检查当前支付选项是否需要支付验证码").need_login().no_footprint()
 				.got_page("ajax response")
 					.comments("本请求是AJAX请求")
-			.request("send payment verify code").with_string("mobile").variable()
+			.request("send payment verify code").with_string("order id").with_string("mobile").variable()
 				.comments("发送支付验证码").need_login()
-				.got_page("ajax response")
+				.got_page("simple toast")
 				;
 	}
 

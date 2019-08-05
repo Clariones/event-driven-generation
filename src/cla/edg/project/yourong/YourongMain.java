@@ -12,6 +12,7 @@ import cla.edg.pageflow.BasePageFlowDescriptionScript;
 import cla.edg.pageflow.BasePageFlowScript;
 import cla.edg.project.yourong.events.Contract;
 import cla.edg.project.yourong.events.OwnerBills;
+import cla.edg.project.yourong.events.YourongProjectBook;
 import cla.edg.project.yourong.objlife.ProjectLifeScriptFactory;
 
 public class YourongMain {
@@ -24,6 +25,7 @@ public class YourongMain {
 //		testEventService(new Project());
 		testEventService(new Contract());
 		testEventService(new OwnerBills());
+		testEventService(new YourongProjectBook());
 		testExplore(new ProjectLifeScriptFactory());
 	}
 

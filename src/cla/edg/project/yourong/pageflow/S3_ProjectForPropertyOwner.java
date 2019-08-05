@@ -34,6 +34,7 @@ public class S3_ProjectForPropertyOwner extends PieceOfScript{
 				.comments("查看以附件形式存在的, 只有读操作的文档").need_login().has_footprint().can_refresh()
 				.got_page("attached project documents under tag in wxapp").list_of("project-attachment").title("项目资料")
 					.comments("某个tag下的所有项目附件文档的列表")
+			
 			// 项目任务大厅 中的17个功能统一入口
 			.request("open property owner mission").with_string("mission id").with_string("project id")
 				.comments("打开某项业主任务的页面").need_login().has_footprint().can_refresh()
@@ -76,10 +77,11 @@ public class S3_ProjectForPropertyOwner extends PieceOfScript{
 					.may_request("open to yourong project book confirmation")
 			.request("open to yourong project book confirmation").with_string("document id")
 				.comments("准备以业主身份确认项目中的5书").need_login().no_footprint()
-				.got_page("yourong book confirmation form").title("5书确认")
-					.comments("确认优荣5书的表单")
-					.may_request("confirm yourong project book")
-					.may_request("reject yourong project book")
+//				.got_page("yourong book confirmation form").title("5书确认")
+//					.comments("确认优荣5书的表单")
+//					.may_request("confirm yourong project book")
+//					.may_request("reject yourong project book")
+				.got_page("simple popup")
 			.request("confirm yourong project book").with_string("document id").with_string("verify code")
 				.comments("以业主身份确认项目中的5书").need_login().no_footprint()
 				.got_page("yourong book list for project")
