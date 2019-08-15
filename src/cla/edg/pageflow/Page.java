@@ -11,6 +11,9 @@ public class Page extends BasePageFlowElement {
 	
 	
 	public String getPageTitle() {
+		if (pageTitle == null) {
+			return this.getName(); // 老是忘了写page title, 给个默认值
+		}
 		return pageTitle;
 	}
 

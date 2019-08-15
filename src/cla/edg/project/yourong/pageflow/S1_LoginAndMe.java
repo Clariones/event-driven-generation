@@ -74,6 +74,16 @@ public class S1_LoginAndMe extends PieceOfScript{
 				.got_page("project application detail").title("项目申请")
 					.comments("项目申请详情")
 					
+			// 推荐
+			.request("view my recommendations")
+				.comments("查看我的推荐列表").need_login().no_footprint()
+				.got_page("my recommendation list").list_of("recommendation").title("我的推荐")
+					.comments("查看我的推荐列表")
+					.may_request("view my next page recommendations")
+			.request("view my next page recommendations").with_last_record_id()
+				.comments("查看我的推荐列表: 翻页").need_login().no_footprint()
+				.got_page("my recommendation list")
+					
 			// 切换角色
 			.request("open profile")
 				.comments("个人信息及角色切换页面").need_login()

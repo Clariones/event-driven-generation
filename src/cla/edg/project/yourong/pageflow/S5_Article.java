@@ -32,7 +32,25 @@ public class S5_Article extends PieceOfScript{
 				.got_page("article group").title("优选服务商")
 					.comments("暂时按: 某个分类下的所有文件列表 处理")
 					
-					
+			// 设计师推荐表
+			.request("open designer recommendation form")
+				.comments("打开设计师推荐表,填写").no_footprint().need_login()
+				.got_page("designer recommendation form").title("推荐设计师")
+					.comments("设计师推荐表")
+					.may_request("submit designer recommendation form")
+			.request("submit designer recommendation form").with_form("DesignerRecommendation")
+				.comments("提交设计师推荐表").need_login()
+				.got_page_same_as_request("view golden designer")
+			// 服务商推荐表
+			.request("open service provider recommendation form")
+				.comments("打开服务商推荐表,填写").no_footprint().need_login()
+				.got_page("service provider recommendation form").title("推荐服务商")
+					.comments("服务商推荐表")
+					.may_request("submit service provider recommendation form")
+			.request("submit service provider recommendation form").with_form("ServiceProviderRecommendation")
+				.comments("提交服务商推荐表").need_login()
+				.got_page_same_as_request("view golden service")
+			
 						
 		
 				;

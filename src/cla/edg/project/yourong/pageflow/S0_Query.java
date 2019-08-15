@@ -98,6 +98,7 @@ public class S0_Query extends PieceOfScript{
 			/** 项目申请相关查询 */	
 			.query("customer_project_application").list_of("current user as owner").pagination().with_string("filter").with_object("com.yrdec.yourong.employeenomination.EmployeeNomination as user info")
 				.comments("查询当前用户相关的项目申请")
+			/** 用户提交的推荐查询, 手工编写, 不在这里 */
 			;
 	}
 

@@ -64,10 +64,10 @@ public abstract class ${class_name}ViewService extends Base${class_name}ViewServ
 <#macro formPostHanlingMethod request>
 	public Object ${T.getRequestProcessingMethodName(request)}(${context_name} userContext<@T.getRequestProcessingMethodParameters request/>) throws Exception {
 		${custom_context_name} ctx = (${custom_context_name}) userContext;
+		if (hasFormResubmitFlag(ctx)) {
+			throwExceptionWithMessage(ctx, "请不要重复提交");
+		}
 		try{
-			if (hasFormResubmitFlag(ctx)) {
-				throwExceptionWithMessage(ctx, "请不要重复提交");
-			}
 			String accessUrl = makeUrlF("${T.getRequestProcessingMethodName(request)}", false, "formData");
 			ctx.setAccessUrl(accessUrl);
 			<@getRequestUser request "	"/>

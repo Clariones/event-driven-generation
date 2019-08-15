@@ -46,6 +46,7 @@ public class S2_HomePage extends PieceOfScript{
 			.request("submit new project application form").with_form("customer_project_application")
 				.comments("提交 品牌合作登记表").no_login().no_footprint()
 				.got_page_same_as_request("home page")
+			
 		// TODO
 			
 				;
