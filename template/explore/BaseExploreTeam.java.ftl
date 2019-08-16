@@ -98,7 +98,7 @@ public abstract class ${class_name} extends ${NAMING.toCamelCase(script.configur
 	</#if>
 	<#if node.needChildren>
 			@Override
-			protected void buildSubTeam(Map<String, Map<String, PathFinder<CustomYourongUserContextImpl>>> teamMap, Map<String, String> teamStartMap) {
+			protected void buildSubTeam(Map<String, Map<String, PathFinder<${custom_context_name}>>> teamMap, Map<String, String> teamStartMap) {
 				Map<String, PathFinder<CustomYourongUserContextImpl>> subTeamMap = null;
 		<#list node.subNodeGroups as subGroupName, subNodeList>
 				teamStartMap.put("${subGroupName}", "${node.subNodeStartNode[subGroupName]}");

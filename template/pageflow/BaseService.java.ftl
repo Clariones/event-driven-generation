@@ -28,7 +28,7 @@ public abstract class Base${class_name}ViewService extends ${parent_class_name} 
 	protected boolean returnRightNow(int resultCode) {
 		return $PRC_RESULT_OBJECT_WAS_SET == resultCode;
 	}
-	protected abstract void commonLog(CustomYourongUserContextImpl ctx, String eventCode, String title, 
+	protected abstract void commonLog(${custom_context_name} ctx, String eventCode, String title, 
 			String key1, String key2, String key3, Object detailInfo);
 			
 	protected boolean hasFormResubmitFlag(${custom_context_name}  ctx) {
