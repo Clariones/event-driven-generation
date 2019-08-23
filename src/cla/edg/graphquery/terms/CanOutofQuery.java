@@ -4,5 +4,5 @@ import cla.edg.pageflow.PageFlowScript;
 
 public interface CanOutofQuery {
 	PageFlowScript request(String name);
-	GraphQueryDescriber query_graph();
+	GraphQueryDescriber query_graph(String name);
 }

@@ -1,5 +1,6 @@
 package cla.edg.graphquery;
 
+import cla.edg.graphquery.terms.BaseConditionDescriptor;
 import cla.edg.graphquery.terms.BaseQueryCondition;
 import cla.edg.graphquery.terms.GraphQueryDescriber;
 import cla.edg.project.yourong.gen.graphquery.QueryPathDescripter;
@@ -44,13 +45,19 @@ public class BaseGraphQueryDescriptor implements GraphQueryDescriber{
 	}
 
 	@Override
-	public BaseQueryCondition search_by(BaseQueryCondition condition) {
+	public BaseConditionDescriptor search_by(BaseQueryCondition condition) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public GraphQueryDescriber pagination() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public GraphQueryDescriber no_pagination() {
 		// TODO Auto-generated method stub
 		return null;
 	}

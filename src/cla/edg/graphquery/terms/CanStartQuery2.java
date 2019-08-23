@@ -1,5 +1,5 @@
 package cla.edg.graphquery.terms;
 
-public interface CanStartQuery {
+public interface CanStartQuery2 {
 
 }

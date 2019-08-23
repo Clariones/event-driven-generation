@@ -9,83 +9,15 @@ public class NumberMemberInfo extends MemberInfo implements NumberLogicalOperati
 	}
 
 	@Override
-	public BaseQueryCondition eq(String param) {
+	public BaseQueryCondition addParamCondition(String operatorStr, String paramName) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public BaseQueryCondition less_then(String param) {
+	public BaseQueryCondition addMemberInfoCondition(String operatorStr, MemberInfo param) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	@Override
-	public BaseQueryCondition more_then(String param) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public BaseQueryCondition not_eq(String param) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public BaseQueryCondition not_less_then(String param) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public BaseQueryCondition not_more_then(String param) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public BaseQueryCondition between(String param1, String param2) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public BaseQueryCondition eq(MemberInfo memberInfo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public BaseQueryCondition less_then(MemberInfo memberInfo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public BaseQueryCondition more_then(MemberInfo memberInfo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public BaseQueryCondition not_eq(MemberInfo memberInfo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public BaseQueryCondition not_less_then(MemberInfo memberInfo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public BaseQueryCondition not_more_then(MemberInfo memberInfo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	
-
 }
+	
