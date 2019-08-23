@@ -18,7 +18,6 @@ public class S3_ProjectForPropertyOwner extends PieceOfScript{
 						.may_request("view project books as owner").comments("以业主身份查看项目中的5书")
 						.may_request("view project organization").comments("查看项目组织的信息")
 						.may_request("view project contracts as owner").comments("查看项目的合同")
-						.may_request("view project document list as owner").comments("查看以附件形式存在的, 只有读操作的文档")
 				.when_others().comments("有多个项目可看")
 					.got_page("wxapp project list").title("我的项目").list_of("project")
 						.comments("小程序端的项目列表")
@@ -30,10 +29,6 @@ public class S3_ProjectForPropertyOwner extends PieceOfScript{
 				.got_page("project detail for owner").title("项目详情")
 				
 				
-			.request("view project document list as owner").with_string("tag id")
-				.comments("查看以附件形式存在的, 只有读操作的文档").need_login().has_footprint().can_refresh()
-				.got_page("attached project documents under tag in wxapp").list_of("project-attachment").title("项目资料")
-					.comments("某个tag下的所有项目附件文档的列表")
 			
 			// 项目任务大厅 中的17个功能统一入口
 			.request("open property owner mission").with_string("mission id").with_string("project id")
