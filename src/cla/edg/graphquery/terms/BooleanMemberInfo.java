@@ -7,41 +7,18 @@ public class BooleanMemberInfo extends MemberInfo implements BooleanLogicalOpera
 		rst.setMemberName(member);
 		return rst;
 	}
+
+	@Override
+	public BaseQueryCondition addParamCondition(String operatorStr, String paramName, String prefix, String postFix) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public BaseQueryCondition addMemberInfoCondition(String string, MemberInfo param, String prefix, String postFix) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
-	@Override
-	public BaseQueryCondition eq(String param) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public BaseQueryCondition not_eq(String param) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public BaseQueryCondition is_true() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public BaseQueryCondition is_false() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public BaseQueryCondition eq(MemberInfo memberInfo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public BaseQueryCondition not_eq(MemberInfo memberInfo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 }

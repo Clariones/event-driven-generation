@@ -9,82 +9,18 @@ public class DateTimeMemberInfo extends MemberInfo implements DateTimeLogicalOpe
 	}
 
 	@Override
-	public BaseQueryCondition eq(String param) {
+	public BaseQueryCondition addParamCondition(String operatorStr, String paramName, String prefix, String postFix) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public BaseQueryCondition before(String param) {
+	public BaseQueryCondition addMemberInfoCondition(String string, MemberInfo param, String prefix, String postFix) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public BaseQueryCondition after(String param) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public BaseQueryCondition not_eq(String param) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public BaseQueryCondition not_before(String param) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public BaseQueryCondition not_after(String param) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public BaseQueryCondition between(String param1, String param2) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public BaseQueryCondition eq(MemberInfo memberInfo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public BaseQueryCondition before(MemberInfo memberInfo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public BaseQueryCondition after(MemberInfo memberInfo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public BaseQueryCondition not_eq(MemberInfo memberInfo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public BaseQueryCondition not_before(MemberInfo memberInfo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public BaseQueryCondition not_after(MemberInfo memberInfo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
+	
 	
 }
