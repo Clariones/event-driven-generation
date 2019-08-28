@@ -313,6 +313,10 @@ public class PageFlowScript extends BasePageFlowScript {
 		return this;
 	}
 	
+	public <T> T graph_query_with(T graphQueryDescriptor) {
+		return graphQueryDescriptor;
+	}
+	
 	
 	
 	

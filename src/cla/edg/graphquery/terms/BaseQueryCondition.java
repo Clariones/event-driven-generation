@@ -1,6 +1,15 @@
 package cla.edg.graphquery.terms;
 
 public interface BaseQueryCondition {
-	BaseQueryCondition and(BaseQueryCondition condition);
-	BaseQueryCondition or(BaseQueryCondition condition);
+	default BaseQueryCondition and(BaseQueryCondition condition) {
+		return connectWith("&&", condition);
+	}
+	default BaseQueryCondition or(BaseQueryCondition condition) {
+		return connectWith("||", condition);
+	}
+	
+	BaseQueryCondition connectWith(String string, BaseQueryCondition condition);
+	BaseQueryCondition wrapWithNot();
+	
+	
 }

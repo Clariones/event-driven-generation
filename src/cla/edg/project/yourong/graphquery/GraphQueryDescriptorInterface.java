@@ -1,5 +1,7 @@
-package cla.edg.graphquery.terms;
+package cla.edg.project.yourong.graphquery;
 
+import cla.edg.graphquery.terms.BaseQueryCondition;
+import cla.edg.graphquery.terms.MemberInfo;
 import cla.edg.pageflow.PageFlowScript;
 import cla.edg.project.yourong.gen.graphquery.QueryPathDescripter;
 import cla.edg.project.yourong.gen.graphquery.WantedNodeDescripter;
@@ -7,18 +9,30 @@ import cla.edg.project.yourong.gen.graphquery.WantedNodeDescripter;
 public interface GraphQueryDescriptorInterface {
 	// 描述'图查询'的参数
 	interface _gqi_parameters {
-		_gqi_fully_functional with_string(String paramName);
-		_gqi_fully_functional with_integer(String paramName);
-		_gqi_fully_functional with_decimal(String paramName);
-		_gqi_fully_functional with_date(String paramName);
-		_gqi_fully_functional with_boolean(String paramName);
+		_gqi_fully_functional with_simple_param(String typeClassName, String paramName);
+		default _gqi_fully_functional with_string(String paramName) {
+			return with_simple_param("string", paramName);
+		}
+		default _gqi_fully_functional with_integer(String paramName) {
+			return with_simple_param("integer", paramName);
+		}
+		default _gqi_fully_functional with_decimal(String paramName) {
+			return with_simple_param("decimal", paramName);
+		}
+		default _gqi_fully_functional with_date(String paramName) {
+			return with_simple_param("datetime", paramName);
+		}
+		default _gqi_fully_functional with_boolean(String paramName) {
+			return with_simple_param("boolean", paramName);
+		}
 		_gqi_fully_functional with_object(String typeClassName, String paramName);
 		_gqi_fully_functional pagination();
 		_gqi_fully_functional no_pagination();
 		_gqi_fully_functional comments(String comments);
+		_gqi_fully_functional order_by(MemberInfo ... members);
 	}
 	interface _gqi_out_of_graph_query {
-		PageFlowScript request(String name);
+		PageFlowScript continue_to_next();
 		_gqi_fully_functional query_graph(String name);
 	}
 	

@@ -13,9 +13,11 @@ public interface DateTimeLogicalOperationDescriptor extends BaseLogicalOperation
 	default BaseQueryCondition not_after(String param) {
 		return addParamCondition("<=", param);
 	}
-	default BaseQueryCondition between(String param1, String param2) {
-		return after(param1).and(before(param2));
-	}
+//	default BaseQueryCondition between(String param1, String param2) {
+//		return after(param1).and(before(param2));
+//	}
+	BaseQueryCondition between(String param1, String param2);
+	
 	default BaseQueryCondition before(MemberInfo memberInfo) {
 		return addMemberInfoCondition("<", memberInfo);
 	}
@@ -28,9 +30,10 @@ public interface DateTimeLogicalOperationDescriptor extends BaseLogicalOperation
 	default BaseQueryCondition not_after(MemberInfo memberInfo) {
 		return addMemberInfoCondition("<=", memberInfo);
 	}
-	default BaseQueryCondition between(MemberInfo memberInfo1, MemberInfo memberInfo2) {
-		return after(memberInfo1).and(before(memberInfo2));
-	}
+//	default BaseQueryCondition between(MemberInfo memberInfo1, MemberInfo memberInfo2) {
+//		return after(memberInfo1).and(before(memberInfo2));
+//	}
+	BaseQueryCondition between(MemberInfo memberInfo1, MemberInfo memberInfo2);
 }
 
 

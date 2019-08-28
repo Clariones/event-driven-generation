@@ -2,7 +2,7 @@ package cla.edg.graphquery.terms;
 
 public interface StringLogicalOperationDescriptor extends BaseLogicalOperationDescriptor {
 	default BaseQueryCondition contains(String param) {
-		return addParamCondition("LIKE", param);
+		return addParamCondition("LIKE", param, "%", "%");
 	}
 
 	default BaseQueryCondition starts_with(String param) {

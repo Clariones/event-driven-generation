@@ -1,6 +1,7 @@
-package cla.edg.graphquery;
+package cla.edg.project.yourong.graphquery;
 
-import cla.edg.graphquery.terms.GraphQueryDescriber;
+import cla.edg.Utils;
+import cla.edg.pageflow.PageFlowScript;
 import cla.edg.project.yourong.gen.graphquery.AccountBookItemStatus;
 import cla.edg.project.yourong.gen.graphquery.AccountTitle;
 import cla.edg.project.yourong.gen.graphquery.Article;
@@ -9,14 +10,19 @@ import cla.edg.project.yourong.gen.graphquery.MainOrder;
 import cla.edg.project.yourong.gen.graphquery.Merchant;
 import cla.edg.project.yourong.gen.graphquery.MerchantType;
 import cla.edg.project.yourong.gen.graphquery.OrderStatus;
+import cla.edg.project.yourong.gen.graphquery.PlatformConfiguration;
 import cla.edg.project.yourong.gen.graphquery.TaskStatus;
 
 public class YourongGraphQueryDescripter extends BaseGraphQueryDescriptor {
 
 	public static void main(String[] args) {
-		GraphQueryDescriber testee = new YourongGraphQueryDescripter();
+		PageFlowScript script = new PageFlowScript();
+		script.setName("test");
 		
-		testee.pagination().with_string("employee id").with_string("status")
+		YourongGraphQueryDescripter descriptor = new YourongGraphQueryDescripter();
+		descriptor.setPageFlowScript(script);
+		script.graph_query_with(descriptor)
+		.query_graph("to find articles by current employee").pagination().with_string("employee id").with_string("status")
 			.start_from().employee_nomination_with("employee id")
 			.through(	EmployeeNomination.getEmployee(),
 						Merchant.getMainOrderList(),
@@ -39,13 +45,23 @@ public class YourongGraphQueryDescripter extends BaseGraphQueryDescriptor {
 				)
 			.want().article(/*文章*/).article_category(/*文章分类*/).article_paragraph(/*文章段落列表*/).employee_nomination(/*作者*/)
 			.search_by(
-					MerchantType.getCode().eq("#Personal")
-					.and(
-							Article.getAuthorName().contains(Merchant.getName())
-							.or(Article.getAuthorName().starts_with(Merchant.getName()))
-							.or(Article.getAuthorName().ends_with(Merchant.getName()))
-						)
+					MerchantType.getCode().eq("Personal")
+						.and(
+								Article.getAuthorName().contains(Merchant.getName())
+								.or(Article.getAuthorName().starts_with(Merchant.getName()))
+								.or(Article.getAuthorName().ends_with(Merchant.getName()))
+								.and(AccountTitle.getCode().eq("paramX")
+										.or(AccountTitle.getCode().contains("paramX"))
+										.or(AccountTitle.getCode().starts_with("paramX"))
+										.or(AccountTitle.getCode().ends_with("paramX"))
+									)
+							)
+						.and(
+								not(PlatformConfiguration.getCreateTime().before("currentTime"))
+								.or(MainOrder.getFinalAmount().between("minPrice", "maxPrice"))
+							)
 					)
+			.order_by(Merchant.getId().asc(), Merchant.getCreateTime().desc())
 		.query_graph("for tasks opening and assigned to my company").pagination().with_string("employee id").with_string("status")
 			.want().task().work_package().project()
 			.start_from().employee_nomination_with("employee id")
@@ -54,6 +70,16 @@ public class YourongGraphQueryDescripter extends BaseGraphQueryDescriptor {
 					)
 			
 			;
+		
+		String rst = Utils.toJson(descriptor, true);
+		System.out.println(rst);
+		
+		rst = descriptor.getQueryList().get(1).getQueryConditionAsString();
+		System.out.println(rst);
+	}
+
+	public void setPageFlowScript(PageFlowScript script) {
+		this.pageFlowScript = script;
 	}
 
 
