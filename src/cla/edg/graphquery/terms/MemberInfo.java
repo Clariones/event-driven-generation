@@ -45,4 +45,8 @@ public class MemberInfo {
 		setSortDirection("desc");
 		return this;
 	}
+	
+	public String getEdgeName() {
+		return this.getClassName()+"$"+this.getMemberName();
+	}
 }
