@@ -2,9 +2,9 @@ package cla.edg.project.yourong.graphquery;
 
 import cla.edg.Utils;
 import cla.edg.pageflow.PageFlowScript;
-import cla.edg.project.yourong.gen.graphquery.AccountBookItemStatus;
 import cla.edg.project.yourong.gen.graphquery.AccountTitle;
 import cla.edg.project.yourong.gen.graphquery.Article;
+import cla.edg.project.yourong.gen.graphquery.BaseGraphQueryDescriptor;
 import cla.edg.project.yourong.gen.graphquery.EmployeeNomination;
 import cla.edg.project.yourong.gen.graphquery.MainOrder;
 import cla.edg.project.yourong.gen.graphquery.Merchant;
@@ -76,10 +76,6 @@ public class YourongGraphQueryDescripter extends BaseGraphQueryDescriptor {
 		
 		rst = descriptor.getQueryList().get(1).getQueryConditionAsString();
 		System.out.println(rst);
-	}
-
-	public void setPageFlowScript(PageFlowScript script) {
-		this.pageFlowScript = script;
 	}
 
 

@@ -40,6 +40,13 @@ public class PageFlowGenerator extends BasicGenerator {
 	}
 
 	public void generateWithScript(BasePageFlowScript script) throws Exception {
+		this.setBaseOutputFolder(script.output_base_folder());
+		this.setBaseTempalteFolder(script.template_base_folder());
+		this.setBasePackageName(script.base_package_name());
+		this.setProjectName(script.project_name());
+		this.setParentClassName(script.parent_class_name());
+		this.setParentClassPackage(script.parent_class_package());
+		
 		verifyScriptWasFinished(script);
 		// 一共输出4个文件： 
 		//	BaseXXXViewService 这个基类，声明所有生成的处理框架中用到的方法和常量。方便维护。

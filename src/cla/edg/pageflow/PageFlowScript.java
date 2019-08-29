@@ -55,7 +55,9 @@ public class PageFlowScript extends BasePageFlowScript {
 		return this;
 	}
 	public PageFlowScript comments(String string) {
-		currentWork.setComments(string);
+		if (currentWork instanceof BasePageFlowElement) {
+			((BasePageFlowElement) currentWork).setComments(string);
+		}
 		return this;
 	}
 	
@@ -315,6 +317,13 @@ public class PageFlowScript extends BasePageFlowScript {
 	public <T> T graph_query_with(T graphQueryDescriptor) {
 		return graphQueryDescriptor;
 	}
+	
+	public PageFlowScript base_on() {
+		currentWork = this.getConfiguration();
+		return this;
+	}
+	
+	
 	
 	
 	

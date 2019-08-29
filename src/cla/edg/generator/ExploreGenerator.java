@@ -11,6 +11,7 @@ import freemarker.template.Template;
 
 public class ExploreGenerator extends BasicGenerator{
 	public void generateWithScript(ObjectLifeScript script) throws Exception {
+		
 		verifyScriptWasCorrect(script);
 		
 		String targetObjectTypeName = script.getConfiguration().objectTypeName;
