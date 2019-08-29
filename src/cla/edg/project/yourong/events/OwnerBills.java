@@ -1,9 +1,8 @@
 package cla.edg.project.yourong.events;
 
-import cla.edg.eventscript.BaseEventDescriptionScript;
 import cla.edg.eventscript.EventScript;
 
-public class OwnerBills extends BaseEventDescriptionScript{
+public class OwnerBills extends BaseYourongEventScript{
 	private static final EventScript SCRIPT = $("owner bill")
 			/**
 			 * 开始: 由某公司发起支付申请

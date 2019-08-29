@@ -1,9 +1,8 @@
 package cla.edg.project.moyi;
 
-import cla.edg.eventscript.BaseEventDescriptionScript;
 import cla.edg.eventscript.EventScript;
 
-public class InkDeed extends BaseEventDescriptionScript{
+public class InkDeed extends BaseMoyiEventScript{
 	private static final EventScript SCRIPT = $("ink deed")
 			/**
 			 * 发行

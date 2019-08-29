@@ -140,6 +140,11 @@ public class EventScript extends BasicEventScriptInfo {
 		}
 		return this;
 	}
+
+	public EventScript base_on() {
+		currentOperation = this.getConfiguration();
+		return this;
+	}
 	
 
 }

@@ -2,6 +2,7 @@ package cla.edg.generator;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -10,6 +11,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import cla.edg.Utils;
+import cla.edg.graphquery.terms.GraphQueryInfo;
+import cla.edg.graphquery.terms.ParameterInfo;
 import cla.edg.pageflow.AccessParameter;
 import cla.edg.pageflow.BasePageFlowScript;
 import cla.edg.pageflow.Branch;
@@ -211,5 +214,74 @@ public class PageFlowGeneratorHelper {
 	}
 	private Request findRequestByName(BasePageFlowScript script, String req) {
 		return script.getRequests().stream().filter(it->it.getName().equals(req)).findFirst().get();
+	}
+	
+	
+	public List<Map<String, String>> getParamInfoListForMethodDeclaration(GraphQueryInfo queryInfo) {
+		List<ParameterInfo> parameters = queryInfo.getParameters();
+		if (parameters == null || parameters.isEmpty()) {
+			return new ArrayList<>();
+		}
+		List<Map<String, String>> result = new ArrayList<>();
+		for(ParameterInfo p :  parameters) {
+			if (p.isExtType()) {
+				result.add(Utils.put("typeName", Utils.getClassNameFromFullName(p.getTypeClassName()))
+						.put("varName", toJavaVarName(p.getParamName())).into_map(String.class));
+				continue;
+			}
+			result.add(Utils.put("typeName", toGQParamTypeName(p.getTypeClassName()))
+					.put("varName", toJavaVarName(p.getParamName())).into_map(String.class));
+		}
+		return result;
+	}
+	public  List<Map<String, String>> getParamInfoListForQueryParameter(GraphQueryInfo queryInfo) {
+		List<Map<String, String>> result = getParamInfoListForMethodDeclaration(queryInfo);
+		result.removeIf(data->{
+			String name = data.get("varName");
+			String startPointTypeName = queryInfo.getStartPoint().get("paramName");
+			startPointTypeName = toJavaVarName(startPointTypeName);
+			return name.equals(startPointTypeName);
+		});
+		return result;
+	}
+	private Object toGQParamTypeName(String typeClassName) {
+		switch (typeClassName) {
+		case "boolean":
+			return "Boolean";
+		case "integer":
+			return "Long";
+		case "decimal":
+			return "BigDecimal";
+		case "datetime":
+			return "Date";
+		case "string":
+			return "String";
+		default:
+			throw new RuntimeException("toJavaVarName() cannot handle " + typeClassName);
+		}
+	}
+	private String toJavaVarName(String varName) {
+		return Utils.uncapFirst(Utils.toCamelCase(varName));
+	}
+	
+	public String toCamelCase(String name) {
+		return Utils.toCamelCase(name);
+	}
+	
+	public List<String> getReferencedTypes(List<GraphQueryInfo> queryInfoList) {
+		Set<String> cs = new HashSet<>();
+		for(GraphQueryInfo q : queryInfoList) {
+			// 先是wanted 里
+			List<String> ns = q.getEnhanceTypeName();
+			for(String n : ns) {
+				cs.add(n.toLowerCase()+"."+n);
+			}
+			// 然后是 start
+			String n = q.getStartPoint().get("typeName");
+			cs.add(n.toLowerCase()+"."+n);
+		}
+		List<String> result = new ArrayList<>(cs);
+		Collections.sort(result);
+		return result;
 	}
 }

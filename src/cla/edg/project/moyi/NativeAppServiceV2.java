@@ -7,6 +7,13 @@ import cla.edg.pageflow.PageFlowScript;
 public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 
 	private static final PageFlowScript SCRIPT = $("native app v2").need_login()
+			.base_on()
+				.output_base_folder("/works/jobs/moyi_v2/workspace/moyi-biz-suite/bizcore/WEB-INF/moyi_v2_src")
+				.template_base_folder("./template")
+				.base_package_name("com.terapico.moyi")
+				.project_name("moyi")
+				.parent_class_name("NativeAppService")
+				.parent_class_package("com.terapico.moyi.appservice")
 			/**
 			 * 店铺入驻
 			 */

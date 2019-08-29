@@ -1,6 +1,5 @@
 package cla.edg.project.yourong.events;
 
-import cla.edg.eventscript.BaseEventDescriptionScript;
 import cla.edg.eventscript.EventScript;
 
 /**
@@ -22,7 +21,7 @@ import cla.edg.eventscript.EventScript;
  * @author clariones
  *
  */
-public class Project extends BaseEventDescriptionScript{
+public class Project extends BaseYourongEventScript{
 	private static final EventScript SCRIPT = $("project")
 			/**
 			 * 开始: 由某个用户提交一个项目申请

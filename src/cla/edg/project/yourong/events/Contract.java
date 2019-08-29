@@ -1,9 +1,9 @@
 package cla.edg.project.yourong.events;
 
-import cla.edg.eventscript.BaseEventDescriptionScript;
+import cla.edg.eventscript.BasicEventScriptInfo;
 import cla.edg.eventscript.EventScript;
 
-public class Contract extends BaseEventDescriptionScript{
+public class Contract extends BaseYourongEventScript{
 	private static final EventScript SCRIPT = $("project running contract")
 			/**
 			 * 开始: 由某个用户提交一个项目申请

@@ -142,6 +142,22 @@ public class PageFlowGenerator extends BasicGenerator {
 			template = getTemplate(tmplFileName);
 			doGeneration(outputFile, data, template);
 		}
+		
+		if (script.getGraphQueryDescriptor() != null && script.getGraphQueryDescriptor().hasContent()) {
+			// 第6个文件: XXGraphQuery 
+			packageName = this.getBasePackageName()+"."+Utils.toCamelCase(script.getName()).toLowerCase();
+			fileNameEtyma = Utils.toCamelCase(script.getName());
+			className = String.format("%s", fileNameEtyma);
+			data.put("class_name", className);
+			data.put("queryInfo", script.getGraphQueryDescriptor());
+			outputFileName = className + "GraphQueryHelper.java";
+			outputFile = new File(getBaseOutputFolderFile(),
+					Utils.packageNameToPath(packageName) + "/" + outputFileName);
+			System.out.println("Write to " + outputFile.getCanonicalPath());
+			tmplFileName = "graphquery/BaseQueryImpl.java.ftl";
+			template = getTemplate(tmplFileName);
+			doGeneration(outputFile, data, template);
+		}
 				
 		// 调试用：增加一个自动布局的JS数据文件
 		outputFileName = "datanodes.js";

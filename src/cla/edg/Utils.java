@@ -111,6 +111,13 @@ public class Utils {
 		}
 		return Character.toUpperCase(tn.charAt(0)) + tn.substring(1);
 	}
+	public static String getClassNameFromFullName(String typeClassName) {
+		int pos = typeClassName.lastIndexOf('.');
+		if (pos > 0) {
+			return typeClassName.substring(pos+1);
+		}
+		return typeClassName;
+	}
 	
 	
 }
