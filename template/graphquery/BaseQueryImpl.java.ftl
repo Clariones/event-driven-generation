@@ -57,6 +57,7 @@ public class ${class_name}GraphQueryHelper {
 	</@>) throws Exception {
 		BaseQuery query = initQueryFor${q_name?cap_first}(${NAMING.toCamelCase( query.startPoint.paramName ) ? uncap_first});
 		prepareWantedFor${q_name?cap_first}(query);
+		preparePathsFor${q_name?cap_first}(query);
 		prepareConditionFor${q_name?cap_first}(query);
 		prepareParametersFor${q_name?cap_first}(<@compress single_line=true>query
 	<#list helper.getParamInfoListForMethodDeclaration(query) as param>
@@ -83,8 +84,15 @@ public class ${class_name}GraphQueryHelper {
 	protected void enhance${q_name?cap_first}(${custom_context_name} ctx, SmartList<${query.targetTypeName}> sList) {}
 	protected BaseQuery initQueryFor${q_name?cap_first}(String ${NAMING.toCamelCase( query.startPoint.paramName ) ? uncap_first}) {
 		return new ${helper.toCamelCase(project_name)}Query(${query.startPoint.typeName}.class, ${NAMING.toCamelCase( query.startPoint.paramName ) ? uncap_first})
-	<#list query.searchEdges as edge>
+	<#list helper.getAllEdeges(query) as edge>
 			.relation("${edge.edgeName}")
+	</#list>
+			;
+	}
+	protected void preparePathsFor${q_name?cap_first}(BaseQuery query) {
+		query
+	<#list helper.getAllPathPaires(query) as pathPair>
+			.addPath("${pathPair.curPath}", "${pathPair.prePath}")
 	</#list>
 			;
 	}

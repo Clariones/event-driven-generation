@@ -11,6 +11,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import cla.edg.Utils;
+import cla.edg.graphquery.terms.BasePathInfo;
 import cla.edg.graphquery.terms.GraphQueryInfo;
 import cla.edg.graphquery.terms.ParameterInfo;
 import cla.edg.pageflow.AccessParameter;
@@ -282,6 +283,43 @@ public class PageFlowGeneratorHelper {
 		}
 		List<String> result = new ArrayList<>(cs);
 		Collections.sort(result);
+		return result;
+	}
+	
+	public List<BasePathInfo> getAllEdeges(GraphQueryInfo query) {
+		List<BasePathInfo> pathList = query.getPathInfoList();
+		Map<String, BasePathInfo> all = new HashMap<>();
+		for(BasePathInfo p : pathList) {
+			all.putAll(p.getAllPaths());
+		}
+		return new ArrayList<>(all.values());
+	}
+	
+	public List<Map<String, String>> getAllPathPaires(GraphQueryInfo query) {
+		List<BasePathInfo> pathList = query.getPathInfoList();
+		Map<String, BasePathInfo> all = new HashMap<>();
+		for(BasePathInfo p : pathList) {
+			all.putAll(p.getAllPaths());
+		}
+		
+		List<Map<String, String>> result = new ArrayList<>();
+		Set<String> allNodeNames = all.values().stream().map(it->it.getFromClass()).collect(Collectors.toSet());
+		allNodeNames.addAll(all.values().stream().map(it->it.getToClass()).collect(Collectors.toSet()));
+		for(String nodeName: allNodeNames) {
+			List<BasePathInfo> fromMePath = all.values().stream().filter(it->it.getFromClass().equals(nodeName)).collect(Collectors.toList());
+			if (fromMePath == null || fromMePath.isEmpty()) {
+				continue;
+			}
+			List<BasePathInfo> toMePath = all.values().stream().filter(it->it.getToClass().equals(nodeName)).collect(Collectors.toList());
+			if (toMePath == null || toMePath.isEmpty()) {
+				continue;
+			}
+			for(BasePathInfo f : fromMePath) {
+				for(BasePathInfo t : toMePath) {
+					result.add(Utils.put("prePath", f.getEdgeName()).put("curPath", t.getEdgeName()).into_map(String.class));
+				}
+			}
+		}
 		return result;
 	}
 }

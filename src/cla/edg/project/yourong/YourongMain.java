@@ -32,8 +32,8 @@ public class YourongMain {
 
 	private static void testExplore(BaseObjectLifeScriptFactory scriptFactory) throws Exception {
 		ObjectLifeScript script = scriptFactory.getScript();
-		String json = Utils.toJson(script, true);
-		System.out.println(json);
+//		String json = Utils.toJson(script, true);
+//		System.out.println(json);
 		ExploreGenerator generator = new ExploreGenerator();
 		
 		generator.setBaseOutputFolder("/works/jobs/yourong_v2/workspace/yourong-biz-suite/bizcore/WEB-INF/yourong_custom_src");
@@ -44,9 +44,9 @@ public class YourongMain {
 
 	private static void testPageFlow(BasePageFlowDescriptionScript test) throws Exception {
 		BasePageFlowScript script = test.getScript();
-		String jsonStr = Utils.toJson(script, true);
-
-		System.out.println(jsonStr);
+//		String jsonStr = Utils.toJson(script, true);
+//
+//		System.out.println(jsonStr);
 		
 		PageFlowGenerator generator = new PageFlowGenerator();
 		
@@ -56,9 +56,9 @@ public class YourongMain {
 	private static void testEventService(BaseYourongEventScript testScript) throws Exception {
 		BaseYourongEventScript  test = testScript;
 		EventScript script = test.getScript();
-		String jsonStr = Utils.toJson(script, true);
-		
-		System.out.println(jsonStr);
+//		String jsonStr = Utils.toJson(script, true);
+//		
+//		System.out.println(jsonStr);
 		
 		EventScriptGenerator generator = new EventScriptGenerator();
 //		generator.setBaseOutputFolder("/works/jobs/yourong_v2/workspace/yourong-biz-suite/bizcore/WEB-INF/yourong_custom_src");

@@ -1,6 +1,7 @@
 package cla.edg.graphquery.terms;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -19,8 +20,17 @@ public class GraphQueryInfo {
 	protected List<String> enhanceTypeName;
 	protected List<MemberInfo> searchEdges;
 	protected List<MemberInfo> sortMembers;
+	protected List<BasePathInfo> pathInfoList;
 	
-	
+	public List<BasePathInfo> getPathInfoList() {
+		if (pathInfoList == null) {
+			pathInfoList = new LinkedList<>();
+		}
+		return pathInfoList;
+	}
+	public void setPathInfoList(List<BasePathInfo> pathInfoList) {
+		this.pathInfoList = pathInfoList;
+	}
 	public List<MemberInfo> getSortMembers() {
 		if (sortMembers == null) {
 			sortMembers = new LinkedList<>();
@@ -128,6 +138,17 @@ public class GraphQueryInfo {
 	
 	public String getQueryConditionAsString() {
 		return this.getQueryCondition().toString();
+	}
+	
+	public void addPaths(BasePathInfo[] paths) {
+		this.getPathInfoList().addAll(Arrays.asList(paths));
+		
+//		Map<String, BasePathInfo> t = new HashMap<>();
+//		for(BasePathInfo pathInfo: paths) {
+//			Map<String, BasePathInfo> a = pathInfo.getAllPaths();
+//			t.putAll(a);
+//		}
+//		System.out.println(t);
 	}
 
 	
