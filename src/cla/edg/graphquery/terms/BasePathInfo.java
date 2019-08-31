@@ -110,13 +110,10 @@ public class BasePathInfo {
 	protected void actFor(BasePathInfo newPath) {
 		this.getActForPaths().add(newPath);
 	}
+
 	private String getPathKey(BasePathInfo basePathInfo) {
-		if (HAS_A.equals(this.getRelationType())) {
-			return String.format("%s--(%s)->%s",
-					this.getFromClass(), this.getMemberName(), this.getToClass());
-		}
-		return String.format("%s--(%s)->%s",
-				this.getToClass(), this.getReferAsMemberName(), this.getFromClass());
+		// 不同方向的是不同的path
+		return String.format("%s--<%s>->%s", this.getFromClass(), this.getMemberName(), this.getToClass());
 	}
 
 
