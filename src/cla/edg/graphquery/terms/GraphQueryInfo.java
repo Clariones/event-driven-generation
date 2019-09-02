@@ -21,7 +21,18 @@ public class GraphQueryInfo {
 	protected List<MemberInfo> searchEdges;
 	protected List<MemberInfo> sortMembers;
 	protected List<BasePathInfo> pathInfoList;
-	
+	protected List<BasePathInfo> wantList;
+
+	public List<BasePathInfo> getWantList() {
+		if (wantList == null) {
+			wantList = new LinkedList<>();
+		}
+		return wantList;
+	}
+
+	public void setWantList(List<BasePathInfo> wantList) {
+		this.wantList = wantList;
+	}
 	public List<BasePathInfo> getPathInfoList() {
 		if (pathInfoList == null) {
 			pathInfoList = new LinkedList<>();

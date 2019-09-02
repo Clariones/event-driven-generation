@@ -70,9 +70,7 @@ public class ${class_name}GraphQueryHelper {
 		prepareSortInfoFor${q_name?cap_first}(query);
 			
 	 	ResultList<${query.targetTypeName}> resultList = ctx.getGraphService().query(query, ${query.targetTypeName}.class);
-        if (!ctx.isProductEnvironment()) {
-	 		System.out.println(resultList);
-	 	}
+	 	//	System.out.println(resultList);
 	 	<#if query.pagination>
 	 	SmartList<${query.targetTypeName}> sList = wrapInSmartList(ctx, "${q_name}", pageSize, nextPageOffset, resultList);
 	 	<#else>
@@ -90,35 +88,46 @@ public class ${class_name}GraphQueryHelper {
 			;
 	}
 	protected void preparePathsFor${q_name?cap_first}(BaseQuery query) {
-		query
-	<#list helper.getAllPathPaires(query) as pathPair>
-			.addPath("${pathPair.curPath}", "${pathPair.prePath}")
-	</#list>
-			;
+	<#if helper.getAllPathInfoFromLinkedPaths(query)?has_content>
+		query<#list helper.getAllPathInfoFromLinkedPaths(query) as pathPair>.addPath("${pathPair.prePath}", "${pathPair.curPath}")
+			</#list>;
+	</#if>
 	}
 	protected void prepareWantedFor${q_name?cap_first}(BaseQuery query) {
 		query<@compress single_line=true>.want(
 	<#list query.enhanceTypeName as typeName>
 			${typeName}.class<#if typeName_has_next>,</#if>
 	</#list>)</@>;
+	
+	<#list helper.getWantedPaths(query) as wanted>
+		<#if wanted.relationType == "has_a">
+		query.want("${wanted.edgeName}", ${wanted.toClass}.class);
+		<#else>
+		query.want( ${wanted.toClass}.class);
+		</#if>
+	</#list>
 	}
 	protected void prepareConditionFor${q_name?cap_first}(BaseQuery query) {
 		query.filter("${query.queryConditionAsString}");
 	}
 	protected void prepareSortInfoFor${q_name?cap_first}(BaseQuery query) {
+	<#if query.sortMembers?has_content>
 		<@compress single_line=true>query.sort("<#list query.sortMembers 
 		as member>${member.className}.${member.memberName} ${member.sortDirection}<#if member_has_next>, </#if></#list>"
 		)</@>;
+	</#if>
 	}
 	protected void prepareParametersFor${q_name?cap_first}(<@compress single_line=true>BaseQuery query
 	<#list helper.getParamInfoListForMethodDeclaration(query) as param>
 		,${param.typeName} ${param.varName}
 	</#list>
 	</@>) {
+	<#if helper.getParamInfoListForQueryParameter(query)?has_content>
 		query
-	<#list helper.getParamInfoListForQueryParameter(query) as param>
+		<#list helper.getParamInfoListForQueryParameter(query) as param>
 			.parameter("${param.varName}", ${param.varName})
-	</#list>
+		</#list>
+	</#if>
 			;
 	}
 	protected int preparePaginationFor${q_name?cap_first}(BaseQuery query, int pageSize, Integer pageNo, Integer forceTopN) {
