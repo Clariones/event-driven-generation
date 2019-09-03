@@ -25,4 +25,10 @@ public interface BaseLogicalOperationDescriptor {
 	default BaseQueryCondition not_eq(MemberInfo memberInfo) {
 		return addMemberInfoCondition("!=", memberInfo);
 	}
+	default BaseQueryCondition in(String param) {
+		return addParamCondition("in", param);
+	}
+	default BaseQueryCondition not_in(String param) {
+		return addParamCondition("not in", param);
+	}
 }

@@ -227,21 +227,37 @@ public class PageFlowGeneratorHelper {
 			return new ArrayList<>();
 		}
 		List<Map<String, String>> result = new ArrayList<>();
-		for(ParameterInfo p :  parameters) {
-			if (p.isExtType()) {
-				result.add(Utils.put("typeName", Utils.getClassNameFromFullName(p.getTypeClassName()))
-						.put("varName", toJavaVarName(p.getParamName())).into_map(String.class));
-				continue;
+		for (ParameterInfo p : parameters) {
+			if (p.isList()) {
+				if (p.isExtType()) {
+					result.add(
+							Utils.put("typeName", "List<" + Utils.getClassNameFromFullName(p.getTypeClassName()) + ">")
+									.put("varName", toJavaVarName(p.getParamName()) + "List")
+									.put("paramName", toJavaVarName(p.getParamName())).into_map(String.class));
+					continue;
+				}
+				result.add(Utils.put("typeName", "List<" + toGQParamTypeName(p.getTypeClassName()) + ">")
+						.put("varName", toJavaVarName(p.getParamName()) + "List")
+						.put("paramName", toJavaVarName(p.getParamName())).into_map(String.class));
+			} else {
+				if (p.isExtType()) {
+					result.add(Utils.put("typeName", Utils.getClassNameFromFullName(p.getTypeClassName()))
+							.put("varName", toJavaVarName(p.getParamName()))
+							.put("paramName", toJavaVarName(p.getParamName())).into_map(String.class));
+					continue;
+				}
+				result.add(Utils.put("typeName", toGQParamTypeName(p.getTypeClassName()))
+						.put("varName", toJavaVarName(p.getParamName()))
+						.put("paramName", toJavaVarName(p.getParamName())).into_map(String.class));
 			}
-			result.add(Utils.put("typeName", toGQParamTypeName(p.getTypeClassName()))
-					.put("varName", toJavaVarName(p.getParamName())).into_map(String.class));
 		}
 		return result;
 	}
+	
 	public  List<Map<String, String>> getParamInfoListForQueryParameter(GraphQueryInfo queryInfo) {
 		List<Map<String, String>> result = getParamInfoListForMethodDeclaration(queryInfo);
 		result.removeIf(data->{
-			String name = data.get("varName");
+			String name = data.get("paramName");
 			String startPointTypeName = queryInfo.getStartPoint().get("paramName");
 			startPointTypeName = toJavaVarName(startPointTypeName);
 			return name.equals(startPointTypeName);
@@ -303,14 +319,25 @@ public class PageFlowGeneratorHelper {
 	}
 	
 	public List<BasePathInfo> getAllEdeges(GraphQueryInfo query) {
-		List<BasePathInfo> pathList = query.getPathInfoList();
+//		List<BasePathInfo> pathList = query.getPathInfoList();
+//		Map<String, BasePathInfo> all = new HashMap<>();
+//		for(BasePathInfo p : pathList) {
+//			all.putAll(p.getAllPaths());
+//		}
+//		
+//		for(BasePathInfo p : query.getWantList()) {
+//			all.putAll(p.getAllPaths());
+//		}
+//		return new ArrayList<>(all.values());
+		List<BasePathInfo> pathList = new LinkedList<>(query.getPathInfoList());
+		pathList.addAll(query.getWantList());
 		Map<String, BasePathInfo> all = new HashMap<>();
-		for(BasePathInfo p : pathList) {
-			all.putAll(p.getAllPaths());
-		}
-		
-		for(BasePathInfo p : query.getWantList()) {
-			all.putAll(p.getAllPaths());
+		for(BasePathInfo pth : pathList) {
+			List<PathInfoV2> pathInfoList = pth.getPathOfMine();
+			for(PathInfoV2 p : pathInfoList) {
+				System.out.println(p.getEdge().getEdgeName()+" == " + p.getEdge());
+				all.put(p.getEdge().getEdgeName(), p.getEdge());
+			}
 		}
 		return new ArrayList<>(all.values());
 	}
@@ -438,7 +465,11 @@ public class PageFlowGeneratorHelper {
 		List<BasePathInfo> pathList = query.getWantList();
 		Map<String, BasePathInfo> all = new HashMap<>();
 		for(BasePathInfo p : pathList) {
-			all.putAll(p.getAllPaths());
+			List<PathInfoV2> paths = p.getPathOfMine();
+			for(PathInfoV2 pInfo: paths){
+				BasePathInfo cPath = pInfo.getEdge();
+				all.put(cPath.getEdgeName(), cPath);
+			}
 		}
 		
 		return new LinkedList<>(all.values());

@@ -33,12 +33,12 @@ public class MemberInfoWithLogicalOperation extends MemberInfo implements  BaseQ
 	}
 	
 	@Override
-	public String toString() {
+	public String toExpressionString(List<ParameterInfo> list) {
 		String expStr = String.format("%s %s %s%s", 
 				assembleTypeInfoInCondition(), 
 				this.getConditionInfo().getOperatorStr(), 
-				assembleParamInfoInCondition(),
-				assembleMoreCondition()
+				assembleParamInfoInCondition(list),
+				assembleMoreCondition(list)
 				);
 		if (this.getConditionInfo().isNotFlag()) {
 			return " !(" + expStr +") ";
@@ -47,7 +47,7 @@ public class MemberInfoWithLogicalOperation extends MemberInfo implements  BaseQ
 		}
 
 	}
-	private String assembleMoreCondition() {
+	private String assembleMoreCondition(List<ParameterInfo> list) {
 		List<BaseQueryCondition> moreCondition = this.getConditionInfo().getMoreConditions();
 		if (moreCondition == null || moreCondition.isEmpty()) {
 			return "";
@@ -56,24 +56,25 @@ public class MemberInfoWithLogicalOperation extends MemberInfo implements  BaseQ
 		for(BaseQueryCondition cond : moreCondition) {
 			MemberInfoWithLogicalOperation condObj = (MemberInfoWithLogicalOperation) cond;
 			sb.append(' ').append(condObj.getConditionInfo().getOperationType()).append(" (")
-				.append(cond.toString()).append(") ");
+				.append(cond.toExpressionString(list)).append(") ");
 		}
 		return sb.toString();
 	}
-	private String assembleParamInfoInCondition() {
+	private String assembleParamInfoInCondition(List<ParameterInfo> list) {
 		String paramType = this.getConditionInfo().getParamType();
 		if (paramType == null) {
 			return "";
 		}
 		if (paramType.equals("input")) {
+			ParameterInfo param = list.stream().filter(it->it.getParamName().equals(getConditionInfo().getParamName())).findAny().get();
 			if (getConditionInfo().getPrefix() != null || getConditionInfo().getPostfix() != null) {
 				return String.format("CONCAT(%s@%s%s)", 
 						getConditionInfo().getPrefix()==null?"":"\""+getConditionInfo().getPrefix()+"\",",
-						Utils.toJavaVariableName(getConditionInfo().getParamName()),
+						Utils.toJavaVariableName(getConditionInfo().getParamName())+(param.isList()?"List":""),
 						getConditionInfo().getPostfix()==null?"":",\""+getConditionInfo().getPostfix()+"\""
 						);
 			}
-			return String.format("@%s", Utils.toJavaVariableName(getConditionInfo().getParamName()));
+			return String.format("@%s", Utils.toJavaVariableName(getConditionInfo().getParamName())+(param.isList()?"List":""));
 		}
 		if (paramType.equals("reference")) {
 			if (getConditionInfo().getPrefix() != null || getConditionInfo().getPostfix() != null) {

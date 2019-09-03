@@ -1,5 +1,7 @@
 package ${package};
 
+import java.util.List;
+
 import com.skynet.infrastructure.graphservice.BaseQuery;
 import com.skynet.infrastructure.graphservice.ResultList;
 import ${base_package}.BaseEntity;
@@ -48,14 +50,18 @@ public class ${class_name}GraphQueryHelper {
 	/*
 	${query.comments}(${query.name})
 	*/
-	<#assign q_name='query'+NAMING.toCamelCase( query.getName() ) />
+	<#assign q_name='query'+NAMING.toCamelCase( query.targetTypeName)+'List'+NAMING.toCamelCase( query.getName() ) />
 	public SmartList<${query.targetTypeName}> ${q_name}(<@compress single_line=true>${custom_context_name} ctx
 	<#list helper.getParamInfoListForMethodDeclaration(query) as param>
 		,${param.typeName} ${param.varName}
 	</#list>
 	<#if query.pagination>, Integer pageNo, Integer forceTopN</#if>
 	</@>) throws Exception {
+	<#if query.parameters[0].list>
+		BaseQuery query = initQueryFor${q_name?cap_first}(${NAMING.toCamelCase( query.startPoint.paramName ) ? uncap_first}List.toArray(new String[]{}));
+	<#else>
 		BaseQuery query = initQueryFor${q_name?cap_first}(${NAMING.toCamelCase( query.startPoint.paramName ) ? uncap_first});
+	</#if>
 		prepareWantedFor${q_name?cap_first}(query);
 		preparePathsFor${q_name?cap_first}(query);
 		prepareConditionFor${q_name?cap_first}(query);
@@ -80,7 +86,7 @@ public class ${class_name}GraphQueryHelper {
 		return sList;
 	}
 	protected void enhance${q_name?cap_first}(${custom_context_name} ctx, SmartList<${query.targetTypeName}> sList) {}
-	protected BaseQuery initQueryFor${q_name?cap_first}(String ${NAMING.toCamelCase( query.startPoint.paramName ) ? uncap_first}) {
+	protected BaseQuery initQueryFor${q_name?cap_first}(String ... ${NAMING.toCamelCase( query.startPoint.paramName ) ? uncap_first}) {
 		return new ${helper.toCamelCase(project_name)}Query(${query.startPoint.typeName}.class, ${NAMING.toCamelCase( query.startPoint.paramName ) ? uncap_first})
 	<#list helper.getAllEdeges(query) as edge>
 			.relation("${edge.edgeName}")
@@ -108,7 +114,9 @@ public class ${class_name}GraphQueryHelper {
 	</#list>
 	}
 	protected void prepareConditionFor${q_name?cap_first}(BaseQuery query) {
+	<#if query.queryCondition?has_content>
 		query.filter("${query.queryConditionAsString}");
+	</#if>
 	}
 	protected void prepareSortInfoFor${q_name?cap_first}(BaseQuery query) {
 	<#if query.sortMembers?has_content>

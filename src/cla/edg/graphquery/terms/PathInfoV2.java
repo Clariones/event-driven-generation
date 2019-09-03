@@ -24,6 +24,10 @@ public class PathInfoV2 {
 	public void setEdge(BasePathInfo edge) {
 		this.edge = edge;
 	}
+	@Override
+	public String toString() {
+		return "PathInfoV2 (from [" + fromNode.getNodeType() + "] to [" + toNode.getNodeType() + "] by edge " + edge.getEdgeName() + ")";
+	}
 	
 	
 }

@@ -19,13 +19,12 @@ public class S0_GraphQuery extends PieceOfScript{
 		descriptor.setPageFlowScript(script);
 		script
 			.graph_query_with(descriptor)
-			.query_graph("projects in app for current user").pagination().with_string("employee id").with_string("filter")
-//				.want().project()
+			.query_graph(Project.which_are("in app for current user")).pagination().with_string_list("employee id").with_string_list("filter")
 				.comments("查询APP上,当前用户应该看到的项目列表")
 				.want(
 						Project.projectPhase(),
 						Project.store(),
-						Project.projectOwner().genericAccountBookList()
+						Project.projectOwner()
 				)
 				.start_from().employee_nomination_with("employee id")
 				.path(
@@ -34,40 +33,10 @@ public class S0_GraphQuery extends PieceOfScript{
 								Merchant.projectListAsStore(),
 								Merchant.workPackageList().project()
 								)
-						.then(
-								Project.projectPhase(),
-								Project.store(),
-								Project.projectOwner()//.genericAccountBookList()
-						)
 					)
-//				.path(
-//						EmployeeNomination.employer().projectListAsProjectOwner().projectPhase(),
-//						EmployeeNomination.employer().projectListAsStore(Project.projectPhase(), Project.store()),
-//						EmployeeNomination.employer().workPackageList().project().projectPhase()
-//					)
-//				.path(
-//						EmployeeNomination.employer().merchantLicenseList(),
-//						EmployeeNomination.employer().customerProjectApplicationList(),
-//						WorkPackage.responsibleServiceCompany().customerProjectApplicationList(),
-//						CustomerProjectApplication.applicantMerchant().employeeNominationListAsEmployer()
-//					)
-				.search_by(Project.getProjectPhaseId().eq("filter"))
+				.search_by(Project.getProjectPhaseId().in("filter"))
 				.order_by(Project.getCreateTime().desc(), Project.getId().desc())
-			
 				
-				.query_graph("projects in app for current user2").pagination().with_string("id")
-//				.want().merchant()
-				.comments("查询APP上,当前用户应该看到的项目列表")
-				.want(
-						Merchant.projectListAsProjectOwner(),
-						Merchant.projectListAsStore()
-				)
-				.start_from().merchant_with("id")
-				.path(
-						Merchant.projectListAsProjectOwner(),
-						Merchant.projectListAsStore()
-					)
-				.search_by(Merchant.getId().eq("id"))
 			
 			.continue_to_next()
 			;

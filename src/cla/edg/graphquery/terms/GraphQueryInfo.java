@@ -124,6 +124,7 @@ public class GraphQueryInfo {
 	public void addParam(boolean isExtType, String typeClassName, String paramName) {
 		ParameterInfo param = new ParameterInfo();
 		param.setExtType(isExtType);
+		param.setList(false);
 		param.setTypeClassName(typeClassName);
 		param.setParamName(paramName);
 		getParameters().add(param);
@@ -148,18 +149,20 @@ public class GraphQueryInfo {
 	}
 	
 	public String getQueryConditionAsString() {
-		return this.getQueryCondition().toString();
+		return this.getQueryCondition().toExpressionString(getParameters());
 	}
 	
 	public void addPaths(BasePathInfo[] paths) {
 		this.getPathInfoList().addAll(Arrays.asList(paths));
-		
-//		Map<String, BasePathInfo> t = new HashMap<>();
-//		for(BasePathInfo pathInfo: paths) {
-//			Map<String, BasePathInfo> a = pathInfo.getAllPaths();
-//			t.putAll(a);
-//		}
-//		System.out.println(t);
+	}
+
+	public void addListParam(boolean isExtType, String typeClassName, String paramName) {
+		ParameterInfo param = new ParameterInfo();
+		param.setExtType(isExtType);
+		param.setList(true);
+		param.setTypeClassName(typeClassName);
+		param.setParamName(paramName);
+		getParameters().add(param);
 	}
 
 	
