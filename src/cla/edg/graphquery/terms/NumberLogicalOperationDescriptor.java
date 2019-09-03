@@ -25,10 +25,6 @@ public interface NumberLogicalOperationDescriptor extends BaseLogicalOperationDe
 		return addParamCondition("<=", param);
 	}
 	
-//	default BaseQueryCondition between(String param1, String param2) {
-//		return not_less_then(param1).and(not_more_then(param2));
-//	}
-	
 	BaseQueryCondition between(String param1, String param2);
 	
 	default BaseQueryCondition eq(MemberInfo param) {

@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import cla.edg.graphquery.terms.GraphQueryScript;
+import cla.edg.graphquery.terms.BaseGraphQueryDescriptor;
 
 public class BasePageFlowScript extends BasePageFlowElement{
 
@@ -22,14 +22,14 @@ public class BasePageFlowScript extends BasePageFlowElement{
 	protected transient QueryInfo currentQuery;
 	protected List<String> objectParamTypes;
 	protected Map<String, Object> configuration;
-	protected transient GraphQueryScript graphQueryDescriptor;
+	protected transient BaseGraphQueryDescriptor graphQueryDescriptor;
 	
 	
-	public GraphQueryScript getGraphQueryDescriptor() {
+	public BaseGraphQueryDescriptor getGraphQueryDescriptor() {
 		return graphQueryDescriptor;
 	}
 
-	public void setGraphQueryDescriptor(GraphQueryScript graphQueryDescriptor) {
+	public void setGraphQueryDescriptor(BaseGraphQueryDescriptor graphQueryDescriptor) {
 		this.graphQueryDescriptor = graphQueryDescriptor;
 	}
 

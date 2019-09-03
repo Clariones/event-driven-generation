@@ -2,7 +2,7 @@ package cla.edg.pageflow;
 
 import java.util.List;
 
-import cla.edg.graphquery.terms.GraphQueryScript;
+import cla.edg.graphquery.terms.BaseGraphQueryDescriptor;
 
 
 public class PageFlowScript extends BasePageFlowScript {
@@ -316,9 +316,9 @@ public class PageFlowScript extends BasePageFlowScript {
 		return this;
 	}
 	
-	public <T extends GraphQueryScript> T graph_query_with(T graphQueryDescriptor) {
-		setGraphQueryDescriptor(graphQueryDescriptor);
-		return graphQueryDescriptor;
+	public BaseGraphQueryDescriptor graph_query_with() {
+		setGraphQueryDescriptor(new BaseGraphQueryDescriptor());
+		return getGraphQueryDescriptor();
 	}
 	
 	

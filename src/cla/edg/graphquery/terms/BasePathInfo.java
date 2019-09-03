@@ -22,9 +22,6 @@ public class BasePathInfo {
 	protected String referAsMemberName;
 	protected String relationType;
 	
-//	protected List<BasePathInfo> priorPaths;
-//	protected transient List<BasePathInfo> nextPaths;
-	
 	protected List<PathInfoV2> pathOfMine;
 	
 	public List<PathInfoV2> getPathOfMine() {
@@ -68,24 +65,6 @@ public class BasePathInfo {
 	public void setActForPaths(List<BasePathInfo> actForPaths) {
 		this.actForPaths = actForPaths;
 	}
-//	public List<BasePathInfo> getPriorPaths() {
-//		if (priorPaths == null) {
-//			priorPaths = new LinkedList<>();
-//		}
-//		return priorPaths;
-//	}
-//	public void setPriorPaths(List<BasePathInfo> priorPaths) {
-//		this.priorPaths = priorPaths;
-//	}
-//	public List<BasePathInfo> getNextPaths() {
-//		if (nextPaths == null) {
-//			nextPaths = new LinkedList<>();
-//		}
-//		return nextPaths;
-//	}
-//	public void setNextPaths(List<BasePathInfo> nextPaths) {
-//		this.nextPaths = nextPaths;
-//	}
 	public String getFromClass() {
 		return fromClass;
 	}
@@ -122,18 +101,6 @@ public class BasePathInfo {
 		}
 		return this.getToClass()+"$"+this.getReferAsMemberName();
 	}
-	/////////// 方案1 用图, 节点是类型, 关系是边 和数据库概念一致
-	protected void appendPath(BasePathInfo newPath) {
-		Map<String, BasePathInfo> allExisted = this.getAllPaths();
-		Map<String, BasePathInfo> newAdded = newPath.getAllPaths();
-		allExisted.putAll(newAdded);
-		newPath.setAllPaths(allExisted);
-//		System.out.println(allExisted);
-	}
-	protected void actFor(BasePathInfo newPath) {
-		this.getActForPaths().add(newPath);
-		actFor2(newPath);
-	}
 
 	public String getPathKey() {
 		// 不同方向的是不同的path
@@ -141,40 +108,6 @@ public class BasePathInfo {
 	}
 
 
-//////////  方案2, 用关系的链表, 暂时没做
-//	protected void appendPath2(BasePathInfo newPath) {
-//		List<BasePathInfo> startPaths = newPath.getStartPaths();
-//		this.getNextPaths().addAll(startPaths);
-//		
-//		newPath.getPriorPaths().add(this);
-//		newPath.getPriorPaths().addAll(this.getActForPaths());
-//	}
-//	private List<BasePathInfo> getStartPaths() {
-//		List<BasePathInfo> startPoints = new LinkedList<>();
-//		for( BasePathInfo node: this.getPriorPaths()) {
-//			if (node.getPriorPaths() == null || node.getPriorPaths().isEmpty()) {
-//				addAsStartPoint(startPoints, node);
-//				continue;
-//			}
-//			List<BasePathInfo> fatherStartPoints = new LinkedList<>();
-//			for(BasePathInfo fNode: node.getPriorPaths()) {
-//				fatherStartPoints.addAll(fNode.getStartPaths());
-//			}
-//			for(BasePathInfo fs : fatherStartPoints) {
-//				addAsStartPoint(startPoints, node);
-//			}
-//		}
-//		return startPoints;
-//	}
-
-	private void addAsStartPoint(List<BasePathInfo> startPoints, BasePathInfo node) {
-		startPoints.add(node);
-	}
-
-	protected void actFor2(BasePathInfo newPath) {
-		// this.getActForPaths().add(newPath);
-	}
-//////////方案2, 用关系的链表, 暂时没做
 	public <T extends BasePathInfo> T then(T p1, T... paths) {
 		return addPaths(p1, paths);
 	}
@@ -185,25 +118,8 @@ public class BasePathInfo {
 			list.addAll(Arrays.asList(paths));
 		}
 		appendPaths((List<BasePathInfo>) list);
-		
-		appendPath(p1);
-		if (paths != null) {
-			for(T path: paths) {
-				appendPath(path);
-				p1.actFor(path);
-			}
-		}
-		
-//		appendPath2(p1);
-//		if (paths != null) {
-//			for(T path: paths) {
-//				appendPath2(path);
-//			}
-//		}
 		return p1;
 	}
-	
-	
 	
 
 	public void appendPaths(List<BasePathInfo> list) {
@@ -280,8 +196,6 @@ public class BasePathInfo {
 	}
 
 	public <T extends BasePathInfo> T next(T nextPath){
-		appendPath(nextPath);
-//		appendPath2(nextPath);
 		appendPaths(Arrays.asList(new BasePathInfo[] {nextPath}));
 		return nextPath;
 	}
