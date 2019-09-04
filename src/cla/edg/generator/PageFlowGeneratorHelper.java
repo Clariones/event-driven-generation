@@ -43,7 +43,7 @@ public class PageFlowGeneratorHelper {
 	}
 	public List<Branch> getAllOtherBranches(Request req){
 		if (req.getBranches().size() == 1) {
-			System.out.printf("request [%s] has only one branch\n", req.getName());
+//			System.out.printf("request [%s] has only one branch\n", req.getName());
 			return new ArrayList<>();
 		}
 		boolean foundDefault = false;
@@ -56,10 +56,10 @@ public class PageFlowGeneratorHelper {
 			result.add(bch);
 		}
 		if (foundDefault) {
-			System.out.printf("request [%s] has %d branch(es) besides default\n", req.getName(), result.size());
+//			System.out.printf("request [%s] has %d branch(es) besides default\n", req.getName(), result.size());
 			return result;
 		}
-		System.out.printf("request [%s] has %d branch(es), will return %d\n", req.getName(), result.size(), result.size()-1);
+//		System.out.printf("request [%s] has %d branch(es), will return %d\n", req.getName(), result.size(), result.size()-1);
 		result.remove(0);
 		return result;
 	}
@@ -302,11 +302,11 @@ public class PageFlowGeneratorHelper {
 			
 			// 已经所有的 path
 			List<BasePathInfo> edges = getAllEdeges(q);
-			HashMap<String, BasePathInfo> allENodes = new HashMap<String, BasePathInfo>();
-			edges.forEach(it->{
-				allENodes.putAll(it.getAllPaths());
-			});
-			for(BasePathInfo eNode: allENodes.values()) {
+//			HashMap<String, BasePathInfo> allENodes = new HashMap<String, BasePathInfo>();
+//			edges.forEach(it->{
+//				allENodes.putAll(it.getAllPaths());
+//			});
+			for(BasePathInfo eNode: edges) {
 				n = eNode.getFromClass();
 				cs.add(n.toLowerCase()+"."+n);
 				n = eNode.getToClass();
@@ -335,60 +335,59 @@ public class PageFlowGeneratorHelper {
 		for(BasePathInfo pth : pathList) {
 			List<PathInfoV2> pathInfoList = pth.getPathOfMine();
 			for(PathInfoV2 p : pathInfoList) {
-				System.out.println(p.getEdge().getEdgeName()+" == " + p.getEdge());
 				all.put(p.getEdge().getEdgeName(), p.getEdge());
 			}
 		}
 		return new ArrayList<>(all.values());
 	}
 	
-	public List<Map<String, String>> getAllPathPaires(GraphQueryInfo query) {
-		List<BasePathInfo> pathList = query.getPathInfoList();
-		Map<String, BasePathInfo> all = new HashMap<>();
-		for(BasePathInfo p : pathList) {
-			all.putAll(p.getAllPaths());
-		}
-		pathList = query.getWantList();
-		for(BasePathInfo p : pathList) {
-			all.putAll(p.getAllPaths());
-		}
-		
-//		System.out.println(all.keySet());
-		
-		List<Map<String, String>> result = new ArrayList<>();
-		Set<String> allNodeNames = all.values().stream().map(it->it.getFromClass()).collect(Collectors.toSet());
-		Set<String> pathKey = new HashSet<>();
-		allNodeNames.addAll(all.values().stream().map(it->it.getToClass()).collect(Collectors.toSet()));
-		for(String nodeName: allNodeNames) {
-			List<BasePathInfo> fromMePath = all.values().stream().filter(it->it.getFromClass().equals(nodeName)).collect(Collectors.toList());
-			if (fromMePath == null || fromMePath.isEmpty()) {
-				continue;
-			}
-			List<BasePathInfo> toMePath = all.values().stream().filter(it->it.getToClass().equals(nodeName)).collect(Collectors.toList());
-			if (toMePath == null || toMePath.isEmpty()) {
-				continue;
-			}
-			for(BasePathInfo f : fromMePath) {
-				for(BasePathInfo t : toMePath) {
-					if (f.getEdgeName().equals(t.getEdgeName())) {
-						continue;
-					}
-					boolean existed = isPathExisted(pathKey, f, t);
-					if (existed) {
-						continue;
-					}
-					result.add(Utils.put("prePath", t.getEdgeName()).put("curPath", f.getEdgeName()).into_map(String.class));
-//					System.out.printf("%s(%s) <%s> %s(%s)\r\n", 
-//							t.getEdgeName(), t.getPathKey(),
-//							nodeName,
-//							f.getEdgeName(), f.getPathKey()
-//							);
-				}
-			}
-		}
-		Collections.sort(result, getPathComparator());
-		return result;
-	}
+//	public List<Map<String, String>> getAllPathPaires(GraphQueryInfo query) {
+//		List<BasePathInfo> pathList = query.getPathInfoList();
+//		Map<String, BasePathInfo> all = new HashMap<>();
+//		for(BasePathInfo p : pathList) {
+//			all.putAll(p.getAllPaths());
+//		}
+//		pathList = query.getWantList();
+//		for(BasePathInfo p : pathList) {
+//			all.putAll(p.getAllPaths());
+//		}
+//		
+////		System.out.println(all.keySet());
+//		
+//		List<Map<String, String>> result = new ArrayList<>();
+//		Set<String> allNodeNames = all.values().stream().map(it->it.getFromClass()).collect(Collectors.toSet());
+//		Set<String> pathKey = new HashSet<>();
+//		allNodeNames.addAll(all.values().stream().map(it->it.getToClass()).collect(Collectors.toSet()));
+//		for(String nodeName: allNodeNames) {
+//			List<BasePathInfo> fromMePath = all.values().stream().filter(it->it.getFromClass().equals(nodeName)).collect(Collectors.toList());
+//			if (fromMePath == null || fromMePath.isEmpty()) {
+//				continue;
+//			}
+//			List<BasePathInfo> toMePath = all.values().stream().filter(it->it.getToClass().equals(nodeName)).collect(Collectors.toList());
+//			if (toMePath == null || toMePath.isEmpty()) {
+//				continue;
+//			}
+//			for(BasePathInfo f : fromMePath) {
+//				for(BasePathInfo t : toMePath) {
+//					if (f.getEdgeName().equals(t.getEdgeName())) {
+//						continue;
+//					}
+//					boolean existed = isPathExisted(pathKey, f, t);
+//					if (existed) {
+//						continue;
+//					}
+//					result.add(Utils.put("prePath", t.getEdgeName()).put("curPath", f.getEdgeName()).into_map(String.class));
+////					System.out.printf("%s(%s) <%s> %s(%s)\r\n", 
+////							t.getEdgeName(), t.getPathKey(),
+////							nodeName,
+////							f.getEdgeName(), f.getPathKey()
+////							);
+//				}
+//			}
+//		}
+//		Collections.sort(result, getPathComparator());
+//		return result;
+//	}
 	private Comparator<Map<String, String>> getPathComparator() {
 		return new Comparator<Map<String, String>>() {
 
@@ -411,56 +410,14 @@ public class PageFlowGeneratorHelper {
 		if (f.getEdgeName().equals(t.getEdgeName())) {
 			existed = true;
 		}
+		if (f.getEdgeName().equals("null$$")) {
+			existed = true;
+		}
 		pathKey.add(pathKeyStr);
 		return existed;
 	}
 	
 	
-//	public List<Map<String, String>> getAllPathPairesFromLinkedPaths(GraphQueryInfo query) {
-//		List<BasePathInfo> endPoints = new LinkedList<>();
-//		
-//		query.getPathInfoList().forEach(it->{
-//			List<BasePathInfo> wantList = it.getActForPaths();
-//			
-//			endPoints.add(it);
-//			
-//			wantList.forEach(it2->{
-//				endPoints.add(it2);
-//			});
-//		});
-//		query.getWantList().forEach(it->{
-//			List<BasePathInfo> wantList = it.getActForPaths();
-//			endPoints.add(it);
-//			wantList.forEach(it2->{
-//				endPoints.add(it2);
-//			});
-//		});
-//		
-//		List<Map<String, String>> result = new ArrayList<>();
-//		Set<String> pathKey = new HashSet<>();
-//		for(BasePathInfo path: endPoints) {
-//			addPriorPaths(result, path, pathKey);
-//		}
-//		Collections.sort(result, getPathComparator());
-//		return result;
-//	}
-	
-//	private void addPriorPaths(List<Map<String, String>> result, BasePathInfo path, Set<String> pathKey) {
-//		List<BasePathInfo> priorList = path.getPriorPaths();
-//		if (priorList == null || priorList.isEmpty()) {
-//			return;
-//		}
-//		for(BasePathInfo cPath : priorList) {
-//			boolean existed = isPathExisted(pathKey, cPath, path);
-//			if (existed) {
-//				continue;
-//			}
-//			result.add(Utils.put("prePath", cPath.getEdgeName()).put("curPath", path.getEdgeName()).into_map(String.class));
-//			System.out.printf("link paths: %s(%s) <%s> %s(%s)\r\n", cPath.getEdgeName(), cPath.getPathKey(),
-//					path.getFromClass(), path.getEdgeName(), path.getPathKey());
-//			addPriorPaths(result, cPath, pathKey);
-//		}
-//	}
 	public List<BasePathInfo> getWantedPaths(GraphQueryInfo query) {
 		List<BasePathInfo> pathList = query.getWantList();
 		Map<String, BasePathInfo> all = new HashMap<>();
@@ -475,14 +432,69 @@ public class PageFlowGeneratorHelper {
 		return new LinkedList<>(all.values());
 	}
 	
-	
+	public boolean hasPathInfoFromLinkedPaths(GraphQueryInfo query) {
+		List<BasePathInfo> list1 = query.getPathInfoList();
+		 List<BasePathInfo> list2 = query.getWantList();
+		if (list1 != null && list1.size() > 0) {
+			return true;
+		}
+//		if (list2 != null && list2.size() > 0) {
+//			return true;
+//		}
+		return false;
+	}
+	public Set<String> getStartEdgeNameInQuery(GraphQueryInfo query) {
+		List<BasePathInfo> list = query.getPathInfoList();
+		Set<String> result = new HashSet<>();
+		if (list != null && list.size() > 0) {
+			for(BasePathInfo p : list) {
+				BasePathInfo edge = p.getStartEdge();
+				if (edge != null) {
+					result.add(edge.getEdgeName());
+				}
+			}
+		}
+		if (!result.isEmpty()) {
+			return result;
+		}
+		list = query.getWantList();
+		if (list != null && list.size() > 0) {
+			for(BasePathInfo p : list) {
+				BasePathInfo edge = p.getStartEdge();
+				if (edge != null) {
+					result.add(edge.getEdgeName());
+				}
+			}
+		}
+		return result;
+	}
 	public List<Map<String, String>> getAllPathInfoFromLinkedPaths(GraphQueryInfo query) {
-		List<BasePathInfo> endPoints = new LinkedList<>(query.getPathInfoList());
+		List<BasePathInfo> endPoints = new LinkedList<>();
+		if (query.getWantList() != null && query.getWantList().size() > 0) {
+			if (query.getPathInfoList() == null || query.getPathInfoList().isEmpty()) {
+				BasePathInfo vPath = new BasePathInfo();
+				vPath.setFromClass(null);
+				vPath.setToClass(query.getTargetTypeName());
+				vPath.setMemberName("$");
+				vPath.setRelationType(BasePathInfo.HAS_A);
+				vPath.appendPaths(query.getWantList());
+				endPoints.add(query.getWantList().get(0));
+			} else {
+				for (BasePathInfo path : query.getPathInfoList()) {
+					path.appendPaths(query.getWantList());
+					endPoints.add(query.getWantList().get(0));
+				}
+			}
+		} else {
+			endPoints.addAll(query.getPathInfoList());
+		}
 		
 		List<Map<String, String>> result = new ArrayList<>();
 		Set<String> pathKey = new HashSet<>();
 		for(BasePathInfo path: endPoints) {
 			List<PathInfoV2> paths = path.getPathOfMine();
+			System.out.println("==========" + paths);
+			
 			for(PathInfoV2 pInfo: paths){
 				BasePathInfo cPath = pInfo.getEdge();
 				List<PathInfoV2> toPaths = path.findNextPath(pInfo);
@@ -490,11 +502,12 @@ public class PageFlowGeneratorHelper {
 					continue;
 				}
 				for(PathInfoV2 tPath: toPaths) {
+					if (this.isPathExisted(pathKey, cPath, tPath.getEdge())) {
+						continue;
+					}
 					result.add(Utils.put("prePath", cPath.getEdgeName())
 							.put("curPath", tPath.getEdge().getEdgeName())
 							.into_map(String.class));
-					System.out.printf("link paths: %s(%s) <%s> %s(%s)\r\n", cPath.getEdgeName(), cPath.getPathKey(),
-							tPath.getEdge().getFromClass(), tPath.getEdge().getEdgeName(), tPath.getEdge().getPathKey());
 				}
 			}
 		}

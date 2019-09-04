@@ -317,7 +317,10 @@ public class PageFlowScript extends BasePageFlowScript {
 	}
 	
 	public BaseGraphQueryDescriptor graph_query_with() {
-		setGraphQueryDescriptor(new BaseGraphQueryDescriptor());
+		if (getGraphQueryDescriptor() == null) {
+			setGraphQueryDescriptor(new BaseGraphQueryDescriptor());
+			getGraphQueryDescriptor().setPageFlowScript(this);
+		}
 		return getGraphQueryDescriptor();
 	}
 	

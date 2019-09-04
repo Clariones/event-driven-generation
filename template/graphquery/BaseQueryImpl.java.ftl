@@ -1,5 +1,7 @@
 package ${package};
 
+import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 import com.skynet.infrastructure.graphservice.BaseQuery;
@@ -94,16 +96,16 @@ public class ${class_name}GraphQueryHelper {
 			;
 	}
 	protected void preparePathsFor${q_name?cap_first}(BaseQuery query) {
-	<#if helper.getAllPathInfoFromLinkedPaths(query)?has_content>
+	<#list helper.getStartEdgeNameInQuery(query) as edgeName>
+		query.addPath(null, "${edgeName}");
+	</#list>
+	<#if helper.hasPathInfoFromLinkedPaths(query)>
 		query<#list helper.getAllPathInfoFromLinkedPaths(query) as pathPair>.addPath("${pathPair.prePath}", "${pathPair.curPath}")
 			</#list>;
 	</#if>
 	}
 	protected void prepareWantedFor${q_name?cap_first}(BaseQuery query) {
-		query<@compress single_line=true>.want(
-	<#list query.enhanceTypeName as typeName>
-			${typeName}.class<#if typeName_has_next>,</#if>
-	</#list>)</@>;
+		query.want(${query.targetTypeName}.class);
 	
 	<#list helper.getWantedPaths(query) as wanted>
 		<#if wanted.relationType == "has_a">

@@ -40,31 +40,31 @@ public class BasePathInfo {
 		this.pathOfMine = pathOfMine;
 	}
 
-	protected transient List<BasePathInfo> actForPaths;
+//	protected transient List<BasePathInfo> actForPaths;
+//	
+//	protected transient Map<String, BasePathInfo> allPaths;
 	
-	protected transient Map<String, BasePathInfo> allPaths;
-	
-	public Map<String, BasePathInfo> getAllPaths() {
-		if (allPaths == null) {
-			allPaths = new HashMap<>();
-			allPaths.put(this.getPathKey(), this);
-		}
-		return allPaths;
-	}
-	
-	public void setAllPaths(Map<String, BasePathInfo> allPaths) {
-		this.allPaths = allPaths;
-	}
-	
-	public List<BasePathInfo> getActForPaths() {
-		if (actForPaths == null) {
-			actForPaths = new LinkedList<>();
-		}
-		return actForPaths;
-	}
-	public void setActForPaths(List<BasePathInfo> actForPaths) {
-		this.actForPaths = actForPaths;
-	}
+//	public Map<String, BasePathInfo> getAllPaths() {
+//		if (allPaths == null) {
+//			allPaths = new HashMap<>();
+//			allPaths.put(this.getPathKey(), this);
+//		}
+//		return allPaths;
+//	}
+//	
+//	public void setAllPaths(Map<String, BasePathInfo> allPaths) {
+//		this.allPaths = allPaths;
+//	}
+//	
+//	public List<BasePathInfo> getActForPaths() {
+//		if (actForPaths == null) {
+//			actForPaths = new LinkedList<>();
+//		}
+//		return actForPaths;
+//	}
+//	public void setActForPaths(List<BasePathInfo> actForPaths) {
+//		this.actForPaths = actForPaths;
+//	}
 	public String getFromClass() {
 		return fromClass;
 	}
@@ -104,7 +104,7 @@ public class BasePathInfo {
 
 	public String getPathKey() {
 		// 不同方向的是不同的path
-		return String.format("%s--<%s>->%s", this.getFromClass(), this.getMemberName(), this.getToClass());
+		return String.format("[%s]-%s-[%s]", this.getFromClass(), this.getMemberName(), this.getToClass());
 	}
 
 
@@ -123,6 +123,9 @@ public class BasePathInfo {
 	
 
 	public void appendPaths(List<BasePathInfo> list) {
+		if (list == null || list.isEmpty()) {
+			return;
+		}
 		// 首先检查, 所有新追加的path的起点类型是一致的, 我的所有终点的类型是一致的
 		Set<String> newStartNodeClassNames = list.stream().map(it->it.getStartClassName()).collect(Collectors.toSet());
 		if (newStartNodeClassNames.size() > 1) {
@@ -205,7 +208,7 @@ public class BasePathInfo {
 		return this.getPathKey();
 	}
 	
-	protected String getStartClassName() {
+	public String getStartClassName() {
 		Set<NodeInPathV2> s = new HashSet<>();
 		Set<NodeInPathV2> e = new HashSet<>();
 		findStartAndEndNodes(s, e);
@@ -213,6 +216,21 @@ public class BasePathInfo {
 			throw new RuntimeException("当前路径信息有超过1个起点");
 		}
 		return s.iterator().next().getNodeType();
+	}
+	public BasePathInfo getStartEdge() {
+		Set<NodeInPathV2> s = new HashSet<>();
+		Set<NodeInPathV2> e = new HashSet<>();
+		findStartAndEndNodes(s, e);
+		if (s.size() > 1) {
+			throw new RuntimeException("当前路径信息有超过1个起点");
+		}
+		List<PathInfoV2> list = this.getPathOfMine();
+		for(PathInfoV2 p : list) {
+			if (s.contains(p.getFromNode())) {
+				return p.getEdge();
+			}
+		}
+		return null;
 	}
 
 	public List<PathInfoV2> findNextPath(PathInfoV2 pInfo) {
