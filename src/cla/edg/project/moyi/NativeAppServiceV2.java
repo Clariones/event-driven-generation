@@ -8,7 +8,7 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 
 	private static final PageFlowScript SCRIPT = $("native app v2").need_login()
 			.base_on()
-				.output_base_folder("/works/jobs/moyi_v2/workspace/moyi-biz-suite/bizcore/WEB-INF/moyi_v2_src")
+				.output_base_folder("/works/jobs/moyi_v3/workspace/moyi-biz-suite/bizcore/WEB-INF/moyi_v2_src")
 				.template_base_folder("./template")
 				.base_package_name("com.terapico.moyi")
 				.project_name("moyi")
@@ -494,7 +494,7 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 			 * 浏览
 			 */
 			.request("view store of user").with_string("user id")
-				.comments("查看用户的商铺").no_login().has_footprint()
+				.comments("用户查看他的商铺").no_login().has_footprint()
 				.got_page("store detail")
 			.request("view store detail").with_string("shop id").with_string("filter")
 				.comments("游客浏览店铺").has_footprint().no_login()
@@ -772,7 +772,7 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 
 	@Override
 	public PageFlowScript getScript() {
-		return SCRIPT;
+		return SCRIPT.import_from(new V3PageFlowScript());
 	}
 
 }

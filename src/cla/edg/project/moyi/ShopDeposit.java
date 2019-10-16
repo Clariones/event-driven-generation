@@ -16,8 +16,8 @@ public class ShopDeposit extends BaseMoyiEventScript{
 			/**
 			 * 未完全定义的事件
 			 */
-			.on_event("TBD")
-				.comments("待定")
+//			.on_event("TBD")
+//				.comments("待定")
 			;
 	
 

@@ -2,7 +2,6 @@ package cla.edg.project.yourong;
 
 import cla.edg.pageflow.BasePageFlowDescriptionScript;
 import cla.edg.pageflow.PageFlowScript;
-import cla.edg.project.yourong.pageflow.S0_GraphQuery;
 import cla.edg.project.yourong.pageflow.S0_Query;
 import cla.edg.project.yourong.pageflow.S1_LoginAndMe;
 import cla.edg.project.yourong.pageflow.S2_HomePage;
@@ -21,7 +20,7 @@ public class YourongServiceMainScript extends BasePageFlowDescriptionScript {
 				.parent_class_name("BaseUnifyClientServiceImpl")
 				.parent_class_package("com.yrdec.yourong.unifyclientservice")
 			.import_from(new S0_Query())
-			.import_from(new S0_GraphQuery())
+//			.import_from(new S0_GraphQuery())
 			.import_from(new S1_LoginAndMe())
 			.import_from(new S2_HomePage())
 			.import_from(new S3_ProjectForPropertyOwner())

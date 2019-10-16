@@ -1,6 +1,11 @@
 package cla.edg;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.google.gson.Gson;
@@ -119,5 +124,20 @@ public class Utils {
 		return typeClassName;
 	}
 	
+	public static <T> List<T> toList(T ... objs) {
+		return new ArrayList<T>(Arrays.asList(objs));
+	}
+
+	public static void saveIntoFile(File file, String content) throws Exception {
+		if (!file.exists()) {
+			file.getParentFile().mkdirs();
+			file.createNewFile();
+		}
+		try(FileWriter fout = new FileWriter(file)) {
+			fout.write(content);
+			fout.flush();
+			System.out.println("write into " + file.getCanonicalPath());
+		}
+	}
 	
 }

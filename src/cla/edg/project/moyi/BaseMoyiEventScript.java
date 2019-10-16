@@ -8,7 +8,7 @@ public abstract class BaseMoyiEventScript {
 		EventScript result = new EventScript();
 		result.setBussinessName(name);
 		result.base_on()
-			.output_base_folder("/works/jobs/moyi_v2/workspace/moyi-biz-suite/bizcore/WEB-INF/moyi_v2_src")
+			.output_base_folder("/works/jobs/moyi_v3/workspace/moyi-biz-suite/bizcore/WEB-INF/moyi_v2_src")
 			.template_base_folder("./template")
 			.base_package_name("com.terapico.moyi")
 			.project_name("moyi");

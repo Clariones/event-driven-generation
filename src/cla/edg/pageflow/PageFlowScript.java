@@ -315,7 +315,10 @@ public class PageFlowScript extends BasePageFlowScript {
 		}
 		return this;
 	}
-	
+	public PageFlowScript got_ajax_page() {
+		return got_page("ajax response");
+	}
+		
 	public BaseGraphQueryDescriptor graph_query_with() {
 		if (getGraphQueryDescriptor() == null) {
 			setGraphQueryDescriptor(new BaseGraphQueryDescriptor());
