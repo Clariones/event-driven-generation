@@ -2,7 +2,8 @@ package cla.edg.pageflow;
 
 import java.util.List;
 
-import cla.edg.project.yourong.pageflow.S0_Query;
+import cla.edg.graphquery.terms.BaseGraphQueryDescriptor;
+
 
 public class PageFlowScript extends BasePageFlowScript {
 
@@ -56,7 +57,9 @@ public class PageFlowScript extends BasePageFlowScript {
 		return this;
 	}
 	public PageFlowScript comments(String string) {
-		currentWork.setComments(string);
+		if (currentWork instanceof BasePageFlowElement) {
+			((BasePageFlowElement) currentWork).setComments(string);
+		}
 		return this;
 	}
 	
@@ -165,6 +168,9 @@ public class PageFlowScript extends BasePageFlowScript {
 		}
 		return this;
 	}
+	public PageFlowScript with_last_record_id() {
+		return with_string("last record id");
+	}
 	public PageFlowScript with_string(String paramName) {
 		if (currentWork instanceof Request) {
 			AccessParameter p = currentRequest.addStringParameter(paramName);
@@ -172,6 +178,15 @@ public class PageFlowScript extends BasePageFlowScript {
 			currentQuery.addStringParameter(paramName);
 		}else {
 			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能指定字符串参数"+paramName);
+		}
+		return this;
+	}
+	public PageFlowScript with_object(String paramName) {
+		if (currentWork instanceof QueryInfo) {
+			String[] names = paramName.split("\\s+as\\s+");
+			currentQuery.addObjectParameter(names[1], names[0]);
+		}else {
+			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能指定对象参数"+paramName);
 		}
 		return this;
 	}
@@ -224,6 +239,7 @@ public class PageFlowScript extends BasePageFlowScript {
 		setCurrentWork(qInfo);
 		return this;
 	}
+	
 	public PageFlowScript which(String whichDescription) {
 		if (currentQuery == null) {
 			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能描述搜索");
@@ -263,6 +279,8 @@ public class PageFlowScript extends BasePageFlowScript {
 	public PageFlowScript list_of(String templateName) {
 		if (currentWork instanceof Page) {
 			currentPage.setListOfTemplate(templateName);
+		}else if (currentWork instanceof QueryInfo) {
+			return which(templateName);
 		}else {
 			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能增加页面请求");
 		}
@@ -297,6 +315,23 @@ public class PageFlowScript extends BasePageFlowScript {
 		}
 		return this;
 	}
+	
+	public BaseGraphQueryDescriptor graph_query_with() {
+		if (getGraphQueryDescriptor() == null) {
+			setGraphQueryDescriptor(new BaseGraphQueryDescriptor());
+			getGraphQueryDescriptor().setPageFlowScript(this);
+		}
+		return getGraphQueryDescriptor();
+	}
+	
+	
+	public PageFlowScript base_on() {
+		currentWork = this.getConfiguration();
+		return this;
+	}
+	
+	
+	
 	
 	
 	

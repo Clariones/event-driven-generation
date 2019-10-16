@@ -1,9 +1,8 @@
 package cla.edg.project.moyi;
 
-import cla.edg.eventscript.BaseEventDescriptionScript;
 import cla.edg.eventscript.EventScript;
 
-public class ShopDeposit extends BaseEventDescriptionScript{
+public class ShopDeposit extends BaseMoyiEventScript{
 	private static final EventScript SCRIPT = $("shop deposit")
 			/**
 			 * 店铺入驻

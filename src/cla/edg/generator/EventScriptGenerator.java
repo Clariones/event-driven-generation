@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Set;
 
 import cla.edg.Utils;
+import cla.edg.eventscript.BasicEventScriptInfo;
 import cla.edg.eventscript.EventInfo;
 import cla.edg.eventscript.EventProcessResultBranch;
 import cla.edg.eventscript.EventRipple;
@@ -14,6 +15,11 @@ import freemarker.template.Template;
 
 public class EventScriptGenerator extends BasicGenerator{
 	public void generateWithScript(EventScript script) throws Exception {
+		this.setBaseOutputFolder(script.output_base_folder());
+		this.setBaseTempalteFolder(script.template_base_folder());
+		this.setBasePackageName(script.base_package_name());
+		this.setProjectName(script.project_name());
+		
 		verifyScriptWasFinished(script);
 		
 		String packageName = this.getBasePackageName()+"."+Utils.toCamelCase(script.getBussinessName()).toLowerCase();

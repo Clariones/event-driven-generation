@@ -24,6 +24,9 @@ import ${base_package}.${NAMING.toCamelCase(query.objectName)?lower_case}.${NAMI
 	<#assign imported = imported + [query.objectName] />
 	</#if>
 </#list>
+<#list script.objectParamTypes as typeName>
+import ${typeName};
+</#list>
 
 /**
  * 此类负责：声明所有{@link ${class_name}ViewService}中所使用的数据库搜索方法。 单独列出的目的是便于维护。

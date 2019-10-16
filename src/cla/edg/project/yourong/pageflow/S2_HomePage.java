@@ -28,15 +28,27 @@ public class S2_HomePage extends PieceOfScript{
 				.comments("以业主身份查看某个营销板块").has_footprint().no_login().can_refresh()
 				.got_page("marketing block home").title("市场营销")
 					.comments("营销板块的入口页")
+			// 品牌合作登记表
 			.request("open partner apply")
-				.comments("打开'品牌合作'页面,填写'品牌合作登记表'")
-				.got_page("partner application").title("品牌合作等级表")
-					.comments("品牌合作等级表")
-						
+				.comments("打开'品牌合作'页面,填写'品牌合作登记表'").no_footprint().no_login()
+				.got_page("partner application").title("品牌合作登记表")
+					.comments("品牌合作登记表")
+					.may_request("submit partner application form")
+			.request("submit partner application form").with_form("partner_application")
+				.comments("提交 品牌合作登记表").no_login().no_footprint()
+				.got_page_same_as_request("home page")
+			// 项目登记表
+			.request("open project apply")
+				.comments("打开项目申请页面, 填写项目申请表").no_login().no_footprint()
+				.got_page("new project application form").title("项目登记表")
+					.comments("项目登记表")
+					.may_request("submit new project application form")
+			.request("submit new project application form").with_form("customer_project_application")
+				.comments("提交 品牌合作登记表").no_login().no_footprint()
+				.got_page_same_as_request("home page")
+			
 		// TODO
-			.request("open project apply").comments("打开项目申请页面, 填写项目申请表").todo()
-			.request("view article category").comments("按照文章分类, 查看该分类下的所有文章").todo()
-			.request("view article detail").comments("查看文章内容").todo()
+			
 				;
 	}
 

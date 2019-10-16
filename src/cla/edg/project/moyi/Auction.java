@@ -1,9 +1,8 @@
 package cla.edg.project.moyi;
 
-import cla.edg.eventscript.BaseEventDescriptionScript;
 import cla.edg.eventscript.EventScript;
 
-public class Auction extends BaseEventDescriptionScript{
+public class Auction extends BaseMoyiEventScript{
 	private static final EventScript SCRIPT = $("artwork auction")
 			/**
 			 * 流拍

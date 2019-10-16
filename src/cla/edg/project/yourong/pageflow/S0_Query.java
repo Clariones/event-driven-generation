@@ -50,8 +50,56 @@ public class S0_Query extends PieceOfScript{
 				.comments("查询项目中的某类账单")
 			.query("main_order").which("some type in project").no_pagination().with_string("project id").with_string("fee type")
 				.comments("查询项目中的某类账单的'主订单'")
+			
+			/** 项目日报列表查询 */
+			.query("project_daily_report").which("project").pagination().with_string("project id").with_string("owner type")
+				.comments("查询项目的项目日报列表")
+				.rule_comments("除 工人 外, 其他人都可以看到所有的项目日报")
+				.rule_comments("工人 只能看到自己写的项目日报")
 				
-				;
+			/** 项目合同 */
+			.query("project_running_contract").which("project").pagination().with_string("project id")
+				.comments("查询项目的合同列表")
+				
+			/** 项目进度 */
+			.query("project_progress").which("project phase").pagination().with_string("project id").with_string("phase id")
+				.comments("查询项目中的某个阶段的进度记录")
+				
+			/** 维护任务查询 */
+			.query("task").which("maintainance by project").pagination().with_string("project id").with_string("owner type")
+				.comments("查询一个项目中的维护任务")
+			.query("maintainance_requirement").list_of("task").pagination().with_string("task id").with_string("filter")
+				.comments("查询一个维护任务下关联的维护请求")
+		
+			/* ============================================================================================================== */
+			/** 文章相关查询 */
+			.query("article").which("article category").pagination().with_string("category id")
+				.comments("查询某类文章的列表")
+				
+		
+				
+				
+			/* ============================================================================================================== */
+
+			/** 账户相关查询 */
+			.query("generic_account_book_item").which("account book").pagination().with_string("account book id")
+				.comments("查询账簿内记录的条目")
+			.query("running_account_record").which("account book").pagination().with_string("account book id")
+				.comments("查询账簿的流水")
+			
+			/* ============================================================================================================== */
+			/** 订单相关查询 */
+			.query("main_order").which("property owner").pagination().with_string("filter").with_string("owner type").with_object("com.yrdec.yourong.employeenomination.EmployeeNomination as user info")
+				.comments("查询当前用户可以查看的业主订单")
+			.query("yourong_bill").which("main order").with_string("order id")
+				.comments("查询主订单中引用的'优荣账单'")
+				
+			/* ============================================================================================================== */
+			/** 项目申请相关查询 */	
+			.query("customer_project_application").list_of("current user as owner").pagination().with_string("filter").with_object("com.yrdec.yourong.employeenomination.EmployeeNomination as user info")
+				.comments("查询当前用户相关的项目申请")
+			/** 用户提交的推荐查询, 手工编写, 不在这里 */
+			;
 	}
 
 	

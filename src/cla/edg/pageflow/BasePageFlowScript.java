@@ -6,11 +6,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import cla.edg.graphquery.terms.BaseGraphQueryDescriptor;
+
 public class BasePageFlowScript extends BasePageFlowElement{
 
 	protected List<Request> requests;
 	protected Map<String, Page> pages;
-	protected transient BasePageFlowElement currentWork;
+	protected transient Object currentWork;
 	protected transient Request currentRequest;
 	protected transient Branch currentBranch;
 	protected transient Page currentPage;
@@ -18,7 +20,37 @@ public class BasePageFlowScript extends BasePageFlowElement{
 	protected transient boolean hasFootPrintDefault = true;
 	protected List<QueryInfo> queryInfoList;
 	protected transient QueryInfo currentQuery;
+	protected List<String> objectParamTypes;
+	protected Map<String, Object> configuration;
+	protected transient BaseGraphQueryDescriptor graphQueryDescriptor;
 	
+	
+	public BaseGraphQueryDescriptor getGraphQueryDescriptor() {
+		return graphQueryDescriptor;
+	}
+
+	public void setGraphQueryDescriptor(BaseGraphQueryDescriptor graphQueryDescriptor) {
+		this.graphQueryDescriptor = graphQueryDescriptor;
+	}
+
+	public Map<String, Object> getConfiguration() {
+		if (configuration == null) {
+			configuration = new HashMap<>();
+		}
+		return configuration;
+	}
+
+	public void setConfiguration(Map<String, Object> configuration) {
+		this.configuration = configuration;
+	}
+
+	public List<String> getObjectParamTypes() {
+		return objectParamTypes;
+	}
+
+	public void setObjectParamTypes(List<String> objectParamTypes) {
+		this.objectParamTypes = objectParamTypes;
+	}
 
 	public List<QueryInfo> getQueryInfoList() {
 		return queryInfoList;
@@ -118,4 +150,58 @@ public class BasePageFlowScript extends BasePageFlowElement{
 		}
 		return null;
 	}
+
+	protected PageFlowScript addConfiuration(String key, Object value) {
+		if (currentWork != this.getConfiguration()) {
+			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+",不能设置"+key);
+		}
+		this.getConfiguration().put(key, value);
+		return (PageFlowScript) this;
+	}
+	protected String getConfigureValue(String key) {
+		return (String) this.getConfiguration().get(key);
+	}
+	
+	public PageFlowScript output_base_folder(String value) {
+		return addConfiuration("output_base_folder", value);
+	}
+	public String output_base_folder() {
+		return getConfigureValue("output_base_folder");
+	}
+
+	public PageFlowScript template_base_folder(String value) {
+		return addConfiuration("template_base_folder", value);
+	}
+	public String template_base_folder() {
+		return getConfigureValue("template_base_folder");
+	}
+
+	public PageFlowScript base_package_name(String value) {
+		return addConfiuration("base_package_name", value);
+	}
+	public String base_package_name() {
+		return getConfigureValue("base_package_name");
+	}
+	
+	public PageFlowScript project_name(String value) {
+		return addConfiuration("project_name", value);
+	}
+	public String project_name() {
+		return getConfigureValue("project_name");
+	}
+	
+	public PageFlowScript parent_class_name(String value) {
+		return addConfiuration("parent_class_name", value);
+	}
+	public String parent_class_name() {
+		return getConfigureValue("parent_class_name");
+	}
+	
+	public PageFlowScript parent_class_package(String value) {
+		return addConfiuration("parent_class_package", value);
+	}
+	public String parent_class_package() {
+		return getConfigureValue("parent_class_package");
+	}
+	
 }

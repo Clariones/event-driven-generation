@@ -1,9 +1,8 @@
 package cla.edg.project.moyi;
 
-import cla.edg.eventscript.BaseEventDescriptionScript;
 import cla.edg.eventscript.EventScript;
 
-public class Affiliate extends BaseEventDescriptionScript{
+public class Affiliate extends BaseMoyiEventScript{
 	private static final EventScript SCRIPT = $("affiliate")
 			/**
 			 * 发行

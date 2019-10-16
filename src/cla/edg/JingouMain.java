@@ -11,6 +11,7 @@ import cla.edg.pageflow.BasePageFlowScript;
 import cla.edg.project.jingou.JobOrder;
 import cla.edg.project.jingou.WxappServiceScript;
 
+
 public class JingouMain {
 
 	public static void main(String[] args) throws Exception {

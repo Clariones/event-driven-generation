@@ -1,11 +1,15 @@
 package cla.edg.generator;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import cla.edg.Utils;
+import cla.edg.pageflow.AccessParameter;
 import cla.edg.pageflow.BasePageFlowScript;
 import cla.edg.pageflow.Branch;
 import cla.edg.pageflow.Page;
@@ -36,6 +40,13 @@ public class PageFlowGenerator extends BasicGenerator {
 	}
 
 	public void generateWithScript(BasePageFlowScript script) throws Exception {
+		this.setBaseOutputFolder(script.output_base_folder());
+		this.setBaseTempalteFolder(script.template_base_folder());
+		this.setBasePackageName(script.base_package_name());
+		this.setProjectName(script.project_name());
+		this.setParentClassName(script.parent_class_name());
+		this.setParentClassPackage(script.parent_class_package());
+		
 		verifyScriptWasFinished(script);
 		// 一共输出4个文件： 
 		//	BaseXXXViewService 这个基类，声明所有生成的处理框架中用到的方法和常量。方便维护。
@@ -131,6 +142,22 @@ public class PageFlowGenerator extends BasicGenerator {
 			template = getTemplate(tmplFileName);
 			doGeneration(outputFile, data, template);
 		}
+		
+		if (script.getGraphQueryDescriptor() != null && script.getGraphQueryDescriptor().hasContent()) {
+			// 第6个文件: XXGraphQuery 
+			packageName = this.getBasePackageName()+"."+Utils.toCamelCase(script.getName()).toLowerCase();
+			fileNameEtyma = Utils.toCamelCase(script.getName());
+			className = String.format("%s", fileNameEtyma);
+			data.put("class_name", className);
+			data.put("queryInfo", script.getGraphQueryDescriptor());
+			outputFileName = className + "GraphQueryHelper.java";
+			outputFile = new File(getBaseOutputFolderFile(),
+					Utils.packageNameToPath(packageName) + "/" + outputFileName);
+			System.out.println("Write to " + outputFile.getCanonicalPath());
+			tmplFileName = "graphquery/BaseQueryImpl.java.ftl";
+			template = getTemplate(tmplFileName);
+			doGeneration(outputFile, data, template);
+		}
 				
 		// 调试用：增加一个自动布局的JS数据文件
 		outputFileName = "datanodes.js";
@@ -189,12 +216,38 @@ public class PageFlowGenerator extends BasicGenerator {
 		}
 		// 4. 所有的query的名字必须是合法的
 		if(script.getQueryInfoList() != null) {
+			Set<String> allObjectParamTypes = new HashSet<>();
 			for(QueryInfo query: script.getQueryInfoList()) {
 				if (query.getObjectName().contains(" ")) {
 					throw new RuntimeException("查询的对象名字不正常："+query.getObjectName());
 				}
+				List<AccessParameter> params = query.getParameters();
+				if (params == null || params.isEmpty()) {
+					continue;
+				}
+				for(AccessParameter param : params) {
+					if (param.isExtType()) {
+						String typeName = param.getTypeName();
+						if (allObjectParamTypes.contains(typeName)) {
+							continue;
+						} else {
+							int pos = typeName.lastIndexOf('.');
+							if (pos > 0) {
+								allObjectParamTypes.add(typeName);
+								param.setTypeName(typeName.substring(pos+1));
+							}
+						}
+					}
+				}
 			}
 			
+			if (allObjectParamTypes.size() > 0) {
+				List<String> objTypeNames = new ArrayList<>(allObjectParamTypes);
+				Collections.sort(objTypeNames);
+				script.setObjectParamTypes(objTypeNames);
+			}else {
+				script.setObjectParamTypes(new ArrayList<>());
+			}
 		}
 	}
 }

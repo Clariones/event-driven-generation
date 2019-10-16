@@ -55,6 +55,7 @@ public abstract class ${class_name}ViewService extends Base${class_name}ViewServ
 		ctx.set${NAMING.toCamelCase(param.paramName)}(${NAMING.toCamelCase(param.paramName)?uncap_first});
 		</#list>
 	</#if>
+		commonLog(ctx, "${T.getRequestProcessingMethodName(request)}", "${request.comments!}", ctx.getRemoteIP(), ctx.tokenId(), makeUrlF("", false<@T.getRequestProcessingUrlMethodParametersWithoutType request/>), null);
 	<@requestProcessAndReturn request>
 	</@>
 	}
@@ -63,7 +64,12 @@ public abstract class ${class_name}ViewService extends Base${class_name}ViewServ
 <#macro formPostHanlingMethod request>
 	public Object ${T.getRequestProcessingMethodName(request)}(${context_name} userContext<@T.getRequestProcessingMethodParameters request/>) throws Exception {
 		${custom_context_name} ctx = (${custom_context_name}) userContext;
+		if (hasFormResubmitFlag(ctx)) {
+			throwExceptionWithMessage(ctx, "请不要重复提交");
+		}
 		try{
+			String accessUrl = makeUrlF("${T.getRequestProcessingMethodName(request)}", false, "formData");
+			ctx.setAccessUrl(accessUrl);
 			<@getRequestUser request "	"/>
 	<#if request.hasFootprint>
 			ctx.addFootprint(this);
@@ -72,6 +78,7 @@ public abstract class ${class_name}ViewService extends Base${class_name}ViewServ
 			${helper.getBaseFormClassName(request.parameters[0])} form = new ${helper.getFormClassName(request.parameters[0])}().initByRequest(ctx, formData);
 			form.verifyInputs();
 			ctx.setInputFormData(form);
+			commonLog(ctx, "${T.getRequestProcessingMethodName(request)}", "${request.comments!}", ctx.getRemoteIP(), ctx.tokenId(), formData, null);
 		<@requestProcessAndReturn request "	">
 		</@>
 		}finally {
@@ -95,7 +102,7 @@ public abstract class ${class_name}ViewService extends Base${class_name}ViewServ
 	<#if helper.isRequestHasBranch(request)>
 		<#assign otherBranches=helper.getAllOtherBranches(request)/>
 		${prefix}int resultCode = processRequest${T.getRequestProcessingMethodName(request)?cap_first}(ctx);
-		${prefix}if ($PRC_RESULT_OBJECT_WAS_SET == resultCode){
+		${prefix}if (returnRightNow(resultCode)){
 		${prefix}	return ctx.getResultObject();
 		${prefix}}
 		${prefix}BaseViewPage page = null;
@@ -108,10 +115,13 @@ public abstract class ${class_name}ViewService extends Base${class_name}ViewServ
 			${prefix}}
 		</#list>
 			<#assign branch=helper.getDefaultBranch(request)/>
-			${prefix}case PRC_${NAMING.toJavaConstStyle(branch.name)}:
-			${prefix}default: { //  ${branch.comments!}
+			${prefix}case PRC_${NAMING.toJavaConstStyle(branch.name)}:<#if branch.name != 'by default'>
+			${prefix}case PRC_BY_DEFAULT:</#if> {
 				${prefix}page = assembler${NAMING.toCamelCase(branch.page)}Page(ctx, "${T.getRequestProcessingMethodName(request)}");
 				${prefix}break;
+			${prefix}}
+			${prefix}default: {
+				${prefix}throw new Exception("未定义的分支代码"+resultCode);
 			${prefix}}
 		${prefix}}
 		<#if request.canRefresh>
@@ -127,7 +137,7 @@ public abstract class ${class_name}ViewService extends Base${class_name}ViewServ
 	<#else>
 		<#assign branch=helper.getDefaultBranch(request)/>
 		${prefix}int resultCode = processRequest${T.getRequestProcessingMethodName(request)?cap_first}(ctx);
-		${prefix}if ($PRC_RESULT_OBJECT_WAS_SET == resultCode){
+		${prefix}if (returnRightNow(resultCode)){
 		${prefix}	return ctx.getResultObject();
 		${prefix}}
 		${prefix}BaseViewPage page = assembler${NAMING.toCamelCase(branch.page)}Page(ctx, "${T.getRequestProcessingMethodName(request)}");

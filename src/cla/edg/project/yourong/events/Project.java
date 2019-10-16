@@ -1,6 +1,5 @@
 package cla.edg.project.yourong.events;
 
-import cla.edg.eventscript.BaseEventDescriptionScript;
 import cla.edg.eventscript.EventScript;
 
 /**
@@ -22,14 +21,32 @@ import cla.edg.eventscript.EventScript;
  * @author clariones
  *
  */
-public class Project extends BaseEventDescriptionScript{
+public class Project extends BaseYourongEventScript{
 	private static final EventScript SCRIPT = $("project")
 			/**
 			 * 开始: 由某个用户提交一个项目申请
 			 */
 			.on_event("application submited").with("input form data")
 				.comments("用户提交了新项目申请")
-			
+			.on_event("document confirmed").with("project document")
+				.comments("用户确认了项目相关的文档")
+			.on_event("document rejected").with("project document")
+				.comments("用户确认了项目相关的文档")
+				
+			// 项目5书相关
+			.on_event("yourong project book created").with("yourong book")
+				.comments("5书被创建")
+				.event_ripple("progress updated with yourong project book")
+			.on_event("yourong project book confirmed").with("yourong book")
+				.comments("用户同意了5书")
+				.event_ripple("progress updated with yourong project book")
+			.on_event("yourong project book rejected").with("yourong book")
+				.comments("用户否决了5书")
+				.event_ripple("progress updated with yourong project book")
+				
+			.internal_only_bydefault()
+			.on_event("progress updated with yourong project book").with("yourong book")
+				.comments("项目进度由于5书的变化而发生变化")
 			;
 	
 

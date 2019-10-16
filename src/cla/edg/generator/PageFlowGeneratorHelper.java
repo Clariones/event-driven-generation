@@ -2,14 +2,21 @@ package cla.edg.generator;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import cla.edg.Utils;
+import cla.edg.graphquery.terms.BasePathInfo;
+import cla.edg.graphquery.terms.GraphQueryInfo;
+import cla.edg.graphquery.terms.ParameterInfo;
+import cla.edg.graphquery.terms.PathInfoV2;
 import cla.edg.pageflow.AccessParameter;
 import cla.edg.pageflow.BasePageFlowScript;
 import cla.edg.pageflow.Branch;
@@ -36,7 +43,7 @@ public class PageFlowGeneratorHelper {
 	}
 	public List<Branch> getAllOtherBranches(Request req){
 		if (req.getBranches().size() == 1) {
-			System.out.printf("request [%s] has only one branch\n", req.getName());
+//			System.out.printf("request [%s] has only one branch\n", req.getName());
 			return new ArrayList<>();
 		}
 		boolean foundDefault = false;
@@ -49,10 +56,10 @@ public class PageFlowGeneratorHelper {
 			result.add(bch);
 		}
 		if (foundDefault) {
-			System.out.printf("request [%s] has %d branch(es) besides default\n", req.getName(), result.size());
+//			System.out.printf("request [%s] has %d branch(es) besides default\n", req.getName(), result.size());
 			return result;
 		}
-		System.out.printf("request [%s] has %d branch(es), will return %d\n", req.getName(), result.size(), result.size()-1);
+//		System.out.printf("request [%s] has %d branch(es), will return %d\n", req.getName(), result.size(), result.size()-1);
 		result.remove(0);
 		return result;
 	}
@@ -212,4 +219,300 @@ public class PageFlowGeneratorHelper {
 	private Request findRequestByName(BasePageFlowScript script, String req) {
 		return script.getRequests().stream().filter(it->it.getName().equals(req)).findFirst().get();
 	}
+	
+	
+	public List<Map<String, String>> getParamInfoListForMethodDeclaration(GraphQueryInfo queryInfo) {
+		List<ParameterInfo> parameters = queryInfo.getParameters();
+		if (parameters == null || parameters.isEmpty()) {
+			return new ArrayList<>();
+		}
+		List<Map<String, String>> result = new ArrayList<>();
+		for (ParameterInfo p : parameters) {
+			if (p.isList()) {
+				if (p.isExtType()) {
+					result.add(
+							Utils.put("typeName", "List<" + Utils.getClassNameFromFullName(p.getTypeClassName()) + ">")
+									.put("varName", toJavaVarName(p.getParamName()) + "List")
+									.put("paramName", toJavaVarName(p.getParamName())).into_map(String.class));
+					continue;
+				}
+				result.add(Utils.put("typeName", "List<" + toGQParamTypeName(p.getTypeClassName()) + ">")
+						.put("varName", toJavaVarName(p.getParamName()) + "List")
+						.put("paramName", toJavaVarName(p.getParamName())).into_map(String.class));
+			} else {
+				if (p.isExtType()) {
+					result.add(Utils.put("typeName", Utils.getClassNameFromFullName(p.getTypeClassName()))
+							.put("varName", toJavaVarName(p.getParamName()))
+							.put("paramName", toJavaVarName(p.getParamName())).into_map(String.class));
+					continue;
+				}
+				result.add(Utils.put("typeName", toGQParamTypeName(p.getTypeClassName()))
+						.put("varName", toJavaVarName(p.getParamName()))
+						.put("paramName", toJavaVarName(p.getParamName())).into_map(String.class));
+			}
+		}
+		return result;
+	}
+	
+	public  List<Map<String, String>> getParamInfoListForQueryParameter(GraphQueryInfo queryInfo) {
+		List<Map<String, String>> result = getParamInfoListForMethodDeclaration(queryInfo);
+		result.removeIf(data->{
+			String name = data.get("paramName");
+			String startPointTypeName = queryInfo.getStartPoint().get("paramName");
+			startPointTypeName = toJavaVarName(startPointTypeName);
+			return name.equals(startPointTypeName);
+		});
+		return result;
+	}
+	private Object toGQParamTypeName(String typeClassName) {
+		switch (typeClassName) {
+		case "boolean":
+			return "Boolean";
+		case "integer":
+			return "Long";
+		case "decimal":
+			return "BigDecimal";
+		case "datetime":
+			return "Date";
+		case "string":
+			return "String";
+		default:
+			throw new RuntimeException("toJavaVarName() cannot handle " + typeClassName);
+		}
+	}
+	private String toJavaVarName(String varName) {
+		return Utils.uncapFirst(Utils.toCamelCase(varName));
+	}
+	
+	public String toCamelCase(String name) {
+		return Utils.toCamelCase(name);
+	}
+	
+	public List<String> getReferencedTypes(List<GraphQueryInfo> queryInfoList) {
+		Set<String> cs = new HashSet<>();
+		for(GraphQueryInfo q : queryInfoList) {
+			// 先是wanted 里
+			List<String> ns = q.getEnhanceTypeName();
+			for(String n : ns) {
+				cs.add(n.toLowerCase()+"."+n);
+			}
+			// 然后是 start
+			String n = q.getStartPoint().get("typeName");
+			cs.add(n.toLowerCase()+"."+n);
+			
+			// 已经所有的 path
+			List<BasePathInfo> edges = getAllEdeges(q);
+//			HashMap<String, BasePathInfo> allENodes = new HashMap<String, BasePathInfo>();
+//			edges.forEach(it->{
+//				allENodes.putAll(it.getAllPaths());
+//			});
+			for(BasePathInfo eNode: edges) {
+				n = eNode.getFromClass();
+				cs.add(n.toLowerCase()+"."+n);
+				n = eNode.getToClass();
+				cs.add(n.toLowerCase()+"."+n);
+			}
+		}
+		List<String> result = new ArrayList<>(cs);
+		Collections.sort(result);
+		return result;
+	}
+	
+	public List<BasePathInfo> getAllEdeges(GraphQueryInfo query) {
+//		List<BasePathInfo> pathList = query.getPathInfoList();
+//		Map<String, BasePathInfo> all = new HashMap<>();
+//		for(BasePathInfo p : pathList) {
+//			all.putAll(p.getAllPaths());
+//		}
+//		
+//		for(BasePathInfo p : query.getWantList()) {
+//			all.putAll(p.getAllPaths());
+//		}
+//		return new ArrayList<>(all.values());
+		List<BasePathInfo> pathList = new LinkedList<>(query.getPathInfoList());
+		pathList.addAll(query.getWantList());
+		Map<String, BasePathInfo> all = new HashMap<>();
+		for(BasePathInfo pth : pathList) {
+			List<PathInfoV2> pathInfoList = pth.getPathOfMine();
+			for(PathInfoV2 p : pathInfoList) {
+				all.put(p.getEdge().getEdgeName(), p.getEdge());
+			}
+		}
+		return new ArrayList<>(all.values());
+	}
+	
+//	public List<Map<String, String>> getAllPathPaires(GraphQueryInfo query) {
+//		List<BasePathInfo> pathList = query.getPathInfoList();
+//		Map<String, BasePathInfo> all = new HashMap<>();
+//		for(BasePathInfo p : pathList) {
+//			all.putAll(p.getAllPaths());
+//		}
+//		pathList = query.getWantList();
+//		for(BasePathInfo p : pathList) {
+//			all.putAll(p.getAllPaths());
+//		}
+//		
+////		System.out.println(all.keySet());
+//		
+//		List<Map<String, String>> result = new ArrayList<>();
+//		Set<String> allNodeNames = all.values().stream().map(it->it.getFromClass()).collect(Collectors.toSet());
+//		Set<String> pathKey = new HashSet<>();
+//		allNodeNames.addAll(all.values().stream().map(it->it.getToClass()).collect(Collectors.toSet()));
+//		for(String nodeName: allNodeNames) {
+//			List<BasePathInfo> fromMePath = all.values().stream().filter(it->it.getFromClass().equals(nodeName)).collect(Collectors.toList());
+//			if (fromMePath == null || fromMePath.isEmpty()) {
+//				continue;
+//			}
+//			List<BasePathInfo> toMePath = all.values().stream().filter(it->it.getToClass().equals(nodeName)).collect(Collectors.toList());
+//			if (toMePath == null || toMePath.isEmpty()) {
+//				continue;
+//			}
+//			for(BasePathInfo f : fromMePath) {
+//				for(BasePathInfo t : toMePath) {
+//					if (f.getEdgeName().equals(t.getEdgeName())) {
+//						continue;
+//					}
+//					boolean existed = isPathExisted(pathKey, f, t);
+//					if (existed) {
+//						continue;
+//					}
+//					result.add(Utils.put("prePath", t.getEdgeName()).put("curPath", f.getEdgeName()).into_map(String.class));
+////					System.out.printf("%s(%s) <%s> %s(%s)\r\n", 
+////							t.getEdgeName(), t.getPathKey(),
+////							nodeName,
+////							f.getEdgeName(), f.getPathKey()
+////							);
+//				}
+//			}
+//		}
+//		Collections.sort(result, getPathComparator());
+//		return result;
+//	}
+	private Comparator<Map<String, String>> getPathComparator() {
+		return new Comparator<Map<String, String>>() {
+
+			@Override
+			public int compare(Map<String, String> o1, Map<String, String> o2) {
+				String c1 = o1.get("curPath");
+				String c2 = o2.get("curPath");
+				String p1 = o1.get("prePath");
+				String p2 = o2.get("prePath");
+				return p1.compareTo(p2);
+			}
+		};
+	}
+	private boolean isPathExisted(Set<String> pathKey, BasePathInfo f, BasePathInfo t) {
+		boolean existed = false;
+		String pathKeyStr = t.getEdgeName() + "=>" + f.getEdgeName() ;
+		if (pathKey.contains(pathKeyStr)) {
+			existed = true;
+		}
+		if (f.getEdgeName().equals(t.getEdgeName())) {
+			existed = true;
+		}
+		if (f.getEdgeName().equals("null$$")) {
+			existed = true;
+		}
+		pathKey.add(pathKeyStr);
+		return existed;
+	}
+	
+	
+	public List<BasePathInfo> getWantedPaths(GraphQueryInfo query) {
+		List<BasePathInfo> pathList = query.getWantList();
+		Map<String, BasePathInfo> all = new HashMap<>();
+		for(BasePathInfo p : pathList) {
+			List<PathInfoV2> paths = p.getPathOfMine();
+			for(PathInfoV2 pInfo: paths){
+				BasePathInfo cPath = pInfo.getEdge();
+				all.put(cPath.getEdgeName(), cPath);
+			}
+		}
+		
+		return new LinkedList<>(all.values());
+	}
+	
+	public boolean hasPathInfoFromLinkedPaths(GraphQueryInfo query) {
+		List<BasePathInfo> list1 = query.getPathInfoList();
+		 List<BasePathInfo> list2 = query.getWantList();
+		if (list1 != null && list1.size() > 0) {
+			return true;
+		}
+//		if (list2 != null && list2.size() > 0) {
+//			return true;
+//		}
+		return false;
+	}
+	public Set<String> getStartEdgeNameInQuery(GraphQueryInfo query) {
+		List<BasePathInfo> list = query.getPathInfoList();
+		Set<String> result = new HashSet<>();
+		if (list != null && list.size() > 0) {
+			for(BasePathInfo p : list) {
+				BasePathInfo edge = p.getStartEdge();
+				if (edge != null) {
+					result.add(edge.getEdgeName());
+				}
+			}
+		}
+		if (!result.isEmpty()) {
+			return result;
+		}
+		list = query.getWantList();
+		if (list != null && list.size() > 0) {
+			for(BasePathInfo p : list) {
+				BasePathInfo edge = p.getStartEdge();
+				if (edge != null) {
+					result.add(edge.getEdgeName());
+				}
+			}
+		}
+		return result;
+	}
+	public List<Map<String, String>> getAllPathInfoFromLinkedPaths(GraphQueryInfo query) {
+		List<BasePathInfo> endPoints = new LinkedList<>();
+		if (query.getWantList() != null && query.getWantList().size() > 0) {
+			if (query.getPathInfoList() == null || query.getPathInfoList().isEmpty()) {
+				BasePathInfo vPath = new BasePathInfo();
+				vPath.setFromClass(null);
+				vPath.setToClass(query.getTargetTypeName());
+				vPath.setMemberName("$");
+				vPath.setRelationType(BasePathInfo.HAS_A);
+				vPath.appendPaths(query.getWantList());
+				endPoints.add(query.getWantList().get(0));
+			} else {
+				for (BasePathInfo path : query.getPathInfoList()) {
+					path.appendPaths(query.getWantList());
+					endPoints.add(query.getWantList().get(0));
+				}
+			}
+		} else {
+			endPoints.addAll(query.getPathInfoList());
+		}
+		
+		List<Map<String, String>> result = new ArrayList<>();
+		Set<String> pathKey = new HashSet<>();
+		for(BasePathInfo path: endPoints) {
+			List<PathInfoV2> paths = path.getPathOfMine();
+			System.out.println("==========" + paths);
+			
+			for(PathInfoV2 pInfo: paths){
+				BasePathInfo cPath = pInfo.getEdge();
+				List<PathInfoV2> toPaths = path.findNextPath(pInfo);
+				if (toPaths == null || toPaths.isEmpty()) {
+					continue;
+				}
+				for(PathInfoV2 tPath: toPaths) {
+					if (this.isPathExisted(pathKey, cPath, tPath.getEdge())) {
+						continue;
+					}
+					result.add(Utils.put("prePath", cPath.getEdgeName())
+							.put("curPath", tPath.getEdge().getEdgeName())
+							.into_map(String.class));
+				}
+			}
+		}
+		Collections.sort(result, getPathComparator());
+		return result;
+	}
+	
 }

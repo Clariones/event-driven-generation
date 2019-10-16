@@ -1,10 +1,10 @@
 package cla.edg.project.moyi;
 
-import cla.edg.eventscript.BaseEventDescriptionScript;
 import cla.edg.eventscript.EventScript;
 
-public class Auction_backup extends BaseEventDescriptionScript{
+public class Auction_backup extends BaseMoyiEventScript{
 	private static final EventScript SCRIPT = $("auction")
+			
 			/**
 			 * Best lucky
 			 * 卖家上传所有权资料->支付证书费用->平台创建艺术品数字证书

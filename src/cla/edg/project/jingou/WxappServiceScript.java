@@ -78,7 +78,7 @@ public class WxappServiceScript extends BasePageFlowDescriptionScript {
 				.rule_comments("用户有打包厂厂长的角色, 则需要根据warehouse id过滤")
 				.rule_comments("用户只有司机的角色, 则不用warehouse id过滤")
 			.got_page("need handled order list")
-				.comments("订单/工作单的列表页").list_of("main_order_big")
+				.comments("订单/工作单的列表页").list_of("main-order-big")
 				.may_request("job order detail")
 		.request("view next page orders need handled").with_string("warehouse id").with_string("last record id")
 			.comments("查看当前用户需要去处理,例如核实重量 的所有订单: 翻页")

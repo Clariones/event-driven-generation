@@ -50,6 +50,11 @@ public class QueryInfo extends BasePageFlowElement {
 	public AccessParameter addStringParameter(String paramName) {
 		return newParam("String", paramName, null);
 	}
+	public AccessParameter addObjectParameter(String paramName, String typeName) {
+		AccessParameter rst = newParam(typeName, paramName, null);
+		rst.setExtType(true);
+		return rst;
+	}
 	public AccessParameter addIntegerParameter(String paramName) {
 		return newParam("Integer", paramName, null);
 	}
