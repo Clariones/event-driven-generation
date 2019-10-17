@@ -332,6 +332,9 @@ public class PageFlowScript extends BasePageFlowScript {
 		currentWork = this.getConfiguration();
 		return this;
 	}
+	public PageFlowScript got_popup_page() {
+		return got_page("simple popup");
+	}
 	
 	
 	

@@ -12,8 +12,22 @@ import ${base_package}.${target_class?lower_case}.${target_class};
 import ${base_package}.${actor_class?lower_case}.${actor_class};
 import com.terapico.utils.TaskUtil;
 
-public class BaseFavorite${target_class}Of${actor_class}Util {
+public abstract class BaseFavorite${target_class}Of${actor_class}Util {
 	protected static final Map<String, Object> EO = new HashMap<>();
+	
+	public boolean isFollowed(${user_context_class} ctx, ${actor_class} actor${actor_class}, ${target_class} target${target_class}) throws Exception {
+		if (actor${actor_class} == null || target${target_class} == null) {
+			return false;
+		}
+		return isFollowed(ctx, actor${actor_class}.getId(), target${target_class}.getId());
+	}
+	public boolean isFollowed(${user_context_class} ctx, String actor${actor_class}Id, String target${target_class}Id) throws Exception {
+		if (actor${actor_class}Id == null || target${target_class}Id == null) {
+			return false;
+		}
+		${record_class} record = loadRecord(ctx, actor${actor_class}Id, target${target_class}Id);
+		return record == null ? false : record.getAvailable();
+	}
 	
 	/**
 	 * 关注
