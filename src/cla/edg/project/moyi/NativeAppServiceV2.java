@@ -8,8 +8,6 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 
 	private static final PageFlowScript SCRIPT = $("native app v2").need_login()
 			.base_on()
-				.output_base_folder("/works/jobs/moyi_v3/workspace/moyi-biz-suite/bizcore/WEB-INF/moyi_v2_src")
-				.template_base_folder("./template")
 				.base_package_name("com.terapico.moyi")
 				.project_name("moyi")
 				.parent_class_name("NativeAppService")

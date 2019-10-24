@@ -103,7 +103,6 @@ public abstract class ${class_name}DBQueryHelper{
 		, List<Object> params<@T.getRequestProcessingUrlMethodParameters query/>
 		) throws Exception {
 	</@>${''}
-		// TODO: 你需要自己实现这个部分
 		String sql = "select D.* from ${query.objectName}_data D ";
 	<#if query.pagination>
 		if (lastRecord != null) {
@@ -118,7 +117,6 @@ public abstract class ${class_name}DBQueryHelper{
 	}
 	
 	protected void enhance${typeClass}ListOf${NAMING.toCamelCase(query.name)}(${custom_context_name} ctx, SmartList<${typeClass}> list, String queryName<@T.getRequestProcessingUrlMethodParameters query/>) throws Exception {
-		// TODO: 你需要自己实现这个部分
 	}
 
 </#list>

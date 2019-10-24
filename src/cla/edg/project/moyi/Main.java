@@ -30,6 +30,8 @@ public class Main {
 		System.out.println(jsonStr);
 		
 		PageFlowGenerator generator = new PageFlowGenerator();
+		generator.setBaseOutputFolder("/works/jobs/moyi_v3/workspace/moyi-biz-suite/bizcore/WEB-INF/moyi_v2_src");
+		generator.setBaseTempalteFolder("./template");
 		generator.generateWithScript(script);
 	}
 	

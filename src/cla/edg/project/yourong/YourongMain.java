@@ -49,6 +49,8 @@ public class YourongMain {
 //		System.out.println(jsonStr);
 		
 		PageFlowGenerator generator = new PageFlowGenerator();
+		generator.setBaseOutputFolder("/works/jobs/yourong_v2/workspace/yourong-biz-suite/bizcore/WEB-INF/yourong_custom_src");
+		generator.setBaseTempalteFolder("./template");
 		
 		generator.generateWithScript(script);
 	}

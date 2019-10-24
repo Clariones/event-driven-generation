@@ -162,16 +162,6 @@ public class BasePageFlowScript extends BasePageFlowElement{
 		return (String) this.getConfiguration().get(key);
 	}
 	
-	public PageFlowScript output_base_folder(String value) {
-		return addConfiuration("output_base_folder", value);
-	}
-	public String output_base_folder() {
-		return getConfigureValue("output_base_folder");
-	}
-
-	public PageFlowScript template_base_folder(String value) {
-		return addConfiuration("template_base_folder", value);
-	}
 	public String template_base_folder() {
 		return getConfigureValue("template_base_folder");
 	}
