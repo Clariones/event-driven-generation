@@ -23,8 +23,17 @@ public class BasePageFlowScript extends BasePageFlowElement{
 	protected List<String> objectParamTypes;
 	protected Map<String, Object> configuration;
 	protected transient BaseGraphQueryDescriptor graphQueryDescriptor;
+	protected UserLoginInfo userLoginInfo;
 	
 	
+	public UserLoginInfo getUserLoginInfo() {
+		return userLoginInfo;
+	}
+
+	public void setUserLoginInfo(UserLoginInfo userLoginInfo) {
+		this.userLoginInfo = userLoginInfo;
+	}
+
 	public BaseGraphQueryDescriptor getGraphQueryDescriptor() {
 		return graphQueryDescriptor;
 	}

@@ -335,7 +335,24 @@ public class PageFlowScript extends BasePageFlowScript {
 	public PageFlowScript got_popup_page() {
 		return got_page("simple popup");
 	}
-	
+	public PageFlowScript login_as(String modelName) {
+		UserLoginInfo ulInfo = new UserLoginInfo();
+		ulInfo.setUserModelName(modelName);
+		userLoginInfo = ulInfo;
+		return this;
+	}
+	public PageFlowScript login_from_wxapp_by_wechat_work() {
+		userLoginInfo.addLoginMethod("wechat_work_app");
+		return this;
+	}
+	public PageFlowScript login_from_wxapp_by_openid() {
+		userLoginInfo.addLoginMethod("wechat_app");
+		return this;
+	}
+	public PageFlowScript login_by_mobile_with_verify_code() {
+		userLoginInfo.addLoginMethod("mobile_and_vcode");
+		return this;
+	}
 	
 	
 	

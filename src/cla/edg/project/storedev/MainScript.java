@@ -11,6 +11,10 @@ public class MainScript extends BasePageFlowDescriptionScript {
 				.project_name("storedev")
 				.parent_class_name("BasicWxappService")
 				.parent_class_package("com.doublechain.storedev.wxappservice")
+			.login_as("store_developer")
+				.login_from_wxapp_by_wechat_work()
+				// .login_from_wxapp_by_openid()
+				.login_by_mobile_with_verify_code()
 			.import_from(new S0_Homepage())
 			.import_from(new S1_Query())
 

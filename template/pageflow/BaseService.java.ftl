@@ -10,9 +10,33 @@ import java.util.Map;
 import ${base_package}.${context_name};
 import ${base_package}.${custom_context_name};
 import ${base_package}.FootprintProducer;
+import ${base_package}.MultipleAccessKey;
 import ${base_package}.${NAMING.toCamelCase(project_name)}BaseConstants;
+import ${base_package}.${NAMING.toCamelCase(project_name)}BaseUtils;
+import ${base_package}.SmartList;
+import ${base_package}.secuser.SecUser;
+import ${base_package}.userapp.UserApp;
+<#if script.userLoginInfo?has_content>
+	<#assign loginInfo=script.userLoginInfo />
+import ${base_package}.${NAMING.toCamelCase(loginInfo.userModelName)?lower_case}.${NAMING.toCamelCase(loginInfo.userModelName)};
+	<#if loginInfo.canLoginBy("wechat_work_app")>
+import ${base_package}.wechatworklogininfo.WechatWorkLoginInfo;
+import me.chanjar.weixin.cp.api.WxCpService;
+import me.chanjar.weixin.cp.bean.WxCpMaJsCode2SessionResult;
+	</#if>
+	<#if loginInfo.canLoginBy("wechat_app")>
+import ${base_package}.wechatlogininfo.WechatLoginInfo;
+import cn.binarywang.wx.miniapp.api.WxMaService;
+import cn.binarywang.wx.miniapp.bean.WxMaJscode2SessionResult;
+	</#if>
+</#if>
+
 import ${parent_class_package}.${parent_class_name};
 import ${package}pageview.*;
+import com.terapico.utils.DateTimeUtil;
+import com.terapico.utils.JWTUtil;
+import com.terapico.utils.MapUtil;
+import com.terapico.utils.RandomUtil;
 import com.terapico.utils.TextUtil;
 
 /**
@@ -21,6 +45,22 @@ import com.terapico.utils.TextUtil;
  *
  */
 public abstract class Base${class_name}ViewService extends ${parent_class_name} implements FootprintProducer{
+<#if script.userLoginInfo?has_content>
+	protected static interface BaseLoginHandler {
+
+		String PARAM_CODE = "code";
+		String WECHAT_WORK_APP = "wechat_work_app";  // 前端使用小程序，用企业微信登录
+		String WECHAT_APP = "wechat_app";  // 前端使用小程序, 做微信登录
+		String MOBILE_AND_VCODE = "mobile_vcode";	// 前端使用手机号和验证码登录
+
+		/**
+		 * 用输入的信息，做登录的动作。
+		 * @return 如果输入的信息错误，抛异常；如果输入的信息，不能登陆，抛异常；如果输入的信息允许登录，但是找不到对应的'登录目标'， 不抛异常，返回null；如果登录正常，返回登录成功的对象。
+		 */
+		public ${NAMING.toCamelCase(loginInfo.userModelName)} doLogin(${custom_context_name} ctx, Map<String, Object> params) throws Exception;
+
+	}
+</#if>
 	public static final int $PRC_RESULT_OBJECT_WAS_SET = -1;
 <#list helper.getAllBrachNames(script) as branchName>
 	public static final int PRC_${NAMING.toJavaConstStyle(branchName)} = ${branchName?index};
@@ -78,6 +118,9 @@ public abstract class Base${class_name}ViewService extends ${parent_class_name} 
 		}
 		return sb.toString();
 	}
+<#if script.userLoginInfo?has_content>
+	<#include "/actions/login/login.java.ftl">
+</#if>
 <#list script.requests as request>
 	// 处理请求：${request.comments!}
 	public static String make${NAMING.toCamelCase(request.name)}Url(${custom_context_name} ctx<@T.getRequestProcessingUrlMethodParameters request/>){
