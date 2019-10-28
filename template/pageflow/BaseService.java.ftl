@@ -64,7 +64,11 @@ public abstract class Base${class_name}ViewService extends ${parent_class_name} 
 		 * @return 如果输入的信息错误，抛异常；如果输入的信息，不能登陆，抛异常；如果输入的信息允许登录，但是找不到对应的'登录目标'， 不抛异常，返回null；如果登录正常，返回登录成功的对象。
 		 */
 		public ${NAMING.toCamelCase(loginInfo.userModelName)} doLogin(${custom_context_name} ctx, Map<String, Object> params) throws Exception;
-
+		
+		/** 
+		 * 获取处理后的登录相关信息
+		 */
+		public Map<String, Object> getProcessedLoginInfo(${custom_context_name} ctx);
 	}
 </#if>
 	public static final int $PRC_RESULT_OBJECT_WAS_SET = -1;

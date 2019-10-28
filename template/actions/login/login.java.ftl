@@ -9,7 +9,7 @@
         ${login_target_class} loginTarget = loginHandler.doLogin(ctx, params);
         if (loginTarget == null) {
             // 如果没有抛异常，返回null，说明是个 '新建用户'。 触发'onNewLogin'方法
-            loginTarget = onNewLogin(ctx, params);
+            loginTarget = onNewLogin(ctx, params, loginHandler);
         }
         // 找到登录目标对应的 secUser 和 userApp
         SecUser secUser = findSecUserByLoginTarget(ctx, loginTarget);
@@ -87,7 +87,7 @@
 
     
     // 默认新用户登录，自动创建账户。 具体的字段需要业务实现。所以此处为 abstract
-    protected abstract ${login_target_class} onNewLogin(${custom_context_name} ctx, Map<String, Object> params) throws Exception;
+    protected abstract ${login_target_class} onNewLogin(${custom_context_name} ctx, Map<String, Object> params, BaseLoginHandler loginHandler) throws Exception;
 
     protected BaseLoginHandler findLoginHandler(${custom_context_name} ctx, Map<String, Object> params) {
 
@@ -96,6 +96,8 @@
 <#if loginInfo.canLoginBy("wechat_work_app")>
             case BaseLoginHandler.WECHAT_WORK_APP: {
                 return new BaseLoginHandler() {
+                	String wwUserId;
+                	String wwSessionKey;
                     @Override
                     public ${login_target_class} doLogin(${custom_context_name} ctx, Map<String, Object> params) throws Exception{
                         WxCpService svc = getWxCpService();
@@ -104,6 +106,8 @@
                         String userId = sessionInfo.getUserId();
                         String userSessionKey = sessionInfo.getSessionKey();
                         ctx.putIntoContextLocalStorage("wechatLoginSessionKey", userSessionKey);
+                        wwUserId = userId;
+						wwSessionKey = userSessionKey;
                         MultipleAccessKey key = new MultipleAccessKey();
 						WechatWorkLoginInfo logInfo = wechatWorkLoginInfoDaoOf(ctx).loadByUserId(userId, EO);
 						if (logInfo == null) {
@@ -113,12 +117,20 @@
 						wechatWorkLoginInfoManagerOf(ctx).internalSaveWechatWorkLoginInfo(ctx, logInfo, EO);
 						return ${login_target_class?uncap_first}DaoOf(ctx).load(logInfo.get${login_target_class}().getId(), EO);
                     }
+                    @Override
+					public Map<String, Object> getProcessedLoginInfo(CustomStoredevUserContextImpl ctx) {
+						return MapUtil.put("loginMethod", BaseLoginHandler.WECHAT_WORK_APP)
+								.put("userId", wwUserId)
+								.put("sessionKey", wwSessionKey).into_map();
+					}
                 };
             }
 </#if>
 <#if loginInfo.canLoginBy("wechat_app")>
             case BaseLoginHandler.WECHAT_APP:{
                 return new BaseLoginHandler() {
+                	String wxOpenId;
+                	String wxSessionKey;
                     @Override
                     public ${login_target_class} doLogin(${custom_context_name} ctx, Map<String, Object> params) throws Exception{
                         WxMaService wxService = getWxMaService();
@@ -126,6 +138,8 @@
                         WxMaJscode2SessionResult sessionInfo = wxService.jsCode2SessionInfo(code);
                         String openId = sessionInfo.getOpenid();
                         String userSessionKey = sessionInfo.getSessionKey();
+                        wxOpenId = openId;
+						wxSessionKey = userSessionKey;
                         ctx.putIntoContextLocalStorage("wechatLoginSessionKey", userSessionKey);
                         String sql = "select * from wechat_login_info_data where open_id=? and ${login_target_model} is not null";
 						SmartList<WechatLoginInfo> infoList = wechatLoginInfoDaoOf(ctx).queryList(sql, openId);
@@ -137,19 +151,26 @@
 						wechatLoginInfoManagerOf(ctx).internalSaveWechatLoginInfo(ctx, logInfo, EO);
 						return ${login_target_class?uncap_first}DaoOf(ctx).load(logInfo.get${login_target_class}().getId(), EO);
                     }
+                    @Override
+					public Map<String, Object> getProcessedLoginInfo(CustomStoredevUserContextImpl ctx) {
+						return MapUtil.put("loginMethod", BaseLoginHandler.WECHAT_APP)
+								.put("openId", wxOpenId)
+								.put("sessionKey", wxSessionKey).into_map();
+					}
                 };
             }
 </#if>
 <#if loginInfo.canLoginBy("mobile_and_vcode")>
             case BaseLoginHandler.MOBILE_AND_VCODE:{
             	return new BaseLoginHandler() {
+            		String mcMobile;
                     @Override
                     public ${login_target_class} doLogin(${custom_context_name} ctx, Map<String, Object> params) throws Exception{
                     	String vCode = (String) params.get("verifyCode");
                     	String mobile = (String) params.get("mobile");
                     	mobile = ${NAMING.toCamelCase(project_name)}BaseUtils.formatChinaMobile(mobile);
                     	checkVerifyCode(ctx, vCode, mobile);
-                    	
+                    	mcMobile = mobile;
                         String sql = "select * from ${login_target_model}_data where mobile=?";
                         SmartList<${login_target_class}> list = ${login_target_class?uncap_first}DaoOf(ctx).queryList(sql, mobile);
                         if (list == null || list.isEmpty()) {
@@ -157,6 +178,11 @@
                         }
                         return list.first();
                     }
+                    @Override
+					public Map<String, Object> getProcessedLoginInfo(CustomStoredevUserContextImpl ctx) {
+						return MapUtil.put("loginMethod", BaseLoginHandler.MOBILE_AND_VCODE)
+								.put("mobile", mcMobile).into_map();
+					}
                 };
             }
 </#if>
