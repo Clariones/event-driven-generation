@@ -4,8 +4,11 @@ package ${package};
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.net.URLEncoder;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import javax.servlet.http.Cookie;
+import com.auth0.jwt.interfaces.DecodedJWT;
 
 import ${base_package}.${context_name};
 import ${base_package}.${custom_context_name};
@@ -16,6 +19,7 @@ import ${base_package}.${NAMING.toCamelCase(project_name)}BaseUtils;
 import ${base_package}.SmartList;
 import ${base_package}.secuser.SecUser;
 import ${base_package}.userapp.UserApp;
+import ${base_package}.userapp.UserAppTokens;
 <#if script.userLoginInfo?has_content>
 	<#assign loginInfo=script.userLoginInfo />
 import ${base_package}.${NAMING.toCamelCase(loginInfo.userModelName)?lower_case}.${NAMING.toCamelCase(loginInfo.userModelName)};
@@ -38,6 +42,8 @@ import com.terapico.utils.JWTUtil;
 import com.terapico.utils.MapUtil;
 import com.terapico.utils.RandomUtil;
 import com.terapico.utils.TextUtil;
+
+import com.terapico.uccaf.BaseUserContext;
 
 /**
  * 此类负责：声明所有${class_name}ViewService中所使用的方法和常量。 单独列出的目的是便于维护。
@@ -120,7 +126,9 @@ public abstract class Base${class_name}ViewService extends ${parent_class_name} 
 	}
 <#if script.userLoginInfo?has_content>
 	<#include "/actions/login/login.java.ftl">
+	<#include "/actions/login/checkAccess.java.ftl">
 </#if>
+
 <#list script.requests as request>
 	// 处理请求：${request.comments!}
 	public static String make${NAMING.toCamelCase(request.name)}Url(${custom_context_name} ctx<@T.getRequestProcessingUrlMethodParameters request/>){

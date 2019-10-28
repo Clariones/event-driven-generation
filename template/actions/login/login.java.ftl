@@ -48,7 +48,7 @@
 	}
 	protected void cacheLoginedUser(${custom_context_name} ctx, String loginInfoCacheToken, SecUser secUser, UserApp userApp, ${login_target_class} loginTarget) {
 		Map<String, Object> data = MapUtil.put("secUserId", secUser.getId())
-				.put("userAppId", userApp.getId())
+				.putIf(userApp!=null, "userAppId", userApp.getId())
 				.put("loginAs", loginTarget.getId())
 				.putIf(ctx.getFromContextLocalStorage("wechatLoginSessionKey")!=null, "wechatLoginSessionKey", ctx.getFromContextLocalStorage("wechatLoginSessionKey"))
 				.put("fromTime", ctx.now())
