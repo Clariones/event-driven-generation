@@ -58,7 +58,7 @@
     	if (data == null || !data.containsKey("fromTime")) {
     		return true;
     	}
-    	Date date = (Date) data.get("fromTime");
+    	Date date = DateTimeUtil.parseInputDateTime(String.valueOf(data.get("fromTime")));
     	if (ctx.now().getTime() - date.getTime() > (5*DateTimeUtil.DAY_IN_MS)) {
     		return true;
     	}

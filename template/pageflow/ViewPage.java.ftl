@@ -35,17 +35,23 @@ public class ${class_name}Page extends BaseViewPage{
 		return pageTitle;
 	}
 </#if>
-<#if page.listOfTemplate??>
+<#if page.listOfTemplate?has_content>
 	@Override
 	protected void beforeDoRendering() {
 		super.beforeDoRendering();
 		this.set("displayMode", "${page.listOfTemplate}");
 	}
-
+</#if>
+<#if page.listOfTemplate?has_content || page.renderClassName?has_content>
 	@Override
 	protected void afterDoRendering() {
 		super.afterDoRendering();
+	<#if page.listOfTemplate?has_content>
 		forceResponseAsListOfPage();
+	</#if>
+	<#if page.renderClassName?has_content>
+		userContext.forceResponseXClassHeader("${page.renderClassName}");
+	</#if>
 	}
 </#if>
 }

@@ -185,6 +185,9 @@ public class PageFlowScript extends BasePageFlowScript {
 		if (currentWork instanceof QueryInfo) {
 			String[] names = paramName.split("\\s+as\\s+");
 			currentQuery.addObjectParameter(names[1], names[0]);
+		}else if (currentWork instanceof Request) {
+			String[] names = paramName.split("\\s+as\\s+");
+			currentRequest.addObjectParameter(names[1], names[0]);
 		}else {
 			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能指定对象参数"+paramName);
 		}
@@ -286,6 +289,14 @@ public class PageFlowScript extends BasePageFlowScript {
 		}
 		return this;
 	}
+	public PageFlowScript as_class(String className) {
+		if (currentWork instanceof Page) {
+			currentPage.setRenderClassName(className);
+		}else {
+			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能指定类名");
+		}
+		return this;
+	}
 	public PageFlowScript title(String name) {
 		if (currentWork instanceof Page) {
 			currentPage.setPageTitle(name);
@@ -339,7 +350,8 @@ public class PageFlowScript extends BasePageFlowScript {
 		UserLoginInfo ulInfo = new UserLoginInfo();
 		ulInfo.setUserModelName(modelName);
 		userLoginInfo = ulInfo;
-		return this;
+		return this.request("client login").with_object("com.terapico.caf.baseelement.LoginParam as loginParam")
+				.comments("默认的客户端登录接口").no_footprint().no_login();
 	}
 	public PageFlowScript login_from_wxapp_by_wechat_work() {
 		userLoginInfo.addLoginMethod("wechat_work_app");
@@ -353,6 +365,34 @@ public class PageFlowScript extends BasePageFlowScript {
 		userLoginInfo.addLoginMethod("mobile_and_vcode");
 		return this;
 	}
+	public PageFlowScript standard_homepage(String title) {
+		return this.request("view homepage")
+				.comments("查看首页").no_login().has_footprint().can_refresh()
+			.got_page("home").title(title).as_class("com.terapico.appview.HomePage")
+			;
+	}
+	public PageFlowScript standard_me(String title) {
+		return this.request("view dashboard")
+				.comments("我的").need_login().has_footprint().can_refresh()
+			.got_page("me").title(title).as_class("com.terapico.appview.MePage")
+			;
+	}
+	protected PageFlowScript with_field(String name, String scope) {
+		if (currentWork instanceof Page) {
+			currentPage.addField(name, scope);
+		}else {
+			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能设定字段");
+		}
+		return this;
+	}
+	
+	public PageFlowScript got_me_page() {
+		return got_page("me").as_class("com.terapico.appview.MePage");
+	}
+	public PageFlowScript got_home_page() {
+		return got_page("home").as_class("com.terapico.appview.HomePage");
+	}
+	
 	
 	
 	

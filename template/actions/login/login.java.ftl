@@ -2,7 +2,7 @@
 <#assign login_target_class=NAMING.toCamelCase(loginInfo.userModelName)/>
 <#assign login_target_model=loginInfo.userModelName/>
     
-    protected Object processClientLogin(${custom_context_name} ctx, Map<String, Object> params) throws Exception {
+    protected ${login_target_class} processClientLogin(${custom_context_name} ctx, Map<String, Object> params) throws Exception {
         // 先根据输入参数，判断应该用哪个 loginHandler
         BaseLoginHandler loginHandler = findLoginHandler(ctx, params);
         // loginHandler 首先找到登录的目标用户。 如果登录失败，会抛出异常。 如果允许登录，
@@ -47,8 +47,8 @@
 		return (int) (7*DateTimeUtil.DAY_IN_MS/DateTimeUtil.SECOND_IN_MS);
 	}
 	protected void cacheLoginedUser(${custom_context_name} ctx, String loginInfoCacheToken, SecUser secUser, UserApp userApp, ${login_target_class} loginTarget) {
-		Map<String, Object> data = MapUtil.put("secUserId", secUser.getId())
-				.putIf(userApp!=null, "userAppId", userApp.getId())
+		Map<String, Object> data = MapUtil.putIf(secUser!=null, "secUserId", ()->secUser.getId())
+				.putIf(userApp!=null, "userAppId", ()->userApp.getId())
 				.put("loginAs", loginTarget.getId())
 				.putIf(ctx.getFromContextLocalStorage("wechatLoginSessionKey")!=null, "wechatLoginSessionKey", ctx.getFromContextLocalStorage("wechatLoginSessionKey"))
 				.put("fromTime", ctx.now())
@@ -109,7 +109,12 @@
                         wwUserId = userId;
 						wwSessionKey = userSessionKey;
                         MultipleAccessKey key = new MultipleAccessKey();
-						WechatWorkLoginInfo logInfo = wechatWorkLoginInfoDaoOf(ctx).loadByUserId(userId, EO);
+						WechatWorkLoginInfo logInfo = null;
+						try {
+							logInfo = wechatWorkLoginInfoDaoOf(ctx).loadByUserId(userId, EO);
+						}catch(Exception e){
+							// 找不到不要紧 后面会处理
+						}
 						if (logInfo == null) {
 							return null;
 						}
