@@ -44,6 +44,7 @@ import com.terapico.utils.RandomUtil;
 import com.terapico.utils.TextUtil;
 
 import com.terapico.uccaf.BaseUserContext;
+import com.terapico.caf.baseelement.LoginParam;
 
 /**
  * 此类负责：声明所有${class_name}ViewService中所使用的方法和常量。 单独列出的目的是便于维护。
@@ -53,8 +54,7 @@ import com.terapico.uccaf.BaseUserContext;
 public abstract class Base${class_name}ViewService extends ${parent_class_name} implements FootprintProducer{
 <#if script.userLoginInfo?has_content>
 	protected static interface BaseLoginHandler {
-
-		String PARAM_CODE = "code";
+		String DEBUG = "debug";  // 调试时使用的简单登录接口，生产环境不可用
 		String WECHAT_WORK_APP = "wechat_work_app";  // 前端使用小程序，用企业微信登录
 		String WECHAT_APP = "wechat_app";  // 前端使用小程序, 做微信登录
 		String MOBILE_AND_VCODE = "mobile_vcode";	// 前端使用手机号和验证码登录
@@ -63,7 +63,7 @@ public abstract class Base${class_name}ViewService extends ${parent_class_name} 
 		 * 用输入的信息，做登录的动作。
 		 * @return 如果输入的信息错误，抛异常；如果输入的信息，不能登陆，抛异常；如果输入的信息允许登录，但是找不到对应的'登录目标'， 不抛异常，返回null；如果登录正常，返回登录成功的对象。
 		 */
-		public ${NAMING.toCamelCase(loginInfo.userModelName)} doLogin(${custom_context_name} ctx, Map<String, Object> params) throws Exception;
+		public ${NAMING.toCamelCase(loginInfo.userModelName)} doLogin(${custom_context_name} ctx, LoginParam loginParam) throws Exception;
 		
 		/** 
 		 * 获取处理后的登录相关信息
@@ -146,7 +146,11 @@ public abstract class Base${class_name}ViewService extends ${parent_class_name} 
 </#list>
 
 <#list script.pages as name,page>
-	protected abstract ${NAMING.toCamelCase(page.name)}Page assembler${NAMING.toCamelCase(page.name)}Page(${custom_context_name} ctx, String requestName)throws Exception;
+	protected ${NAMING.toCamelCase(page.name)}Page assembler${NAMING.toCamelCase(page.name)}Page(${custom_context_name} ctx, String requestName)throws Exception {
+		${NAMING.toCamelCase(page.name)}Page page = new ${NAMING.toCamelCase(page.name)}Page();
+		page.assemblerContent(ctx, requestName);
+		return page;
+	}
 </#list>
 
 	protected abstract void getCurrentUserInfo(${custom_context_name} ctx);

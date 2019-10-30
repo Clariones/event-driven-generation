@@ -3,6 +3,8 @@ package ${package}pageview;
 
 import com.terapico.caf.viewpage.SerializeScope;
 import ${base_package}.BaseViewPage;
+import ${base_package}.${context_name};
+import ${base_package}.${custom_context_name};
 import ${base_package}.${NAMING.toCamelCase(project_name)}ViewScope;
 
 public class ${class_name}Page extends BaseViewPage{
@@ -54,4 +56,10 @@ public class ${class_name}Page extends BaseViewPage{
 	</#if>
 	}
 </#if>
+	@Override
+	public void assemblerContent(${context_name} userContext, String requestName)throws Exception {
+		${custom_context_name} ctx = (${custom_context_name})userContext;
+		// TODO: 需要实现
+		setPageTitle("尚未实现");
+	}
 }

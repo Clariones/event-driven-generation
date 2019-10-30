@@ -88,14 +88,19 @@
 			return null;
 		}
 		String loginedId = (String) data.get("loginAs");
-		${login_target_class} loginTarget = ${login_target_class?uncap_first}DaoOf(ctx).load(loginedId, EO);
-		UserApp userApp = userAppDaoOf(ctx).load(userAppId, UserAppTokens.start().withSecUser().done());
-		ctx.setCurrentUserInfo(loginTarget);
-		int cachePeriod = getLoginInfoCachePeriod(ctx);
-		ctx.putToCache(getCurrentAppKey(ctx), userApp, cachePeriod);
-		ctx.setSecUser(userApp.getSecUser());
-		
-		return loginTarget;
+		try{
+			${login_target_class} loginTarget = ${login_target_class?uncap_first}DaoOf(ctx).load(loginedId, EO);
+			UserApp userApp = userAppDaoOf(ctx).load(userAppId, UserAppTokens.start().withSecUser().done());
+			ctx.setCurrentUserInfo(loginTarget);
+			int cachePeriod = getLoginInfoCachePeriod(ctx);
+			ctx.putToCache(getCurrentAppKey(ctx), userApp, cachePeriod);
+			ctx.setSecUser(userApp.getSecUser());
+			
+			return loginTarget;
+		}catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
     
     protected DecodedJWT getTokenFromClientRequest(${custom_context_name} ctx) {

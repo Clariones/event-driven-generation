@@ -2,14 +2,14 @@
 <#assign login_target_class=NAMING.toCamelCase(loginInfo.userModelName)/>
 <#assign login_target_model=loginInfo.userModelName/>
     
-    protected ${login_target_class} processClientLogin(${custom_context_name} ctx, Map<String, Object> params) throws Exception {
+    protected ${login_target_class} processClientLogin(${custom_context_name} ctx, LoginParam loginParam) throws Exception {
         // 先根据输入参数，判断应该用哪个 loginHandler
-        BaseLoginHandler loginHandler = findLoginHandler(ctx, params);
+        BaseLoginHandler loginHandler = findLoginHandler(ctx, loginParam);
         // loginHandler 首先找到登录的目标用户。 如果登录失败，会抛出异常。 如果允许登录，
-        ${login_target_class} loginTarget = loginHandler.doLogin(ctx, params);
+        ${login_target_class} loginTarget = loginHandler.doLogin(ctx, loginParam);
         if (loginTarget == null) {
             // 如果没有抛异常，返回null，说明是个 '新建用户'。 触发'onNewLogin'方法
-            loginTarget = onNewLogin(ctx, params, loginHandler);
+            loginTarget = onNewLogin(ctx, loginParam, loginHandler);
         }
         // 找到登录目标对应的 secUser 和 userApp
         SecUser secUser = findSecUserByLoginTarget(ctx, loginTarget);
@@ -87,21 +87,42 @@
 
     
     // 默认新用户登录，自动创建账户。 具体的字段需要业务实现。所以此处为 abstract
-    protected abstract ${login_target_class} onNewLogin(${custom_context_name} ctx, Map<String, Object> params, BaseLoginHandler loginHandler) throws Exception;
+    protected abstract ${login_target_class} onNewLogin(${custom_context_name} ctx, LoginParam loginParam, BaseLoginHandler loginHandler) throws Exception;
 
-    protected BaseLoginHandler findLoginHandler(${custom_context_name} ctx, Map<String, Object> params) {
-
-        String loginMethod = (String) params.get("loginMethod");
-		switch (loginMethod) {
+    protected BaseLoginHandler findLoginHandler(${custom_context_name} ctx, LoginParam loginParam) {
+		switch (loginParam.getLoginMethod()) {
+			case BaseLoginHandler.DEBUG: {
+				return new BaseLoginHandler() {
+					String did;
+					@Override
+                    public ${login_target_class} doLogin(${custom_context_name} ctx, LoginParam loginParam) throws Exception{
+                    	if (ctx.isProductEnvironment()){
+                    		throw new Exception("不能在生产环境使用此方式登录");
+                    	}
+                    	String id = loginParam.getId();
+                    	try{
+							return ${login_target_class?uncap_first}DaoOf(ctx).load(id, EO);
+						}catch(Exception e){
+							// 找不到不要紧 后面会处理
+							return null;
+						}
+                    }
+                    @Override
+					public Map<String, Object> getProcessedLoginInfo(CustomStoredevUserContextImpl ctx) {
+						return MapUtil.put("loginMethod", BaseLoginHandler.DEBUG)
+								.put("id", did).into_map();
+					}
+				};
+			}
 <#if loginInfo.canLoginBy("wechat_work_app")>
             case BaseLoginHandler.WECHAT_WORK_APP: {
                 return new BaseLoginHandler() {
                 	String wwUserId;
                 	String wwSessionKey;
                     @Override
-                    public ${login_target_class} doLogin(${custom_context_name} ctx, Map<String, Object> params) throws Exception{
+                    public ${login_target_class} doLogin(${custom_context_name} ctx, LoginParam loginParam) throws Exception{
                         WxCpService svc = getWxCpService();
-                        String code = (String) params.get(BaseLoginHandler.PARAM_CODE);
+                        String code = loginParam.getCode();
                         WxCpMaJsCode2SessionResult sessionInfo = svc.jsCode2Session(code);
                         String userId = sessionInfo.getUserId();
                         String userSessionKey = sessionInfo.getSessionKey();
@@ -109,18 +130,15 @@
                         wwUserId = userId;
 						wwSessionKey = userSessionKey;
                         MultipleAccessKey key = new MultipleAccessKey();
-						WechatWorkLoginInfo logInfo = null;
-						try {
-							logInfo = wechatWorkLoginInfoDaoOf(ctx).loadByUserId(userId, EO);
+                        try {
+							WechatWorkLoginInfo logInfo = wechatWorkLoginInfoDaoOf(ctx).loadByUserId(userId, EO);
+							logInfo.updateSessionKey(userSessionKey);
+							wechatWorkLoginInfoManagerOf(ctx).internalSaveWechatWorkLoginInfo(ctx, logInfo, EO);
+							return ${login_target_class?uncap_first}DaoOf(ctx).load(logInfo.get${login_target_class}().getId(), EO);
 						}catch(Exception e){
 							// 找不到不要紧 后面会处理
-						}
-						if (logInfo == null) {
 							return null;
 						}
-						logInfo.updateSessionKey(userSessionKey);
-						wechatWorkLoginInfoManagerOf(ctx).internalSaveWechatWorkLoginInfo(ctx, logInfo, EO);
-						return ${login_target_class?uncap_first}DaoOf(ctx).load(logInfo.get${login_target_class}().getId(), EO);
                     }
                     @Override
 					public Map<String, Object> getProcessedLoginInfo(CustomStoredevUserContextImpl ctx) {
@@ -137,9 +155,9 @@
                 	String wxOpenId;
                 	String wxSessionKey;
                     @Override
-                    public ${login_target_class} doLogin(${custom_context_name} ctx, Map<String, Object> params) throws Exception{
+                    public ${login_target_class} doLogin(${custom_context_name} ctx, LoginParam loginParam) throws Exception{
                         WxMaService wxService = getWxMaService();
-                        String code = (String) params.get(BaseLoginHandler.PARAM_CODE);
+                        String code = loginParam.getCode();
                         WxMaJscode2SessionResult sessionInfo = wxService.jsCode2SessionInfo(code);
                         String openId = sessionInfo.getOpenid();
                         String userSessionKey = sessionInfo.getSessionKey();
@@ -154,7 +172,12 @@
 						WechatLoginInfo logInfo = infoList.first();
 						logInfo.updateSessionKey(userSessionKey);
 						wechatLoginInfoManagerOf(ctx).internalSaveWechatLoginInfo(ctx, logInfo, EO);
-						return ${login_target_class?uncap_first}DaoOf(ctx).load(logInfo.get${login_target_class}().getId(), EO);
+						try{
+							return ${login_target_class?uncap_first}DaoOf(ctx).load(logInfo.get${login_target_class}().getId(), EO);
+						}catch(Exception e){
+							// 找不到不要紧 后面会处理
+							return null;
+						}
                     }
                     @Override
 					public Map<String, Object> getProcessedLoginInfo(CustomStoredevUserContextImpl ctx) {
@@ -170,9 +193,9 @@
             	return new BaseLoginHandler() {
             		String mcMobile;
                     @Override
-                    public ${login_target_class} doLogin(${custom_context_name} ctx, Map<String, Object> params) throws Exception{
-                    	String vCode = (String) params.get("verifyCode");
-                    	String mobile = (String) params.get("mobile");
+                    public ${login_target_class} doLogin(${custom_context_name} ctx, LoginParam loginParam) throws Exception{
+                    	String vCode = loginParam.getVerifyCode();
+                    	String mobile = loginParam.getMobile();
                     	mobile = ${NAMING.toCamelCase(project_name)}BaseUtils.formatChinaMobile(mobile);
                     	checkVerifyCode(ctx, vCode, mobile);
                     	mcMobile = mobile;
