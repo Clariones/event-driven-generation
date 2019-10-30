@@ -128,6 +128,7 @@ public abstract class Base${class_name}ViewService extends ${parent_class_name} 
 		}
 		return sb.toString();
 	}
+	<#include "/actions/sms/sendSms.java.ftl">
 <#if script.userLoginInfo?has_content>
 	<#include "/actions/login/login.java.ftl">
 	<#include "/actions/login/checkAccess.java.ftl">
