@@ -18,10 +18,13 @@ public class MainScript extends BasePageFlowDescriptionScript {
 				.login_by_mobile_with_verify_code()
 				
 			.standard_homepage("植物医生")
-			.standard_me("植物医生")
+//			.standard_me("植物医生")
+			.request("view dashboard").with_string("filter")
+			.comments("我的").need_login().has_footprint().can_refresh()
+			.got_page("me").title("植物医生").as_class("com.terapico.appview.MePage")
 			.import_from(new S0_Homepage())
 			.import_from(new S1_Query())
-
+			.import_from(new S2_RecommendationForm())
 			;
 	
 
