@@ -20,6 +20,7 @@ import ${base_package}.SmartList;
 import ${base_package}.secuser.SecUser;
 import ${base_package}.userapp.UserApp;
 import ${base_package}.userapp.UserAppTokens;
+import ${base_package}.${NAMING.toCamelCase(project_name)}Exception;
 <#if script.userLoginInfo?has_content>
 	<#assign loginInfo=script.userLoginInfo />
 import ${base_package}.${NAMING.toCamelCase(loginInfo.userModelName)?lower_case}.${NAMING.toCamelCase(loginInfo.userModelName)};
