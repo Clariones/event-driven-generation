@@ -108,7 +108,7 @@
 						}
                     }
                     @Override
-					public Map<String, Object> getProcessedLoginInfo(Custom${NAMING.toCamelCase(project_name)}UserContextImpl ctx) {
+					public Map<String, Object> getProcessedLoginInfo(${custom_context_name} ctx) {
 						return MapUtil.put("loginMethod", BaseLoginHandler.DEBUG)
 								.put("id", did).into_map();
 					}
@@ -141,7 +141,7 @@
 						}
                     }
                     @Override
-					public Map<String, Object> getProcessedLoginInfo(Custom${NAMING.toCamelCase(project_name)}UserContextImpl ctx) {
+					public Map<String, Object> getProcessedLoginInfo(${custom_context_name} ctx) {
 						return MapUtil.put("loginMethod", BaseLoginHandler.WECHAT_WORK_APP)
 								.put("userId", wwUserId)
 								.put("sessionKey", wwSessionKey).into_map();
@@ -180,7 +180,7 @@
 						}
                     }
                     @Override
-					public Map<String, Object> getProcessedLoginInfo(Custom${NAMING.toCamelCase(project_name)}UserContextImpl ctx) {
+					public Map<String, Object> getProcessedLoginInfo(${custom_context_name} ctx) {
 						return MapUtil.put("loginMethod", BaseLoginHandler.WECHAT_APP)
 								.put("openId", wxOpenId)
 								.put("sessionKey", wxSessionKey).into_map();
@@ -207,7 +207,7 @@
                         return list.first();
                     }
                     @Override
-					public Map<String, Object> getProcessedLoginInfo(Custom${NAMING.toCamelCase(project_name)}UserContextImpl ctx) {
+					public Map<String, Object> getProcessedLoginInfo(${custom_context_name} ctx) {
 						return MapUtil.put("loginMethod", BaseLoginHandler.MOBILE_AND_VCODE)
 								.put("mobile", mcMobile).into_map();
 					}

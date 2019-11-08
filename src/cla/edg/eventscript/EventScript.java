@@ -145,6 +145,10 @@ public class EventScript extends BasicEventScriptInfo {
 		currentOperation = this.getConfiguration();
 		return this;
 	}
+
+	public EventScript nothing() {
+		return this;
+	}
 	
 
 }

@@ -16,6 +16,9 @@ public class V3PageFlowScript extends PieceOfScript {
 			.request("moyi user unwatch moyi shop").with_string("shop id")
 				.comments("用户取消关注店铺").need_login().no_footprint()
 				.got_ajax_page()
+			.request("moyi user unwatch moyi shop from list").with_string("shop id")
+				.comments("用户取消关注店铺").need_login().no_footprint()
+				.got_page("shops watched by user")
 				
 			.request("view watched user by shop").with_string("shop id")
 				.comments("查看关注店铺的用户列表")

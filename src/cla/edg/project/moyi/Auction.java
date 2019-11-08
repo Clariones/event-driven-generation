@@ -60,6 +60,7 @@ public class Auction extends BaseMoyiEventScript{
 				.event_ripple("calculate split details when confirm reception").comments("根据订单自动计算分账明细")
 				.event_ripple("close auction trade with split details").comments("交易成功时,根据分账明细处理订单和所涉及的人,作品")
 				.event_ripple("reward for first deal").comments("对首单成交者发放奖励")
+				.event_ripple("reward for refferral").comments("对店铺推荐者发放奖励")
 //				.event_ripple("release shop deposit when receiption confirmed").comments("确认收货后, 退还卖家的店铺保证金")
 				
 				
@@ -191,6 +192,7 @@ public class Auction extends BaseMoyiEventScript{
 			.on_event("handle ink deed when bought in without ink deed sold").comments("流拍但是没有别人持有墨契时,标记所有墨契已经处理完毕")
 //			.on_event("release shop deposit when receiption confirmed").comments("确认收货后, 退还卖家的店铺保证金")
 			.on_event("reward for first deal").comments("对首单成交者发放奖励")
+			.on_event("reward for refferral").comments("对店铺推荐者发放奖励")
 			;
 	
 

@@ -6,6 +6,7 @@ import ${base_package}.${custom_context_name};
 import ${base_package}.BaseViewPage;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.Map;
 
 <#list helper.getAllForms(script) as form>

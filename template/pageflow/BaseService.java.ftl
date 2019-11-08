@@ -111,6 +111,10 @@ public abstract class Base${class_name}ViewService extends ${parent_class_name} 
 					sb.append('+').append('/');
 					continue;
 				}
+				if (param instanceof Date) {
+					sb.append(DateTimeUtil.formatDate((Date)param, "yyyy-MM-dd'T'HH:mm:ss")).append('/');
+					continue;
+				}
 				boolean isVariable = false;
 				if (param instanceof String && ((String) param).length() > 0) {
 					isVariable = ((String) param).charAt(0) == ':';

@@ -171,11 +171,22 @@ public class PageFlowScript extends BasePageFlowScript {
 	public PageFlowScript with_last_record_id() {
 		return with_string("last record id");
 	}
+	
 	public PageFlowScript with_string(String paramName) {
 		if (currentWork instanceof Request) {
 			AccessParameter p = currentRequest.addStringParameter(paramName);
 		}else if (currentWork instanceof QueryInfo) {
 			currentQuery.addStringParameter(paramName);
+		}else {
+			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能指定字符串参数"+paramName);
+		}
+		return this;
+	}
+	public PageFlowScript with_date(String paramName) {
+		if (currentWork instanceof Request) {
+			AccessParameter p = currentRequest.addDateParameter(paramName);
+		}else if (currentWork instanceof QueryInfo) {
+			currentQuery.addDateParameter(paramName);
 		}else {
 			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能指定字符串参数"+paramName);
 		}
