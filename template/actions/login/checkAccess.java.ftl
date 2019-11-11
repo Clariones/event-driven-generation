@@ -33,6 +33,7 @@
 			}
 			// 没有登录
 			if (needLogin) {
+				ctx.forceResponseXClassHeader("com.terapico.appview.LoginForm");
 				return accessFail("请登录后再继续使用。");
 			}
 			// 无需登录，那就生成一个临时的token
