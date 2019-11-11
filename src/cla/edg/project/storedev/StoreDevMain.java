@@ -25,7 +25,7 @@ public class StoreDevMain {
 //		System.out.println(json);
 		ExploreGenerator generator = new ExploreGenerator();
 		
-		generator.setBaseOutputFolder("/works/jobs/store_dev_v1/workspace/storedev-biz-suite/bizcore/WEB-INF/storedev_custom_src");
+		generator.setBaseOutputFolder("/Users/jarryzhou/codebase/storedev-biz-suite/bizcore/WEB-INF/storedev_custom_src");
 		generator.setBaseTempalteFolder("./template");
 		
 		generator.generateWithScript(script);
@@ -38,7 +38,7 @@ public class StoreDevMain {
 //		System.out.println(jsonStr);
 		
 		PageFlowGenerator generator = new PageFlowGenerator();
-		generator.setBaseOutputFolder("/works/jobs/store_dev_v1/workspace/storedev-biz-suite/bizcore/WEB-INF/storedev_custom_src");
+		generator.setBaseOutputFolder("/Users/jarryzhou/codebase/storedev-biz-suite/bizcore/WEB-INF/storedev_custom_src");
 		generator.setBaseTempalteFolder("./template");
 		generator.generateWithScript(script);
 	}
