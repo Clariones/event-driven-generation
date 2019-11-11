@@ -10,8 +10,6 @@ public class S2_RecommendationForm extends PieceOfScript {
 					.request("home page").comments("APP 登陆后的首页").can_refresh().need_login().with_string("filter")
 					.got_page("store developer home")
 						.may_request("open baseinformation form").comments("发起申请")
-						.may_request("open new store").comments("新开门店")
-						.may_request("view rank").comments("查看排名")
 					
 						//发起申请
 						.request("open baseinformation form").comments("打开 新店申请-基本信息")
@@ -41,12 +39,6 @@ public class S2_RecommendationForm extends PieceOfScript {
 							.has_footprint().can_refresh().need_login()
 							.got_page("expense form")
 									
-						//新开门店
-						.request("open new store").comments("新开门店").need_login()
-							.got_page("new store")
-						
-						.request("view rank").comments("查看排名").need_login().can_refresh()
-							.got_page("ranking")
 							
 				
 			;
