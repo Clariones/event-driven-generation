@@ -5,6 +5,9 @@
     protected ${login_target_class} processClientLogin(${custom_context_name} ctx, LoginParam loginParam) throws Exception {
         // 先根据输入参数，判断应该用哪个 loginHandler
         BaseLoginHandler loginHandler = findLoginHandler(ctx, loginParam);
+        if (loginHandler == null) {
+        	throwsExceptionWithMessage(ctx, "不支持"+loginParam.getLoginMethod()+"方式的登录");
+        }
         // loginHandler 首先找到登录的目标用户。 如果登录失败，会抛出异常。 如果允许登录，
         ${login_target_class} loginTarget = loginHandler.doLogin(ctx, loginParam);
         if (loginTarget == null) {
@@ -101,12 +104,7 @@
                     		throw new Exception("不能在生产环境使用此方式登录");
                     	}
                     	String id = loginParam.getId();
-                    	try{
-							return ${login_target_class?uncap_first}DaoOf(ctx).load(id, EO);
-						}catch(Exception e){
-							// 找不到不要紧 后面会处理
-							return null;
-						}
+						return ${login_target_class?uncap_first}DaoOf(ctx).load(id, EO);
                     }
                     @Override
 					public Map<String, Object> getProcessedLoginInfo(${custom_context_name} ctx) {
