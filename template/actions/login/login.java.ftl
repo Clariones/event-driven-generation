@@ -10,6 +10,7 @@
         if (loginTarget == null) {
             // 如果没有抛异常，返回null，说明是个 '新建用户'。 触发'onNewLogin'方法
             loginTarget = onNewLogin(ctx, loginParam, loginHandler);
+            loginHandler.createLoginInfoForNewTarget(ctx, loginTarget);
         }
         // 找到登录目标对应的 secUser 和 userApp
         SecUser secUser = findSecUserByLoginTarget(ctx, loginTarget);
@@ -112,6 +113,10 @@
 						return MapUtil.put("loginMethod", BaseLoginHandler.DEBUG)
 								.put("id", did).into_map();
 					}
+					@Override
+					public void createLoginInfoForNewTarget(${custom_context_name} ctx, ${login_target_class} loginTarget) {
+						// 调试登录直接使用ID,无需额外操作
+					}
 				};
 			}
 <#if loginInfo.canLoginBy("wechat_work_app")>
@@ -145,6 +150,18 @@
 						return MapUtil.put("loginMethod", BaseLoginHandler.WECHAT_WORK_APP)
 								.put("userId", wwUserId)
 								.put("sessionKey", wwSessionKey).into_map();
+					}
+					
+					@Override
+					public void createLoginInfoForNewTarget(${custom_context_name} ctx, ${login_target_class} loginTarget) {
+						try {
+							WxCpService svc = getWxCpService();
+							wechatWorkLoginInfoManagerOf(ctx).createWechatWorkLoginInfo(ctx, loginTarget.getId(), 
+								svc.getWxCpConfigStorage().getCorpId(), wwUserId, wwSessionKey);
+
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
 					}
                 };
             }
@@ -185,6 +202,16 @@
 								.put("openId", wxOpenId)
 								.put("sessionKey", wxSessionKey).into_map();
 					}
+					@Override
+					public void createLoginInfoForNewTarget(${custom_context_name} ctx, ${login_target_class} loginTarget) {
+						try {
+							WxMaService wxService = getWxMaService();
+							wechatLoginInfoManagerOf(ctx).createWechatLoginInfo(ctx, loginTarget.getId(),
+									wxService.getWxMaConfig().getAppid(), wxOpenId, wxSessionKey);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
                 };
             }
 </#if>
@@ -210,6 +237,10 @@
 					public Map<String, Object> getProcessedLoginInfo(${custom_context_name} ctx) {
 						return MapUtil.put("loginMethod", BaseLoginHandler.MOBILE_AND_VCODE)
 								.put("mobile", mcMobile).into_map();
+					}
+					@Override
+					public void createLoginInfoForNewTarget(${custom_context_name} ctx, ${login_target_class} loginTarget) {
+						// 手机号登录直接使用SecUser,无需额外操作
 					}
                 };
             }

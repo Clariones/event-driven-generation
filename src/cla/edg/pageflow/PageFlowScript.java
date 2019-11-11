@@ -54,7 +54,7 @@ public class PageFlowScript extends BasePageFlowScript {
 		request.setHasFootprint(hasFootPrintDefault);
 		addNewRequest(request);
 		setCurrentWork(request);
-		return this;
+		return this.comments("这个程序员很懒,什么也没留下");
 	}
 	public PageFlowScript comments(String string) {
 		if (currentWork instanceof BasePageFlowElement) {
