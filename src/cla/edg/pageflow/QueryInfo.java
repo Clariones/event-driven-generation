@@ -8,6 +8,21 @@ public class QueryInfo extends BasePageFlowElement {
 	protected List<String> ruleComments;
 	protected List<AccessParameter> parameters;
 	protected boolean pagination = false;
+	protected boolean querySingleObject = false;
+	protected QueryActionInfo queryActionInfo;
+	
+	public QueryActionInfo getQueryActionInfo() {
+		return queryActionInfo;
+	}
+	public void setQueryActionInfo(QueryActionInfo queryActionInfo) {
+		this.queryActionInfo = queryActionInfo;
+	}
+	public boolean isQuerySingleObject() {
+		return querySingleObject;
+	}
+	public void setQuerySingleObject(boolean querySingleObject) {
+		this.querySingleObject = querySingleObject;
+	}
 	public String getObjectName() {
 		return objectName;
 	}

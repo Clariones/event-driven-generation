@@ -1,7 +1,6 @@
 package cla.edg.project.moyi;
 
 import cla.edg.pageflow.BasePageFlowDescriptionScript;
-import cla.edg.pageflow.BasePageFlowScript;
 import cla.edg.pageflow.PageFlowScript;
 
 public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
@@ -496,7 +495,7 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 				.got_page("store detail")
 			.request("view store detail").with_string("shop id").with_string("filter")
 				.comments("游客浏览店铺").has_footprint().no_login()
-				.query("artwork_auction").which("opening in shop").pagination().with_string("shop id")
+				.query("artwork_auction").which("opening in shop").pagination().with_string("shop id").with_date("viewing from")
 					.comments("查询店铺的在售拍卖")
 					.rule_comments("公示中 和 拍卖中 的都有效")
 					.rule_comments("以开始时间倒序")
@@ -514,11 +513,11 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 					.may_request("view next page ink deed opening in shop")
 					.may_request("view artwork product")
 					.may_request("view ink deed entry order detail")
-			.request("view next page auction opening in shop").with_string("shop id").with_string("last record id")
+			.request("view next page auction opening in shop").with_string("shop id").with_date("view time").with_string("last record id")
 				.comments("游客浏览店铺 在售商品翻页")
 				.got_page("store detail")
 			.request("view next page auction closed in shop").with_string("shop id").with_string("last record id")
-				.comments("游客浏览店铺 在售商品翻页")
+				.comments("游客浏览店铺 已截拍商品翻页")
 				.got_page("store detail")
 			.request("view next page ink deed opening in shop").with_string("user id").with_string("last record id")
 				.comments("游客浏览店铺 在售墨契翻页")
@@ -763,14 +762,19 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 				.rule_comments("filter 表示状态, 例如公示中和竞拍中, 用 'not_close' 表示")
 			.query("artwork_auction").which("bidded by me").pagination().with_string("user id").with_string("filter")
 				.comments("查询'我的-拍品订单-已预约'的列表")
-				
+			.query("artwork").which("recommened").no_pagination().with_string("artwork id").with_integer("length")
+				.comments("查询当前作品相关的推荐作品")
+			.query("artwork_auction").which("recommened").no_pagination().with_string("artwork id").with_integer("length")
+				.comments("查询当前作品相关的推荐拍品")
 			;
 		
 //			
 
 	@Override
 	public PageFlowScript getScript() {
-		return SCRIPT.import_from(new V3PageFlowScript());
+		return SCRIPT.import_from(new V3PageFlowScript())
+				.import_from(new V3FindScript())
+				;
 	}
 
 }

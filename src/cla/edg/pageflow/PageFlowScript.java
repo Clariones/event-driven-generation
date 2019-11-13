@@ -404,6 +404,52 @@ public class PageFlowScript extends BasePageFlowScript {
 		return got_page("home").as_class("com.terapico.appview.HomePage");
 	}
 	
+	public PageFlowScript find(String tgtName) {
+		this.query(tgtName);
+		currentQuery.setQuerySingleObject(true);
+		return this;
+	}
+	public PageFlowScript do_it_as() {
+		if (currentWork instanceof QueryInfo) {
+			queryActionInfo = new QueryActionInfo();
+			currentQuery.setQueryActionInfo(queryActionInfo);
+		}else {
+			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能指定执行细节");
+		}
+		return this;
+	}
+	public PageFlowScript sql_is(String sql) {
+		if (currentWork instanceof QueryInfo) {
+			queryActionInfo.setSqlTemplate(sql);
+		}else {
+			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能指定SQL细节");
+		}
+		return this;
+	}
+	public PageFlowScript param_string(String param) {
+		if (currentWork instanceof QueryInfo) {
+			queryActionInfo.addParamString(param);
+		}else {
+			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能指定SQL参数细节");
+		}
+		return this;
+	}
+	public PageFlowScript param(Object param) {
+		if (currentWork instanceof QueryInfo) {
+			queryActionInfo.addParam(param);
+		}else {
+			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能指定SQL参数细节");
+		}
+		return this;
+	}
+	public PageFlowScript need_know(String typeName) {
+		if (currentWork instanceof QueryInfo) {
+			queryActionInfo.getExternTypesNeedKnown().add(typeName);
+		}else {
+			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能指定SQL参数细节");
+		}
+		return this;
+	}
 	
 	
 	

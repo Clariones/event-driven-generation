@@ -24,7 +24,7 @@ public class BasePageFlowScript extends BasePageFlowElement{
 	protected Map<String, Object> configuration;
 	protected transient BaseGraphQueryDescriptor graphQueryDescriptor;
 	protected UserLoginInfo userLoginInfo;
-	
+	protected QueryActionInfo queryActionInfo;
 	
 	public UserLoginInfo getUserLoginInfo() {
 		return userLoginInfo;

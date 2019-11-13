@@ -15,8 +15,8 @@ import freemarker.template.Template;
 
 public class EventScriptGenerator extends BasicGenerator{
 	public void generateWithScript(EventScript script) throws Exception {
-		this.setBaseOutputFolder(script.output_base_folder());
-		this.setBaseTempalteFolder(script.template_base_folder());
+//		this.setBaseOutputFolder(script.output_base_folder());
+//		this.setBaseTempalteFolder(script.template_base_folder());
 		this.setBasePackageName(script.base_package_name());
 		this.setProjectName(script.project_name());
 		

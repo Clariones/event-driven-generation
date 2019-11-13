@@ -44,6 +44,9 @@ public abstract class ${class_name}DBQueryHelper{
 	 * ${query.comments!}.
 	 */
 	<#assign typeClass=NAMING.toCamelCase(query.objectName)/>
+  <#if query.querySingleObject>
+  	<#include "DbQuerySingle.java.ftl">
+  <#else>
 	${''}<@compress single_line=true>
 	public SmartList<${typeClass}> 
 		query${typeClass}ListOf${NAMING.toCamelCase(query.name)}(
@@ -119,6 +122,6 @@ public abstract class ${class_name}DBQueryHelper{
 	
 	protected void enhance${typeClass}ListOf${NAMING.toCamelCase(query.name)}(${custom_context_name} ctx, SmartList<${typeClass}> list, String queryName<@T.getRequestProcessingUrlMethodParameters query/>) throws Exception {
 	}
-
+  </#if>
 </#list>
 }

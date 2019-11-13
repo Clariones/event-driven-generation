@@ -7,6 +7,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -138,6 +140,16 @@ public class Utils {
 			fout.flush();
 			System.out.println("write into " + file.getCanonicalPath());
 		}
+	}
+	
+	public static List<String> findAllMatched(String source, Pattern pattern) {
+		Matcher matcher = pattern.matcher(source);
+		List<String> list = new ArrayList<>();
+		while (matcher.find()) {
+			list.add(matcher.group());
+		}
+		return list;
+
 	}
 	
 }
