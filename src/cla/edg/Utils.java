@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -151,5 +152,43 @@ public class Utils {
 		return list;
 
 	}
+	public static String repeat(int time) {
+		return repeat("?",",",time);
+	}
+	public static String repeat(String text, String seperator, int times) {
+		StringBuilder sb = new StringBuilder();
+		while(times-- > 0) {
+			sb.append(text);
+			if (times > 0) {
+				sb.append(seperator);
+			}
+		}
+		return sb.toString();
+	}
+	public static List<Object> convertToList(Object data) {
+		if (data == null) {
+			return new ArrayList<>();
+		}
+		if (data instanceof Collection) {
+			return new ArrayList<>((Collection)data);
+		}
+		if (data.getClass().isArray()) {
+			return new ArrayList<>(Arrays.asList((Object[])data));
+		}
+		return new ArrayList<>(Arrays.asList(data));
+	}
 	
+	protected static final Map<String, List<Object>> additionalRecord = new HashMap<>();
+	public static boolean record(String groupName, Object data) {
+		List<Object> list = additionalRecord.get(groupName);
+		if (list == null) {
+			list = new ArrayList<>();
+			additionalRecord.put(groupName, list);
+		}
+		if (list.contains(data)) {
+			return false;
+		}
+		list.add(data);
+		return true;
+	}
 }

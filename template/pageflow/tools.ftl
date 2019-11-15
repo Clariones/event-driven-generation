@@ -65,3 +65,4 @@
 		<#return NAMING.toCamelCase(request.name)?uncap_first />
 	</#if>
 </#function>
+

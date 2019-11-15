@@ -1,8 +1,14 @@
 package cla.edg.pageflow;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import cla.edg.Utils;
 import cla.edg.graphquery.terms.BaseGraphQueryDescriptor;
+import cla.edg.modelbean.BaseModelBean;
+import cla.edg.modelbean.CorperationPathNode;
+import cla.edg.modelbean.LogicalOperator;
+import cla.edg.project.moyi.gen.graphquery.ArtworkOwnershipCertificate;
 
 
 public class PageFlowScript extends BasePageFlowScript {
@@ -449,6 +455,52 @@ public class PageFlowScript extends BasePageFlowScript {
 			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能指定SQL参数细节");
 		}
 		return this;
+	}
+	public PageFlowScript where(LogicalOperator ... conditions) {
+		if (currentWork instanceof QueryInfo) {
+			// 
+		}else {
+			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能指定搜索条件");
+		}
+		queryActionInfo.getExternTypesNeedKnown().addAll(LogicalOperator.needKnownClasses);
+		if (conditions.length == 1) {
+			queryActionInfo.setSearchWhere(conditions[0]);
+			return this;
+		}
+		LogicalOperator first = conditions[0];
+		for (int i=1;i<conditions.length;i++) {
+			first = first.and(conditions[i]);
+		}
+		queryActionInfo.setSearchWhere(first);
+		return this;
+	}
+	public PageFlowScript search_along(BaseModelBean ... modelPaths) {
+		if (currentWork instanceof QueryInfo) {
+			// 
+		}else {
+			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能指定搜索路径");
+		}
+		List<CorperationPathNode> allList = new ArrayList<>();
+		for(BaseModelBean bean : modelPaths) {
+			bean.getCorperatedPath().forEach(it->{
+				String key = it.getKey();
+				if (allList.stream().anyMatch(e->e.getKey().equals(key))) {
+					return;
+				}
+				allList.add(it);
+			});
+		}
+		queryActionInfo.setSearchAlongPath(allList);
+		return this;
+	}
+	
+	public PageFlowScript test() {
+		String sql = queryActionInfo.getSqlFromSearchClause();
+		System.out.println(sql);
+		return this;
+	}
+	public PageFlowScript find(BaseModelBean bean) {
+		return find(bean.getModelTypeName());
 	}
 	
 	
