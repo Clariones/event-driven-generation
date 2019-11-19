@@ -26,7 +26,7 @@ public class Main {
 		BasePageFlowScript script = test.getScript();
 		String jsonStr = Utils.toJson(script, true);
 
-		System.out.println(jsonStr);
+		// System.out.println(jsonStr);
 		
 		PageFlowGenerator generator = new PageFlowGenerator();
 		generator.setBaseOutputFolder("/works/jobs/moyi_v3/workspace/moyi-biz-suite/bizcore/WEB-INF/moyi_v2_src");
@@ -38,7 +38,7 @@ public class Main {
 		EventScript script = test.getScript();
 		String jsonStr = Utils.toJson(script, true);
 		
-		System.out.println(jsonStr);
+		// System.out.println(jsonStr);
 		
 		EventScriptGenerator generator = new EventScriptGenerator();
 		generator.setBaseOutputFolder("/works/jobs/moyi_v3/workspace/moyi-biz-suite/bizcore/WEB-INF/moyi_v3_src");

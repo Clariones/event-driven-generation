@@ -22,7 +22,7 @@
 		) throws Exception {
 	</@>${''}
 	<#if query.queryActionInfo?has_content>
-		<#if query.queryActionInfo.searchAlongPath?has_content>
+		<#if query.queryActionInfo.beanRoute?has_content>
 		String sql = "${query.queryActionInfo.sqlFromSearchClause}";
 			<#list query.queryActionInfo.paramsFromSearchClause as param>
 		params.add(${param});

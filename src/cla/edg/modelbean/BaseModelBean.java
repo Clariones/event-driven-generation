@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cla.edg.modelbean.LogicalOperator.Operator;
+import cla.edg.noderoute.NodeRoute;
 
 public abstract class BaseModelBean {
 	// 接口声明
@@ -17,9 +18,26 @@ public abstract class BaseModelBean {
 	protected transient List<CorperationPathNode> corperatedPath;
 	protected transient BaseModelBean previousBean;
 	protected ModelBeanAdditionalData additonalData = new ModelBeanAdditionalData();
+	protected String memberName;
+	///////////////////////////////////////////////////////////////////////////
+	protected ModelBeanRoute beanRoute;
 	
 	public ModelBeanAdditionalData getAdditonalData() {
 		return additonalData;
+	}
+	public ModelBeanRoute getBeanRoute() {
+		return beanRoute;
+	}
+	
+	//////////////
+	public void setBeanRoute(ModelBeanRoute beanRoute) {
+		this.beanRoute = beanRoute;
+	}
+	public String getMemberName() {
+		return memberName;
+	}
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
 	}
 	public void setAdditonalData(ModelBeanAdditionalData additonalData) {
 		this.additonalData = additonalData;
@@ -48,6 +66,7 @@ public abstract class BaseModelBean {
 	public void setName(String name) {
 		this.name = name;
 	}
+	/** true: FROM-refer-TO; false: FROM-has-been-referred-by-TO; */
 	public boolean isReferDirection() {
 		return referDirection;
 	}
@@ -106,6 +125,41 @@ public abstract class BaseModelBean {
 		bean.setPreviousBean(this);
 		// 添加路径
 		updateCorperatedPath(ourPath, this, bean);
+		
+		// 添加路劲
+		appendToNodeRoute(bean);
+		
+	}
+	
+	private void appendToNodeRoute(BaseModelBean anotherBean) {
+		ModelBeanRoute br1 = this.getBeanRoute();
+		if (br1 == null) {
+			// 起点的时候,需要创建beanRoute,并初始化自己为其起点
+			this.setBeanRoute(new ModelBeanRoute());
+			this.getBeanRoute().addNode(this);
+		}
+		// 如果已经有beanRoute,说明已经不是一个空'路线图'了,需要在当前 meeting point 后面,追加'路径'. 所以先计算路径
+		BeanRelation relation = createBeanRelation(this, anotherBean);
+		this.getBeanRoute().appendNode(relation, anotherBean);
+		// 一个路径上的所有节点,共享一个 beanRoute
+		anotherBean.setBeanRoute(getBeanRoute());
+	}
+	
+	private BeanRelation createBeanRelation(BaseModelBean fromBean, BaseModelBean toBean) {
+		BeanRelation relation = new BeanRelation();
+		relation.setFromBeanTypeName(fromBean.getModelTypeName());
+		relation.setToBeanTypeName(toBean.getModelTypeName());
+		if (toBean.isReferDirection()) {
+			relation.setForwardReference(true);
+			relation.setMemberName(toBean.getMemberName());
+			relation.setReferFieldName(toBean.getName());
+		}else {
+			relation.setForwardReference(false);
+			relation.setMemberName(toBean.getMemberName());
+			relation.setReferFieldName(toBean.getName());
+		}
+		return relation;
+		
 	}
 	protected void updateCorperatedPath(List<CorperationPathNode> ourPath, BaseModelBean fromBean, BaseModelBean toBean) {
 		String key = CorperationPathNode.keyOf(fromBean,toBean);
@@ -120,6 +174,11 @@ public abstract class BaseModelBean {
 	}
 	public void useMember(BaseAttribute member) {
 		member.setContainerBean(this);
+		if (this.getBeanRoute() == null) {
+			// 起点的时候,需要创建beanRoute,并初始化自己为其起点
+			this.setBeanRoute(new ModelBeanRoute());
+			this.getBeanRoute().addNode(this);
+		}
 	}
 	
 	public String getFullPathInSearch() {
@@ -136,5 +195,16 @@ public abstract class BaseModelBean {
 	}
 	public void assignAlias(String alias) {
 		this.getAdditonalData().aliasInSql = alias;
+	}
+	
+	public String getKey() {
+		return this.getModelTypeName();
+	}
+	
+	public BaseModelBean getRoot() {
+		if (this.getPreviousBean() == null) {
+			return this;
+		}
+		return this.getPreviousBean().getRoot();
 	}
 }

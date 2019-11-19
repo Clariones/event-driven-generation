@@ -17,7 +17,10 @@ import cla.edg.modelbean.BaseModelBean;
 import cla.edg.modelbean.CorperationPathNode;
 import cla.edg.modelbean.EnumAttribute;
 import cla.edg.modelbean.LogicalOperator;
+import cla.edg.modelbean.ModelBeanRoute;
 import cla.edg.modelbean.LogicalOperator.Operator;
+import cla.edg.noderoute.RouteUtil;
+import cla.edg.project.moyi.gen.graphquery.MODEL;
 
 public class QueryActionInfo {
 	protected String sqlTemplate;
@@ -27,6 +30,37 @@ public class QueryActionInfo {
 	protected LogicalOperator searchWhere;
 	protected List<Object> params;
 	
+	// /////////////////////////////////////////////
+	protected String targetModelTypeName;
+	protected boolean querySingle;
+	protected boolean pagination;
+	protected ModelBeanRoute beanRoute;
+	public ModelBeanRoute getBeanRoute() {
+		return beanRoute;
+	}
+	public void setBeanRoute(ModelBeanRoute beanRoute) {
+		this.beanRoute = beanRoute;
+	}
+	public String getTargetModelTypeName() {
+		return targetModelTypeName;
+	}
+	public void setTargetModelTypeName(String targetModelTypeName) {
+		this.targetModelTypeName = targetModelTypeName;
+	}
+	public boolean isQuerySingle() {
+		return querySingle;
+	}
+	public void setQuerySingle(boolean querySingle) {
+		this.querySingle = querySingle;
+	}
+	public boolean isPagination() {
+		return pagination;
+	}
+	public void setPagination(boolean pagination) {
+		this.pagination = pagination;
+	}
+	
+	// /////////////////////////////////////////////
 	
 	public LogicalOperator getSearchWhere() {
 		return searchWhere;
@@ -101,7 +135,24 @@ public class QueryActionInfo {
 	public List<Object> getParamsFromSearchClause() {
 		return params;
 	}
+	
 	public String getSqlFromSearchClause() {
+		StringBuilder sb =  new StringBuilder();
+		String selectStr = beanRoute.getSelectClause(this.getTargetModelTypeName());
+		System.out.println("selectStr="+selectStr);
+		sb.append(selectStr);
+		
+		params = new ArrayList<>();
+		String whereClause = RouteUtil.getWhereClause(params, this.getSearchWhere());
+		sb.append(whereClause);
+		// create order by 
+		makeSortClause(params, sb, null);
+		// create limit
+		makeLimitClause(params, sb, null);
+		System.out.println("paramValueExpList="+params);
+		return sb.toString().replaceAll("[\r\n]+", "\" +\r\n\t\t\t\"");
+	}
+	public String getSqlFromSearchClauseV1() {
 		StringBuilder sb =  new StringBuilder();
 		// create select first
 		Map<String, BaseModelBean> allBeansUsed = new HashMap<>();
@@ -153,10 +204,10 @@ public class QueryActionInfo {
 		return sb.toString().replace("\n", "\" +\n\t\t\t\" ");
 	}
 	private void makeSortClause(List<Object> paramValueExpList, StringBuilder sb, LogicalOperator whereClauses) {
-		sb.append("\n\t\t order by T1.id desc ");
+		sb.append("\n    ORDER BY T1.id DESC ");
 	}
 	private void makeLimitClause(List<Object> paramValueExpList, StringBuilder sb, LogicalOperator whereClauses) {
-		sb.append("\n\t\t limit ? ");
+		sb.append("\n    LIMIT ? ");
 		paramValueExpList.add("1");
 	}
 	private void makeWhereClause(List<Object> paramValueExpList, StringBuilder sb, LogicalOperator where) {
@@ -359,4 +410,5 @@ public class QueryActionInfo {
 		}
 		throw new RuntimeException("没找到"+bean.getModelTypeName()+"的别名");
 	}
+	
 }

@@ -2,13 +2,17 @@ package cla.edg.pageflow;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import cla.edg.Utils;
 import cla.edg.graphquery.terms.BaseGraphQueryDescriptor;
 import cla.edg.modelbean.BaseModelBean;
 import cla.edg.modelbean.CorperationPathNode;
 import cla.edg.modelbean.LogicalOperator;
+import cla.edg.modelbean.ModelBeanRoute;
+import cla.edg.noderoute.RouteUtil;
 import cla.edg.project.moyi.gen.graphquery.ArtworkOwnershipCertificate;
+import cla.edg.project.moyi.gen.graphquery.MODEL;
 
 
 public class PageFlowScript extends BasePageFlowScript {
@@ -462,16 +466,29 @@ public class PageFlowScript extends BasePageFlowScript {
 		}else {
 			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能指定搜索条件");
 		}
-		queryActionInfo.getExternTypesNeedKnown().addAll(LogicalOperator.needKnownClasses);
+		
+		ModelBeanRoute beanRoute = null;
+		LogicalOperator c1 = conditions[0];
 		if (conditions.length == 1) {
-			queryActionInfo.setSearchWhere(conditions[0]);
-			return this;
+			beanRoute = c1.getBeanRoute();
+		}else {
+			for(int i=1;i<conditions.length;i++) {
+				c1.and(conditions[i]);
+			}
+			beanRoute = c1.getBeanRoute();
 		}
-		LogicalOperator first = conditions[0];
-		for (int i=1;i<conditions.length;i++) {
-			first = first.and(conditions[i]);
+		if (beanRoute == null) {
+			throw new RuntimeException("找不到bean route");
 		}
-		queryActionInfo.setSearchWhere(first);
+		beanRoute.assignAlias();
+		queryActionInfo.setBeanRoute(beanRoute);
+		queryActionInfo.setSearchWhere(c1);
+		queryActionInfo.setTargetModelTypeName(currentQuery.getObjectName());
+		queryActionInfo.setQuerySingle(currentQuery.isQuerySingleObject());
+		queryActionInfo.setPagination(currentQuery.isPagination());
+		queryActionInfo.getExternTypesNeedKnown().addAll(beanRoute.getAllNodes().values().stream()
+				.map(it -> it.getData().getFullClassName()).collect(Collectors.toSet()));
+		
 		return this;
 	}
 	public PageFlowScript search_along(BaseModelBean ... modelPaths) {
