@@ -4,15 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import cla.edg.Utils;
 import cla.edg.graphquery.terms.BaseGraphQueryDescriptor;
 import cla.edg.modelbean.BaseModelBean;
 import cla.edg.modelbean.CorperationPathNode;
 import cla.edg.modelbean.LogicalOperator;
 import cla.edg.modelbean.ModelBeanRoute;
-import cla.edg.noderoute.RouteUtil;
-import cla.edg.project.moyi.gen.graphquery.ArtworkOwnershipCertificate;
-import cla.edg.project.moyi.gen.graphquery.MODEL;
 
 
 public class PageFlowScript extends BasePageFlowScript {

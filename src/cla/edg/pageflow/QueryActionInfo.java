@@ -17,10 +17,9 @@ import cla.edg.modelbean.BaseModelBean;
 import cla.edg.modelbean.CorperationPathNode;
 import cla.edg.modelbean.EnumAttribute;
 import cla.edg.modelbean.LogicalOperator;
-import cla.edg.modelbean.ModelBeanRoute;
 import cla.edg.modelbean.LogicalOperator.Operator;
+import cla.edg.modelbean.ModelBeanRoute;
 import cla.edg.noderoute.RouteUtil;
-import cla.edg.project.moyi.gen.graphquery.MODEL;
 
 public class QueryActionInfo {
 	protected String sqlTemplate;
