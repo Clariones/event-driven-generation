@@ -34,6 +34,14 @@ public class V3FindScript extends PieceOfScript {
 						.where(MODEL.artworkAuction().artwork().eq("${artwork id}"),
 							MODEL.artworkAuction().artworkAuctionStatus().code().eq(ArtworkAuctionStatus.WAIT_FOR_DISPLAY)
 							)
+				/*
+				.find(MODEL.moyiUser()).which("is owner of artwork by main order").with_string("order id")
+					.do_it_as()
+						.where(
+							MODEL.moyiUser().artworkOwnershipCertificateList().artworkAuctionList().artworkAuctionOrderList().mainOrder().eq("${order id}"),
+							MODEL.moyiUser().articleList().not_null()
+							)
+				*/
 				;
 	}
 

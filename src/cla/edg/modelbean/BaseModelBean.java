@@ -85,6 +85,9 @@ public abstract class BaseModelBean {
 		if (this.getLastMeetingPoint() == null) {
 			return;
 		}
+		if (!this.isReferDirection()) {
+			return;
+		}
 		MeetingPoint<BaseModelBean, BeanRelation> curPoint = this.getBeanRoute().getCurrentMeetingPoint();
 		this.getBeanRoute().removeMeetPoint(curPoint);
 		this.getBeanRoute().setCurrentMeetingPoint(lastMeetingPoint);

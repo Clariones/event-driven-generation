@@ -75,17 +75,17 @@ public class RouteUtil {
 		}
 		sb.append("(").append(alias).append(".").append(op1.getName());
 		sb.append(makeOperatorExp(where.getOperator())).append(makeParamExp(paramValueExpList, where));
-		sb.append(") ");
+		sb.append(")");
 		if (!where.hasMore()) {
 			return;
 		}
 		for (LogicalOperator subWhere : where.getOperations()) {
 			switch (where.getCollectionType()) {
 			case and:
-				sb.append("AND ");
+				sb.append(" AND ");
 				break;
 			case or:
-				sb.append("OR ");
+				sb.append(" OR ");
 				break;
 			default:
 				throw new RuntimeException("只支持'and'或者'or'");
