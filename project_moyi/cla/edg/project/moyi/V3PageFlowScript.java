@@ -64,6 +64,23 @@ public class V3PageFlowScript extends PieceOfScript {
 			.request("confirm quick reshelf auction").with_string("artwork auction id")
 				.comments("2019-11-6:按照暂定规则, 重新上架")
 				.got_page("artwork auction detail")
+				
+				
+				
+				
+				
+			/** 发行墨契 */
+			.request("start issue ink deed v3").with_string("artwork auction id")
+				.comments("艺术品卖家发行墨契").no_footprint()
+				.when("first time to issue").comments("V3首次发行墨契")
+					.got_page("ink deed issue")
+				.when("further issue").comments("V3增发墨契")
+					.got_page("ink deed share number setting")
+				
+				
+				
+				
+				
 			;
 	}
 }

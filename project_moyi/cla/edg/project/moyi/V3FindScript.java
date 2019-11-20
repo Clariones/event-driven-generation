@@ -3,6 +3,7 @@ package cla.edg.project.moyi;
 import cla.edg.pageflow.PageFlowScript;
 import cla.edg.pageflow.PieceOfScript;
 import cla.edg.project.moyi.gen.graphquery.ArtworkAuctionStatus;
+import cla.edg.project.moyi.gen.graphquery.InkDeedStatus;
 import cla.edg.project.moyi.gen.graphquery.MODEL;
 
 public class V3FindScript extends PieceOfScript {
@@ -27,12 +28,12 @@ public class V3FindScript extends PieceOfScript {
 				.find(MODEL.artworkAuction()).which("not finished").with_string("artwork id")
 					.do_it_as()
 						.where(MODEL.artworkAuction().artwork().eq("${artwork id}"),
-							MODEL.artworkAuction().artworkAuctionStatus().code().not_in(ArtworkAuctionStatus.CLOSED, ArtworkAuctionStatus.CANCELLED, ArtworkAuctionStatus.BOUGHT_IN)
+							MODEL.artworkAuction().artworkAuctionStatus().code().not_in(ArtworkAuctionStatus.WAIT_FOR_DISPLAY, ArtworkAuctionStatus.CLOSED, ArtworkAuctionStatus.CANCELLED, ArtworkAuctionStatus.BOUGHT_IN)
 							)
 				.find(MODEL.artworkAuction()).which("not submitted").with_string("artwork id")
 					.do_it_as()
 						.where(MODEL.artworkAuction().artwork().eq("${artwork id}"),
-							MODEL.artworkAuction().artworkAuctionStatus().code().eq(ArtworkAuctionStatus.WAIT_FOR_DISPLAY)
+								MODEL.artworkAuction().artworkAuctionStatus().code().eq(ArtworkAuctionStatus.WAIT_FOR_DISPLAY)
 							)
 				/*
 				.find(MODEL.moyiUser()).which("is owner of artwork by main order").with_string("order id")
@@ -42,6 +43,27 @@ public class V3FindScript extends PieceOfScript {
 							MODEL.moyiUser().articleList().not_null()
 							)
 				*/
+				.find(MODEL.inkDeed()).which("already issued for auction").with_string("artwork auction id")
+					.comments("统计拍品已经发行的有效墨契数量")
+					.do_it_as().count()
+						.where(MODEL.inkDeed().auction().eq("${artwork auction id}"),
+								MODEL.inkDeed().status().not(InkDeedStatus.DESTROYED)
+							)
+				.find(MODEL.artworkAuctionBiddingPriceRecord()).which("for auction").with_string("artwork auction id")
+					.comments("统计拍品的出价次数")
+					.do_it_as().count()
+						.where(MODEL.artworkAuctionBiddingPriceRecord().artworkAuction().eq("${artwork auction id}"))
+				.find(MODEL.inkDeed()).which("user can buy").with_string("artwork auction id").with_string("user id")
+					.comments("统计用户可以购买的某个拍品下的墨契数量")
+					.rule_comments("1. 拍品在公示期")
+					.rule_comments("2. 是上架销售的墨契,不包括已发行,未上架的墨契")
+					.rule_comments("3. 持有人不是自己")
+					.do_it_as().count()
+						.where(MODEL.inkDeed().auction().id().eq("${artwork auction id}"),
+								MODEL.artworkAuction().artworkAuctionStatus().code().eq(ArtworkAuctionStatus.DISPLAYING),
+								MODEL.inkDeed().status().in(InkDeedStatus.AVALIABLE, InkDeedStatus.BOOKED),  // 已经锁定的, 还没购买的也算
+								MODEL.inkDeed().holder().not("${user id}")
+							)
 				;
 	}
 

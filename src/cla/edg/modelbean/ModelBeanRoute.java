@@ -34,8 +34,14 @@ public class ModelBeanRoute extends RouteMap<BaseModelBean, BeanRelation>{
 		}
 	}
 
+	public String getCountSelectClause(String targetModelType) {
+		return getSelectClause(targetModelType, true);
+	}
 	
 	public String getSelectClause(String targetModelType) {
+		return getSelectClause(targetModelType, false);
+	}
+	protected String getSelectClause(String targetModelType, boolean isCount) {
 		Node<BaseModelBean, BeanRelation> node = this.getNodeByKey(targetModelType);
 		if (node == null) {
 			exception("目标模型"+targetModelType+"没有在bean route中");
@@ -47,7 +53,11 @@ public class ModelBeanRoute extends RouteMap<BaseModelBean, BeanRelation>{
 		String targetAlias = startPoint.getAlias();
 		setTargetModelAlias(targetAlias);
 		StringBuilder sb = new StringBuilder();
-		sb.append("SELECT DISTINCT ").append(targetAlias).append(".* from ");
+		if (isCount) {
+			sb.append("SELECT COUNT(DISTINCT ").append(targetAlias).append(".*) from ");
+		}else {
+			sb.append("SELECT DISTINCT ").append(targetAlias).append(".* from ");
+		}
 		if (this.getAllNodes().size() == 1) {
 			sb.append(targetModelType).append("_data ").append(targetAlias).append(" \r\n");
 			return sb.toString();

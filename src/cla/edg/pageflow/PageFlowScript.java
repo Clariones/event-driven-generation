@@ -420,6 +420,9 @@ public class PageFlowScript extends BasePageFlowScript {
 		if (currentWork instanceof QueryInfo) {
 			queryActionInfo = new QueryActionInfo();
 			currentQuery.setQueryActionInfo(queryActionInfo);
+			queryActionInfo.setTargetModelTypeName(currentQuery.getObjectName());
+			queryActionInfo.setQuerySingle(currentQuery.isQuerySingleObject());
+			queryActionInfo.setPagination(currentQuery.isPagination());
 		}else {
 			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能指定执行细节");
 		}
@@ -480,12 +483,10 @@ public class PageFlowScript extends BasePageFlowScript {
 		beanRoute.assignAlias();
 		queryActionInfo.setBeanRoute(beanRoute);
 		queryActionInfo.setSearchWhere(c1);
-		queryActionInfo.setTargetModelTypeName(currentQuery.getObjectName());
-		queryActionInfo.setQuerySingle(currentQuery.isQuerySingleObject());
-		queryActionInfo.setPagination(currentQuery.isPagination());
 		queryActionInfo.getExternTypesNeedKnown().addAll(beanRoute.getAllNodes().values().stream()
 				.map(it -> it.getData().getFullClassName()).collect(Collectors.toSet()));
-		
+		queryActionInfo.getExternTypesNeedKnown().addAll(c1.needKnownClasses);
+		//
 		return this;
 	}
 	public PageFlowScript search_along(BaseModelBean ... modelPaths) {
@@ -515,6 +516,16 @@ public class PageFlowScript extends BasePageFlowScript {
 	}
 	public PageFlowScript find(BaseModelBean bean) {
 		return find(bean.getModelTypeName());
+	}
+
+	public PageFlowScript count() {
+		if (currentWork instanceof QueryInfo && queryActionInfo != null) {
+			// 目前只支持这种场景
+			queryActionInfo.setCounting(true);
+		} else {
+			throw new RuntimeException("当前任务是" + currentWork.getClass().getSimpleName() + ", 不能指定搜索条件");
+		}
+		return this;
 	}
 	
 	

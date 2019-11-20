@@ -1,3 +1,30 @@
+<#if query.queryActionInfo?has_content && query.queryActionInfo.counting>
+	${''}<@compress single_line=true>
+    public int
+		count${typeClass}Which${NAMING.toCamelCase(query.name)}(
+		${custom_context_name} ctx
+		<@T.getRequestProcessingUrlMethodParameters query/>
+		) throws Exception {
+	</@>${''}
+		List<Object> params = new ArrayList<>();
+		String sql = prepareSqlAndParamsForCount${typeClass}Which${NAMING.toCamelCase(query.name)}(ctx, params<@T.getRequestProcessingMethodParameterNames query/>);
+		Integer cnt = ctx.dao().queryForObject(sql, params.toArray(), Integer.class);
+		return cnt == null ? 0 : cnt;
+	}
+	
+	${''}<@compress single_line=true>
+	protected String prepareSqlAndParamsForCount${typeClass}Which${NAMING.toCamelCase(query.name)}(
+		${custom_context_name} ctx, List<Object> params<@T.getRequestProcessingUrlMethodParameters query/>
+		) throws Exception {
+	</@>${''}
+		String sql = "${query.queryActionInfo.sql}";
+	<#list query.queryActionInfo.params as param>
+		params.add(${param});
+	</#list>
+		return sql;
+	}
+
+<#else>
     ${''}<@compress single_line=true>
     public ${typeClass}
 		find${typeClass}Which${NAMING.toCamelCase(query.name)}(
@@ -43,4 +70,4 @@
 	<#if helper.record('singleClass', typeClass)>
 	protected abstract void enhance${typeClass}(${custom_context_name} ctx, ${typeClass} data, String queryName) throws Exception;
 	</#if>
-	
+</#if>

@@ -126,11 +126,11 @@ public abstract class BaseModelBean {
 		goBackOneStep();
 		return LogicalOperator.create(Operator.bigger, this, o);
 	}
-	public LogicalOperator in(Object o) {
+	public LogicalOperator in(Object ... o) {
 		goBackOneStep();
 		return LogicalOperator.create(Operator.in, this, o);
 	}
-	public LogicalOperator not_in(Object o) {
+	public LogicalOperator not_in(Object ... o) {
 		goBackOneStep();
 		return LogicalOperator.create(Operator.not_in, this, o);
 	}

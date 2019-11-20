@@ -28,6 +28,14 @@ public class QueryActionInfo {
 	protected String targetModelTypeName;
 	protected boolean querySingle;
 	protected boolean pagination;
+	protected boolean counting = false;
+	
+	public boolean isCounting() {
+		return counting;
+	}
+	public void setCounting(boolean counting) {
+		this.counting = counting;
+	}
 	public String getTargetModelTypeName() {
 		return targetModelTypeName;
 	}
@@ -63,6 +71,9 @@ public class QueryActionInfo {
 	}
 	public String getSql() {
 		if (this.getBeanRoute() != null) {
+			if (this.isCounting()) {
+				return this.getCountSqlFromSearchClause();
+			}
 			return this.getSqlFromSearchClause();
 		}else {
 			return this.getDbSql();
@@ -141,6 +152,16 @@ public class QueryActionInfo {
 	}
 	public List<Object> getParamsFromSearchClause() {
 		return params;
+	}
+	public String getCountSqlFromSearchClause() {
+		StringBuilder sb =  new StringBuilder();
+		String selectStr = beanRoute.getCountSelectClause(this.getTargetModelTypeName());
+		sb.append(selectStr);
+		
+		params = new ArrayList<>();
+		String whereClause = RouteUtil.getWhereClause(params, this.getSearchWhere());
+		sb.append(whereClause);
+		return sb.toString().replaceAll("[\r\n]+", "\" +\r\n\t\t\t\"");
 	}
 	public String getSqlFromSearchClause() {
 		StringBuilder sb =  new StringBuilder();
