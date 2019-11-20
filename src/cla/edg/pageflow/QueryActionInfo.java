@@ -157,7 +157,7 @@ public class QueryActionInfo {
 		return sb.toString().replaceAll("[\r\n]+", "\" +\r\n\t\t\t\"");
 	}
 	private void makeSortClause(List<Object> paramValueExpList, StringBuilder sb, LogicalOperator whereClauses) {
-		sb.append("\n    ORDER BY T1.id DESC ");
+		sb.append("\n    ORDER BY ").append(beanRoute.getTargetModelAlias()).append(".id DESC ");
 	}
 	private void makeLimitClause(List<Object> paramValueExpList, StringBuilder sb, LogicalOperator whereClauses) {
 		sb.append("\n    LIMIT ? ");

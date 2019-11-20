@@ -8,6 +8,13 @@ import cla.edg.routemap.Node;
 import cla.edg.routemap.RouteMap;
 
 public class ModelBeanRoute extends RouteMap<BaseModelBean, BeanRelation>{
+	protected String targetModelAlias;
+	public String getTargetModelAlias() {
+		return targetModelAlias;
+	}
+	public void setTargetModelAlias(String targetModelAlias) {
+		this.targetModelAlias = targetModelAlias;
+	}
 
 	public void assignAlias() {
 		AtomicInteger cnt = new AtomicInteger(0);
@@ -38,6 +45,7 @@ public class ModelBeanRoute extends RouteMap<BaseModelBean, BeanRelation>{
 		}
 		MeetingPoint<BaseModelBean, BeanRelation> startPoint = node.getMeetingPointList().get(0);
 		String targetAlias = startPoint.getAlias();
+		setTargetModelAlias(targetAlias);
 		StringBuilder sb = new StringBuilder();
 		sb.append("SELECT DISTINCT ").append(targetAlias).append(".* from ");
 		if (this.getAllNodes().size() == 1) {
