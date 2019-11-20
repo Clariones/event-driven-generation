@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cla.edg.modelbean.LogicalOperator.Operator;
-import cla.edg.noderoute.NodeRoute;
+import cla.edg.routemap.MeetingPoint;
 
 public abstract class BaseModelBean {
 	// 接口声明
@@ -21,6 +21,7 @@ public abstract class BaseModelBean {
 	protected String memberName;
 	///////////////////////////////////////////////////////////////////////////
 	protected ModelBeanRoute beanRoute;
+	protected MeetingPoint<BaseModelBean, BeanRelation> lastMeetingPoint = null;
 	
 	public ModelBeanAdditionalData getAdditonalData() {
 		return additonalData;
@@ -28,7 +29,12 @@ public abstract class BaseModelBean {
 	public ModelBeanRoute getBeanRoute() {
 		return beanRoute;
 	}
-	
+	public MeetingPoint<BaseModelBean, BeanRelation> getLastMeetingPoint() {
+		return lastMeetingPoint;
+	}
+	public void setLastMeetingPoint(MeetingPoint<BaseModelBean, BeanRelation> lastMeetingPoint) {
+		this.lastMeetingPoint = lastMeetingPoint;
+	}
 	//////////////
 	public void setBeanRoute(ModelBeanRoute beanRoute) {
 		this.beanRoute = beanRoute;
@@ -75,36 +81,54 @@ public abstract class BaseModelBean {
 	}
 
 	
+	private void goBackOneStep() {
+		if (this.getLastMeetingPoint() == null) {
+			return;
+		}
+		MeetingPoint<BaseModelBean, BeanRelation> curPoint = this.getBeanRoute().getCurrentMeetingPoint();
+		this.getBeanRoute().removeMeetPoint(curPoint);
+		this.getBeanRoute().setCurrentMeetingPoint(lastMeetingPoint);
+	}
 	
 	
 	public LogicalOperator eq(Object o) {
+		goBackOneStep();
 		return LogicalOperator.create(Operator.eq, this, o);
 	}
 	public LogicalOperator not(Object o) {
+		goBackOneStep();
 		return LogicalOperator.create(Operator.not, this, o);
 	}
 	public LogicalOperator is_null() {
+		goBackOneStep();
 		return LogicalOperator.create(Operator.is_null, this, null);
 	}
 	public LogicalOperator not_null() {
+		goBackOneStep();
 		return LogicalOperator.create(Operator.not_null, this, null);
 	}
 	public LogicalOperator less_or_eq(Object o) {
+		goBackOneStep();
 		return LogicalOperator.create(Operator.less_or_eq, this, o);
 	}
 	public LogicalOperator bigger_or_eq(Object o) {
+		goBackOneStep();
 		return LogicalOperator.create(Operator.bigger_or_eq, this, o);
 	}
 	public LogicalOperator less_than(Object o) {
+		goBackOneStep();
 		return LogicalOperator.create(Operator.less, this, o);
 	}
 	public LogicalOperator bigger_than(Object o) {
+		goBackOneStep();
 		return LogicalOperator.create(Operator.bigger, this, o);
 	}
 	public LogicalOperator in(Object o) {
+		goBackOneStep();
 		return LogicalOperator.create(Operator.in, this, o);
 	}
 	public LogicalOperator not_in(Object o) {
+		goBackOneStep();
 		return LogicalOperator.create(Operator.not_in, this, o);
 	}
 	
@@ -138,11 +162,14 @@ public abstract class BaseModelBean {
 			this.setBeanRoute(new ModelBeanRoute());
 			this.getBeanRoute().addNode(this);
 		}
+		MeetingPoint<BaseModelBean, BeanRelation> curPoint = this.getBeanRoute().getCurrentMeetingPoint();
 		// 如果已经有beanRoute,说明已经不是一个空'路线图'了,需要在当前 meeting point 后面,追加'路径'. 所以先计算路径
 		BeanRelation relation = createBeanRelation(this, anotherBean);
 		this.getBeanRoute().appendNode(relation, anotherBean);
+		
 		// 一个路径上的所有节点,共享一个 beanRoute
 		anotherBean.setBeanRoute(getBeanRoute());
+		anotherBean.setLastMeetingPoint(curPoint);
 	}
 	
 	private BeanRelation createBeanRelation(BaseModelBean fromBean, BaseModelBean toBean) {

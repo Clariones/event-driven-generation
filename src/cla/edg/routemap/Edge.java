@@ -1,4 +1,4 @@
-package cla.edg.noderoute;
+package cla.edg.routemap;
 
 public class Edge<N, E> {
 	protected transient E data;

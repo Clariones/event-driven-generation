@@ -1,4 +1,4 @@
-package cla.edg.noderoute;
+package cla.edg.routemap;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,7 +10,7 @@ import cla.edg.modelbean.BaseModelBean;
 import cla.edg.modelbean.BeanRelation;
 import cla.edg.modelbean.ModelBeanRoute;
 
-public class NodeRoute <N,E>{
+public class RouteMap <N,E>{
 	protected Map<String, Node<N,E>> allNodes = new HashMap<>();
 	protected transient Map<String, LinkedList<Edge<N,E>>> allEdges = new HashMap<>();
 	protected Node<N,E> startNode = null;
@@ -93,11 +93,12 @@ public class NodeRoute <N,E>{
 	/**
 	 * 先找到合并的入口点, 然后重放所有路径
 	 * @param anotherRoute
+	 * @return 
 	 */
-	public void mergeFrom(NodeRoute <N,E> anotherRoute) {
+	public RouteMap<N, E> mergeFrom(RouteMap <N,E> anotherRoute) {
 		MeetingPoint<N, E> point = findMergerPoint(this, anotherRoute);
-		NodeRoute <N,E> tgtBeanRoute = null;
-		NodeRoute <N,E> additonalBeanRoute = null;
+		RouteMap <N,E> tgtBeanRoute = null;
+		RouteMap <N,E> additonalBeanRoute = null;
 		if (point == null) {
 			point = findMergerPoint(anotherRoute, this);
 			tgtBeanRoute = anotherRoute;
@@ -112,10 +113,38 @@ public class NodeRoute <N,E>{
 		}
 		
 		mergeBeanRoute(additonalBeanRoute, point, tgtBeanRoute);
+		return tgtBeanRoute;
 	}
 	
-	private void mergeBeanRoute(NodeRoute<N, E> additonalBeanRoute, MeetingPoint<N, E> startPoint,
-			NodeRoute<N, E> tgtBeanRoute) {
+	/** 移除一个交汇点 */
+	public void removeMeetPoint(MeetingPoint<N, E> point) {
+		Node<N, E> node = this.getNodeByKey(point.getNodeKey());
+		if (node == null) {
+			exception("要移除的节点"+point.getNodeKey()+"不存在");
+		}
+		if (!point.getEdgesFromMe().isEmpty()) {
+			for(Edge<N, E> edge : point.getEdgesFromMe()) {
+				removeMeetPoint(edge.getToNode());
+				removeEdgeEdge(edge);
+			}
+		}
+		if (!point.getEdgesToMe().isEmpty()) {
+			for(Edge<N, E> edge: point.getEdgesToMe()) {
+				MeetingPoint<N, E> fromPoint = edge.getFromNode();
+				fromPoint.getEdgesFromMe().remove(edge);
+			}
+		}
+		node.getMeetingPointList().remove(point);
+		if (node.getMeetingPointList().isEmpty()) {
+			allNodes.remove(point.getNodeKey());
+		}
+	}
+	
+	private void removeEdgeEdge(Edge<N, E> edge) {
+		// 目前edge没统一记录,移除了节点就移除了edge
+	}
+	private void mergeBeanRoute(RouteMap<N, E> additonalBeanRoute, MeetingPoint<N, E> startPoint,
+			RouteMap<N, E> tgtBeanRoute) {
 		tgtBeanRoute.setCurrentMeetingPoint(startPoint);
 		MeetingPoint<N, E> p1 = additonalBeanRoute.getStartNode().getMeetingPointList().get(0);
 		mergeMeetingPoint(startPoint, p1);
@@ -126,7 +155,7 @@ public class NodeRoute <N,E>{
 			replayPath(tgtBeanRoute, additonalBeanRoute, startPoint, edge);
 		}
 	}
-	private void replayPath(NodeRoute<N, E> tgtBeanRoute, NodeRoute<N, E> additonalBeanRoute, MeetingPoint<N, E> startPoint, Edge<N, E> edge) {
+	private void replayPath(RouteMap<N, E> tgtBeanRoute, RouteMap<N, E> additonalBeanRoute, MeetingPoint<N, E> startPoint, Edge<N, E> edge) {
 		tgtBeanRoute.setCurrentMeetingPoint(startPoint);
 		MeetingPoint<N, E> toNode = edge.getToNode();
 		E edgeData = edge.getData();
@@ -144,7 +173,7 @@ public class NodeRoute <N,E>{
 	private void mergeMeetingPoint(MeetingPoint<N, E> startPoint, MeetingPoint<N, E> p1) {
 		startPoint.getMirrorPoints().add(p1);
 	}
-	private MeetingPoint<N,E> findMergerPoint(NodeRoute<N, E> nodeRoute, NodeRoute<N, E> anotherRoute) {
+	private MeetingPoint<N,E> findMergerPoint(RouteMap<N, E> nodeRoute, RouteMap<N, E> anotherRoute) {
 		Node<N, E> startNode1 = nodeRoute.getStartNode();
 		Node<N, E> startNode2 = anotherRoute.getStartNode();
 		if (startNode1 == null || startNode2 == null) {

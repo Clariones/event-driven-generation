@@ -19,7 +19,8 @@ public class Main {
 //		testEventService(new Affiliate());
 		
 		testPageFlow(new NativeAppServiceV2());
-		testV3EventService(new InkDeedV3Service());
+		testV3EventService(new V3InkDeedService());
+		testV3EventService(new V3AuctionService());
 	}
 
 	private static void testPageFlow(BasePageFlowDescriptionScript test) throws Exception {

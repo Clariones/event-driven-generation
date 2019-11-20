@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.Set;
 
 import cla.edg.Utils;
-import cla.edg.noderoute.MeetingPoint;
-import cla.edg.noderoute.Node;
-import cla.edg.noderoute.NodeRoute;
+import cla.edg.routemap.MeetingPoint;
+import cla.edg.routemap.Node;
+import cla.edg.routemap.RouteMap;
 
 public class LogicalOperator {
 	public static Set<String> needKnownClasses = new HashSet<>();
@@ -75,34 +75,6 @@ public class LogicalOperator {
 		}
 		return this;
 	}
-//	private void mergeRouteMap(LogicalOperator op1, LogicalOperator op2) {
-//		RouteMap<BaseModelBean, BeanRelation> rm1 = op1.getRouteMap();
-//		RouteMap<BaseModelBean, BeanRelation> rm2 = op2.getRouteMap();
-//		if(rm1 == null || rm2 == null) {
-//			return;
-//		}
-//		try {
-//			rm1.merge(rm2);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			throw new RuntimeException(e);
-//		}
-//	}
-//	public RouteMap<BaseModelBean, BeanRelation> getRouteMap() {
-//		if (op1 instanceof BaseModelBean) {
-//			return ((BaseModelBean) op1).getRouteMap();
-//		}
-//		if (op1 instanceof BaseAttribute) {
-//			return ((BaseAttribute) op1).getContainerBean().getRouteMap();
-//		}
-//		if (op2 instanceof BaseModelBean) {
-//			return ((BaseModelBean) op2).getRouteMap();
-//		}
-//		if (op2 instanceof BaseAttribute) {
-//			return ((BaseAttribute) op2).getContainerBean().getRouteMap();
-//		}
-//		return null;
-//	}
 	public LogicalOperator or (LogicalOperator ... operations) {
 		this.setCollectionType(CollectionType.or);
 		getOperations().addAll(Arrays.asList(operations));
@@ -117,7 +89,20 @@ public class LogicalOperator {
 	private void mergeNodeRoute(LogicalOperator operand1, LogicalOperator operand2) {
 		ModelBeanRoute beanRoute1 = operand1.getBeanRoute();
 		ModelBeanRoute beanRoute2 = operand2.getBeanRoute();
-		beanRoute1.mergeFrom(beanRoute2);
+		ModelBeanRoute mergedBeanRoute = (ModelBeanRoute) beanRoute1.mergeFrom(beanRoute2);
+		operand1.setBeanRoute(mergedBeanRoute);
+	}
+	public void setBeanRoute(ModelBeanRoute beanRoute) {
+		if (op1 instanceof BaseModelBean) {
+			((BaseModelBean) op1).setBeanRoute(beanRoute);
+			return;
+		}
+		if (op1 instanceof BaseAttribute) {
+			((BaseAttribute) op1).getContainerBean().setBeanRoute(beanRoute);
+			return;
+		}
+		// 目前应该就是这样,不然就要仔细想想
+		exception("逻辑运算更新bean route超出预期");
 	}
 	
 	public ModelBeanRoute getBeanRoute() {
@@ -135,6 +120,7 @@ public class LogicalOperator {
 	private void exception(String message) {
 		throw new RuntimeException(message);
 	}
+	
 	public static LogicalOperator create(Operator opr, Object op1, Object op2) {
 		LogicalOperator result = new LogicalOperator();
 		result.setOp1(op1);
@@ -153,35 +139,13 @@ public class LogicalOperator {
 			result.setDelareAtPoint(point);
 		}
 		updateNodeRoute(op2);
-//		BaseModelBean fromBean = null;
-//		BaseModelBean toBean = null;
-//		if (op1 instanceof BaseModelBean) {
-//			fromBean = (BaseModelBean) op1;
-//		}else if (op1 instanceof BaseAttribute) {
-//			fromBean = ((BaseAttribute) op1).getContainerBean();
-//		}
-//		if (op2 instanceof BaseModelBean) {
-//			toBean = (BaseModelBean) op2;
-//		}else if (op2 instanceof BaseAttribute) {
-//			toBean = ((BaseAttribute) op2).getContainerBean();
-//		}
-//		if (fromBean != null && toBean != null) {
-//			try {
-//				fromBean.getRouteMap().merge(toBean.getRouteMap());
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//				throw new RuntimeException(e);
-//			}
-//			toBean.setRouteMap(fromBean.getRouteMap());
-//		}
-		
 		return result;
 	}
 	
 	protected static MeetingPoint<BaseModelBean, BeanRelation> updateNodeRoute(Object operand) {
 		MeetingPoint<BaseModelBean, BeanRelation> point = null;
 		if (operand instanceof BaseModelBean) {
-			point = ((BaseModelBean) operand).getBeanRoute().getCurrentMeetingPoint().getEdgesToMe().iterator().next().getFromNode();
+			point = ((BaseModelBean) operand).getBeanRoute().getCurrentMeetingPoint();
 		}
 		if (operand instanceof BaseAttribute) {
 			point = ((BaseAttribute) operand).getContainerBean().getBeanRoute().getCurrentMeetingPoint();

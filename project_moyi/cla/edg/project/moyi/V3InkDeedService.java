@@ -2,7 +2,7 @@ package cla.edg.project.moyi;
 
 import cla.edg.eventscript.EventScript;
 
-public class InkDeedV3Service extends BaseMoyiEventScript {
+public class V3InkDeedService extends BaseMoyiEventScript {
 	private static final EventScript SCRIPT = $("ink deed v3")
 			.on_event("submit issuing request").with("input form data")
 				.comments("提交发行墨契的请求")

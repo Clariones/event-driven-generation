@@ -2,12 +2,12 @@ package cla.edg.modelbean;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-import cla.edg.noderoute.Edge;
-import cla.edg.noderoute.MeetingPoint;
-import cla.edg.noderoute.Node;
-import cla.edg.noderoute.NodeRoute;
+import cla.edg.routemap.Edge;
+import cla.edg.routemap.MeetingPoint;
+import cla.edg.routemap.Node;
+import cla.edg.routemap.RouteMap;
 
-public class ModelBeanRoute extends NodeRoute<BaseModelBean, BeanRelation>{
+public class ModelBeanRoute extends RouteMap<BaseModelBean, BeanRelation>{
 
 	public void assignAlias() {
 		AtomicInteger cnt = new AtomicInteger(0);
@@ -69,6 +69,8 @@ public class ModelBeanRoute extends NodeRoute<BaseModelBean, BeanRelation>{
 			appendJoinClause(sb, toNode, nextEdge);
 		}
 	}
+
+	
 
 	
 

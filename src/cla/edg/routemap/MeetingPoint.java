@@ -1,4 +1,4 @@
-package cla.edg.noderoute;
+package cla.edg.routemap;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -9,7 +9,7 @@ public class MeetingPoint<N,E> {
 	protected transient Set<Edge<N,E>> edgesToMe = new HashSet<>();
 	protected Set<Edge<N,E>> edgesFromMe = new HashSet<>();
 	protected Set<MeetingPoint<N,E>> mirrorPoints = new HashSet<>();
-
+	protected String hashCodeStr;
 	
 	
 	public String getAlias() {
@@ -49,8 +49,14 @@ public class MeetingPoint<N,E> {
 		edgesToMe.add(edge);
 	}
 	
+	
 	// ///////////////////////////////////////////////////////////////////////////////////////
 	
+	public MeetingPoint() {
+		super();
+		hashCodeStr = "MP-" + this.hashCode();
+		// TODO Auto-generated constructor stub
+	}
 	/** 是否存在已经存在的, 起点为 this 的边. <p/>
 	 *  判断规则是这样:
 	 *  1. 首先 edge 的key 是一样的;

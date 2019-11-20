@@ -56,6 +56,9 @@ public class V3PageFlowScript extends PieceOfScript {
 				.comments("为artwork准备上架时发现保证金不够时,先缴保证金,成功后要转为上架")
 				.got_page("pay shop deposit bill")
 			// 第三步,缴完费, 在成功页面可能会又回到第一步,然后这次保证金	足够了,就会走'正常情况'.
+			.request("submit artwork auction application v3").with_form("artwork auction").customize()
+				.comments("提交上架信息表单").no_footprint()
+				.got_page("paid success")
 				
 			// 二次上架的确认执行
 			.request("confirm quick reshelf auction").with_string("artwork auction id")

@@ -22,17 +22,10 @@
 		) throws Exception {
 	</@>${''}
 	<#if query.queryActionInfo?has_content>
-		<#if query.queryActionInfo.beanRoute?has_content>
-		String sql = "${query.queryActionInfo.sqlFromSearchClause}";
-			<#list query.queryActionInfo.paramsFromSearchClause as param>
+		String sql = "${query.queryActionInfo.sql}";
+		<#list query.queryActionInfo.params as param>
 		params.add(${param});
-			</#list>
-		<#else>
-		String sql = "${query.queryActionInfo.dbSql}";
-			<#list query.queryActionInfo.paramPrepareQueue as param>
-		params.add(${param});
-			</#list>
-		</#if>
+		</#list>
 	<#else>
 		String sql = "select D.* from ${query.objectName}_data D order by id desc limit 1";
 	</#if>
