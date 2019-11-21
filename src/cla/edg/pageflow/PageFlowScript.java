@@ -6,10 +6,12 @@ import java.util.stream.Collectors;
 
 import cla.edg.Utils;
 import cla.edg.graphquery.terms.BaseGraphQueryDescriptor;
+import cla.edg.modelbean.BaseAttribute;
 import cla.edg.modelbean.BaseModelBean;
 import cla.edg.modelbean.CorperationPathNode;
 import cla.edg.modelbean.LogicalOperator;
 import cla.edg.modelbean.ModelBeanRoute;
+import cla.edg.modelbean.StringAttribute;
 
 
 public class PageFlowScript extends BasePageFlowScript {
@@ -480,7 +482,7 @@ public class PageFlowScript extends BasePageFlowScript {
 		if (beanRoute == null) {
 			throw new RuntimeException("找不到bean route");
 		}
-		beanRoute.assignAlias();
+		
 		queryActionInfo.setBeanRoute(beanRoute);
 		queryActionInfo.setSearchWhere(c1);
 		queryActionInfo.getExternTypesNeedKnown().addAll(beanRoute.getAllNodes().values().stream()
@@ -528,7 +530,42 @@ public class PageFlowScript extends BasePageFlowScript {
 		return this;
 	}
 	
-	
+	public PageFlowScript order_by(BaseAttribute attr) {
+		if (currentWork instanceof QueryInfo && queryActionInfo != null) {
+			// 目前只支持这种场景
+			queryActionInfo.addSortingPath(attr, false);
+		} else {
+			throw new RuntimeException("当前任务是" + currentWork.getClass().getSimpleName() + ", 不能指定排序条件");
+		}
+		return this;
+	}
+	public PageFlowScript order_by(BaseModelBean bean) {
+		if (currentWork instanceof QueryInfo && queryActionInfo != null) {
+			// 目前只支持这种场景
+			queryActionInfo.addSortingPath(bean, false);
+		} else {
+			throw new RuntimeException("当前任务是" + currentWork.getClass().getSimpleName() + ", 不能指定排序条件");
+		}
+		return this;
+	}
+	public PageFlowScript desc() {
+		if (currentWork instanceof QueryInfo && queryActionInfo != null) {
+			// 目前只支持这种场景
+			queryActionInfo.setCurrentSortingDirectionASC(false);
+		} else {
+			throw new RuntimeException("当前任务是" + currentWork.getClass().getSimpleName() + ", 不能指定排序方向");
+		}
+		return this;
+	}
+	public PageFlowScript asc() {
+		if (currentWork instanceof QueryInfo && queryActionInfo != null) {
+			// 目前只支持这种场景
+			queryActionInfo.setCurrentSortingDirectionASC(true);
+		} else {
+			throw new RuntimeException("当前任务是" + currentWork.getClass().getSimpleName() + ", 不能指定排序方向");
+		}
+		return this;
+	}
 	
 	
 	

@@ -56,14 +56,25 @@ public class V3FindScript extends PieceOfScript {
 				.find(MODEL.inkDeed()).which("user can buy").with_string("artwork auction id").with_string("user id")
 					.comments("统计用户可以购买的某个拍品下的墨契数量")
 					.rule_comments("1. 拍品在公示期")
-					.rule_comments("2. 是上架销售的墨契,不包括已发行,未上架的墨契")
+					.rule_comments("2. 是上架销售的墨契,不包括已发行,未上架的墨契") // 注:为了防止定时任务不及时, 也包括状态为 锁定,但是时间超过锁定时间的
 					.rule_comments("3. 持有人不是自己")
 					.do_it_as().count()
 						.where(MODEL.inkDeed().auction().id().eq("${artwork auction id}"),
 								MODEL.artworkAuction().artworkAuctionStatus().code().eq(ArtworkAuctionStatus.DISPLAYING),
-								MODEL.inkDeed().status().in(InkDeedStatus.AVALIABLE, InkDeedStatus.BOOKED),  // 已经锁定的, 还没购买的也算
+								MODEL.inkDeed().status().in(InkDeedStatus.AVALIABLE, InkDeedStatus.BOOKED, InkDeedStatus.BE_DRAWN),  // 已经锁定的, 还没购买的也算
 								MODEL.inkDeed().holder().not("${user id}")
 							)
+						.order_by(MODEL.inkDeed().purchasePrice()).desc()
+				.find(MODEL.inkDeed()).which("the one user can buy").with_string("artwork auction id").with_string("user id")
+					.comments("找出用户可以购买的某个拍品下的墨契")
+					.rule_comments("2. 是上架销售的墨契,不包括已发行,未上架的墨契") // 注:为了防止定时任务不及时, 也包括状态为 锁定,但是时间超过锁定时间的
+					.rule_comments("3. 持有人不是自己")
+					.do_it_as()
+						.where(MODEL.inkDeed().auction().eq("${artwork auction id}"),
+								MODEL.inkDeed().status().in(InkDeedStatus.AVALIABLE),  // 已经锁定的, 还没购买的也算
+								MODEL.inkDeed().holder().not("${user id}")
+							)
+						.order_by(MODEL.inkDeed().purchasePrice()).asc()
 				;
 	}
 

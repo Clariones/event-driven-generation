@@ -89,7 +89,7 @@ public class LogicalOperator {
 	private void mergeNodeRoute(LogicalOperator operand1, LogicalOperator operand2) {
 		ModelBeanRoute beanRoute1 = operand1.getBeanRoute();
 		ModelBeanRoute beanRoute2 = operand2.getBeanRoute();
-		ModelBeanRoute mergedBeanRoute = (ModelBeanRoute) beanRoute1.mergeFrom(beanRoute2);
+		ModelBeanRoute mergedBeanRoute = (ModelBeanRoute) beanRoute1.mergeWith(beanRoute2);
 		operand1.setBeanRoute(mergedBeanRoute);
 	}
 	public void setBeanRoute(ModelBeanRoute beanRoute) {

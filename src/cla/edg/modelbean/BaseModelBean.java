@@ -81,7 +81,7 @@ public abstract class BaseModelBean {
 	}
 
 	
-	private void goBackOneStep() {
+	public void goBackOneStep() {
 		if (this.getLastMeetingPoint() == null) {
 			return;
 		}

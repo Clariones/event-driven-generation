@@ -1,12 +1,9 @@
 package cla.edg.pageflow;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.google.gson.Gson;
@@ -15,11 +12,9 @@ import cla.edg.Utils;
 import cla.edg.modelbean.BaseAttribute;
 import cla.edg.modelbean.BaseModelBean;
 import cla.edg.modelbean.CorperationPathNode;
-import cla.edg.modelbean.EnumAttribute;
 import cla.edg.modelbean.LogicalOperator;
-import cla.edg.modelbean.LogicalOperator.Operator;
-import cla.edg.routemap.RouteUtil;
 import cla.edg.modelbean.ModelBeanRoute;
+import cla.edg.routemap.RouteUtil;
 
 public class QueryActionInfo {
 	// ========================== 公共部分 ===========================
@@ -143,6 +138,9 @@ public class QueryActionInfo {
 	// ========================== 写法2: 用route map组装SQL ===========================
 	protected List<Object> params;
 	protected ModelBeanRoute beanRoute;
+	protected SortingInfo currentSortingPath;
+	protected ModelBeanRoute sortingMap;
+	protected List<SortingInfo> sortingFields = new ArrayList<>();
 	
 	public ModelBeanRoute getBeanRoute() {
 		return beanRoute;
@@ -155,6 +153,10 @@ public class QueryActionInfo {
 	}
 	public String getCountSqlFromSearchClause() {
 		StringBuilder sb =  new StringBuilder();
+		if (this.sortingMap != null) {
+			beanRoute = (ModelBeanRoute) beanRoute.mergeWith(sortingMap);
+		}
+		beanRoute.assignAlias();
 		String selectStr = beanRoute.getCountSelectClause(this.getTargetModelTypeName());
 		sb.append(selectStr);
 		
@@ -164,6 +166,10 @@ public class QueryActionInfo {
 		return sb.toString().replaceAll("[\r\n]+", "\" +\r\n\t\t\t\"");
 	}
 	public String getSqlFromSearchClause() {
+		if (this.sortingMap != null) {
+			beanRoute = (ModelBeanRoute) beanRoute.mergeWith(sortingMap);
+		}
+		beanRoute.assignAlias();
 		StringBuilder sb =  new StringBuilder();
 		String selectStr = beanRoute.getSelectClause(this.getTargetModelTypeName());
 		sb.append(selectStr);
@@ -178,11 +184,83 @@ public class QueryActionInfo {
 		return sb.toString().replaceAll("[\r\n]+", "\" +\r\n\t\t\t\"");
 	}
 	private void makeSortClause(List<Object> paramValueExpList, StringBuilder sb, LogicalOperator whereClauses) {
-		sb.append("\n    ORDER BY ").append(beanRoute.getTargetModelAlias()).append(".id DESC ");
+		if (this.sortingFields.isEmpty()) {
+			sb.append("\n    ORDER BY ").append(beanRoute.getTargetModelAlias()).append(".id DESC ");
+			return;
+		}
+		// 用指定的
+		sb.append("\n    ORDER BY ");
+		boolean first = true;
+		for(SortingInfo field: sortingFields) {
+			if (!first) {
+				sb.append(", ");
+			}
+			sb.append(field.getMeetingPoint().getAlias()).append(".").append(field.getSortingFieldName()).append(field.isAscDirection()?" asc":" desc");
+			if (first) {
+				first = false;
+			}
+		}
+		sb.append(' ');
 	}
+
 	private void makeLimitClause(List<Object> paramValueExpList, StringBuilder sb, LogicalOperator whereClauses) {
-		sb.append("\n    LIMIT ? ");
-		paramValueExpList.add("1");
+		if (this.isQuerySingle()) {
+			sb.append("\n    LIMIT ? ");
+			paramValueExpList.add("1");
+			return;
+		}
+		
+		if (this.isPagination()) {
+			sb.append("\n    LIMIT ? ");
+			paramValueExpList.add("pageSize");
+			return;
+		}
+	}
+	
+	// 和排序相关的
+	public void addSortingPath(BaseAttribute attr, boolean asc) {
+		ModelBeanRoute inputBeanRoute = attr.getContainerBean().getBeanRoute();
+		currentSortingPath = new SortingInfo();
+		currentSortingPath.setMeetingPoint(inputBeanRoute.getCurrentMeetingPoint());
+		currentSortingPath.setAscDirection(asc);
+		currentSortingPath.setSortField(attr);
+		sortingFields.add(currentSortingPath);
+		
+		if (sortingMap == null) {
+			sortingMap = inputBeanRoute;
+			return;
+		}
+		sortingMap = (ModelBeanRoute) sortingMap.mergeWith(inputBeanRoute);
+	}
+	private void ensureSortingMap() {
+		if (sortingMap == null) {
+			sortingMap = new ModelBeanRoute();
+		}
+	}
+	public void addSortingPath(BaseModelBean bean, boolean asc) {
+		bean.goBackOneStep();
+		ModelBeanRoute inputBeanRoute = bean.getBeanRoute();
+		currentSortingPath = new SortingInfo();
+		currentSortingPath.setMeetingPoint(inputBeanRoute.getCurrentMeetingPoint());
+		currentSortingPath.setAscDirection(asc);
+		currentSortingPath.setSortField(bean);
+		sortingFields.add(currentSortingPath);
+		if (sortingMap == null) {
+			sortingMap = inputBeanRoute;
+			return;
+		}
+		sortingMap = (ModelBeanRoute) sortingMap.mergeWith(inputBeanRoute);
+	}
+	// 设置排序字段的方向 true-asc; false-desc
+	public void setCurrentSortingDirectionASC(boolean asc) {
+		if (currentSortingPath == null) {
+			exception("asc()/desc() 应该在 order_by(xxx) 后使用");
+		}
+		currentSortingPath.setAscDirection(asc);
+	}
+	
+	private void exception(String message) {
+		throw new RuntimeException(message);
 	}
 	
 	

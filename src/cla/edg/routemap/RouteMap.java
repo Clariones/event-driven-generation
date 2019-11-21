@@ -95,7 +95,7 @@ public class RouteMap <N,E>{
 	 * @param anotherRoute
 	 * @return 
 	 */
-	public RouteMap<N, E> mergeFrom(RouteMap <N,E> anotherRoute) {
+	public RouteMap<N, E> mergeWith(RouteMap <N,E> anotherRoute) {
 		MeetingPoint<N, E> point = findMergerPoint(this, anotherRoute);
 		RouteMap <N,E> tgtBeanRoute = null;
 		RouteMap <N,E> additonalBeanRoute = null;

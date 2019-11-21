@@ -77,6 +77,12 @@ public class V3PageFlowScript extends PieceOfScript {
 				.when("further issue").comments("V3增发墨契")
 					.got_page("ink deed share number setting")
 				
+			/** 墨契销售 
+			 *  墨契销售的业务规则现在是这样: 
+			 *  1. 一次只能买一个;
+			 *  2. 自动选最便宜的;
+			 *  3. 中台配置锁定墨契的时间,单位是分钟,最小1分钟,最大30分钟;
+			 */
 				
 				
 				

@@ -12,6 +12,7 @@ public class InkDeedStatus extends BaseModelBean{
 	// 枚举对象
 	public static EnumAttribute FRESH = new EnumAttribute("com.terapico.moyi.inkdeedstatus.InkDeedStatus", "FRESH");
 	public static EnumAttribute AVALIABLE = new EnumAttribute("com.terapico.moyi.inkdeedstatus.InkDeedStatus", "AVALIABLE");
+	public static EnumAttribute BE_DRAWN = new EnumAttribute("com.terapico.moyi.inkdeedstatus.InkDeedStatus", "BE_DRAWN");
 	public static EnumAttribute BOOKED = new EnumAttribute("com.terapico.moyi.inkdeedstatus.InkDeedStatus", "BOOKED");
 	public static EnumAttribute WAITING = new EnumAttribute("com.terapico.moyi.inkdeedstatus.InkDeedStatus", "WAITING");
 	public static EnumAttribute CASHED = new EnumAttribute("com.terapico.moyi.inkdeedstatus.InkDeedStatus", "CASHED");
