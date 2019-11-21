@@ -65,16 +65,31 @@ public class V3FindScript extends PieceOfScript {
 								MODEL.inkDeed().holder().not("${user id}")
 							)
 						.order_by(MODEL.inkDeed().purchasePrice()).desc()
-				.find(MODEL.inkDeed()).which("the one user can buy").with_string("artwork auction id").with_string("user id")
+				.find(MODEL.inkDeed()).which("the one user can buy").with_string("artwork auction id").with_string("user id").with_integer("book minutes")
 					.comments("找出用户可以购买的某个拍品下的墨契")
 					.rule_comments("2. 是上架销售的墨契,不包括已发行,未上架的墨契") // 注:为了防止定时任务不及时, 也包括状态为 锁定,但是时间超过锁定时间的
 					.rule_comments("3. 持有人不是自己")
 					.do_it_as()
 						.where(MODEL.inkDeed().auction().eq("${artwork auction id}"),
-								MODEL.inkDeed().status().in(InkDeedStatus.AVALIABLE),  // 已经锁定的, 还没购买的也算
+								MODEL.inkDeed().status().code().in(InkDeedStatus.AVALIABLE)  // 已经锁定的, 还没购买的也算
+									.or(MODEL.inkDeed().status().code().eq(InkDeedStatus.BE_DRAWN)
+											.and(MODEL.inkDeed().lastUpdateTime().less("DateTimeUtil.standOn(ctx.now()).addSeconds(-30).getDate()")),
+										MODEL.inkDeed().status().code().eq(InkDeedStatus.BOOKED)
+											.and(MODEL.inkDeed().lastUpdateTime().less("DateTimeUtil.standOn(ctx.now()).addMinutes(-bookMinutes).getDate()"))
+									   ),
 								MODEL.inkDeed().holder().not("${user id}")
 							)
 						.order_by(MODEL.inkDeed().purchasePrice()).asc()
+						.need_know("com.terapico.utils.DateTimeUtil")
+				.find(MODEL.auctionStartNotification()).which("user reserved").with_string("artwork auction id").with_string("user id")
+					.comments("找出用户对某场拍卖的开拍提醒")
+					.do_it_as()
+//						.where(MODEL.artworkAuction().auctionStartNotificationList().bidder().eq("${user id}"),
+//								MODEL.artworkAuction().id().eq("${artwork auction id}")
+//							)
+					.where(MODEL.auctionStartNotification().bidder().eq("${user id}"),
+							MODEL.auctionStartNotification().auction().eq("${artwork auction id}")
+						)
 				;
 	}
 

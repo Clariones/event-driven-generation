@@ -52,23 +52,23 @@ public class RouteUtil {
 		
 		StringBuilder sb = new StringBuilder();
 		sb.append("\r\n    WHERE ");
-		makeWhereClause(paramValueExpList, sb, c1);
+		makeWhereClause(paramValueExpList, sb, c1, "");
 		return sb.toString();
 	}
 
-	private static void makeWhereClause(List<Object> paramValueExpList, StringBuilder sb, LogicalOperator where) {
+	private static void makeWhereClause(List<Object> paramValueExpList, StringBuilder sb, LogicalOperator where, String leadSpace) {
 		Object op1 = where.getOp1();
 		if (op1 instanceof BaseAttribute) {
-			makeWhereClauseByAttribute(paramValueExpList, sb, where, (BaseAttribute) op1);
+			makeWhereClauseByAttribute(paramValueExpList, sb, where, (BaseAttribute) op1, leadSpace);
 		} else if (op1 instanceof BaseModelBean) {
-			makeWhereClauseByBean(paramValueExpList, sb, where, (BaseModelBean) op1);
+			makeWhereClauseByBean(paramValueExpList, sb, where, (BaseModelBean) op1, leadSpace);
 		} else {
 			throw new RuntimeException("where的op1只支持'模型'或者'属性'");
 		}
 	}
 
 	private static void makeWhereClauseByBean(List<Object> paramValueExpList, StringBuilder sb, LogicalOperator where,
-			BaseModelBean op1) {
+			BaseModelBean op1, String leadSpace) {
 		String alias = findModelBeanAlais(where);
 		if (where.hasMore()) {
 			sb.append(" (");
@@ -82,15 +82,15 @@ public class RouteUtil {
 		for (LogicalOperator subWhere : where.getOperations()) {
 			switch (where.getCollectionType()) {
 			case and:
-				sb.append(" AND ");
+				sb.append("\r\n      ").append(leadSpace).append("AND ");
 				break;
 			case or:
-				sb.append(" OR ");
+				sb.append("\r\n      ").append(leadSpace).append("OR ");
 				break;
 			default:
 				throw new RuntimeException("只支持'and'或者'or'");
 			}
-			makeWhereClause(paramValueExpList, sb, subWhere);
+			makeWhereClause(paramValueExpList, sb, subWhere, leadSpace+"  ");
 		}
 		sb.append(") ");
 		return;
@@ -101,7 +101,7 @@ public class RouteUtil {
 	}
 
 	private static void makeWhereClauseByAttribute(List<Object> paramValueExpList, StringBuilder sb,
-			LogicalOperator where, BaseAttribute op1) {
+			LogicalOperator where, BaseAttribute op1, String leadSpace) {
 		String alias = findModelBeanAlais(where);
 		sb.append(' ');
 		if (where.getOperations() != null && where.getOperations().size() > 0) {
@@ -116,15 +116,15 @@ public class RouteUtil {
 		for (LogicalOperator subWhere : where.getOperations()) {
 			switch (where.getCollectionType()) {
 			case and:
-				sb.append("AND ");
+				sb.append("\r\n      ").append(leadSpace).append("AND ");
 				break;
 			case or:
-				sb.append("OR ");
+				sb.append("\r\n      ").append(leadSpace).append("OR ");
 				break;
 			default:
 				throw new RuntimeException("只支持'and'或者'or'");
 			}
-			makeWhereClause(paramValueExpList, sb, subWhere);
+			makeWhereClause(paramValueExpList, sb, subWhere, leadSpace+"  ");
 		}
 		sb.append(") ");
 		return;
@@ -194,13 +194,20 @@ public class RouteUtil {
 	}
 
 	protected static Pattern ptnVariable = Pattern.compile("\\$\\{(.*)\\}");
+	protected static Pattern ptnStringConst = Pattern.compile("\\$\\{\\'(.*)\\'\\}");
 
 	private static String wrapString(String op2) {
-		Matcher m = ptnVariable.matcher(op2);
+		Matcher m;
+		m = ptnStringConst.matcher(op2);
+		if (m.matches()) {
+			return new Gson().toJson(m.group(1));
+		}
+		
+		m = ptnVariable.matcher(op2);
 		if (m.matches()) {
 			return Utils.toJavaVariableName(m.group(1));
 		}
-		return new Gson().toJson(op2);
+		return op2;
 	}
 
 	private static String makeOperatorExp(Operator operator) {

@@ -134,18 +134,22 @@ public class LogicalOperator {
 			}
 		});
 		
-		MeetingPoint<BaseModelBean, BeanRelation> point = updateNodeRoute(op1);
+		MeetingPoint<BaseModelBean, BeanRelation> point = updateNodeRoute(op1, opr);
 		if (point != null) {
 			result.setDelareAtPoint(point);
 		}
-		updateNodeRoute(op2);
+		updateNodeRoute(op2, opr);
 		return result;
 	}
 	
-	protected static MeetingPoint<BaseModelBean, BeanRelation> updateNodeRoute(Object operand) {
+	protected static MeetingPoint<BaseModelBean, BeanRelation> updateNodeRoute(Object operand, Operator opr) {
 		MeetingPoint<BaseModelBean, BeanRelation> point = null;
 		if (operand instanceof BaseModelBean) {
-			point = ((BaseModelBean) operand).getBeanRoute().getCurrentMeetingPoint();
+			ModelBeanRoute beanRoute = ((BaseModelBean) operand).getBeanRoute();
+			if (beanRoute == null || beanRoute.getCurrentMeetingPoint() == null) {
+				throw new RuntimeException("你直接指定了 MODEL.XXX()."+opr+"(). 无法通过关联关系或者属性推断你需要的字段, 您是不是想写: MODEL.XXX().id()."+opr+"()?");
+			}
+			point = beanRoute.getCurrentMeetingPoint();
 		}
 		if (operand instanceof BaseAttribute) {
 			point = ((BaseAttribute) operand).getContainerBean().getBeanRoute().getCurrentMeetingPoint();
