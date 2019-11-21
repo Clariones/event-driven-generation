@@ -90,6 +90,7 @@ public class V3FindScript extends PieceOfScript {
 					.where(MODEL.auctionStartNotification().bidder().eq("${user id}"),
 							MODEL.auctionStartNotification().auction().eq("${artwork auction id}")
 						)
+				
 				;
 	}
 
