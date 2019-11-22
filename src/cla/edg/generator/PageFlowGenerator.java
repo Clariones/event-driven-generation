@@ -239,6 +239,9 @@ public class PageFlowGenerator extends BasicGenerator {
 						}
 					}
 				}
+				if (query.getQueryActionInfo() != null) {
+					allObjectParamTypes.addAll(query.getQueryActionInfo().getExternTypesNeedKnown());
+				}
 			}
 			
 			if (allObjectParamTypes.size() > 0) {

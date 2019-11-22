@@ -55,8 +55,8 @@ public class JingouMain {
 		EventScriptGenerator generator = new EventScriptGenerator();
 		generator.setBaseOutputFolder("/works/jobs/jingou_v1/workspace/jingou-biz-suite/bizcore/WEB-INF/jingou_custom_src");
 		generator.setBaseTempalteFolder("./template");
-		generator.setBasePackageName("com.recyclesupplychain.jingou");
-		generator.setProjectName("jingou");
+//		generator.setBasePackageName("com.recyclesupplychain.jingou");
+//		generator.setProjectName("jingou");
 		
 		generator.generateWithScript(script);
 	}

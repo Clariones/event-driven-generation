@@ -23,7 +23,7 @@ import cla.edg.pageflow.Branch;
 import cla.edg.pageflow.Page;
 import cla.edg.pageflow.Request;
 
-public class PageFlowGeneratorHelper {
+public class PageFlowGeneratorHelper{
 	public boolean isRequestHasBranch(Request req) {
 		if (req.getBranches() == null || req.getBranches().size() <= 1) {
 			return false;
@@ -515,4 +515,7 @@ public class PageFlowGeneratorHelper {
 		return result;
 	}
 	
+	public boolean record(String groupName, Object data) {
+		return Utils.record(groupName, data);
+	}
 }

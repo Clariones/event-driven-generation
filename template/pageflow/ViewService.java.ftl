@@ -66,7 +66,7 @@ public abstract class ${class_name}ViewService extends Base${class_name}ViewServ
 	public Object ${T.getRequestProcessingMethodName(request)}(${context_name} userContext<@T.getRequestProcessingMethodParameters request/>) throws Exception {
 		${custom_context_name} ctx = (${custom_context_name}) userContext;
 		if (hasFormResubmitFlag(ctx)) {
-			throwsExceptionWithMessage(ctx, "请不要重复提交");
+			throwExceptionWithMessage(ctx, "请不要重复提交");
 		}
 		try{
 			String accessUrl = makeUrlF("${T.getRequestProcessingMethodName(request)}", false, "formData");
