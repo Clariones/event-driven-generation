@@ -107,19 +107,40 @@ public abstract class ${class_name}DBQueryHelper{
 		, List<Object> params<@T.getRequestProcessingUrlMethodParameters query/>
 		) throws Exception {
 	</@>${''}
+	
+	<#if query.queryActionInfo?has_content>
+		String sql = "${query.queryActionInfo.sql}";
+			<#list query.queryActionInfo.params as param>
+		params.add(${param});
+			</#list>
+		<#if query.pagination>
+		// 加入分页所需的参数
+		fillPaginationParamsForQuery${typeClass}ListOf${NAMING.toCamelCase(query.name)}(ctx, lastRecord, limit, params<@T.getRequestProcessingMethodParameterNames query/>);
+		params.add(limit);
+		</#if>
+		return sql;
+	<#else>
 		String sql = "select D.* from ${query.objectName}_data D ";
-	<#if query.pagination>
+		<#if query.pagination>
 		if (lastRecord != null) {
 			params.add(lastRecord.getId());
 			sql += " where D.id <= ? ";
 		}
 		params.add(limit);
 		return sql + " order by D.id desc limit ?";
-	<#else>
+		<#else>
 		return sql + " order by D.id desc";
+		</#if>
 	</#if>
 	}
-	
+	<#if query.queryActionInfo?has_content>
+	${''}<@compress single_line=true>
+	protected void fillPaginationParamsForQuery${typeClass}ListOf${NAMING.toCamelCase(query.name)}(${custom_context_name} ctx, 
+	${typeClass} lastRecord, int limit, List<Object> params<@T.getRequestProcessingUrlMethodParameters query/>
+		) throws Exception {
+	</@>${''}
+	}
+	</#if>
 	protected void enhance${typeClass}ListOf${NAMING.toCamelCase(query.name)}(${custom_context_name} ctx, SmartList<${typeClass}> list, String queryName<@T.getRequestProcessingUrlMethodParameters query/>) throws Exception {
 	}
   </#if>

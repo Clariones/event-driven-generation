@@ -177,11 +177,55 @@ public class QueryActionInfo {
 		params = new ArrayList<>();
 		String whereClause = RouteUtil.getWhereClause(params, this.getSearchWhere());
 		sb.append(whereClause);
+		// create pagination clause
+		makePaginationClause(params, sb, null);
 		// create order by 
 		makeSortClause(params, sb, null);
 		// create limit
 		makeLimitClause(params, sb, null);
 		return sb.toString().replaceAll("[\r\n]+", "\" +\r\n\t\t\t\"");
+	}
+	private void makePaginationClause(List<Object> params, StringBuilder sb, Object object) {
+		if (!this.isPagination()) {
+			return;
+		}
+		if (this.sortingFields.isEmpty()) {
+			sb.append("\n    AND (").append(beanRoute.getTargetModelAlias()).append(".id <= ?) ");
+			return;
+		}
+		
+		sb.append("\r\n      AND (");
+		for(int i=0;i<sortingFields.size();i++) {
+			makePaginationCondition(sb, i);
+		}
+		
+		sb.append(") ");
+		return;
+	}
+	private void makePaginationCondition(StringBuilder sb, int pos) {
+		if (pos > 0) {
+			sb.append(" OR (");
+		}
+		for(int i=0;i<pos;i++) {
+			SortingInfo fd = sortingFields.get(i);
+			if (i>0) {
+				sb.append(" AND ");
+			}
+			sb.append(fd.getMeetingPoint().getAlias()).append(".").append(fd.getSortingFieldName()).append("=?");
+		}
+		SortingInfo fd = sortingFields.get(pos);
+		if (pos>0) {
+			sb.append(" AND ");
+		}
+		sb.append(fd.getMeetingPoint().getAlias()).append(".").append(fd.getSortingFieldName());
+		if (fd.isAscDirection()) {
+			sb.append(">=?");
+		}else {
+			sb.append("<=?");
+		}
+		if (pos > 0) {
+			sb.append(")");
+		}
 	}
 	private void makeSortClause(List<Object> paramValueExpList, StringBuilder sb, LogicalOperator whereClauses) {
 		if (this.sortingFields.isEmpty()) {
@@ -204,15 +248,15 @@ public class QueryActionInfo {
 	}
 
 	private void makeLimitClause(List<Object> paramValueExpList, StringBuilder sb, LogicalOperator whereClauses) {
-		if (this.isQuerySingle()) {
+		if (this.isPagination()) {
 			sb.append("\n    LIMIT ? ");
-			paramValueExpList.add("1");
+			// paramValueExpList.add("pageSize");
 			return;
 		}
 		
-		if (this.isPagination()) {
+		if (this.isQuerySingle()) {
 			sb.append("\n    LIMIT ? ");
-			paramValueExpList.add("pageSize");
+			paramValueExpList.add("1");
 			return;
 		}
 	}
