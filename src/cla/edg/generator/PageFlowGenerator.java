@@ -160,13 +160,13 @@ public class PageFlowGenerator extends BasicGenerator {
 		}
 				
 		// 调试用：增加一个自动布局的JS数据文件
-		outputFileName = "datanodes.js";
-		File outputFolder = new File("/works/jobs/moyi_v2/workspace/agl");
-		outputFile = new File(outputFolder, outputFileName);
-		System.out.println("Write to " + outputFile.getCanonicalPath());
-		tmplFileName = "pageflow/data.js.ftl";
-		template = getTemplate(tmplFileName);
-		doGeneration(outputFile, data, template);
+//		outputFileName = "datanodes.js";
+//		File outputFolder = new File("/works/jobs/moyi_v2/workspace/agl");
+//		outputFile = new File(outputFolder, outputFileName);
+//		System.out.println("Write to " + outputFile.getCanonicalPath());
+//		tmplFileName = "pageflow/data.js.ftl";
+//		template = getTemplate(tmplFileName);
+//		doGeneration(outputFile, data, template);
 	}
 
 	private void verifyScriptWasFinished(BasePageFlowScript script) {
@@ -250,4 +250,5 @@ public class PageFlowGenerator extends BasicGenerator {
 			}
 		}
 	}
+	
 }

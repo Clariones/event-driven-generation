@@ -74,7 +74,7 @@ public abstract class Base${class_name}ViewService extends ${parent_class_name} 
 		/**
 		 * 新用户登录后,创建与之关联的登录信息
 		 */
-		public void createLoginInfoForNewTarget(CustomBcexUserContextImpl ctx, WechatUser loginTarget);
+		public void createLoginInfoForNewTarget(${custom_context_name} ctx, ${NAMING.toCamelCase(loginInfo.userModelName)} loginTarget);
 	}
 </#if>
 	public static final int $PRC_RESULT_OBJECT_WAS_SET = -1;
