@@ -115,7 +115,9 @@ public abstract class ${class_name}DBQueryHelper{
 			</#list>
 		<#if query.pagination>
 		// 加入分页所需的参数
-		fillPaginationParamsForQuery${typeClass}ListOf${NAMING.toCamelCase(query.name)}(ctx, lastRecord, limit, params<@T.getRequestProcessingMethodParameterNames query/>);
+		if (lastRecord != null) {
+			fillPaginationParamsForQuery${typeClass}ListOf${NAMING.toCamelCase(query.name)}(ctx, lastRecord, limit, params<@T.getRequestProcessingMethodParameterNames query/>);
+		}
 		params.add(limit);
 		</#if>
 		return sql;
@@ -139,6 +141,7 @@ public abstract class ${class_name}DBQueryHelper{
 	${typeClass} lastRecord, int limit, List<Object> params<@T.getRequestProcessingUrlMethodParameters query/>
 		) throws Exception {
 	</@>${''}
+		// 你要自己填好分页的参数, 不然jdbc的参数个数不对
 	}
 	</#if>
 	protected void enhance${typeClass}ListOf${NAMING.toCamelCase(query.name)}(${custom_context_name} ctx, SmartList<${typeClass}> list, String queryName<@T.getRequestProcessingUrlMethodParameters query/>) throws Exception {

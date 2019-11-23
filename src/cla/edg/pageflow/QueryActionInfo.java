@@ -163,7 +163,16 @@ public class QueryActionInfo {
 		params = new ArrayList<>();
 		String whereClause = RouteUtil.getWhereClause(params, this.getSearchWhere());
 		sb.append(whereClause);
-		return sb.toString().replaceAll("[\r\n]+", "\" +\r\n\t\t\t\"");
+		return makeOutputString(sb);
+	}
+	private String makeOutputString(StringBuilder sb) {
+		return sb.toString()
+				.replaceAll("<IF_LAST_RECORD>[\r\n]*", "<IF_LAST_RECORD>")
+				.replaceAll("<END_OF_BRACKET>[\r\n]*", "<END_OF_BRACKET>")
+				.replaceAll("[\r\n]+", "\" +\r\n\t\t\t\"")
+				.replace("<IF_LAST_RECORD>", "\" +\r\n\t\t    (lastRecord == null ? \"\": \"")
+				.replace("<END_OF_BRACKET>", "\") +\r\n\t\t\t\"")
+				;
 	}
 	public String getSqlFromSearchClause() {
 		if (this.sortingMap != null) {
@@ -183,14 +192,16 @@ public class QueryActionInfo {
 		makeSortClause(params, sb, null);
 		// create limit
 		makeLimitClause(params, sb, null);
-		return sb.toString().replaceAll("[\r\n]+", "\" +\r\n\t\t\t\"");
+		return makeOutputString(sb);
 	}
 	private void makePaginationClause(List<Object> params, StringBuilder sb, Object object) {
 		if (!this.isPagination()) {
 			return;
 		}
+		sb.append("<IF_LAST_RECORD>");
 		if (this.sortingFields.isEmpty()) {
 			sb.append("\n    AND (").append(beanRoute.getTargetModelAlias()).append(".id <= ?) ");
+			sb.append(" END_OF_BRACKET ");
 			return;
 		}
 		
@@ -200,9 +211,11 @@ public class QueryActionInfo {
 		}
 		
 		sb.append(") ");
+		sb.append("<END_OF_BRACKET>");
 		return;
 	}
 	private void makePaginationCondition(StringBuilder sb, int pos) {
+		
 		if (pos > 0) {
 			sb.append(" OR (");
 		}
@@ -226,6 +239,7 @@ public class QueryActionInfo {
 		if (pos > 0) {
 			sb.append(")");
 		}
+		
 	}
 	private void makeSortClause(List<Object> paramValueExpList, StringBuilder sb, LogicalOperator whereClauses) {
 		if (this.sortingFields.isEmpty()) {
