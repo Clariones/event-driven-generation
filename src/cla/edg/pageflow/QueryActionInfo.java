@@ -17,6 +17,9 @@ import cla.edg.modelbean.ModelBeanRoute;
 import cla.edg.routemap.RouteUtil;
 
 public class QueryActionInfo {
+	private static final String IF_LAST_RECORD = "<IF_LAST_RECORD>";
+	private static final String END_OF_BRACKET = "<END_OF_BRACKET>";
+	private static final String END_OF_LAST_RECORD = IF_LAST_RECORD;
 	// ========================== 公共部分 ===========================
 	protected Set<String> externTypesNeedKnown;
 	protected LogicalOperator searchWhere;
@@ -115,7 +118,7 @@ public class QueryActionInfo {
 	}
 	
 	public String getDbSql() {
-		return this.getSqlTemplate().replaceAll("\\?\\{[^\\}]+\\}", "?").replace("\n", "\" +\n\t\t\t\" ");
+		return makeOutputString(this.getSqlTemplate().replaceAll("\\?\\{[^\\}]+\\}", "?"));
 	}
 	
 	Pattern ptnSqlParam = Pattern.compile("(\\?(\\{[^\\}]+\\})?)");
@@ -163,15 +166,15 @@ public class QueryActionInfo {
 		params = new ArrayList<>();
 		String whereClause = RouteUtil.getWhereClause(params, this.getSearchWhere());
 		sb.append(whereClause);
-		return makeOutputString(sb);
+		return makeOutputString(sb.toString());
 	}
-	private String makeOutputString(StringBuilder sb) {
-		return sb.toString()
-				.replaceAll("<IF_LAST_RECORD>[\r\n]*", "<IF_LAST_RECORD>")
-				.replaceAll("<END_OF_BRACKET>[\r\n]*", "<END_OF_BRACKET>")
+	private String makeOutputString(String str) {
+		return str
+				.replaceAll("<IF_LAST_RECORD>[\r\n]*", IF_LAST_RECORD)
+				.replaceAll("<END_OF_BRACKET>[\r\n]*", END_OF_BRACKET)
 				.replaceAll("[\r\n]+", "\" +\r\n\t\t\t\"")
-				.replace("<IF_LAST_RECORD>", "\" +\r\n\t\t    (lastRecord == null ? \"\": \"")
-				.replace("<END_OF_BRACKET>", "\") +\r\n\t\t\t\"")
+				.replace(IF_LAST_RECORD, "\" +\r\n\t\t    (lastRecord == null ? \"\": \"")
+				.replace(END_OF_BRACKET, "\") +\r\n\t\t\t\"")
 				;
 	}
 	public String getSqlFromSearchClause() {
@@ -192,16 +195,16 @@ public class QueryActionInfo {
 		makeSortClause(params, sb, null);
 		// create limit
 		makeLimitClause(params, sb, null);
-		return makeOutputString(sb);
+		return makeOutputString(sb.toString());
 	}
 	private void makePaginationClause(List<Object> params, StringBuilder sb, Object object) {
 		if (!this.isPagination()) {
 			return;
 		}
-		sb.append("<IF_LAST_RECORD>");
+		sb.append(IF_LAST_RECORD);
 		if (this.sortingFields.isEmpty()) {
 			sb.append("\n    AND (").append(beanRoute.getTargetModelAlias()).append(".id <= ?) ");
-			sb.append(" END_OF_BRACKET ");
+			sb.append(END_OF_LAST_RECORD);
 			return;
 		}
 		
@@ -211,7 +214,7 @@ public class QueryActionInfo {
 		}
 		
 		sb.append(") ");
-		sb.append("<END_OF_BRACKET>");
+		sb.append(END_OF_LAST_RECORD);
 		return;
 	}
 	private void makePaginationCondition(StringBuilder sb, int pos) {
