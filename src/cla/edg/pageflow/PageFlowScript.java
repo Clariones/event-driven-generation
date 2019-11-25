@@ -500,6 +500,30 @@ public class PageFlowScript extends BasePageFlowScript {
 		//
 		return this;
 	}
+	public PageFlowScript wants(BaseModelBean ... endPoints) {
+		if (currentWork instanceof QueryInfo) {
+			// 
+		}else {
+			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能指定加载范围");
+		}
+		BaseModelBean b1 = endPoints[0];
+		ModelBeanRoute beanRoute = null;
+		beanRoute = b1.getBeanRoute();
+		if (endPoints.length == 1) {
+			// 不用合并了
+		}else {
+			for(int i=1;i<endPoints.length;i++) {
+				beanRoute = (ModelBeanRoute) beanRoute.mergeWith(endPoints[i].getBeanRoute());
+			}
+		}
+		if (beanRoute == null) {
+			throw new RuntimeException("找不到bean route");
+		}
+		queryActionInfo.getExternTypesNeedKnown().addAll(beanRoute.getAllNodes().values().stream()
+				.map(it -> it.getData().getFullClassName()).collect(Collectors.toSet()));
+		queryActionInfo.setWantedMap(beanRoute);
+		return this;
+	}
 	public PageFlowScript search_along(BaseModelBean ... modelPaths) {
 		if (currentWork instanceof QueryInfo) {
 			// 

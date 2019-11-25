@@ -81,6 +81,7 @@ public class V3FindScript extends PieceOfScript {
 								MODEL.inkDeed().holder().not("${user id}")
 							)
 						.order_by(MODEL.inkDeed().purchasePrice()).asc().order_by(MODEL.inkDeed().id()).desc()
+						.wants(MODEL.inkDeed().auction(), MODEL.inkDeed().holder())
 						.need_know("com.terapico.utils.DateTimeUtil")
 				.find(MODEL.auctionStartNotification()).which("user reserved").with_string("artwork auction id").with_string("user id")
 					.comments("找出用户对某场拍卖的开拍提醒")
@@ -91,6 +92,7 @@ public class V3FindScript extends PieceOfScript {
 					.where(MODEL.auctionStartNotification().bidder().eq("${user id}"),
 							MODEL.auctionStartNotification().auction().eq("${artwork auction id}")
 						)
+					.wants(MODEL.auctionStartNotification().auction(), MODEL.auctionStartNotification().bidder())
 					.not_generate_pagination_params()
 				
 				;

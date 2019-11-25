@@ -64,7 +64,21 @@
 		String queryName<@T.getRequestProcessingUrlMethodParameters query/>
 		) throws Exception {
 	</@>${''}
+	<#if query.queryActionInfo.wantedMap?has_content>
+		if (data == null) {
+			return;
+		}
+		<#list query.queryActionInfo.singleObjectEnhancePathList as enhanceInfo>
+			<#if enhanceInfo.methodType == 'enhance'>
+		List<${enhanceInfo.enhancedTypeName}> ${enhanceInfo.enhancedListVarName} = ${NAMING.toCamelCase(project_name)}BaseUtils.collectReferencedObjectWithType(ctx, ${enhanceInfo.standOnVarName}, ${enhanceInfo.enhancedTypeName}.class);
+		ctx.getDAOGroup().enhanceList(${enhanceInfo.enhancedListVarName}, ${enhanceInfo.enhancedTypeName}.class);
+			<#else>
+		List<${enhanceInfo.enhancedTypeName}> ${enhanceInfo.enhancedListVarName} = ctx.getDAOGroup().get${NAMING.toCamelCase(enhanceInfo.ownerType)}DAO().${enhanceInfo.methodName}(ctx,${enhanceInfo.standOnVarName}, EO);
+			</#if>
+		</#list>
+	<#else>
 		enhance${typeClass}(ctx, data, queryName);
+	</#if>
 	}
 	
 	<#if helper.record('singleClass', typeClass)>

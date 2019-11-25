@@ -155,7 +155,15 @@ public class QueryActionInfo {
 	protected SortingInfo currentSortingPath;
 	protected ModelBeanRoute sortingMap;
 	protected List<SortingInfo> sortingFields = new ArrayList<>();
+	protected ModelBeanRoute wantedMap;
 	
+	
+	public ModelBeanRoute getWantedMap() {
+		return wantedMap;
+	}
+	public void setWantedMap(ModelBeanRoute wantedMap) {
+		this.wantedMap = wantedMap;
+	}
 	public ModelBeanRoute getBeanRoute() {
 		return beanRoute;
 	}
@@ -335,31 +343,36 @@ public class QueryActionInfo {
 		throw new RuntimeException(message);
 	}
 	
+	
+	public List<Object> getSingleObjectEnhancePathList() {
+		return getEnhancePathList("data", this.getWantedMap());
+	}
 	public List<Object> getListEnhancePathList() {
-		return getEnhancePathList("list");
+		return getEnhancePathList("list", this.getWantedMap());
 	}
 	// 和enhance相关的
 	public List<Object> getLastRecordEnhancePathList() {
-		return getEnhancePathList("lastRecord");
-	}
-	protected List<Object> getEnhancePathList(String startName) {
-		if (this.sortingMap == null) {
-			System.out.println("查询" + this.getTargetModelTypeName() +"时未指定排序信息,默认按ID排序和分页" );
-			return new ArrayList<>();
-		}
 		if (this.isNotGeneratePaginationParams()) {
 			System.out.println("查询" + this.getTargetModelTypeName() +"时指定不自动生成分页参数处理" );
 			return new ArrayList<>();
 		}
-		List<Edge<BaseModelBean, BeanRelation>> edges = this.sortingMap.getDFSPaths(sortingMap.getStartNode().getMeetingPointList().get(0));
+		return getEnhancePathList("lastRecord", sortingMap);
+	}
+	protected List<Object> getEnhancePathList(String startName, ModelBeanRoute beanEnhanceRoute) {
+		if (beanEnhanceRoute == null || beanEnhanceRoute.getAllNodes() == null || beanEnhanceRoute.getAllNodes().size() <= 1) {
+			System.out.println("查询" + this.getTargetModelTypeName() +"时未指定排序信息,默认按ID排序和分页" );
+			return new ArrayList<>();
+		}
+		
+		List<Edge<BaseModelBean, BeanRelation>> edges = beanEnhanceRoute.getDFSPaths(beanEnhanceRoute.getStartNode().getMeetingPointList().get(0));
 		
 		List<Object> result = new ArrayList<>();
 		edges.forEach(edge->{
 			// 我要生成类似下面这两句话:
 			// List<InkDeedStatus> statusList = MiscUtils.collectReferencedObjectWithType(ctx, lastRecord, InkDeedStatus.class);
 			// ctx.getDAOGroup().enhanceList(statusList, InkDeedStatus.class);
-			Node<BaseModelBean, BeanRelation> fromNode = sortingMap.getNodeByKey(edge.getFromNode().getNodeKey());
-			Node<BaseModelBean, BeanRelation> toNode = sortingMap.getNodeByKey(edge.getToNode().getNodeKey());
+			Node<BaseModelBean, BeanRelation> fromNode = beanEnhanceRoute.getNodeByKey(edge.getFromNode().getNodeKey());
+			Node<BaseModelBean, BeanRelation> toNode = beanEnhanceRoute.getNodeByKey(edge.getToNode().getNodeKey());
 			String enhancedTypeName = toNode.getData().getModelTypeName();
 			enhancedTypeName = Utils.toCamelCase(enhancedTypeName);
 			String enhancedListVarName = edge.getData().getKey();
@@ -373,7 +386,7 @@ public class QueryActionInfo {
 				// 就直接从lastRecord开始
 			}else {
 				Edge<BaseModelBean, BeanRelation> fromEdge = edge.getFromNode().getEdgesToMe().iterator().next();
-				fromNode = sortingMap.getNodeByKey(fromEdge.getFromNode().getNodeKey());
+				fromNode = beanEnhanceRoute.getNodeByKey(fromEdge.getFromNode().getNodeKey());
 				standOnVarName = String.format("%sListOf%sAs%s", 
 						fromEdge.getData().getMemberName(),
 						Utils.toCamelCase(fromNode.getData().getModelTypeName()),
