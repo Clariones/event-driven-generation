@@ -462,6 +462,15 @@ public class PageFlowScript extends BasePageFlowScript {
 		}
 		return this;
 	}
+	
+	public PageFlowScript not_generate_pagination_params() {
+		if (currentWork instanceof QueryInfo) {
+			queryActionInfo.setNotGeneratePaginationParams(true);
+		}else {
+			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能指定搜索条件");
+		}
+		return this;
+	}
 	public PageFlowScript where(LogicalOperator ... conditions) {
 		if (currentWork instanceof QueryInfo) {
 			// 

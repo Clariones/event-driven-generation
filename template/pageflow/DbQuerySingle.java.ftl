@@ -68,6 +68,8 @@
 	}
 	
 	<#if helper.record('singleClass', typeClass)>
-	protected abstract void enhance${typeClass}(${custom_context_name} ctx, ${typeClass} data, String queryName) throws Exception;
+	protected void enhance${typeClass}(${custom_context_name} ctx, ${typeClass} data, String queryName) throws Exception {
+		// 默认什么都不增强. 需要额外增强请重载此函数
+	}
 	</#if>
 </#if>

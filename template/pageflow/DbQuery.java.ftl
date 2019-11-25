@@ -12,6 +12,7 @@ import java.util.Map;
 
 import ${base_package}.${context_name};
 import ${base_package}.SmartList;
+import ${base_package}.${NAMING.toCamelCase(project_name)}BaseUtils;
 import ${base_package}.${custom_context_name};
 import ${parent_class_package}.${parent_class_name};
 import ${package}pageview.*;
@@ -141,10 +142,38 @@ public abstract class ${class_name}DBQueryHelper{
 	${typeClass} lastRecord, int limit, List<Object> params<@T.getRequestProcessingUrlMethodParameters query/>
 		) throws Exception {
 	</@>${''}
+		<#if query.queryActionInfo.notGeneratePaginationParams>
 		// 你要自己填好分页的参数, 不然jdbc的参数个数不对
+		<#else>
+		// 首先增强对象
+			<#list query.queryActionInfo.lastRecordEnhancePathList as enhanceInfo>
+				<#if enhanceInfo.methodType == 'enhance'>
+		List<${enhanceInfo.enhancedTypeName}> ${enhanceInfo.enhancedListVarName} = ${NAMING.toCamelCase(project_name)}BaseUtils.collectReferencedObjectWithType(ctx, ${enhanceInfo.standOnVarName}, ${enhanceInfo.enhancedTypeName}.class);
+		ctx.getDAOGroup().enhanceList(${enhanceInfo.enhancedListVarName}, ${enhanceInfo.enhancedTypeName}.class);
+				<#else>
+		List<${enhanceInfo.enhancedTypeName}> ${enhanceInfo.enhancedListVarName} = ctx.getDAOGroup().get${NAMING.toCamelCase(enhanceInfo.ownerType)}DAO().${enhanceInfo.methodName}(ctx,${enhanceInfo.standOnVarName}, EO);
+				</#if>
+			</#list>
+			<#list query.queryActionInfo.paginationParamsExp as param>
+		params.add(${param});
+			</#list>
+		</#if>
 	}
 	</#if>
 	protected void enhance${typeClass}ListOf${NAMING.toCamelCase(query.name)}(${custom_context_name} ctx, SmartList<${typeClass}> list, String queryName<@T.getRequestProcessingUrlMethodParameters query/>) throws Exception {
+	<#if query.queryActionInfo?has_content>
+		if (list == null || list.isEmpty()) {
+			return;
+		}
+		<#list query.queryActionInfo.listEnhancePathList as enhanceInfo>
+			<#if enhanceInfo.methodType == 'enhance'>
+		List<${enhanceInfo.enhancedTypeName}> ${enhanceInfo.enhancedListVarName} = ${NAMING.toCamelCase(project_name)}BaseUtils.collectReferencedObjectWithType(ctx, ${enhanceInfo.standOnVarName}, ${enhanceInfo.enhancedTypeName}.class);
+		ctx.getDAOGroup().enhanceList(${enhanceInfo.enhancedListVarName}, ${enhanceInfo.enhancedTypeName}.class);
+			<#else>
+		List<${enhanceInfo.enhancedTypeName}> ${enhanceInfo.enhancedListVarName} = ctx.getDAOGroup().get${NAMING.toCamelCase(enhanceInfo.ownerType)}DAO().${enhanceInfo.methodName}(ctx,${enhanceInfo.standOnVarName}, EO);
+			</#if>
+		</#list>
+	</#if>
 	}
   </#if>
 </#list>

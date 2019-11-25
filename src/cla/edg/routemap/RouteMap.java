@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import cla.edg.modelbean.BaseModelBean;
@@ -218,7 +219,7 @@ public class RouteMap <N,E>{
 		Edge<N,E> edge = Edge.create(edgeData);
 		return edge;
 	}
-	protected Node<N,E> getNodeByKey(String key) {
+	public Node<N,E> getNodeByKey(String key) {
 		return allNodes.get(key);
 	}
 	protected Node<N, E> createNode(N nodeData) {
@@ -229,5 +230,35 @@ public class RouteMap <N,E>{
 	protected void exception(String string) {
 		throw new RuntimeException("出错了:"+string);
 	}
-	
+
+	// 使用DFS(深度优先)算法,从startPoint开始,遍历其下的所有节点, 并给出每一步的"点-边-点"信息 其实就是 边
+	public List<Edge<N,E>> getDFSPaths(MeetingPoint<N, E> startPoint) {
+		List<Edge<N,E>> result = new ArrayList<>();
+		goThroughWithDFS(result, startPoint);
+		return result;
+	}
+	protected void goThroughWithDFS(List<Edge<N,E>> result, MeetingPoint<N, E> point) {
+		// TODO Auto-generated method stub
+		if (point.getEdgesFromMe().isEmpty()) {
+			return;
+		}
+		for(Edge<N, E> edge : point.getEdgesFromMe()) {
+			result.add(edge);
+			MeetingPoint<N, E> nextNode = edge.getToNode();
+			goThroughWithDFS(result, nextNode);
+		}
+	}
+
+	public List<Edge<N,E>> getPathsFromStartToPoint(MeetingPoint<N, E> point) {
+		LinkedList<Edge<N,E>> result = new LinkedList<>();
+		if (point == null || point.getEdgesToMe().isEmpty()) {
+			return result;
+		}
+		while(!point.getEdgesToMe().isEmpty()) {
+			Edge<N, E> edge = point.getEdgesToMe().iterator().next();
+			result.addFirst(edge);
+			point = edge.getFromNode();
+		}
+		return result;
+	}
 }

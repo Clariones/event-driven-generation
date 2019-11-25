@@ -2,6 +2,7 @@ package cla.edg.pageflow;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import java.util.regex.Pattern;
@@ -11,15 +12,18 @@ import com.google.gson.Gson;
 import cla.edg.Utils;
 import cla.edg.modelbean.BaseAttribute;
 import cla.edg.modelbean.BaseModelBean;
+import cla.edg.modelbean.BeanRelation;
 import cla.edg.modelbean.CorperationPathNode;
 import cla.edg.modelbean.LogicalOperator;
 import cla.edg.modelbean.ModelBeanRoute;
+import cla.edg.routemap.Edge;
+import cla.edg.routemap.Node;
 import cla.edg.routemap.RouteUtil;
 
 public class QueryActionInfo {
 	private static final String IF_LAST_RECORD = "<IF_LAST_RECORD>";
 	private static final String END_OF_BRACKET = "<END_OF_BRACKET>";
-	private static final String END_OF_LAST_RECORD = IF_LAST_RECORD;
+	private static final String END_OF_LAST_RECORD = END_OF_BRACKET;
 	// ========================== 公共部分 ===========================
 	protected Set<String> externTypesNeedKnown;
 	protected LogicalOperator searchWhere;
@@ -27,7 +31,14 @@ public class QueryActionInfo {
 	protected boolean querySingle;
 	protected boolean pagination;
 	protected boolean counting = false;
+	protected boolean notGeneratePaginationParams = false;
 	
+	public boolean isNotGeneratePaginationParams() {
+		return notGeneratePaginationParams;
+	}
+	public void setNotGeneratePaginationParams(boolean notGeneratePaginationParams) {
+		this.notGeneratePaginationParams = notGeneratePaginationParams;
+	}
 	public boolean isCounting() {
 		return counting;
 	}
@@ -324,5 +335,112 @@ public class QueryActionInfo {
 		throw new RuntimeException(message);
 	}
 	
+	public List<Object> getListEnhancePathList() {
+		return getEnhancePathList("list");
+	}
+	// 和enhance相关的
+	public List<Object> getLastRecordEnhancePathList() {
+		return getEnhancePathList("lastRecord");
+	}
+	protected List<Object> getEnhancePathList(String startName) {
+		if (this.sortingMap == null) {
+			System.out.println("查询" + this.getTargetModelTypeName() +"时未指定排序信息,默认按ID排序和分页" );
+			return new ArrayList<>();
+		}
+		if (this.isNotGeneratePaginationParams()) {
+			System.out.println("查询" + this.getTargetModelTypeName() +"时指定不自动生成分页参数处理" );
+			return new ArrayList<>();
+		}
+		List<Edge<BaseModelBean, BeanRelation>> edges = this.sortingMap.getDFSPaths(sortingMap.getStartNode().getMeetingPointList().get(0));
+		
+		List<Object> result = new ArrayList<>();
+		edges.forEach(edge->{
+			// 我要生成类似下面这两句话:
+			// List<InkDeedStatus> statusList = MiscUtils.collectReferencedObjectWithType(ctx, lastRecord, InkDeedStatus.class);
+			// ctx.getDAOGroup().enhanceList(statusList, InkDeedStatus.class);
+			Node<BaseModelBean, BeanRelation> fromNode = sortingMap.getNodeByKey(edge.getFromNode().getNodeKey());
+			Node<BaseModelBean, BeanRelation> toNode = sortingMap.getNodeByKey(edge.getToNode().getNodeKey());
+			String enhancedTypeName = toNode.getData().getModelTypeName();
+			enhancedTypeName = Utils.toCamelCase(enhancedTypeName);
+			String enhancedListVarName = edge.getData().getKey();
+			enhancedListVarName = String.format("%sListOf%sAs%s", 
+					edge.getData().getMemberName(),
+					Utils.toCamelCase(fromNode.getData().getModelTypeName()),
+					edge.getFromNode().getAlias()
+					);
+			String standOnVarName = startName;
+			if (edge.getFromNode().getEdgesToMe().isEmpty()) {
+				// 就直接从lastRecord开始
+			}else {
+				Edge<BaseModelBean, BeanRelation> fromEdge = edge.getFromNode().getEdgesToMe().iterator().next();
+				fromNode = sortingMap.getNodeByKey(fromEdge.getFromNode().getNodeKey());
+				standOnVarName = String.format("%sListOf%sAs%s", 
+						fromEdge.getData().getMemberName(),
+						Utils.toCamelCase(fromNode.getData().getModelTypeName()),
+						fromEdge.getFromNode().getAlias()
+						);
+			}
+			String methodType = "enhance";
+			String methodName = "";
+			String ownerType = "";
+			if (!edge.getData().isForwardReference()) {
+				methodType = "loadOurs";
+				methodName = String.format("loadOur%s", Utils.capFirst(edge.getData().getMemberName()));
+				ownerType = edge.getFromNode().getNodeKey();
+			}
+			result.add(Utils.put("enhancedTypeName", enhancedTypeName)
+					.put("enhancedListVarName", enhancedListVarName)
+					.put("standOnVarName", standOnVarName)
+					.put("methodType", methodType)
+					.put("methodName", methodName)
+					.put("ownerType", ownerType)
+					.into_map()
+					);
+		});
+		
+		return result;
+	}
 	
+	public List<Object> getPaginationParamsExp() {
+		List<Object> params = new ArrayList<>();
+		makePaginationParams(params);
+		return params;
+	}
+	private void makePaginationParams(List<Object> params) {
+		if (!this.isPagination()) {
+			return;
+		}
+		if (this.sortingFields.isEmpty()) { // 要分页,又没有指定排序规则的情况下, 按照目标类型的ID分页
+			params.add("lastRecord.getId()");
+			return;
+		}
+		// 指定了排序规则的, 按排序顺序来填充参数
+		for(int i=0;i<sortingFields.size();i++) {
+			for(int j = 0; j <= i; j++) {
+				makePaginationConditionParam(params, j);
+			}
+		}
+		return;
+	}
+	private void makePaginationConditionParam(List<Object> params, int pos) {
+		StringBuilder sb = new StringBuilder();
+		sb.append("lastRecord");
+		SortingInfo fd = sortingFields.get(pos);
+		List<Edge<BaseModelBean, BeanRelation>> paths = sortingMap.getPathsFromStartToPoint(fd.getMeetingPoint());
+//		if (paths.size() == 0) {
+//			sb.append(".get").append(Utils.capFirst(fd.getSortingFieldName())).append("()");
+//		}
+		for(Edge<BaseModelBean, BeanRelation> edge: paths) {
+			BeanRelation br = edge.getData();
+			sb.append(".get").append(Utils.capFirst(br.getMemberName())).append("()");
+			if (!br.isForwardReference()) {
+				sb.append(".first()");
+			}
+		}
+		sb.append(".get").append(Utils.toCamelCase(fd.getSortingFieldName())).append("()");
+		if (fd.getSortField() instanceof BaseModelBean) {
+			sb.append(".getId()");
+		}
+		params.add(sb.toString());
+	}
 }

@@ -1,5 +1,6 @@
 package cla.edg.modelbean;
 
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import cla.edg.routemap.Edge;
@@ -89,7 +90,8 @@ public class ModelBeanRoute extends RouteMap<BaseModelBean, BeanRelation>{
 			appendJoinClause(sb, toNode, nextEdge);
 		}
 	}
-
+	
+	
 	
 
 	
