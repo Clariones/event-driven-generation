@@ -57,7 +57,7 @@ public class ModelBeanRoute extends RouteMap<BaseModelBean, BeanRelation>{
 		startPoint = this.getStartNode().getMeetingPointList().get(0);
 		StringBuilder sb = new StringBuilder();
 		if (isCount) {
-			sb.append("SELECT COUNT(DISTINCT ").append(targetAlias).append(".*) from ");
+			sb.append("SELECT COUNT(DISTINCT ").append(targetAlias).append(".id) from ");
 		}else {
 			sb.append("SELECT DISTINCT ").append(targetAlias).append(".* from ");
 		}
