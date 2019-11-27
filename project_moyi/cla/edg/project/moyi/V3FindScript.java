@@ -5,6 +5,7 @@ import cla.edg.pageflow.PieceOfScript;
 import cla.edg.project.moyi.gen.graphquery.ArtworkAuctionStatus;
 import cla.edg.project.moyi.gen.graphquery.InkDeedStatus;
 import cla.edg.project.moyi.gen.graphquery.MODEL;
+import cla.edg.project.moyi.gen.graphquery.PaymentStatus;
 
 public class V3FindScript extends PieceOfScript {
 	@Override
@@ -94,7 +95,13 @@ public class V3FindScript extends PieceOfScript {
 						)
 					.wants(MODEL.auctionStartNotification().auction(), MODEL.auctionStartNotification().bidder())
 					.not_generate_pagination_params()
-				
+				.query(MODEL.paymentLineItem()).which("available in payment").with_string("payment id")
+					.comments("查询支付详情相关的,目前有效的支付条目")
+					.do_it_as()
+						.where(MODEL.paymentLineItem().paymentDetail().eq("${payment id}"),
+								MODEL.paymentLineItem().paymentStatus().code().not(PaymentStatus.CANCELLED)
+							)
+						.wants(MODEL.paymentLineItem().paymentStatus())
 				;
 	}
 

@@ -136,7 +136,7 @@ public abstract class ${class_name}DBQueryHelper{
 		</#if>
 	</#if>
 	}
-	<#if query.queryActionInfo?has_content>
+	<#if query.pagination && query.queryActionInfo?has_content>
 	${''}<@compress single_line=true>
 	protected void fillPaginationParamsForQuery${typeClass}ListOf${NAMING.toCamelCase(query.name)}(${custom_context_name} ctx, 
 	${typeClass} lastRecord, int limit, List<Object> params<@T.getRequestProcessingUrlMethodParameters query/>

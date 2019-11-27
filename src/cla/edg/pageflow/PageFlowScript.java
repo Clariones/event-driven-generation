@@ -255,6 +255,9 @@ public class PageFlowScript extends BasePageFlowScript {
 		return this;
 	}
 	
+	public PageFlowScript query(BaseModelBean bean) {
+		return query(bean.getModelTypeName());
+	}
 	public PageFlowScript query(String tgtName) {
 		QueryInfo qInfo = new QueryInfo();
 		qInfo.setObjectName(tgtName);
