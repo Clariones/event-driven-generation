@@ -25,6 +25,7 @@ public class LogicalOperator {
 	protected CollectionType collectionType = CollectionType.and;
 	protected List<LogicalOperator> operations = new ArrayList<>();
 	protected MeetingPoint<BaseModelBean, BeanRelation> delareAtPoint;
+	protected ModelBeanRoute beanRoute;
 	
 	public MeetingPoint<BaseModelBean, BeanRelation> getDelareAtPoint() {
 		return delareAtPoint;
@@ -106,15 +107,16 @@ public class LogicalOperator {
 	}
 	
 	public ModelBeanRoute getBeanRoute() {
-		if (op1 instanceof BaseModelBean) {
-			return ((BaseModelBean) op1).getBeanRoute();
-		}
-		if (op1 instanceof BaseAttribute) {
-			return ((BaseAttribute) op1).getContainerBean().getBeanRoute();
-		}
+//		if (op1 instanceof BaseModelBean) {
+//			return ((BaseModelBean) op1).getBeanRoute();
+//		}
+//		if (op1 instanceof BaseAttribute) {
+//			return ((BaseAttribute) op1).getContainerBean().getBeanRoute();
+//		}
+		return beanRoute;
 		// 目前应该就是这样,不然就要仔细想想
-		exception("逻辑运算获取bean route超出预期");
-		return null;
+		// exception("逻辑运算获取bean route超出预期");
+		// return null;
 	}
 	
 	private void exception(String message) {
@@ -134,27 +136,34 @@ public class LogicalOperator {
 			}
 		});
 		
-		MeetingPoint<BaseModelBean, BeanRelation> point = updateNodeRoute(op1, opr);
-		if (point != null) {
-			result.setDelareAtPoint(point);
+		result.beanRoute = updateNodeRoute(op1, opr);
+		if (result.beanRoute == null) {
+			throw new RuntimeException("指定条件时,必须指明条件相关的节点路径");
 		}
-		updateNodeRoute(op2, opr);
+		MeetingPoint<BaseModelBean, BeanRelation> point = result.beanRoute.getCurrentMeetingPoint();
+		result.setDelareAtPoint(point);
+		
+		ModelBeanRoute br2 = updateNodeRoute(op2, opr);
+		if(br2 != null) {
+			result.beanRoute = (ModelBeanRoute) result.beanRoute.mergeWith(br2);
+		}
+		
 		return result;
 	}
 	
-	protected static MeetingPoint<BaseModelBean, BeanRelation> updateNodeRoute(Object operand, Operator opr) {
+	protected static ModelBeanRoute updateNodeRoute(Object operand, Operator opr) {
 		MeetingPoint<BaseModelBean, BeanRelation> point = null;
 		if (operand instanceof BaseModelBean) {
 			ModelBeanRoute beanRoute = ((BaseModelBean) operand).getBeanRoute();
 			if (beanRoute == null || beanRoute.getCurrentMeetingPoint() == null) {
 				throw new RuntimeException("你直接指定了 MODEL.XXX()."+opr+"(). 无法通过关联关系或者属性推断你需要的字段, 您是不是想写: MODEL.XXX().id()."+opr+"()?");
 			}
-			point = beanRoute.getCurrentMeetingPoint();
+			return beanRoute;
 		}
 		if (operand instanceof BaseAttribute) {
-			point = ((BaseAttribute) operand).getContainerBean().getBeanRoute().getCurrentMeetingPoint();
+			return  ((BaseAttribute) operand).getContainerBean().getBeanRoute();
 		}
-		return point;
+		return null;
 	}
 	public boolean hasMore() {
 		if(this.getOperations() == null || this.getOperations().isEmpty()) {

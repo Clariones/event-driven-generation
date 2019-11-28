@@ -101,7 +101,7 @@ public class V3FindScript extends PieceOfScript {
 						.where(MODEL.paymentLineItem().paymentDetail().eq("${payment id}"),
 								MODEL.paymentLineItem().paymentStatus().code().not(PaymentStatus.CANCELLED)
 							)
-						.wants(MODEL.paymentLineItem().paymentStatus())
+						.wants(MODEL.paymentLineItem().paymentStatus(), MODEL.paymentLineItem().paymentMethod())
 				;
 	}
 

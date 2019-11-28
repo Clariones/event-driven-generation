@@ -152,16 +152,16 @@ public class RouteUtil {
 				paramValueExpList.add(wrapString((String) op2));
 				return "?";
 			}
-			// if (op2 instanceof BaseModelBean) {
-			// BaseModelBean node = findModelBeanForAlias(where);
-			// return node.getAdditonalData().aliasInSql+".id";
-			// }
-			// if (op2 instanceof BaseAttribute) {
-			// BaseModelBean node = findModelBeanForAlias(((BaseAttribute)
-			// op2).getContainerBean());
-			// return node.getAdditonalData().aliasInSql+"."+((BaseAttribute)
-			// op2).getName();
-			// }
+			if (op2 instanceof BaseModelBean) {
+				BaseModelBean node = (BaseModelBean) op2;
+				String alias = node.getBeanRoute().getCurrentMeetingPoint().getAlias();
+				return alias+".id";
+			}
+			if (op2 instanceof BaseAttribute) {
+				BaseModelBean node = ((BaseAttribute) op2).getContainerBean();
+				String alias = node.getBeanRoute().getCurrentMeetingPoint().getAlias();
+				return alias+"."+((BaseAttribute) op2).getName();
+			}
 			throw new RuntimeException(
 					"不晓得怎么处理op2:" + op2.getClass().getSimpleName() + "(" + Utils.toJson(op2, false) + ")");
 		}
