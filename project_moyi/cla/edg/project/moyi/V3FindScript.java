@@ -3,8 +3,10 @@ package cla.edg.project.moyi;
 import cla.edg.pageflow.PageFlowScript;
 import cla.edg.pageflow.PieceOfScript;
 import cla.edg.project.moyi.gen.graphquery.ArtworkAuctionStatus;
+import cla.edg.project.moyi.gen.graphquery.CertificateStatus;
 import cla.edg.project.moyi.gen.graphquery.InkDeedStatus;
 import cla.edg.project.moyi.gen.graphquery.MODEL;
+import cla.edg.project.moyi.gen.graphquery.OrderStatus;
 import cla.edg.project.moyi.gen.graphquery.PaymentStatus;
 
 public class V3FindScript extends PieceOfScript {
@@ -102,6 +104,41 @@ public class V3FindScript extends PieceOfScript {
 								MODEL.paymentLineItem().paymentStatus().code().not(PaymentStatus.CANCELLED)
 							)
 						.wants(MODEL.paymentLineItem().paymentStatus(), MODEL.paymentLineItem().paymentMethod())
+				.find(MODEL.mainOrder()).which("used to issue ink deed and not paid").with_string("artwork auction id").with_string("user id")
+					.comments("找出用户为某个拍品发行墨契的订单")
+					.do_it_as()
+						.where(MODEL.mainOrder().inkDeedIssueBillList().auction().eq("${artwork auction id}"),
+								MODEL.inkDeedIssueBill().seller().eq("${user id}"),
+								MODEL.mainOrder().orderStatus().code().in(OrderStatus.NEED_PAY, OrderStatus.PAYING)
+							)
+						.wants(MODEL.mainOrder().inkDeedIssueBillList(), MODEL.mainOrder().orderStatus(), MODEL.inkDeedIssueBill().orderStatus())
+				.find(MODEL.paymentDetail()).which("available for main order").with_string("order id")
+					.comments("找出订单的payment detail")
+					.do_it_as()
+						.where(MODEL.paymentDetail().mainOrder().eq("${order id}"),
+								MODEL.paymentDetail().paymentStatus().not_in(PaymentStatus.CANCELLED)
+							)
+				.find(MODEL.moyiShopCertification()).which("already paid").with_string("shop id")
+					.comments("找出店相关的, 未作废的店铺认证")
+					.do_it_as()
+						.where(MODEL.moyiShopCertification().moyiShopList().id().eq("${shop id}"), 
+								MODEL.moyiShopCertification().certificateStatus().in(CertificateStatus.CERTIFICATED, CertificateStatus.PROCESSING))
+						.wants(MODEL.moyiShopCertification().certificateStatus(), MODEL.moyiShopCertification().moyiShopList().shopkeeper())
+				.find(MODEL.auctionBiddingDeposit()).which("paid by user").with_string("artwork auction id").with_string("user id")
+					.comments("找出用户为拍卖缴纳的竞拍保证金")
+					.do_it_as()
+						.where(MODEL.auctionBiddingDeposit().bidder().eq("${user id}"),
+								MODEL.auctionBiddingDeposit().auction().eq("${artwork auction id}"))
+						.order_by(MODEL.auctionBiddingDeposit().id()).desc()
+						.wants(MODEL.auctionBiddingDeposit().status())
+				.find(MODEL.mainOrder()).which("opening for bidding deposit").with_string("artwork auction id").with_string("user id")
+					.comments("找出当前用户的未关闭的 竞拍保证金 订单")
+					.do_it_as()
+						.where(MODEL.mainOrder().auctionBiddingDepositBillList().bidder().eq("${user id}"),
+								MODEL.mainOrder().auctionBiddingDepositBillList().auction().eq("${artwork auction id}"),
+								MODEL.mainOrder().orderStatus().code().in(OrderStatus.NEED_PAY, OrderStatus.PAYING))
+						.wants(MODEL.mainOrder().auctionBiddingDepositBillList(), MODEL.mainOrder().orderStatus())
+						.order_by(MODEL.mainOrder()).desc()
 				;
 	}
 

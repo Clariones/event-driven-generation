@@ -5,12 +5,12 @@ import cla.edg.eventscript.EventScript;
 public class V3InkDeedService extends BaseMoyiEventScript {
 	private static final EventScript SCRIPT = $("ink deed v3")
 			// 发行墨契相关
-			.on_event("submit issuing request").with("input form data")
+			.on_event("submit issuing request").with("artwork auction id").with("usufructRatio").with("number")
 				.comments("提交发行墨契的请求")
 				.rule_comments("检查规则: 店铺保证金不少于1000元;起拍价大于20元;没超过30%...")
 				.rule_comments("DO:为用户生成一个 墨契发行 订单")
 				
-			.on_event("issue ink deed").with("artwork auction").with("number")
+			.on_event("issue ink deed").with("artwork auction").with("usufructRatio").with("number")
 				.comments("发行墨契")
 				.rule_comments("会检查是否可以发行墨契: 首先同提交发行请求时一样检查一遍,防止当初的一些条件发生了变化")
 				.rule_comments("DO:生成若干份墨契,并将之初始化")

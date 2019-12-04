@@ -40,6 +40,10 @@ public abstract class ${class_name}DBQueryHelper{
 	public int getPageSize(${custom_context_name} ctx, String queryName) {
 		return 20;
 	}
+	@SuppressWarnings("serial")
+	public <T> List<T> asList(T object) {
+		return new ArrayList<T>() {{add(object);}};
+	}
 <#list script.queryInfoList as query >
 	/**
 	 * ${query.comments!}.

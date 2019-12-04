@@ -320,6 +320,10 @@ public class QueryActionInfo {
 	public void addSortingPath(BaseModelBean bean, boolean asc) {
 		bean.goBackOneStep();
 		ModelBeanRoute inputBeanRoute = bean.getBeanRoute();
+		if (inputBeanRoute == null) {
+			addSortingPath(bean.id(), asc);
+			return;
+		}
 		currentSortingPath = new SortingInfo();
 		currentSortingPath.setMeetingPoint(inputBeanRoute.getCurrentMeetingPoint());
 		currentSortingPath.setAscDirection(asc);
@@ -364,6 +368,8 @@ public class QueryActionInfo {
 			return new ArrayList<>();
 		}
 		
+		beanEnhanceRoute.assignAlias();
+		
 		List<Edge<BaseModelBean, BeanRelation>> edges = beanEnhanceRoute.getDFSPaths(beanEnhanceRoute.getStartNode().getMeetingPointList().get(0));
 		
 		List<Object> result = new ArrayList<>();
@@ -400,6 +406,9 @@ public class QueryActionInfo {
 				methodType = "loadOurs";
 				methodName = String.format("loadOur%s", Utils.capFirst(edge.getData().getMemberName()));
 				ownerType = edge.getFromNode().getNodeKey();
+				if (standOnVarName.equals("data")) {
+					standOnVarName = "asList(data)";
+				}
 			}
 			result.add(Utils.put("enhancedTypeName", enhancedTypeName)
 					.put("enhancedListVarName", enhancedListVarName)
