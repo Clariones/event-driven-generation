@@ -602,7 +602,22 @@ public class PageFlowScript extends BasePageFlowScript {
 		}
 		return this;
 	}
-	
-	
+	public PageFlowScript top(String limitExp) {
+		if (currentWork instanceof QueryInfo) {
+			queryActionInfo.setLimitExp(limitExp);
+			return this;
+		}else {
+			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能指定搜索条件");
+		}
+	}
+	public PageFlowScript top_3() {
+		return top("3");
+	}
+	public PageFlowScript top_5() {
+		return top("5");
+	}
+	public PageFlowScript top_10() {
+		return top("10");
+	}
 	
 }

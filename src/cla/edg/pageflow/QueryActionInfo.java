@@ -32,7 +32,12 @@ public class QueryActionInfo {
 	protected boolean pagination;
 	protected boolean counting = false;
 	protected boolean notGeneratePaginationParams = false;
+	protected String limitExp = null;
 	
+	
+	public String getLimitExp() {
+		return limitExp;
+	}
 	public boolean isNotGeneratePaginationParams() {
 		return notGeneratePaginationParams;
 	}
@@ -290,6 +295,11 @@ public class QueryActionInfo {
 			return;
 		}
 		
+		if (this.getLimitExp() != null) {
+			sb.append("\n    LIMIT ? ");
+			return;
+		}
+		
 		if (this.isQuerySingle()) {
 			sb.append("\n    LIMIT ? ");
 			paramValueExpList.add("1");
@@ -464,5 +474,15 @@ public class QueryActionInfo {
 			sb.append(".getId()");
 		}
 		params.add(sb.toString());
+	}
+	public void setLimitExp(String limitExp) {
+		this.limitExp = limitExp;
+	}
+	
+	public boolean isLimitExpIsObject() {
+		if (limitExp == null) {
+			return false;
+		}
+		return Utils.isElVariable(limitExp);
 	}
 }

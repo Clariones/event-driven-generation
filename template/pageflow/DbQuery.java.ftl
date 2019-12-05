@@ -125,6 +125,13 @@ public abstract class ${class_name}DBQueryHelper{
 		}
 		params.add(limit);
 		</#if>
+		<#if query.queryActionInfo.limitExp?has_content>
+			<#if query.queryActionInfo.limitExpIsObject>
+		params.add(${NAMING.asELVariable(query.queryActionInfo.limitExp)}==null?this.getPageSize(ctx, "query${typeClass}ListOf${NAMING.toCamelCase(query.name)}"):${NAMING.asELVariable(query.queryActionInfo.limitExp)});
+			<#else>
+		params.add(${NAMING.asELVariable(query.queryActionInfo.limitExp)});
+			</#if>
+		</#if>		
 		return sql;
 	<#else>
 		String sql = "select D.* from ${query.objectName}_data D ";
@@ -133,6 +140,7 @@ public abstract class ${class_name}DBQueryHelper{
 			params.add(lastRecord.getId());
 			sql += " where D.id <= ? ";
 		}
+
 		params.add(limit);
 		return sql + " order by D.id desc limit ?";
 		<#else>
@@ -165,7 +173,7 @@ public abstract class ${class_name}DBQueryHelper{
 	}
 	</#if>
 	protected void enhance${typeClass}ListOf${NAMING.toCamelCase(query.name)}(${custom_context_name} ctx, SmartList<${typeClass}> list, String queryName<@T.getRequestProcessingUrlMethodParameters query/>) throws Exception {
-	<#if query.queryActionInfo?has_content>
+	<#if query.queryActionInfo?has_content && query.queryActionInfo.listEnhancePathList?has_content>
 		if (list == null || list.isEmpty()) {
 			return;
 		}
@@ -177,6 +185,8 @@ public abstract class ${class_name}DBQueryHelper{
 		List<${enhanceInfo.enhancedTypeName}> ${enhanceInfo.enhancedListVarName} = ctx.getDAOGroup().get${NAMING.toCamelCase(enhanceInfo.ownerType)}DAO().${enhanceInfo.methodName}(ctx,${enhanceInfo.standOnVarName}, EO);
 			</#if>
 		</#list>
+	<#else>
+		// 重载此函数, 根据查询的结果, 加载更多的相关数据
 	</#if>
 	}
   </#if>

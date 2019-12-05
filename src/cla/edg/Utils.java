@@ -191,4 +191,36 @@ public class Utils {
 		list.add(data);
 		return true;
 	}
+	
+	protected static Pattern ptnStrConst = Pattern.compile("\\$\\{\\'(.*)\\'\\}");
+	protected static Pattern ptnVarConst = Pattern.compile("\\$\\{(.*)\\}");
+	public static String asELVariable(String exp) {
+		Matcher m;
+		m = ptnStrConst.matcher(exp);
+		if (m.matches()) {
+			return toJson(m.group(1), false);
+		}
+		
+		m = ptnVarConst.matcher(exp);
+		if (m.matches()) {
+			return toJavaVariableName(m.group(1));
+		}
+		
+		return exp;
+	}
+	
+	public static boolean isElVariable(String exp) {
+		Matcher m;
+		m = ptnStrConst.matcher(exp);
+		if (m.matches()) {
+			return false;
+		}
+		
+		m = ptnVarConst.matcher(exp);
+		if (m.matches()) {
+			return true;
+		}
+		
+		return false;
+	}
 }
