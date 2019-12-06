@@ -19,7 +19,7 @@ import cla.edg.routemap.RouteUtil;
 public class QueryActionInfo {
 	private static final String IF_LAST_RECORD = "<IF_LAST_RECORD>";
 	private static final String END_OF_BRACKET = "<END_OF_BRACKET>";
-	private static final String END_OF_LAST_RECORD = IF_LAST_RECORD;
+	private static final String END_OF_LAST_RECORD = END_OF_BRACKET;
 	// ========================== 公共部分 ===========================
 	protected Set<String> externTypesNeedKnown;
 	protected LogicalOperator searchWhere;
@@ -27,7 +27,7 @@ public class QueryActionInfo {
 	protected boolean querySingle;
 	protected boolean pagination;
 	protected boolean counting = false;
-	
+
 	public boolean isCounting() {
 		return counting;
 	}
@@ -116,11 +116,11 @@ public class QueryActionInfo {
 	public void addParamString(Object param) {
 		getParamDefinitions().add(new Gson().toJson(param));
 	}
-	
+
 	public String getDbSql() {
 		return makeOutputString(this.getSqlTemplate().replaceAll("\\?\\{[^\\}]+\\}", "?"));
 	}
-	
+
 	Pattern ptnSqlParam = Pattern.compile("(\\?(\\{[^\\}]+\\})?)");
 	public List<Object> getParamPrepareQueue() {
 		List<Object> result = new ArrayList<>();
@@ -137,14 +137,14 @@ public class QueryActionInfo {
 		}
 		return result;
 	}
-	
+
 	// ========================== 写法2: 用route map组装SQL ===========================
 	protected List<Object> params;
 	protected ModelBeanRoute beanRoute;
 	protected SortingInfo currentSortingPath;
 	protected ModelBeanRoute sortingMap;
 	protected List<SortingInfo> sortingFields = new ArrayList<>();
-	
+
 	public ModelBeanRoute getBeanRoute() {
 		return beanRoute;
 	}
@@ -162,7 +162,7 @@ public class QueryActionInfo {
 		beanRoute.assignAlias();
 		String selectStr = beanRoute.getCountSelectClause(this.getTargetModelTypeName());
 		sb.append(selectStr);
-		
+
 		params = new ArrayList<>();
 		String whereClause = RouteUtil.getWhereClause(params, this.getSearchWhere());
 		sb.append(whereClause);
@@ -185,13 +185,13 @@ public class QueryActionInfo {
 		StringBuilder sb =  new StringBuilder();
 		String selectStr = beanRoute.getSelectClause(this.getTargetModelTypeName());
 		sb.append(selectStr);
-		
+
 		params = new ArrayList<>();
 		String whereClause = RouteUtil.getWhereClause(params, this.getSearchWhere());
 		sb.append(whereClause);
 		// create pagination clause
 		makePaginationClause(params, sb, null);
-		// create order by 
+		// create order by
 		makeSortClause(params, sb, null);
 		// create limit
 		makeLimitClause(params, sb, null);
@@ -207,18 +207,18 @@ public class QueryActionInfo {
 			sb.append(END_OF_LAST_RECORD);
 			return;
 		}
-		
+
 		sb.append("\r\n      AND (");
 		for(int i=0;i<sortingFields.size();i++) {
 			makePaginationCondition(sb, i);
 		}
-		
+
 		sb.append(") ");
 		sb.append(END_OF_LAST_RECORD);
 		return;
 	}
 	private void makePaginationCondition(StringBuilder sb, int pos) {
-		
+
 		if (pos > 0) {
 			sb.append(" OR (");
 		}
@@ -242,7 +242,7 @@ public class QueryActionInfo {
 		if (pos > 0) {
 			sb.append(")");
 		}
-		
+
 	}
 	private void makeSortClause(List<Object> paramValueExpList, StringBuilder sb, LogicalOperator whereClauses) {
 		if (this.sortingFields.isEmpty()) {
@@ -270,14 +270,14 @@ public class QueryActionInfo {
 			// paramValueExpList.add("pageSize");
 			return;
 		}
-		
+
 		if (this.isQuerySingle()) {
 			sb.append("\n    LIMIT ? ");
 			paramValueExpList.add("1");
 			return;
 		}
 	}
-	
+
 	// 和排序相关的
 	public void addSortingPath(BaseAttribute attr, boolean asc) {
 		ModelBeanRoute inputBeanRoute = attr.getContainerBean().getBeanRoute();
@@ -286,7 +286,7 @@ public class QueryActionInfo {
 		currentSortingPath.setAscDirection(asc);
 		currentSortingPath.setSortField(attr);
 		sortingFields.add(currentSortingPath);
-		
+
 		if (sortingMap == null) {
 			sortingMap = inputBeanRoute;
 			return;
@@ -319,10 +319,10 @@ public class QueryActionInfo {
 		}
 		currentSortingPath.setAscDirection(asc);
 	}
-	
+
 	private void exception(String message) {
 		throw new RuntimeException(message);
 	}
-	
-	
+
+
 }

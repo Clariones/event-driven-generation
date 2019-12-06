@@ -24,7 +24,7 @@ public class S0_Homepage extends PieceOfScript {
 					.got_page("audit task list").list_of("recommended_store_audit_task")
 
 				//查看排名
-				.request("view ranking details").need_login().comments("查看排名")
+				.request("view ranking details").with_string("start date").with_string("end date").need_login().comments("查看排名")
 					.got_page("ranking details")
 
 				.request("view recommended store detail").need_login().with_string("recommended store id")
@@ -35,6 +35,7 @@ public class S0_Homepage extends PieceOfScript {
 
 				.request("start application").need_login().comments("发起申请")
 					.got_page("base information form")
+
 			;
 	}
 }
