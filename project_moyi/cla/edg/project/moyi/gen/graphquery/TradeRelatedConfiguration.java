@@ -5,15 +5,15 @@ import java.util.Map;
 import cla.edg.Utils;
 import cla.edg.modelbean.*;
 
-public class ShopOpeningRewardRule extends BaseModelBean{
+public class TradeRelatedConfiguration extends BaseModelBean{
 	public String getFullClassName() {
-		return "com.terapico.moyi.shopopeningrewardrule.ShopOpeningRewardRule";
+		return "com.terapico.moyi.traderelatedconfiguration.TradeRelatedConfiguration";
 	}
 	// 枚举对象
-	public static EnumAttribute OPENING_IB_REWARD = new EnumAttribute("com.terapico.moyi.shopopeningrewardrule.ShopOpeningRewardRule", "OPENING_IB_REWARD");
-	public static EnumAttribute SHOP_REFERRAL_OPENING_CASH_REWARD = new EnumAttribute("com.terapico.moyi.shopopeningrewardrule.ShopOpeningRewardRule", "SHOP_REFERRAL_OPENING_CASH_REWARD");
-	public static EnumAttribute RECOMMENDED = new EnumAttribute("com.terapico.moyi.shopopeningrewardrule.ShopOpeningRewardRule", "RECOMMENDED");
-	public static EnumAttribute REFERRAL_PROFIT_SHARE = new EnumAttribute("com.terapico.moyi.shopopeningrewardrule.ShopOpeningRewardRule", "REFERRAL_PROFIT_SHARE");
+	public static EnumAttribute INK_DEED_LOCK_TIME = new EnumAttribute("com.terapico.moyi.traderelatedconfiguration.TradeRelatedConfiguration", "INK_DEED_LOCK_TIME");
+	public static EnumAttribute AUCTION_ORDER_ACCOUNT_PERIOD = new EnumAttribute("com.terapico.moyi.traderelatedconfiguration.TradeRelatedConfiguration", "AUCTION_ORDER_ACCOUNT_PERIOD");
+	public static EnumAttribute AUCTION_START_PREROLL = new EnumAttribute("com.terapico.moyi.traderelatedconfiguration.TradeRelatedConfiguration", "AUCTION_START_PREROLL");
+	public static EnumAttribute BIDDING_DEPOSIT = new EnumAttribute("com.terapico.moyi.traderelatedconfiguration.TradeRelatedConfiguration", "BIDDING_DEPOSIT");
 
 	// 引用的对象
 
@@ -56,6 +56,14 @@ public class ShopOpeningRewardRule extends BaseModelBean{
 		return member;
 	}
 
+	public StringAttribute unitName(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string");
+		member.setName("unit_name");
+		useMember(member);
+		return member;
+	}
+
 	public StringAttribute description(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
@@ -64,10 +72,26 @@ public class ShopOpeningRewardRule extends BaseModelBean{
 		return member;
 	}
 
-	public NumberAttribute numericValue(){
+	public NumberAttribute value(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
-		member.setName("numeric_value");
+		member.setName("value");
+		useMember(member);
+		return member;
+	}
+
+	public NumberAttribute minValue(){
+		NumberAttribute member = new NumberAttribute();
+		member.setModelTypeName("money");
+		member.setName("min_value");
+		useMember(member);
+		return member;
+	}
+
+	public NumberAttribute maxValue(){
+		NumberAttribute member = new NumberAttribute();
+		member.setModelTypeName("money");
+		member.setName("max_value");
 		useMember(member);
 		return member;
 	}

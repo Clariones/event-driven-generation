@@ -139,7 +139,7 @@ public class MoyiShop extends BaseModelBean{
 	public StringAttribute shopName(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("shopName");
+		member.setName("shop_name");
 		useMember(member);
 		return member;
 	}
@@ -155,7 +155,7 @@ public class MoyiShop extends BaseModelBean{
 	public StringAttribute shopLogo(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_image");
-		member.setName("shopLogo");
+		member.setName("shop_logo");
 		useMember(member);
 		return member;
 	}
@@ -163,7 +163,7 @@ public class MoyiShop extends BaseModelBean{
 	public StringAttribute contactName(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("contactName");
+		member.setName("contact_name");
 		useMember(member);
 		return member;
 	}
@@ -171,7 +171,7 @@ public class MoyiShop extends BaseModelBean{
 	public StringAttribute contactMobile(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_china_mobile_phone");
-		member.setName("contactMobile");
+		member.setName("contact_mobile");
 		useMember(member);
 		return member;
 	}
@@ -179,7 +179,7 @@ public class MoyiShop extends BaseModelBean{
 	public StringAttribute contactEmail(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_email");
-		member.setName("contactEmail");
+		member.setName("contact_email");
 		useMember(member);
 		return member;
 	}
@@ -187,7 +187,7 @@ public class MoyiShop extends BaseModelBean{
 	public NumberAttribute availableDeposit(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
-		member.setName("availableDeposit");
+		member.setName("available_deposit");
 		useMember(member);
 		return member;
 	}
@@ -195,7 +195,7 @@ public class MoyiShop extends BaseModelBean{
 	public NumberAttribute payableDeposit(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
-		member.setName("payableDeposit");
+		member.setName("payable_deposit");
 		useMember(member);
 		return member;
 	}
@@ -203,7 +203,7 @@ public class MoyiShop extends BaseModelBean{
 	public NumberAttribute frozenDeposit(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
-		member.setName("frozenDeposit");
+		member.setName("frozen_deposit");
 		useMember(member);
 		return member;
 	}
@@ -211,7 +211,7 @@ public class MoyiShop extends BaseModelBean{
 	public DateTimeAttribute createTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_create");
-		member.setName("createTime");
+		member.setName("create_time");
 		useMember(member);
 		return member;
 	}
@@ -219,7 +219,7 @@ public class MoyiShop extends BaseModelBean{
 	public DateTimeAttribute certificateTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time");
-		member.setName("certificateTime");
+		member.setName("certificate_time");
 		useMember(member);
 		return member;
 	}
@@ -227,7 +227,7 @@ public class MoyiShop extends BaseModelBean{
 	public DateTimeAttribute lastUpdateTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_update");
-		member.setName("lastUpdateTime");
+		member.setName("last_update_time");
 		useMember(member);
 		return member;
 	}

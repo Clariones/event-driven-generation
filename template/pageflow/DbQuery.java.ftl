@@ -73,7 +73,8 @@ public abstract class ${class_name}DBQueryHelper{
 	<#else>
 		String sql = prepareSqlAndParamsForQuery${typeClass}ListOf${NAMING.toCamelCase(query.name)}(ctx, params<@T.getRequestProcessingMethodParameterNames query/>);
 	</#if>
-		SmartList<${typeClass}> list = ctx.getDAOGroup().get${typeClass}DAO().queryList(sql, params.toArray());
+		
+		SmartList<${typeClass}> list = executeQuery${typeClass}ListOf${NAMING.toCamelCase(query.name)}(ctx, sql, params);
 	<#if query.pagination>
 		list.setRowsPerPage(pageSize);
 	<#else>
@@ -94,7 +95,9 @@ public abstract class ${class_name}DBQueryHelper{
 		enhance${typeClass}ListOf${NAMING.toCamelCase(query.name)}(ctx, list, "query${typeClass}ListOf${NAMING.toCamelCase(query.name)}"<@T.getRequestProcessingMethodParameterNames query/>);
 		return list;
 	}
-	
+	protected SmartList<${typeClass}> executeQuery${typeClass}ListOf${NAMING.toCamelCase(query.name)}(${custom_context_name} ctx, String sql, List<Object> params) throws Exception {
+		return ctx.getDAOGroup().get${typeClass}DAO().queryList(sql, params.toArray());
+	}
 	/**
 	 * ${query.comments!}.
 	<#if query.ruleComments?has_content>

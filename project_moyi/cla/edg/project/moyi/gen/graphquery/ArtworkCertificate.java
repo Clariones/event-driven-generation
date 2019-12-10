@@ -39,7 +39,7 @@ public class ArtworkCertificate extends BaseModelBean{
 	public StringAttribute imageUrl(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_image");
-		member.setName("imageUrl");
+		member.setName("image_url");
 		useMember(member);
 		return member;
 	}

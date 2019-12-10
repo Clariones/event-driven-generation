@@ -983,6 +983,30 @@ public class MODEL{
 		return rst;
 	}
 
+	public static TradeRelatedConfiguration tradeRelatedConfiguration() {
+		TradeRelatedConfiguration rst = new TradeRelatedConfiguration();
+		rst.setModelTypeName("trade_related_configuration");
+		return rst;
+	}
+
+	public static AssetStatus assetStatus() {
+		AssetStatus rst = new AssetStatus();
+		rst.setModelTypeName("asset_status");
+		return rst;
+	}
+
+	public static UserFrozenAccountRecord userFrozenAccountRecord() {
+		UserFrozenAccountRecord rst = new UserFrozenAccountRecord();
+		rst.setModelTypeName("user_frozen_account_record");
+		return rst;
+	}
+
+	public static InkDeedOrderLineItem inkDeedOrderLineItem() {
+		InkDeedOrderLineItem rst = new InkDeedOrderLineItem();
+		rst.setModelTypeName("ink_deed_order_line_item");
+		return rst;
+	}
+
 	public static UserDomain userDomain() {
 		UserDomain rst = new UserDomain();
 		rst.setModelTypeName("user_domain");

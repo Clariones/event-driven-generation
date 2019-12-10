@@ -39,7 +39,7 @@ public class DeliverArtwork extends BaseModelBean{
 	public BooleanAttribute authorStatement(){
 		BooleanAttribute member = new BooleanAttribute();
 		member.setModelTypeName("bool");
-		member.setName("authorStatement");
+		member.setName("author_statement");
 		useMember(member);
 		return member;
 	}
@@ -47,7 +47,7 @@ public class DeliverArtwork extends BaseModelBean{
 	public BooleanAttribute holderStatement(){
 		BooleanAttribute member = new BooleanAttribute();
 		member.setModelTypeName("bool");
-		member.setName("holderStatement");
+		member.setName("holder_statement");
 		useMember(member);
 		return member;
 	}
@@ -55,7 +55,7 @@ public class DeliverArtwork extends BaseModelBean{
 	public StringAttribute artworkName(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("artworkName");
+		member.setName("artwork_name");
 		useMember(member);
 		return member;
 	}
@@ -63,7 +63,7 @@ public class DeliverArtwork extends BaseModelBean{
 	public StringAttribute artworkImages(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_image");
-		member.setName("artworkImages");
+		member.setName("artwork_images");
 		useMember(member);
 		return member;
 	}
@@ -71,7 +71,7 @@ public class DeliverArtwork extends BaseModelBean{
 	public StringAttribute artworkDescription(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_longtext");
-		member.setName("artworkDescription");
+		member.setName("artwork_description");
 		useMember(member);
 		return member;
 	}
@@ -79,7 +79,7 @@ public class DeliverArtwork extends BaseModelBean{
 	public StringAttribute artworkCertificates(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_image");
-		member.setName("artworkCertificates");
+		member.setName("artwork_certificates");
 		useMember(member);
 		return member;
 	}

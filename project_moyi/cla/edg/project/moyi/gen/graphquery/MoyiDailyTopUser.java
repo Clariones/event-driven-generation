@@ -39,7 +39,7 @@ public class MoyiDailyTopUser extends BaseModelBean{
 	public StringAttribute userIdentification(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("userIdentification");
+		member.setName("user_identification");
 		useMember(member);
 		return member;
 	}
@@ -47,7 +47,7 @@ public class MoyiDailyTopUser extends BaseModelBean{
 	public StringAttribute userName(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("userName");
+		member.setName("user_name");
 		useMember(member);
 		return member;
 	}
@@ -55,7 +55,7 @@ public class MoyiDailyTopUser extends BaseModelBean{
 	public StringAttribute userProfileImage(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_image");
-		member.setName("userProfileImage");
+		member.setName("user_profile_image");
 		useMember(member);
 		return member;
 	}
@@ -63,7 +63,7 @@ public class MoyiDailyTopUser extends BaseModelBean{
 	public NumberAttribute userDailyRank(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
-		member.setName("userDailyRank");
+		member.setName("user_daily_rank");
 		useMember(member);
 		return member;
 	}
@@ -71,7 +71,7 @@ public class MoyiDailyTopUser extends BaseModelBean{
 	public StringAttribute userInkDeltaValue(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("userInkDeltaValue");
+		member.setName("user_ink_delta_value");
 		useMember(member);
 		return member;
 	}

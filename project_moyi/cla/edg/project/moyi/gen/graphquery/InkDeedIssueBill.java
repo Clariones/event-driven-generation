@@ -69,7 +69,7 @@ public class InkDeedIssueBill extends BaseModelBean{
 	public NumberAttribute issueIbCost(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
-		member.setName("issueIbCost");
+		member.setName("issue_ib_cost");
 		useMember(member);
 		return member;
 	}
@@ -77,7 +77,7 @@ public class InkDeedIssueBill extends BaseModelBean{
 	public NumberAttribute unitUsufructRatio(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("double");
-		member.setName("unitUsufructRatio");
+		member.setName("unit_usufruct_ratio");
 		useMember(member);
 		return member;
 	}
@@ -85,7 +85,7 @@ public class InkDeedIssueBill extends BaseModelBean{
 	public NumberAttribute unitPrice(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
-		member.setName("unitPrice");
+		member.setName("unit_price");
 		useMember(member);
 		return member;
 	}
@@ -93,7 +93,7 @@ public class InkDeedIssueBill extends BaseModelBean{
 	public NumberAttribute issueNumber(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
-		member.setName("issueNumber");
+		member.setName("issue_number");
 		useMember(member);
 		return member;
 	}
@@ -101,7 +101,7 @@ public class InkDeedIssueBill extends BaseModelBean{
 	public DateTimeAttribute createTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_create");
-		member.setName("createTime");
+		member.setName("create_time");
 		useMember(member);
 		return member;
 	}
@@ -109,7 +109,7 @@ public class InkDeedIssueBill extends BaseModelBean{
 	public DateTimeAttribute lastUpdateTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_update");
-		member.setName("lastUpdateTime");
+		member.setName("last_update_time");
 		useMember(member);
 		return member;
 	}

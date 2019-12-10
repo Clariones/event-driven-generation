@@ -77,7 +77,7 @@ public class PaymentDetail extends BaseModelBean{
 	public NumberAttribute cashAmount(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
-		member.setName("cashAmount");
+		member.setName("cash_amount");
 		useMember(member);
 		return member;
 	}
@@ -85,7 +85,7 @@ public class PaymentDetail extends BaseModelBean{
 	public NumberAttribute ibAmount(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
-		member.setName("ibAmount");
+		member.setName("ib_amount");
 		useMember(member);
 		return member;
 	}
@@ -93,7 +93,15 @@ public class PaymentDetail extends BaseModelBean{
 	public NumberAttribute autoIbAmount(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
-		member.setName("autoIbAmount");
+		member.setName("auto_ib_amount");
+		useMember(member);
+		return member;
+	}
+
+	public StringAttribute detailInfo(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string_longtext");
+		member.setName("detail_info");
 		useMember(member);
 		return member;
 	}
@@ -101,7 +109,7 @@ public class PaymentDetail extends BaseModelBean{
 	public StringAttribute wxAppId(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("wxAppId");
+		member.setName("wx_app_id");
 		useMember(member);
 		return member;
 	}
@@ -109,7 +117,7 @@ public class PaymentDetail extends BaseModelBean{
 	public StringAttribute wxOutTradeNo(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("wxOutTradeNo");
+		member.setName("wx_out_trade_no");
 		useMember(member);
 		return member;
 	}
@@ -117,7 +125,7 @@ public class PaymentDetail extends BaseModelBean{
 	public DateTimeAttribute paidTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time");
-		member.setName("paidTime");
+		member.setName("paid_time");
 		useMember(member);
 		return member;
 	}
@@ -125,7 +133,7 @@ public class PaymentDetail extends BaseModelBean{
 	public DateTimeAttribute createTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_create");
-		member.setName("createTime");
+		member.setName("create_time");
 		useMember(member);
 		return member;
 	}
@@ -133,7 +141,7 @@ public class PaymentDetail extends BaseModelBean{
 	public DateTimeAttribute lastUpdateTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_update");
-		member.setName("lastUpdateTime");
+		member.setName("last_update_time");
 		useMember(member);
 		return member;
 	}

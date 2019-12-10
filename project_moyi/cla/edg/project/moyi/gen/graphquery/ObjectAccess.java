@@ -47,7 +47,7 @@ public class ObjectAccess extends BaseModelBean{
 	public StringAttribute objectType(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("objectType");
+		member.setName("object_type");
 		useMember(member);
 		return member;
 	}

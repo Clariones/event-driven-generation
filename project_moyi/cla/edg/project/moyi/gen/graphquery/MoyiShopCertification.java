@@ -69,7 +69,7 @@ public class MoyiShopCertification extends BaseModelBean{
 	public StringAttribute shopkeeperRealName(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("shopkeeperRealName");
+		member.setName("shopkeeper_real_name");
 		useMember(member);
 		return member;
 	}
@@ -77,7 +77,7 @@ public class MoyiShopCertification extends BaseModelBean{
 	public StringAttribute shopkeeperIdCardNumber(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("shopkeeperIdCardNumber");
+		member.setName("shopkeeper_id_card_number");
 		useMember(member);
 		return member;
 	}
@@ -85,7 +85,7 @@ public class MoyiShopCertification extends BaseModelBean{
 	public StringAttribute idCardHoldingImage(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_image");
-		member.setName("idCardHoldingImage");
+		member.setName("id_card_holding_image");
 		useMember(member);
 		return member;
 	}
@@ -93,7 +93,7 @@ public class MoyiShopCertification extends BaseModelBean{
 	public StringAttribute idCardFrontImage(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_image");
-		member.setName("idCardFrontImage");
+		member.setName("id_card_front_image");
 		useMember(member);
 		return member;
 	}
@@ -101,7 +101,7 @@ public class MoyiShopCertification extends BaseModelBean{
 	public StringAttribute idCardBackImage(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_image");
-		member.setName("idCardBackImage");
+		member.setName("id_card_back_image");
 		useMember(member);
 		return member;
 	}
@@ -109,7 +109,7 @@ public class MoyiShopCertification extends BaseModelBean{
 	public StringAttribute companyName(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("companyName");
+		member.setName("company_name");
 		useMember(member);
 		return member;
 	}
@@ -117,7 +117,7 @@ public class MoyiShopCertification extends BaseModelBean{
 	public StringAttribute businessLicenseCopyImage(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_image");
-		member.setName("businessLicenseCopyImage");
+		member.setName("business_license_copy_image");
 		useMember(member);
 		return member;
 	}
@@ -125,7 +125,7 @@ public class MoyiShopCertification extends BaseModelBean{
 	public DateTimeAttribute createTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_create");
-		member.setName("createTime");
+		member.setName("create_time");
 		useMember(member);
 		return member;
 	}

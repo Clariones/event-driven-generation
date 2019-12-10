@@ -101,7 +101,7 @@ public class SecUser extends BaseModelBean{
 	public StringAttribute weixinOpenid(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("weixinOpenid");
+		member.setName("weixin_openid");
 		useMember(member);
 		return member;
 	}
@@ -109,7 +109,7 @@ public class SecUser extends BaseModelBean{
 	public StringAttribute weixinAppid(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("weixinAppid");
+		member.setName("weixin_appid");
 		useMember(member);
 		return member;
 	}
@@ -117,7 +117,7 @@ public class SecUser extends BaseModelBean{
 	public StringAttribute accessToken(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("accessToken");
+		member.setName("access_token");
 		useMember(member);
 		return member;
 	}
@@ -125,7 +125,7 @@ public class SecUser extends BaseModelBean{
 	public NumberAttribute verificationCode(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
-		member.setName("verificationCode");
+		member.setName("verification_code");
 		useMember(member);
 		return member;
 	}
@@ -133,7 +133,7 @@ public class SecUser extends BaseModelBean{
 	public DateTimeAttribute verificationCodeExpire(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time");
-		member.setName("verificationCodeExpire");
+		member.setName("verification_code_expire");
 		useMember(member);
 		return member;
 	}
@@ -141,7 +141,7 @@ public class SecUser extends BaseModelBean{
 	public DateTimeAttribute lastLoginTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time");
-		member.setName("lastLoginTime");
+		member.setName("last_login_time");
 		useMember(member);
 		return member;
 	}
@@ -149,7 +149,7 @@ public class SecUser extends BaseModelBean{
 	public StringAttribute currentStatus(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("currentStatus");
+		member.setName("current_status");
 		useMember(member);
 		return member;
 	}

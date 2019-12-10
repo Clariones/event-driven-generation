@@ -85,7 +85,7 @@ public class ArtworkAuctionComplaint extends BaseModelBean{
 	public StringAttribute image1(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_image");
-		member.setName("image1");
+		member.setName("image_1");
 		useMember(member);
 		return member;
 	}
@@ -93,7 +93,7 @@ public class ArtworkAuctionComplaint extends BaseModelBean{
 	public StringAttribute image2(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_image");
-		member.setName("image2");
+		member.setName("image_2");
 		useMember(member);
 		return member;
 	}
@@ -101,7 +101,7 @@ public class ArtworkAuctionComplaint extends BaseModelBean{
 	public StringAttribute image3(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_image");
-		member.setName("image3");
+		member.setName("image_3");
 		useMember(member);
 		return member;
 	}
@@ -109,7 +109,7 @@ public class ArtworkAuctionComplaint extends BaseModelBean{
 	public StringAttribute image4(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_image");
-		member.setName("image4");
+		member.setName("image_4");
 		useMember(member);
 		return member;
 	}
@@ -117,7 +117,7 @@ public class ArtworkAuctionComplaint extends BaseModelBean{
 	public StringAttribute image5(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_image");
-		member.setName("image5");
+		member.setName("image_5");
 		useMember(member);
 		return member;
 	}
@@ -125,7 +125,7 @@ public class ArtworkAuctionComplaint extends BaseModelBean{
 	public DateTimeAttribute createTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_create");
-		member.setName("createTime");
+		member.setName("create_time");
 		useMember(member);
 		return member;
 	}
@@ -133,7 +133,7 @@ public class ArtworkAuctionComplaint extends BaseModelBean{
 	public DateTimeAttribute lastUpdateTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_update");
-		member.setName("lastUpdateTime");
+		member.setName("last_update_time");
 		useMember(member);
 		return member;
 	}

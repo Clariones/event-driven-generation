@@ -49,7 +49,7 @@ public class ModeratorBonus extends BaseModelBean{
 	public NumberAttribute inkCoinValue(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("double");
-		member.setName("inkCoinValue");
+		member.setName("ink_coin_value");
 		useMember(member);
 		return member;
 	}
@@ -57,7 +57,7 @@ public class ModeratorBonus extends BaseModelBean{
 	public NumberAttribute experienceValue(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
-		member.setName("experienceValue");
+		member.setName("experience_value");
 		useMember(member);
 		return member;
 	}
@@ -65,7 +65,7 @@ public class ModeratorBonus extends BaseModelBean{
 	public DateTimeAttribute bonusDatetime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_now");
-		member.setName("bonusDatetime");
+		member.setName("bonus_datetime");
 		useMember(member);
 		return member;
 	}

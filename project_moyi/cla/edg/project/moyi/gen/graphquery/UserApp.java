@@ -77,7 +77,7 @@ public class UserApp extends BaseModelBean{
 	public StringAttribute appIcon(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("appIcon");
+		member.setName("app_icon");
 		useMember(member);
 		return member;
 	}
@@ -85,7 +85,7 @@ public class UserApp extends BaseModelBean{
 	public BooleanAttribute fullAccess(){
 		BooleanAttribute member = new BooleanAttribute();
 		member.setModelTypeName("bool");
-		member.setName("fullAccess");
+		member.setName("full_access");
 		useMember(member);
 		return member;
 	}
@@ -101,7 +101,7 @@ public class UserApp extends BaseModelBean{
 	public StringAttribute objectType(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("objectType");
+		member.setName("object_type");
 		useMember(member);
 		return member;
 	}
@@ -109,7 +109,7 @@ public class UserApp extends BaseModelBean{
 	public StringAttribute objectId(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("objectId");
+		member.setName("object_id");
 		useMember(member);
 		return member;
 	}

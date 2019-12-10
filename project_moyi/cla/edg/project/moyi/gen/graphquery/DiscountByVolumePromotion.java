@@ -64,7 +64,7 @@ public class DiscountByVolumePromotion extends BaseModelBean{
 	public NumberAttribute volumeOfTrade(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
-		member.setName("volumeOfTrade");
+		member.setName("volume_of_trade");
 		useMember(member);
 		return member;
 	}
@@ -72,7 +72,7 @@ public class DiscountByVolumePromotion extends BaseModelBean{
 	public NumberAttribute promotionAmount(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
-		member.setName("promotionAmount");
+		member.setName("promotion_amount");
 		useMember(member);
 		return member;
 	}

@@ -79,7 +79,7 @@ public class SpamReport extends BaseModelBean{
 	public StringAttribute spamDescription(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("spamDescription");
+		member.setName("spam_description");
 		useMember(member);
 		return member;
 	}
@@ -87,7 +87,7 @@ public class SpamReport extends BaseModelBean{
 	public DateTimeAttribute reportDatetime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_create");
-		member.setName("reportDatetime");
+		member.setName("report_datetime");
 		useMember(member);
 		return member;
 	}

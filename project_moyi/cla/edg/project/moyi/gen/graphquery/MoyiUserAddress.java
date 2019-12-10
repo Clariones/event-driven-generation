@@ -39,7 +39,7 @@ public class MoyiUserAddress extends BaseModelBean{
 	public StringAttribute contactName(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("contactName");
+		member.setName("contact_name");
 		useMember(member);
 		return member;
 	}
@@ -47,7 +47,7 @@ public class MoyiUserAddress extends BaseModelBean{
 	public StringAttribute contactMobile(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_china_mobile_phone");
-		member.setName("contactMobile");
+		member.setName("contact_mobile");
 		useMember(member);
 		return member;
 	}
@@ -55,7 +55,7 @@ public class MoyiUserAddress extends BaseModelBean{
 	public StringAttribute addressDetail(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("addressDetail");
+		member.setName("address_detail");
 		useMember(member);
 		return member;
 	}
@@ -63,7 +63,7 @@ public class MoyiUserAddress extends BaseModelBean{
 	public NumberAttribute displayOrder(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
-		member.setName("displayOrder");
+		member.setName("display_order");
 		useMember(member);
 		return member;
 	}
@@ -71,7 +71,7 @@ public class MoyiUserAddress extends BaseModelBean{
 	public DateTimeAttribute createTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_create");
-		member.setName("createTime");
+		member.setName("create_time");
 		useMember(member);
 		return member;
 	}
@@ -79,7 +79,7 @@ public class MoyiUserAddress extends BaseModelBean{
 	public DateTimeAttribute lastUpdateTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_update");
-		member.setName("lastUpdateTime");
+		member.setName("last_update_time");
 		useMember(member);
 		return member;
 	}

@@ -49,7 +49,7 @@ public class ArtworkAuctionBiddingPriceRecord extends BaseModelBean{
 	public StringAttribute bidderHashcode(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("bidderHashcode");
+		member.setName("bidder_hashcode");
 		useMember(member);
 		return member;
 	}
@@ -57,7 +57,7 @@ public class ArtworkAuctionBiddingPriceRecord extends BaseModelBean{
 	public NumberAttribute biddingPrice(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
-		member.setName("biddingPrice");
+		member.setName("bidding_price");
 		useMember(member);
 		return member;
 	}
@@ -65,7 +65,7 @@ public class ArtworkAuctionBiddingPriceRecord extends BaseModelBean{
 	public DateTimeAttribute createTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_create");
-		member.setName("createTime");
+		member.setName("create_time");
 		useMember(member);
 		return member;
 	}

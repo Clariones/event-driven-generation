@@ -53,6 +53,16 @@ public class InkDeed extends BaseModelBean{
 		return member;
 	}
 
+	public MoyiUser buyer() {
+		MoyiUser member = new MoyiUser();
+		member.setModelTypeName("moyi_user");
+		member.setName("buyer");
+		member.setMemberName("buyer");
+		member.setReferDirection(true);
+		append(member);
+		return member;
+	}
+
 	public Artwork artwork() {
 		Artwork member = new Artwork();
 		member.setModelTypeName("artwork");
@@ -84,6 +94,16 @@ public class InkDeed extends BaseModelBean{
 		append(member);
 		return member;
 	}
+	
+	public InkDeedOrderLineItem inkDeedOrderLineItemList() {
+		InkDeedOrderLineItem member = new InkDeedOrderLineItem();
+		member.setModelTypeName("ink_deed_order_line_item");
+		member.setName("ink_deed");
+		member.setMemberName("inkDeedOrderLineItemList");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
 
 	
 	// 普通属性
@@ -107,7 +127,7 @@ public class InkDeed extends BaseModelBean{
 	public NumberAttribute soledTimes(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
-		member.setName("soledTimes");
+		member.setName("soled_times");
 		useMember(member);
 		return member;
 	}
@@ -115,7 +135,7 @@ public class InkDeed extends BaseModelBean{
 	public NumberAttribute issuePrice(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
-		member.setName("issuePrice");
+		member.setName("issue_price");
 		useMember(member);
 		return member;
 	}
@@ -123,7 +143,7 @@ public class InkDeed extends BaseModelBean{
 	public NumberAttribute purchasePrice(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
-		member.setName("purchasePrice");
+		member.setName("purchase_price");
 		useMember(member);
 		return member;
 	}
@@ -131,7 +151,7 @@ public class InkDeed extends BaseModelBean{
 	public NumberAttribute cashValue(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
-		member.setName("cashValue");
+		member.setName("cash_value");
 		useMember(member);
 		return member;
 	}
@@ -139,7 +159,7 @@ public class InkDeed extends BaseModelBean{
 	public NumberAttribute usufructRatio(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("double");
-		member.setName("usufructRatio");
+		member.setName("usufruct_ratio");
 		useMember(member);
 		return member;
 	}
@@ -147,7 +167,7 @@ public class InkDeed extends BaseModelBean{
 	public StringAttribute coverImage(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_image");
-		member.setName("coverImage");
+		member.setName("cover_image");
 		useMember(member);
 		return member;
 	}
@@ -171,7 +191,7 @@ public class InkDeed extends BaseModelBean{
 	public DateTimeAttribute createTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_create");
-		member.setName("createTime");
+		member.setName("create_time");
 		useMember(member);
 		return member;
 	}
@@ -179,7 +199,7 @@ public class InkDeed extends BaseModelBean{
 	public DateTimeAttribute lastUpdateTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_update");
-		member.setName("lastUpdateTime");
+		member.setName("last_update_time");
 		useMember(member);
 		return member;
 	}

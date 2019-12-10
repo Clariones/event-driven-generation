@@ -125,7 +125,7 @@ public class RewardDetailRecord extends BaseModelBean{
 	public StringAttribute ruleCode(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("ruleCode");
+		member.setName("rule_code");
 		useMember(member);
 		return member;
 	}
@@ -149,7 +149,7 @@ public class RewardDetailRecord extends BaseModelBean{
 	public BooleanAttribute personalPay(){
 		BooleanAttribute member = new BooleanAttribute();
 		member.setModelTypeName("bool");
-		member.setName("personalPay");
+		member.setName("personal_pay");
 		useMember(member);
 		return member;
 	}
@@ -157,7 +157,7 @@ public class RewardDetailRecord extends BaseModelBean{
 	public BooleanAttribute personalIncome(){
 		BooleanAttribute member = new BooleanAttribute();
 		member.setModelTypeName("bool");
-		member.setName("personalIncome");
+		member.setName("personal_income");
 		useMember(member);
 		return member;
 	}
@@ -165,7 +165,7 @@ public class RewardDetailRecord extends BaseModelBean{
 	public StringAttribute transactionAddress(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("transactionAddress");
+		member.setName("transaction_address");
 		useMember(member);
 		return member;
 	}
@@ -173,7 +173,7 @@ public class RewardDetailRecord extends BaseModelBean{
 	public DateTimeAttribute createTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_create");
-		member.setName("createTime");
+		member.setName("create_time");
 		useMember(member);
 		return member;
 	}
@@ -181,7 +181,7 @@ public class RewardDetailRecord extends BaseModelBean{
 	public DateTimeAttribute settlementDeadLine(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time");
-		member.setName("settlementDeadLine");
+		member.setName("settlement_dead_line");
 		useMember(member);
 		return member;
 	}
@@ -189,7 +189,7 @@ public class RewardDetailRecord extends BaseModelBean{
 	public DateTimeAttribute lastUpdateTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_update");
-		member.setName("lastUpdateTime");
+		member.setName("last_update_time");
 		useMember(member);
 		return member;
 	}

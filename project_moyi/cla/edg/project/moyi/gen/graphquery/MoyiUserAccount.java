@@ -69,7 +69,7 @@ public class MoyiUserAccount extends BaseModelBean{
 	public StringAttribute wechatOpenid(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("wechatOpenid");
+		member.setName("wechat_openid");
 		useMember(member);
 		return member;
 	}
@@ -77,7 +77,7 @@ public class MoyiUserAccount extends BaseModelBean{
 	public StringAttribute wechatUnionId(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("wechatUnionId");
+		member.setName("wechat_union_id");
 		useMember(member);
 		return member;
 	}
@@ -93,7 +93,7 @@ public class MoyiUserAccount extends BaseModelBean{
 	public NumberAttribute frozenAmount(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
-		member.setName("frozenAmount");
+		member.setName("frozen_amount");
 		useMember(member);
 		return member;
 	}
@@ -101,7 +101,7 @@ public class MoyiUserAccount extends BaseModelBean{
 	public NumberAttribute recommendationBouns(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
-		member.setName("recommendationBouns");
+		member.setName("recommendation_bouns");
 		useMember(member);
 		return member;
 	}
@@ -109,7 +109,7 @@ public class MoyiUserAccount extends BaseModelBean{
 	public DateTimeAttribute createTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_create");
-		member.setName("createTime");
+		member.setName("create_time");
 		useMember(member);
 		return member;
 	}
@@ -117,7 +117,7 @@ public class MoyiUserAccount extends BaseModelBean{
 	public DateTimeAttribute lastUpdateTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_update");
-		member.setName("lastUpdateTime");
+		member.setName("last_update_time");
 		useMember(member);
 		return member;
 	}

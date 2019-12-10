@@ -77,7 +77,7 @@ public class WithdrawRecord extends BaseModelBean{
 	public NumberAttribute estimateFee(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
-		member.setName("estimateFee");
+		member.setName("estimate_fee");
 		useMember(member);
 		return member;
 	}
@@ -85,7 +85,7 @@ public class WithdrawRecord extends BaseModelBean{
 	public NumberAttribute estimatePaidAmount(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
-		member.setName("estimatePaidAmount");
+		member.setName("estimate_paid_amount");
 		useMember(member);
 		return member;
 	}
@@ -93,7 +93,7 @@ public class WithdrawRecord extends BaseModelBean{
 	public StringAttribute receivingAccount(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("receivingAccount");
+		member.setName("receiving_account");
 		useMember(member);
 		return member;
 	}
@@ -101,7 +101,7 @@ public class WithdrawRecord extends BaseModelBean{
 	public StringAttribute receivingBankSiteName(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("receivingBankSiteName");
+		member.setName("receiving_bank_site_name");
 		useMember(member);
 		return member;
 	}
@@ -109,7 +109,7 @@ public class WithdrawRecord extends BaseModelBean{
 	public StringAttribute receivingAccountName(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("receivingAccountName");
+		member.setName("receiving_account_name");
 		useMember(member);
 		return member;
 	}
@@ -117,7 +117,7 @@ public class WithdrawRecord extends BaseModelBean{
 	public StringAttribute receivingAccountMobile(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_china_mobile_phone");
-		member.setName("receivingAccountMobile");
+		member.setName("receiving_account_mobile");
 		useMember(member);
 		return member;
 	}
@@ -141,7 +141,7 @@ public class WithdrawRecord extends BaseModelBean{
 	public StringAttribute paymentMethod(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("paymentMethod");
+		member.setName("payment_method");
 		useMember(member);
 		return member;
 	}
@@ -149,7 +149,7 @@ public class WithdrawRecord extends BaseModelBean{
 	public DateTimeAttribute createTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_create");
-		member.setName("createTime");
+		member.setName("create_time");
 		useMember(member);
 		return member;
 	}
@@ -157,7 +157,7 @@ public class WithdrawRecord extends BaseModelBean{
 	public DateTimeAttribute acceptTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time");
-		member.setName("acceptTime");
+		member.setName("accept_time");
 		useMember(member);
 		return member;
 	}
@@ -165,7 +165,7 @@ public class WithdrawRecord extends BaseModelBean{
 	public DateTimeAttribute finishTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time");
-		member.setName("finishTime");
+		member.setName("finish_time");
 		useMember(member);
 		return member;
 	}
@@ -173,7 +173,7 @@ public class WithdrawRecord extends BaseModelBean{
 	public DateTimeAttribute lastUpdateTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_update");
-		member.setName("lastUpdateTime");
+		member.setName("last_update_time");
 		useMember(member);
 		return member;
 	}

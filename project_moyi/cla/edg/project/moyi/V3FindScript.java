@@ -39,14 +39,6 @@ public class V3FindScript extends PieceOfScript {
 						.where(MODEL.artworkAuction().artwork().eq("${artwork id}"),
 								MODEL.artworkAuction().artworkAuctionStatus().code().eq(ArtworkAuctionStatus.WAIT_FOR_DISPLAY)
 							)
-				/*
-				.find(MODEL.moyiUser()).which("is owner of artwork by main order").with_string("order id")
-					.do_it_as()
-						.where(
-							MODEL.moyiUser().artworkOwnershipCertificateList().artworkAuctionList().artworkAuctionOrderList().mainOrder().eq("${order id}"),
-							MODEL.moyiUser().articleList().not_null()
-							)
-				*/
 				.find(MODEL.inkDeed()).which("already issued for auction").with_string("artwork auction id")
 					.comments("统计拍品已经发行的有效墨契数量")
 					.do_it_as().count()
@@ -139,6 +131,56 @@ public class V3FindScript extends PieceOfScript {
 								MODEL.mainOrder().orderStatus().code().in(OrderStatus.NEED_PAY, OrderStatus.PAYING))
 						.wants(MODEL.mainOrder().auctionBiddingDepositBillList(), MODEL.mainOrder().orderStatus())
 						.order_by(MODEL.mainOrder()).desc()
+				.find(MODEL.inkDeed()).which("user can put to sale").with_string("artwork auction id").with_string("user id")
+					.comments("统计用户可上架销售的墨契数量")
+					.do_it_as().count()
+						.where(MODEL.inkDeed().holder().eq("${user id}"),
+								MODEL.inkDeed().auction().eq("${artwork auction id}"),
+								MODEL.inkDeed().status().code().eq(InkDeedStatus.FRESH))
+				.find(MODEL.inkDeed()).which("user selling").with_string("artwork auction id").with_string("user id")
+					.comments("统计用户已经上架销售的墨契数量")
+					.do_it_as().count()
+						.where(MODEL.inkDeed().holder().eq("${user id}"),
+								MODEL.inkDeed().auction().eq("${artwork auction id}"),
+								MODEL.inkDeed().status().code().in(InkDeedStatus.AVALIABLE, InkDeedStatus.BOOKED, InkDeedStatus.BE_DRAWN))
+				.query(MODEL.inkDeed()).which("user can put to sale").with_string("artwork auction id").with_string("user id").with_integer("number")
+					.comments("找出当前用户可上架销售的墨契")
+					.do_it_as()
+						.where(MODEL.inkDeed().holder().eq("${user id}"),
+							MODEL.inkDeed().auction().eq("${artwork auction id}"),
+							MODEL.inkDeed().status().code().eq(InkDeedStatus.FRESH))
+						.top("${number}")
+						.order_by(MODEL.inkDeed()).asc()
+				.query(MODEL.artworkAuction()).which("for ink deed trade zone").pagination().with_string("search key")
+					.comments("V3新规则下的墨契交易列表. 将所需信息聚合为 ArtworkAuction 对象, 然后再转换成页面需要的格式")
+				.query(MODEL.inkDeedEntryOrder()).which("selling of auction").with_string("artwork auction id").with_string("user id").with_float("price").with_string("except user id").with_integer("limit")
+					.comments("V3新规则下, 拍品下的可交易墨契聚合成假的 entry order")
+				.query(MODEL.inkDeedHoldingStatistic()).which("not held by user").pagination().with_string("artwork auction id").with_string("user id").with_string("last user id").with_integer("last count").with_integer("top n")
+					.comments("V3新规则下, 按照用户统计某个拍品下的墨契持有数量")
+				.query(MODEL.inkDeedHoldingStatistic()).which("my holding v3").pagination().with_string("user id").with_string("last auction id")
+					.comments("V3新规则下的 我持有的墨契 ")
+				.query(MODEL.inkDeed()).which("be drawn to buy by user").with_string("artwork auction id").with_string("except holder id").with_integer("number").with_date("lastest drawn time").with_date("lastest book time")
+					.comments("在拍品中,抽取若干用户可以购买的墨契")
+					.do_it_as()
+						.where(MODEL.inkDeed().auction().eq("${artwork auction id}"),
+								MODEL.inkDeed().holder().not("${except holder id}"),
+								MODEL.inkDeed().status().eq(InkDeedStatus.AVALIABLE)
+									.or(MODEL.inkDeed().status().eq(InkDeedStatus.BE_DRAWN).and(MODEL.inkDeed().lastUpdateTime().before("${lastest drawn time}")),
+										MODEL.inkDeed().status().eq(InkDeedStatus.BOOKED).and(MODEL.inkDeed().lastUpdateTime().before("${lastest book time}")))
+								)
+						.order_by(MODEL.inkDeed().purchasePrice())
+						.top("${number}")
+				.query(MODEL.inkDeed()).which("be drawn with quote to buy").with_string("artwork auction id").with_string("holder id").with_float("price").with_integer("number").with_date("lastest drawn time").with_date("lastest book time")
+					.comments("在拍品中,按照指定的持有人和报价,抽取若干用户可以购买的墨契")
+					.do_it_as()
+						.where(MODEL.inkDeed().auction().eq("${artwork auction id}"),
+								MODEL.inkDeed().holder().eq("${holder id}"),
+								MODEL.inkDeed().purchasePrice().eq("${price}"),
+								MODEL.inkDeed().status().eq(InkDeedStatus.AVALIABLE)
+									.or(MODEL.inkDeed().status().eq(InkDeedStatus.BE_DRAWN).and(MODEL.inkDeed().lastUpdateTime().before("${lastest drawn time}")),
+										MODEL.inkDeed().status().eq(InkDeedStatus.BOOKED).and(MODEL.inkDeed().lastUpdateTime().before("${lastest book time}")))
+								)
+						.top("${number}")
 				;
 	}
 

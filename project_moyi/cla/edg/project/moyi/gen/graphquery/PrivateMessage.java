@@ -59,7 +59,7 @@ public class PrivateMessage extends BaseModelBean{
 	public StringAttribute messageText(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_longtext");
-		member.setName("messageText");
+		member.setName("message_text");
 		useMember(member);
 		return member;
 	}
@@ -67,7 +67,7 @@ public class PrivateMessage extends BaseModelBean{
 	public StringAttribute messageImage(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_image");
-		member.setName("messageImage");
+		member.setName("message_image");
 		useMember(member);
 		return member;
 	}
@@ -75,7 +75,7 @@ public class PrivateMessage extends BaseModelBean{
 	public DateTimeAttribute sendTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_create");
-		member.setName("sendTime");
+		member.setName("send_time");
 		useMember(member);
 		return member;
 	}
@@ -83,7 +83,7 @@ public class PrivateMessage extends BaseModelBean{
 	public BooleanAttribute alreadyRead(){
 		BooleanAttribute member = new BooleanAttribute();
 		member.setModelTypeName("bool");
-		member.setName("alreadyRead");
+		member.setName("already_read");
 		useMember(member);
 		return member;
 	}

@@ -67,7 +67,7 @@ public class MoyiUserIbOrder extends BaseModelBean{
 	public NumberAttribute ibAmount(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
-		member.setName("ibAmount");
+		member.setName("ib_amount");
 		useMember(member);
 		return member;
 	}
@@ -75,7 +75,7 @@ public class MoyiUserIbOrder extends BaseModelBean{
 	public NumberAttribute exchangeRate(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("double");
-		member.setName("exchangeRate");
+		member.setName("exchange_rate");
 		useMember(member);
 		return member;
 	}
@@ -91,7 +91,7 @@ public class MoyiUserIbOrder extends BaseModelBean{
 	public DateTimeAttribute createTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_create");
-		member.setName("createTime");
+		member.setName("create_time");
 		useMember(member);
 		return member;
 	}
@@ -99,7 +99,7 @@ public class MoyiUserIbOrder extends BaseModelBean{
 	public DateTimeAttribute lastUpdateTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_update");
-		member.setName("lastUpdateTime");
+		member.setName("last_update_time");
 		useMember(member);
 		return member;
 	}

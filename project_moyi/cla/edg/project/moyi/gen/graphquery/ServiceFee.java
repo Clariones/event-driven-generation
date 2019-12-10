@@ -67,7 +67,7 @@ public class ServiceFee extends BaseModelBean{
 	public NumberAttribute ibPrice(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("double");
-		member.setName("ibPrice");
+		member.setName("ib_price");
 		useMember(member);
 		return member;
 	}
@@ -75,7 +75,7 @@ public class ServiceFee extends BaseModelBean{
 	public NumberAttribute rmbPrice(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("double");
-		member.setName("rmbPrice");
+		member.setName("rmb_price");
 		useMember(member);
 		return member;
 	}
@@ -83,7 +83,7 @@ public class ServiceFee extends BaseModelBean{
 	public NumberAttribute ibSalePrice(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("double");
-		member.setName("ibSalePrice");
+		member.setName("ib_sale_price");
 		useMember(member);
 		return member;
 	}
@@ -91,7 +91,7 @@ public class ServiceFee extends BaseModelBean{
 	public NumberAttribute rmbSalePrice(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("double");
-		member.setName("rmbSalePrice");
+		member.setName("rmb_sale_price");
 		useMember(member);
 		return member;
 	}

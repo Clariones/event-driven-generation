@@ -47,7 +47,7 @@ public class FormFieldMessage extends BaseModelBean{
 	public StringAttribute parameterName(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("parameterName");
+		member.setName("parameter_name");
 		useMember(member);
 		return member;
 	}

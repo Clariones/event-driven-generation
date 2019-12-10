@@ -97,7 +97,7 @@ public class InkDeedEntryOrder extends BaseModelBean{
 	public NumberAttribute totalQuantity(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
-		member.setName("totalQuantity");
+		member.setName("total_quantity");
 		useMember(member);
 		return member;
 	}
@@ -105,7 +105,7 @@ public class InkDeedEntryOrder extends BaseModelBean{
 	public NumberAttribute soldQuantity(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
-		member.setName("soldQuantity");
+		member.setName("sold_quantity");
 		useMember(member);
 		return member;
 	}
@@ -113,7 +113,7 @@ public class InkDeedEntryOrder extends BaseModelBean{
 	public StringAttribute sellerHashcode(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("sellerHashcode");
+		member.setName("seller_hashcode");
 		useMember(member);
 		return member;
 	}
@@ -121,7 +121,7 @@ public class InkDeedEntryOrder extends BaseModelBean{
 	public NumberAttribute unitPrice(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
-		member.setName("unitPrice");
+		member.setName("unit_price");
 		useMember(member);
 		return member;
 	}
@@ -129,7 +129,7 @@ public class InkDeedEntryOrder extends BaseModelBean{
 	public StringAttribute inkDeedSet(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_longtext");
-		member.setName("inkDeedSet");
+		member.setName("ink_deed_set");
 		useMember(member);
 		return member;
 	}
@@ -137,7 +137,7 @@ public class InkDeedEntryOrder extends BaseModelBean{
 	public StringAttribute lockByOrder(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("lockByOrder");
+		member.setName("lock_by_order");
 		useMember(member);
 		return member;
 	}
@@ -145,7 +145,7 @@ public class InkDeedEntryOrder extends BaseModelBean{
 	public DateTimeAttribute lockTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time");
-		member.setName("lockTime");
+		member.setName("lock_time");
 		useMember(member);
 		return member;
 	}
@@ -153,7 +153,7 @@ public class InkDeedEntryOrder extends BaseModelBean{
 	public DateTimeAttribute createTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_create");
-		member.setName("createTime");
+		member.setName("create_time");
 		useMember(member);
 		return member;
 	}
@@ -161,7 +161,7 @@ public class InkDeedEntryOrder extends BaseModelBean{
 	public DateTimeAttribute lastUpdateTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_update");
-		member.setName("lastUpdateTime");
+		member.setName("last_update_time");
 		useMember(member);
 		return member;
 	}

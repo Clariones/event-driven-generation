@@ -64,6 +64,16 @@ public class InkDeedOrder extends BaseModelBean{
 	}
 
 	// 被引用的对象
+	
+	public InkDeedOrderLineItem inkDeedOrderLineItemList() {
+		InkDeedOrderLineItem member = new InkDeedOrderLineItem();
+		member.setModelTypeName("ink_deed_order_line_item");
+		member.setName("ink_deed_order");
+		member.setMemberName("inkDeedOrderLineItemList");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
 
 	
 	// 普通属性
@@ -95,7 +105,7 @@ public class InkDeedOrder extends BaseModelBean{
 	public NumberAttribute unitPrice(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
-		member.setName("unitPrice");
+		member.setName("unit_price");
 		useMember(member);
 		return member;
 	}
@@ -103,7 +113,7 @@ public class InkDeedOrder extends BaseModelBean{
 	public NumberAttribute originalPrice(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
-		member.setName("originalPrice");
+		member.setName("original_price");
 		useMember(member);
 		return member;
 	}
@@ -111,7 +121,7 @@ public class InkDeedOrder extends BaseModelBean{
 	public NumberAttribute finalPrice(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
-		member.setName("finalPrice");
+		member.setName("final_price");
 		useMember(member);
 		return member;
 	}
@@ -119,7 +129,7 @@ public class InkDeedOrder extends BaseModelBean{
 	public StringAttribute buyerHashcode(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("buyerHashcode");
+		member.setName("buyer_hashcode");
 		useMember(member);
 		return member;
 	}
@@ -127,7 +137,7 @@ public class InkDeedOrder extends BaseModelBean{
 	public DateTimeAttribute createTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_create");
-		member.setName("createTime");
+		member.setName("create_time");
 		useMember(member);
 		return member;
 	}
@@ -135,7 +145,7 @@ public class InkDeedOrder extends BaseModelBean{
 	public DateTimeAttribute lastUpdateTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_update");
-		member.setName("lastUpdateTime");
+		member.setName("last_update_time");
 		useMember(member);
 		return member;
 	}

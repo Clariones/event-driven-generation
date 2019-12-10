@@ -157,7 +157,7 @@ public class Section extends BaseModelBean{
 	public StringAttribute sectionSlogan(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("sectionSlogan");
+		member.setName("section_slogan");
 		useMember(member);
 		return member;
 	}
@@ -165,7 +165,7 @@ public class Section extends BaseModelBean{
 	public StringAttribute sectionIntroduction(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_longtext");
-		member.setName("sectionIntroduction");
+		member.setName("section_introduction");
 		useMember(member);
 		return member;
 	}
@@ -173,7 +173,7 @@ public class Section extends BaseModelBean{
 	public StringAttribute coverImage(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_image");
-		member.setName("coverImage");
+		member.setName("cover_image");
 		useMember(member);
 		return member;
 	}
@@ -181,7 +181,7 @@ public class Section extends BaseModelBean{
 	public NumberAttribute sectionAccount(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("double");
-		member.setName("sectionAccount");
+		member.setName("section_account");
 		useMember(member);
 		return member;
 	}

@@ -59,7 +59,7 @@ public class InkDeedCashRecord extends BaseModelBean{
 	public StringAttribute inkDeedSet(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_longtext");
-		member.setName("inkDeedSet");
+		member.setName("ink_deed_set");
 		useMember(member);
 		return member;
 	}
@@ -67,7 +67,7 @@ public class InkDeedCashRecord extends BaseModelBean{
 	public NumberAttribute totalInkDeedCopies(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
-		member.setName("totalInkDeedCopies");
+		member.setName("total_ink_deed_copies");
 		useMember(member);
 		return member;
 	}
@@ -75,7 +75,7 @@ public class InkDeedCashRecord extends BaseModelBean{
 	public NumberAttribute holdingInkDeedCopies(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
-		member.setName("holdingInkDeedCopies");
+		member.setName("holding_ink_deed_copies");
 		useMember(member);
 		return member;
 	}
@@ -83,7 +83,7 @@ public class InkDeedCashRecord extends BaseModelBean{
 	public NumberAttribute unitCashAmount(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
-		member.setName("unitCashAmount");
+		member.setName("unit_cash_amount");
 		useMember(member);
 		return member;
 	}
@@ -91,7 +91,7 @@ public class InkDeedCashRecord extends BaseModelBean{
 	public NumberAttribute cashedAmount(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
-		member.setName("cashedAmount");
+		member.setName("cashed_amount");
 		useMember(member);
 		return member;
 	}
@@ -99,7 +99,7 @@ public class InkDeedCashRecord extends BaseModelBean{
 	public DateTimeAttribute createTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_create");
-		member.setName("createTime");
+		member.setName("create_time");
 		useMember(member);
 		return member;
 	}

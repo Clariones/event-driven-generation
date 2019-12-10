@@ -5,39 +5,49 @@ import java.util.Map;
 import cla.edg.Utils;
 import cla.edg.modelbean.*;
 
-public class UserInviteRegistrationInfo extends BaseModelBean{
+public class InkDeedOrderLineItem extends BaseModelBean{
 	public String getFullClassName() {
-		return "com.terapico.moyi.userinviteregistrationinfo.UserInviteRegistrationInfo";
+		return "com.terapico.moyi.inkdeedorderlineitem.InkDeedOrderLineItem";
 	}
 	// 枚举对象
 
 	// 引用的对象
 
-	public MoyiUser inviter() {
-		MoyiUser member = new MoyiUser();
-		member.setModelTypeName("moyi_user");
-		member.setName("inviter");
-		member.setMemberName("inviter");
+	public InkDeed inkDeed() {
+		InkDeed member = new InkDeed();
+		member.setModelTypeName("ink_deed");
+		member.setName("ink_deed");
+		member.setMemberName("inkDeed");
 		member.setReferDirection(true);
 		append(member);
 		return member;
 	}
 
-	public MoyiUser invitee() {
-		MoyiUser member = new MoyiUser();
-		member.setModelTypeName("moyi_user");
-		member.setName("invitee");
-		member.setMemberName("invitee");
+	public InkDeedOrder inkDeedOrder() {
+		InkDeedOrder member = new InkDeedOrder();
+		member.setModelTypeName("ink_deed_order");
+		member.setName("ink_deed_order");
+		member.setMemberName("inkDeedOrder");
 		member.setReferDirection(true);
 		append(member);
 		return member;
 	}
 
-	public Moyi moyi() {
-		Moyi member = new Moyi();
-		member.setModelTypeName("moyi");
-		member.setName("moyi");
-		member.setMemberName("moyi");
+	public MoyiUser seller() {
+		MoyiUser member = new MoyiUser();
+		member.setModelTypeName("moyi_user");
+		member.setName("seller");
+		member.setMemberName("seller");
+		member.setReferDirection(true);
+		append(member);
+		return member;
+	}
+
+	public MoyiUser buyer() {
+		MoyiUser member = new MoyiUser();
+		member.setModelTypeName("moyi_user");
+		member.setName("buyer");
+		member.setMemberName("buyer");
 		member.setReferDirection(true);
 		append(member);
 		return member;
@@ -56,18 +66,18 @@ public class UserInviteRegistrationInfo extends BaseModelBean{
 		return member;
 	}
 
-	public StringAttribute inviteCode(){
-		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
-		member.setName("invite_code");
+	public NumberAttribute price(){
+		NumberAttribute member = new NumberAttribute();
+		member.setModelTypeName("money");
+		member.setName("price");
 		useMember(member);
 		return member;
 	}
 
-	public DateTimeAttribute registrationDate(){
+	public DateTimeAttribute createTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_create");
-		member.setName("registration_date");
+		member.setName("create_time");
 		useMember(member);
 		return member;
 	}

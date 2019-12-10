@@ -109,7 +109,7 @@ public class Review extends BaseModelBean{
 	public StringAttribute reviewContent(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_longtext");
-		member.setName("reviewContent");
+		member.setName("review_content");
 		useMember(member);
 		return member;
 	}
@@ -117,7 +117,7 @@ public class Review extends BaseModelBean{
 	public StringAttribute quoteReviewId(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("quoteReviewId");
+		member.setName("quote_review_id");
 		useMember(member);
 		return member;
 	}
@@ -125,7 +125,7 @@ public class Review extends BaseModelBean{
 	public NumberAttribute inkCoinValue(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("double");
-		member.setName("inkCoinValue");
+		member.setName("ink_coin_value");
 		useMember(member);
 		return member;
 	}
@@ -133,7 +133,7 @@ public class Review extends BaseModelBean{
 	public DateTimeAttribute reviewTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_update");
-		member.setName("reviewTime");
+		member.setName("review_time");
 		useMember(member);
 		return member;
 	}

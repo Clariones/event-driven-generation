@@ -39,7 +39,7 @@ public class MoyiDailyTopArtwork extends BaseModelBean{
 	public StringAttribute artworkIdentification(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("artworkIdentification");
+		member.setName("artwork_identification");
 		useMember(member);
 		return member;
 	}
@@ -47,7 +47,7 @@ public class MoyiDailyTopArtwork extends BaseModelBean{
 	public StringAttribute artworkName(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("artworkName");
+		member.setName("artwork_name");
 		useMember(member);
 		return member;
 	}
@@ -55,7 +55,7 @@ public class MoyiDailyTopArtwork extends BaseModelBean{
 	public NumberAttribute artworkInkDeltaValue(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("double");
-		member.setName("artworkInkDeltaValue");
+		member.setName("artwork_ink_delta_value");
 		useMember(member);
 		return member;
 	}
@@ -63,7 +63,7 @@ public class MoyiDailyTopArtwork extends BaseModelBean{
 	public NumberAttribute artworkDailyRank(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
-		member.setName("artworkDailyRank");
+		member.setName("artwork_daily_rank");
 		useMember(member);
 		return member;
 	}

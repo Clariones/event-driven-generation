@@ -57,7 +57,7 @@ public class BonusType extends BaseModelBean{
 	public NumberAttribute bonusMaxValue(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("double");
-		member.setName("bonusMaxValue");
+		member.setName("bonus_max_value");
 		useMember(member);
 		return member;
 	}

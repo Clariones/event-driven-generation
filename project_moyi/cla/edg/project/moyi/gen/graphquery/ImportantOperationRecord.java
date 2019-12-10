@@ -37,7 +37,7 @@ public class ImportantOperationRecord extends BaseModelBean{
 	public StringAttribute operationType(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("operationType");
+		member.setName("operation_type");
 		useMember(member);
 		return member;
 	}
@@ -45,7 +45,7 @@ public class ImportantOperationRecord extends BaseModelBean{
 	public StringAttribute actorSecUser(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("actorSecUser");
+		member.setName("actor_sec_user");
 		useMember(member);
 		return member;
 	}
@@ -53,7 +53,7 @@ public class ImportantOperationRecord extends BaseModelBean{
 	public StringAttribute actorMoyiUser(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("actorMoyiUser");
+		member.setName("actor_moyi_user");
 		useMember(member);
 		return member;
 	}
@@ -61,7 +61,7 @@ public class ImportantOperationRecord extends BaseModelBean{
 	public StringAttribute objectType(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("objectType");
+		member.setName("object_type");
 		useMember(member);
 		return member;
 	}
@@ -69,7 +69,7 @@ public class ImportantOperationRecord extends BaseModelBean{
 	public StringAttribute objectId(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("objectId");
+		member.setName("object_id");
 		useMember(member);
 		return member;
 	}
@@ -85,7 +85,7 @@ public class ImportantOperationRecord extends BaseModelBean{
 	public DateTimeAttribute lastUpdateTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_update");
-		member.setName("lastUpdateTime");
+		member.setName("last_update_time");
 		useMember(member);
 		return member;
 	}

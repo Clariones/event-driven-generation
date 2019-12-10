@@ -97,7 +97,7 @@ public class MasterColumn extends BaseModelBean{
 	public StringAttribute pinyinName(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("pinyinName");
+		member.setName("pinyin_name");
 		useMember(member);
 		return member;
 	}
@@ -105,7 +105,7 @@ public class MasterColumn extends BaseModelBean{
 	public StringAttribute columnIntroduction(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_longtext");
-		member.setName("columnIntroduction");
+		member.setName("column_introduction");
 		useMember(member);
 		return member;
 	}
@@ -113,7 +113,7 @@ public class MasterColumn extends BaseModelBean{
 	public StringAttribute coverImage(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_image");
-		member.setName("coverImage");
+		member.setName("cover_image");
 		useMember(member);
 		return member;
 	}
@@ -121,7 +121,7 @@ public class MasterColumn extends BaseModelBean{
 	public DateTimeAttribute createTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_create");
-		member.setName("createTime");
+		member.setName("create_time");
 		useMember(member);
 		return member;
 	}

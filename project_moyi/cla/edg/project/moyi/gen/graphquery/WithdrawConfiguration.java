@@ -39,7 +39,7 @@ public class WithdrawConfiguration extends BaseModelBean{
 	public StringAttribute defaultPaymentMethod(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("defaultPaymentMethod");
+		member.setName("default_payment_method");
 		useMember(member);
 		return member;
 	}
@@ -47,7 +47,7 @@ public class WithdrawConfiguration extends BaseModelBean{
 	public StringAttribute payingAccount(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("payingAccount");
+		member.setName("paying_account");
 		useMember(member);
 		return member;
 	}
@@ -55,7 +55,7 @@ public class WithdrawConfiguration extends BaseModelBean{
 	public NumberAttribute singleTradeUpperLimit(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("double");
-		member.setName("singleTradeUpperLimit");
+		member.setName("single_trade_upper_limit");
 		useMember(member);
 		return member;
 	}
@@ -63,7 +63,7 @@ public class WithdrawConfiguration extends BaseModelBean{
 	public NumberAttribute singleTradeLowerLimit(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("double");
-		member.setName("singleTradeLowerLimit");
+		member.setName("single_trade_lower_limit");
 		useMember(member);
 		return member;
 	}

@@ -144,6 +144,16 @@ public class MainOrder extends BaseModelBean{
 		append(member);
 		return member;
 	}
+	
+	public UserFrozenAccountRecord userFrozenAccountRecordList() {
+		UserFrozenAccountRecord member = new UserFrozenAccountRecord();
+		member.setModelTypeName("user_frozen_account_record");
+		member.setName("main_order");
+		member.setMemberName("userFrozenAccountRecordList");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
 
 	
 	// 普通属性
@@ -167,7 +177,7 @@ public class MainOrder extends BaseModelBean{
 	public StringAttribute sceneCode(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("sceneCode");
+		member.setName("scene_code");
 		useMember(member);
 		return member;
 	}
@@ -175,7 +185,7 @@ public class MainOrder extends BaseModelBean{
 	public NumberAttribute listCashPrice(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
-		member.setName("listCashPrice");
+		member.setName("list_cash_price");
 		useMember(member);
 		return member;
 	}
@@ -183,7 +193,7 @@ public class MainOrder extends BaseModelBean{
 	public NumberAttribute listIbPrice(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
-		member.setName("listIbPrice");
+		member.setName("list_ib_price");
 		useMember(member);
 		return member;
 	}
@@ -191,7 +201,7 @@ public class MainOrder extends BaseModelBean{
 	public NumberAttribute salesCashPrice(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
-		member.setName("salesCashPrice");
+		member.setName("sales_cash_price");
 		useMember(member);
 		return member;
 	}
@@ -199,7 +209,7 @@ public class MainOrder extends BaseModelBean{
 	public NumberAttribute salesIbPrice(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
-		member.setName("salesIbPrice");
+		member.setName("sales_ib_price");
 		useMember(member);
 		return member;
 	}
@@ -207,7 +217,7 @@ public class MainOrder extends BaseModelBean{
 	public NumberAttribute payCashPrice(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
-		member.setName("payCashPrice");
+		member.setName("pay_cash_price");
 		useMember(member);
 		return member;
 	}
@@ -215,7 +225,7 @@ public class MainOrder extends BaseModelBean{
 	public NumberAttribute payIbPrice(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
-		member.setName("payIbPrice");
+		member.setName("pay_ib_price");
 		useMember(member);
 		return member;
 	}
@@ -223,7 +233,31 @@ public class MainOrder extends BaseModelBean{
 	public BooleanAttribute useIbBalance(){
 		BooleanAttribute member = new BooleanAttribute();
 		member.setModelTypeName("bool");
-		member.setName("useIbBalance");
+		member.setName("use_ib_balance");
+		useMember(member);
+		return member;
+	}
+
+	public BooleanAttribute useCashBalance(){
+		BooleanAttribute member = new BooleanAttribute();
+		member.setModelTypeName("bool");
+		member.setName("use_cash_balance");
+		useMember(member);
+		return member;
+	}
+
+	public BooleanAttribute useWechat(){
+		BooleanAttribute member = new BooleanAttribute();
+		member.setModelTypeName("bool");
+		member.setName("use_wechat");
+		useMember(member);
+		return member;
+	}
+
+	public StringAttribute details(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string_longtext");
+		member.setName("details");
 		useMember(member);
 		return member;
 	}
@@ -231,7 +265,7 @@ public class MainOrder extends BaseModelBean{
 	public DateTimeAttribute createTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_create");
-		member.setName("createTime");
+		member.setName("create_time");
 		useMember(member);
 		return member;
 	}
@@ -239,7 +273,7 @@ public class MainOrder extends BaseModelBean{
 	public DateTimeAttribute lastUpdateTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_update");
-		member.setName("lastUpdateTime");
+		member.setName("last_update_time");
 		useMember(member);
 		return member;
 	}

@@ -47,7 +47,7 @@ public class ArtworkImage extends BaseModelBean{
 	public NumberAttribute imageWidth(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
-		member.setName("imageWidth");
+		member.setName("image_width");
 		useMember(member);
 		return member;
 	}
@@ -55,7 +55,7 @@ public class ArtworkImage extends BaseModelBean{
 	public NumberAttribute imageHeight(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
-		member.setName("imageHeight");
+		member.setName("image_height");
 		useMember(member);
 		return member;
 	}

@@ -49,7 +49,7 @@ public class ArtworkFans extends BaseModelBean{
 	public DateTimeAttribute watchTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_create");
-		member.setName("watchTime");
+		member.setName("watch_time");
 		useMember(member);
 		return member;
 	}

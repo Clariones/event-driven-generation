@@ -64,7 +64,7 @@ public class SpecialOfferPromotion extends BaseModelBean{
 	public NumberAttribute promotionAmount(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
-		member.setName("promotionAmount");
+		member.setName("promotion_amount");
 		useMember(member);
 		return member;
 	}
@@ -72,7 +72,7 @@ public class SpecialOfferPromotion extends BaseModelBean{
 	public DateTimeAttribute startDate(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date");
-		member.setName("startDate");
+		member.setName("start_date");
 		useMember(member);
 		return member;
 	}
@@ -80,7 +80,7 @@ public class SpecialOfferPromotion extends BaseModelBean{
 	public DateTimeAttribute endDate(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date");
-		member.setName("endDate");
+		member.setName("end_date");
 		useMember(member);
 		return member;
 	}

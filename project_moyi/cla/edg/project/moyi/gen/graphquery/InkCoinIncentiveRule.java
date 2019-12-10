@@ -73,7 +73,7 @@ public class InkCoinIncentiveRule extends BaseModelBean{
 	public NumberAttribute settlementDurationHour(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
-		member.setName("settlementDurationHour");
+		member.setName("settlement_duration_hour");
 		useMember(member);
 		return member;
 	}
@@ -81,7 +81,7 @@ public class InkCoinIncentiveRule extends BaseModelBean{
 	public NumberAttribute ruleValue(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("double");
-		member.setName("ruleValue");
+		member.setName("rule_value");
 		useMember(member);
 		return member;
 	}
@@ -89,7 +89,7 @@ public class InkCoinIncentiveRule extends BaseModelBean{
 	public DateTimeAttribute lastUpdateTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_update");
-		member.setName("lastUpdateTime");
+		member.setName("last_update_time");
 		useMember(member);
 		return member;
 	}

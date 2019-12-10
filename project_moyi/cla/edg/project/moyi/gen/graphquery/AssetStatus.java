@@ -5,43 +5,18 @@ import java.util.Map;
 import cla.edg.Utils;
 import cla.edg.modelbean.*;
 
-public class Slide extends BaseModelBean{
+public class AssetStatus extends BaseModelBean{
 	public String getFullClassName() {
-		return "com.terapico.moyi.slide.Slide";
+		return "com.terapico.moyi.assetstatus.AssetStatus";
 	}
 	// 枚举对象
+	public static EnumAttribute RECEIVABLE = new EnumAttribute("com.terapico.moyi.assetstatus.AssetStatus", "RECEIVABLE");
+	public static EnumAttribute FROZEN = new EnumAttribute("com.terapico.moyi.assetstatus.AssetStatus", "FROZEN");
+	public static EnumAttribute RELEASED = new EnumAttribute("com.terapico.moyi.assetstatus.AssetStatus", "RELEASED");
+	public static EnumAttribute SEND_BACK = new EnumAttribute("com.terapico.moyi.assetstatus.AssetStatus", "SEND_BACK");
+	public static EnumAttribute INVALID = new EnumAttribute("com.terapico.moyi.assetstatus.AssetStatus", "INVALID");
 
 	// 引用的对象
-
-	public SlideType slideType() {
-		SlideType member = new SlideType();
-		member.setModelTypeName("slide_type");
-		member.setName("slide_type");
-		member.setMemberName("slideType");
-		member.setReferDirection(true);
-		append(member);
-		return member;
-	}
-
-	public Artwork linkedArtwork() {
-		Artwork member = new Artwork();
-		member.setModelTypeName("artwork");
-		member.setName("linked_artwork");
-		member.setMemberName("linkedArtwork");
-		member.setReferDirection(true);
-		append(member);
-		return member;
-	}
-
-	public Article linkedArticle() {
-		Article member = new Article();
-		member.setModelTypeName("article");
-		member.setName("linked_article");
-		member.setMemberName("linkedArticle");
-		member.setReferDirection(true);
-		append(member);
-		return member;
-	}
 
 	public Moyi moyi() {
 		Moyi member = new Moyi();
@@ -54,6 +29,16 @@ public class Slide extends BaseModelBean{
 	}
 
 	// 被引用的对象
+	
+	public UserFrozenAccountRecord userFrozenAccountRecordList() {
+		UserFrozenAccountRecord member = new UserFrozenAccountRecord();
+		member.setModelTypeName("user_frozen_account_record");
+		member.setName("status");
+		member.setMemberName("userFrozenAccountRecordList");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
 
 	
 	// 普通属性
@@ -74,18 +59,18 @@ public class Slide extends BaseModelBean{
 		return member;
 	}
 
-	public StringAttribute image(){
+	public StringAttribute code(){
 		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string_image");
-		member.setName("image");
+		member.setModelTypeName("string");
+		member.setName("code");
 		useMember(member);
 		return member;
 	}
 
-	public StringAttribute linkUrl(){
+	public StringAttribute description(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("link_url");
+		member.setName("description");
 		useMember(member);
 		return member;
 	}

@@ -59,7 +59,7 @@ public class Organization extends BaseModelBean{
 	public StringAttribute organizationName(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("organizationName");
+		member.setName("organization_name");
 		useMember(member);
 		return member;
 	}
@@ -67,7 +67,7 @@ public class Organization extends BaseModelBean{
 	public StringAttribute businessLicenseNumber(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_taxpayerid");
-		member.setName("businessLicenseNumber");
+		member.setName("business_license_number");
 		useMember(member);
 		return member;
 	}
@@ -75,7 +75,7 @@ public class Organization extends BaseModelBean{
 	public StringAttribute businessLicenseImage(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_image");
-		member.setName("businessLicenseImage");
+		member.setName("business_license_image");
 		useMember(member);
 		return member;
 	}

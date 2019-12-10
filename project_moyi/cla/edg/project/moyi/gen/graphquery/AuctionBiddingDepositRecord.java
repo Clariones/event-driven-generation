@@ -57,7 +57,7 @@ public class AuctionBiddingDepositRecord extends BaseModelBean{
 	public NumberAttribute incomeAmount(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
-		member.setName("incomeAmount");
+		member.setName("income_amount");
 		useMember(member);
 		return member;
 	}
@@ -65,7 +65,7 @@ public class AuctionBiddingDepositRecord extends BaseModelBean{
 	public NumberAttribute expendAmount(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
-		member.setName("expendAmount");
+		member.setName("expend_amount");
 		useMember(member);
 		return member;
 	}
@@ -73,7 +73,7 @@ public class AuctionBiddingDepositRecord extends BaseModelBean{
 	public NumberAttribute frozenAmount(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
-		member.setName("frozenAmount");
+		member.setName("frozen_amount");
 		useMember(member);
 		return member;
 	}
@@ -81,7 +81,7 @@ public class AuctionBiddingDepositRecord extends BaseModelBean{
 	public NumberAttribute releaseAmount(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
-		member.setName("releaseAmount");
+		member.setName("release_amount");
 		useMember(member);
 		return member;
 	}
@@ -89,7 +89,7 @@ public class AuctionBiddingDepositRecord extends BaseModelBean{
 	public NumberAttribute availableBalance(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
-		member.setName("availableBalance");
+		member.setName("available_balance");
 		useMember(member);
 		return member;
 	}
@@ -97,7 +97,7 @@ public class AuctionBiddingDepositRecord extends BaseModelBean{
 	public NumberAttribute frozenBalance(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
-		member.setName("frozenBalance");
+		member.setName("frozen_balance");
 		useMember(member);
 		return member;
 	}
@@ -105,7 +105,7 @@ public class AuctionBiddingDepositRecord extends BaseModelBean{
 	public DateTimeAttribute createTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_create");
-		member.setName("createTime");
+		member.setName("create_time");
 		useMember(member);
 		return member;
 	}
