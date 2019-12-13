@@ -23,6 +23,16 @@ public class InkDeedOrder extends BaseModelBean{
 		return member;
 	}
 
+	public ArtworkAuction auction() {
+		ArtworkAuction member = new ArtworkAuction();
+		member.setModelTypeName("artwork_auction");
+		member.setName("auction");
+		member.setMemberName("auction");
+		member.setReferDirection(true);
+		append(member);
+		return member;
+	}
+
 	public MoyiUser buyer() {
 		MoyiUser member = new MoyiUser();
 		member.setModelTypeName("moyi_user");

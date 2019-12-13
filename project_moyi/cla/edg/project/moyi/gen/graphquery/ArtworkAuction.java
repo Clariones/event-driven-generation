@@ -245,6 +245,16 @@ public class ArtworkAuction extends BaseModelBean{
 		return member;
 	}
 	
+	public InkDeedOrder inkDeedOrderList() {
+		InkDeedOrder member = new InkDeedOrder();
+		member.setModelTypeName("ink_deed_order");
+		member.setName("auction");
+		member.setMemberName("inkDeedOrderList");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+	
 	public InkDeedCashRecord inkDeedCashRecordList() {
 		InkDeedCashRecord member = new InkDeedCashRecord();
 		member.setModelTypeName("ink_deed_cash_record");
