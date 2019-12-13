@@ -52,6 +52,14 @@ public class V3InkDeedService extends BaseMoyiEventScript {
 				.comments("拍品二次上架,需要迁移墨契")
 				.rule_comments("二次上架需要处理7种相关数据,此处仅处理墨契状态回迁到'新发行',重新计算发行价的事情")
 				
+			// 外部事件
+			.on_event("return ink deed").with("artwork auction")
+				.comments("违约处理时,被调用,处理墨契交易原路返回的事情")
+				.rule_comments("所有交易作废")
+				.rule_comments("所有款项退回到买家余额账户")
+				.rule_comments("所有墨契回到发行人手中,状态变成 新发行 或者 待生效(DORMANT)")
+				.event_ripple("change status")
+				
 			// 墨契交易相关
 			.on_event("be drawn").with("user id").with("ink deed list").with("artwork auction")
 				.comments("用户抽取了某些墨契")
@@ -65,6 +73,7 @@ public class V3InkDeedService extends BaseMoyiEventScript {
 			.on_event("order completed").with("main order")
 				.comments("用户完成了墨契订单")
 				.rule_comments("该墨契状态应被设定为'新发行'")	// 购买完成后,不是'可流通',需要重新上架
+				.rule_comments("持有人完成转变")
 			.on_event("order cancelled by user").with("main order")
 				.comments("墨契订单被取消")
 				.event_ripple("change status")

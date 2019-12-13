@@ -113,6 +113,16 @@ public class V3PageFlowScript extends PieceOfScript {
 				.comments("根据墨契的持有人和售价,查看墨契详情").no_login().has_footprint().can_refresh()
 				.got_page("ink deed detail by holder and price")
 					
+				
+			/**
+			 * 个人账户
+			 */
+			.request("view my cash account v3")
+				.comments("V3版本的用户现金账户详情").need_login().has_footprint().can_refresh()
+				.got_page("user cash account detail v3").title("我的账户")
+			.request("view frozen account record list").with_last_record_id()
+				.comments("查看用户的待入账明细").need_login().no_footprint().can_refresh()
+				.got_page("frozen account record list").title("待入账明细").list_of("frozen-record")
 			;
 	}
 }

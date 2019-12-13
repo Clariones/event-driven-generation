@@ -16,6 +16,7 @@ import cla.edg.modelbean.BeanRelation;
 import cla.edg.modelbean.CorperationPathNode;
 import cla.edg.modelbean.LogicalOperator;
 import cla.edg.modelbean.ModelBeanRoute;
+import cla.edg.modelbean.NumberAttribute;
 import cla.edg.routemap.Edge;
 import cla.edg.routemap.Node;
 import cla.edg.routemap.RouteUtil;
@@ -31,10 +32,24 @@ public class QueryActionInfo {
 	protected boolean querySingle;
 	protected boolean pagination;
 	protected boolean counting = false;
+	protected boolean sum = false;
+	protected NumberAttribute sumAttribute;
 	protected boolean notGeneratePaginationParams = false;
 	protected String limitExp = null;
 	
 	
+	public boolean isSum() {
+		return sum;
+	}
+	public void setSum(boolean sum) {
+		this.sum = sum;
+	}
+	public NumberAttribute getSumAttribute() {
+		return sumAttribute;
+	}
+	public void setSumAttribute(NumberAttribute sumAttribute) {
+		this.sumAttribute = sumAttribute;
+	}
 	public String getLimitExp() {
 		return limitExp;
 	}
@@ -85,8 +100,8 @@ public class QueryActionInfo {
 	}
 	public String getSql() {
 		if (this.getBeanRoute() != null) {
-			if (this.isCounting()) {
-				return this.getCountSqlFromSearchClause();
+			if (this.isCounting() || this.isSum()) {
+				return this.getCountOrSumSqlFromSearchClause();
 			}
 			return this.getSqlFromSearchClause();
 		}else {
@@ -178,13 +193,16 @@ public class QueryActionInfo {
 	public List<Object> getParamsFromSearchClause() {
 		return params;
 	}
-	public String getCountSqlFromSearchClause() {
+	public String getCountOrSumSqlFromSearchClause() {
 		StringBuilder sb =  new StringBuilder();
 		if (this.sortingMap != null) {
 			beanRoute = (ModelBeanRoute) beanRoute.mergeWith(sortingMap);
 		}
+		if (this.sumAttribute != null) {
+			beanRoute = (ModelBeanRoute) beanRoute.mergeWith(sumAttribute.getContainerBean().getBeanRoute());
+		}
 		beanRoute.assignAlias();
-		String selectStr = beanRoute.getCountSelectClause(this.getTargetModelTypeName());
+		String selectStr = beanRoute.getCountOrSumSelectClause(this.getTargetModelTypeName(), this.sumAttribute);
 		sb.append(selectStr);
 		
 		params = new ArrayList<>();
@@ -484,5 +502,20 @@ public class QueryActionInfo {
 			return false;
 		}
 		return Utils.isElVariable(limitExp);
+	}
+	
+	public String getSumDataType() {
+		switch (this.sumAttribute.getModelTypeName()) {
+		case "long":
+			return "Long";
+		case "int":
+		case "int_auto_zero":
+			return "Integer";
+		case "double":
+		case "money_auto_zero":
+		case "money":
+		default:
+			return "BigDecimal";
+		}
 	}
 }

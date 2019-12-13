@@ -3,6 +3,7 @@ package cla.edg.project.moyi;
 import cla.edg.pageflow.PageFlowScript;
 import cla.edg.pageflow.PieceOfScript;
 import cla.edg.project.moyi.gen.graphquery.ArtworkAuctionStatus;
+import cla.edg.project.moyi.gen.graphquery.AssetStatus;
 import cla.edg.project.moyi.gen.graphquery.CertificateStatus;
 import cla.edg.project.moyi.gen.graphquery.InkDeedStatus;
 import cla.edg.project.moyi.gen.graphquery.MODEL;
@@ -159,6 +160,8 @@ public class V3FindScript extends PieceOfScript {
 					.comments("V3新规则下, 按照用户统计某个拍品下的墨契持有数量")
 				.query(MODEL.inkDeedHoldingStatistic()).which("my holding v3").pagination().with_string("user id").with_string("last auction id")
 					.comments("V3新规则下的 我持有的墨契 ")
+				.query(MODEL.inkDeedHoldingStatistic()).which("my waiting cash v3").pagination().with_string("user id").with_string("last auction id")
+					.comments("V3新规则下的 我待兑付的墨契 ")
 				.query(MODEL.inkDeed()).which("be drawn to buy by user").with_string("artwork auction id").with_string("except holder id").with_integer("number").with_date("lastest drawn time").with_date("lastest book time")
 					.comments("在拍品中,抽取若干用户可以购买的墨契")
 					.do_it_as()
@@ -170,17 +173,38 @@ public class V3FindScript extends PieceOfScript {
 								)
 						.order_by(MODEL.inkDeed().purchasePrice())
 						.top("${number}")
-				.query(MODEL.inkDeed()).which("be drawn with quote to buy").with_string("artwork auction id").with_string("holder id").with_float("price").with_integer("number").with_date("lastest drawn time").with_date("lastest book time")
+				.query(MODEL.inkDeed()).which("be drawn with quote to buy").with_string("artwork auction id").with_string("holder id").with_float("price").with_string("except holder id").with_integer("number").with_date("lastest drawn time").with_date("lastest book time")
 					.comments("在拍品中,按照指定的持有人和报价,抽取若干用户可以购买的墨契")
 					.do_it_as()
 						.where(MODEL.inkDeed().auction().eq("${artwork auction id}"),
 								MODEL.inkDeed().holder().eq("${holder id}"),
+								MODEL.inkDeed().holder().not("${except holder id}"),
 								MODEL.inkDeed().purchasePrice().eq("${price}"),
 								MODEL.inkDeed().status().eq(InkDeedStatus.AVALIABLE)
 									.or(MODEL.inkDeed().status().eq(InkDeedStatus.BE_DRAWN).and(MODEL.inkDeed().lastUpdateTime().before("${lastest drawn time}")),
 										MODEL.inkDeed().status().eq(InkDeedStatus.BOOKED).and(MODEL.inkDeed().lastUpdateTime().before("${lastest book time}")))
 								)
 						.top("${number}")
+				.find(MODEL.mainOrder()).which("for artwork auction").with_string("artwork auction id")
+					.comments("找出拍品对应的交易主订单")
+					.do_it_as()
+						.where(MODEL.mainOrder().artworkAuctionOrderList().auction().eq("${artwork auction id}"))
+						.order_by(MODEL.mainOrder().id()).desc()
+				.query(MODEL.inkDeedEntryOrder()).which("selling by user v3").pagination().with_string("user id").with_string("last auction id").with_float("last price")
+					.comments("V3新规则下, 指定用户的拍品下的交易中墨契聚合成假的 entry order")
+				.query(MODEL.userFrozenAccountRecord()).which("user").pagination().with_string("user id")
+					.comments("查询用户的冻结账户明细")
+					.do_it_as()
+						.where(MODEL.userFrozenAccountRecord().owner().eq("${user id}"),
+								MODEL.userFrozenAccountRecord().status().code().in(AssetStatus.FROZEN, AssetStatus.RECEIVABLE))
+						.wants(MODEL.userFrozenAccountRecord().status())
+						.order_by(MODEL.userFrozenAccountRecord().id()).desc()
+				.find(MODEL.userFrozenAccountRecord()).which("tobe credit to user").with_string("user id")
+					.comments("查询用户的冻结账户明细")
+					.do_it_as().sum(MODEL.userFrozenAccountRecord().amount())
+						.where(MODEL.userFrozenAccountRecord().owner().eq("${user id}"),
+								MODEL.userFrozenAccountRecord().status().code().in(AssetStatus.FROZEN, AssetStatus.RECEIVABLE))
+						
 				;
 	}
 

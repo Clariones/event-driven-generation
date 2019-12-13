@@ -11,6 +11,7 @@ import cla.edg.modelbean.BaseModelBean;
 import cla.edg.modelbean.CorperationPathNode;
 import cla.edg.modelbean.LogicalOperator;
 import cla.edg.modelbean.ModelBeanRoute;
+import cla.edg.modelbean.NumberAttribute;
 import cla.edg.modelbean.StringAttribute;
 
 
@@ -565,7 +566,16 @@ public class PageFlowScript extends BasePageFlowScript {
 		}
 		return this;
 	}
-	
+	public PageFlowScript sum(NumberAttribute attribute) {
+		if (currentWork instanceof QueryInfo && queryActionInfo != null) {
+			// 目前只支持这种场景
+			queryActionInfo.setSum(true);
+			queryActionInfo.setSumAttribute(attribute);
+		} else {
+			throw new RuntimeException("当前任务是" + currentWork.getClass().getSimpleName() + ", 不能指定求和条件");
+		}
+		return this;
+	}
 	public PageFlowScript order_by(BaseAttribute attr) {
 		if (currentWork instanceof QueryInfo && queryActionInfo != null) {
 			// 目前只支持这种场景
@@ -619,5 +629,6 @@ public class PageFlowScript extends BasePageFlowScript {
 	public PageFlowScript top_10() {
 		return top("10");
 	}
+	
 	
 }

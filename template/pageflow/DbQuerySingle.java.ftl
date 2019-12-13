@@ -1,19 +1,24 @@
-<#if query.queryActionInfo?has_content && query.queryActionInfo.counting>
+<#if query.queryActionInfo?has_content && (query.queryActionInfo.counting || query.queryActionInfo.sum)>
 	${''}<@compress single_line=true>
-    public int
-		count${typeClass}Which${NAMING.toCamelCase(query.name)}(
+    public <#if query.queryActionInfo.counting>int<#else>${query.queryActionInfo.sumDataType}</#if>
+		${getSingleMethodPrefix(query.queryActionInfo)}${typeClass}Which${NAMING.toCamelCase(query.name)}(
 		${custom_context_name} ctx
 		<@T.getRequestProcessingUrlMethodParameters query/>
 		) throws Exception {
 	</@>${''}
 		List<Object> params = new ArrayList<>();
-		String sql = prepareSqlAndParamsForCount${typeClass}Which${NAMING.toCamelCase(query.name)}(ctx, params<@T.getRequestProcessingMethodParameterNames query/>);
+		String sql = prepareSqlAndParamsFor${getSingleMethodPrefix(query.queryActionInfo)?cap_first}${typeClass}Which${NAMING.toCamelCase(query.name)}(ctx, params<@T.getRequestProcessingMethodParameterNames query/>);
+		<#if query.queryActionInfo.counting>
 		Integer cnt = ctx.dao().queryForObject(sql, params.toArray(), Integer.class);
 		return cnt == null ? 0 : cnt;
+		<#else>
+		${query.queryActionInfo.sumDataType} cnt = ctx.dao().queryForObject(sql, params.toArray(), ${query.queryActionInfo.sumDataType}.class);
+		return cnt;
+		</#if>
 	}
 	
 	${''}<@compress single_line=true>
-	protected String prepareSqlAndParamsForCount${typeClass}Which${NAMING.toCamelCase(query.name)}(
+	protected String prepareSqlAndParamsFor${getSingleMethodPrefix(query.queryActionInfo)?cap_first}${typeClass}Which${NAMING.toCamelCase(query.name)}(
 		${custom_context_name} ctx, List<Object> params<@T.getRequestProcessingUrlMethodParameters query/>
 		) throws Exception {
 	</@>${''}
@@ -87,3 +92,12 @@
 	}
 	</#if>
 </#if>
+
+<#function getSingleMethodPrefix queryActionInfo>
+	<#if queryActionInfo.counting>
+		<#return "count">
+	<#else>
+		<#assign rst = NAMING.toJavaVariableName(queryActionInfo.sumAttribute.name)>
+		<#return "sum${rst?cap_first}Of">
+	</#if>
+</#function>
