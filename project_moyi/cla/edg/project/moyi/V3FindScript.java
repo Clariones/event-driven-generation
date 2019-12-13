@@ -15,20 +15,20 @@ public class V3FindScript extends PieceOfScript {
 	public PageFlowScript makeSequel(PageFlowScript script) {
 		return script
 				// 写法1: 整个SQL手写,参数手写
-				// 参数可以用名字引用, 写法为 ?{参数名}, 会自动在Params里正确位置追加. 
+				// 参数可以用名字引用, 写法为 ?{参数名}, 会自动在Params里正确位置追加.
 				// param(xxx) 中的xxx 会原样写入代码. 例如要写常量, 就写 param("MyConstant.X"), 生成代码就是 params.add(MyConstant.X), 也可以写变量
 				// 例如 param("\"%\" + artworkId + \"%\""), 就会生成 params.add("%"+artworkId+"%"). 就是简单的填入.
 				// param_string("xxx")是个简写, 会把写入的内容,最后包含在一个字符串中, 例如 param_string("甲说:\"你好\"") 就会生成params.add("甲说:\"你好\"");
 				// 如果用 param("\"甲说:\\\"你好\\\"\"") 就太麻烦
 				.find(MODEL.artworkOwnershipCertificate()).which("available for artwork").with_string("artwork id")
 					.do_it_as()
-						.sql_is("select AC.* from artwork_ownership_certificate_data AC left join certificate_status_data CS on AC.certificate_status=CS.id\n" + 
-								"	where AC.artwork=?{artwork id} and CS.code = ?\n" + 
-								"    order by AC.id desc \n" + 
+						.sql_is("select AC.* from artwork_ownership_certificate_data AC left join certificate_status_data CS on AC.certificate_status=CS.id\n" +
+								"	where AC.artwork=?{artwork id} and CS.code = ?\n" +
+								"    order by AC.id desc \n" +
 								"    limit ? ")
 						.param("CertificateStatus.CERTIFICATED").param(1)
 						.need_know("com.terapico.moyi.certificatestatus.CertificateStatus")
-				// 写法2(单个搜索,不带分页): 只描述搜索条件, 脚本自己分析sql,组装条件. 
+				// 写法2(单个搜索,不带分页): 只描述搜索条件, 脚本自己分析sql,组装条件.
 				// param的写法: ${xxx} 会转成Java变量名; ${'xxx'} 会包在字符串里  直接写xxx,会直接输出到代码
 				.find(MODEL.artworkAuction()).which("not finished").with_string("artwork id")
 					.do_it_as()
@@ -114,7 +114,7 @@ public class V3FindScript extends PieceOfScript {
 				.find(MODEL.moyiShopCertification()).which("already paid").with_string("shop id")
 					.comments("找出店相关的, 未作废的店铺认证")
 					.do_it_as()
-						.where(MODEL.moyiShopCertification().moyiShopList().id().eq("${shop id}"), 
+						.where(MODEL.moyiShopCertification().moyiShopList().id().eq("${shop id}"),
 								MODEL.moyiShopCertification().certificateStatus().in(CertificateStatus.CERTIFICATED, CertificateStatus.PROCESSING))
 						.wants(MODEL.moyiShopCertification().certificateStatus(), MODEL.moyiShopCertification().moyiShopList().shopkeeper())
 				.find(MODEL.auctionBiddingDeposit()).which("paid by user").with_string("artwork auction id").with_string("user id")
@@ -204,10 +204,17 @@ public class V3FindScript extends PieceOfScript {
 					.do_it_as().sum(MODEL.userFrozenAccountRecord().amount())
 						.where(MODEL.userFrozenAccountRecord().owner().eq("${user id}"),
 								MODEL.userFrozenAccountRecord().status().code().in(AssetStatus.FROZEN, AssetStatus.RECEIVABLE))
-						
+
+				.query(MODEL.artworkAuctionOrder().getModelTypeName()).which("pending arbitration by user").with_string("user id").pagination()
+						.comments("查询用户的售后中的拍品订单，业务上的售后中包含 售后中|买家违约|卖家违约 3种状态")
+						.do_it_as()
+							.where(MODEL.artworkAuctionOrder().orderStatus().code().eq(OrderStatus.PENDING_ARBITRATION)
+									.or(MODEL.artworkAuctionOrder().orderStatus().code().eq(OrderStatus.BUYER_DEFAULT))
+									.or(MODEL.artworkAuctionOrder().orderStatus().code().eq(OrderStatus.SELLER_DEFAULT)))
+
 				;
 	}
 
-	
-			
+
+
 }
