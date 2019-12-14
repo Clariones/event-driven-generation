@@ -211,6 +211,37 @@ public class V3FindScript extends PieceOfScript {
 							.where(MODEL.artworkAuctionOrder().orderStatus().code().eq(OrderStatus.PENDING_ARBITRATION)
 									.or(MODEL.artworkAuctionOrder().orderStatus().code().eq(OrderStatus.BUYER_DEFAULT))
 									.or(MODEL.artworkAuctionOrder().orderStatus().code().eq(OrderStatus.SELLER_DEFAULT)))
+				.query(MODEL.inkDeedOrder()).which("need pay by user").pagination().with_string("user id")
+					.comments("查看用户的待支付墨契订单")
+					.do_it_as()
+						.where(MODEL.inkDeedOrder().orderStatus().code().eq(OrderStatus.NEED_PAY),
+								MODEL.inkDeedOrder().buyer().eq("${user id}"))
+						.order_by(MODEL.inkDeedOrder().id()).asc() // 待支付有时间限制,需要最先支付的放在上面
+						.wants(MODEL.inkDeedOrder().orderStatus(),
+								MODEL.inkDeedOrder().auction().seller())
+				.query(MODEL.inkDeedOrder()).which("canclled of user").pagination().with_string("user id")
+					.comments("查看用户的已取消墨契订单")
+					.do_it_as()
+						.where(MODEL.inkDeedOrder().orderStatus().code().eq(OrderStatus.CANCELLED),
+								MODEL.inkDeedOrder().buyer().eq("${user id}"))
+						.order_by(MODEL.inkDeedOrder().id()).desc() // 已取消的按时间由近及远
+						.wants(MODEL.inkDeedOrder().orderStatus(),
+								MODEL.inkDeedOrder().auction().seller())
+				.query(MODEL.inkDeedOrder()).which("closed of user").pagination().with_string("user id")
+					.comments("查看用户的已完成墨契订单")
+					.do_it_as()
+						.where(MODEL.inkDeedOrder().orderStatus().code().eq(OrderStatus.CLOSED),
+								MODEL.inkDeedOrder().buyer().eq("${user id}"))
+						.order_by(MODEL.inkDeedOrder().id()).desc() // 已完成的按时间由近及远
+						.wants(MODEL.inkDeedOrder().orderStatus(),
+								MODEL.inkDeedOrder().auction().seller())
+				.query(MODEL.inkDeedOrder()).which("belong to user").pagination().with_string("user id")
+					.comments("查看用户的所有墨契订单")
+					.do_it_as()
+						.where(MODEL.inkDeedOrder().buyer().eq("${user id}"))
+						.order_by(MODEL.inkDeedOrder().id()).desc() // 
+						.wants(MODEL.inkDeedOrder().orderStatus(),
+								MODEL.inkDeedOrder().auction().seller())
 						
 				// 2019-12-13 退墨契相关的
 				.query(MODEL.userFrozenAccountRecord()).which("ink deed trade by auction").with_string("artwork auction id")
@@ -224,6 +255,7 @@ public class V3FindScript extends PieceOfScript {
 					.do_it_as()
 						.where(MODEL.inkDeed().auction().eq("${artwork auction id}"),
 								MODEL.inkDeed().status().not_in(InkDeedStatus.CASHED, InkDeedStatus.DESTROYED))
+						
 				;
 	}
 

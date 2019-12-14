@@ -112,6 +112,10 @@ public class V3PageFlowScript extends PieceOfScript {
 			.request("view selling ink deed by holder and price").with_string("artwork auction id").with_string("user id").with_string("price")
 				.comments("根据墨契的持有人和售价,查看墨契详情").no_login().has_footprint().can_refresh()
 				.got_page("ink deed detail by holder and price")
+				
+			.request("view ink deed order list v3").with_string("filter").with_last_record_id()
+				.comments("用户按照订单状态分页查看他自己的默契订单")
+				.got_page("ink deed order list v3").title("墨契订单")
 					
 				
 			/**

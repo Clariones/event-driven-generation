@@ -3,12 +3,17 @@ package cla.edg.modelbean;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import cla.edg.Utils;
 import cla.edg.routemap.Edge;
 import cla.edg.routemap.MeetingPoint;
 import cla.edg.routemap.Node;
 import cla.edg.routemap.RouteMap;
 
 public class ModelBeanRoute extends RouteMap<BaseModelBean, BeanRelation>{
+	protected boolean isBlank(String str) {
+		return Utils.isBlank(str);
+	}
+	
 	protected String targetModelAlias;
 	public String getTargetModelAlias() {
 		return targetModelAlias;
@@ -25,16 +30,17 @@ public class ModelBeanRoute extends RouteMap<BaseModelBean, BeanRelation>{
 	}
 
 	private void assignAliasToPoint(MeetingPoint<BaseModelBean, BeanRelation> point, AtomicInteger cnt) {
-//		if (point.getAlias() != null) {
-//			return;
-//		}
-		String alias = String.format("%sT%d", point.getAlias()==null?"":point.getAlias(),cnt.incrementAndGet());
+		if (!isBlank(point.getAlias())) {
+			return;
+		}
+		String alias = String.format("%sT%d", isBlank(point.getAlias())?"":point.getAlias(),cnt.incrementAndGet());
 		point.updatePointAlias(alias);
 		for(Edge<BaseModelBean, BeanRelation> edge: point.getEdgesFromMe()) {
 			assignAliasToPoint(edge.getToNode(), cnt);
 		}
 	}
 
+	
 	public String getCountOrSumSelectClause(String targetModelType, NumberAttribute sumAttribute) {
 		return getSelectClause(targetModelType, sumAttribute, true);
 	}
