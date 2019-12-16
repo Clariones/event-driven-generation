@@ -80,6 +80,14 @@ public class InkDeedTradeRecord extends BaseModelBean{
 		return member;
 	}
 
+	public NumberAttribute soldTimes(){
+		NumberAttribute member = new NumberAttribute();
+		member.setModelTypeName("int");
+		member.setName("sold_times");
+		useMember(member);
+		return member;
+	}
+
 	public DateTimeAttribute createTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_create");

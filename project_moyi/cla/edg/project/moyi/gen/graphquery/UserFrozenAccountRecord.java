@@ -82,6 +82,14 @@ public class UserFrozenAccountRecord extends BaseModelBean{
 		return member;
 	}
 
+	public NumberAttribute soldTimes(){
+		NumberAttribute member = new NumberAttribute();
+		member.setModelTypeName("int");
+		member.setName("sold_times");
+		useMember(member);
+		return member;
+	}
+
 	public StringAttribute detailInfo(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_longtext");

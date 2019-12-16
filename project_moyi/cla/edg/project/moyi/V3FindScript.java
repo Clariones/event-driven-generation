@@ -4,6 +4,7 @@ import cla.edg.pageflow.PageFlowScript;
 import cla.edg.pageflow.PieceOfScript;
 import cla.edg.project.moyi.gen.graphquery.ArtworkAuctionStatus;
 import cla.edg.project.moyi.gen.graphquery.AssetStatus;
+import cla.edg.project.moyi.gen.graphquery.AuctionBiddingDepositStatus;
 import cla.edg.project.moyi.gen.graphquery.CertificateStatus;
 import cla.edg.project.moyi.gen.graphquery.InkDeedStatus;
 import cla.edg.project.moyi.gen.graphquery.MODEL;
@@ -118,7 +119,7 @@ public class V3FindScript extends PieceOfScript {
 								MODEL.moyiShopCertification().certificateStatus().in(CertificateStatus.CERTIFICATED, CertificateStatus.PROCESSING))
 						.wants(MODEL.moyiShopCertification().certificateStatus(), MODEL.moyiShopCertification().moyiShopList().shopkeeper())
 				.find(MODEL.auctionBiddingDeposit()).which("paid by user").with_string("artwork auction id").with_string("user id")
-					.comments("找出用户为拍卖缴纳的竞拍保证金")
+					.comments("找出最后一次用户为拍卖缴纳的竞拍保证金. 无论状态如何")
 					.do_it_as()
 						.where(MODEL.auctionBiddingDeposit().bidder().eq("${user id}"),
 								MODEL.auctionBiddingDeposit().auction().eq("${artwork auction id}"))
@@ -255,7 +256,22 @@ public class V3FindScript extends PieceOfScript {
 					.do_it_as()
 						.where(MODEL.inkDeed().auction().eq("${artwork auction id}"),
 								MODEL.inkDeed().status().not_in(InkDeedStatus.CASHED, InkDeedStatus.DESTROYED))
-						
+				
+				.find(MODEL.auctionBiddingDeposit()).which("user paid for deal auction").with_string("artwork auction id").with_string("user id")
+					.comments("找出用户为拍卖所交的,可计入支付项的竞拍保证金记录")
+					.do_it_as()
+						.where(MODEL.auctionBiddingDeposit().auction().eq("${artwork auction id}"),
+								MODEL.auctionBiddingDeposit().bidder().eq("${user id}"),
+								MODEL.auctionBiddingDeposit().status().code().not(AuctionBiddingDepositStatus.RETURNED))
+				.find(MODEL.efficientRecommendation()).which("effect for deal auction").with_string("artwork auction id")
+					.comments("找出某个拍卖的有效荐宝记录")
+					.do_it_as()
+						.where(MODEL.efficientRecommendation().auction().eq("${artwork auction id}"),
+								MODEL.efficientRecommendation().bidder().eq(MODEL.efficientRecommendation().auction().buyer()))
+				.find(MODEL.userInviteRegistrationInfo()).which("shop opened").with_string("shop id")
+					.comments("找到店主被邀请成功的记录")
+					.do_it_as()
+						.where(MODEL.userInviteRegistrationInfo().invitee().moyiShopList().eq("${shop id}"))
 				;
 	}
 
