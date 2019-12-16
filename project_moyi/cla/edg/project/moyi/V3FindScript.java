@@ -211,7 +211,7 @@ public class V3FindScript extends PieceOfScript {
 						.do_it_as()
 							.where(MODEL.artworkAuctionOrder().orderStatus().code().eq(OrderStatus.PENDING_ARBITRATION)
 									.or(MODEL.artworkAuctionOrder().orderStatus().code().eq(OrderStatus.BUYER_DEFAULT))
-									.or(MODEL.artworkAuctionOrder().orderStatus().code().eq(OrderStatus.SELLER_DEFAULT)))
+									.or(MODEL.artworkAuctionOrder().orderStatus().code().eq(OrderStatus.SELLER_DEFAULT))).wants(MODEL.artworkAuctionOrder().orderStatus())
 				.query(MODEL.inkDeedOrder()).which("need pay by user").pagination().with_string("user id")
 					.comments("查看用户的待支付墨契订单")
 					.do_it_as()
