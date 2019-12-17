@@ -245,12 +245,16 @@ public class V3FindScript extends PieceOfScript {
 								MODEL.inkDeedOrder().auction().seller())
 						
 				// 2019-12-13 退墨契相关的
-				.query(MODEL.userFrozenAccountRecord()).which("ink deed trade by auction").with_string("artwork auction id")
+				.query(MODEL.userFrozenAccountRecord()).which("ink deed trade by auction").pagination().with_string("artwork auction id")
 					.comments("找出拍品相关的所有墨契交易对应的冻结账户记录")
 					.do_it_as()
 						.where(MODEL.userFrozenAccountRecord().otherRelatedType().eq("ArtworkAuction.INTERNAL_TYPE"),
 								MODEL.userFrozenAccountRecord().otherRelatedId().eq("${artwork auction id}"),
 								MODEL.userFrozenAccountRecord().status().in(AssetStatus.FROZEN, AssetStatus.RECEIVABLE))
+				.query(MODEL.userFrozenAccountRecord()).which("announced within main order").pagination().with_string("main order id")
+					.comments("找出某个主订单相关的,结算后'公告'的应收款")
+					.do_it_as()
+						.where(MODEL.userFrozenAccountRecord().mainOrder().eq("${main order id}"))
 				.query(MODEL.inkDeed()).which("valid in auction").pagination().with_string("artwork auction id")
 					.comments("找出拍品相关的所有有效的墨契")
 					.do_it_as()
