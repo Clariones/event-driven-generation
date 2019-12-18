@@ -94,7 +94,7 @@ public class V3PageFlowScript extends PieceOfScript {
 			 *  
 			 *  user id 和 object id 为空时, 表示对用户和墨契ID没有限制
 			 */
-			.request("buy one ink deed").with_string("artwork auction id").with_string("user id").with_string("object id")
+			.request("buy one ink deed").with_string("artwork auction id").with_string("user id").with_string("object id").with_integer("quantity").variable()
 				.comments("用户从拍品的可售墨契中,挑出价格最低的给用户去购买").need_login().no_footprint()
 				.got_page("buy ink deed preview")
 				

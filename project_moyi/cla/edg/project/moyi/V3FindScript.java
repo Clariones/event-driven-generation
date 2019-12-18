@@ -183,6 +183,7 @@ public class V3FindScript extends PieceOfScript {
 								MODEL.inkDeed().purchasePrice().eq("${price}"),
 								MODEL.inkDeed().status().eq(InkDeedStatus.AVALIABLE)
 									.or(MODEL.inkDeed().status().eq(InkDeedStatus.BE_DRAWN).and(MODEL.inkDeed().lastUpdateTime().before("${lastest drawn time}")),
+										MODEL.inkDeed().status().eq(InkDeedStatus.BE_DRAWN).and(MODEL.inkDeed().buyer().eq("${except holder id}")),
 										MODEL.inkDeed().status().eq(InkDeedStatus.BOOKED).and(MODEL.inkDeed().lastUpdateTime().before("${lastest book time}")))
 								)
 						.top("${number}")
@@ -281,6 +282,14 @@ public class V3FindScript extends PieceOfScript {
 					.do_it_as()
 						.where(MODEL.inkDeed().auction().artworkAuctionStatus().code().eq(ArtworkAuctionStatus.BIDDING),
 								MODEL.inkDeed().status().in(InkDeedStatus.FRESH, InkDeedStatus.AVALIABLE, InkDeedStatus.BE_DRAWN, InkDeedStatus.BOOKED))
+				.find(MODEL.inkDeed()).which("selling by user with price of auction").with_string("artwork auction id").with_string("user id").with_float("price")
+					.comments("统计某个拍品下某人某价的在售墨契有多少份")
+					.do_it_as().count()
+						.where(MODEL.inkDeed().auction().eq("${artwork auction id}"),
+								MODEL.inkDeed().seller().eq("${user id}"),
+								MODEL.inkDeed().purchasePrice().eq("${price}"),
+								MODEL.inkDeed().status().in(InkDeedStatus.AVALIABLE, InkDeedStatus.BE_DRAWN, InkDeedStatus.BOOKED))
+						
 				;
 	}
 
