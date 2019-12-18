@@ -276,6 +276,11 @@ public class V3FindScript extends PieceOfScript {
 					.comments("找到店主被邀请成功的记录")
 					.do_it_as()
 						.where(MODEL.userInviteRegistrationInfo().invitee().moyiShopList().eq("${shop id}"))
+				.find(MODEL.inkDeed()).which("should turn to wait")
+					.comments("找一个需要转换到 WATING 的墨契")
+					.do_it_as()
+						.where(MODEL.inkDeed().auction().artworkAuctionStatus().code().eq(ArtworkAuctionStatus.BIDDING),
+								MODEL.inkDeed().status().in(InkDeedStatus.FRESH, InkDeedStatus.AVALIABLE, InkDeedStatus.BE_DRAWN, InkDeedStatus.BOOKED))
 				;
 	}
 
