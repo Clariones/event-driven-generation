@@ -289,7 +289,11 @@ public class V3FindScript extends PieceOfScript {
 								MODEL.inkDeed().seller().eq("${user id}"),
 								MODEL.inkDeed().purchasePrice().eq("${price}"),
 								MODEL.inkDeed().status().in(InkDeedStatus.AVALIABLE, InkDeedStatus.BE_DRAWN, InkDeedStatus.BOOKED))
-						
+				.query(MODEL.inkDeedOrder()).which("timeout or lost").pagination().with_date("drawn dead line").with_date("booked dead line")
+					.comments("查询已经过期或者被别人抢先了的墨契订单")
+					.do_it_as()
+						.where(MODEL.inkDeedOrder().orderStatus().code().in(OrderStatus.NEED_PAY, OrderStatus.PAYING),
+								MODEL.inkDeedOrder().lastUpdateTime().before("${booked dead line}")	)
 				;
 	}
 
