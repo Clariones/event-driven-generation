@@ -116,7 +116,7 @@ public class V3FindScript extends PieceOfScript {
 					.comments("找出店相关的, 未作废的店铺认证")
 					.do_it_as()
 						.where(MODEL.moyiShopCertification().moyiShopList().id().eq("${shop id}"), 
-								MODEL.moyiShopCertification().certificateStatus().in(CertificateStatus.CERTIFICATED, CertificateStatus.PROCESSING))
+								MODEL.moyiShopCertification().certificateStatus().code().in(CertificateStatus.CERTIFICATED, CertificateStatus.PROCESSING))
 						.wants(MODEL.moyiShopCertification().certificateStatus(), MODEL.moyiShopCertification().moyiShopList().shopkeeper())
 				.find(MODEL.auctionBiddingDeposit()).which("paid by user").with_string("artwork auction id").with_string("user id")
 					.comments("找出最后一次用户为拍卖缴纳的竞拍保证金. 无论状态如何")
