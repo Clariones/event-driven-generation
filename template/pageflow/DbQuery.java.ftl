@@ -126,15 +126,23 @@ public abstract class ${class_name}DBQueryHelper{
 		if (lastRecord != null) {
 			fillPaginationParamsForQuery${typeClass}ListOf${NAMING.toCamelCase(query.name)}(ctx, lastRecord, limit, params<@T.getRequestProcessingMethodParameterNames query/>);
 		}
-		params.add(limit);
 		</#if>
-		<#if query.queryActionInfo.limitExp?has_content>
+		<#if query.queryActionInfo.limitExp?has_content && !query.pagination>
 			<#if query.queryActionInfo.limitExpIsObject>
 		params.add(${NAMING.asELVariable(query.queryActionInfo.limitExp)}==null?this.getPageSize(ctx, "query${typeClass}ListOf${NAMING.toCamelCase(query.name)}"):${NAMING.asELVariable(query.queryActionInfo.limitExp)});
 			<#else>
 		params.add(${NAMING.asELVariable(query.queryActionInfo.limitExp)});
 			</#if>
-		</#if>		
+		<#elseif query.pagination && !(query.queryActionInfo.limitExp?has_content)>
+		params.add(limit);
+		<#elseif query.pagination && query.queryActionInfo.limitExp?has_content>
+		if (${NAMING.asELVariable(query.queryActionInfo.limitExp)}==null){
+			params.add(limit);
+		}else{
+			params.add(Math.min(limit, ${NAMING.asELVariable(query.queryActionInfo.limitExp)}));
+		}
+		// 两个都有
+		</#if>
 		return sql;
 	<#else>
 		String sql = "select D.* from ${query.objectName}_data D ";

@@ -145,7 +145,7 @@ public class V3FindScript extends PieceOfScript {
 						.where(MODEL.inkDeed().holder().eq("${user id}"),
 								MODEL.inkDeed().auction().eq("${artwork auction id}"),
 								MODEL.inkDeed().status().code().in(InkDeedStatus.AVALIABLE, InkDeedStatus.BOOKED, InkDeedStatus.BE_DRAWN))
-				.query(MODEL.inkDeed()).which("user can put to sale").with_string("artwork auction id").with_string("user id").with_integer("number")
+				.query(MODEL.inkDeed()).which("user can put to sale").pagination().with_string("artwork auction id").with_string("user id").with_integer("number")
 					.comments("找出当前用户可上架销售的墨契")
 					.do_it_as()
 						.where(MODEL.inkDeed().holder().eq("${user id}"),
