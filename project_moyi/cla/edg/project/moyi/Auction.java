@@ -4,6 +4,20 @@ import cla.edg.eventscript.EventScript;
 
 public class Auction extends BaseMoyiEventScript{
 	private static final EventScript SCRIPT = $("artwork auction")
+			.on_event("submit put on sale application").with("input form data")
+			.comments("V3的上架事件处理")
+			.rule_comments("主要特性是保证金和上拍分离. 因此校验规则需要更改")
+			.rule_comments("同时还支持二次上架.")
+			.when("lack of deposit")
+			.when("new creation")
+				.event_ripple("create auction from application")
+			.when("quick reshelf")
+				.event_ripple("create auction from application")
+				.event_ripple("transfer ink deed to new auction")
+				.event_ripple("transfer appointment to new auction")
+				.event_ripple("transfer affiliate recommendation to new auction")
+				.event_ripple("mark auction reshelfed")
+			
 			/**
 			 * 流拍
 			 */
@@ -15,14 +29,15 @@ public class Auction extends BaseMoyiEventScript{
 					.rule_comments("如果没有墨契售出,不需要处理墨契")
 					.rule_comments("艺术品和艺术品证书不需要变化, 保持不变")
 					.rule_comments("若无墨契需要善后, 拍卖以 '流拍' 告终,否则可以直接 处理完毕")
-				.when("has ink deed sold").comments("有墨契需要善后")
+//				.when("has ink deed sold").comments("有墨契需要善后")
+					.event_ripple("return ink deed").to("ink deed v3").comments("退回墨契")
 					.event_ripple("refund losed bidder deposit").comments("退还未中标竞拍者的保证金")
 					.event_ripple("auction bought in").comments("拍卖以 '流拍' 告终")
-				.when_others().comments("无需处理墨契")
-					.event_ripple("refund losed bidder deposit").comments("退还未中标竞拍者的保证金")
-					.event_ripple("handle ink deed when bought in without ink deed sold").comments("标记所有墨契已经处理完毕")
-					.event_ripple("release seller deposit frozen by inke deed").comments("释放发行墨契时冻结的保证金")
-					.event_ripple("auction closed").comments("拍卖全部处理完毕")
+//				.when_others().comments("无需处理墨契")
+//					.event_ripple("refund losed bidder deposit").comments("退还未中标竞拍者的保证金")
+//					.event_ripple("handle ink deed when bought in without ink deed sold").comments("标记所有墨契已经处理完毕")
+//					.event_ripple("release seller deposit frozen by inke deed").comments("释放发行墨契时冻结的保证金")
+//					.event_ripple("auction closed").comments("拍卖全部处理完毕")
 			// 成交
 			.on_event("closed as deal").with("artwork auction")
 				.comments("竞拍结束,有人出价后的处理.")
@@ -139,6 +154,10 @@ public class Auction extends BaseMoyiEventScript{
 					.event_ripple("return ink deed to applied user").comments("将墨契按发行价退回给持有者")
 					.event_ripple("auction closed").comments("拍卖全部处理完毕")
 					
+					
+					
+					
+			
 			/**内部事件*/
 			.internal_only_bydefault()
 			.on_event("release seller deposit frozen by inke deed").comments("释放发行墨契时冻结的保证金")
@@ -189,10 +208,19 @@ public class Auction extends BaseMoyiEventScript{
 			.on_event("platform earn buyer penalty").comments("平台收入罚没的保证金")
 			.on_event("seller got buyer penalty").comments("卖家收入买家的保证金")
 			.on_event("return ink deed to applied user").comments("将墨契按发行价退回给持有者")
-			.on_event("handle ink deed when bought in without ink deed sold").comments("流拍但是没有别人持有墨契时,标记所有墨契已经处理完毕")
+//			.on_event("handle ink deed when bought in without ink deed sold").comments("流拍但是没有别人持有墨契时,标记所有墨契已经处理完毕")
 //			.on_event("release shop deposit when receiption confirmed").comments("确认收货后, 退还卖家的店铺保证金")
 			.on_event("reward for first deal").comments("对首单成交者发放奖励")
 			.on_event("reward for refferral").comments("对店铺推荐者发放奖励")
+			
+			.on_event("create auction from application").comments("根据表单内容创建拍卖")
+			.on_event("transfer ink deed to new auction").comments("把相同作品的未成交的拍卖的墨契转移到新拍卖中去")
+			.on_event("transfer appointment to new auction").comments("把相同作品的未成交的拍卖的'开始预约'转移到新拍卖中去")
+			.on_event("transfer affiliate recommendation to new auction").comments("把相同作品的未成交的拍卖的'推荐'转移到新拍卖中去")
+			.on_event("mark auction reshelfed").comments("标记拍卖已经被重新上架")
+			
+			
+			
 			;
 	
 
