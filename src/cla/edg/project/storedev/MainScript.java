@@ -16,7 +16,7 @@ public class MainScript extends BasePageFlowDescriptionScript {
 				.login_from_wxapp_by_wechat_work()
 				// .login_from_wxapp_by_openid()
 				.login_by_mobile_with_verify_code()
-				
+
 			.standard_homepage("植物医生")
 //			.standard_me("植物医生")
 			.request("view dashboard").with_string("filter")
@@ -25,8 +25,9 @@ public class MainScript extends BasePageFlowDescriptionScript {
 			.import_from(new S0_Homepage())
 			.import_from(new S1_Query())
 			.import_from(new S2_RecommendationForm())
+			.import_from(new S3_RecommendedStoreDetailPage())
 			;
-	
+
 
 	@Override
 	public PageFlowScript getScript() {
