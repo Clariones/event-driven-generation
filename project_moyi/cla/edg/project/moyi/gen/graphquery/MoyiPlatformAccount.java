@@ -49,7 +49,7 @@ public class MoyiPlatformAccount extends BaseModelBean{
 	public NumberAttribute cashBalance(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
-		member.setName("cashBalance");
+		member.setName("cash_balance");
 		useMember(member);
 		return member;
 	}
@@ -57,7 +57,7 @@ public class MoyiPlatformAccount extends BaseModelBean{
 	public NumberAttribute ibBalance(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
-		member.setName("ibBalance");
+		member.setName("ib_balance");
 		useMember(member);
 		return member;
 	}
@@ -65,7 +65,7 @@ public class MoyiPlatformAccount extends BaseModelBean{
 	public NumberAttribute estimatedBankServiceFee(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
-		member.setName("estimatedBankServiceFee");
+		member.setName("estimated_bank_service_fee");
 		useMember(member);
 		return member;
 	}
@@ -73,7 +73,7 @@ public class MoyiPlatformAccount extends BaseModelBean{
 	public DateTimeAttribute lastUpdateTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_update");
-		member.setName("lastUpdateTime");
+		member.setName("last_update_time");
 		useMember(member);
 		return member;
 	}

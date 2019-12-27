@@ -145,7 +145,7 @@ public class ArtworkAuctionOrder extends BaseModelBean{
 	public StringAttribute sellerHashcode(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("sellerHashcode");
+		member.setName("seller_hashcode");
 		useMember(member);
 		return member;
 	}
@@ -153,7 +153,7 @@ public class ArtworkAuctionOrder extends BaseModelBean{
 	public StringAttribute buyerHashcode(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("buyerHashcode");
+		member.setName("buyer_hashcode");
 		useMember(member);
 		return member;
 	}
@@ -161,7 +161,7 @@ public class ArtworkAuctionOrder extends BaseModelBean{
 	public StringAttribute refereeHashcode(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("refereeHashcode");
+		member.setName("referee_hashcode");
 		useMember(member);
 		return member;
 	}
@@ -169,7 +169,7 @@ public class ArtworkAuctionOrder extends BaseModelBean{
 	public StringAttribute receiverName(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("receiverName");
+		member.setName("receiver_name");
 		useMember(member);
 		return member;
 	}
@@ -177,7 +177,7 @@ public class ArtworkAuctionOrder extends BaseModelBean{
 	public StringAttribute receiverMobile(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_china_mobile_phone");
-		member.setName("receiverMobile");
+		member.setName("receiver_mobile");
 		useMember(member);
 		return member;
 	}
@@ -185,7 +185,7 @@ public class ArtworkAuctionOrder extends BaseModelBean{
 	public StringAttribute receiverAddressDetail(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("receiverAddressDetail");
+		member.setName("receiver_address_detail");
 		useMember(member);
 		return member;
 	}
@@ -193,7 +193,7 @@ public class ArtworkAuctionOrder extends BaseModelBean{
 	public NumberAttribute shippingCost(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
-		member.setName("shippingCost");
+		member.setName("shipping_cost");
 		useMember(member);
 		return member;
 	}
@@ -201,7 +201,7 @@ public class ArtworkAuctionOrder extends BaseModelBean{
 	public StringAttribute expressCompany(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("expressCompany");
+		member.setName("express_company");
 		useMember(member);
 		return member;
 	}
@@ -209,7 +209,7 @@ public class ArtworkAuctionOrder extends BaseModelBean{
 	public StringAttribute expressTrackingNumber(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("expressTrackingNumber");
+		member.setName("express_tracking_number");
 		useMember(member);
 		return member;
 	}
@@ -217,7 +217,7 @@ public class ArtworkAuctionOrder extends BaseModelBean{
 	public DateTimeAttribute dealTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time");
-		member.setName("dealTime");
+		member.setName("deal_time");
 		useMember(member);
 		return member;
 	}
@@ -225,7 +225,7 @@ public class ArtworkAuctionOrder extends BaseModelBean{
 	public DateTimeAttribute paidTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time");
-		member.setName("paidTime");
+		member.setName("paid_time");
 		useMember(member);
 		return member;
 	}
@@ -233,7 +233,7 @@ public class ArtworkAuctionOrder extends BaseModelBean{
 	public DateTimeAttribute deliverTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time");
-		member.setName("deliverTime");
+		member.setName("deliver_time");
 		useMember(member);
 		return member;
 	}
@@ -241,7 +241,7 @@ public class ArtworkAuctionOrder extends BaseModelBean{
 	public DateTimeAttribute confirmTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time");
-		member.setName("confirmTime");
+		member.setName("confirm_time");
 		useMember(member);
 		return member;
 	}
@@ -249,7 +249,7 @@ public class ArtworkAuctionOrder extends BaseModelBean{
 	public DateTimeAttribute cancelTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time");
-		member.setName("cancelTime");
+		member.setName("cancel_time");
 		useMember(member);
 		return member;
 	}
@@ -257,7 +257,7 @@ public class ArtworkAuctionOrder extends BaseModelBean{
 	public BooleanAttribute autoTimeoutChecking(){
 		BooleanAttribute member = new BooleanAttribute();
 		member.setModelTypeName("bool");
-		member.setName("autoTimeoutChecking");
+		member.setName("auto_timeout_checking");
 		useMember(member);
 		return member;
 	}
@@ -265,7 +265,7 @@ public class ArtworkAuctionOrder extends BaseModelBean{
 	public DateTimeAttribute createTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_create");
-		member.setName("createTime");
+		member.setName("create_time");
 		useMember(member);
 		return member;
 	}
@@ -273,7 +273,7 @@ public class ArtworkAuctionOrder extends BaseModelBean{
 	public DateTimeAttribute lastUpdateTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_update");
-		member.setName("lastUpdateTime");
+		member.setName("last_update_time");
 		useMember(member);
 		return member;
 	}

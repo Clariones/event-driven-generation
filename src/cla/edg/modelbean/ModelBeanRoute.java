@@ -1,13 +1,19 @@
 package cla.edg.modelbean;
 
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import cla.edg.Utils;
 import cla.edg.routemap.Edge;
 import cla.edg.routemap.MeetingPoint;
 import cla.edg.routemap.Node;
 import cla.edg.routemap.RouteMap;
 
 public class ModelBeanRoute extends RouteMap<BaseModelBean, BeanRelation>{
+	protected boolean isBlank(String str) {
+		return Utils.isBlank(str);
+	}
+	
 	protected String targetModelAlias;
 	public String getTargetModelAlias() {
 		return targetModelAlias;
@@ -24,24 +30,25 @@ public class ModelBeanRoute extends RouteMap<BaseModelBean, BeanRelation>{
 	}
 
 	private void assignAliasToPoint(MeetingPoint<BaseModelBean, BeanRelation> point, AtomicInteger cnt) {
-//		if (point.getAlias() != null) {
-//			return;
-//		}
-		String alias = String.format("%sT%d", point.getAlias()==null?"":point.getAlias(),cnt.incrementAndGet());
+		if (!isBlank(point.getAlias())) {
+			return;
+		}
+		String alias = String.format("%sT%d", isBlank(point.getAlias())?"":point.getAlias(),cnt.incrementAndGet());
 		point.updatePointAlias(alias);
 		for(Edge<BaseModelBean, BeanRelation> edge: point.getEdgesFromMe()) {
 			assignAliasToPoint(edge.getToNode(), cnt);
 		}
 	}
 
-	public String getCountSelectClause(String targetModelType) {
-		return getSelectClause(targetModelType, true);
+	
+	public String getCountOrSumSelectClause(String targetModelType, NumberAttribute sumAttribute) {
+		return getSelectClause(targetModelType, sumAttribute, true);
 	}
 	
 	public String getSelectClause(String targetModelType) {
-		return getSelectClause(targetModelType, false);
+		return getSelectClause(targetModelType, null, false);
 	}
-	protected String getSelectClause(String targetModelType, boolean isCount) {
+	protected String getSelectClause(String targetModelType, NumberAttribute sumAttribute, boolean isCountOrSum) {
 		Node<BaseModelBean, BeanRelation> node = this.getNodeByKey(targetModelType);
 		if (node == null) {
 			exception("目标模型"+targetModelType+"没有在bean route中");
@@ -55,8 +62,16 @@ public class ModelBeanRoute extends RouteMap<BaseModelBean, BeanRelation>{
 		
 		startPoint = this.getStartNode().getMeetingPointList().get(0);
 		StringBuilder sb = new StringBuilder();
-		if (isCount) {
-			sb.append("SELECT COUNT(DISTINCT ").append(targetAlias).append(".*) from ");
+		if (isCountOrSum) {
+			if (sumAttribute != null) {
+				MeetingPoint<BaseModelBean, BeanRelation> mp = sumAttribute.getContainerBean().getLastMeetingPoint();
+				if (mp == null) {
+					mp = sumAttribute.getContainerBean().getBeanRoute().getCurrentMeetingPoint();
+				}
+				sb.append("SELECT SUM( ").append(mp.getAlias()).append(".").append(sumAttribute.getName()).append(") from ");
+			}else {
+				sb.append("SELECT COUNT(DISTINCT ").append(targetAlias).append(".id) from ");
+			}
 		}else {
 			sb.append("SELECT DISTINCT ").append(targetAlias).append(".* from ");
 		}
@@ -89,7 +104,8 @@ public class ModelBeanRoute extends RouteMap<BaseModelBean, BeanRelation>{
 			appendJoinClause(sb, toNode, nextEdge);
 		}
 	}
-
+	
+	
 	
 
 	

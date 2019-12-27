@@ -59,7 +59,7 @@ public class InkDeedHoldingStatistic extends BaseModelBean{
 	public NumberAttribute holdingQuantity(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
-		member.setName("holdingQuantity");
+		member.setName("holding_quantity");
 		useMember(member);
 		return member;
 	}
@@ -67,7 +67,7 @@ public class InkDeedHoldingStatistic extends BaseModelBean{
 	public NumberAttribute sellingQuantity(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
-		member.setName("sellingQuantity");
+		member.setName("selling_quantity");
 		useMember(member);
 		return member;
 	}
@@ -75,7 +75,7 @@ public class InkDeedHoldingStatistic extends BaseModelBean{
 	public NumberAttribute totalQuantity(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
-		member.setName("totalQuantity");
+		member.setName("total_quantity");
 		useMember(member);
 		return member;
 	}
@@ -83,7 +83,7 @@ public class InkDeedHoldingStatistic extends BaseModelBean{
 	public DateTimeAttribute createTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_create");
-		member.setName("createTime");
+		member.setName("create_time");
 		useMember(member);
 		return member;
 	}
@@ -91,7 +91,7 @@ public class InkDeedHoldingStatistic extends BaseModelBean{
 	public DateTimeAttribute lastUpdateTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_update");
-		member.setName("lastUpdateTime");
+		member.setName("last_update_time");
 		useMember(member);
 		return member;
 	}

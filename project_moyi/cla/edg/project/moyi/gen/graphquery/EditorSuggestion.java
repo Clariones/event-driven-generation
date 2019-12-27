@@ -59,7 +59,7 @@ public class EditorSuggestion extends BaseModelBean{
 	public StringAttribute editorTitle(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("editorTitle");
+		member.setName("editor_title");
 		useMember(member);
 		return member;
 	}
@@ -67,7 +67,7 @@ public class EditorSuggestion extends BaseModelBean{
 	public StringAttribute editorCoverImage1(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_image");
-		member.setName("editorCoverImage1");
+		member.setName("editor_cover_image1");
 		useMember(member);
 		return member;
 	}
@@ -75,7 +75,7 @@ public class EditorSuggestion extends BaseModelBean{
 	public StringAttribute editorCoverImage2(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_image");
-		member.setName("editorCoverImage2");
+		member.setName("editor_cover_image2");
 		useMember(member);
 		return member;
 	}
@@ -83,7 +83,7 @@ public class EditorSuggestion extends BaseModelBean{
 	public StringAttribute editorCoverImage3(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_image");
-		member.setName("editorCoverImage3");
+		member.setName("editor_cover_image3");
 		useMember(member);
 		return member;
 	}
@@ -91,7 +91,7 @@ public class EditorSuggestion extends BaseModelBean{
 	public DateTimeAttribute lastUpdateTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_update");
-		member.setName("lastUpdateTime");
+		member.setName("last_update_time");
 		useMember(member);
 		return member;
 	}

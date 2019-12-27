@@ -49,7 +49,7 @@ public class ArtworkDailyInkValue extends BaseModelBean{
 	public StringAttribute artworkIdentification(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("artworkIdentification");
+		member.setName("artwork_identification");
 		useMember(member);
 		return member;
 	}
@@ -57,7 +57,7 @@ public class ArtworkDailyInkValue extends BaseModelBean{
 	public NumberAttribute artworkInkValue(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("double");
-		member.setName("artworkInkValue");
+		member.setName("artwork_ink_value");
 		useMember(member);
 		return member;
 	}

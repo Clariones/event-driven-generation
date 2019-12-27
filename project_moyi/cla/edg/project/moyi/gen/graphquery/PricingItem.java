@@ -47,7 +47,7 @@ public class PricingItem extends BaseModelBean{
 	public StringAttribute itemCode(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("itemCode");
+		member.setName("item_code");
 		useMember(member);
 		return member;
 	}
@@ -71,7 +71,7 @@ public class PricingItem extends BaseModelBean{
 	public StringAttribute currencyType(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("currencyType");
+		member.setName("currency_type");
 		useMember(member);
 		return member;
 	}
@@ -79,7 +79,7 @@ public class PricingItem extends BaseModelBean{
 	public DateTimeAttribute createTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_create");
-		member.setName("createTime");
+		member.setName("create_time");
 		useMember(member);
 		return member;
 	}

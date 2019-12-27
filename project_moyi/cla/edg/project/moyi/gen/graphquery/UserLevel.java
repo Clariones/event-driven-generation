@@ -49,7 +49,7 @@ public class UserLevel extends BaseModelBean{
 	public StringAttribute levelName(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("levelName");
+		member.setName("level_name");
 		useMember(member);
 		return member;
 	}
@@ -57,7 +57,7 @@ public class UserLevel extends BaseModelBean{
 	public StringAttribute levelCode(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("levelCode");
+		member.setName("level_code");
 		useMember(member);
 		return member;
 	}
@@ -65,7 +65,7 @@ public class UserLevel extends BaseModelBean{
 	public NumberAttribute levelQualifyValue(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
-		member.setName("levelQualifyValue");
+		member.setName("level_qualify_value");
 		useMember(member);
 		return member;
 	}
@@ -73,7 +73,7 @@ public class UserLevel extends BaseModelBean{
 	public DateTimeAttribute lastUpdateTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_update");
-		member.setName("lastUpdateTime");
+		member.setName("last_update_time");
 		useMember(member);
 		return member;
 	}

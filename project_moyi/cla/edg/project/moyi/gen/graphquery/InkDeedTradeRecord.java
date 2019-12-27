@@ -23,11 +23,11 @@ public class InkDeedTradeRecord extends BaseModelBean{
 		return member;
 	}
 
-	public MoyiUser holder() {
+	public MoyiUser seller() {
 		MoyiUser member = new MoyiUser();
 		member.setModelTypeName("moyi_user");
-		member.setName("holder");
-		member.setMemberName("holder");
+		member.setName("seller");
+		member.setMemberName("seller");
 		member.setReferDirection(true);
 		append(member);
 		return member;
@@ -64,10 +64,10 @@ public class InkDeedTradeRecord extends BaseModelBean{
 		return member;
 	}
 
-	public NumberAttribute amount(){
+	public NumberAttribute price(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
-		member.setName("amount");
+		member.setName("price");
 		useMember(member);
 		return member;
 	}
@@ -80,10 +80,18 @@ public class InkDeedTradeRecord extends BaseModelBean{
 		return member;
 	}
 
+	public NumberAttribute soldTimes(){
+		NumberAttribute member = new NumberAttribute();
+		member.setModelTypeName("int");
+		member.setName("sold_times");
+		useMember(member);
+		return member;
+	}
+
 	public DateTimeAttribute createTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_create");
-		member.setName("createTime");
+		member.setName("create_time");
 		useMember(member);
 		return member;
 	}
@@ -91,7 +99,7 @@ public class InkDeedTradeRecord extends BaseModelBean{
 	public StringAttribute sourceEvent(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("sourceEvent");
+		member.setName("source_event");
 		useMember(member);
 		return member;
 	}

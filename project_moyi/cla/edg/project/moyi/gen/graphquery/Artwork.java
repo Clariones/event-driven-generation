@@ -419,7 +419,7 @@ public class Artwork extends BaseModelBean{
 	public StringAttribute artworkName(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("artworkName");
+		member.setName("artwork_name");
 		useMember(member);
 		return member;
 	}
@@ -427,7 +427,7 @@ public class Artwork extends BaseModelBean{
 	public StringAttribute artworkResume(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_longtext");
-		member.setName("artworkResume");
+		member.setName("artwork_resume");
 		useMember(member);
 		return member;
 	}
@@ -435,7 +435,7 @@ public class Artwork extends BaseModelBean{
 	public BooleanAttribute authorStatement(){
 		BooleanAttribute member = new BooleanAttribute();
 		member.setModelTypeName("bool");
-		member.setName("authorStatement");
+		member.setName("author_statement");
 		useMember(member);
 		return member;
 	}
@@ -443,7 +443,7 @@ public class Artwork extends BaseModelBean{
 	public BooleanAttribute holderStatement(){
 		BooleanAttribute member = new BooleanAttribute();
 		member.setModelTypeName("bool");
-		member.setName("holderStatement");
+		member.setName("holder_statement");
 		useMember(member);
 		return member;
 	}
@@ -451,7 +451,7 @@ public class Artwork extends BaseModelBean{
 	public DateTimeAttribute postTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_create");
-		member.setName("postTime");
+		member.setName("post_time");
 		useMember(member);
 		return member;
 	}
@@ -459,7 +459,7 @@ public class Artwork extends BaseModelBean{
 	public StringAttribute coverImage(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_image");
-		member.setName("coverImage");
+		member.setName("cover_image");
 		useMember(member);
 		return member;
 	}
@@ -467,7 +467,7 @@ public class Artwork extends BaseModelBean{
 	public NumberAttribute coverImageWidth(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
-		member.setName("coverImageWidth");
+		member.setName("cover_image_width");
 		useMember(member);
 		return member;
 	}
@@ -475,7 +475,7 @@ public class Artwork extends BaseModelBean{
 	public NumberAttribute coverImageHeight(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
-		member.setName("coverImageHeight");
+		member.setName("cover_image_height");
 		useMember(member);
 		return member;
 	}
@@ -483,7 +483,7 @@ public class Artwork extends BaseModelBean{
 	public StringAttribute artworkDimensionDescription(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("artworkDimensionDescription");
+		member.setName("artwork_dimension_description");
 		useMember(member);
 		return member;
 	}
@@ -491,7 +491,7 @@ public class Artwork extends BaseModelBean{
 	public NumberAttribute artworkInkValue(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("double");
-		member.setName("artworkInkValue");
+		member.setName("artwork_ink_value");
 		useMember(member);
 		return member;
 	}
@@ -499,7 +499,7 @@ public class Artwork extends BaseModelBean{
 	public NumberAttribute artworkReviewCount(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
-		member.setName("artworkReviewCount");
+		member.setName("artwork_review_count");
 		useMember(member);
 		return member;
 	}
@@ -507,7 +507,7 @@ public class Artwork extends BaseModelBean{
 	public NumberAttribute artworkLikeCount(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
-		member.setName("artworkLikeCount");
+		member.setName("artwork_like_count");
 		useMember(member);
 		return member;
 	}
@@ -515,7 +515,7 @@ public class Artwork extends BaseModelBean{
 	public NumberAttribute artworkPageViewCount(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
-		member.setName("artworkPageViewCount");
+		member.setName("artwork_page_view_count");
 		useMember(member);
 		return member;
 	}
@@ -523,7 +523,7 @@ public class Artwork extends BaseModelBean{
 	public NumberAttribute artworkWatchCount(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
-		member.setName("artworkWatchCount");
+		member.setName("artwork_watch_count");
 		useMember(member);
 		return member;
 	}
@@ -531,7 +531,7 @@ public class Artwork extends BaseModelBean{
 	public DateTimeAttribute lastUpdateTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_update");
-		member.setName("lastUpdateTime");
+		member.setName("last_update_time");
 		useMember(member);
 		return member;
 	}

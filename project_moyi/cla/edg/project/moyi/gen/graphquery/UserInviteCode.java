@@ -39,7 +39,7 @@ public class UserInviteCode extends BaseModelBean{
 	public StringAttribute inviteCode(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("inviteCode");
+		member.setName("invite_code");
 		useMember(member);
 		return member;
 	}

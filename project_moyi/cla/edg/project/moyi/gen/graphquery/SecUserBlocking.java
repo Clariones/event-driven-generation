@@ -47,7 +47,7 @@ public class SecUserBlocking extends BaseModelBean{
 	public DateTimeAttribute blockTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_create");
-		member.setName("blockTime");
+		member.setName("block_time");
 		useMember(member);
 		return member;
 	}

@@ -77,7 +77,7 @@ public class DeliverArticle extends BaseModelBean{
 	public StringAttribute sourceInfo(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("sourceInfo");
+		member.setName("source_info");
 		useMember(member);
 		return member;
 	}
@@ -85,7 +85,7 @@ public class DeliverArticle extends BaseModelBean{
 	public StringAttribute imageUrl(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_image");
-		member.setName("imageUrl");
+		member.setName("image_url");
 		useMember(member);
 		return member;
 	}
@@ -93,7 +93,7 @@ public class DeliverArticle extends BaseModelBean{
 	public StringAttribute imageText(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("imageText");
+		member.setName("image_text");
 		useMember(member);
 		return member;
 	}

@@ -69,7 +69,7 @@ public class ArticleBonus extends BaseModelBean{
 	public NumberAttribute bonusValue(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("double");
-		member.setName("bonusValue");
+		member.setName("bonus_value");
 		useMember(member);
 		return member;
 	}
@@ -77,7 +77,7 @@ public class ArticleBonus extends BaseModelBean{
 	public StringAttribute bonusComment(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("bonusComment");
+		member.setName("bonus_comment");
 		useMember(member);
 		return member;
 	}
@@ -85,7 +85,7 @@ public class ArticleBonus extends BaseModelBean{
 	public DateTimeAttribute bonusDatetime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_create");
-		member.setName("bonusDatetime");
+		member.setName("bonus_datetime");
 		useMember(member);
 		return member;
 	}

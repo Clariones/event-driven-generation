@@ -49,7 +49,7 @@ public class SectionFans extends BaseModelBean{
 	public DateTimeAttribute watchTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_create");
-		member.setName("watchTime");
+		member.setName("watch_time");
 		useMember(member);
 		return member;
 	}
@@ -57,7 +57,7 @@ public class SectionFans extends BaseModelBean{
 	public NumberAttribute sectionDisplayOrder(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
-		member.setName("sectionDisplayOrder");
+		member.setName("section_display_order");
 		useMember(member);
 		return member;
 	}

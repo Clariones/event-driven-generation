@@ -12,6 +12,7 @@ import java.util.Map;
 
 import ${base_package}.${context_name};
 import ${base_package}.SmartList;
+import ${base_package}.${NAMING.toCamelCase(project_name)}BaseUtils;
 import ${base_package}.${custom_context_name};
 import ${parent_class_package}.${parent_class_name};
 import ${package}pageview.*;
@@ -38,6 +39,10 @@ public abstract class ${class_name}DBQueryHelper{
 	public static final Map<String, Object> EO = new HashMap<>();
 	public int getPageSize(${custom_context_name} ctx, String queryName) {
 		return 20;
+	}
+	@SuppressWarnings("serial")
+	public <T> List<T> asList(T object) {
+		return new ArrayList<T>() {{add(object);}};
 	}
 <#list script.queryInfoList as query >
 	/**
@@ -68,7 +73,8 @@ public abstract class ${class_name}DBQueryHelper{
 	<#else>
 		String sql = prepareSqlAndParamsForQuery${typeClass}ListOf${NAMING.toCamelCase(query.name)}(ctx, params<@T.getRequestProcessingMethodParameterNames query/>);
 	</#if>
-		SmartList<${typeClass}> list = ctx.getDAOGroup().get${typeClass}DAO().queryList(sql, params.toArray());
+		
+		SmartList<${typeClass}> list = executeQuery${typeClass}ListOf${NAMING.toCamelCase(query.name)}(ctx, sql, params);
 	<#if query.pagination>
 		list.setRowsPerPage(pageSize);
 	<#else>
@@ -89,7 +95,9 @@ public abstract class ${class_name}DBQueryHelper{
 		enhance${typeClass}ListOf${NAMING.toCamelCase(query.name)}(ctx, list, "query${typeClass}ListOf${NAMING.toCamelCase(query.name)}"<@T.getRequestProcessingMethodParameterNames query/>);
 		return list;
 	}
-	
+	protected SmartList<${typeClass}> executeQuery${typeClass}ListOf${NAMING.toCamelCase(query.name)}(${custom_context_name} ctx, String sql, List<Object> params) throws Exception {
+		return ctx.getDAOGroup().get${typeClass}DAO().queryList(sql, params.toArray());
+	}
 	/**
 	 * ${query.comments!}.
 	<#if query.ruleComments?has_content>
@@ -118,7 +126,22 @@ public abstract class ${class_name}DBQueryHelper{
 		if (lastRecord != null) {
 			fillPaginationParamsForQuery${typeClass}ListOf${NAMING.toCamelCase(query.name)}(ctx, lastRecord, limit, params<@T.getRequestProcessingMethodParameterNames query/>);
 		}
+		</#if>
+		<#if query.queryActionInfo.limitExp?has_content && !query.pagination>
+			<#if query.queryActionInfo.limitExpIsObject>
+		params.add(${NAMING.asELVariable(query.queryActionInfo.limitExp)}==null?this.getPageSize(ctx, "query${typeClass}ListOf${NAMING.toCamelCase(query.name)}"):${NAMING.asELVariable(query.queryActionInfo.limitExp)});
+			<#else>
+		params.add(${NAMING.asELVariable(query.queryActionInfo.limitExp)});
+			</#if>
+		<#elseif query.pagination && !(query.queryActionInfo.limitExp?has_content)>
 		params.add(limit);
+		<#elseif query.pagination && query.queryActionInfo.limitExp?has_content>
+		if (${NAMING.asELVariable(query.queryActionInfo.limitExp)}==null){
+			params.add(limit);
+		}else{
+			params.add(Math.min(limit, ${NAMING.asELVariable(query.queryActionInfo.limitExp)}));
+		}
+		// 两个都有
 		</#if>
 		return sql;
 	<#else>
@@ -128,6 +151,7 @@ public abstract class ${class_name}DBQueryHelper{
 			params.add(lastRecord.getId());
 			sql += " where D.id <= ? ";
 		}
+
 		params.add(limit);
 		return sql + " order by D.id desc limit ?";
 		<#else>
@@ -135,16 +159,46 @@ public abstract class ${class_name}DBQueryHelper{
 		</#if>
 	</#if>
 	}
-	<#if query.queryActionInfo?has_content>
+	<#if query.pagination && query.queryActionInfo?has_content>
 	${''}<@compress single_line=true>
 	protected void fillPaginationParamsForQuery${typeClass}ListOf${NAMING.toCamelCase(query.name)}(${custom_context_name} ctx, 
 	${typeClass} lastRecord, int limit, List<Object> params<@T.getRequestProcessingUrlMethodParameters query/>
 		) throws Exception {
 	</@>${''}
+		<#if query.queryActionInfo.notGeneratePaginationParams>
 		// 你要自己填好分页的参数, 不然jdbc的参数个数不对
+		<#else>
+		// 首先增强对象
+			<#list query.queryActionInfo.lastRecordEnhancePathList as enhanceInfo>
+				<#if enhanceInfo.methodType == 'enhance'>
+		List<${enhanceInfo.enhancedTypeName}> ${enhanceInfo.enhancedListVarName} = ${NAMING.toCamelCase(project_name)}BaseUtils.collectReferencedObjectWithType(ctx, ${enhanceInfo.standOnVarName}, ${enhanceInfo.enhancedTypeName}.class);
+		ctx.getDAOGroup().enhanceList(${enhanceInfo.enhancedListVarName}, ${enhanceInfo.enhancedTypeName}.class);
+				<#else>
+		List<${enhanceInfo.enhancedTypeName}> ${enhanceInfo.enhancedListVarName} = ctx.getDAOGroup().get${NAMING.toCamelCase(enhanceInfo.ownerType)}DAO().${enhanceInfo.methodName}(ctx,${enhanceInfo.standOnVarName}, EO);
+				</#if>
+			</#list>
+			<#list query.queryActionInfo.paginationParamsExp as param>
+		params.add(${param});
+			</#list>
+		</#if>
 	}
 	</#if>
 	protected void enhance${typeClass}ListOf${NAMING.toCamelCase(query.name)}(${custom_context_name} ctx, SmartList<${typeClass}> list, String queryName<@T.getRequestProcessingUrlMethodParameters query/>) throws Exception {
+	<#if query.queryActionInfo?has_content && query.queryActionInfo.listEnhancePathList?has_content>
+		if (list == null || list.isEmpty()) {
+			return;
+		}
+		<#list query.queryActionInfo.listEnhancePathList as enhanceInfo>
+			<#if enhanceInfo.methodType == 'enhance'>
+		List<${enhanceInfo.enhancedTypeName}> ${enhanceInfo.enhancedListVarName} = ${NAMING.toCamelCase(project_name)}BaseUtils.collectReferencedObjectWithType(ctx, ${enhanceInfo.standOnVarName}, ${enhanceInfo.enhancedTypeName}.class);
+		ctx.getDAOGroup().enhanceList(${enhanceInfo.enhancedListVarName}, ${enhanceInfo.enhancedTypeName}.class);
+			<#else>
+		List<${enhanceInfo.enhancedTypeName}> ${enhanceInfo.enhancedListVarName} = ctx.getDAOGroup().get${NAMING.toCamelCase(enhanceInfo.ownerType)}DAO().${enhanceInfo.methodName}(ctx,${enhanceInfo.standOnVarName}, EO);
+			</#if>
+		</#list>
+	<#else>
+		// 重载此函数, 根据查询的结果, 加载更多的相关数据
+	</#if>
 	}
   </#if>
 </#list>

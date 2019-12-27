@@ -42,7 +42,7 @@
 
 	protected String makeClientToken(${custom_context_name} ctx, String loginInfoCacheToken, ${login_target_class} loginTarget) {
 		String jwtTokenString = JWTUtil.getJwtToken(loginInfoCacheToken,
-				${NAMING.toCamelCase(project_name)}BaseUtils.getOssUploadFolderName(${login_target_class}.INTERNAL_TYPE, loginTarget.getId(), ctx.isProductEnvironment()),
+				${NAMING.toCamelCase(project_name)}BaseUtils.getOssUploadFolderName(${login_target_class}.INTERNAL_NAME, loginTarget.getId(), ctx.isProductEnvironment()),
 				ctx.isProductEnvironment()?"product":"test", ctx.now());
 		return jwtTokenString;
 	}

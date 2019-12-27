@@ -39,7 +39,7 @@ public class InkDeedEntryOrderStatistic extends BaseModelBean{
 	public NumberAttribute totalIssuedQuantity(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
-		member.setName("totalIssuedQuantity");
+		member.setName("total_issued_quantity");
 		useMember(member);
 		return member;
 	}
@@ -47,7 +47,7 @@ public class InkDeedEntryOrderStatistic extends BaseModelBean{
 	public NumberAttribute minimalPrice(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
-		member.setName("minimalPrice");
+		member.setName("minimal_price");
 		useMember(member);
 		return member;
 	}
@@ -55,7 +55,7 @@ public class InkDeedEntryOrderStatistic extends BaseModelBean{
 	public NumberAttribute maximumPrice(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
-		member.setName("maximumPrice");
+		member.setName("maximum_price");
 		useMember(member);
 		return member;
 	}

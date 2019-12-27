@@ -67,7 +67,7 @@ public class ShopOpeningRewardRule extends BaseModelBean{
 	public NumberAttribute numericValue(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
-		member.setName("numericValue");
+		member.setName("numeric_value");
 		useMember(member);
 		return member;
 	}

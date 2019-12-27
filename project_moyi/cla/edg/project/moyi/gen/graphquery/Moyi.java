@@ -954,6 +954,26 @@ public class Moyi extends BaseModelBean{
 		append(member);
 		return member;
 	}
+	
+	public TradeRelatedConfiguration tradeRelatedConfigurationList() {
+		TradeRelatedConfiguration member = new TradeRelatedConfiguration();
+		member.setModelTypeName("trade_related_configuration");
+		member.setName("moyi");
+		member.setMemberName("tradeRelatedConfigurationList");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+	
+	public AssetStatus assetStatusList() {
+		AssetStatus member = new AssetStatus();
+		member.setModelTypeName("asset_status");
+		member.setName("moyi");
+		member.setMemberName("assetStatusList");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
 
 	
 	// 普通属性

@@ -86,7 +86,7 @@ public class MoyiExperienceRule extends BaseModelBean{
 	public NumberAttribute pointValue(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
-		member.setName("pointValue");
+		member.setName("point_value");
 		useMember(member);
 		return member;
 	}
@@ -94,7 +94,7 @@ public class MoyiExperienceRule extends BaseModelBean{
 	public DateTimeAttribute lastUpdateTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_update");
-		member.setName("lastUpdateTime");
+		member.setName("last_update_time");
 		useMember(member);
 		return member;
 	}

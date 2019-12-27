@@ -47,7 +47,7 @@ public class FormAction extends BaseModelBean{
 	public StringAttribute localeKey(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("localeKey");
+		member.setName("locale_key");
 		useMember(member);
 		return member;
 	}
@@ -55,7 +55,7 @@ public class FormAction extends BaseModelBean{
 	public StringAttribute actionKey(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("actionKey");
+		member.setName("action_key");
 		useMember(member);
 		return member;
 	}

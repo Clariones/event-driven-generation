@@ -79,7 +79,7 @@ public class ModeratorPunishment extends BaseModelBean{
 	public DateTimeAttribute punishedDatetime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_create");
-		member.setName("punishedDatetime");
+		member.setName("punished_datetime");
 		useMember(member);
 		return member;
 	}
@@ -87,7 +87,7 @@ public class ModeratorPunishment extends BaseModelBean{
 	public StringAttribute punishedComment(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_longtext");
-		member.setName("punishedComment");
+		member.setName("punished_comment");
 		useMember(member);
 		return member;
 	}
@@ -95,7 +95,7 @@ public class ModeratorPunishment extends BaseModelBean{
 	public NumberAttribute punishedExperienceValue(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("double");
-		member.setName("punishedExperienceValue");
+		member.setName("punished_experience_value");
 		useMember(member);
 		return member;
 	}

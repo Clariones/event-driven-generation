@@ -67,7 +67,7 @@ public class MoyiExperienceRecord extends BaseModelBean{
 	public NumberAttribute appliedPoint(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
-		member.setName("appliedPoint");
+		member.setName("applied_point");
 		useMember(member);
 		return member;
 	}
@@ -75,7 +75,7 @@ public class MoyiExperienceRecord extends BaseModelBean{
 	public DateTimeAttribute createTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_create");
-		member.setName("createTime");
+		member.setName("create_time");
 		useMember(member);
 		return member;
 	}
@@ -83,7 +83,7 @@ public class MoyiExperienceRecord extends BaseModelBean{
 	public StringAttribute relatedObjectType(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("relatedObjectType");
+		member.setName("related_object_type");
 		useMember(member);
 		return member;
 	}
@@ -91,7 +91,7 @@ public class MoyiExperienceRecord extends BaseModelBean{
 	public StringAttribute relatedObjectId(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("relatedObjectId");
+		member.setName("related_object_id");
 		useMember(member);
 		return member;
 	}

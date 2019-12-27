@@ -39,7 +39,7 @@ public class LoginHistory extends BaseModelBean{
 	public DateTimeAttribute loginTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_create");
-		member.setName("loginTime");
+		member.setName("login_time");
 		useMember(member);
 		return member;
 	}
@@ -47,7 +47,7 @@ public class LoginHistory extends BaseModelBean{
 	public StringAttribute fromIp(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("fromIp");
+		member.setName("from_ip");
 		useMember(member);
 		return member;
 	}

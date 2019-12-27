@@ -23,6 +23,10 @@ public abstract class BaseModelBean {
 	protected ModelBeanRoute beanRoute;
 	protected MeetingPoint<BaseModelBean, BeanRelation> lastMeetingPoint = null;
 	
+	public String getInternalType() {
+		String fullClassName = getFullClassName();
+		return fullClassName.substring(fullClassName.lastIndexOf('.')+1);
+	}
 	public ModelBeanAdditionalData getAdditonalData() {
 		return additonalData;
 	}

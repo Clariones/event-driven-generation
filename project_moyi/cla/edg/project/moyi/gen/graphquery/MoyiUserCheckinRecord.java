@@ -49,7 +49,7 @@ public class MoyiUserCheckinRecord extends BaseModelBean{
 	public DateTimeAttribute checkinTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_create");
-		member.setName("checkinTime");
+		member.setName("checkin_time");
 		useMember(member);
 		return member;
 	}

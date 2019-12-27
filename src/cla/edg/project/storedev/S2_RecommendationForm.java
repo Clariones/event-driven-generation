@@ -57,6 +57,10 @@ public class S2_RecommendationForm extends PieceOfScript {
 						.request("save expense information form").comments("保存 新店申请-费用信息").with_form("expense_information")
 							.has_footprint().can_refresh().need_login()
 							.got_page("expense form")
+							
+						.request("abandon form").comments("放弃表单提交，清空").with_string("change request id")
+							.has_footprint().can_refresh().need_login()
+							.got_page("me")
 
 			;
 	}

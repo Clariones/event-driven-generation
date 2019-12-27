@@ -39,7 +39,7 @@ public class MoyiPlatformAccountRecord extends BaseModelBean{
 	public NumberAttribute cashAmount(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
-		member.setName("cashAmount");
+		member.setName("cash_amount");
 		useMember(member);
 		return member;
 	}
@@ -47,7 +47,7 @@ public class MoyiPlatformAccountRecord extends BaseModelBean{
 	public NumberAttribute ibAmount(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
-		member.setName("ibAmount");
+		member.setName("ib_amount");
 		useMember(member);
 		return member;
 	}
@@ -55,7 +55,7 @@ public class MoyiPlatformAccountRecord extends BaseModelBean{
 	public NumberAttribute cashBalance(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
-		member.setName("cashBalance");
+		member.setName("cash_balance");
 		useMember(member);
 		return member;
 	}
@@ -63,7 +63,7 @@ public class MoyiPlatformAccountRecord extends BaseModelBean{
 	public NumberAttribute ibBalance(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
-		member.setName("ibBalance");
+		member.setName("ib_balance");
 		useMember(member);
 		return member;
 	}
@@ -79,7 +79,7 @@ public class MoyiPlatformAccountRecord extends BaseModelBean{
 	public StringAttribute referToType(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("referToType");
+		member.setName("refer_to_type");
 		useMember(member);
 		return member;
 	}
@@ -87,7 +87,7 @@ public class MoyiPlatformAccountRecord extends BaseModelBean{
 	public StringAttribute referToId(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("referToId");
+		member.setName("refer_to_id");
 		useMember(member);
 		return member;
 	}
@@ -95,7 +95,7 @@ public class MoyiPlatformAccountRecord extends BaseModelBean{
 	public DateTimeAttribute createTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_create");
-		member.setName("createTime");
+		member.setName("create_time");
 		useMember(member);
 		return member;
 	}

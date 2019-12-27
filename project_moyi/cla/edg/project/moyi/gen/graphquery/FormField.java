@@ -47,7 +47,7 @@ public class FormField extends BaseModelBean{
 	public StringAttribute localeKey(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("localeKey");
+		member.setName("locale_key");
 		useMember(member);
 		return member;
 	}
@@ -55,7 +55,7 @@ public class FormField extends BaseModelBean{
 	public StringAttribute parameterName(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("parameterName");
+		member.setName("parameter_name");
 		useMember(member);
 		return member;
 	}
@@ -79,7 +79,7 @@ public class FormField extends BaseModelBean{
 	public StringAttribute defaultValue(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("defaultValue");
+		member.setName("default_value");
 		useMember(member);
 		return member;
 	}
@@ -95,7 +95,7 @@ public class FormField extends BaseModelBean{
 	public StringAttribute fieldGroup(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("fieldGroup");
+		member.setName("field_group");
 		useMember(member);
 		return member;
 	}
@@ -103,7 +103,7 @@ public class FormField extends BaseModelBean{
 	public StringAttribute minimumValue(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("minimumValue");
+		member.setName("minimum_value");
 		useMember(member);
 		return member;
 	}
@@ -111,7 +111,7 @@ public class FormField extends BaseModelBean{
 	public StringAttribute maximumValue(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("maximumValue");
+		member.setName("maximum_value");
 		useMember(member);
 		return member;
 	}
@@ -135,7 +135,7 @@ public class FormField extends BaseModelBean{
 	public BooleanAttribute customRendering(){
 		BooleanAttribute member = new BooleanAttribute();
 		member.setModelTypeName("bool");
-		member.setName("customRendering");
+		member.setName("custom_rendering");
 		useMember(member);
 		return member;
 	}
@@ -143,7 +143,7 @@ public class FormField extends BaseModelBean{
 	public StringAttribute candidateValues(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("candidateValues");
+		member.setName("candidate_values");
 		useMember(member);
 		return member;
 	}
@@ -151,7 +151,7 @@ public class FormField extends BaseModelBean{
 	public StringAttribute suggestValues(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("suggestValues");
+		member.setName("suggest_values");
 		useMember(member);
 		return member;
 	}

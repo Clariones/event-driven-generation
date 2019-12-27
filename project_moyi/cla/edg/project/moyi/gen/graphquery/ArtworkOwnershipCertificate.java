@@ -119,7 +119,7 @@ public class ArtworkOwnershipCertificate extends BaseModelBean{
 	public BooleanAttribute applyByAuthor(){
 		BooleanAttribute member = new BooleanAttribute();
 		member.setModelTypeName("bool");
-		member.setName("applyByAuthor");
+		member.setName("apply_by_author");
 		useMember(member);
 		return member;
 	}
@@ -127,7 +127,7 @@ public class ArtworkOwnershipCertificate extends BaseModelBean{
 	public StringAttribute ownershipCertificateImage(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_image");
-		member.setName("ownershipCertificateImage");
+		member.setName("ownership_certificate_image");
 		useMember(member);
 		return member;
 	}
@@ -135,7 +135,7 @@ public class ArtworkOwnershipCertificate extends BaseModelBean{
 	public StringAttribute artworkSize(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("artworkSize");
+		member.setName("artwork_size");
 		useMember(member);
 		return member;
 	}
@@ -143,7 +143,7 @@ public class ArtworkOwnershipCertificate extends BaseModelBean{
 	public StringAttribute artworkMaterial(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("artworkMaterial");
+		member.setName("artwork_material");
 		useMember(member);
 		return member;
 	}
@@ -151,7 +151,7 @@ public class ArtworkOwnershipCertificate extends BaseModelBean{
 	public StringAttribute artworkDecade(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("artworkDecade");
+		member.setName("artwork_decade");
 		useMember(member);
 		return member;
 	}
@@ -167,7 +167,7 @@ public class ArtworkOwnershipCertificate extends BaseModelBean{
 	public StringAttribute certificateImage(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_image");
-		member.setName("certificateImage");
+		member.setName("certificate_image");
 		useMember(member);
 		return member;
 	}
@@ -175,7 +175,7 @@ public class ArtworkOwnershipCertificate extends BaseModelBean{
 	public StringAttribute signatureImage(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_image");
-		member.setName("signatureImage");
+		member.setName("signature_image");
 		useMember(member);
 		return member;
 	}
@@ -183,7 +183,7 @@ public class ArtworkOwnershipCertificate extends BaseModelBean{
 	public StringAttribute authorName(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("authorName");
+		member.setName("author_name");
 		useMember(member);
 		return member;
 	}
@@ -191,7 +191,7 @@ public class ArtworkOwnershipCertificate extends BaseModelBean{
 	public StringAttribute ownershipProofImage(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_image");
-		member.setName("ownershipProofImage");
+		member.setName("ownership_proof_image");
 		useMember(member);
 		return member;
 	}
@@ -207,7 +207,7 @@ public class ArtworkOwnershipCertificate extends BaseModelBean{
 	public BooleanAttribute fakeACompensableThree(){
 		BooleanAttribute member = new BooleanAttribute();
 		member.setModelTypeName("bool");
-		member.setName("fakeACompensableThree");
+		member.setName("fake_a_compensable_three");
 		useMember(member);
 		return member;
 	}
@@ -215,7 +215,7 @@ public class ArtworkOwnershipCertificate extends BaseModelBean{
 	public DateTimeAttribute createTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_create");
-		member.setName("createTime");
+		member.setName("create_time");
 		useMember(member);
 		return member;
 	}
@@ -223,7 +223,7 @@ public class ArtworkOwnershipCertificate extends BaseModelBean{
 	public DateTimeAttribute inChainTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time");
-		member.setName("inChainTime");
+		member.setName("in_chain_time");
 		useMember(member);
 		return member;
 	}
@@ -231,7 +231,7 @@ public class ArtworkOwnershipCertificate extends BaseModelBean{
 	public StringAttribute bumoTransaction(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("bumoTransaction");
+		member.setName("bumo_transaction");
 		useMember(member);
 		return member;
 	}
@@ -239,7 +239,7 @@ public class ArtworkOwnershipCertificate extends BaseModelBean{
 	public DateTimeAttribute lastUpdateTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_update");
-		member.setName("lastUpdateTime");
+		member.setName("last_update_time");
 		useMember(member);
 		return member;
 	}

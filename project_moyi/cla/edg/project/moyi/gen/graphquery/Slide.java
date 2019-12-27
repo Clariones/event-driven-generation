@@ -85,7 +85,7 @@ public class Slide extends BaseModelBean{
 	public StringAttribute linkUrl(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("linkUrl");
+		member.setName("link_url");
 		useMember(member);
 		return member;
 	}

@@ -101,7 +101,7 @@ public class ShopOpeningRewardRecord extends BaseModelBean{
 	public DateTimeAttribute createTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_create");
-		member.setName("createTime");
+		member.setName("create_time");
 		useMember(member);
 		return member;
 	}
@@ -109,7 +109,7 @@ public class ShopOpeningRewardRecord extends BaseModelBean{
 	public DateTimeAttribute paidTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time");
-		member.setName("paidTime");
+		member.setName("paid_time");
 		useMember(member);
 		return member;
 	}
@@ -117,7 +117,7 @@ public class ShopOpeningRewardRecord extends BaseModelBean{
 	public DateTimeAttribute lastUpdateTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_update");
-		member.setName("lastUpdateTime");
+		member.setName("last_update_time");
 		useMember(member);
 		return member;
 	}

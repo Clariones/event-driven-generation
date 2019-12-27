@@ -59,7 +59,7 @@ public class SectionTopArticle extends BaseModelBean{
 	public DateTimeAttribute markedTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_create");
-		member.setName("markedTime");
+		member.setName("marked_time");
 		useMember(member);
 		return member;
 	}

@@ -49,7 +49,7 @@ public class ArticleLike extends BaseModelBean{
 	public DateTimeAttribute likeTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_create");
-		member.setName("likeTime");
+		member.setName("like_time");
 		useMember(member);
 		return member;
 	}

@@ -39,7 +39,7 @@ public class ArticleImage extends BaseModelBean{
 	public StringAttribute imageText(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_longtext");
-		member.setName("imageText");
+		member.setName("image_text");
 		useMember(member);
 		return member;
 	}

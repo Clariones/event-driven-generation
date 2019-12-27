@@ -267,7 +267,7 @@ public class Article extends BaseModelBean{
 	public DateTimeAttribute postDate(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time");
-		member.setName("postDate");
+		member.setName("post_date");
 		useMember(member);
 		return member;
 	}
@@ -275,7 +275,7 @@ public class Article extends BaseModelBean{
 	public StringAttribute sourceInfo(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("sourceInfo");
+		member.setName("source_info");
 		useMember(member);
 		return member;
 	}
@@ -283,7 +283,7 @@ public class Article extends BaseModelBean{
 	public NumberAttribute articleReward(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("double");
-		member.setName("articleReward");
+		member.setName("article_reward");
 		useMember(member);
 		return member;
 	}
@@ -291,7 +291,7 @@ public class Article extends BaseModelBean{
 	public NumberAttribute articleLikeCount(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
-		member.setName("articleLikeCount");
+		member.setName("article_like_count");
 		useMember(member);
 		return member;
 	}
@@ -299,7 +299,7 @@ public class Article extends BaseModelBean{
 	public NumberAttribute articleReviewCount(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
-		member.setName("articleReviewCount");
+		member.setName("article_review_count");
 		useMember(member);
 		return member;
 	}
@@ -307,7 +307,7 @@ public class Article extends BaseModelBean{
 	public NumberAttribute articlePageViewCount(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
-		member.setName("articlePageViewCount");
+		member.setName("article_page_view_count");
 		useMember(member);
 		return member;
 	}
@@ -315,7 +315,7 @@ public class Article extends BaseModelBean{
 	public BooleanAttribute isEliteArticle(){
 		BooleanAttribute member = new BooleanAttribute();
 		member.setModelTypeName("bool");
-		member.setName("isEliteArticle");
+		member.setName("is_elite_article");
 		useMember(member);
 		return member;
 	}
@@ -323,7 +323,7 @@ public class Article extends BaseModelBean{
 	public DateTimeAttribute lastUpdateTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_update");
-		member.setName("lastUpdateTime");
+		member.setName("last_update_time");
 		useMember(member);
 		return member;
 	}

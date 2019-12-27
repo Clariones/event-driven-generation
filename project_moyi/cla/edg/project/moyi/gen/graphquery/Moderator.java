@@ -59,7 +59,7 @@ public class Moderator extends BaseModelBean{
 	public DateTimeAttribute startDate(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time");
-		member.setName("startDate");
+		member.setName("start_date");
 		useMember(member);
 		return member;
 	}
@@ -67,7 +67,7 @@ public class Moderator extends BaseModelBean{
 	public DateTimeAttribute endDate(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time");
-		member.setName("endDate");
+		member.setName("end_date");
 		useMember(member);
 		return member;
 	}

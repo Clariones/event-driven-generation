@@ -49,7 +49,7 @@ public class RecommendArtist extends BaseModelBean{
 	public NumberAttribute displayOrder(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
-		member.setName("displayOrder");
+		member.setName("display_order");
 		useMember(member);
 		return member;
 	}

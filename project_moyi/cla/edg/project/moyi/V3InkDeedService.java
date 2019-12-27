@@ -5,12 +5,12 @@ import cla.edg.eventscript.EventScript;
 public class V3InkDeedService extends BaseMoyiEventScript {
 	private static final EventScript SCRIPT = $("ink deed v3")
 			// 发行墨契相关
-			.on_event("submit issuing request").with("input form data")
+			.on_event("submit issuing request").with("artwork auction id").with("usufructRatio").with("number")
 				.comments("提交发行墨契的请求")
 				.rule_comments("检查规则: 店铺保证金不少于1000元;起拍价大于20元;没超过30%...")
 				.rule_comments("DO:为用户生成一个 墨契发行 订单")
 				
-			.on_event("issue ink deed").with("artwork auction").with("number")
+			.on_event("issue ink deed").with("artwork auction").with("usufructRatio").with("number")
 				.comments("发行墨契")
 				.rule_comments("会检查是否可以发行墨契: 首先同提交发行请求时一样检查一遍,防止当初的一些条件发生了变化")
 				.rule_comments("DO:生成若干份墨契,并将之初始化")
@@ -52,18 +52,28 @@ public class V3InkDeedService extends BaseMoyiEventScript {
 				.comments("拍品二次上架,需要迁移墨契")
 				.rule_comments("二次上架需要处理7种相关数据,此处仅处理墨契状态回迁到'新发行',重新计算发行价的事情")
 				
+			// 外部事件
+			.on_event("return ink deed").with("artwork auction")
+				.comments("违约处理时,被调用,处理墨契交易原路返回的事情")
+				.rule_comments("所有交易作废")
+				.rule_comments("所有款项退回到买家余额账户")
+				.rule_comments("所有墨契回到发行人手中,状态变成 新发行 或者 待生效(DORMANT)")
+				.event_ripple("change status")
+				
 			// 墨契交易相关
-			.on_event("be drawn").with("user id").with("ink deed")
-				.comments("用户抽中了某个墨契")
+			.on_event("be drawn").with("user id").with("ink deed list").with("artwork auction")
+				.comments("用户抽取了某些墨契")
 				.rule_comments("该墨契状态应被设定为'被抽中'")
 				.event_ripple("change status")
-			.on_event("place order").with("main order")
+				.event_ripple("create ink deed order")
+			.on_event("start to pay order").with("main order")
 				.comments("用户下单购买墨契")
 				.rule_comments("该墨契状态应被设定为'已预订'")
 				.event_ripple("change status")
 			.on_event("order completed").with("main order")
 				.comments("用户完成了墨契订单")
 				.rule_comments("该墨契状态应被设定为'新发行'")	// 购买完成后,不是'可流通',需要重新上架
+				.rule_comments("持有人完成转变")
 			.on_event("order cancelled by user").with("main order")
 				.comments("墨契订单被取消")
 				.event_ripple("change status")
@@ -79,6 +89,8 @@ public class V3InkDeedService extends BaseMoyiEventScript {
 			.internal_only_bydefault()
 			.on_event("change status").with("ink deed status").with("ink deed list")
 				.comments("改变墨契状态事件")
+			.on_event("create ink deed order").with("user id").with("ink deed list").with("artwork auction")
+				.comments("创建墨契订单")
 			;
 
 	@Override

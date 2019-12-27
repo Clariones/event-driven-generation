@@ -59,7 +59,7 @@ public class UserInviteRegistrationInfo extends BaseModelBean{
 	public StringAttribute inviteCode(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("inviteCode");
+		member.setName("invite_code");
 		useMember(member);
 		return member;
 	}
@@ -67,7 +67,7 @@ public class UserInviteRegistrationInfo extends BaseModelBean{
 	public DateTimeAttribute registrationDate(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_create");
-		member.setName("registrationDate");
+		member.setName("registration_date");
 		useMember(member);
 		return member;
 	}

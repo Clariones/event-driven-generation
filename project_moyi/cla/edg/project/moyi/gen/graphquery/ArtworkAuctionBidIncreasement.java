@@ -39,7 +39,7 @@ public class ArtworkAuctionBidIncreasement extends BaseModelBean{
 	public NumberAttribute priceVolume(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
-		member.setName("priceVolume");
+		member.setName("price_volume");
 		useMember(member);
 		return member;
 	}

@@ -55,7 +55,7 @@ public class QuickLink extends BaseModelBean{
 	public StringAttribute imagePath(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_image");
-		member.setName("imagePath");
+		member.setName("image_path");
 		useMember(member);
 		return member;
 	}
@@ -63,7 +63,7 @@ public class QuickLink extends BaseModelBean{
 	public StringAttribute linkTarget(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("linkTarget");
+		member.setName("link_target");
 		useMember(member);
 		return member;
 	}
@@ -71,7 +71,7 @@ public class QuickLink extends BaseModelBean{
 	public DateTimeAttribute createTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_create");
-		member.setName("createTime");
+		member.setName("create_time");
 		useMember(member);
 		return member;
 	}

@@ -49,7 +49,7 @@ public class MoyiUserDailyInkValue extends BaseModelBean{
 	public StringAttribute userIdentification(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("userIdentification");
+		member.setName("user_identification");
 		useMember(member);
 		return member;
 	}
@@ -57,7 +57,7 @@ public class MoyiUserDailyInkValue extends BaseModelBean{
 	public NumberAttribute artworkInkValue(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("double");
-		member.setName("artworkInkValue");
+		member.setName("artwork_ink_value");
 		useMember(member);
 		return member;
 	}

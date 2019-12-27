@@ -97,7 +97,7 @@ public class Artist extends BaseModelBean{
 	public StringAttribute profileImage(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_image");
-		member.setName("profileImage");
+		member.setName("profile_image");
 		useMember(member);
 		return member;
 	}
@@ -105,7 +105,7 @@ public class Artist extends BaseModelBean{
 	public StringAttribute artistResume(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_longtext");
-		member.setName("artistResume");
+		member.setName("artist_resume");
 		useMember(member);
 		return member;
 	}

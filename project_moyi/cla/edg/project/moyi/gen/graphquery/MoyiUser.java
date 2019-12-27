@@ -825,6 +825,16 @@ public class MoyiUser extends BaseModelBean{
 		return member;
 	}
 	
+	public InkDeed inkDeedListAsBuyer() {
+		InkDeed member = new InkDeed();
+		member.setModelTypeName("ink_deed");
+		member.setName("buyer");
+		member.setMemberName("inkDeedListAsBuyer");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+	
 	public InkDeedIssueBill inkDeedIssueBillList() {
 		InkDeedIssueBill member = new InkDeedIssueBill();
 		member.setModelTypeName("ink_deed_issue_bill");
@@ -875,11 +885,11 @@ public class MoyiUser extends BaseModelBean{
 		return member;
 	}
 	
-	public InkDeedTradeRecord inkDeedTradeRecordListAsHolder() {
+	public InkDeedTradeRecord inkDeedTradeRecordListAsSeller() {
 		InkDeedTradeRecord member = new InkDeedTradeRecord();
 		member.setModelTypeName("ink_deed_trade_record");
-		member.setName("holder");
-		member.setMemberName("inkDeedTradeRecordListAsHolder");
+		member.setName("seller");
+		member.setMemberName("inkDeedTradeRecordListAsSeller");
 		member.setReferDirection(false);
 		append(member);
 		return member;
@@ -934,6 +944,46 @@ public class MoyiUser extends BaseModelBean{
 		append(member);
 		return member;
 	}
+	
+	public UserFrozenAccountRecord userFrozenAccountRecordListAsOwner() {
+		UserFrozenAccountRecord member = new UserFrozenAccountRecord();
+		member.setModelTypeName("user_frozen_account_record");
+		member.setName("owner");
+		member.setMemberName("userFrozenAccountRecordListAsOwner");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+	
+	public UserFrozenAccountRecord userFrozenAccountRecordListAsPayer() {
+		UserFrozenAccountRecord member = new UserFrozenAccountRecord();
+		member.setModelTypeName("user_frozen_account_record");
+		member.setName("payer");
+		member.setMemberName("userFrozenAccountRecordListAsPayer");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+	
+	public InkDeedOrderLineItem inkDeedOrderLineItemListAsSeller() {
+		InkDeedOrderLineItem member = new InkDeedOrderLineItem();
+		member.setModelTypeName("ink_deed_order_line_item");
+		member.setName("seller");
+		member.setMemberName("inkDeedOrderLineItemListAsSeller");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+	
+	public InkDeedOrderLineItem inkDeedOrderLineItemListAsBuyer() {
+		InkDeedOrderLineItem member = new InkDeedOrderLineItem();
+		member.setModelTypeName("ink_deed_order_line_item");
+		member.setName("buyer");
+		member.setMemberName("inkDeedOrderLineItemListAsBuyer");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
 
 	
 	// 普通属性
@@ -973,7 +1023,7 @@ public class MoyiUser extends BaseModelBean{
 	public StringAttribute avatarImage(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_image");
-		member.setName("avatarImage");
+		member.setName("avatar_image");
 		useMember(member);
 		return member;
 	}
@@ -981,7 +1031,7 @@ public class MoyiUser extends BaseModelBean{
 	public StringAttribute selfIntroduction(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_longtext");
-		member.setName("selfIntroduction");
+		member.setName("self_introduction");
 		useMember(member);
 		return member;
 	}
@@ -989,7 +1039,7 @@ public class MoyiUser extends BaseModelBean{
 	public BooleanAttribute isCommunityPartner(){
 		BooleanAttribute member = new BooleanAttribute();
 		member.setModelTypeName("bool");
-		member.setName("isCommunityPartner");
+		member.setName("is_community_partner");
 		useMember(member);
 		return member;
 	}
@@ -997,7 +1047,7 @@ public class MoyiUser extends BaseModelBean{
 	public NumberAttribute personalInkCoinAccount(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("double");
-		member.setName("personalInkCoinAccount");
+		member.setName("personal_ink_coin_account");
 		useMember(member);
 		return member;
 	}
@@ -1005,7 +1055,7 @@ public class MoyiUser extends BaseModelBean{
 	public NumberAttribute rewardInkCoinAccount(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("double");
-		member.setName("rewardInkCoinAccount");
+		member.setName("reward_ink_coin_account");
 		useMember(member);
 		return member;
 	}
@@ -1013,7 +1063,7 @@ public class MoyiUser extends BaseModelBean{
 	public NumberAttribute userLevelPoints(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
-		member.setName("userLevelPoints");
+		member.setName("user_level_points");
 		useMember(member);
 		return member;
 	}
@@ -1029,7 +1079,7 @@ public class MoyiUser extends BaseModelBean{
 	public DateTimeAttribute createTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_create");
-		member.setName("createTime");
+		member.setName("create_time");
 		useMember(member);
 		return member;
 	}
@@ -1037,7 +1087,7 @@ public class MoyiUser extends BaseModelBean{
 	public DateTimeAttribute lastUpdateTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_update");
-		member.setName("lastUpdateTime");
+		member.setName("last_update_time");
 		useMember(member);
 		return member;
 	}

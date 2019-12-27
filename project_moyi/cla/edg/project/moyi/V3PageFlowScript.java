@@ -72,9 +72,10 @@ public class V3PageFlowScript extends PieceOfScript {
 			/** 发行墨契 */
 			.request("start issue ink deed v3").with_string("artwork auction id")
 				.comments("艺术品卖家发行墨契").no_footprint()
-				.when("first time to issue").comments("V3首次发行墨契")
-					.got_page("ink deed issue")
-				.when("further issue").comments("V3增发墨契")
+				.when("first time to issue").comments("首次发行墨契")
+					.got_page("ink deed issue").comments("发行墨契")
+						.may_request("to set ink deed share number")
+				.when("further issue").comments("增发墨契")
 					.got_page("ink deed share number setting")
 				
 			/** 墨契销售 
@@ -90,11 +91,42 @@ public class V3PageFlowScript extends PieceOfScript {
 			 *  step5: 系统将墨契交割
 			 *  如果用户在step3处没有选择去支付, 该墨契30秒后就被自动释放
 			 *  如果用户几分钟内都没有完成订单支付, 该墨契会被自动释放
+			 *  
+			 *  user id 和 object id 为空时, 表示对用户和墨契ID没有限制
 			 */
-			.request("buy one ink deed").with_string("artwork auction id")
-				.comments("用户从拍品的可售墨契中,挑出价格最低的给用户去购买")
+			.request("buy one ink deed").with_string("artwork auction id").with_string("user id").with_string("object id").with_integer("quantity").variable()
+				.comments("用户从拍品的可售墨契中,挑出价格最低的给用户去购买").need_login().no_footprint()
 				.got_page("buy ink deed preview")
 				
+//			.request("view my ink deed info").with_string("artwork auction id")
+//				.comments("查看用户自己的某个拍品的墨契")
+//				.got_page()
+//				
+			.request("view selling ink deed of auction").with_string("artwork auction id").with_string("user id").with_string("price")
+				.comments("查看某个拍品相关的墨契统计列表,按人和价格分组").no_login().has_footprint().can_refresh()
+				.when("only one").comments("只有一个挂单可售")
+					.got_page("ink deed detail by holder and price")
+				.when_others().comments("有多个列表")
+					.got_page("auction ink deed order list")
+					
+			.request("view selling ink deed by holder and price").with_string("artwork auction id").with_string("user id").with_string("price")
+				.comments("根据墨契的持有人和售价,查看墨契详情").no_login().has_footprint().can_refresh()
+				.got_page("ink deed detail by holder and price")
+				
+			.request("view ink deed order list v3").with_string("filter").with_last_record_id()
+				.comments("用户按照订单状态分页查看他自己的默契订单")
+				.got_page("ink deed order list v3").title("墨契订单")
+					
+				
+			/**
+			 * 个人账户
+			 */
+			.request("view my cash account v3")
+				.comments("V3版本的用户现金账户详情").need_login().has_footprint().can_refresh()
+				.got_page("user cash account detail v3").title("我的账户")
+			.request("view frozen account record list").with_last_record_id()
+				.comments("查看用户的待入账明细").need_login().no_footprint().can_refresh()
+				.got_page("frozen account record list").title("待入账明细").list_of("frozen-record")
 			;
 	}
 }
