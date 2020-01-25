@@ -989,6 +989,12 @@ public class MODEL{
 		return rst;
 	}
 
+	public static AdditionalPlatformConfiguration additionalPlatformConfiguration() {
+		AdditionalPlatformConfiguration rst = new AdditionalPlatformConfiguration();
+		rst.setModelTypeName("additional_platform_configuration");
+		return rst;
+	}
+
 	public static AssetStatus assetStatus() {
 		AssetStatus rst = new AssetStatus();
 		rst.setModelTypeName("asset_status");

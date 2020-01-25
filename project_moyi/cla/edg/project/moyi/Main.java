@@ -47,14 +47,16 @@ public class Main {
 		generator.generateWithScript(script);
 	}
 	
-//	private static void testEventService(BaseMoyiEventScript testScript) throws Exception {
-//		BaseMoyiEventScript  test = testScript;
-//		EventScript script = test.getScript();
-//		String jsonStr = Utils.toJson(script, true);
-//		
-//		System.out.println(jsonStr);
-//		
-//		EventScriptGenerator generator = new EventScriptGenerator();
-//		generator.generateWithScript(script);
-//	}
+	private static void testEventService(BaseMoyiEventScript testScript) throws Exception {
+		BaseMoyiEventScript  test = testScript;
+		EventScript script = test.getScript();
+		String jsonStr = Utils.toJson(script, true);
+		
+		System.out.println(jsonStr);
+		
+		EventScriptGenerator generator = new EventScriptGenerator();
+		generator.setBaseOutputFolder("/works/jobs/moyi_v3/workspace/moyi-biz-suite/bizcore/WEB-INF/moyi_v2_src");
+		generator.setBaseTempalteFolder("./template");
+		generator.generateWithScript(script);
+	}
 }

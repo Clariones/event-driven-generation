@@ -965,6 +965,16 @@ public class Moyi extends BaseModelBean{
 		return member;
 	}
 	
+	public AdditionalPlatformConfiguration additionalPlatformConfigurationList() {
+		AdditionalPlatformConfiguration member = new AdditionalPlatformConfiguration();
+		member.setModelTypeName("additional_platform_configuration");
+		member.setName("moyi");
+		member.setMemberName("additionalPlatformConfigurationList");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+	
 	public AssetStatus assetStatusList() {
 		AssetStatus member = new AssetStatus();
 		member.setModelTypeName("asset_status");

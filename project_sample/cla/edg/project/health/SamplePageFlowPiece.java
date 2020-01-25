@@ -1,9 +1,9 @@
-package cla.edg.project.moyi;
+package cla.edg.project.health;
 
 import cla.edg.pageflow.PageFlowScript;
 import cla.edg.pageflow.PieceOfScript;
 
-public class V3PageFlowScript extends PieceOfScript {
+public class SamplePageFlowPiece extends PieceOfScript {
 	@Override
 	public PageFlowScript makeSequel(PageFlowScript script) {
 		return script

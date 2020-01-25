@@ -207,7 +207,7 @@ public class V3FindScript extends PieceOfScript {
 						.where(MODEL.userFrozenAccountRecord().owner().eq("${user id}"),
 								MODEL.userFrozenAccountRecord().status().code().in(AssetStatus.FROZEN, AssetStatus.RECEIVABLE))
 
-				.query(MODEL.artworkAuctionOrder().getModelTypeName()).which("pending arbitration by user").with_string("user id").pagination()
+				.query(MODEL.artworkAuctionOrder()).which("pending arbitration by user").with_string("user id").pagination()
 						.comments("查询用户的售后中的拍品订单，业务上的售后中包含 售后中|买家违约|卖家违约 3种状态")
 						.do_it_as()
 							.where(MODEL.artworkAuctionOrder().orderStatus().code().eq(OrderStatus.PENDING_ARBITRATION)
@@ -225,7 +225,8 @@ public class V3FindScript extends PieceOfScript {
 					.comments("查看用户的已取消墨契订单")
 					.do_it_as()
 						.where(MODEL.inkDeedOrder().orderStatus().code().eq(OrderStatus.CANCELLED),
-								MODEL.inkDeedOrder().buyer().eq("${user id}"))
+								MODEL.inkDeedOrder().buyer().eq("${user id}"),
+								MODEL.inkDeedOrder().auction().not_null())
 						.order_by(MODEL.inkDeedOrder().id()).desc() // 已取消的按时间由近及远
 						.wants(MODEL.inkDeedOrder().orderStatus(),
 								MODEL.inkDeedOrder().auction().seller())
@@ -240,7 +241,7 @@ public class V3FindScript extends PieceOfScript {
 				.query(MODEL.inkDeedOrder()).which("belong to user").pagination().with_string("user id")
 					.comments("查看用户的所有墨契订单")
 					.do_it_as()
-						.where(MODEL.inkDeedOrder().buyer().eq("${user id}"))
+						.where(MODEL.inkDeedOrder().buyer().eq("${user id}"), MODEL.inkDeedOrder().auction().not_null())
 						.order_by(MODEL.inkDeedOrder().id()).desc() // 
 						.wants(MODEL.inkDeedOrder().orderStatus(),
 								MODEL.inkDeedOrder().auction().seller())
@@ -294,6 +295,42 @@ public class V3FindScript extends PieceOfScript {
 					.do_it_as()
 						.where(MODEL.inkDeedOrder().orderStatus().code().in(OrderStatus.NEED_PAY, OrderStatus.PAYING),
 								MODEL.inkDeedOrder().lastUpdateTime().before("${booked dead line}")	)
+						
+				.find(MODEL.auctionStartNotification()).which("appointed by user").with_string("artwork auction id").with_string("user id")
+					.comments("找到用户对某场拍卖的预约提醒记录")
+					.do_it_as()
+						.where(MODEL.auctionStartNotification().bidder().eq("${user id}"),
+								MODEL.auctionStartNotification().auction().eq("${artwork auction id}"))
+				.find(MODEL.artworkAuction()).which("latest related to artwork").with_string("artwork id")
+					.comments("找到作品最后一次的拍卖")
+					.do_it_as()
+						.where(MODEL.artworkAuction().artwork().eq("${artwork id}"))
+						.wants(MODEL.artworkAuction().artworkAuctionStatus())
+						.order_by(MODEL.artworkAuction().id()).desc()
+				.find(MODEL.inkDeed()).which("dromant for artwork").with_string("artwork id")
+					.comments("找出一件作品的待生效的墨契")
+					.do_it_as().count()
+						.where(MODEL.inkDeed().artwork().eq("${artwork id}"),
+								MODEL.inkDeed().status().not_in(InkDeedStatus.DESTROYED, InkDeedStatus.CASHED))
+				.query(MODEL.auctionBiddingDeposit()).which("auction").pagination().with_string("artwork auction id")
+					.comments("查询拍卖的所有竞拍保证金")
+					.do_it_as()
+						.where(MODEL.auctionBiddingDeposit().auction().eq("${artwork auction id}"))
+						.wants(MODEL.auctionBiddingDeposit().status())
+						
+				.query(MODEL.artworkAuctionBiddingPriceRecord()).which("auction").pagination().with_string("artwork auction id")
+					.comments("查询拍卖的所有竞拍记录")
+					.do_it_as()
+						.where(MODEL.artworkAuctionBiddingPriceRecord().artworkAuction().eq("${artwork auction id}"))
+				.query(MODEL.artworkAuction()).which("not closed").pagination()
+					.comments("找到尚未结束的拍卖")
+					.do_it_as()
+						.where(MODEL.artworkAuction().artworkAuctionStatus().code().in(ArtworkAuctionStatus.DISPLAYING, ArtworkAuctionStatus.BIDDING))
+						.wants(MODEL.artworkAuction().artworkAuctionStatus())
+				.query(MODEL.inkDeed()).which("auction").pagination().with_string("artwork auction id")
+					.comments("找出拍品相关的所有的墨契")
+					.do_it_as()
+						.where(MODEL.inkDeed().auction().eq("${artwork auction id}"))
 				;
 	}
 
