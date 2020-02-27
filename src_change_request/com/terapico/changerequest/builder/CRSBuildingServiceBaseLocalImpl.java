@@ -81,4 +81,44 @@ public abstract class CRSBuildingServiceBaseLocalImpl implements ChangeRequestSp
 	protected String getTempEventName(String eventType) {
 		return String.format("evt_%s_%d", eventType, eventCount.incrementAndGet());
 	}
+
+	protected FieldSpec sureField(String crName, String stepName, String eventName, String fieldName) {
+		EventSpec eventSpec = this.getEvent(crName, stepName, eventName);
+		FieldSpec spec = eventSpec.findField(fieldName);
+		if (spec != null) {
+			return spec;
+		}
+		//if (spec == null) 
+		spec = eventSpec.getPrototype().findField(fieldName);
+		if (spec == null) {
+			error("还没有创建Field " + crName +"/"+ stepName +"/"+ eventName +"/"+ fieldName);
+		}
+		FieldSpec newSpec = spec.copy();
+		eventSpec.addField(newSpec);
+		return newSpec;
+	}
+	protected FieldSpec prototypeField(String crName, String stepName, String eventName, String fieldName) {
+		return getEvent(eventName).findField(fieldName);
+	}
+	protected EventSpec sureEvent(String crName, String stepName, String eventName) {
+		EventSpec spec = this.getEvent(crName, stepName, eventName);
+		if (spec == null) {
+			error("还没有创建Event " + crName +"/"+ stepName +"/"+ eventName);
+		}
+		return spec;
+	}
+	protected StepSpec sureStep(String crName, String stepName) {
+		StepSpec spec = this.getStep(crName, stepName);
+		if (spec == null) {
+			error("还没有创建Step " + crName +"/"+ stepName);
+		}
+		return spec;
+	}
+	protected ChangeRequestSpec sureCR(String crName) {
+		ChangeRequestSpec spec = this.getChangeRequest(crName);
+		if (spec == null) {
+			error("还没有创建ChangeRequest " + crName );
+		}
+		return spec;
+	}
 }

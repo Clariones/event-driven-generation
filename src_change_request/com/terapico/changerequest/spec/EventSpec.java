@@ -50,4 +50,15 @@ public class EventSpec extends CommonSpec<EventSpec>{
 		ensureFieldSpecs().add(fieldSpec);
 	}
 	
+	public void setI18nIfNotExists(String localeCode, String text) {
+		if (this.getI18nName() != null && this.getI18nName().containsKey(localeCode)) {
+			return; // 如果已经有了,就不更新
+		}
+		this.addI18n(localeCode, text);
+	}
+	
+	public FieldSpec findField(String fieldName) {
+		return this.ensureFieldSpecs().stream().filter(it->it.getName().equals(fieldName)).findFirst().orElse(null);
+	}
+	
 }

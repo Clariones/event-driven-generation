@@ -216,7 +216,7 @@ public class ChangeRequestSpecBaseBuilder<T extends ChangeRequestSpecBaseBuilder
 	}
 
 	public T contains_event(String eventName) {
-		if (!workingBoard.isBuildingChangeRequest()) {
+		if (!workingBoard.isBuildingStep()) {
 			// 如果当前不是 Step, 直接event, 那么说明要建立一个默认的,名字和 CR 一样的 Step
 			String stepName = service.createDefaultStepByChangeRequest($CR());
 			workingBoard.onStep(stepName);

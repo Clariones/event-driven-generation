@@ -8,10 +8,12 @@ public abstract class CommonSpec <T extends CommonSpec<T>>{
 	protected String name;
 	protected String title;
 	protected Map<String, String> i18nName;
-	protected boolean isRequired = true;
-	protected int minCollectionSize = 0;
-	protected int maxCollectionSize = 0;
-	protected boolean isCollection = false;
+	protected Boolean isRequired = true;
+	protected Integer minCollectionSize = 0;
+	protected Integer maxCollectionSize = 0;
+	protected Boolean isCollection = false;
+	
+	
 	public String getName() {
 		return name;
 	}
@@ -30,33 +32,36 @@ public abstract class CommonSpec <T extends CommonSpec<T>>{
 	public void setI18nName(Map<String, String> i18nName) {
 		this.i18nName = i18nName;
 	}
-	public boolean isRequired() {
+	public Boolean getIsRequired() {
 		return isRequired;
 	}
-	public void setRequired(boolean isRequired) {
+	public void setIsRequired(Boolean isRequired) {
 		this.isRequired = isRequired;
 	}
-	public int getMinCollectionSize() {
+	public Integer getMinCollectionSize() {
 		return minCollectionSize;
 	}
-	public void setMinCollectionSize(int minCollectionSize) {
+	public void setMinCollectionSize(Integer minCollectionSize) {
 		this.minCollectionSize = minCollectionSize;
 	}
-	public int getMaxCollectionSize() {
+	public Integer getMaxCollectionSize() {
 		return maxCollectionSize;
 	}
-	public void setMaxCollectionSize(int maxCollectionSize) {
+	public void setMaxCollectionSize(Integer maxCollectionSize) {
 		this.maxCollectionSize = maxCollectionSize;
 	}
-	public boolean isCollection() {
+	public Boolean getIsCollection() {
 		return isCollection;
 	}
-	public void setCollection(boolean isCollection) {
+	public void setIsCollection(Boolean isCollection) {
 		this.isCollection = isCollection;
 	}
-	
 	public T withName(String name) {
 		this.setName(name);
+		return (T) this;
+	}
+	public T withI18n(Map<String, String> i18nNames) {
+		this.setI18nName(new HashMap<>(i18nNames));
 		return (T) this;
 	}
 	
@@ -73,7 +78,8 @@ public abstract class CommonSpec <T extends CommonSpec<T>>{
 		}
 		return (T)this;
 	}
-	protected boolean is4Title(String localeCode) {
+	
+	protected Boolean is4Title(String localeCode) {
 		// 默认用 zh_CN 的做title, 可以重载为 false 避免这个动作
 		return "zh_CN".equals(localeCode);
 	}

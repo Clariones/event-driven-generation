@@ -64,4 +64,9 @@ public class Example {
 								.values_can_get_from("getOfficeByCity/${register city}/")
 				.getChangeRequestSpec();
 	}
+	
+	public static void main(String[] args) {
+		ProjectChangeRequestSpec rst = new Example().scriptExampe();
+		System.out.println(rst);
+	}
 }

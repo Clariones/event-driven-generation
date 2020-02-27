@@ -8,6 +8,8 @@ import com.terapico.changerequest.spec.FieldSpec;
 import com.terapico.changerequest.spec.ProjectChangeRequestSpec;
 import com.terapico.changerequest.spec.StepSpec;
 
+import cla.edg.Utils;
+
 public class ChangeRequestSpecBuildingServiceLocalImpl extends CRSBuildingServiceBaseLocalImpl {
 
 	@Override
@@ -71,180 +73,165 @@ public class ChangeRequestSpecBuildingServiceLocalImpl extends CRSBuildingServic
 
 	@Override
 	public void createNewField(String crName, String stepName, String eventName, String fieldName) {
-		EventSpec evtSpec = this.getEvent(crName, stepName, eventName);
-		if (evtSpec == null) {
-			error("还没有创建Event "+crName+"/"+stepName+"/"+eventName);
-		}
+		EventSpec evtSpec = sureEvent(crName, stepName, eventName);
 		EventSpec prototypeEventSpec = evtSpec.getPrototype();
-		if (prototypeEventSpec == null) {
-			error("某次创建Event没有创建它的原型");
-		}
 		prototypeEventSpec.addField(new FieldSpec().withName(fieldName));
 	}
 
 	@Override
 	public void addFieldI18n(String crName, String stepName, String eventName, String fieldName, String localeCode,
 			String text) {
-		FieldSpec fSpec = this.getField(crName, stepName, eventName, fieldName);
-		if (fSpec == null) {
-			error("还没有创建Field " + crName +"/"+ stepName +"/"+ eventName +"/"+ fieldName);
-		}
-		fSpec.addI18n(localeCode, text);
+		sureField(crName, stepName, eventName, fieldName).addI18n(localeCode, text);
+		prototypeField(crName, stepName, eventName, fieldName).addI18nIfNeed(localeCode, text);
 	}
 
 	@Override
 	public void addEventI18n(String crName, String stepName, String eventName, String localeCode, String text) {
-		EventSpec spec = this.getEvent(crName, stepName, eventName);
-		if (spec == null) {
-			error("还没有创建Field " + crName +"/"+ stepName +"/"+ eventName);
-		}
+		EventSpec spec = sureEvent(crName, stepName, eventName);
 		spec.addI18n(localeCode, text);
+		spec.getPrototype().setI18nIfNotExists(localeCode, text);
 	}
 
 	@Override
 	public void addStepI18n(String crName, String stepName, String localeCode, String text) {
-		// TODO Auto-generated method stub
-		
+		sureStep(crName, stepName).addI18n(localeCode, text);
 	}
 
 	@Override
 	public void addChangeRequestI18n(String crName, String localeCode, String text) {
-		// TODO Auto-generated method stub
-		
+		this.sureCR(crName).addI18n(localeCode, text);
 	}
 
 	@Override
 	public String createDefaultStepByChangeRequest(String crName) {
-		// TODO Auto-generated method stub
-		return null;
+		ChangeRequestSpec crSpec = this.sureCR(crName);
+		crSpec.addStep(new StepSpec().withName(crSpec.getName()).withIndex(1).withI18n(crSpec.getI18nName()));
+		return crSpec.getName();
 	}
 
 	@Override
-	public void renameEvent(String crName, String stepName, String eventName, String name) {
-		// TODO Auto-generated method stub
-		
+	public void renameEvent(String crName, String stepName, String eventName, String newName) {
+		sureEvent(crName, stepName, eventName).setName(newName);
 	}
 
 	@Override
 	public void setFieldInteractionMode(String crName, String stepName, String eventName, String fieldName,
 			String mode) {
-		// TODO Auto-generated method stub
-		
+		sureField(crName, stepName, eventName, fieldName).setInteractionMode(mode);
+		prototypeField(crName, stepName, eventName, fieldName).setInteractionModeIfNeed(mode);
 	}
 
 	@Override
 	public void setFieldRequired(String crName, String stepName, String eventName, String fieldName, boolean required) {
-		// TODO Auto-generated method stub
-		
+		sureField(crName, stepName, eventName, fieldName).setIsRequired(required);
+		sureField(crName, stepName, eventName, fieldName).setIsRequired(required);
 	}
 
 	@Override
 	public void setEventRequired(String crName, String stepName, String eventName, boolean required) {
-		// TODO Auto-generated method stub
-		
+		sureEvent(crName, stepName, eventName).setIsRequired(required);
 	}
 
 	@Override
 	public void setStepRequired(String crName, String stepName, boolean required) {
-		// TODO Auto-generated method stub
-		
+		sureStep(crName, stepName).setIsRequired(required);
 	}
 
 	@Override
 	public void forceFieldValue(String crName, String stepName, String eventName, String fieldName,
 			Serializable forceValue) {
-		// TODO Auto-generated method stub
-		
+		sureField(crName, stepName, eventName, fieldName).setForceValue(forceValue);
+		prototypeField(crName, stepName, eventName, fieldName).setForceValueIfNeed(forceValue);
 	}
 
 	@Override
 	public void setFieldRange(String crName, String stepName, String eventName, String fieldName,
 			Serializable[] rangeArgs) {
-		// TODO Auto-generated method stub
-		
+		sureField(crName, stepName, eventName, fieldName).setRangeArgs(rangeArgs);
+		prototypeField(crName, stepName, eventName, fieldName).setRangeArgsIfNeed(rangeArgs);
 	}
 
 	@Override
 	public void setFieldPlaceholder(String crName, String stepName, String eventName, String fieldName, String text) {
-		// TODO Auto-generated method stub
-		
+		sureField(crName, stepName, eventName, fieldName).setPlaceholder(text);
+		prototypeField(crName, stepName, eventName, fieldName).setPlaceholderIfNeed(text);
 	}
 
 	@Override
 	public void setFieldTipsTitle(String crName, String stepName, String eventName, String fieldName, String text) {
-		// TODO Auto-generated method stub
-		
+		sureField(crName, stepName, eventName, fieldName).setTipsTitle(text);
+		prototypeField(crName, stepName, eventName, fieldName).setTipsTitleIfNeed(text);
 	}
 
 	@Override
 	public void setFieldTipsContent(String crName, String stepName, String eventName, String fieldName, String text) {
-		// TODO Auto-generated method stub
-		
+		sureField(crName, stepName, eventName, fieldName).setTipsContext(text);
+		prototypeField(crName, stepName, eventName, fieldName).setTipsContextIfNeed(text);
 	}
 
 	@Override
 	public void addFieldValueMapping(String crName, String stepName, String eventName, String fieldName, String key,
 			Serializable value) {
-		// TODO Auto-generated method stub
-		
+		sureField(crName, stepName, eventName, fieldName).addValueMapping(key, value);
+		prototypeField(crName, stepName, eventName, fieldName).addValueMappingIfNeed(key, value);
 	}
 
 	@Override
 	public void setFieldInputType(String crName, String stepName, String eventName, String fieldName,
 			FieldType fieldType) {
-		// TODO Auto-generated method stub
-		
+		sureField(crName, stepName, eventName, fieldName).setInputType(fieldType);
+		prototypeField(crName, stepName, eventName, fieldName).setInputTypeIfNeed(fieldType);
 	}
 
 	@Override
 	public void setFieldSelectable(String crName, String stepName, String eventName, String fieldName,
 			boolean selectable, boolean multiSelection) {
-		// TODO Auto-generated method stub
-		
+		sureField(crName, stepName, eventName, fieldName).setSelectable(selectable);
+		sureField(crName, stepName, eventName, fieldName).setMultiSelection(multiSelection);
 	}
 
 	@Override
 	public FieldType getFieldInputType(String crName, String stepName, String eventName, String fieldName) {
-		// TODO Auto-generated method stub
-		return null;
+		return sureField(crName, stepName, eventName, fieldName).getInputType();
 	}
 
 	@Override
 	public boolean isFieldMultiSelectable(String crName, String stepName, String eventName, String fieldName) {
-		// TODO Auto-generated method stub
-		return false;
+		Boolean B = sureField(crName, stepName, eventName, fieldName).getMultiSelection();
+		return B == null ? false : B.booleanValue();
 	}
 
 	@Override
 	public boolean isFieldSelectable(String crName, String stepName, String eventName, String fieldName) {
-		// TODO Auto-generated method stub
-		return false;
+		Boolean B = sureField(crName, stepName, eventName, fieldName).getSelectable();
+		return B == null ? false : B.booleanValue();
 	}
 
 	@Override
 	public boolean isFieldSingleSelectable(String crName, String stepName, String eventName, String fieldName) {
-		// TODO Auto-generated method stub
-		return false;
+		Boolean B = sureField(crName, stepName, eventName, fieldName).getMultiSelection();
+		return B == null ? false : !B.booleanValue();
 	}
 
 	@Override
 	public void setFieldDefaultValue(String crName, String stepName, String eventName, String fieldName,
 			Serializable defaultValue) {
-		// TODO Auto-generated method stub
-		
+		sureField(crName, stepName, eventName, fieldName).setDefaultValue(defaultValue);
+		prototypeField(crName, stepName, eventName, fieldName).setDefaultValueIfNeed(defaultValue);
 	}
 
 	@Override
 	public void setEventRepeatTimes(String crName, String stepName, String eventName, int min, int max) {
-		// TODO Auto-generated method stub
-		
+		sureEvent(crName, stepName, eventName).setIsCollection(true);
+		sureEvent(crName, stepName, eventName).setMinCollectionSize(min);
+		sureEvent(crName, stepName, eventName).setMaxCollectionSize(max);
 	}
 
 	@Override
 	public void setFieldValuesRetrieveApi(String crName, String stepName, String eventName, String fieldName,
 			String apiUrl) {
-		// TODO Auto-generated method stub
-		
+		apiUrl = Utils.toCamelCase(apiUrl).replaceAll("\\$\\{(.+)\\}", ":$1");
+		sureField(crName, stepName, eventName, fieldName).setDataRetrieveApiUrl(apiUrl);
 	}
 
 	
