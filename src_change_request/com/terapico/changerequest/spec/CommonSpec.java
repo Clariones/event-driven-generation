@@ -9,8 +9,8 @@ public abstract class CommonSpec <T extends CommonSpec<T>>{
 	protected String title;
 	protected Map<String, String> i18nName;
 	protected Boolean isRequired = true;
-	protected Integer minCollectionSize = 0;
-	protected Integer maxCollectionSize = 0;
+	protected Integer minCollectionSize;
+	protected Integer maxCollectionSize;
 	protected Boolean isCollection = false;
 	
 	
@@ -56,8 +56,13 @@ public abstract class CommonSpec <T extends CommonSpec<T>>{
 	public void setIsCollection(Boolean isCollection) {
 		this.isCollection = isCollection;
 	}
+	
+	
+	public abstract String getSpecType();
+	
 	public T withName(String name) {
 		this.setName(name);
+		log("新建 "+this.getSpecType()+":"+name);
 		return (T) this;
 	}
 	public T withI18n(Map<String, String> i18nNames) {
@@ -82,5 +87,12 @@ public abstract class CommonSpec <T extends CommonSpec<T>>{
 	protected Boolean is4Title(String localeCode) {
 		// 默认用 zh_CN 的做title, 可以重载为 false 避免这个动作
 		return "zh_CN".equals(localeCode);
+	}
+	protected void log(String message) {
+		System.out.println(String.format("[%20s]: %s", this.getClass().getSimpleName(),message));
+	}
+	public void rename(String newName) {
+		log("改名 "+this.getSpecType()+":"+name+" rename to "+newName);
+		this.setName(newName);
 	}
 }

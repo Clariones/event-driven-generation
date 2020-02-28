@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import com.terapico.changerequest.spec.ProjectChangeRequestSpec;
 
+import cla.edg.Utils;
+
 public class ChangeRequestSpecBaseBuilder<T extends ChangeRequestSpecBaseBuilder<T>>
 		extends  ChangeRequestSpecBuilderUtil{
 	protected T me;
@@ -127,7 +129,7 @@ public class ChangeRequestSpecBaseBuilder<T extends ChangeRequestSpecBaseBuilder
 		if(workingBoard.isBuildingField()) {
 			if(workingBoard.getCurrentJobName().equals(WorkingBoard.SET_VALUE_MAPPING)) {
 				service.addFieldValueMapping($CR(),$STEP(),$EVENT(),$FIELD(), key, value);
-				service.setFieldInputType($CR(),$STEP(),$EVENT(),$FIELD(), FieldType.SINGLE_SELECTION);
+				service.setFieldSelectable($CR(),$STEP(),$EVENT(),$FIELD(), true, false);
 				workingBoard.onJob(WorkingBoard.MORE_VALUE_MAPPING);
 			}else if(workingBoard.getCurrentJobName().equals(WorkingBoard.MORE_VALUE_MAPPING)){
 				if (service.isFieldSingleSelectable($CR(),$STEP(),$EVENT(),$FIELD())) {
@@ -179,15 +181,32 @@ public class ChangeRequestSpecBaseBuilder<T extends ChangeRequestSpecBaseBuilder
 	}
 
 	public T for_field(String fieldName) {
+		// 现在开始建立 field.
+		// 如果 现在还在建立 changRequest, 那么自动建立 step 和 event
+		// 如果 现在还在建立 step, 那么自动建立 event
+		
 		if (workingBoard.getCurrentEventName() == null) {
-			error("只有在Event内才能描述Field");
+			if(workingBoard.isBuildingChangeRequest()) {
+				String stepName = service.createDefaultStepByChangeRequest($CR());
+				workingBoard.onStep(stepName);
+			}
+			if (workingBoard.isBuildingStep()) {
+				String eventTempName = service.addEventIntoStep($CR(), $STEP(), $STEP());
+				service.renameEvent($CR(), $STEP(), eventTempName, $STEP());
+				workingBoard.onEvent($STEP());
+			}
+			if (workingBoard.getCurrentEventName() == null) {
+				error("只有在Event内才能描述Field");
+			}
 		}
 		if (service.checkFieldExists($CR(),$STEP(),$EVENT(),fieldName)) {
 			// 找到就算了
 		}else {
 			service.createNewField($CR(),$STEP(),$EVENT(),fieldName);
 			service.setFieldInputType($CR(),$STEP(),$EVENT(),fieldName, FieldType.TEXT);
-			service.setFieldInteractionMode($CR(),$STEP(),$EVENT(),$FIELD(), "input");
+			service.clearPrototypeEventSetTag($CR(),$STEP(),$EVENT(),fieldName, "inputType");
+			service.setFieldInteractionMode($CR(),$STEP(),$EVENT(),fieldName, "input");
+			service.clearPrototypeEventSetTag($CR(),$STEP(),$EVENT(),fieldName, "interactionMode");
 		}
 		workingBoard.onField(fieldName);
 		return me;
@@ -212,16 +231,19 @@ public class ChangeRequestSpecBaseBuilder<T extends ChangeRequestSpecBaseBuilder
 		}
 		service.createNewStep($CR(), stepIdx, stepName);
 		workingBoard.onStep(stepName);
+		log("新建 Step:"+$STEP());
 		return me;
 	}
 
+
 	public T contains_event(String eventName) {
-		if (!workingBoard.isBuildingStep()) {
+		if (workingBoard.getCurrentStepName() == null) {
 			// 如果当前不是 Step, 直接event, 那么说明要建立一个默认的,名字和 CR 一样的 Step
 			String stepName = service.createDefaultStepByChangeRequest($CR());
 			workingBoard.onStep(stepName);
 		}
-		if (!workingBoard.isBuildingStep()) {
+		if (workingBoard.getCurrentStepName() == null) {
+			System.out.println(Utils.toJson(workingBoard, true));
 			error("只有在Step中才能描述vent");
 		}
 		String eventTempName = service.addEventIntoStep($CR(), $STEP(), eventName);
@@ -283,5 +305,16 @@ public class ChangeRequestSpecBaseBuilder<T extends ChangeRequestSpecBaseBuilder
 		}
 		return me;
 	}
-
+	
+	
+	public T only_one() {
+		switch (workingBoard.currentWorkingLevel()) {
+		case WorkingBoard.EVENT:
+			service.setEventOnlyonce($CR(), $STEP(), $EVENT());
+			break;
+		default:
+			error("只有描述 Event 才能指定只用1次");
+		}
+		return me;
+	}
 }

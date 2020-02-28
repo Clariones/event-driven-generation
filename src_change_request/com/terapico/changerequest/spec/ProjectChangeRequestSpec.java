@@ -44,5 +44,8 @@ public class ProjectChangeRequestSpec extends CommonSpec<ProjectChangeRequestSpe
 		ensureAllEventSpecs().put(eventSpec.getType(), eventSpec);
 	}
 	
-	
+	@Override
+	public String getSpecType() {
+		return "Project";
+	}
 }

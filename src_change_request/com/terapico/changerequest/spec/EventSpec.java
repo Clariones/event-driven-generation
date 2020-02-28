@@ -6,7 +6,7 @@ import java.util.List;
 public class EventSpec extends CommonSpec<EventSpec>{
 	protected List<FieldSpec> fieldSpecs;
 	protected String type;
-	protected EventSpec prototype;
+	protected transient EventSpec prototype;
 	
 	public String getType() {
 		return type;
@@ -59,6 +59,11 @@ public class EventSpec extends CommonSpec<EventSpec>{
 	
 	public FieldSpec findField(String fieldName) {
 		return this.ensureFieldSpecs().stream().filter(it->it.getName().equals(fieldName)).findFirst().orElse(null);
+	}
+	
+	@Override
+	public String getSpecType() {
+		return "Event";
 	}
 	
 }

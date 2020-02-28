@@ -38,6 +38,11 @@ public class ChangeRequestSpec extends CommonSpec<ChangeRequestSpec>{
 		resortStpeSpecs();
 	}
 
+	@Override
+	public String getSpecType() {
+		return "ChangeRequest";
+	}
+
 	
 
 	

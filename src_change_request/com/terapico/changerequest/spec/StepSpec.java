@@ -7,6 +7,14 @@ public class StepSpec extends CommonSpec<StepSpec>{
 	protected List<EventSpec> eventSpecs;
 	protected int index;
 	
+	
+	
+	
+	public StepSpec() {
+		super();
+		// new Throwable().printStackTrace();
+	}
+	
 	public List<EventSpec> getEventSpecs() {
 		return eventSpecs;
 	}
@@ -37,4 +45,8 @@ public class StepSpec extends CommonSpec<StepSpec>{
 		ensureEventSpecs().add(eventSpec);
 	}
 	
+	@Override
+	public String getSpecType() {
+		return "Step";
+	}
 }

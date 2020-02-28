@@ -64,10 +64,10 @@ public class ChangeRequestSpecBuildingServiceLocalImpl extends CRSBuildingServic
 			error("还没有创建Step "+crName+"/"+stepName);
 		}
 		if (isGlobalNewEvent(eventType)) {
-			root().addEvent(new EventSpec().withType(eventType));
+			root().addEvent(new EventSpec().withType(eventType).withName(eventType));
 		}
 		String tmpName = getTempEventName(eventType);
-		stepSpec.addEvent(new EventSpec().withName(tmpName).withPrototype(getEvent(eventType)));
+		stepSpec.addEvent(new EventSpec().withName(tmpName).withPrototype(getEvent(eventType)).withType(eventType));
 		return tmpName;
 	}
 
@@ -105,13 +105,14 @@ public class ChangeRequestSpecBuildingServiceLocalImpl extends CRSBuildingServic
 	@Override
 	public String createDefaultStepByChangeRequest(String crName) {
 		ChangeRequestSpec crSpec = this.sureCR(crName);
-		crSpec.addStep(new StepSpec().withName(crSpec.getName()).withIndex(1).withI18n(crSpec.getI18nName()));
-		return crSpec.getName();
+		StepSpec stepSpec = new StepSpec().withName(crSpec.getName()).withIndex(1).withI18n(crSpec.getI18nName());
+		crSpec.addStep(stepSpec);
+		return stepSpec.getName();
 	}
 
 	@Override
 	public void renameEvent(String crName, String stepName, String eventName, String newName) {
-		sureEvent(crName, stepName, eventName).setName(newName);
+		sureEvent(crName, stepName, eventName).rename(newName);
 	}
 
 	@Override
@@ -232,6 +233,20 @@ public class ChangeRequestSpecBuildingServiceLocalImpl extends CRSBuildingServic
 			String apiUrl) {
 		apiUrl = Utils.toCamelCase(apiUrl).replaceAll("\\$\\{(.+)\\}", ":$1");
 		sureField(crName, stepName, eventName, fieldName).setDataRetrieveApiUrl(apiUrl);
+	}
+
+	@Override
+	public void clearPrototypeEventSetTag(String crName, String stepName, String eventName, String fieldName,
+			String nameOfSetTag) {
+		prototypeField(crName, stepName, eventName, fieldName).clearSetTag(nameOfSetTag);
+	}
+
+	@Override
+	public void setEventOnlyonce(String crName, String stepName, String eventName) {
+		EventSpec event = sureEvent(crName, stepName, eventName);
+		event.setIsCollection(false);
+		event.setMaxCollectionSize(null);
+		event.setMinCollectionSize(null);
 	}
 
 	

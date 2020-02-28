@@ -8,7 +8,9 @@ public abstract class ChangeRequestSpecBuilderUtil {
 	protected void error(String message) {
 		throw new RuntimeException(message);
 	}
-
+	protected void log(String string) {
+		System.out.println(String.format("[%20s]: %s", "Builder", string));
+	}
 	protected String $CR() {
 		return workingBoard.getCurrentChangeRequestName();
 	}

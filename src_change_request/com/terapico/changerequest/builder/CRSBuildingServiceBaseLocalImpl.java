@@ -1,7 +1,10 @@
 package com.terapico.changerequest.builder;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
+import java.util.stream.Collectors;
 
 import com.terapico.changerequest.spec.ChangeRequestSpec;
 import com.terapico.changerequest.spec.EventSpec;
@@ -79,7 +82,24 @@ public abstract class CRSBuildingServiceBaseLocalImpl implements ChangeRequestSp
 	}
 
 	protected String getTempEventName(String eventType) {
-		return String.format("evt_%s_%d", eventType, eventCount.incrementAndGet());
+		// 如果现有的events没有这个名字,默认用这个type作为名字
+		if (root().getChangeRequestSpecs().values().stream()
+				.flatMap(itStep->{
+					if (itStep.getStepSpecs() == null) {
+						return new ArrayList<StepSpec>().stream();
+					}
+					return itStep.getStepSpecs().stream();
+				})
+				.flatMap(itEvent->{
+					if (itEvent.getEventSpecs() == null) {
+						return new ArrayList<EventSpec>().stream();
+					}
+					return itEvent.getEventSpecs().stream();
+				})
+				.anyMatch(it->it.getName().equals(eventType))) {
+			return String.format("evt_%s_%d", eventType, eventCount.incrementAndGet());
+		}
+		return eventType;
 	}
 
 	protected FieldSpec sureField(String crName, String stepName, String eventName, String fieldName) {
@@ -98,7 +118,7 @@ public abstract class CRSBuildingServiceBaseLocalImpl implements ChangeRequestSp
 		return newSpec;
 	}
 	protected FieldSpec prototypeField(String crName, String stepName, String eventName, String fieldName) {
-		return getEvent(eventName).findField(fieldName);
+		return getEvent(getEvent(crName, stepName, eventName).getType()).findField(fieldName);
 	}
 	protected EventSpec sureEvent(String crName, String stepName, String eventName) {
 		EventSpec spec = this.getEvent(crName, stepName, eventName);

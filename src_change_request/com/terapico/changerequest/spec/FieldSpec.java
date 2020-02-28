@@ -137,7 +137,7 @@ public class FieldSpec extends CommonSpec<FieldSpec> implements Cloneable{
 		return newOne;
 	}
 	
-	protected Set<String> setTags = new HashSet<>();
+	protected transient Set<String> setTags = new HashSet<>();
 	protected boolean notSet(String tag) {
 		if (setTags.contains(tag)) {
 			return false;
@@ -200,7 +200,13 @@ public class FieldSpec extends CommonSpec<FieldSpec> implements Cloneable{
 		}
 		
 	}
+	public void clearSetTag(String nameOfSetTag) {
+		setTags.remove(nameOfSetTag);
+	}
 	
-	
+	@Override
+	public String getSpecType() {
+		return "Field";
+	}
 
 }

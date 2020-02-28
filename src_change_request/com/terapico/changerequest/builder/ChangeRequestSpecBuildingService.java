@@ -19,7 +19,7 @@ public interface ChangeRequestSpecBuildingService {
 	public void createNewChangeRequest(String crTypeName);
 	public void createNewStep(String crName, int stepIdx, String stepName);
 	// 返回值是event的name,没有的话,就临时生成一个
-	public String addEventIntoStep(String crName, String stepName, String eventName);
+	public String addEventIntoStep(String crName, String stepName, String eventType);
 	public void createNewField(String crName, String stepName, String eventName, String fieldName);
 
 	public void addFieldI18n(String crName, String stepName, String eventName, String fieldName, String localeCode,
@@ -72,6 +72,10 @@ public interface ChangeRequestSpecBuildingService {
 	public void setEventRepeatTimes(String crName, String stepName, String eventName, int min, int max);
 
 	public void setFieldValuesRetrieveApi(String crName, String stepName, String eventName, String fieldName, String apiUrl);
+
+	public void clearPrototypeEventSetTag(String crName, String stepName, String eventName, String fieldName, String nameOfSetTag);
+
+	public void setEventOnlyonce(String crName, String stepName, String eventName);
 
 
 

@@ -63,7 +63,7 @@ public class ChangeRequestSpecBuilder extends ChangeRequestSpecBaseBuilder<Chang
 	}
 
 	public ChangeRequestSpecBuilder must_one() {
-		return is_required(true).required_times(1,1);
+		return is_required(true).only_one();
 	}
 	public ChangeRequestSpecBuilder must_have() {
 		return is_required(true);
@@ -71,7 +71,7 @@ public class ChangeRequestSpecBuilder extends ChangeRequestSpecBaseBuilder<Chang
 	
 
 	public ChangeRequestSpecBuilder once() {
-		return required_times(1,1);
+		return only_one();
 	}
 
 	public ChangeRequestSpecBuilder many_times(int min, int max) {
