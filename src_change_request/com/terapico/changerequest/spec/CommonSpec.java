@@ -63,8 +63,10 @@ public abstract class CommonSpec <T extends CommonSpec<T>>{
 	public T withName(String name) {
 		this.setName(name);
 		log("新建 "+this.getSpecType()+":"+name);
+		whereami();
 		return (T) this;
 	}
+	
 	public T withI18n(Map<String, String> i18nNames) {
 		this.setI18nName(new HashMap<>(i18nNames));
 		return (T) this;
@@ -94,5 +96,8 @@ public abstract class CommonSpec <T extends CommonSpec<T>>{
 	public void rename(String newName) {
 		log("改名 "+this.getSpecType()+":"+name+" rename to "+newName);
 		this.setName(newName);
+	}
+	protected void whereami() {
+		// new Throwable().printStackTrace();
 	}
 }

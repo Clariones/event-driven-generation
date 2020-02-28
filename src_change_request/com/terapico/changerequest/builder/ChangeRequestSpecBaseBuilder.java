@@ -231,12 +231,12 @@ public class ChangeRequestSpecBaseBuilder<T extends ChangeRequestSpecBaseBuilder
 		}
 		service.createNewStep($CR(), stepIdx, stepName);
 		workingBoard.onStep(stepName);
-		log("新建 Step:"+$STEP());
+		log("开始描述 Step:"+$STEP());
 		return me;
 	}
 
 
-	public T contains_event(String eventName) {
+	public T contains_event(String eventTypeName) {
 		if (workingBoard.getCurrentStepName() == null) {
 			// 如果当前不是 Step, 直接event, 那么说明要建立一个默认的,名字和 CR 一样的 Step
 			String stepName = service.createDefaultStepByChangeRequest($CR());
@@ -246,8 +246,9 @@ public class ChangeRequestSpecBaseBuilder<T extends ChangeRequestSpecBaseBuilder
 			System.out.println(Utils.toJson(workingBoard, true));
 			error("只有在Step中才能描述vent");
 		}
-		String eventTempName = service.addEventIntoStep($CR(), $STEP(), eventName);
+		String eventTempName = service.addEventIntoStep($CR(), $STEP(), eventTypeName);
 		workingBoard.onEvent(eventTempName);
+		log("开始描述 Event:"+$EVENT());
 		return me;
 	}
 

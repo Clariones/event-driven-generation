@@ -64,7 +64,7 @@ public class ChangeRequestSpecBuildingServiceLocalImpl extends CRSBuildingServic
 			error("还没有创建Step "+crName+"/"+stepName);
 		}
 		if (isGlobalNewEvent(eventType)) {
-			root().addEvent(new EventSpec().withType(eventType).withName(eventType));
+			root().addEvent(new EventSpec().withType(eventType).withName(eventType+" prototype"));
 		}
 		String tmpName = getTempEventName(eventType);
 		stepSpec.addEvent(new EventSpec().withName(tmpName).withPrototype(getEvent(eventType)).withType(eventType));

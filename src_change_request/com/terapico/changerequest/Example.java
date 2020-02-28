@@ -53,21 +53,21 @@ public class Example {
 							.has_field("content").zh_CN("内容")
 								.range(1,500)
 								.place_holder("请输入条款内容")
-//					.step3("registration").zh_CN("注册信息")
-//						// 只有一个event,一次,必填,可以全部使用默认值: 名字和step一样,标题和step一样,cannot_skip
-//						// 同样的道理, 只有一个step可以向 changeRequest 取默认值
-//							.has_field("register date").zh_CN("申请注册日期").which_type_of(FieldType.DATE)
-//								.tips_title("?").tips_content("领取结婚证的日期")
-//								.place_holder("请选择申请注册的日期")
-//							.has_field("register provice").zh_CN("注册地-省")
-//								.tips_title("?").tips_content("前往领取结婚证的民政局所在地址")
-//								.values_can_get_from("getProvinces/")
-//							.has_field("register city").zh_CN("注册地-市")
-//								.tips_title("?").tips_content("前往领取结婚证的民政局所在地址")
-//								.values_can_get_from("getCitiesByProvince/${register provice}/")
-//							.has_field("register office").zh_CN("注册地-民政局")
-//								.tips_title("?").tips_content("前往领取结婚证的民政局")
-//								.values_can_get_from("getOfficeByCity/${register city}/")
+					.step3("registration").zh_CN("注册信息")
+						// 只有一个event,一次,必填,可以全部使用默认值: 名字和step一样,标题和step一样,cannot_skip
+						// 同样的道理, 只有一个step可以向 changeRequest 取默认值
+							.has_field("register date").zh_CN("申请注册日期").which_type_of(FieldType.DATE)
+								.tips_title("?").tips_content("领取结婚证的日期")
+								.place_holder("请选择申请注册的日期")
+							.has_field("register provice").zh_CN("注册地-省")
+								.tips_title("?").tips_content("前往领取结婚证的民政局所在地址")
+								.values_can_get_from("getProvinces/")
+							.has_field("register city").zh_CN("注册地-市")
+								.tips_title("?").tips_content("前往领取结婚证的民政局所在地址")
+								.values_can_get_from("getCitiesByProvince/${register provice}/")
+							.has_field("register office").zh_CN("注册地-民政局")
+								.tips_title("?").tips_content("前往领取结婚证的民政局")
+								.values_can_get_from("getOfficeByCity/${register city}/")
 				.getChangeRequestSpec();
 	}
 	
