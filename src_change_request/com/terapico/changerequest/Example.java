@@ -50,7 +50,7 @@ public class Example {
 								.defaule_value(0)
 								.optional()
 						.contains_event("premaritial notarization").as("female").zh_CN("女方婚前财产声明")
-						.contains_event("additional terms").zh_CN("补充条款").many_times(0,200)
+						.contains_event("additional terms").zh_CN("补充条款").many_times(0,200).optional()
 							.has_field("content").zh_CN("内容")
 								.range(1,500)
 								.place_holder("请输入条款内容")

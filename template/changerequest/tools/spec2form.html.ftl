@@ -84,14 +84,20 @@
 	</div>
 </#macro>
 <#macro STEP_HEADER crSpec stepSpec>
-
-	<h4>${stepSpec.title!}</h4>
 </#macro>
 <#macro STEP_FOOTER crSpec stepSpec>
 </#macro>
 <#macro EVENT_HEADER crSpec stepSpec eventSpec>
+	<@compress single_line=true>
+	<h4 style="display:inline;">${eventSpec.title}
+		<#if eventSpec.mustHave><span style="color:red;">*</span></#if>
+	</h4>(${eventSpec.name}:${eventSpec.eventType})<#if eventSpec.multiple>
+			[${eventSpec.minimalNumber!}~${eventSpec.maximumNumber!}]
+		</#if>
+	</@compress>
 </#macro>
 <#macro EVENT_FOOTER crSpec stepSpec eventSpec>
+	<hr></hr>
 </#macro>
 <#macro FIELD crSpec stepSpec eventSpec fieldSpec>
 </#macro>
