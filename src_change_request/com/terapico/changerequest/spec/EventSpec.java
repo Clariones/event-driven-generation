@@ -65,5 +65,16 @@ public class EventSpec extends CommonSpec<EventSpec>{
 	public String getSpecType() {
 		return "Event";
 	}
+	public void mergeWithPrototype() {
+		EventSpec baseData = this.getPrototype();
+		baseData.getFieldSpecs().forEach(baseField->{
+			FieldSpec myField = this.findField(baseField.getName());
+			if (myField == null) {
+				this.addField(baseField.copy());
+				return;
+			}
+			myField.mergeWith(baseField);
+		});
+	}
 	
 }

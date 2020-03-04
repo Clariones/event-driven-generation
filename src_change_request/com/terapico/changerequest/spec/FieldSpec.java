@@ -137,6 +137,79 @@ public class FieldSpec extends CommonSpec<FieldSpec> implements Cloneable{
 		return newOne;
 	}
 	
+	public void mergeWith(FieldSpec baseData) {
+		if (this.getInteractionMode() == null) {
+			this.setInteractionMode(baseData.getInteractionMode());
+		}
+		if (this.getInputType() == null) {
+			this.setInputType(baseData.getInputType());
+		}
+		if (this.getDefaultValue() == null) {
+			this.setDefaultValue(baseData.getDefaultValue());
+		}
+		if (this.getForceValue() == null) {
+			this.setForceValue(baseData.getForceValue());
+		}
+		if (this.getRangeArgs() == null) {
+			this.setRangeArgs(baseData.getRangeArgs());
+		}
+		if (this.getPlaceholder() == null) {
+			this.setPlaceholder(baseData.getPlaceholder());
+		}
+		if (this.getTipsTitle() == null) {
+			this.setTipsTitle(baseData.getTipsTitle());
+		}
+		if (this.getTipsContext() == null) {
+			this.setTipsContext(baseData.getTipsContext());
+		}
+		if (this.getSelectable() == null) {
+			this.setSelectable(baseData.getSelectable());
+		}
+		if (this.getMultiSelection() == null) {
+			this.setMultiSelection(baseData.getMultiSelection());
+		}
+		if (this.getValuesMapping() == null) {
+			this.setValuesMapping(baseData.getValuesMapping());
+		}
+		if (baseData.getValuesMapping() != null) {
+			Map<String, Serializable> data = new HashMap<>(baseData.getValuesMapping());
+			if (this.getValuesMapping() != null) {
+				data.putAll(this.getValuesMapping());
+			}
+			this.setValuesMapping(data);
+		}
+		if (this.getDataRetrieveApiUrl() == null) {
+			this.setDataRetrieveApiUrl(baseData.getDataRetrieveApiUrl());
+		}
+		if (this.getName() == null) {
+			this.setName(baseData.getName());
+		}
+		if (this.getTitle() == null) {
+			this.setTitle(baseData.getTitle());
+		}
+		if (baseData.getI18nName() != null) {
+			Map<String, String> data = new HashMap<>(baseData.getI18nName());
+			if (this.getI18nName() != null) {
+				data.putAll(this.getI18nName());
+			}
+			this.setI18nName(data);
+		}
+		
+		if (this.getIsRequired() == null) {
+			this.setIsRequired(baseData.getIsRequired());
+		}
+		if (this.getMinCollectionSize() == null) {
+			this.setMinCollectionSize(baseData.getMinCollectionSize());
+		}
+		if (this.getMaxCollectionSize() == null) {
+			this.setMaxCollectionSize(baseData.getMaxCollectionSize());
+		}
+		if (this.getIsCollection() == null) {
+			this.setIsCollection(baseData.getIsCollection());
+		}
+
+	}
+	
 	protected transient Set<String> setTags = new HashSet<>();
 	protected boolean notSet(String tag) {
 		if (setTags.contains(tag)) {

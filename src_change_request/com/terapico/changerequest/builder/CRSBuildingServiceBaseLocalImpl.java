@@ -1,11 +1,15 @@
 package com.terapico.changerequest.builder;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
-import java.util.stream.Collectors;
 
+import com.terapico.changerequest.builder.OutputName.CHANGE_REQUEST;
+import com.terapico.changerequest.builder.OutputName.CHANGE_REQUEST.STEP;
+import com.terapico.changerequest.builder.OutputName.CHANGE_REQUEST.STEP.EVENT;
+import com.terapico.changerequest.builder.OutputName.CHANGE_REQUEST.STEP.EVENT.FIELD;
 import com.terapico.changerequest.spec.ChangeRequestSpec;
 import com.terapico.changerequest.spec.EventSpec;
 import com.terapico.changerequest.spec.FieldSpec;
@@ -140,5 +144,108 @@ public abstract class CRSBuildingServiceBaseLocalImpl implements ChangeRequestSp
 			error("还没有创建ChangeRequest " + crName );
 		}
 		return spec;
+	}
+
+	protected Map<String, Object> makeOutput() {
+		Map<String, Object> result = new HashMap<>();
+		result.put(OutputName.NAME, root().getName());
+		result.put(OutputName.TITLE, root().getTitle());
+		
+		List<Object> crSpecs = new ArrayList<>();
+		root().getChangeRequestSpecs().forEach((crName,crSpec)->{
+			Map<String, Object> crSpecOutput = makeCROutput(crSpec);
+			crSpecs.add(crSpecOutput);
+		});
+		result.put(OutputName.CHANGE_REQUEST_LIST, crSpecs);
+		return result;
+	}
+
+	protected Map<String, Object> makeCROutput(ChangeRequestSpec spec) {
+		Map<String, Object> result = new HashMap<>();
+		result.put(CHANGE_REQUEST.TITLE, spec.getTitle());
+		result.put(CHANGE_REQUEST.TYPE, spec.getName());
+		List<Object> stepSpecs = new ArrayList<>();
+		spec.getStepSpecs().forEach(stepSpec->{
+			Map<String, Object> stepSpecOutput = makeStepOutput(spec, stepSpec);
+			stepSpecs.add(stepSpecOutput);
+		});
+		result.put(CHANGE_REQUEST.STEP_LIST, stepSpecs);
+		return result;
+	}
+
+	protected Map<String, Object> makeStepOutput(ChangeRequestSpec crSpec, StepSpec stepSpec) {
+		Map<String, Object> result = new HashMap<>();
+		result.put(STEP.TITLE, stepSpec.getTitle());
+		result.put(STEP.NAME, stepSpec.getName());
+		result.put(STEP.INDEX, stepSpec.getIndex());
+		result.put(STEP.SKIP, !stepSpec.getIsRequired());
+		List<Object> eventSpecs = new ArrayList<>();
+		stepSpec.getEventSpecs().forEach(eventSpec->{
+			Map<String, Object> eventSpecOutput = makeEventOutput(crSpec, stepSpec, eventSpec);
+			eventSpecs.add(eventSpecOutput);
+		});
+		result.put(STEP.EVENT_LIST, eventSpecs);
+		return result;
+	}
+
+	protected Map<String, Object> makeEventOutput(ChangeRequestSpec crSpec, StepSpec stepSpec, EventSpec eventSpec) {
+		Map<String, Object> result = new HashMap<>();
+		result.put(EVENT.TITLE, eventSpec.getTitle());
+		result.put(EVENT.NAME, eventSpec.getName());
+		result.put(EVENT.TYPE, eventSpec.getType());
+		result.put(EVENT.MUST, eventSpec.getIsRequired());
+		result.put(EVENT.TYPE, eventSpec.getType());
+		result.put(EVENT.MULTIPLE, eventSpec.getIsCollection());
+		if (eventSpec.getIsCollection()) {
+			if (eventSpec.getMinCollectionSize()==null) {
+				result.put(EVENT.MIN, eventSpec.getIsRequired()?1:0);
+			}else {
+				result.put(EVENT.MIN, eventSpec.getMinCollectionSize());
+			}
+			result.put(EVENT.MAX, eventSpec.getMaxCollectionSize()==null?EVENT._DEFAULT_MAX:eventSpec.getMaxCollectionSize());
+		}
+		List<Object> fieldSpecs = new ArrayList<>();
+		eventSpec.getFieldSpecs().forEach(fieldSpec->{
+			Map<String, Object> fieldSpecOutput = makeFieldOutput(crSpec, stepSpec, eventSpec, fieldSpec);
+			fieldSpecs.add(fieldSpecOutput);
+		});
+		result.put(EVENT.FIELD_LIST, fieldSpecs);
+		return result;
+	}
+
+	protected Map<String, Object> makeFieldOutput(ChangeRequestSpec crSpec, StepSpec stepSpec, EventSpec eventSpec,
+			FieldSpec fieldSpec) {
+		Map<String, Object> result = new HashMap<>();
+		result.put(FIELD.NAME, fieldSpec.getName());
+		result.put(FIELD.TITLE, fieldSpec.getTitle());
+		result.put(FIELD.INTER_ACTION_MODE,fieldSpec.getInteractionMode());
+		if (fieldSpec.getSelectable() == null || fieldSpec.getSelectable().booleanValue() ==  false) {
+			result.put(FIELD.SELECTABLE, FIELD.SELECTABLE_NOT);
+		}else if(fieldSpec.getMultiSelection() == null || fieldSpec.getMultiSelection().booleanValue() == false){
+			result.put(FIELD.SELECTABLE, FIELD.SELECTABLE_SINGLE);
+		}else {
+			result.put(FIELD.SELECTABLE, FIELD.SELECTABLE_MULTI);
+		}
+		result.put(FIELD.MUST, fieldSpec.getIsRequired());
+		if (fieldSpec.getRangeArgs() != null) {
+			putIfNotNull(result, FIELD.MIN, fieldSpec.getRangeArgs()[0]);
+			putIfNotNull(result, FIELD.MAX, fieldSpec.getRangeArgs()[1]);
+		}
+		putIfNotNull(result, FIELD.PLACE_HOLDER, fieldSpec.getPlaceholder());
+		putIfNotNull(result, FIELD.PLACE_HOLDER, fieldSpec.getPlaceholder());
+		putIfNotNull(result, FIELD.TIPS_CONTENT, fieldSpec.getTipsContext());
+		putIfNotNull(result, FIELD.TIPS_TITLE, fieldSpec.getTipsTitle());
+		putIfNotNull(result, FIELD.FORCE_VALUE, fieldSpec.getForceValue());
+		putIfNotNull(result, FIELD.DEFAULT_VALUE, fieldSpec.getDefaultValue());
+		putIfNotNull(result, FIELD.VALUES, fieldSpec.getValuesMapping());
+		return result;
+	}
+
+	@Override
+	public void putIfNotNull(Map<String, Object> result, String key, Object value) {
+		if (value == null) {
+			return;
+		}
+		result.put(key, value);
 	}
 }

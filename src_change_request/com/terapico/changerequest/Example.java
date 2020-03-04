@@ -1,6 +1,7 @@
 package com.terapico.changerequest;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import com.terapico.changerequest.builder.ChangeRequestSpecBuilder;
@@ -12,7 +13,7 @@ import cla.edg.Utils;
 
 public class Example {
 
-	public ProjectChangeRequestSpec scriptExampe() {
+	public Object scriptExampe() {
 
 		return ChangeRequestSpecBuilder.for_project("example")
 				.change_request("marriage registration").zh_CN("婚姻注册申请")
@@ -68,11 +69,35 @@ public class Example {
 							.has_field("register office").zh_CN("注册地-民政局")
 								.tips_title("?").tips_content("前往领取结婚证的民政局")
 								.values_can_get_from("getOfficeByCity/${register city}/")
+				.change_request("test").zh_CN("测试")
+					.has_field("name")
 				.getChangeRequestSpec();
 	}
 	
+	
+	public Object simpleExampe() {
+
+		return ChangeRequestSpecBuilder.for_project("example")
+				.change_request("marriage registration").zh_CN("婚姻注册申请")
+					.has_field("message1")
+						.display()
+						.value("请在下面输入申请婚姻登记的男方信息")
+					.has_field("name").zh_CN("姓名")	
+						.range(1,40)
+						.place_holder("请输入男方姓名")
+						.tips_title("注意事项").tips_content("请与身份证保持一致")
+					.has_field("gender").zh_CN("性别")		
+						.values_canbe("male","男").or("female","女")	
+						.value("male")
+						.disabled()
+					.has_field("birthday").zh_CN("出生日期").which_type_of(FieldType.DATE)
+						.must_have()
+						.place_holder("请输入男方的生日")
+						.tips_title("?").tips_content("请与身份证保持一致")
+				.getChangeRequestSpec();
+	}
 	public static void main(String[] args) {
-		ProjectChangeRequestSpec rst = new Example().scriptExampe();
+		Object rst = new Example().scriptExampe();
 		System.out.println(Utils.toJson(rst, true));
 		
 //		List<EventSpec> X = rst.getChangeRequestSpecs().values().stream()

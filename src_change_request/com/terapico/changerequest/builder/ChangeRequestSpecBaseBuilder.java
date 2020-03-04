@@ -1,6 +1,7 @@
 package com.terapico.changerequest.builder;
 
 import java.io.Serializable;
+import java.util.Map;
 
 import com.terapico.changerequest.spec.ProjectChangeRequestSpec;
 
@@ -25,7 +26,7 @@ public class ChangeRequestSpecBaseBuilder<T extends ChangeRequestSpecBaseBuilder
 		return new ChangeRequestSpecBuildingServiceLocalImpl();
 	}
 
-	public ProjectChangeRequestSpec getChangeRequestSpec() {
+	public Map<String, Object> getChangeRequestSpec() {
 		return service.getProjectChangeRequestSpec();
 	}
 
@@ -188,6 +189,7 @@ public class ChangeRequestSpecBaseBuilder<T extends ChangeRequestSpecBaseBuilder
 		if (workingBoard.getCurrentEventName() == null) {
 			if(workingBoard.isBuildingChangeRequest()) {
 				String stepName = service.createDefaultStepByChangeRequest($CR());
+				log("自动创建Step " + stepName+":");
 				workingBoard.onStep(stepName);
 			}
 			if (workingBoard.isBuildingStep()) {

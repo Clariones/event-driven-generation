@@ -1,6 +1,8 @@
 package com.terapico.changerequest.builder;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.terapico.changerequest.spec.ChangeRequestSpec;
 import com.terapico.changerequest.spec.EventSpec;
@@ -19,8 +21,15 @@ public class ChangeRequestSpecBuildingServiceLocalImpl extends CRSBuildingServic
 	}
 
 	@Override
-	public ProjectChangeRequestSpec getProjectChangeRequestSpec() {
-		return getProjectSpec();
+	public Map<String, Object> getProjectChangeRequestSpec() {
+		root().getChangeRequestSpecs().forEach((cName, cr)->{
+			cr.getStepSpecs().forEach(step->{
+				step.getEventSpecs().forEach(event->{
+					event.mergeWithPrototype();
+				});
+			});
+		});
+		return makeOutput();
 	}
 
 	@Override
@@ -105,7 +114,8 @@ public class ChangeRequestSpecBuildingServiceLocalImpl extends CRSBuildingServic
 	@Override
 	public String createDefaultStepByChangeRequest(String crName) {
 		ChangeRequestSpec crSpec = this.sureCR(crName);
-		StepSpec stepSpec = new StepSpec().withName(crSpec.getName()).withIndex(1).withI18n(crSpec.getI18nName());
+		StepSpec stepSpec = new StepSpec().withName(crSpec.getName()).withIndex(1);
+		stepSpec.addI18n("zh_CN", crSpec.getTitle());
 		crSpec.addStep(stepSpec);
 		return stepSpec.getName();
 	}

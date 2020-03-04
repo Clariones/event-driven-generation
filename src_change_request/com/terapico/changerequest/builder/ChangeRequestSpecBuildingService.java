@@ -1,6 +1,7 @@
 package com.terapico.changerequest.builder;
 
 import java.io.Serializable;
+import java.util.Map;
 
 import com.terapico.changerequest.spec.ProjectChangeRequestSpec;
 
@@ -8,7 +9,7 @@ public interface ChangeRequestSpecBuildingService {
 
 	public void createNewProject(String projectName);
 
-	public ProjectChangeRequestSpec getProjectChangeRequestSpec();
+	public Map<String, Object> getProjectChangeRequestSpec();
 
 	/** 判断指定type的CR是否存在. 如果不是existed指定的,则抛出异常 */
 	public boolean checkChangeRequestExists(String crTypeName);
@@ -76,6 +77,8 @@ public interface ChangeRequestSpecBuildingService {
 	public void clearPrototypeEventSetTag(String crName, String stepName, String eventName, String fieldName, String nameOfSetTag);
 
 	public void setEventOnlyonce(String crName, String stepName, String eventName);
+
+	void putIfNotNull(Map<String, Object> result, String key, Object value);
 
 
 
