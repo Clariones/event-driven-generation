@@ -90,7 +90,7 @@ public class ChangeRequestSpecBaseBuilder<T extends ChangeRequestSpecBaseBuilder
 	}
 
 	
-	public T has_values(String key, Serializable value, boolean keyIsBoolean) {
+	protected T has_values(String key, Serializable value, boolean keyIsBoolean) {
 		if(workingBoard.isBuildingField()) {
 			service.addFieldValueMapping($CR(),$STEP(),$EVENT(),$FIELD(), key, value);
 			service.setFieldSelectable($CR(),$STEP(),$EVENT(),$FIELD(), true, true);
@@ -151,7 +151,7 @@ public class ChangeRequestSpecBaseBuilder<T extends ChangeRequestSpecBaseBuilder
 
 	public T defaule_value(Serializable defaultValue) {
 		if(workingBoard.isBuildingField()) {
-			service.setFieldDefaultValue($CR(),$STEP(),$EVENT(),$FIELD(), defaultValue);
+			service.setFieldDefaultValue($CR(),$STEP(),$EVENT(),$FIELD(), defaultValue+"");
 			workingBoard.onJob(WorkingBoard.DEFAULT_VALUE);
 		}else {
 			error("目前只有字段才能指定缺省值");
@@ -203,6 +203,9 @@ public class ChangeRequestSpecBaseBuilder<T extends ChangeRequestSpecBaseBuilder
 		}
 		if (service.checkFieldExists($CR(),$STEP(),$EVENT(),fieldName)) {
 			// 找到就算了
+		}else if (service.checkFieldExistsInPrototype($CR(),$STEP(),$EVENT(),fieldName)) {
+			// 原来不存在,但是prototype里存在,那就clone一份
+			service.cloneFieldFromPrototype($CR(),$STEP(),$EVENT(),fieldName);
 		}else {
 			service.createNewField($CR(),$STEP(),$EVENT(),fieldName);
 			service.setFieldInputType($CR(),$STEP(),$EVENT(),fieldName, FieldType.TEXT);
@@ -217,6 +220,7 @@ public class ChangeRequestSpecBaseBuilder<T extends ChangeRequestSpecBaseBuilder
 	public T values_can_get_from(String apiUrl) {
 		if(workingBoard.isBuildingField()) {
 			service.setFieldValuesRetrieveApi($CR(),$STEP(),$EVENT(),$FIELD(), apiUrl);
+			service.setFieldSelectable($CR(),$STEP(),$EVENT(),$FIELD(), true, false);
 			workingBoard.onJob(WorkingBoard.VALUES_API);
 		}else {
 			error("只有Field支持设定数据接口");
@@ -224,6 +228,14 @@ public class ChangeRequestSpecBaseBuilder<T extends ChangeRequestSpecBaseBuilder
 		return me;
 	}
 
+	public T do_multiple_select() {
+		if(workingBoard.isBuildingField()) {
+			service.setFieldSelectable($CR(),$STEP(),$EVENT(),$FIELD(), true, true);
+		}else {
+			error("只有Field支持多选");
+		}
+		return me;
+	}
 	protected T step(int stepIdx, String stepName) {
 		if (workingBoard.getCurrentChangeRequestName() == null) {
 			error("只能在描述CR时指定Step");

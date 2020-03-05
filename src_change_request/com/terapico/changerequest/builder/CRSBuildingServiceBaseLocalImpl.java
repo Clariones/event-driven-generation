@@ -231,6 +231,7 @@ public abstract class CRSBuildingServiceBaseLocalImpl implements ChangeRequestSp
 			putIfNotNull(result, FIELD.MIN, fieldSpec.getRangeArgs()[0]);
 			putIfNotNull(result, FIELD.MAX, fieldSpec.getRangeArgs()[1]);
 		}
+		result.put(FIELD.TYPE, fieldSpec.getInputType().getSystemTypeName());
 		putIfNotNull(result, FIELD.PLACE_HOLDER, fieldSpec.getPlaceholder());
 		putIfNotNull(result, FIELD.PLACE_HOLDER, fieldSpec.getPlaceholder());
 		putIfNotNull(result, FIELD.TIPS_CONTENT, fieldSpec.getTipsContext());
@@ -238,6 +239,7 @@ public abstract class CRSBuildingServiceBaseLocalImpl implements ChangeRequestSp
 		putIfNotNull(result, FIELD.FORCE_VALUE, fieldSpec.getForceValue());
 		putIfNotNull(result, FIELD.DEFAULT_VALUE, fieldSpec.getDefaultValue());
 		putIfNotNull(result, FIELD.VALUES, fieldSpec.getValuesMapping());
+		putIfNotNull(result, FIELD.VALUES_RETRIEVE_API, fieldSpec.getDataRetrieveApiUrl());
 		return result;
 	}
 

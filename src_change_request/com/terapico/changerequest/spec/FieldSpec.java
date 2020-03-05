@@ -210,12 +210,12 @@ public class FieldSpec extends CommonSpec<FieldSpec> implements Cloneable{
 
 	}
 	
-	protected transient Set<String> setTags = new HashSet<>();
+	protected transient HashMap<String, String> setTags = new HashMap<>();
 	protected boolean notSet(String tag) {
-		if (setTags.contains(tag)) {
+		if (setTags.containsKey(tag)) {
 			return false;
 		}
-		setTags.add(tag);
+		setTags.put(tag, tag);
 		return true;
 	}
 	
@@ -273,6 +273,30 @@ public class FieldSpec extends CommonSpec<FieldSpec> implements Cloneable{
 		}
 		
 	}
+	public void setSelectableIfNeed(boolean selectable, FieldSpec curFieldSpec) {
+		String setterKey = curFieldSpec.hashCode()+"";
+		if (notSet("selectable")) {
+			setSelectable(selectable);
+			setTags.put("selectable", setterKey);
+			return;
+		}
+		if (setTags.get("selectable").equals(setterKey)) {
+			setSelectable(selectable);
+			return;
+		}
+	}
+	public void setMultiSelectionIfNeed(boolean multiSelection, FieldSpec curFieldSpec) {
+		String setterKey = curFieldSpec.hashCode()+"";
+		if (notSet("multiSelection")) {
+			setTags.put("multiSelection", setterKey);
+			setMultiSelection(multiSelection);
+			return;
+		}
+		if (setTags.get("multiSelection").equals(setterKey)) {
+			setMultiSelection(multiSelection);
+			return;
+		}
+	}
 	public void clearSetTag(String nameOfSetTag) {
 		setTags.remove(nameOfSetTag);
 	}
@@ -281,5 +305,7 @@ public class FieldSpec extends CommonSpec<FieldSpec> implements Cloneable{
 	public String getSpecType() {
 		return "Field";
 	}
+
+	
 
 }

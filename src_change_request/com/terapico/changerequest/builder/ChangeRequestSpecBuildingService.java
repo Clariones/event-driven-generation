@@ -80,6 +80,10 @@ public interface ChangeRequestSpecBuildingService {
 
 	void putIfNotNull(Map<String, Object> result, String key, Object value);
 
+	public boolean checkFieldExistsInPrototype(String crName, String stepName, String eventName, String fieldName);
+
+	public void cloneFieldFromPrototype(String crName, String stepName, String eventName, String fieldName);
+
 
 
 

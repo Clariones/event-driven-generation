@@ -199,8 +199,11 @@ public class ChangeRequestSpecBuildingServiceLocalImpl extends CRSBuildingServic
 	@Override
 	public void setFieldSelectable(String crName, String stepName, String eventName, String fieldName,
 			boolean selectable, boolean multiSelection) {
-		sureField(crName, stepName, eventName, fieldName).setSelectable(selectable);
+		FieldSpec curFieldSpec = null;
+		(curFieldSpec=sureField(crName, stepName, eventName, fieldName)).setSelectable(selectable);
 		sureField(crName, stepName, eventName, fieldName).setMultiSelection(multiSelection);
+		prototypeField(crName, stepName, eventName, fieldName).setSelectableIfNeed(selectable, curFieldSpec);
+		prototypeField(crName, stepName, eventName, fieldName).setMultiSelectionIfNeed(multiSelection, curFieldSpec);
 	}
 
 	@Override
@@ -261,5 +264,16 @@ public class ChangeRequestSpecBuildingServiceLocalImpl extends CRSBuildingServic
 		event.setMinCollectionSize(null);
 	}
 
+	@Override
+	public boolean checkFieldExistsInPrototype(String crName, String stepName, String eventName, String fieldName) {
+		return prototypeField(crName, stepName, eventName, fieldName) != null;
+	}
+	
+	@Override
+	public void cloneFieldFromPrototype(String crName, String stepName, String eventName, String fieldName) {
+		EventSpec eventSpec = sureEvent(crName, stepName, eventName);
+		FieldSpec fieldSpec = prototypeField(crName, stepName, eventName, fieldName);
+		eventSpec.addField(fieldSpec.copy());
+	}
 	
 }
