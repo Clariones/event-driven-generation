@@ -26,7 +26,7 @@ public class ChangeRequestSpecBaseBuilder<T extends ChangeRequestSpecBaseBuilder
 		return new ChangeRequestSpecBuildingServiceLocalImpl();
 	}
 
-	public Map<String, Object> getChangeRequestSpec() {
+	public Map<String, Map<String, Object>> getChangeRequestSpec() {
 		return service.getProjectChangeRequestSpec();
 	}
 
@@ -236,14 +236,14 @@ public class ChangeRequestSpecBaseBuilder<T extends ChangeRequestSpecBaseBuilder
 		}
 		return me;
 	}
-	protected T step(int stepIdx, String stepName) {
+	public T step(String stepName) {
 		if (workingBoard.getCurrentChangeRequestName() == null) {
 			error("只能在描述CR时指定Step");
 		}
 		if(service.checkStepExists($CR(), stepName)) {
 			error("Step " + stepName+" 已经在"+$CR()+"中定义过.");
 		}
-		service.createNewStep($CR(), stepIdx, stepName);
+		service.createNewStep($CR(), stepName);
 		workingBoard.onStep(stepName);
 		log("开始描述 Step:"+$STEP());
 		return me;

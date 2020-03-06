@@ -25,22 +25,6 @@ public class ChangeRequestSpecBuilder extends ChangeRequestSpecBaseBuilder<Chang
 		}
 	}
 
-	public ChangeRequestSpecBuilder step1(String stepName) {
-		return step(1, stepName);
-	}
-	public ChangeRequestSpecBuilder step2(String stepName) {
-		return step(2, stepName);
-	}
-	public ChangeRequestSpecBuilder step3(String stepName) {
-		return step(3, stepName);
-	}
-	public ChangeRequestSpecBuilder step4(String stepName) {
-		return step(4, stepName);
-	}
-	public ChangeRequestSpecBuilder step5(String stepName) {
-		return step(5, stepName);
-	}
-
 	public ChangeRequestSpecBuilder zh_CN(String chineseText) {
 		return i18n("zh_CN", chineseText);
 	}

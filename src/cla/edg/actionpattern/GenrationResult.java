@@ -44,5 +44,13 @@ public class GenrationResult {
 		this.actionCode = actionCode;
 	}
 	
+	public GenrationResult as_new_file() {
+		this.setActionCode(ACTION_REPLACE);
+		return this;
+	}
+	public GenrationResult when_not_exist() {
+		this.setActionCode(ACTION_CREATE_WHEN_NEED);
+		return this;
+	}
 	
 }

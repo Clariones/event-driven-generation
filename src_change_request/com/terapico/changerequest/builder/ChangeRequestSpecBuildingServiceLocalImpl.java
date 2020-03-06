@@ -21,7 +21,9 @@ public class ChangeRequestSpecBuildingServiceLocalImpl extends CRSBuildingServic
 	}
 
 	@Override
-	public Map<String, Object> getProjectChangeRequestSpec() {
+	public Map<String, Map<String, Object>> getProjectChangeRequestSpec() {
+//		System.out.println(Utils.toJson(root(), true));
+//		System.exit(0);
 		root().getChangeRequestSpecs().forEach((cName, cr)->{
 			cr.getStepSpecs().forEach(step->{
 				step.getEventSpecs().forEach(event->{
@@ -29,7 +31,16 @@ public class ChangeRequestSpecBuildingServiceLocalImpl extends CRSBuildingServic
 				});
 			});
 		});
-		return makeOutput();
+		
+		Map<String, Object> allEventSpec = new HashMap<String, Object>();
+		root().getAllEventSpecs().forEach((name,spec)->{
+			allEventSpec.put(name, this.makeEventOutput(null, null, spec));
+		});
+		
+		Map<String, Map<String, Object>> result = new HashMap<>();
+		result.put("projectSpec", makeOutput());
+		result.put("allEventSpec", allEventSpec);
+		return result;
 	}
 
 	@Override
@@ -58,10 +69,14 @@ public class ChangeRequestSpecBuildingServiceLocalImpl extends CRSBuildingServic
 	}
 
 	@Override
-	public void createNewStep(String crName, int stepIdx, String stepName) {
+	public void createNewStep(String crName, String stepName) {
 		ChangeRequestSpec crSpec = this.getChangeRequest(crName);
 		if (crSpec == null) {
 			error("还没有创建changeRequest "+crName);
+		}
+		int stepIdx = 1;
+		if (crSpec.getStepSpecs() != null) {
+			stepIdx = crSpec.getStepSpecs().size() + 1;
 		}
 		crSpec.addStep(new StepSpec().withName(stepName).withIndex(stepIdx));
 	}
@@ -275,5 +290,7 @@ public class ChangeRequestSpecBuildingServiceLocalImpl extends CRSBuildingServic
 		FieldSpec fieldSpec = prototypeField(crName, stepName, eventName, fieldName);
 		eventSpec.addField(fieldSpec.copy());
 	}
+
+	
 	
 }

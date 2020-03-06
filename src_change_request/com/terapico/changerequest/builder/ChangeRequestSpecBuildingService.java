@@ -9,7 +9,7 @@ public interface ChangeRequestSpecBuildingService {
 
 	public void createNewProject(String projectName);
 
-	public Map<String, Object> getProjectChangeRequestSpec();
+	public Map<String, Map<String, Object>> getProjectChangeRequestSpec();
 
 	/** 判断指定type的CR是否存在. 如果不是existed指定的,则抛出异常 */
 	public boolean checkChangeRequestExists(String crTypeName);
@@ -18,7 +18,7 @@ public interface ChangeRequestSpecBuildingService {
 	public boolean checkFieldExists(String scrName, String stepName, String eventName, String fieldName);
 
 	public void createNewChangeRequest(String crTypeName);
-	public void createNewStep(String crName, int stepIdx, String stepName);
+	public void createNewStep(String crName, String stepName);
 	// 返回值是event的name,没有的话,就临时生成一个
 	public String addEventIntoStep(String crName, String stepName, String eventType);
 	public void createNewField(String crName, String stepName, String eventName, String fieldName);
@@ -83,11 +83,6 @@ public interface ChangeRequestSpecBuildingService {
 	public boolean checkFieldExistsInPrototype(String crName, String stepName, String eventName, String fieldName);
 
 	public void cloneFieldFromPrototype(String crName, String stepName, String eventName, String fieldName);
-
-
-
-
-	
 
 	
 

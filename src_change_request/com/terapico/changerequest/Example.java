@@ -1,23 +1,19 @@
 package com.terapico.changerequest;
 
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import com.terapico.changerequest.builder.ChangeRequestSpecBuilder;
 import com.terapico.changerequest.builder.FieldType;
-import com.terapico.changerequest.spec.EventSpec;
-import com.terapico.changerequest.spec.ProjectChangeRequestSpec;
 
 import cla.edg.Utils;
 
 public class Example {
 
-	public Object scriptExampe() {
+	public Map<String, Map<String, Object>> scriptExampe() {
 
 		return ChangeRequestSpecBuilder.for_project("example")
 				.change_request("marriage registration").zh_CN("婚姻注册申请")
-					.step1("personal info").zh_CN("个人信息")							//默认 .cannot_skip()
+					.step("personal info").zh_CN("个人信息")							//默认 .cannot_skip()
 						.contains_event("citizen").as("male").zh_CN("男方信息")
 							.has_field("message1")
 								.display()
@@ -34,7 +30,7 @@ public class Example {
 								.must_have()
 								.place_holder("请输入男方的生日")
 								.tips_title("?").tips_content("请与身份证保持一致")
-					.step2("personal info 2").zh_CN("个人信息2")	
+					// .step("personal info 2").zh_CN("个人信息2")	
 						.contains_event("citizen").as("female").zh_CN("女方信息").must_one()
 							.for_field("message1")
 								.display()
@@ -42,7 +38,7 @@ public class Example {
 							.for_field("name").place_holder("请输入女方姓名")
 							.for_field("gender").value("female")
 							.for_field("birthday").place_holder("请输入女方的生日")
-					.step3("premarital declaration").zh_CN("婚前财产及协议声明").can_skip()
+					.step("premarital declaration").zh_CN("婚前财产及协议声明").can_skip()
 						.contains_event("premaritial notarization").as("male").zh_CN("男方婚前财产声明")
 							.has_field("need notarize").zh_CN("我要申请婚前财产公证")
 								.defaule_value(false)
@@ -58,7 +54,7 @@ public class Example {
 							.has_field("content").zh_CN("内容")
 								.range(1,500)
 								.place_holder("请输入条款内容")
-					.step4("registration").zh_CN("注册信息")
+					.step("registration").zh_CN("注册信息")
 						// 只有一个event,一次,必填,可以全部使用默认值: 名字和step一样,标题和step一样,cannot_skip
 						// 同样的道理, 只有一个step可以向 changeRequest 取默认值
 							.has_field("register date").zh_CN("申请注册日期").which_type_of(FieldType.DATE)
