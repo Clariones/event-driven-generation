@@ -230,7 +230,11 @@ public class FieldSpec extends CommonSpec<FieldSpec> implements Cloneable{
 			this.setInteractionMode(mode);
 		}
 	}
-	
+	public void setIsRequiredIfNeed(boolean required) {
+		if (notSet("required")) {
+			this.setIsRequired(required);
+		}
+	}
 	public void setForceValueIfNeed(Serializable forceValue) {
 		if (notSet("forceValue")) {
 			this.setForceValue(forceValue);
@@ -305,6 +309,7 @@ public class FieldSpec extends CommonSpec<FieldSpec> implements Cloneable{
 	public String getSpecType() {
 		return "Field";
 	}
+	
 
 	
 

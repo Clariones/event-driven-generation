@@ -16,6 +16,8 @@ import com.terapico.changerequest.spec.FieldSpec;
 import com.terapico.changerequest.spec.ProjectChangeRequestSpec;
 import com.terapico.changerequest.spec.StepSpec;
 
+import cla.edg.Utils;
+
 public abstract class CRSBuildingServiceBaseLocalImpl implements ChangeRequestSpecBuildingService {
 	protected ProjectChangeRequestSpec projectSpec;
 	protected static final AtomicLong eventCount = new AtomicLong(0);
@@ -232,7 +234,6 @@ public abstract class CRSBuildingServiceBaseLocalImpl implements ChangeRequestSp
 			putIfNotNull(result, FIELD.MAX, fieldSpec.getRangeArgs()[1]);
 		}
 		result.put(FIELD.TYPE, fieldSpec.getInputType().getSystemTypeName());
-		putIfNotNull(result, FIELD.PLACE_HOLDER, fieldSpec.getPlaceholder());
 		putIfNotNull(result, FIELD.PLACE_HOLDER, fieldSpec.getPlaceholder());
 		putIfNotNull(result, FIELD.TIPS_CONTENT, fieldSpec.getTipsContext());
 		putIfNotNull(result, FIELD.TIPS_TITLE, fieldSpec.getTipsTitle());

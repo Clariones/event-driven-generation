@@ -48,6 +48,7 @@ public interface OutputName {
 					String DEFAULT_VALUE = "defaultValue";
 					String VALUES = "valuesMapping";
 					String VALUES_RETRIEVE_API = "valuesRetrieveApi";
+					String SAMPLE_DATA = "sampleData";
 				}
 			}
 		}

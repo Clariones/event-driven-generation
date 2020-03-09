@@ -1,5 +1,6 @@
 package com.terapico.changerequest;
 
+import java.io.File;
 import java.util.List;
 
 import com.terapico.changerequest.generator.ChangeRequestGenerator;
@@ -10,13 +11,11 @@ public class GenerationJobExample {
 	public static void main(String[] args) throws Exception {
 		ChangeRequestGenerator generator = new ChangeRequestGenerator();
 		generator.setChangeRequestSpec(new Example().scriptExampe());
-		generator.setProjectName("crExample");
-		generator.setOrgName("skynet");
+		generator.setProjectName("jingou");
+		generator.setOrgName("recycleSupplycChain");
 		List<GenrationResult> files = generator.runJob();
-		files.forEach(file->{
-			System.out.println(file.getFileName());
-			System.out.println(file.getActionCode());
-			System.out.println(file.getContent());
-		});
+		
+		String outputFolder = "/works/jobs/front_end_poc/workspace/jingou-biz-suite/bizcore/GEN-CODE";
+		generator.saveToFiles(new File(outputFolder), files);
 	}
 }

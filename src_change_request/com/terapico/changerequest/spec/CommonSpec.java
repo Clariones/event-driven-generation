@@ -36,6 +36,9 @@ public abstract class CommonSpec <T extends CommonSpec<T>>{
 		return isRequired;
 	}
 	public void setIsRequired(Boolean isRequired) {
+		if(this.getName().equals("register office")) {
+			this.whereami("isRequired="+isRequired);
+		}
 		this.isRequired = isRequired;
 	}
 	public Integer getMinCollectionSize() {
@@ -63,7 +66,6 @@ public abstract class CommonSpec <T extends CommonSpec<T>>{
 	public T withName(String name) {
 		this.setName(name);
 		log("新建 "+this.getSpecType()+":"+name);
-		whereami();
 		return (T) this;
 	}
 	
@@ -97,7 +99,7 @@ public abstract class CommonSpec <T extends CommonSpec<T>>{
 		log("改名 "+this.getSpecType()+":"+name+" rename to "+newName);
 		this.setName(newName);
 	}
-	protected void whereami() {
-		// new Throwable().printStackTrace();
+	protected void whereami(String message) {
+		new Throwable(message).printStackTrace();
 	}
 }

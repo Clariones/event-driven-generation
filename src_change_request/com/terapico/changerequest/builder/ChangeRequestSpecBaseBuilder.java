@@ -182,6 +182,7 @@ public class ChangeRequestSpecBaseBuilder<T extends ChangeRequestSpecBaseBuilder
 	}
 
 	public T for_field(String fieldName) {
+		verifyFieldName(fieldName);
 		// 现在开始建立 field.
 		// 如果 现在还在建立 changRequest, 那么自动建立 step 和 event
 		// 如果 现在还在建立 step, 那么自动建立 event
@@ -215,6 +216,14 @@ public class ChangeRequestSpecBaseBuilder<T extends ChangeRequestSpecBaseBuilder
 		}
 		workingBoard.onField(fieldName);
 		return me;
+	}
+
+	private void verifyFieldName(String fieldName) {
+		if (fieldName.matches(".*[A-Z]+.*")) {
+			if (!fieldName.contains(" ")) {
+				error(fieldName+": 我们建议使用全小写,空格分隔. 某些简写可以使用大写,请在前面加个空格.");
+			}
+		}
 	}
 
 	public T values_can_get_from(String apiUrl) {

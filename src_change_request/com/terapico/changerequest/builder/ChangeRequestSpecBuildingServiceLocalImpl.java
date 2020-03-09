@@ -34,7 +34,7 @@ public class ChangeRequestSpecBuildingServiceLocalImpl extends CRSBuildingServic
 		
 		Map<String, Object> allEventSpec = new HashMap<String, Object>();
 		root().getAllEventSpecs().forEach((name,spec)->{
-			allEventSpec.put(name, this.makeEventOutput(null, null, spec));
+			allEventSpec.put(name, spec);
 		});
 		
 		Map<String, Map<String, Object>> result = new HashMap<>();
@@ -152,7 +152,7 @@ public class ChangeRequestSpecBuildingServiceLocalImpl extends CRSBuildingServic
 	@Override
 	public void setFieldRequired(String crName, String stepName, String eventName, String fieldName, boolean required) {
 		sureField(crName, stepName, eventName, fieldName).setIsRequired(required);
-		sureField(crName, stepName, eventName, fieldName).setIsRequired(required);
+		prototypeField(crName, stepName, eventName, fieldName).setIsRequiredIfNeed(required);
 	}
 
 	@Override

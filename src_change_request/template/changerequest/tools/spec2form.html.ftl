@@ -33,6 +33,12 @@
 	padding: 5px 10px;
 	border-left: 1px solid grey;
 }
+
+.event_container {
+	padding: 5px 10px;
+	margin-top: 15px;
+}
+
 .fd_display {
 	padding: 2px 5px;
     color: #66a26e;
@@ -47,11 +53,12 @@
 	color: #66a26e;
 }
 .evt_header {
-	margin-top: 20px;
-	border-bottom: 3px solid #cdcdcd;
+	/* margin-top: 20px;
+	border-bottom: 3px solid #cdcdcd;*/
 }
 .evt_header h4 {
 	display: inline-block;
+    /*
     padding: 3px 20px;
     background-color: #cdcdcd;
     color: black;
@@ -62,6 +69,7 @@
     box-sizing: border-box;
     position: relative;
     bottom: -4px;
+    */
 }
 .disabled {
 	background-color: rgba(230,230,220,0.5);
@@ -70,6 +78,7 @@
 
 </head>
 <body>
+<h1 style="text-align:center;">${projectSpec.name}的ChangeRequest规格展示</h1>
 <div class="main_pannel">
 <ul class="nav nav-pills flex-column cr_nav_menu" role="tablist">
 <#list projectSpec.changeRequestList as crSpec>
@@ -89,7 +98,7 @@
 			<div class="step_container">
 			<@STEP_HEADER crSpec stepSpec/>
 			<#list stepSpec.eventList as eventSpec>
-				<div class="event_container">
+				<div class="card event_container">
 				<@EVENT_HEADER crSpec stepSpec eventSpec/>
 				<#list eventSpec.fieldList as fieldSpec>
 					<div class="field_container">
@@ -147,7 +156,7 @@ $(function(){
 </#macro>
 <#macro EVENT_HEADER crSpec stepSpec eventSpec>
 	<@compress single_line=true>
-	<div class="evt_header">
+	<div class="card-header evt_header">
 		<h4>${eventSpec.title}
 			<#if eventSpec.mustHave><span style="color:red;">*</span></#if>
 		</h4>(${eventSpec.name}:${eventSpec.eventType})<#if eventSpec.multiple>
@@ -176,20 +185,21 @@ $(function(){
 	<#else>
 		<div class="form-group">
 			<label for="${helper.getLowerCaseName(stepSpec.name, eventSpec.name, fieldSpec.name)}">${fieldSpec.title!}</label>
-			<#if eventSpec.mustHave><span style="color:red;">*</span></#if>
-			(${fieldSpec.name}):${fieldSpec.inputType}
-			<#if fieldSpec.minimal?? || fieldSpec.maximum??>
-				[${fieldSpec.minimal!}~${fieldSpec.maximum!}]
-			</#if>
-			<#if fieldSpec.valuesRetrieveApi?has_content>
-				使用"${fieldSpec.valuesRetrieveApi}"查询数据
-			</#if>
-			<#if fieldSpec.tipsContent??>
-				<div class="fd_tips">
-					<a href="#" data-toggle="popover" title="温馨提示" data-content="${fieldSpec.tipsContent}">${fieldSpec.tipsTitle!"提示"}</a>
-				</div>
-			</#if>
-			
+			<#if fieldSpec.mustHave><span style="color:red;">*</span></#if>
+			<span style="color:#66a26e; font-size: 80%;">
+				(${fieldSpec.name}):${fieldSpec.inputType}
+				<#if fieldSpec.minimal?? || fieldSpec.maximum??>
+					[${fieldSpec.minimal!}~${fieldSpec.maximum!}]
+				</#if>
+				<#if fieldSpec.valuesRetrieveApi?has_content>
+					使用"${fieldSpec.valuesRetrieveApi}"查询数据
+				</#if>
+				<#if fieldSpec.tipsContent??>
+					<div class="fd_tips">
+						<a href="#" data-toggle="popover" title="温馨提示" data-content="${fieldSpec.tipsContent}">${fieldSpec.tipsTitle!"提示"}</a>
+					</div>
+				</#if>
+			</span>
 			
 			<#if fieldSpec.selectable == "single_selectable">
 				<@SINGLE_SELECTABLE_INPUT crSpec stepSpec eventSpec fieldSpec fieldId/>
