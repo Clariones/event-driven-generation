@@ -74,6 +74,14 @@
 .disabled {
 	background-color: rgba(230,230,220,0.5);
 }
+.btn-sm {
+	padding-left: 2rem;
+	padding-right: 2rem;
+}
+.row {
+	margin-left: unset;
+	margin-right: unset;
+}
 </style>
 
 </head>
@@ -151,6 +159,25 @@ $(function(){
 	</div>
 </#macro>
 <#macro STEP_HEADER crSpec stepSpec>
+<#if crSpec.stepList?size gt 1>
+	<div class="row justify-content-center">
+		<#if stepSpec.index gt 1>
+		<button type="button" class="btn btn-primary btn-lg col-sm-4">上一步</button>
+		<#else>
+		<div class="col-sm-4"></div>
+		</#if>
+		<div class="col-sm-4"></div>
+		<#if stepSpec.index == crSpec.stepList?size>
+		<button type="button" class="btn btn-primary btn-lg col-sm-4">提交</button>
+		<#else>
+		<button type="button" class="btn btn-primary btn-lg col-sm-4">下一步</button>
+		</#if>
+	</div>
+<#else>
+	<div class="row justify-content-center">
+	<button type="button" class="btn btn-primary btn-lg col-sm-4">提交</button>
+	</div>
+</#if>
 </#macro>
 <#macro STEP_FOOTER crSpec stepSpec>
 </#macro>
@@ -159,7 +186,7 @@ $(function(){
 	<div class="card-header evt_header">
 		<h4>${eventSpec.title}
 			<#if eventSpec.mustHave><span style="color:red;">*</span></#if>
-		</h4>(${eventSpec.name}:${eventSpec.eventType})<#if eventSpec.multiple>
+		</h4>(${eventSpec.name}:${helper.toModelStyleName(eventSpec.eventType)})<#if eventSpec.multiple>
 				[${eventSpec.minimalNumber!}~${eventSpec.maximumNumber!}]
 			</#if>
 	</div>
@@ -168,6 +195,13 @@ $(function(){
 </#macro>
 <#macro EVENT_FOOTER crSpec stepSpec eventSpec>
 	</form>
+	<#if eventSpec.multiple>
+	<div style="display:flex; flex-direction: row; justify-content:space-between;">
+		<button type="button" class="btn btn-primary btn-sm">上一条</button>
+		<button type="button" class="btn btn-danger btn-sm">删除</button>
+		<button type="button" class="btn btn-primary btn-sm">下一条</button>
+	</div>
+	</#if>
 </#macro>
 <#macro FIELD crSpec stepSpec eventSpec fieldSpec>
 	<#assign fieldId=helper.getLowerCaseName(stepSpec.name, eventSpec.name, fieldSpec.name)/>
@@ -187,7 +221,7 @@ $(function(){
 			<label for="${helper.getLowerCaseName(stepSpec.name, eventSpec.name, fieldSpec.name)}">${fieldSpec.title!}</label>
 			<#if fieldSpec.mustHave><span style="color:red;">*</span></#if>
 			<span style="color:#66a26e; font-size: 80%;">
-				(${fieldSpec.name}):${fieldSpec.inputType}
+				(${helper.toJavaVariableName(fieldSpec.name)}):${fieldSpec.inputType}
 				<#if fieldSpec.minimal?? || fieldSpec.maximum??>
 					[${fieldSpec.minimal!}~${fieldSpec.maximum!}]
 				</#if>

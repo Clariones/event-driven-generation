@@ -12,8 +12,19 @@ TODO-1:
 	event_initiator="$(${userModelName})"
 	change_request="$(${crModelName})"
 	_features="event"
-	_bind_with_cr_type="${helper.getAllCRTypeUsedEvent(allEventSpec[eventName].eventType, projectSpec)?join("|")}"
+	_bind_with_cr_type="${helper.getAllCRTypeUsedEvent(allEventSpec[eventName].type, projectSpec)?join("|")}"
 	/>
 	
 </#list>
 >>> TODO-1 结束 <<<
+
+TODO-2:
+请确数据库 ${projectName?lower_case} 中包含以下定义:
+>>> TODO-2 开始 <<<
+INSERT INTO change_request_type_data (`id`, `name`, `code`, `icon`, `display_order`, `bind_types`, `step_configuration`, `platform`) 
+	VALUES 
+<#list projectSpec.changeRequestList as crSpec>
+	('${helper.getCRName(crSpec)?upper_case}', '${crSpec.title!}', '${helper.getCRName(crSpec)?upper_case}', '', '${100+crSpec?index}', '', '', 'P000001')<#if !crSpec?is_last>,</#if>
+</#list>
+	;
+>>> TODO-2 结束 <<<

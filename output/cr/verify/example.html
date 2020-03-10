@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en" slick-uniqueid="3">
+<head>
+    <title>example CR form</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/build/css/bootstrap-datetimepicker.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link id="bsdp-css" href="https://unpkg.com/bootstrap-datepicker@1.9.0/dist/css/bootstrap-datepicker3.min.css" rel="stylesheet">
+
+
+
+  	<script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+  	<script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+  	<script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
+    <script src="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/src/js/bootstrap-datetimepicker.js"></script>
+    <script src="https://unpkg.com/bootstrap-datepicker@1.9.0/dist/js/bootstrap-datepicker.min.js"></script>
+
+
+<style>
+.main_pannel{
+	display: flex;
+	flex-direction: row;
+}
+.cr_nav_menu {
+	
+}
+.cr_nav {
+}
+.cr_container {
+	margin: 5px;
+	padding: 5px 10px;
+	border-left: 1px solid grey;
+}
+
+.event_container {
+	padding: 5px 10px;
+	margin-top: 15px;
+}
+
+.fd_display {
+	padding: 2px 5px;
+    color: #66a26e;
+    font-style: italic;
+    font-size: 18px;
+}
+.fd_tips {
+	float: right;
+	
+}
+.fd_tips a {
+	color: #66a26e;
+}
+.evt_header {
+	/* margin-top: 20px;
+	border-bottom: 3px solid #cdcdcd;*/
+}
+.evt_header h4 {
+	display: inline-block;
+    /*
+    padding: 3px 20px;
+    background-color: #cdcdcd;
+    color: black;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    margin-bottom: 0;
+    padding-bottom: 0px;
+    box-sizing: border-box;
+    position: relative;
+    bottom: -4px;
+    */
+}
+.disabled {
+	background-color: rgba(230,230,220,0.5);
+}
+.btn-sm {
+	padding-left: 2rem;
+	padding-right: 2rem;
+}
+.row {
+	margin-left: unset;
+	margin-right: unset;
+}
+</style>
+
+</head>
+<body>
+<h1 style="text-align:center;">example的ChangeRequest规格展示</h1>
+<div class="main_pannel">
+<ul class="nav nav-pills flex-column cr_nav_menu" role="tablist">
+	<li class="nav-item cr_nav">
+		<a class="nav-link active" id="test_tab" data-toggle="tab" href="#test" role="tab" aria-controls="test" aria-selected="true">测试</a>
+	</li>
+	<li class="nav-item cr_nav">
+		<a class="nav-link " id="marriage_registration_tab" data-toggle="tab" href="#marriage_registration" role="tab" aria-controls="marriage_registration" aria-selected="false">婚姻注册申请</a>
+	</li>
+</ul>
+<div class="tab-content" style="flex:1;">
+	<div class="tab-pane fade show active" id="test" role="tabpanel" aria-labelledby="test_tab">
+		<div class="cr_container">
+	<h2>测试</h2>
+	<ul class="nav nav-tabs nav-justified flex-row" role="tablist">
+		<li class="nav-item step_nav">
+			<a class="nav-link active" id="test_test_tab" data-toggle="tab" href="#test_test" role="tab" aria-controls="test" aria-selected="true">Step 1: 测试</a>
+		</li>
+	</ul>
+	<div class="tab-content">
+			<div class="tab-pane fade show active" id="test_test" role="tabpanel" aria-labelledby="test_test_tab">
+
+			<div class="step_container">
+	<div class="row justify-content-center">
+	<button type="button" class="btn btn-primary btn-lg col-sm-4">提交</button>
+	</div>
+				<div class="card event_container">
+<div class="card-header evt_header"> <h4>测试 <span style="color:red;">*</span> </h4>(test:test) </div>	<form>
+					<div class="field_container">
+		<div class="form-group">
+			<label for="test_test_name">姓名</label>
+			<span style="color:red;">*</span>
+			<span style="color:#66a26e; font-size: 80%;">
+				(name):string
+			</span>
+			
+		<input class="form-control" 
+				type="text" 
+				
+				id="test_test_name" />
+			
+		</div>
+					</div>
+					<div class="field_container">
+		<div class="form-group">
+			<label for="test_test_birthtime">出生时间</label>
+			<span style="color:red;">*</span>
+			<span style="color:#66a26e; font-size: 80%;">
+				(birthtime):datetime
+			</span>
+			
+		<div class="input-group input_date mb-3">
+  			<input type="text" class="form-control" data-provide="datepicker" placeholder="用来算生辰八字">
+  			<div class="input-group-append">
+    			<span class="input-group-text"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+  			</div>
+		</div>
+			
+		</div>
+					</div>
+					<div class="field_container">
+		<div class="form-group">
+			<label for="test_test_favorite">爱好</label>
+			<span style="color:red;">*</span>
+			<span style="color:#66a26e; font-size: 80%;">
+				(favorite):string
+			</span>
+			
+	<div class="form-control">
+	 	<div class="form-check-inline">
+  			<label class="form-check-label">
+    			<input type="checkbox" class="form-check-input" name="test_test_favorite"
+    				
+    				/>运动
+  			</label>
+		</div>
+	 	<div class="form-check-inline">
+  			<label class="form-check-label">
+    			<input type="checkbox" class="form-check-input" name="test_test_favorite"
+    				
+    				/>读书
+  			</label>
+		</div>
+	 	<div class="form-check-inline">
+  			<label class="form-check-label">
+    			<input type="checkbox" class="form-check-input" name="test_test_favorite"
+    				
+    				/>美食
+  			</label>
+		</div>
+	 	<div class="form-check-inline">
+  			<label class="form-check-label">
+    			<input type="checkbox" class="form-check-input" name="test_test_favorite"
+    				
+    				/>修炼
+  			</label>
+		</div>
+	 </div>
+			
+		</div>
+					</div>
+					<div class="field_container">
+		<div class="form-group">
+			<label for="test_test_self introduction">自我介绍</label>
+			<span style="color:red;">*</span>
+			<span style="color:#66a26e; font-size: 80%;">
+				(selfIntroduction):longtext
+					[10~500]
+			</span>
+			
+		<textarea class="form-control" 
+				type="text" 
+				
+				id="test_test_self introduction"></textarea>
+			
+		</div>
+					</div>
+	</form>
+				</div>
+				<div class="card event_container">
+<div class="card-header evt_header"> <h4>财产声明 <span style="color:red;">*</span> </h4>(madamada:premaritial_notarization) </div>	<form>
+					<div class="field_container">
+		<div class="form-group">
+			<label for="test_madamada_need notarize">我要申请婚前财产公证</label>
+			<span style="color:red;">*</span>
+			<span style="color:#66a26e; font-size: 80%;">
+				(needNotarize):boolean
+			</span>
+			
+	
+	
+	
+	 
+	 <div class="form-control">
+	 	<div class="form-check-inline">
+  			<label class="form-check-label">
+    			<input type="radio" class="form-check-input" name="test_madamada_need notarize"
+    				
+    				 />我要申请婚前财产公证
+  			</label>
+		</div>
+	 	<div class="form-check-inline">
+  			<label class="form-check-label">
+    			<input type="radio" class="form-check-input" name="test_madamada_need notarize"
+    				
+    				 checked />我放弃婚前财产公证
+  			</label>
+		</div>
+	 </div>
+			
+		</div>
+					</div>
+					<div class="field_container">
+		<div class="form-group">
+			<label for="test_madamada_delcared value">声明财产金额</label>
+			
+			<span style="color:#66a26e; font-size: 80%;">
+				(delcaredValue):money
+					[1,000~100,000,000]
+					<div class="fd_tips">
+						<a href="#" data-toggle="popover" title="温馨提示" data-content="财产少于¥10000元,建议不要做婚前财产公证. 公证费用为¥300.00.">注意</a>
+					</div>
+			</span>
+			
+<div class="input-group mb-3">
+    <div class="input-group-prepend">
+      	<span class="input-group-text">$</span>
+    </div>
+		<input class="form-control" 
+				type="number" min="0.00" max="10000.00" step="0.01"
+				placeholder="请输入声明要公证的婚前财产金额"
+				id="test_madamada_delcared value" />
+</div>
+			
+		</div>
+					</div>
+	</form>
+				</div>
+			</div>
+			</div>
+	</div>
+		</div>
+	</div>
+	<div class="tab-pane fade" id="marriage_registration" role="tabpanel" aria-labelledby="marriage_registration_tab">
+		<div class="cr_container">
+	<h2>婚姻注册申请</h2>
+	<ul class="nav nav-tabs nav-justified flex-row" role="tablist">
+		<li class="nav-item step_nav">
+			<a class="nav-link active" id="marriage_registration_personal_info_tab" data-toggle="tab" href="#marriage_registration_personal_info" role="tab" aria-controls="personal_info" aria-selected="true">Step 1: 个人信息</a>
+		</li>
+		<li class="nav-item step_nav">
+			<a class="nav-link " id="marriage_registration_premarital_declaration_tab" data-toggle="tab" href="#marriage_registration_premarital_declaration" role="tab" aria-controls="premarital_declaration" aria-selected="false">Step 2: 婚前财产及协议声明</a>
+		</li>
+		<li class="nav-item step_nav">
+			<a class="nav-link " id="marriage_registration_registration_tab" data-toggle="tab" href="#marriage_registration_registration" role="tab" aria-controls="registration" aria-selected="false">Step 3: 注册信息</a>
+		</li>
+	</ul>
+	<div class="tab-content">
+			<div class="tab-pane fade show active" id="marriage_registration_personal_info" role="tabpanel" aria-labelledby="marriage_registration_personal_info_tab">
+
+			<div class="step_container">
+	<div class="row justify-content-center">
+		<div class="col-sm-4"></div>
+		<div class="col-sm-4"></div>
+		<button type="button" class="btn btn-primary btn-lg col-sm-4">下一步</button>
+	</div>
+				<div class="card event_container">
+<div class="card-header evt_header"> <h4>男方信息 <span style="color:red;">*</span> </h4>(male:citizen) </div>	<form>
+					<div class="field_container">
+		<div class="fd_display">请在下面输入申请婚姻登记的男方信息</div>
+					</div>
+					<div class="field_container">
+		<div class="form-group">
+			<label for="personal info_male_name">姓名</label>
+			<span style="color:red;">*</span>
+			<span style="color:#66a26e; font-size: 80%;">
+				(name):string
+					[1~40]
+					<div class="fd_tips">
+						<a href="#" data-toggle="popover" title="温馨提示" data-content="请与身份证保持一致">注意事项</a>
+					</div>
+			</span>
+			
+		<input class="form-control" 
+				type="text" 
+				placeholder="请输入男方姓名"
+				id="personal info_male_name" />
+			
+		</div>
+					</div>
+					<div class="field_container">
+		<div class="form-group">
+			<label for="personal info_male_gender">性别</label>
+			<span style="color:red;">*</span>
+			<span style="color:#66a26e; font-size: 80%;">
+				(gender):string
+			</span>
+			
+	
+	
+	
+	 
+	 <div class="form-control disabled">
+	 	<div class="form-check-inline">
+  			<label class="form-check-label">
+    			<input type="radio" class="form-check-input" name="personal info_male_gender"
+    				 disabled="disabled"
+    				 />女
+  			</label>
+		</div>
+	 	<div class="form-check-inline">
+  			<label class="form-check-label">
+    			<input type="radio" class="form-check-input" name="personal info_male_gender"
+    				 disabled="disabled"
+    				 checked />男
+  			</label>
+		</div>
+	 </div>
+			
+		</div>
+					</div>
+					<div class="field_container">
+		<div class="form-group">
+			<label for="personal info_male_birthday">出生日期</label>
+			<span style="color:red;">*</span>
+			<span style="color:#66a26e; font-size: 80%;">
+				(birthday):date
+					<div class="fd_tips">
+						<a href="#" data-toggle="popover" title="温馨提示" data-content="请与身份证保持一致">?</a>
+					</div>
+			</span>
+			
+		<div class="input-group input_date mb-3">
+  			<input type="text" class="form-control" data-provide="datepicker" placeholder="请输入男方的生日">
+  			<div class="input-group-append">
+    			<span class="input-group-text"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+  			</div>
+		</div>
+			
+		</div>
+					</div>
+	</form>
+				</div>
+				<div class="card event_container">
+<div class="card-header evt_header"> <h4>女方信息 <span style="color:red;">*</span> </h4>(female:citizen) </div>	<form>
+					<div class="field_container">
+		<div class="fd_display">请在下面输入申请婚姻登记的女方信息</div>
+					</div>
+					<div class="field_container">
+		<div class="form-group">
+			<label for="personal info_female_name">姓名</label>
+			<span style="color:red;">*</span>
+			<span style="color:#66a26e; font-size: 80%;">
+				(name):string
+					[1~40]
+					<div class="fd_tips">
+						<a href="#" data-toggle="popover" title="温馨提示" data-content="请与身份证保持一致">注意事项</a>
+					</div>
+			</span>
+			
+		<input class="form-control" 
+				type="text" 
+				placeholder="请输入女方姓名"
+				id="personal info_female_name" />
+			
+		</div>
+					</div>
+					<div class="field_container">
+		<div class="form-group">
+			<label for="personal info_female_gender">性别</label>
+			<span style="color:red;">*</span>
+			<span style="color:#66a26e; font-size: 80%;">
+				(gender):string
+			</span>
+			
+	
+	
+	
+	 
+	 <div class="form-control disabled">
+	 	<div class="form-check-inline">
+  			<label class="form-check-label">
+    			<input type="radio" class="form-check-input" name="personal info_female_gender"
+    				 disabled="disabled"
+    				 checked />女
+  			</label>
+		</div>
+	 	<div class="form-check-inline">
+  			<label class="form-check-label">
+    			<input type="radio" class="form-check-input" name="personal info_female_gender"
+    				 disabled="disabled"
+    				 />男
+  			</label>
+		</div>
+	 </div>
+			
+		</div>
+					</div>
+					<div class="field_container">
+		<div class="form-group">
+			<label for="personal info_female_birthday">出生日期</label>
+			<span style="color:red;">*</span>
+			<span style="color:#66a26e; font-size: 80%;">
+				(birthday):date
+					<div class="fd_tips">
+						<a href="#" data-toggle="popover" title="温馨提示" data-content="请与身份证保持一致">?</a>
+					</div>
+			</span>
+			
+		<div class="input-group input_date mb-3">
+  			<input type="text" class="form-control" data-provide="datepicker" placeholder="请输入女方的生日">
+  			<div class="input-group-append">
+    			<span class="input-group-text"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+  			</div>
+		</div>
+			
+		</div>
+					</div>
+	</form>
+				</div>
+			</div>
+			</div>
+			<div class="tab-pane fade" id="marriage_registration_premarital_declaration" role="tabpanel" aria-labelledby="marriage_registration_premarital_declaration_tab">
+
+			<div class="step_container">
+	<div class="row justify-content-center">
+		<button type="button" class="btn btn-primary btn-lg col-sm-4">上一步</button>
+		<div class="col-sm-4"></div>
+		<button type="button" class="btn btn-primary btn-lg col-sm-4">下一步</button>
+	</div>
+				<div class="card event_container">
+<div class="card-header evt_header"> <h4>男方婚前财产声明 <span style="color:red;">*</span> </h4>(male:premaritial_notarization) </div>	<form>
+					<div class="field_container">
+		<div class="form-group">
+			<label for="premarital declaration_male_need notarize">我要申请婚前财产公证</label>
+			<span style="color:red;">*</span>
+			<span style="color:#66a26e; font-size: 80%;">
+				(needNotarize):boolean
+			</span>
+			
+	
+	
+	
+	 
+	 <div class="form-control">
+	 	<div class="form-check-inline">
+  			<label class="form-check-label">
+    			<input type="radio" class="form-check-input" name="premarital declaration_male_need notarize"
+    				
+    				 />我要申请婚前财产公证
+  			</label>
+		</div>
+	 	<div class="form-check-inline">
+  			<label class="form-check-label">
+    			<input type="radio" class="form-check-input" name="premarital declaration_male_need notarize"
+    				
+    				 checked />我放弃婚前财产公证
+  			</label>
+		</div>
+	 </div>
+			
+		</div>
+					</div>
+					<div class="field_container">
+		<div class="form-group">
+			<label for="premarital declaration_male_delcared value">声明财产金额</label>
+			
+			<span style="color:#66a26e; font-size: 80%;">
+				(delcaredValue):money
+					[1,000~100,000,000]
+					<div class="fd_tips">
+						<a href="#" data-toggle="popover" title="温馨提示" data-content="财产少于¥10000元,建议不要做婚前财产公证. 公证费用为¥300.00.">注意</a>
+					</div>
+			</span>
+			
+<div class="input-group mb-3">
+    <div class="input-group-prepend">
+      	<span class="input-group-text">$</span>
+    </div>
+		<input class="form-control" 
+				type="number" min="0.00" max="10000.00" step="0.01"
+				placeholder="请输入声明要公证的婚前财产金额"
+				id="premarital declaration_male_delcared value" />
+</div>
+			
+		</div>
+					</div>
+	</form>
+				</div>
+				<div class="card event_container">
+<div class="card-header evt_header"> <h4>女方婚前财产声明 <span style="color:red;">*</span> </h4>(female:premaritial_notarization) </div>	<form>
+					<div class="field_container">
+		<div class="form-group">
+			<label for="premarital declaration_female_need notarize">我要申请婚前财产公证</label>
+			<span style="color:red;">*</span>
+			<span style="color:#66a26e; font-size: 80%;">
+				(needNotarize):boolean
+			</span>
+			
+	
+	
+	
+	 
+	 <div class="form-control">
+	 	<div class="form-check-inline">
+  			<label class="form-check-label">
+    			<input type="radio" class="form-check-input" name="premarital declaration_female_need notarize"
+    				
+    				 />我要申请婚前财产公证
+  			</label>
+		</div>
+	 	<div class="form-check-inline">
+  			<label class="form-check-label">
+    			<input type="radio" class="form-check-input" name="premarital declaration_female_need notarize"
+    				
+    				 checked />我放弃婚前财产公证
+  			</label>
+		</div>
+	 </div>
+			
+		</div>
+					</div>
+					<div class="field_container">
+		<div class="form-group">
+			<label for="premarital declaration_female_delcared value">声明财产金额</label>
+			
+			<span style="color:#66a26e; font-size: 80%;">
+				(delcaredValue):money
+					[1,000~100,000,000]
+					<div class="fd_tips">
+						<a href="#" data-toggle="popover" title="温馨提示" data-content="财产少于¥10000元,建议不要做婚前财产公证. 公证费用为¥300.00.">注意</a>
+					</div>
+			</span>
+			
+<div class="input-group mb-3">
+    <div class="input-group-prepend">
+      	<span class="input-group-text">$</span>
+    </div>
+		<input class="form-control" 
+				type="number" min="0.00" max="10000.00" step="0.01"
+				placeholder="请输入声明要公证的婚前财产金额"
+				id="premarital declaration_female_delcared value" />
+</div>
+			
+		</div>
+					</div>
+	</form>
+				</div>
+				<div class="card event_container">
+<div class="card-header evt_header"> <h4>补充条款 </h4>(additional terms:additional_terms) [0~200] </div>	<form>
+					<div class="field_container">
+		<div class="form-group">
+			<label for="premarital declaration_additional terms_content">内容</label>
+			<span style="color:red;">*</span>
+			<span style="color:#66a26e; font-size: 80%;">
+				(content):string
+					[1~500]
+			</span>
+			
+		<input class="form-control" 
+				type="text" 
+				placeholder="请输入条款内容"
+				id="premarital declaration_additional terms_content" />
+			
+		</div>
+					</div>
+	</form>
+	<div style="display:flex; flex-direction: row; justify-content:space-between;">
+		<button type="button" class="btn btn-primary btn-sm">上一条</button>
+		<button type="button" class="btn btn-danger btn-sm">删除</button>
+		<button type="button" class="btn btn-primary btn-sm">下一条</button>
+	</div>
+				</div>
+			</div>
+			</div>
+			<div class="tab-pane fade" id="marriage_registration_registration" role="tabpanel" aria-labelledby="marriage_registration_registration_tab">
+
+			<div class="step_container">
+	<div class="row justify-content-center">
+		<button type="button" class="btn btn-primary btn-lg col-sm-4">上一步</button>
+		<div class="col-sm-4"></div>
+		<button type="button" class="btn btn-primary btn-lg col-sm-4">提交</button>
+	</div>
+				<div class="card event_container">
+<div class="card-header evt_header"> <h4>注册信息 <span style="color:red;">*</span> </h4>(registration:registration) </div>	<form>
+					<div class="field_container">
+		<div class="form-group">
+			<label for="registration_registration_register date">申请注册日期</label>
+			<span style="color:red;">*</span>
+			<span style="color:#66a26e; font-size: 80%;">
+				(registerDate):date
+					<div class="fd_tips">
+						<a href="#" data-toggle="popover" title="温馨提示" data-content="领取结婚证的日期">?</a>
+					</div>
+			</span>
+			
+		<div class="input-group input_date mb-3">
+  			<input type="text" class="form-control" data-provide="datepicker" placeholder="请选择申请注册的日期">
+  			<div class="input-group-append">
+    			<span class="input-group-text"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+  			</div>
+		</div>
+			
+		</div>
+					</div>
+					<div class="field_container">
+		<div class="form-group">
+			<label for="registration_registration_register province">注册地-省</label>
+			<span style="color:red;">*</span>
+			<span style="color:#66a26e; font-size: 80%;">
+				(registerProvince):string
+					[1~40]
+					使用"GetProvinces/"查询数据
+					<div class="fd_tips">
+						<a href="#" data-toggle="popover" title="温馨提示" data-content="前往领取结婚证的民政局所在地址">?</a>
+					</div>
+			</span>
+			
+		<select class="form-control" id="registration_registration_register province">
+			<option value="1">后台返回的值 1</option>
+			<option value="2">后台返回的值 2</option>
+			<option value="3">后台返回的值 3</option>
+		</select>
+			
+		</div>
+					</div>
+					<div class="field_container">
+		<div class="form-group">
+			<label for="registration_registration_register city">注册地-市</label>
+			<span style="color:red;">*</span>
+			<span style="color:#66a26e; font-size: 80%;">
+				(registerCity):string
+					使用"GetCitiesByProvince/:registerProvice/"查询数据
+					<div class="fd_tips">
+						<a href="#" data-toggle="popover" title="温馨提示" data-content="前往领取结婚证的民政局所在地址">?</a>
+					</div>
+			</span>
+			
+		<select class="form-control" id="registration_registration_register city">
+			<option value="1">后台返回的值 1</option>
+			<option value="2">后台返回的值 2</option>
+			<option value="3">后台返回的值 3</option>
+		</select>
+			
+		</div>
+					</div>
+					<div class="field_container">
+		<div class="form-group">
+			<label for="registration_registration_register office">注册地-民政局</label>
+			
+			<span style="color:#66a26e; font-size: 80%;">
+				(registerOffice):string
+					使用"GetOfficeByCity/:registerCity/"查询数据
+					<div class="fd_tips">
+						<a href="#" data-toggle="popover" title="温馨提示" data-content="前往领取结婚证的民政局">?</a>
+					</div>
+			</span>
+			
+		<select class="form-control" id="registration_registration_register office">
+			<option value="1">后台返回的值 1</option>
+			<option value="2">后台返回的值 2</option>
+			<option value="3">后台返回的值 3</option>
+		</select>
+			
+		</div>
+					</div>
+	</form>
+				</div>
+			</div>
+			</div>
+	</div>
+		</div>
+	</div>
+</div>
+</div>
+
+<script>
+$(function(){
+	$(document).ready(function(){
+	  $('[data-toggle="popover"]').popover();   
+	});
+	
+	/*
+	$(".input_date").datepicker({
+    	maxViewMode: 3,
+    	format: "yyyy/mm/dd"
+	});
+	*/
+});
+</script>
+</body>
+</html>
+

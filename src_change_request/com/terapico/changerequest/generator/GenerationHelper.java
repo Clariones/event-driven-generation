@@ -33,7 +33,10 @@ public class GenerationHelper {
 
 	}
 	public String toModelStyleName(String name) {
-		return name.trim().replace(' ', '_');
+		return Utils.toModelName(name);
+	}
+	public String toJavaVariableName(String name) {
+		return Utils.toJavaVariableName(name);
 	}
 	
 	@SuppressWarnings("unchecked")

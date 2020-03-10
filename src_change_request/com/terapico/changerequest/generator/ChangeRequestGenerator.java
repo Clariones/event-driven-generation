@@ -71,7 +71,6 @@ public class ChangeRequestGenerator extends NewBasicGenerator {
 		GenrationResult result = new GenrationResult().as_new_file();
 		result.setFileName(fileName);
 		Map<String, Object> specJsonData = makeJavaStyleData(this.getChangeRequestSpec().get("projectSpec"));
-		System.out.println("1============\n\n\n" + Utils.toJson(specJsonData, true));
 		result.setContent(Utils.toJson(specJsonData, true));
 		return result;
 	}
@@ -113,6 +112,9 @@ public class ChangeRequestGenerator extends NewBasicGenerator {
 				case "name":
 					result.put(name, Utils.toJavaVariableName((String) value));
 					break;
+				case "changeRequestType":
+					result.put(name, Utils.toJavaConstStyle((String) value));
+					break;
 				case "stepList":
 					result.put(name, makeJavaStyleStepData((List<Map<String, Object>>) value));
 					break;
@@ -132,7 +134,7 @@ public class ChangeRequestGenerator extends NewBasicGenerator {
 			step.forEach((name, value) -> {
 				switch (name) {
 				case "name":
-					result.put(name, Utils.toJavaVariableName((String) value));
+					result.put(name, Utils.toModelName((String) value));
 					break;
 				case "eventList":
 					result.put(name, makeJavaStyleEventData((List<Map<String, Object>>) value));
@@ -153,10 +155,10 @@ public class ChangeRequestGenerator extends NewBasicGenerator {
 			step.forEach((name, value) -> {
 				switch (name) {
 				case "name":
-					result.put(name, Utils.toJavaVariableName((String) value));
+					result.put(name, Utils.toModelName((String) value));
 					break;
 				case "eventType":
-					result.put(name, Utils.toJavaConstStyle((String) value));
+					result.put(name, Utils.toModelName((String) value));
 					break;
 				case "fieldList":
 					result.put(name, makeJavaStyleFieldData((List<Map<String, Object>>) value));

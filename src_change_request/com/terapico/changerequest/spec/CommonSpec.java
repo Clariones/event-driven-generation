@@ -100,6 +100,6 @@ public abstract class CommonSpec <T extends CommonSpec<T>>{
 		this.setName(newName);
 	}
 	protected void whereami(String message) {
-		new Throwable(message).printStackTrace();
+		// new Throwable(message).printStackTrace();
 	}
 }

@@ -232,7 +232,7 @@ public class Utils {
 		}
 		return false;
 	}
-	public static Object toModelName(String name) {
-		return name.trim().replace(' ', '_');
+	public static String toModelName(String name) {
+		return name.trim().replace(' ', '_').toLowerCase();
 	}
 }
