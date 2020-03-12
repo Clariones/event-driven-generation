@@ -145,7 +145,7 @@ $(function(){
 </html>
 
 <#macro CR_HEADER crSpec>
-	<h2>${crSpec.title}</h2>
+	<h2 style="display:inline;">${crSpec.title}</h2>(${helper.getCRName(crSpec)?upper_case})
 	<ul class="nav nav-tabs nav-justified flex-row" role="tablist">
 <#list crSpec.stepList as stepSpec>
 		<li class="nav-item step_nav">
@@ -256,6 +256,9 @@ $(function(){
 						<#break>
 					<#case "time">
 						<@TIME_FIELD_INPUT crSpec stepSpec eventSpec fieldSpec fieldId/>
+						<#break>
+					<#case "images">
+						<@IMAGES_FIELD_INPUT crSpec stepSpec eventSpec fieldSpec fieldId/>
 						<#break>
 					<#default>
 					<span style="color:red;">${fieldSpec.inputType}类型的输入还没处理</span>
@@ -429,4 +432,15 @@ $(function(){
 		</div>
        <#return>
     </#if>
+</#macro>
+<#macro IMAGES_FIELD_INPUT crSpec stepSpec eventSpec fieldSpec fieldId>
+	<#if fieldSpec.interactionMode=="input">
+		<input class="form-control" 
+				type="file" 
+				<#if fieldSpec.placeholder??>placeholder="${fieldSpec.placeholder}"</#if>
+				id="${fieldId}" />
+	</#if>
+	<#if fieldSpec.interactionMode=="disabled">
+		<img src="${fieldSpec.value!}" class="rounded-circle"/>
+	</#if>
 </#macro>

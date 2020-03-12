@@ -1,11 +1,11 @@
 package com.terapico.changerequest.spec;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import com.terapico.changerequest.builder.FieldType;
 
@@ -22,9 +22,15 @@ public class FieldSpec extends CommonSpec<FieldSpec> implements Cloneable{
 	protected Boolean multiSelection;	// option, check-box
 	protected Map<String, Serializable> valuesMapping;
 	protected String dataRetrieveApiUrl;
+	protected String sampleData;
 	
 	
-	
+	public String getSampleData() {
+		return sampleData;
+	}
+	public void setSampleData(String sampleData) {
+		this.sampleData = sampleData;
+	}
 	public String getInteractionMode() {
 		return interactionMode;
 	}
@@ -308,6 +314,26 @@ public class FieldSpec extends CommonSpec<FieldSpec> implements Cloneable{
 	@Override
 	public String getSpecType() {
 		return "Field";
+	}
+	
+	public void appendSampleData(String newSampleData) {
+		if (newSampleData == null || newSampleData.isEmpty()) {
+			return;
+		}
+		if (this.getSampleData() == null) {
+			this.setSampleData(newSampleData);
+			return;
+		}
+		String[] existedSampleData = this.getSampleData().split("\\|");
+		List<String> existedSampleDataList = new ArrayList<>(Arrays.asList(existedSampleData));
+		List<String> newSampleDataList = new ArrayList<>(Arrays.asList(newSampleData.split("\\|")));
+		for(String newSD : newSampleDataList) {
+			if (existedSampleDataList.contains(newSD)) {
+				continue;
+			}
+			existedSampleDataList.add(newSD);
+		}
+		this.setSampleData(String.join("|", existedSampleDataList));
 	}
 	
 

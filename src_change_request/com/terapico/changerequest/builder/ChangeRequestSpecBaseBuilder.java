@@ -168,6 +168,15 @@ public class ChangeRequestSpecBaseBuilder<T extends ChangeRequestSpecBaseBuilder
 		}
 		return me;
 	}
+	public T sample_data(String sample_data) {
+		if(workingBoard.isBuildingField()) {
+			service.setFieldSampleData($CR(),$STEP(),$EVENT(),$FIELD(), sample_data);
+			workingBoard.onJob(WorkingBoard.SAMPLE_DATA);
+		}else {
+			error("此时不能指定值");
+		}
+		return me;
+	}
 
 	public T as(String name) {
 		switch (workingBoard.currentWorkingLevel()) {

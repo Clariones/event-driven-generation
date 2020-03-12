@@ -12,7 +12,7 @@ public class GenerationJobExample {
 		ChangeRequestGenerator generator = new ChangeRequestGenerator();
 		generator.setChangeRequestSpec(new Example().scriptExampe());
 		generator.setProjectName("jingou");
-		generator.setOrgName("recycleSupplycChain");
+		generator.setOrgName("recycleSupplyChain");
 		List<GenrationResult> files = generator.runJob();
 		
 		String outputFolder = "/works/jobs/front_end_poc/workspace/jingou-biz-suite/bizcore/GEN-CODE";

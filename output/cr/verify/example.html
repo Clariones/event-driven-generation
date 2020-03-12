@@ -99,7 +99,7 @@
 <div class="tab-content" style="flex:1;">
 	<div class="tab-pane fade show active" id="test" role="tabpanel" aria-labelledby="test_tab">
 		<div class="cr_container">
-	<h2>测试</h2>
+	<h2 style="display:inline;">测试</h2>(TEST)
 	<ul class="nav nav-tabs nav-justified flex-row" role="tablist">
 		<li class="nav-item step_nav">
 			<a class="nav-link active" id="test_test_tab" data-toggle="tab" href="#test_test" role="tab" aria-controls="test" aria-selected="true">Step 1: 测试</a>
@@ -271,7 +271,7 @@
 	</div>
 	<div class="tab-pane fade" id="marriage_registration" role="tabpanel" aria-labelledby="marriage_registration_tab">
 		<div class="cr_container">
-	<h2>婚姻注册申请</h2>
+	<h2 style="display:inline;">婚姻注册申请</h2>(MARRIAGE_REGISTRATION)
 	<ul class="nav nav-tabs nav-justified flex-row" role="tablist">
 		<li class="nav-item step_nav">
 			<a class="nav-link active" id="marriage_registration_personal_info_tab" data-toggle="tab" href="#marriage_registration_personal_info" role="tab" aria-controls="personal_info" aria-selected="true">Step 1: 个人信息</a>
@@ -296,6 +296,24 @@
 <div class="card-header evt_header"> <h4>男方信息 <span style="color:red;">*</span> </h4>(male:citizen) </div>	<form>
 					<div class="field_container">
 		<div class="fd_display">请在下面输入申请婚姻登记的男方信息</div>
+					</div>
+					<div class="field_container">
+		<div class="form-group">
+			<label for="personal info_male_avatar">证件照</label>
+			<span style="color:red;">*</span>
+			<span style="color:#66a26e; font-size: 80%;">
+				(avatar):images
+					<div class="fd_tips">
+						<a href="#" data-toggle="popover" title="温馨提示" data-content="正面免冠彩色2寸证件照">注意事项</a>
+					</div>
+			</span>
+			
+		<input class="form-control" 
+				type="file" 
+				placeholder="请上传照片"
+				id="personal info_male_avatar" />
+			
+		</div>
 					</div>
 					<div class="field_container">
 		<div class="form-group">
@@ -441,6 +459,24 @@
     			<span class="input-group-text"><i class="fa fa-calendar" aria-hidden="true"></i></span>
   			</div>
 		</div>
+			
+		</div>
+					</div>
+					<div class="field_container">
+		<div class="form-group">
+			<label for="personal info_female_avatar">证件照</label>
+			<span style="color:red;">*</span>
+			<span style="color:#66a26e; font-size: 80%;">
+				(avatar):images
+					<div class="fd_tips">
+						<a href="#" data-toggle="popover" title="温馨提示" data-content="正面免冠彩色2寸证件照">注意事项</a>
+					</div>
+			</span>
+			
+		<input class="form-control" 
+				type="file" 
+				placeholder="请上传照片"
+				id="personal info_female_avatar" />
 			
 		</div>
 					</div>

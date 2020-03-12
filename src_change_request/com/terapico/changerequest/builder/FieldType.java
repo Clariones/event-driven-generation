@@ -25,6 +25,15 @@ public enum FieldType {
 	public void setSystemTypeName(String systemTypeName) {
 		this.systemTypeName = systemTypeName;
 	}
+
+	public boolean isEquals(Object another) {
+		if (another instanceof String) {
+			if (this.getSystemTypeName().equals(another)) {
+				return true;
+			}
+		}
+		return this.equals(another);
+	}
 	
 	
 }

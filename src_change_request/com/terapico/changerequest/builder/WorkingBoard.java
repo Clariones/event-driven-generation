@@ -19,7 +19,7 @@ public class WorkingBoard {
 	public static final String INPUT_TYPE = "input_type";
 	public static final String DEFAULT_VALUE = "default_value";
 	public static final String VALUES_API = "values_api";
-
+	public static final String SAMPLE_DATA = "sample_data";
 	
 	protected String currentProjectName;
 	protected String currentChangeRequestName;

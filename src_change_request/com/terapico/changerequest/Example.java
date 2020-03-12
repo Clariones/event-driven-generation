@@ -18,7 +18,11 @@ public class Example {
 							.has_field("message1")
 								.display()
 								.value("请在下面输入申请婚姻登记的男方信息")
+							.has_field("avatar").zh_CN("证件照").which_type_of(FieldType.IMAGES)
+								.place_holder("请上传照片")
+								.tips_title("注意事项").tips_content("正面免冠彩色2寸证件照")
 							.has_field("name").zh_CN("姓名")							//默认 .which_type_of(FieldType.TEXT)
+								.sample_data("张先生|李小姐")
 								.range(1,40)
 								.place_holder("请输入男方姓名")
 								.tips_title("注意事项").tips_content("请与身份证保持一致")
@@ -36,6 +40,7 @@ public class Example {
 								.display()
 								.value("请在下面输入申请婚姻登记的女方信息")
 							.for_field("name").place_holder("请输入女方姓名")
+								.sample_data("张先生|王太太")
 							.for_field("gender").value("female")
 							.for_field("birthday").place_holder("请输入女方的生日")
 					.step("premarital declaration").zh_CN("婚前财产及协议声明").can_skip()
@@ -62,10 +67,12 @@ public class Example {
 								.tips_title("?").tips_content("领取结婚证的日期")
 								.place_holder("请选择申请注册的日期")
 							.has_field("register province").zh_CN("注册地-省")
+								.sample_data("四川|广东|上海")
 								.tips_title("?").tips_content("前往领取结婚证的民政局所在地址")
 								.values_can_get_from("getProvinces/")
 								.range(1,40)
 							.has_field("register city").zh_CN("注册地-市")
+								.sample_data("成都|深圳|上海")
 								.tips_title("?").tips_content("前往领取结婚证的民政局所在地址")
 								.values_can_get_from("getCitiesByProvince/${register provice}/")
 							.has_field("register office").zh_CN("注册地-民政局")
@@ -92,6 +99,7 @@ public class Example {
 					.has_field("message1")
 						.display()
 						.value("请在下面输入申请婚姻登记的男方信息")
+						.sample_data("")
 					.has_field("name").zh_CN("姓名")	
 						.range(1,40)
 						.place_holder("请输入男方姓名")
@@ -109,11 +117,38 @@ public class Example {
 	public static void main(String[] args) {
 		Object rst = new Example().scriptExampe();
 		System.out.println(Utils.toJson(rst, true));
-		
+		// test1();
 //		List<EventSpec> X = rst.getChangeRequestSpecs().values().stream()
 //				.flatMap(itStep->itStep.getStepSpecs().stream()
 //						.flatMap(itEvent->itEvent.getEventSpecs().stream())
 //				).collect(Collectors.toList());
 //			System.out.println(Utils.toJson(X, true));
 	}
+
+
+	private static void test1() {
+		for(int i=0;i<9;i++) {
+			int n = (i%3+2)*(int)(Math.pow(2, i/3+1))+i/3;
+			System.out.println("X"+i+"="+n);
+		}
+		
+		
+//		System.out.println("开始");
+//		for(int i=1;i<575;i++) {
+//			for(int j=1;j<575;j++) {
+//				for(int k=1;k<575;k++) {
+//					if (i+k+j != 575) {
+//						continue;
+//					}
+//					if (i*j*k != 6750000) {
+//						continue;
+//					}
+//					System.out.printf("%d,%d,%d\n",i,j,k);
+//				}
+//			}
+//		}
+//		System.out.println("收工");
+	}
+	
+	
 }

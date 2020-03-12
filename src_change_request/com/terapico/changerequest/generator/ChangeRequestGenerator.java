@@ -4,12 +4,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+import java.util.function.BiFunction;
+import java.util.function.Function;
+import java.util.function.Supplier;
 
 import com.terapico.generator.NewBasicGenerator;
 
 import cla.edg.Utils;
 import cla.edg.actionpattern.GenrationResult;
 
+@SuppressWarnings("unchecked")
 public class ChangeRequestGenerator extends NewBasicGenerator {
 	protected String projectName;
 	protected String orgName;
@@ -60,21 +65,58 @@ public class ChangeRequestGenerator extends NewBasicGenerator {
 	@Override
 	public List<GenrationResult> runJob() throws Exception {
 		List<GenrationResult> resultList = new ArrayList<>();
-		resultList.add(generateSpecFile());
+		resultList.add(generateFullySpecFile());
+		resultList.add(generateBackendSpecFile());
+		resultList.add(generateCRConstClass());
+		resultList.add(generateCRHelperClass());
 		resultList.add(generateTodoFile());
 		return resultList;
 	}
 
-	protected GenrationResult generateSpecFile() throws Exception {
+	protected GenrationResult generateFullySpecFile() throws Exception {
 		String fileName = this.toFileName(Utils.put("projectName", this.getProjectName()).into_map(),
-				"${projectName?lower_case}_custom_src/META_INF/${projectName?lower_case}_cr_spec.json");
+				"${projectName?lower_case}_custom_src/META_INF/${projectName?lower_case}_fully_cr_spec.json");
 		GenrationResult result = new GenrationResult().as_new_file();
 		result.setFileName(fileName);
-		Map<String, Object> specJsonData = makeJavaStyleData(this.getChangeRequestSpec().get("projectSpec"));
-		result.setContent(Utils.toJson(specJsonData, true));
+		result.setContent(Utils.toJson(this.getChangeRequestSpec().get("projectSpec"), true));
 		return result;
 	}
+	
+	protected GenrationResult generateBackendSpecFile() throws Exception {
+		Map<String, Object> data = Utils.put("projectSpec", this.getChangeRequestSpec().get("projectSpec"))
+				.put("helper", new GenerationHelper())
+				.into_map();
+		String templatePath = "/changerequest/backend_spec.json.ftl";
+		String fileName = this.toFileName(Utils.put("projectName", this.getProjectName()).into_map(),
+				"${projectName?lower_case}_custom_src/META_INF/${projectName?lower_case}_cr_spec.json");
+		return this.doGeneration(data, templatePath, fileName).as_new_file();
+	}
 
+	protected GenrationResult generateCRConstClass() throws Exception {
+		Map<String, Object> data = Utils.put("projectSpec", this.getChangeRequestSpec().get("projectSpec"))
+				.put("projectName", this.getProjectName())
+				.put("orgName", this.getOrgName())
+				.put("helper", new GenerationHelper())
+				.into_map();
+		String templatePath = "/changerequest/cr_const.java.ftl";
+		String fileName = this.toFileName(data,
+				"${projectName?lower_case}_custom_src/com/${orgName?lower_case}/${projectName?lower_case}/CR.java");
+		return this.doGeneration(data, templatePath, fileName).as_new_file();
+	}
+	
+	protected GenrationResult generateCRHelperClass() throws Exception {
+		Map<String, Object> data = Utils.put("projectSpec", this.getChangeRequestSpec().get("projectSpec"))
+				.put("projectName", this.getProjectName())
+				.put("orgName", this.getOrgName())
+				.put("helper", new GenerationHelper())
+				.put("allEventSpec", this.getChangeRequestSpec().get("allEventSpec"))
+				.into_map();
+		String templatePath = "/changerequest/prj_cr_helper.java.ftl";
+		String fileName = this.toFileName(data,
+				"${projectName?lower_case}_custom_src/com/${orgName?lower_case}/${projectName?lower_case}/${projectName?cap_first}ChangeRequestHelper.java");
+		return this.doGeneration(data, templatePath, fileName).as_new_file();
+	}
+	
 	protected GenrationResult generateTodoFile() throws Exception {
 		Map<String, Object> data = Utils.put("projectSpec", this.getChangeRequestSpec().get("projectSpec"))
 				.put("projectName", this.getProjectName())
@@ -89,37 +131,55 @@ public class ChangeRequestGenerator extends NewBasicGenerator {
 		return this.doGeneration(data, templatePath, fileName).as_new_file();
 	}
 
-	private Map<String, Object> makeJavaStyleData(Map<String, Object> projectSpec) {
+	
+	protected Map<String, Object> processProjectSpec(Map<String, Object> projectSpec,
+			TrFunction<Map<String,Object>, String, Object, Object> projectSpecFunction, 
+			TrFunction<Map<String,Object>, String, Object, Object> crSpecFunction, 
+			TrFunction<Map<String,Object>, String, Object, Object> stepSpecFunction,
+			TrFunction<Map<String,Object>, String, Object, Object> eventSpecFunction,
+			TrFunction<Map<String,Object>, String, Object, Object> FieldSpecFunction) {
 		Map<String, Object> result = new HashMap<>();
 		projectSpec.forEach((name, value) -> {
 			switch (name) {
 			case "changeRequestList":
-				result.put(name, makeJavaStyleCRData((List<Map<String, Object>>) value));
+				result.put(name, 
+						processSpecList((List<Map<String, Object>>) value, crSpecFunction, "stepList", (stepList)->{
+							return processSpecList(stepList, stepSpecFunction, "eventList", (eventList)->{
+								return processSpecList(eventList, eventSpecFunction, "fieldList", (fieldList)->{
+									return processSpecList(fieldList, FieldSpecFunction, "", a->null);
+								});
+							});
+						}));
 				break;
 			default:
-				result.put(name, value);
+				if (projectSpecFunction == null) {
+					result.put(name, value);
+				}else {
+					result.put(name, projectSpecFunction.apply(result, name, value));
+				}
+				break;
 			}
 		});
+		
 		return result;
 	}
-
-	private List<Map<String, Object>> makeJavaStyleCRData(List<Map<String, Object>> crList) {
+	
+	private Object processSpecList(List<Map<String, Object>> specList, 
+			TrFunction<Map<String,Object>, String, Object, Object> specHandlerFunction,
+			String listName, Function<List<Map<String, Object>>, Object> listFunc
+			) {
 		List<Map<String, Object>> resultList = new ArrayList<>();
-		crList.forEach(step -> {
+		specList.forEach(cr -> {
 			Map<String, Object> result = new HashMap<>();
-			step.forEach((name, value) -> {
-				switch (name) {
-				case "name":
-					result.put(name, Utils.toJavaVariableName((String) value));
-					break;
-				case "changeRequestType":
-					result.put(name, Utils.toJavaConstStyle((String) value));
-					break;
-				case "stepList":
-					result.put(name, makeJavaStyleStepData((List<Map<String, Object>>) value));
-					break;
-				default:
-					result.put(name, value);
+			cr.forEach((name, value) -> {
+				if (name.equals(listName)) {
+					putIfNotNull(result, name, listFunc.apply((List<Map<String, Object>>) value));
+				}else {
+					if (specHandlerFunction == null) {
+						putIfNotNull(result, name, value);
+					}else {
+						putIfNotNull(result, name, specHandlerFunction.apply(result, name, value));
+					}
 				}
 			});
 			resultList.add(result);
@@ -127,66 +187,44 @@ public class ChangeRequestGenerator extends NewBasicGenerator {
 		return resultList;
 	}
 	
-	private List<Map<String, Object>> makeJavaStyleStepData(List<Map<String, Object>> stepList) {
-		List<Map<String, Object>> resultList = new ArrayList<>();
-		stepList.forEach(step -> {
-			Map<String, Object> result = new HashMap<>();
-			step.forEach((name, value) -> {
-				switch (name) {
-				case "name":
-					result.put(name, Utils.toModelName((String) value));
-					break;
-				case "eventList":
-					result.put(name, makeJavaStyleEventData((List<Map<String, Object>>) value));
-					break;
-				default:
-					result.put(name, value);
-				}
-			});
-			resultList.add(result);
-		});
-		return resultList;
+	private void putIfNotNull(Map<String, Object> result, String name, Object value) {
+		if (value == null) {
+			return;
+		}
+		Objects.requireNonNull(result, "你代码有问题,result没初始化");
+		result.put(name, value);
 	}
+/**
+	 * 这个是个例子,演示如何处理各层数据来做定制化
+	 * @param projectSpec
+	 * @return
+	 */
+	public Map<String, Object> makeJavaStyleData(Map<String, Object> projectSpec) {
+		return processProjectSpec(projectSpec, (resultMap, name, value) -> {
+			// project
+			System.out.println("project." + name + "=" + value);
+			return value;
+		}, (resultMap, name, value) -> {
+			// CR
+			System.out.println("\tcr." + name + "=" + value);
+			return value;
+		}, (resultMap, name, value) -> {
+			// step
+			System.out.println("\t\tstep." + name + "=" + value);
+			return value;
+		}, (resultMap, name, value) -> {
+			// event
+			System.out.println("\t\t\tevent." + name + "=" + value);
+			return value;
+		}, (resultMap, name, value) -> {
+			// field
+			// System.out.println("\t\t\t\tfield."+ name+"="+value);
+			if (name.equals("name")) {
+				return "name->" + value;
+			}
+			return value;
+		});
+	}
+	
 
-	private List<Map<String, Object>> makeJavaStyleEventData(List<Map<String, Object>> eventList) {
-		List<Map<String, Object>> resultList = new ArrayList<>();
-		eventList.forEach(step -> {
-			Map<String, Object> result = new HashMap<>();
-			step.forEach((name, value) -> {
-				switch (name) {
-				case "name":
-					result.put(name, Utils.toModelName((String) value));
-					break;
-				case "eventType":
-					result.put(name, Utils.toModelName((String) value));
-					break;
-				case "fieldList":
-					result.put(name, makeJavaStyleFieldData((List<Map<String, Object>>) value));
-					break;
-				default:
-					result.put(name, value);
-				}
-			});
-			resultList.add(result);
-		});
-		return resultList;
-	}
-
-	private List<Map<String, Object>> makeJavaStyleFieldData(List<Map<String, Object>> stepList) {
-		List<Map<String, Object>> resultList = new ArrayList<>();
-		stepList.forEach(step -> {
-			Map<String, Object> result = new HashMap<>();
-			step.forEach((name, value) -> {
-				switch (name) {
-				case "name":
-					result.put(name, Utils.toJavaVariableName((String) value));
-					break;
-				default:
-					result.put(name, value);
-				}
-			});
-			resultList.add(result);
-		});
-		return resultList;
-	}
 }

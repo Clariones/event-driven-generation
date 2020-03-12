@@ -34,7 +34,7 @@ public class ChangeRequestSpecBuildingServiceLocalImpl extends CRSBuildingServic
 		
 		Map<String, Object> allEventSpec = new HashMap<String, Object>();
 		root().getAllEventSpecs().forEach((name,spec)->{
-			allEventSpec.put(name, spec);
+			allEventSpec.put(name, this.makeEventOutput(null, null, spec));
 		});
 		
 		Map<String, Map<String, Object>> result = new HashMap<>();
@@ -251,6 +251,13 @@ public class ChangeRequestSpecBuildingServiceLocalImpl extends CRSBuildingServic
 		prototypeField(crName, stepName, eventName, fieldName).setDefaultValueIfNeed(defaultValue);
 	}
 
+	@Override
+	public void setFieldSampleData(String crName, String stepName, String eventName, String fieldName,
+			String sampleData) {
+		sureField(crName, stepName, eventName, fieldName).setSampleData(sampleData);
+		prototypeField(crName, stepName, eventName, fieldName).appendSampleData(sampleData);
+	}
+	
 	@Override
 	public void setEventRepeatTimes(String crName, String stepName, String eventName, int min, int max) {
 		sureEvent(crName, stepName, eventName).setIsCollection(true);

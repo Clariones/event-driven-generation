@@ -69,6 +69,7 @@ public interface ChangeRequestSpecBuildingService {
 	public boolean isFieldSingleSelectable(String crName, String stepName, String eventName, String fieldName);
 
 	public void setFieldDefaultValue(String crName, String stepName, String eventName, String fieldName, Serializable defaultValue);
+	public void setFieldSampleData(String crName, String stepName, String eventName, String fieldName, String sample_data);
 
 	public void setEventRepeatTimes(String crName, String stepName, String eventName, int min, int max);
 
@@ -84,6 +85,7 @@ public interface ChangeRequestSpecBuildingService {
 
 	public void cloneFieldFromPrototype(String crName, String stepName, String eventName, String fieldName);
 
+	
 	
 
 }
