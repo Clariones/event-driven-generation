@@ -8,6 +8,7 @@
 			"title":"${crSpec.title}",
 			"brief":null,
 			"changeRequestType":"${helper.JAVA_CONST(crSpec.changeRequestType)}",
+			"requestPrefix": "${crSpec.requestPrefix}",
 			"sceneList":[
 	<#list crSpec.stepList as scene>
 				{
@@ -20,7 +21,7 @@
 						{
 							"name":"${helper.javaVar(scene.name)}_${helper.javaVar(group.name)}",
 							"title":"${group.title}",
-							"orginalName":"${group.eventType}",
+							"modelName":"${group.eventType}",
 							"multiple": ${group.multiple?c},
               				"mustHave": ${group.mustHave?c}
 						}<#if !group?is_last>,</#if>

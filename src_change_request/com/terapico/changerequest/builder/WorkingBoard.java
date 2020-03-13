@@ -114,6 +114,9 @@ public class WorkingBoard {
 		setCurrentJobName(null);
 	}
 	
+	public boolean isBuildingProject() {
+		return this.getCurrentProjectName() != null && this.getCurrentChangeRequestName() == null;
+	}
 	public boolean isBuildingChangeRequest() {
 		return this.getCurrentChangeRequestName() != null && this.getCurrentStepName() == null;
 	}

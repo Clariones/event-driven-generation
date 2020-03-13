@@ -134,6 +134,9 @@ public class GenerationHelper {
 			case "inputType":
 				result.put("type", value);
 				break;
+			case "valuesMapping":
+				result.put("candidateValues", value);
+				break;
 			case "minimal":
 				result.put("minimum", wrapValueToString(value));
 				break;

@@ -13,7 +13,6 @@ public abstract class CommonSpec <T extends CommonSpec<T>>{
 	protected Integer maxCollectionSize;
 	protected Boolean isCollection = false;
 	
-	
 	public String getName() {
 		return name;
 	}
@@ -68,6 +67,7 @@ public abstract class CommonSpec <T extends CommonSpec<T>>{
 		log("新建 "+this.getSpecType()+":"+name);
 		return (T) this;
 	}
+	
 	
 	public T withI18n(Map<String, String> i18nNames) {
 		this.setI18nName(new HashMap<>(i18nNames));

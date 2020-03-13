@@ -18,6 +18,7 @@ public class ChangeRequestSpecBuildingServiceLocalImpl extends CRSBuildingServic
 	public void createNewProject(String projectName) {
 		setProjectSpec(new ProjectChangeRequestSpec());
 		getProjectSpec().setName(projectName);
+		getProjectSpec().setRequestUrlPrefix("changeRequestManager");
 	}
 
 	@Override
@@ -65,7 +66,8 @@ public class ChangeRequestSpecBuildingServiceLocalImpl extends CRSBuildingServic
 
 	@Override
 	public void createNewChangeRequest(String crTypeName) {
-		root().addChangeRequestSpec(new ChangeRequestSpec().withName(crTypeName));
+		root().addChangeRequestSpec(new ChangeRequestSpec()
+				.withName(crTypeName).withRequestUrlPrefix(root().getRequestUrlPrefix()));
 	}
 
 	@Override
@@ -296,6 +298,16 @@ public class ChangeRequestSpecBuildingServiceLocalImpl extends CRSBuildingServic
 		EventSpec eventSpec = sureEvent(crName, stepName, eventName);
 		FieldSpec fieldSpec = prototypeField(crName, stepName, eventName, fieldName);
 		eventSpec.addField(fieldSpec.copy());
+	}
+
+	@Override
+	public void setProjectBaseRequestUrlPrefix(String requestUrlPrefix) {
+		root().setRequestUrlPrefix(requestUrlPrefix);
+	}
+
+	@Override
+	public void setCRBaseRequestUrlPrefix(String crName, String requestUrlPrefix) {
+		getChangeRequest(crName).setRequestUrlPrefix(requestUrlPrefix);
 	}
 
 	

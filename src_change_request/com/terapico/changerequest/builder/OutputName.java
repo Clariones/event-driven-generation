@@ -9,6 +9,7 @@ public interface OutputName {
 		String NAME = "name";
 		String TITLE = "title";
 		String TYPE = "changeRequestType";
+		String REQUEST_PREFIX = "requestPrefix";
 		String STEP_LIST = "stepList";
 
 		interface STEP {

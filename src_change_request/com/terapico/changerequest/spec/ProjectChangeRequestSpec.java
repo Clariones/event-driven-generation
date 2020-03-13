@@ -6,6 +6,7 @@ import java.util.Map;
 public class ProjectChangeRequestSpec extends CommonSpec<ProjectChangeRequestSpec>{
 	protected Map<String, EventSpec> allEventSpecs;
 	protected Map<String, ChangeRequestSpec> changeRequestSpecs;
+	protected String requestUrlPrefix;
 
 	public Map<String, EventSpec> getAllEventSpecs() {
 		return allEventSpecs;
@@ -21,6 +22,12 @@ public class ProjectChangeRequestSpec extends CommonSpec<ProjectChangeRequestSpe
 	}
 	
 	
+	public String getRequestUrlPrefix() {
+		return requestUrlPrefix;
+	}
+	public void setRequestUrlPrefix(String requestUrlPrefix) {
+		this.requestUrlPrefix = requestUrlPrefix;
+	}
 	protected Map<String, ChangeRequestSpec> ensureChangeRequestSpecs() {
 		if (changeRequestSpecs != null) {
 			return changeRequestSpecs;
@@ -37,11 +44,11 @@ public class ProjectChangeRequestSpec extends CommonSpec<ProjectChangeRequestSpe
 	}
 	
 	
-	public void addChangeRequestSpec(ChangeRequestSpec crSpec) {
-		ensureChangeRequestSpecs().put(crSpec.getName(), crSpec);
+	public ChangeRequestSpec addChangeRequestSpec(ChangeRequestSpec crSpec) {
+		return ensureChangeRequestSpecs().put(crSpec.getName(), crSpec);
 	}
-	public void addEvent(EventSpec eventSpec) {
-		ensureAllEventSpecs().put(eventSpec.getType(), eventSpec);
+	public EventSpec addEvent(EventSpec eventSpec) {
+		return ensureAllEventSpecs().put(eventSpec.getType(), eventSpec);
 	}
 	
 	@Override

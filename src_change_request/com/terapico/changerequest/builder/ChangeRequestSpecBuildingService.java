@@ -85,6 +85,10 @@ public interface ChangeRequestSpecBuildingService {
 
 	public void cloneFieldFromPrototype(String crName, String stepName, String eventName, String fieldName);
 
+	public void setProjectBaseRequestUrlPrefix(String requestUrlPrefix);
+
+	public void setCRBaseRequestUrlPrefix(String crName, String requestUrlPrefix);
+
 	
 	
 

@@ -350,4 +350,16 @@ public class ChangeRequestSpecBaseBuilder<T extends ChangeRequestSpecBaseBuilder
 		}
 		return me;
 	}
+	
+	public T request_base(String requestUrlPrefix) {
+		if (workingBoard.isBuildingProject()) {
+			service.setProjectBaseRequestUrlPrefix(requestUrlPrefix);
+		}else if (workingBoard.isBuildingChangeRequest()) {
+			service.setCRBaseRequestUrlPrefix($CR(), requestUrlPrefix);
+		}else {
+			error("只能指定项目级别的全局request prefix,或者单独指定一个CR的request prefix");
+		}
+		return me;
+	}
+
 }

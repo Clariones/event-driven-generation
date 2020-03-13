@@ -12,16 +12,27 @@ public class ChangeRequestSpec extends CommonSpec<ChangeRequestSpec>{
 	};
 	
 	protected List<StepSpec> stepSpecs;
+	protected String requestUrlPrefix;
 
 	public List<StepSpec> getStepSpecs() {
 		return stepSpecs;
 	}
-
 	public void setStepSpecs(List<StepSpec> stepSpes) {
 		this.stepSpecs = stepSpes;
 	}
 
+	public ChangeRequestSpec withRequestUrlPrefix(String urlPrefix) {
+		this.setRequestUrlPrefix(urlPrefix);
+		return this;
+	}
 	
+	
+	public String getRequestUrlPrefix() {
+		return requestUrlPrefix;
+	}
+	public void setRequestUrlPrefix(String requestUrlPrefix) {
+		this.requestUrlPrefix = requestUrlPrefix;
+	}
 	protected List<StepSpec> ensureStepSpecs(){
 		if (stepSpecs != null) {
 			return stepSpecs;
