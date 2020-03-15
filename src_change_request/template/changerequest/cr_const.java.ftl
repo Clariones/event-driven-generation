@@ -1,9 +1,8 @@
 package com.${orgName?lower_case}.${projectName?lower_case};
 
-public interface CR {
-	String GROUP_HIDDEN = "hidden_group";
-	String FIELD_CR_ID = "crId";
-	String FIELD_SCENE_CODE = "sceneCode";
+import com.terapico.changerequest.BaseCrConst;
+
+public interface CR extends BaseCrConst {
 	
 <#list projectSpec.changeRequestList as crSpec>
 	interface ${helper.JAVA_CONST(crSpec.changeRequestType)} {

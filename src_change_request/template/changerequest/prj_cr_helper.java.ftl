@@ -5,10 +5,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.${orgName?lower_case}.${projectName?lower_case}.changerequest.ChangeRequest;
-import com.skynet.caf.appview.CRFieldData;
-import com.skynet.caf.appview.CRGroupData;
-import com.skynet.caf.appview.CRSceneData;
-import com.skynet.caf.appview.ChangeReqeuestData;
+import com.terapico.caf.appview.CRFieldData;
+import com.terapico.caf.appview.CRGroupData;
+import com.terapico.caf.appview.CRSceneData;
+import com.terapico.caf.appview.ChangeReqeuestData;
 import com.terapico.changerequest.BaseChangeRequestHelper;
 import com.terapico.changerequest.CRFieldSpec;
 import com.terapico.changerequest.CRGroupSpec;
@@ -243,7 +243,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 				}
 				
 				CRFieldData fieldData = new CRFieldData();
-				fieldData.setName(fieldSpec.getName());
+				fieldData.setName(fieldSpec.getName()+"_"+evtData.getId());
 				if (fieldSpec.getInteractionMode().equals("display")) {
 					fieldData.setValue(TO_VALUE(fieldSpec.getValue()));
 				}else {
@@ -271,7 +271,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 			}
 		
 			CRFieldData fieldData = new CRFieldData();
-			fieldData.setName(fieldSpec.getName());
+			fieldData.setName(fieldSpec.getName()+"_new");
 			if (fieldSpec.getValue() != null) {
 				fieldData.setValue(TO_VALUE(fieldSpec.getValue()));
 			}else {
