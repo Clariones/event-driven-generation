@@ -10,17 +10,20 @@ import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
 import com.${orgName?lower_case}.${projectName?lower_case}.changerequest.ChangeRequest;
+import com.${orgName?lower_case}.${projectName?lower_case}.changerequest.ChangeRequestTokens;
 import com.terapico.caf.appview.CRFieldData;
 import com.terapico.caf.appview.CRGroupData;
 import com.terapico.caf.appview.CRSceneData;
 import com.terapico.caf.appview.ChangeRequestData;
 import com.terapico.caf.appview.ChangeRequestPostData;
+import com.terapico.caf.appview.ChangeRequestProcessResult;
 import com.terapico.changerequest.BaseChangeRequestHelper;
 import com.terapico.changerequest.CRFieldSpec;
 import com.terapico.changerequest.CRGroupSpec;
 import com.terapico.changerequest.CRSpec;
 
 import com.terapico.utils.DataTypeUtil;
+import com.terapico.uccaf.CafEntity;
 import com.terapico.caf.Images;
 import com.terapico.caf.DateTime;
 
@@ -42,20 +45,39 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 	public ${projectName?cap_first}UserContextImpl getUserContext() {
 		return userContext;
 	}
-
-
 	public void setUserContext(${projectName?cap_first}UserContextImpl userContext) {
 		this.userContext = userContext;
 	}
-
-
 	protected void loadCrSpec() throws Exception {
 		loadCrSpecFromJar("/META_INF/${projectName?lower_case}_cr_spec.json");
 	}
 
-
 	protected Object toEventTableName(CRGroupSpec groupSpec) {
 		return "event_" + (groupSpec.getModelName().trim().replace(' ', '_').toLowerCase())+"_data";
+	}
+	
+	public ChangeRequestProcessResult processChangeRequest(ChangeRequestPostData postedData, BaseEntity currentUserInfo) throws Exception {
+		ChangeRequestProcessResult processResult = new ChangeRequestProcessResult();
+		processResult.setPostedData(postedData);
+		
+		savePostedData(postedData, currentUserInfo);
+		String nextScene = calcSceneCode(postedData.getChangeRequestType(), postedData.getSceneCode(),
+				postedData.getActionCode(), postedData.getActionIndex());
+		if (nextScene.equals(CR.NEXT_COMMIT)) {
+			processResult.setResultCode(ChangeRequestProcessResult.CODE_COMMITTED);
+			processResult.setChangeRequest(loadWholeChangeRequest(postedData.getChangeRequestId()));
+		}else {
+			processResult.setResultCode(ChangeRequestProcessResult.CODE_NOT_COMMITTED);
+			processResult.setNewChangeRequestType(postedData.getChangeRequestType());
+			processResult.setNewSceneCode(nextScene);
+		}
+		
+		return processResult;
+	}
+	
+	public ChangeRequestData assemblerChangeRequstFirstStepResponse(BaseEntity currentUserInfo, String crType) throws Exception {
+			CRSpec crSpec = CR(crType);
+			return assemblerChangeRequstResponse(currentUserInfo, crType, crSpec.getSceneList().get(0).getName());
 	}
 
 	// 根据定位信息,组装一个 cr 的response
@@ -320,11 +342,9 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 			<#list group.fieldList as field>
 				<#if field.interactionMode != 'display'>
 	protected void doField${helper.CamelName(scene.name)+helper.CamelName(group.name)+helper.CamelName(field.name)}Checking(ChangeRequestPostData postedData, CRFieldSpec fieldSpec, String fieldName, Object value) {
-		if (value == null && fieldSpec.getRequired()) {
-			postedData.addVerifyErrorMessage(fieldName, fieldSpec.getLabel(), String.format("请输入'%s'", fieldSpec.getLabel()));
-			return;
+		if (!isFieldMissing(postedData, fieldSpec, fieldName, value)) {
+			do${helper.CamelName(field.inputType)}FieldChecking(postedData, fieldSpec, fieldName, value);
 		}
-		do${helper.CamelName(field.inputType)}FieldChecking(postedData, fieldSpec, fieldName, value);
 	}
 	
 				</#if>
@@ -408,7 +428,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 				<#if field.interactionMode == "display">
 					<#continue>
 				</#if>
-			${helper.getJavaType(field.inputType)} ${helper.javaVar(field.name)} = DataTypeUtil.get${helper.getJavaType(field.inputType)}(fieldValue.get("${helper.javaVar(field.name)}"));
+				${helper.getJavaType(field.inputType)} ${helper.javaVar(field.name)} = get${helper.CamelName(field.inputType)}Value(fieldValue.get("${helper.javaVar(field.name)}"));
 			</#list>
 				String fieldGroup = "${helper.javaVar(scene.name)}_${helper.javaVar(group.name)}";
 				String eventInitiatorType = currentUserInfo.getInternalType();
@@ -430,7 +450,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 				<#if field.interactionMode == "display">
 					<#continue>
 				</#if>
-				event.update${helper.CamelName(field.name)}(DataTypeUtil.get${helper.getJavaType(field.inputType)}(fieldValue.get("${helper.javaVar(field.name)}")));
+				event.update${helper.CamelName(field.name)}(get${helper.CamelName(field.inputType)}Value(fieldValue.get("${helper.javaVar(field.name)}")));
 			</#list>
 				getUserContext().getManagerGroup().getEvent${helper.CamelName(group.eventType)}Manager().internalSaveEvent${helper.CamelName(group.eventType)}(getUserContext(), event, EO);
 			}
@@ -439,4 +459,8 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 		</#list>
 	</#list>
 </#list>
+
+	protected CafEntity loadWholeChangeRequest(String changeRequestId) throws Exception {
+		return this.getUserContext().getDAOGroup().getChangeRequestDAO().load(changeRequestId, ChangeRequestTokens.all());
+	}
 }
