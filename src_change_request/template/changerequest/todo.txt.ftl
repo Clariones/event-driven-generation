@@ -6,10 +6,13 @@ TODO-1:
 <#list allEventSpec?keys as eventName>
 <event_${helper.toModelStyleName(allEventSpec[eventName].eventType)}
 	<#list allEventSpec[eventName].fieldList as fieldSpec>
+		<#if fieldSpec.interactionMode != 'display'>
 	${helper.toModelStyleName(fieldSpec.name)}="${helper.getExampleDataOfField(fieldSpec)}"
+		</#if>
 	</#list>
 	field_group="cr_type/step_name/event_name/event_index|[5,100]"
-	event_initiator="$(${userModelName})"
+	event_initiator_type="SecUser|Merchant|[1,64]"
+	event_initiator_id="SU000001|M0000001|[1,64]"
 	change_request="$(${crModelName})"
 	_features="event"
 	_bind_with_cr_type="${helper.getAllCRTypeUsedEvent(allEventSpec[eventName].eventType, projectSpec)?join("|")}"

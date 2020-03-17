@@ -1,18 +1,28 @@
 package com.${orgName?lower_case}.${projectName?lower_case};
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Date;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
 import com.${orgName?lower_case}.${projectName?lower_case}.changerequest.ChangeRequest;
 import com.terapico.caf.appview.CRFieldData;
 import com.terapico.caf.appview.CRGroupData;
 import com.terapico.caf.appview.CRSceneData;
-import com.terapico.caf.appview.ChangeReqeuestData;
+import com.terapico.caf.appview.ChangeRequestData;
+import com.terapico.caf.appview.ChangeRequestPostData;
 import com.terapico.changerequest.BaseChangeRequestHelper;
 import com.terapico.changerequest.CRFieldSpec;
 import com.terapico.changerequest.CRGroupSpec;
 import com.terapico.changerequest.CRSpec;
+
+import com.terapico.utils.DataTypeUtil;
+import com.terapico.caf.Images;
+import com.terapico.caf.DateTime;
 
 <#list allEventSpec?keys as eventName>
 	<#assign event=allEventSpec[eventName]/>
@@ -49,7 +59,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 	}
 
 	// 根据定位信息,组装一个 cr 的response
-	public ChangeReqeuestData assemblerChangeRequstResponse(BaseEntity currentUserInfo, String crType, String sceneCode)
+	public ChangeRequestData assemblerChangeRequstResponse(BaseEntity currentUserInfo, String crType, String sceneCode)
 			throws Exception {
 		// 先拿到CR spec
 		CRSpec crSpec = CR(crType);
@@ -58,17 +68,17 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 		// 再用这些Group spec, 找到系统中相关的已经存在的cr和event数据
 		ChangeRequest cr = loadCrDataByGroups(crType, currentUserInfo, groupSpecList);
 		// 然后根据需要,补足fields,填充field的默认值
-		ChangeReqeuestData crData = fulfillChangeRequestFields(cr, crSpec, sceneCode, groupSpecList);
+		ChangeRequestData crData = fulfillChangeRequestFields(cr, crSpec, sceneCode, groupSpecList);
 		// 最后要交给业务模块,让业务模块有机会修正准备好的数据: 目前用返回值给业务模块来实现,没做回调
 		// adjustChangeRequestResponse(cr, crSpec, sceneCode, groupSpecList);
 		return crData;
 	}
 	// 根据 group spec list, 把这个cr装满
-	protected ChangeReqeuestData fulfillChangeRequestFields(ChangeRequest InputCR, CRSpec crSpec, String sceneCode,
+	protected ChangeRequestData fulfillChangeRequestFields(ChangeRequest InputCR, CRSpec crSpec, String sceneCode,
 			List<CRGroupSpec> groupSpecList) throws Exception {
 		final ChangeRequest cr = ensureChangeRequest(InputCR, crSpec);
 		// 先建立一个CR
-		ChangeReqeuestData reuestData = new ChangeReqeuestData();
+		ChangeRequestData reuestData = new ChangeRequestData();
 		reuestData.setId(cr.getId());
 		reuestData.setSceneCode(sceneCode);
 		reuestData.setTitle(crSpec.getTitle());
@@ -121,7 +131,8 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 				sb.append(" or ");
 			}
 			sb.append(" exists (select * from ").append(toEventTableName(group))
-					.append(" E where E.change_request = CR.id and event_initiator=? and E.field_group=?) \n");
+					.append(" E where E.change_request = CR.id and event_initiator_type=? and event_initiator_id=? and E.field_group=?) \n");
+			params.add(currentUserInfo.getInternalType());
 			params.add(currentUserInfo.getId());
 			params.add(group.getName());
 		});
@@ -138,7 +149,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 		return cr;
 	}
 
-	protected void addHiddenField(ChangeReqeuestData reuestData, String fieldShortName, String value) {
+	protected void addHiddenField(ChangeRequestData reuestData, String fieldShortName, String value) {
 		CRGroupData group = HIDDEN_GROUP(reuestData);
 		CRFieldData fieldData = new CRFieldData();
 		fieldData.setName(CR.GROUP_HIDDEN+"_"+fieldShortName);
@@ -146,7 +157,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 		group.addField(fieldData);
 	}
 
-	protected CRGroupData HIDDEN_GROUP(ChangeReqeuestData reuestData) {
+	protected CRGroupData HIDDEN_GROUP(ChangeRequestData reuestData) {
 		if (reuestData == null || reuestData.getGroupList() == null) {
 			BUG("你不应该把未准备好的数据交给用户来添加隐藏字段");
 		}
@@ -185,7 +196,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 <#list projectSpec.changeRequestList as crSpec>
 	protected void enhance${helper.CamelName(crSpec.changeRequestType)}ChangeRequest(ChangeRequest cr, List<CRGroupSpec> groupSpecList) throws Exception{
 		groupSpecList.forEach(group->{
-			Object[] params = new Object[] {cr.id, group.getName(), 1000};
+			Object[] params = new Object[] {cr.getId(), group.getName(), 1000};
 			String sql = "select * from " + toEventTableName(group) + " E where E.change_request=? " + 
 					" and E.field_group=? order by id asc limit ?";
 			switch (group.getName()) {
@@ -205,7 +216,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 	}
 	
 </#list>
-	protected void fulfillChangeRequestField(ChangeReqeuestData reuestData, ChangeRequest dbCrData, CRGroupData groupData, CRGroupSpec groupSpec,
+	protected void fulfillChangeRequestField(ChangeRequestData reuestData, ChangeRequest dbCrData, CRGroupData groupData, CRGroupSpec groupSpec,
 			List<CRFieldSpec> fieldSpecList) throws Exception {
 		switch (groupSpec.getName()) {
 <#list projectSpec.changeRequestList as crSpec>
@@ -222,7 +233,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 		}
 	}
 	
-	protected void fulfillChangeRequestFieldByGroup(ChangeReqeuestData reuestData, ChangeRequest dbCrData,
+	protected void fulfillChangeRequestFieldByGroup(ChangeRequestData reuestData, ChangeRequest dbCrData,
 			CRGroupData groupData, List<CRFieldSpec> fieldSpecList, SmartList<? extends BaseEntity> eventList) {
 		if (eventList == null || eventList.isEmpty()) {
 			fullFillNewFields(groupData, fieldSpecList);
@@ -232,8 +243,8 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 		for(int i=0;i<eventList.size();i++) {
 			BaseEntity evtData = eventList.get(i);
 			List<KeyValuePair> kvList = evtData.keyValuePairOf();
-			Object fieldGroup = kvList.stream().filter(entry->entry.getKey().equals("fieldGroup")).findAny().orElse(null);
-			if (fieldGroup == null || !fieldGroup.equals(groupData.getName())) {
+			KeyValuePair fieldGroup = kvList.stream().filter(entry->entry.getKey().equals("fieldGroup")).findAny().orElse(null);
+			if (fieldGroup == null || !fieldGroup.getValue().equals(groupData.getName())) {
 				continue;
 			}
 			foundAny = true;
@@ -248,11 +259,11 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 					fieldData.setValue(TO_VALUE(fieldSpec.getValue()));
 				}else {
 					String memberName = FIELD_NAME(fieldSpec);
-					Object value = kvList.stream().filter(entry->entry.getKey().equals(memberName)).findAny().orElse(null);
-					if (value == null) {
+					KeyValuePair kv = kvList.stream().filter(entry->entry.getKey().equals(memberName)).findAny().orElse(null);
+					if (kv == null || kv.getValue() == null) {
 						fieldData.setValue(TO_VALUE(fieldSpec.getDefaultValue()));
 					}else {
-						fieldData.setValue(TO_VALUE(value));
+						fieldData.setValue(TO_VALUE(kv.getValue()));
 					}
 				}
 				setFieldSpecInfo(fieldData, fieldSpec);
@@ -281,5 +292,151 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 			groupData.addField(fieldData);
 		}
 	}
+	
+	protected void doFieldChecking(ChangeRequestPostData postedData, CRFieldSpec fieldSpec, String fieldName, Object value) {
+		switch (fieldSpec.getName()) {
+<#list projectSpec.changeRequestList as crSpec>
+	<#list crSpec.stepList as scene>
+		<#list scene.eventList as group>
+			<#list group.fieldList as field>
+				<#if field.interactionMode != 'display'>
+		case "${helper.javaVar(scene.name)+"_"+helper.javaVar(group.name)+"_"+helper.javaVar(field.name)}": 
+			doField${helper.CamelName(scene.name)+helper.CamelName(group.name)+helper.CamelName(field.name)}Checking(postedData, fieldSpec, fieldName, value);
+			return;
+				</#if>
+			</#list>
+		</#list>
+	</#list>
+</#list>
+		default:
+			BUG("不应该出现"+fieldSpec.getName());
+			break;
+		}
+	}
+	
+<#list projectSpec.changeRequestList as crSpec>
+	<#list crSpec.stepList as scene>
+		<#list scene.eventList as group>
+			<#list group.fieldList as field>
+				<#if field.interactionMode != 'display'>
+	protected void doField${helper.CamelName(scene.name)+helper.CamelName(group.name)+helper.CamelName(field.name)}Checking(ChangeRequestPostData postedData, CRFieldSpec fieldSpec, String fieldName, Object value) {
+		if (value == null && fieldSpec.getRequired()) {
+			postedData.addVerifyErrorMessage(fieldName, fieldSpec.getLabel(), String.format("请输入'%s'", fieldSpec.getLabel()));
+			return;
+		}
+		do${helper.CamelName(field.inputType)}FieldChecking(postedData, fieldSpec, fieldName, value);
+	}
+	
+				</#if>
+			</#list>
+		</#list>
+	</#list>
+</#list>
 
+	protected ${projectName?cap_first}Exception wrapTo${projectName?cap_first}Exception(ChangeRequestPostData postedData, String msg) {
+		${projectName?cap_first}Exception exception = new ${projectName?cap_first}Exception(msg);
+		for(Map<String, Object> vmsg : postedData.getVerifyMessage()) {
+			Message fmsg = new Message();
+			fmsg.setBody((String) vmsg.get("message"));
+			fmsg.setLevel("warning");
+			fmsg.setSourcePosition((String) vmsg.get("fieldName"));
+			exception.addErrorMessage(fmsg);
+		}
+		return exception;
+	}
+	
+	protected void savePostedData(ChangeRequestPostData postedData, BaseEntity currentUserInfo) throws Exception {
+		switch (postedData.getActionCode()) {
+		case CR.ACTION_COMMIT:
+		case CR.ACTION_NEXT_STEP:
+		case CR.ACTION_NEXT_RECORD:
+			break;
+		case CR.ACTION_PREV_STEP:
+		case CR.ACTION_DELETE_RECORD:
+		case CR.ACTION_PREV_RECORD:
+		default:
+			// 这些情况不需要保存提交的数据
+			return;
+		}
+		
+		CRSpec crSpec = CR(postedData.getChangeRequestType());
+		if (postedData.getVerifyMessage() != null && postedData.getVerifyMessage().size()>0) {
+			String msg = SCENE(crSpec, postedData.getSceneCode()).getTitle()+"输入参数错误";
+			${projectName?cap_first}Exception exception = wrapTo${projectName?cap_first}Exception(postedData, msg);
+			throw exception;
+		}
+		// TODO: 保存已经提交的数据
+		
+		List<CRGroupSpec> groupSpecList = GROUPS(crSpec, postedData.getSceneCode());
+		Iterator<Entry<String, List<Map<String, Object>>>> git = postedData.getFieldData().entrySet().iterator();
+		while(git.hasNext()) {
+			Entry<String, List<Map<String, Object>>> gEntity = git.next();
+			String groupName = gEntity.getKey();
+			List<Map<String, Object>> fieldValues = gEntity.getValue();
+			CRGroupSpec groupSpec = groupSpecList.stream().filter(g->g.getName().equals(groupName)).findFirst().orElse(null);
+			if (groupSpec == null) {
+				error("无法处理提交的 "+groupName+" 的数据");
+			}
+			String crId = postedData.getChangeRequestId();
+			switch (groupSpec.getName()) {
+<#list projectSpec.changeRequestList as crSpec>
+	<#list crSpec.stepList as scene>
+		<#list scene.eventList as group>
+			case CR.${helper.JAVA_CONST(crSpec.changeRequestType)}.SCENE_${helper.JAVA_CONST(scene.name)}.GROUP_${helper.JAVA_CONST(group.name)}:
+				save${helper.CamelName(crSpec.changeRequestType)}${helper.CamelName(scene.name)}${helper.CamelName(group.name)}(crId, fieldValues,currentUserInfo);
+				break;
+		</#list>
+	</#list>
+</#list>
+			default:
+				BUG(groupName+"还没增加save功能");
+			}
+		}
+	}
+
+<#list projectSpec.changeRequestList as crSpec>
+	<#list crSpec.stepList as scene>
+		<#list scene.eventList as group>
+	protected void save${helper.CamelName(crSpec.changeRequestType)}${helper.CamelName(scene.name)}${helper.CamelName(group.name)}(String crId, List<Map<String, Object>> fieldValues, BaseEntity currentUserInfo) throws Exception {
+		if (fieldValues == null || fieldValues.isEmpty()) {
+			return;
+		}
+		for(Map<String, Object> fieldValue: fieldValues) {
+			String id = (String) fieldValue.get("id");
+			if (id == null) {
+			<#list group.fieldList as field>
+				<#if field.interactionMode == "display">
+					<#continue>
+				</#if>
+			${helper.getJavaType(field.inputType)} ${helper.javaVar(field.name)} = DataTypeUtil.get${helper.getJavaType(field.inputType)}(fieldValue.get("${helper.javaVar(field.name)}"));
+			</#list>
+				String fieldGroup = "${helper.javaVar(scene.name)}_${helper.javaVar(group.name)}";
+				String eventInitiatorType = currentUserInfo.getInternalType();
+				String eventInitiatorId = currentUserInfo.getId();
+				String changeRequestId = crId;
+				getUserContext().getManagerGroup().getEvent${helper.CamelName(group.eventType)}Manager()
+					.createEvent${helper.CamelName(group.eventType)}(getUserContext(),<@compress single_line=true>
+			<#list group.fieldList as field>
+				<#if field.interactionMode == "display">
+					<#continue>
+				</#if>
+				${helper.javaVar(field.name)},
+			</#list>
+			</@compress>${''}
+						fieldGroup, eventInitiatorType, eventInitiatorId, changeRequestId);
+			}else{
+				Event${helper.CamelName(group.eventType)} event = getUserContext().getDAOGroup().getEvent${helper.CamelName(group.eventType)}DAO().load(id, EO);
+			<#list group.fieldList as field>
+				<#if field.interactionMode == "display">
+					<#continue>
+				</#if>
+				event.update${helper.CamelName(field.name)}(DataTypeUtil.get${helper.getJavaType(field.inputType)}(fieldValue.get("${helper.javaVar(field.name)}")));
+			</#list>
+				getUserContext().getManagerGroup().getEvent${helper.CamelName(group.eventType)}Manager().internalSaveEvent${helper.CamelName(group.eventType)}(getUserContext(), event, EO);
+			}
+		}
+	}
+		</#list>
+	</#list>
+</#list>
 }

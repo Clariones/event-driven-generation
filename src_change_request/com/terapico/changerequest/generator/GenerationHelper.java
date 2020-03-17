@@ -120,6 +120,10 @@ public class GenerationHelper {
 	public String model_name(String name) {
 		return Utils.toModelName(name);
 	}
+	
+	public String getJavaType(String typeName) {
+		return FieldType.of(typeName).getJavaTypeName();
+	}
 
 	public String makeBackendFieldSpec(Map<String, Object> fieldSpec, String groupName) {
 		Map<String, Object> result = new HashMap<>();
