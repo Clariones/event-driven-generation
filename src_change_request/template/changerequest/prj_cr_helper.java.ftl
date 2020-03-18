@@ -61,8 +61,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 		processResult.setPostedData(postedData);
 		
 		savePostedData(postedData, currentUserInfo);
-		String nextScene = calcSceneCode(postedData.getChangeRequestType(), postedData.getSceneCode(),
-				postedData.getActionCode(), postedData.getActionIndex());
+		String nextScene = calcSceneCode(postedData);
 		if (nextScene.equals(CR.NEXT_COMMIT)) {
 			processResult.setResultCode(ChangeRequestProcessResult.CODE_COMMITTED);
 			processResult.setChangeRequest(loadWholeChangeRequest(postedData.getChangeRequestId()));
@@ -70,6 +69,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 			processResult.setResultCode(ChangeRequestProcessResult.CODE_NOT_COMMITTED);
 			processResult.setNewChangeRequestType(postedData.getChangeRequestType());
 			processResult.setNewSceneCode(nextScene);
+			processResult.setNewGroupIds(calcNewGroupIds(postedData));
 		}
 		
 		return processResult;
@@ -77,12 +77,12 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 	
 	public ChangeRequestData assemblerChangeRequstFirstStepResponse(BaseEntity currentUserInfo, String crType) throws Exception {
 			CRSpec crSpec = CR(crType);
-			return assemblerChangeRequstResponse(currentUserInfo, crType, crSpec.getSceneList().get(0).getName());
+			return assemblerChangeRequstResponse(currentUserInfo, crType, crSpec.getSceneList().get(0).getName(), null);
 	}
 
 	// 根据定位信息,组装一个 cr 的response
-	public ChangeRequestData assemblerChangeRequstResponse(BaseEntity currentUserInfo, String crType, String sceneCode)
-			throws Exception {
+	public ChangeRequestData assemblerChangeRequstResponse(BaseEntity currentUserInfo, String crType, String sceneCode,
+			Map<String, Integer> recordIndexInfo) throws Exception {
 		// 先拿到CR spec
 		CRSpec crSpec = CR(crType);
 		// 再根据scene code, 找到有哪几个group的spec被需要
@@ -90,14 +90,14 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 		// 再用这些Group spec, 找到系统中相关的已经存在的cr和event数据
 		ChangeRequest cr = loadCrDataByGroups(crType, currentUserInfo, groupSpecList);
 		// 然后根据需要,补足fields,填充field的默认值
-		ChangeRequestData crData = fulfillChangeRequestFields(cr, crSpec, sceneCode, groupSpecList);
+		ChangeRequestData crData = fulfillChangeRequestFields(cr, crSpec, sceneCode, groupSpecList, recordIndexInfo);
 		// 最后要交给业务模块,让业务模块有机会修正准备好的数据: 目前用返回值给业务模块来实现,没做回调
 		// adjustChangeRequestResponse(cr, crSpec, sceneCode, groupSpecList);
 		return crData;
 	}
 	// 根据 group spec list, 把这个cr装满
 	protected ChangeRequestData fulfillChangeRequestFields(ChangeRequest InputCR, CRSpec crSpec, String sceneCode,
-			List<CRGroupSpec> groupSpecList) throws Exception {
+			List<CRGroupSpec> groupSpecList, Map<String, Integer> recordIndexInfo) throws Exception {
 		final ChangeRequest cr = ensureChangeRequest(InputCR, crSpec);
 		// 先建立一个CR
 		ChangeRequestData reuestData = new ChangeRequestData();
@@ -116,6 +116,14 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 			reuestData.getGroupList().add(hiddenGroup);
 			addHiddenField(reuestData, CR.FIELD_CR_ID, cr.getId());
 			addHiddenField(reuestData, CR.FIELD_SCENE_CODE, sceneCode);
+			for(CRGroupSpec groupSpec: groupSpecList) {
+				String gName = groupSpec.getName();
+				if (recordIndexInfo != null && recordIndexInfo.containsKey(groupSpec.getName())) {
+					addHiddenField(reuestData, "indexof_"+ gName, String.valueOf(recordIndexInfo.get(gName)));
+				}else {
+					addHiddenField(reuestData, "indexof_"+ gName, "1");
+				}
+			}
 		}
 		// 接着填 scene 列表
 		{
@@ -134,7 +142,8 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 			groupData.setHidden(false);
 			reuestData.getGroupList().add(groupData);
 			
-			fulfillChangeRequestField(reuestData, cr, groupData, groupSpec, crSpec.getFieldList());
+			int groupRecordIndex = getIndexOfGroup(reuestData, groupSpec);
+			fulfillChangeRequestField(reuestData, cr, crSpec, groupData, groupSpec, crSpec.getFieldList(), groupRecordIndex);
 		}
 		// 最后是CR级别的actions
 		fulfillChangeRequestActions(reuestData, crSpec, sceneCode);
@@ -177,17 +186,6 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 		fieldData.setName(CR.GROUP_HIDDEN+"_"+fieldShortName);
 		fieldData.setValue(value);
 		group.addField(fieldData);
-	}
-
-	protected CRGroupData HIDDEN_GROUP(ChangeRequestData reuestData) {
-		if (reuestData == null || reuestData.getGroupList() == null) {
-			BUG("你不应该把未准备好的数据交给用户来添加隐藏字段");
-		}
-		if (reuestData.getGroupList().size() < 1
-				|| !reuestData.getGroupList().get(0).getName().equals(CR.GROUP_HIDDEN)) {
-			BUG("你应该先准备hidden group, 再交给用户来添加隐藏字段");
-		}
-		return reuestData.getGroupList().get(0);
 	}
 
 	protected ChangeRequest ensureChangeRequest(ChangeRequest cr, CRSpec crSpec) throws Exception {
@@ -238,30 +236,42 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 	}
 	
 </#list>
-	protected void fulfillChangeRequestField(ChangeRequestData reuestData, ChangeRequest dbCrData, CRGroupData groupData, CRGroupSpec groupSpec,
-			List<CRFieldSpec> fieldSpecList) throws Exception {
+	protected void fulfillChangeRequestField(ChangeRequestData reuestData, ChangeRequest dbCrData, CRSpec crSpec, CRGroupData groupData, CRGroupSpec groupSpec,
+			List<CRFieldSpec> fieldSpecList, int groupRecordIndex) throws Exception {
+		int curRecordIdx = groupRecordIndex;
 		switch (groupSpec.getName()) {
 <#list projectSpec.changeRequestList as crSpec>
 	<#list crSpec.stepList as scene>
 		<#list scene.eventList as group>
 		case CR.${helper.JAVA_CONST(crSpec.changeRequestType)}.SCENE_${helper.JAVA_CONST(scene.name)}.GROUP_${helper.JAVA_CONST(group.name)}: 
-			fulfillChangeRequestFieldByGroup(reuestData, dbCrData, groupData, fieldSpecList, dbCrData.getEvent${helper.CamelName(group.eventType)}List());
-			return;
+			curRecordIdx = fulfillChangeRequestFieldByGroup(reuestData, dbCrData, groupData, fieldSpecList, dbCrData.getEvent${helper.CamelName(group.eventType)}List(), groupRecordIndex);
+			break;
 		</#list>
 	</#list>
 </#list>
 		default:
 			error("不支持自动填充 "+groupSpec.getName()+":"+groupSpec.getTitle()+" 的数据");
 		}
+		if (groupSpec.isMultiple()) {
+			groupData.setTitle(groupData.getTitle()+" "+curRecordIdx);
+		}
+		fulfillGroupActions(crSpec, groupData, groupSpec, groupRecordIndex);
 	}
 	
-	protected void fulfillChangeRequestFieldByGroup(ChangeRequestData reuestData, ChangeRequest dbCrData,
-			CRGroupData groupData, List<CRFieldSpec> fieldSpecList, SmartList<? extends BaseEntity> eventList) {
+	protected int fulfillChangeRequestFieldByGroup(ChangeRequestData reuestData, ChangeRequest dbCrData,
+			CRGroupData groupData, List<CRFieldSpec> fieldSpecList, SmartList<? extends BaseEntity> eventList, int groupRecordIndex) {
+		String gName = CR.GROUP_HIDDEN+"_indexof_"+groupData.getName();
+		CRFieldData gidField = HIDDEN_GROUP(reuestData).getFieldList().stream().filter(it -> it.getName().equals(gName))
+				.findFirst().orElse(null);
 		if (eventList == null || eventList.isEmpty()) {
 			fullFillNewFields(groupData, fieldSpecList);
-			return;
+			if (gidField != null) {
+				gidField.setValue("1");
+			}
+			return 1;
 		}
-		boolean foundAny = false;
+		int foundAny = 0;
+		boolean fillAny = false;
 		for(int i=0;i<eventList.size();i++) {
 			BaseEntity evtData = eventList.get(i);
 			List<KeyValuePair> kvList = evtData.keyValuePairOf();
@@ -269,7 +279,10 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 			if (fieldGroup == null || !fieldGroup.getValue().equals(groupData.getName())) {
 				continue;
 			}
-			foundAny = true;
+			foundAny++;
+			if (foundAny != groupRecordIndex) {
+				continue;
+			}
 			for(CRFieldSpec fieldSpec: fieldSpecList) {
 				if (!GROUP_NAME(fieldSpec).equals(groupData.getName())){
 					continue;
@@ -290,10 +303,17 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 				}
 				setFieldSpecInfo(fieldData, fieldSpec);
 				groupData.addField(fieldData);
+				fillAny = true;
 			}
 		}
-		if (!foundAny) {
+		if (!fillAny) {
 			fullFillNewFields(groupData, fieldSpecList);
+			if (gidField != null) {
+				gidField.setValue(String.valueOf(foundAny+1));
+			}
+			return foundAny+1;
+		}else {
+			return groupRecordIndex;
 		}
 	}
 

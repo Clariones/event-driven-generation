@@ -23,6 +23,12 @@
 							"title":"${group.title}",
 							"modelName":"${group.eventType}",
 							"multiple": ${group.multiple?c},
+			<#if group.minimalNumber??>
+							"minimalNumber": ${group.minimalNumber?c},
+			</#if>
+			<#if group.maximumNumber??>
+							"maximumNumber": ${group.maximumNumber?c},
+			</#if>
               				"mustHave": ${group.mustHave?c}
 						}<#if !group?is_last>,</#if>
 		</#list>
