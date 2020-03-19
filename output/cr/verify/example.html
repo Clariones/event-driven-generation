@@ -90,55 +90,109 @@
 <div class="main_pannel">
 <ul class="nav nav-pills flex-column cr_nav_menu" role="tablist">
 	<li class="nav-item cr_nav">
-		<a class="nav-link active" id="test_tab" data-toggle="tab" href="#test" role="tab" aria-controls="test" aria-selected="true">测试</a>
+		<a class="nav-link active" id="show_all_type_tab" data-toggle="tab" href="#show_all_type" role="tab" aria-controls="show_all_type" aria-selected="true">所有数据类型</a>
 	</li>
 	<li class="nav-item cr_nav">
 		<a class="nav-link " id="marriage_registration_tab" data-toggle="tab" href="#marriage_registration" role="tab" aria-controls="marriage_registration" aria-selected="false">婚姻注册申请</a>
 	</li>
 </ul>
 <div class="tab-content" style="flex:1;">
-	<div class="tab-pane fade show active" id="test" role="tabpanel" aria-labelledby="test_tab">
+	<div class="tab-pane fade show active" id="show_all_type" role="tabpanel" aria-labelledby="show_all_type_tab">
 		<div class="cr_container">
-	<h2 style="display:inline;">测试</h2>(TEST)
+	<h2 style="display:inline;">所有数据类型</h2>(SHOW_ALL_TYPE)
 	<ul class="nav nav-tabs nav-justified flex-row" role="tablist">
 		<li class="nav-item step_nav">
-			<a class="nav-link active" id="test_test_tab" data-toggle="tab" href="#test_test" role="tab" aria-controls="test" aria-selected="true">Step 1: 测试</a>
+			<a class="nav-link active" id="show_all_type_show_all_type_tab" data-toggle="tab" href="#show_all_type_show_all_type" role="tab" aria-controls="show_all_type" aria-selected="true">Step 1: 所有数据类型</a>
 		</li>
 	</ul>
 	<div class="tab-content">
-			<div class="tab-pane fade show active" id="test_test" role="tabpanel" aria-labelledby="test_test_tab">
+			<div class="tab-pane fade show active" id="show_all_type_show_all_type" role="tabpanel" aria-labelledby="show_all_type_show_all_type_tab">
 
 			<div class="step_container">
 	<div class="row justify-content-center">
 	<button type="button" class="btn btn-primary btn-lg col-sm-4">提交</button>
 	</div>
 				<div class="card event_container">
-<div class="card-header evt_header"> <h4>测试 <span style="color:red;">*</span> </h4>(test:test) </div>	<form>
+<div class="card-header evt_header"> <h4>所有数据类型 <span style="color:red;">*</span> </h4>(show all type:show_all_type) </div>	<form>
 					<div class="field_container">
 		<div class="form-group">
-			<label for="test_test_name">姓名</label>
+			<label for="show all type_show all type_field_text">短文本</label>
 			<span style="color:red;">*</span>
 			<span style="color:#66a26e; font-size: 80%;">
-				(name):string
+				(fieldText):string
 			</span>
 			
 		<input class="form-control" 
 				type="text" 
 				
-				id="test_test_name" />
+				id="show all type_show all type_field_text" />
 			
 		</div>
 					</div>
 					<div class="field_container">
 		<div class="form-group">
-			<label for="test_test_birthtime">出生时间</label>
+			<label for="show all type_show all type_field_longtext">长文本</label>
 			<span style="color:red;">*</span>
 			<span style="color:#66a26e; font-size: 80%;">
-				(birthtime):datetime
+				(fieldLongtext):longtext
+			</span>
+			
+		<textarea class="form-control" 
+				type="text" 
+				
+				id="show all type_show all type_field_longtext"></textarea>
+			
+		</div>
+					</div>
+					<div class="field_container">
+		<div class="form-group">
+			<label for="show all type_show all type_field_boolean">布尔</label>
+			<span style="color:red;">*</span>
+			<span style="color:#66a26e; font-size: 80%;">
+				(fieldBoolean):boolean
+			</span>
+			
+					<span style="color:red;">boolean类型的输入还没处理</span>
+			
+		</div>
+					</div>
+					<div class="field_container">
+		<div class="form-group">
+			<label for="show all type_show all type_field_images">多图</label>
+			<span style="color:red;">*</span>
+			<span style="color:#66a26e; font-size: 80%;">
+				(fieldImages):images
+			</span>
+			
+		<input class="form-control" 
+				type="file" 
+				
+				id="show all type_show all type_field_images" />
+			
+		</div>
+					</div>
+					<div class="field_container">
+		<div class="form-group">
+			<label for="show all type_show all type_field_image">单图</label>
+			<span style="color:red;">*</span>
+			<span style="color:#66a26e; font-size: 80%;">
+				(fieldImage):image
+			</span>
+			
+					<span style="color:red;">image类型的输入还没处理</span>
+			
+		</div>
+					</div>
+					<div class="field_container">
+		<div class="form-group">
+			<label for="show all type_show all type_field_date">日期</label>
+			<span style="color:red;">*</span>
+			<span style="color:#66a26e; font-size: 80%;">
+				(fieldDate):date
 			</span>
 			
 		<div class="input-group input_date mb-3">
-  			<input type="text" class="form-control" data-provide="datepicker" placeholder="用来算生辰八字">
+  			<input type="text" class="form-control" data-provide="datepicker" >
   			<div class="input-group-append">
     			<span class="input-group-text"><i class="fa fa-calendar" aria-hidden="true"></i></span>
   			</div>
@@ -148,106 +202,68 @@
 					</div>
 					<div class="field_container">
 		<div class="form-group">
-			<label for="test_test_favorite">爱好</label>
+			<label for="show all type_show all type_field_datetime">日期时间</label>
 			<span style="color:red;">*</span>
 			<span style="color:#66a26e; font-size: 80%;">
-				(favorite):string
+				(fieldDatetime):datetime
 			</span>
 			
-	<div class="form-control">
-	 	<div class="form-check-inline">
-  			<label class="form-check-label">
-    			<input type="checkbox" class="form-check-input" name="test_test_favorite"
-    				
-    				/>运动
-  			</label>
+		<div class="input-group input_date mb-3">
+  			<input type="text" class="form-control" data-provide="datepicker" >
+  			<div class="input-group-append">
+    			<span class="input-group-text"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+  			</div>
 		</div>
-	 	<div class="form-check-inline">
-  			<label class="form-check-label">
-    			<input type="checkbox" class="form-check-input" name="test_test_favorite"
-    				
-    				/>读书
-  			</label>
-		</div>
-	 	<div class="form-check-inline">
-  			<label class="form-check-label">
-    			<input type="checkbox" class="form-check-input" name="test_test_favorite"
-    				
-    				/>美食
-  			</label>
-		</div>
-	 	<div class="form-check-inline">
-  			<label class="form-check-label">
-    			<input type="checkbox" class="form-check-input" name="test_test_favorite"
-    				
-    				/>修炼
-  			</label>
-		</div>
-	 </div>
 			
 		</div>
 					</div>
 					<div class="field_container">
 		<div class="form-group">
-			<label for="test_test_self introduction">自我介绍</label>
+			<label for="show all type_show all type_field_time">时间</label>
 			<span style="color:red;">*</span>
 			<span style="color:#66a26e; font-size: 80%;">
-				(selfIntroduction):longtext
-					[10~500]
+				(fieldTime):time
 			</span>
 			
-		<textarea class="form-control" 
-				type="text" 
-				
-				id="test_test_self introduction"></textarea>
-			
+		<div class="input-group input_date mb-3">
+  			<input type="text" class="form-control" data-provide="timepicker" >
+  			<div class="input-group-append">
+    			<span class="input-group-text"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
+  			</div>
 		</div>
-					</div>
-	</form>
-				</div>
-				<div class="card event_container">
-<div class="card-header evt_header"> <h4>财产声明 <span style="color:red;">*</span> </h4>(madamada:premaritial_notarization) </div>	<form>
-					<div class="field_container">
-		<div class="form-group">
-			<label for="test_madamada_need notarize">我要申请婚前财产公证</label>
-			<span style="color:red;">*</span>
-			<span style="color:#66a26e; font-size: 80%;">
-				(needNotarize):boolean
-			</span>
-			
-	
-	
-	
-	 
-	 <div class="form-control">
-	 	<div class="form-check-inline">
-  			<label class="form-check-label">
-    			<input type="radio" class="form-check-input" name="test_madamada_need notarize"
-    				
-    				 />我要申请婚前财产公证
-  			</label>
-		</div>
-	 	<div class="form-check-inline">
-  			<label class="form-check-label">
-    			<input type="radio" class="form-check-input" name="test_madamada_need notarize"
-    				
-    				 checked />我放弃婚前财产公证
-  			</label>
-		</div>
-	 </div>
 			
 		</div>
 					</div>
 					<div class="field_container">
 		<div class="form-group">
-			<label for="test_madamada_delcared value">声明财产金额</label>
-			
+			<label for="show all type_show all type_field_integer">整数</label>
+			<span style="color:red;">*</span>
 			<span style="color:#66a26e; font-size: 80%;">
-				(delcaredValue):money
-					[1,000~100,000,000]
-					<div class="fd_tips">
-						<a href="#" data-toggle="popover" title="温馨提示" data-content="财产少于¥10000元,建议不要做婚前财产公证. 公证费用为¥300.00.">注意</a>
+				(fieldInteger):integer
+			</span>
+			
+					<span style="color:red;">integer类型的输入还没处理</span>
+			
+		</div>
 					</div>
+					<div class="field_container">
+		<div class="form-group">
+			<label for="show all type_show all type_field_decimal">小数</label>
+			<span style="color:red;">*</span>
+			<span style="color:#66a26e; font-size: 80%;">
+				(fieldDecimal):decimal
+			</span>
+			
+					<span style="color:red;">decimal类型的输入还没处理</span>
+			
+		</div>
+					</div>
+					<div class="field_container">
+		<div class="form-group">
+			<label for="show all type_show all type_field_money">金融</label>
+			<span style="color:red;">*</span>
+			<span style="color:#66a26e; font-size: 80%;">
+				(fieldMoney):money
 			</span>
 			
 <div class="input-group mb-3">
@@ -256,8 +272,8 @@
     </div>
 		<input class="form-control" 
 				type="number" min="0.00" max="10000.00" step="0.01"
-				placeholder="请输入声明要公证的婚前财产金额"
-				id="test_madamada_delcared value" />
+				
+				id="show all type_show all type_field_money" />
 </div>
 			
 		</div>
@@ -302,16 +318,13 @@
 			<label for="personal info_male_avatar">证件照</label>
 			<span style="color:red;">*</span>
 			<span style="color:#66a26e; font-size: 80%;">
-				(avatar):images
+				(avatar):image
 					<div class="fd_tips">
 						<a href="#" data-toggle="popover" title="温馨提示" data-content="正面免冠彩色2寸证件照">注意事项</a>
 					</div>
 			</span>
 			
-		<input class="form-control" 
-				type="file" 
-				placeholder="请上传照片"
-				id="personal info_male_avatar" />
+					<span style="color:red;">image类型的输入还没处理</span>
 			
 		</div>
 					</div>
@@ -394,6 +407,21 @@
 					</div>
 					<div class="field_container">
 		<div class="form-group">
+			<label for="personal info_female_avatar">证件照</label>
+			<span style="color:red;">*</span>
+			<span style="color:#66a26e; font-size: 80%;">
+				(avatar):image
+					<div class="fd_tips">
+						<a href="#" data-toggle="popover" title="温馨提示" data-content="正面免冠彩色2寸证件照">注意事项</a>
+					</div>
+			</span>
+			
+					<span style="color:red;">image类型的输入还没处理</span>
+			
+		</div>
+					</div>
+					<div class="field_container">
+		<div class="form-group">
 			<label for="personal info_female_name">姓名</label>
 			<span style="color:red;">*</span>
 			<span style="color:#66a26e; font-size: 80%;">
@@ -459,24 +487,6 @@
     			<span class="input-group-text"><i class="fa fa-calendar" aria-hidden="true"></i></span>
   			</div>
 		</div>
-			
-		</div>
-					</div>
-					<div class="field_container">
-		<div class="form-group">
-			<label for="personal info_female_avatar">证件照</label>
-			<span style="color:red;">*</span>
-			<span style="color:#66a26e; font-size: 80%;">
-				(avatar):images
-					<div class="fd_tips">
-						<a href="#" data-toggle="popover" title="温馨提示" data-content="正面免冠彩色2寸证件照">注意事项</a>
-					</div>
-			</span>
-			
-		<input class="form-control" 
-				type="file" 
-				placeholder="请上传照片"
-				id="personal info_female_avatar" />
 			
 		</div>
 					</div>
@@ -615,7 +625,7 @@
 					<div class="field_container">
 		<div class="form-group">
 			<label for="premarital declaration_additional terms_content">内容</label>
-			<span style="color:red;">*</span>
+			
 			<span style="color:#66a26e; font-size: 80%;">
 				(content):string
 					[1~500]

@@ -81,15 +81,18 @@ public class Example {
 								.optional()
 								.tips_title("?").tips_content("前往领取结婚证的民政局")
 								.values_can_get_from("getOfficeByCity/${register city}/")
-				.change_request("test").zh_CN("测试")
-					.has_field("name").zh_CN("姓名")
-					.has_field("birthtime").zh_CN("出生时间").which_type_of(FieldType.DATE_TIME)
-						.place_holder("用来算生辰八字")
-					.has_field("favorite").zh_CN("爱好")
-						.values_canbe("1", "运动").and("2", "读书").and("3", "美食").and("4", "修炼")
-					.has_field("self introduction").zh_CN("自我介绍").which_type_of(FieldType.MULTI_TEXT)
-						.range(10, 500)
-					.contains_event("premaritial notarization").as("madamada").zh_CN("财产声明")
+					.change_request("show all type").zh_CN("所有数据类型")
+						.has_field("field_text").zh_CN("短文本").which_type_of(FieldType.TEXT)
+						.has_field("field_longtext").zh_CN("长文本").which_type_of(FieldType.MULTI_TEXT)
+						.has_field("field_boolean").zh_CN("布尔").which_type_of(FieldType.BOOLEAN)
+						.has_field("field_images").zh_CN("多图").which_type_of(FieldType.IMAGES)
+						.has_field("field_image").zh_CN("单图").which_type_of(FieldType.IMAGE)
+						.has_field("field_date").zh_CN("日期").which_type_of(FieldType.DATE)
+						.has_field("field_datetime").zh_CN("日期时间").which_type_of(FieldType.DATE_TIME)
+						.has_field("field_time").zh_CN("时间").which_type_of(FieldType.TIME)
+						.has_field("field_integer").zh_CN("整数").which_type_of(FieldType.INTEGER)
+						.has_field("field_decimal").zh_CN("小数").which_type_of(FieldType.DECIMAL)
+						.has_field("field_money").zh_CN("金融").which_type_of(FieldType.MONEY)
 				.getChangeRequestSpec();
 	}
 	
@@ -97,7 +100,7 @@ public class Example {
 	public Object simpleExampe() {
 
 		return ChangeRequestSpecBuilder.for_project("example")
-				.change_request("marriage registration").zh_CN("婚姻注册申请")
+				.change_request("show all type").zh_CN("所有数据类型")
 					.has_field("message1")
 						.display()
 						.value("请在下面输入申请婚姻登记的男方信息")
@@ -114,6 +117,13 @@ public class Example {
 						.must_have()
 						.place_holder("请输入男方的生日")
 						.tips_title("?").tips_content("请与身份证保持一致")
+					.has_field("field_bool").zh_CN("出生日期").which_type_of(FieldType.DATE)
+					.has_field("field_bool").zh_CN("出生日期").which_type_of(FieldType.DATE)
+					.has_field("field_bool").zh_CN("出生日期").which_type_of(FieldType.DATE)
+					.has_field("field_bool").zh_CN("出生日期").which_type_of(FieldType.DATE)
+					.has_field("field_bool").zh_CN("出生日期").which_type_of(FieldType.DATE)
+					.has_field("field_bool").zh_CN("出生日期").which_type_of(FieldType.DATE)
+					.has_field("field_bool").zh_CN("出生日期").which_type_of(FieldType.DATE)
 				.getChangeRequestSpec();
 	}
 	public static void main(String[] args) {

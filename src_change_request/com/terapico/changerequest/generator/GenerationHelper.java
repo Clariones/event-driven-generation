@@ -89,6 +89,18 @@ public class GenerationHelper {
 			if (FieldType.MULTI_TEXT.isEquals(inputType)) {
 				value = "text()";
 			}
+			if (FieldType.INTEGER.isEquals(inputType)) {
+				value = "999999999|123456789";
+			}
+			if (FieldType.IMAGE.isEquals(inputType)) {
+				value = "product.jpg";
+			}
+			if (FieldType.IMAGES.isEquals(inputType)) {
+				value = "images()";
+			}
+			if (FieldType.DECIMAL.isEquals(inputType)) {
+				value = "99999999.999|88888888.000";
+			}
 		}
 		if (value != null) {
 			Boolean must = (Boolean) fieldSpec.get(OutputName.CHANGE_REQUEST.STEP.EVENT.FIELD.MUST);

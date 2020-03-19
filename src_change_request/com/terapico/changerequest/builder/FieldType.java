@@ -6,9 +6,9 @@ public enum FieldType {
 	BOOLEAN("boolean", "Boolean"), 
 	IMAGES("images", "Images"), 
 	IMAGE("image", "String"), 
-	DATE("date", "DateTime"), 
+	DATE("date", "Date"), 
 	DATE_TIME("datetime", "DateTime"), 
-	TIME("time", "DateTime"), 
+	TIME("time", "Date"), 
 	INTEGER("integer", "Integer"), 
 	DECIMAL("decimal", "BigDecimal"), 
 	MONEY("money", "BigDecimal");

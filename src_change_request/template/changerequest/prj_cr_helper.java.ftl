@@ -390,9 +390,9 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 		case CR.ACTION_COMMIT:
 		case CR.ACTION_NEXT_STEP:
 		case CR.ACTION_NEXT_RECORD:
+		case CR.ACTION_DELETE_RECORD:
 			break;
 		case CR.ACTION_PREV_STEP:
-		case CR.ACTION_DELETE_RECORD:
 		case CR.ACTION_PREV_RECORD:
 		default:
 			// 这些情况不需要保存提交的数据
@@ -405,8 +405,6 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 			${projectName?cap_first}Exception exception = wrapTo${projectName?cap_first}Exception(postedData, msg);
 			throw exception;
 		}
-		// TODO: 保存已经提交的数据
-		
 		List<CRGroupSpec> groupSpecList = GROUPS(crSpec, postedData.getSceneCode());
 		Iterator<Entry<String, List<Map<String, Object>>>> git = postedData.getFieldData().entrySet().iterator();
 		while(git.hasNext()) {
@@ -416,6 +414,10 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 			CRGroupSpec groupSpec = groupSpecList.stream().filter(g->g.getName().equals(groupName)).findFirst().orElse(null);
 			if (groupSpec == null) {
 				error("无法处理提交的 "+groupName+" 的数据");
+			}
+			if (groupSpec.getName().equals(postedData.getActionGroup()) && CR.ACTION_DELETE_RECORD.equals(postedData.getActionCode())) {
+				deleteGroup(groupSpec, postedData.getChangeRequestId(),fieldValues);
+				continue;
 			}
 			String crId = postedData.getChangeRequestId();
 			switch (groupSpec.getName()) {
@@ -431,6 +433,31 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 			default:
 				BUG(groupName+"还没增加save功能");
 			}
+		}
+	}
+	protected void deleteGroup(CRGroupSpec groupSpec, String crId, List<Map<String, Object>> fieldValues) throws Exception {
+		Map<String, Object> fieldValue = fieldValues.stream().findFirst().orElse(null);
+		if (fieldValue == null) {
+			return;
+		}
+		String id = (String) fieldValue.get("id");
+		if (id == null || id.isEmpty()) {
+			return;
+		}
+		switch (groupSpec.getName()) {
+<#list projectSpec.changeRequestList as crSpec>
+	<#list crSpec.stepList as scene>
+		<#list scene.eventList as group>
+			case CR.${helper.JAVA_CONST(crSpec.changeRequestType)}.SCENE_${helper.JAVA_CONST(scene.name)}.GROUP_${helper.JAVA_CONST(group.name)}:{
+				Event${helper.CamelName(group.eventType)} event = getUserContext().getDAOGroup().getEvent${helper.CamelName(group.eventType)}DAO().load(id, EO);
+				getUserContext().getManagerGroup().getChangeRequestManager().removeEvent${helper.CamelName(group.eventType)}(getUserContext(), crId, id, event.getVersion(), new String[]{});
+			}
+				break;
+		</#list>
+	</#list>
+</#list>
+			default:
+				break;
 		}
 	}
 

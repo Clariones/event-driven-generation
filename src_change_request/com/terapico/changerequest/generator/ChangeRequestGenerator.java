@@ -69,6 +69,7 @@ public class ChangeRequestGenerator extends NewBasicGenerator {
 		resultList.add(generateBackendSpecFile());
 		resultList.add(generateCRConstClass());
 		resultList.add(generateCRHelperClass());
+		resultList.add(generateCustomCRHelperClass());
 		resultList.add(generateTodoFile());
 		return resultList;
 	}
@@ -115,6 +116,19 @@ public class ChangeRequestGenerator extends NewBasicGenerator {
 		String fileName = this.toFileName(data,
 				"${projectName?lower_case}_custom_src/com/${orgName?lower_case}/${projectName?lower_case}/${projectName?cap_first}ChangeRequestHelper.java");
 		return this.doGeneration(data, templatePath, fileName).as_new_file();
+	}
+	
+	protected GenrationResult generateCustomCRHelperClass() throws Exception {
+		Map<String, Object> data = Utils.put("projectSpec", this.getChangeRequestSpec().get("projectSpec"))
+				.put("projectName", this.getProjectName())
+				.put("orgName", this.getOrgName())
+				.put("helper", new GenerationHelper())
+				.put("allEventSpec", this.getChangeRequestSpec().get("allEventSpec"))
+				.into_map();
+		String templatePath = "/changerequest/custom_cr_helper.java.ftl";
+		String fileName = this.toFileName(data,
+				"${projectName?lower_case}_custom_src/com/${orgName?lower_case}/${projectName?lower_case}/ChangeRequestHelper.java");
+		return this.doGeneration(data, templatePath, fileName).when_not_exist();
 	}
 	
 	protected GenrationResult generateTodoFile() throws Exception {
