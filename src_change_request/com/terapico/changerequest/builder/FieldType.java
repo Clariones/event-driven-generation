@@ -11,7 +11,8 @@ public enum FieldType {
 	TIME("time", "Date"), 
 	INTEGER("integer", "Integer"), 
 	DECIMAL("decimal", "BigDecimal"), 
-	MONEY("money", "BigDecimal");
+	MONEY("money", "BigDecimal"),
+	BASE_ENTITY("baseEntity", "BaseEntity");
 	
 	protected String systemTypeName;
 	protected String javaTypeName;

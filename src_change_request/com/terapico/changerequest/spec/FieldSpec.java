@@ -23,7 +23,7 @@ public class FieldSpec extends CommonSpec<FieldSpec> implements Cloneable{
 	protected Map<String, Serializable> valuesMapping;
 	protected String dataRetrieveApiUrl;
 	protected String sampleData;
-	
+	protected String modelName;
 	
 	public String getSampleData() {
 		return sampleData;
@@ -102,6 +102,12 @@ public class FieldSpec extends CommonSpec<FieldSpec> implements Cloneable{
 	}
 	public void setDataRetrieveApiUrl(String dataRetrieveApiUrl) {
 		this.dataRetrieveApiUrl = dataRetrieveApiUrl;
+	}
+	public String getModelName() {
+		return modelName;
+	}
+	public void setModelName(String modelName) {
+		this.modelName = modelName;
 	}
 	protected Map<String, Serializable> ensureValuesMapping() {
 		if (valuesMapping != null) {
@@ -275,6 +281,11 @@ public class FieldSpec extends CommonSpec<FieldSpec> implements Cloneable{
 	public void setInputTypeIfNeed(FieldType fieldType) {
 		if (notSet("inputType")) {
 			this.setInputType(fieldType);
+		}
+	}
+	public void setModelNameIfNeed(String modelName) {
+		if (notSet("modelName")) {
+			this.setModelName(modelName);
 		}
 	}
 	public void setDefaultValueIfNeed(Serializable defaultValue2) {

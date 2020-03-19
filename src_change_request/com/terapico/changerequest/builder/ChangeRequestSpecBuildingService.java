@@ -61,6 +61,7 @@ public interface ChangeRequestSpecBuildingService {
 	public void addFieldValueMapping(String crName, String stepName, String eventName, String fieldName, String key, Serializable value);
 
 	public void setFieldInputType(String crName, String stepName, String eventName, String fieldName, FieldType fieldType);
+	public void setFieldModelType(String crName, String stepName, String eventName, String fieldName, String modelName);
 	public void setFieldSelectable(String crName, String stepName, String eventName, String fieldName, boolean selectable, boolean multiSelection);
 
 	public FieldType getFieldInputType(String crName, String stepName, String eventName, String fieldName);

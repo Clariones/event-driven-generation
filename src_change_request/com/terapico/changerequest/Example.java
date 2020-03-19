@@ -93,6 +93,7 @@ public class Example {
 						.has_field("field_integer").zh_CN("整数").which_type_of(FieldType.INTEGER)
 						.has_field("field_decimal").zh_CN("小数").which_type_of(FieldType.DECIMAL)
 						.has_field("field_money").zh_CN("金融").which_type_of(FieldType.MONEY)
+						.has_field("field_merchant").zh_CN("商户").which_model_of("merchant")
 				.getChangeRequestSpec();
 	}
 	

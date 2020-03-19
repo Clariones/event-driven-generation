@@ -88,6 +88,17 @@ public class ChangeRequestSpecBaseBuilder<T extends ChangeRequestSpecBaseBuilder
 		}
 		return me;
 	}
+	
+	public T which_model_of(String modelName) {
+		if(workingBoard.isBuildingField()) {
+			service.setFieldInputType($CR(),$STEP(),$EVENT(),$FIELD(), FieldType.BASE_ENTITY);
+			service.setFieldModelType($CR(),$STEP(),$EVENT(),$FIELD(), modelName);
+			workingBoard.onJob(WorkingBoard.MODEL_TYPE);
+		}else {
+			error("目前只有字段才能指定 type");
+		}
+		return me;
+	}
 
 	
 	protected T has_values(String key, Serializable value, boolean keyIsBoolean) {

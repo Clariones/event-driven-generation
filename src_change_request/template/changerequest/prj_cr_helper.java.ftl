@@ -22,17 +22,28 @@ import com.terapico.changerequest.CRFieldSpec;
 import com.terapico.changerequest.CRGroupSpec;
 import com.terapico.changerequest.CRSpec;
 
-import com.terapico.utils.DataTypeUtil;
+import com.terapico.utils.TextUtil;
 import com.terapico.uccaf.CafEntity;
 import com.terapico.caf.Images;
 import com.terapico.caf.DateTime;
 
+<#assign modelNames=[]/>
 <#list allEventSpec?keys as eventName>
 	<#assign event=allEventSpec[eventName]/>
 import com.${orgName?lower_case}.${projectName?lower_case}.event${helper.CamelName(event.eventType)?lower_case}.Event${helper.CamelName(event.eventType)};
 <#--
 import com.${orgName?lower_case}.${projectName?lower_case}.event${helper.CamelName(event.eventType)?lower_case}.Event${helper.CamelName(event.eventType)}Table;
 -->
+	<#list event.fieldList as field>
+		<#if field.modelName??>
+			<#if !modelNames?seq_contains(field.modelName)>
+				<#assign modelNames = modelNames + [field.modelName]/>
+			</#if>
+		</#if>
+	</#list>
+</#list>
+<#list modelNames as modelName>
+import com.${orgName?lower_case}.${projectName?lower_case}.${helper.CamelName(modelName)?lower_case}.${helper.CamelName(modelName)};
 </#list>
 
 public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeRequestHelper{
@@ -475,7 +486,11 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 				<#if field.interactionMode == "display">
 					<#continue>
 				</#if>
+				<#if field.inputType == "baseEntity">
+				String ${helper.javaVar(field.name)} = getStringValue(fieldValue.get("${helper.javaVar(field.name)}"));
+				<#else>
 				${helper.getJavaType(field.inputType)} ${helper.javaVar(field.name)} = get${helper.CamelName(field.inputType)}Value(fieldValue.get("${helper.javaVar(field.name)}"));
+				</#if>
 			</#list>
 				String fieldGroup = "${helper.javaVar(scene.name)}_${helper.javaVar(group.name)}";
 				String eventInitiatorType = currentUserInfo.getInternalType();
@@ -497,7 +512,11 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 				<#if field.interactionMode == "display">
 					<#continue>
 				</#if>
+				<#if field.inputType == "baseEntity">
+				event.update${helper.CamelName(field.name)}(${helper.CamelName(field.modelName)}.refById(getStringValue(fieldValue.get("${helper.javaVar(field.name)}"))));
+				<#else>
 				event.update${helper.CamelName(field.name)}(get${helper.CamelName(field.inputType)}Value(fieldValue.get("${helper.javaVar(field.name)}")));
+				</#if>
 			</#list>
 				getUserContext().getManagerGroup().getEvent${helper.CamelName(group.eventType)}Manager().internalSaveEvent${helper.CamelName(group.eventType)}(getUserContext(), event, EO);
 			}
@@ -509,5 +528,17 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 
 	protected CafEntity loadWholeChangeRequest(String changeRequestId) throws Exception {
 		return this.getUserContext().getDAOGroup().getChangeRequestDAO().load(changeRequestId, ChangeRequestTokens.all());
+	}
+	
+	protected void doBaseEntityFieldChecking(ChangeRequestPostData postedData, CRFieldSpec fieldSpec, String fieldName, Object value) {
+		String baseEntityId = getStringValue(value);
+		if (baseEntityId == null) {
+			postedData.addVerifyErrorMessage(fieldName, fieldSpec.getLabel(), String.format("%s的输入不正确", fieldSpec.getLabel()));
+			return;
+		}
+		BaseEntity obj = this.getUserContext().getDAOGroup().loadBasicData(TextUtil.toCamelCase(fieldSpec.getModelName()), baseEntityId);
+		if(obj == null) {
+			postedData.addVerifyErrorMessage(fieldName, fieldSpec.getLabel(), String.format("输入的%s:%s不存在", fieldSpec.getLabel(), baseEntityId));
+		}
 	}
 }

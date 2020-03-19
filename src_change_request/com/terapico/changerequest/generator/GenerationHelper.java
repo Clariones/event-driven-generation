@@ -67,7 +67,11 @@ public class GenerationHelper {
 		String inputType = (String) fieldSpec.get(OutputName.CHANGE_REQUEST.STEP.EVENT.FIELD.TYPE);
 		String value = (String) fieldSpec.get(OutputName.CHANGE_REQUEST.STEP.EVENT.FIELD.SAMPLE_DATA);
 		if (value == null) {
-
+			String modelName = (String) fieldSpec.get(OutputName.CHANGE_REQUEST.STEP.EVENT.FIELD.MODEL_NAME);
+			if (modelName != null) {
+				inputType = "$modelName"; // will cause to skip all bellow
+				value = "$(" + Utils.toModelName(modelName) +"?)";
+			}
 			if (FieldType.TEXT.isEquals(inputType)) {
 				value = "string1|string2";
 			}
@@ -139,6 +143,7 @@ public class GenerationHelper {
 
 	public String makeBackendFieldSpec(Map<String, Object> fieldSpec, String groupName) {
 		Map<String, Object> result = new HashMap<>();
+		String modelName = (String) fieldSpec.get("modelName");
 		fieldSpec.forEach((name, value) -> {
 			switch (name) {
 			case "name":
@@ -183,4 +188,5 @@ public class GenerationHelper {
 			return "OK";
 		}
 	}
+	
 }

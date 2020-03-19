@@ -17,6 +17,7 @@ public class WorkingBoard {
 	public static final String SET_VALUE_MAPPING = "value_mapping";
 	public static final String MORE_VALUE_MAPPING = "more_value_mapping";
 	public static final String INPUT_TYPE = "input_type";
+	public static final String MODEL_TYPE = "model_type";
 	public static final String DEFAULT_VALUE = "default_value";
 	public static final String VALUES_API = "values_api";
 	public static final String SAMPLE_DATA = "sample_data";

@@ -212,6 +212,13 @@ public class ChangeRequestSpecBuildingServiceLocalImpl extends CRSBuildingServic
 		sureField(crName, stepName, eventName, fieldName).setInputType(fieldType);
 		prototypeField(crName, stepName, eventName, fieldName).setInputTypeIfNeed(fieldType);
 	}
+	
+	@Override
+	public void setFieldModelType(String crName, String stepName, String eventName, String fieldName,
+			String modelName) {
+		sureField(crName, stepName, eventName, fieldName).setModelName(modelName);
+		prototypeField(crName, stepName, eventName, fieldName).setModelNameIfNeed(modelName);
+	}
 
 	@Override
 	public void setFieldSelectable(String crName, String stepName, String eventName, String fieldName,

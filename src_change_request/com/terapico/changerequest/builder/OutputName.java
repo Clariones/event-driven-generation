@@ -35,6 +35,7 @@ public interface OutputName {
 					String TITLE = "title";
 					String INTER_ACTION_MODE = "interactionMode";
 					String TYPE = "inputType";
+					String MODEL_NAME = "modelName";
 					String SELECTABLE = "selectable";
 					String MUST = "mustHave";
 					String MIN = "minimal";
