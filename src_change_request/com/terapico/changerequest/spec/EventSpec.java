@@ -1,5 +1,6 @@
 package com.terapico.changerequest.spec;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -84,14 +85,17 @@ public class EventSpec extends CommonSpec<EventSpec>{
 	}
 	public void mergeWithPrototype() {
 		EventSpec baseData = this.getPrototype();
+		List<FieldSpec> mineFields = new ArrayList<>();
 		baseData.getFieldSpecs().forEach(baseField->{
 			FieldSpec myField = this.findField(baseField.getName());
 			if (myField == null) {
-				this.addField(baseField.copy());
+				mineFields.add(baseField.copy());
 				return;
 			}
 			myField.mergeWith(baseField);
+			mineFields.add(myField);
 		});
+		this.setFieldSpecs(mineFields);
 	}
 	
 	

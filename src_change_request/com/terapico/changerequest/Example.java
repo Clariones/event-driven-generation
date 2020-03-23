@@ -40,7 +40,6 @@ public class Example implements ChangeRequestSpecFactory{
 							.for_field("message1")
 								.display()
 								.value("请在下面输入申请婚姻登记的女方信息")
-							.has_field("avatar")
 							.for_field("name").place_holder("请输入女方姓名")
 								.sample_data("张先生|王太太")
 							.for_field("gender").value("female")

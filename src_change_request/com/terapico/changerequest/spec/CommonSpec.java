@@ -23,9 +23,9 @@ public abstract class CommonSpec <T extends CommonSpec<T>>{
 		return title;
 	}
 	public void setTitle(String title) {
-		if (title != null && title.equals("个人信息")) {
-			whereami("设置了title="+title+", 我的老title="+this.getTitle());
-		}
+//		if (title != null && title.equals("个人信息")) {
+//			whereami("设置了title="+title+", 我的老title="+this.getTitle());
+//		}
 		this.title = title;
 	}
 	public Map<String, String> getI18nName() {
