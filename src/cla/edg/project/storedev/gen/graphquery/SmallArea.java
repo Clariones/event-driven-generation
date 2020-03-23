@@ -2,7 +2,8 @@ package cla.edg.project.storedev.gen.graphquery;
 
 import java.util.Map;
 
-import cla.edg.Utils;
+import com.terapico.generator.Utils;
+
 import cla.edg.modelbean.*;
 
 public class SmallArea extends BaseModelBean{

@@ -1,4 +1,4 @@
-package cla.edg.actionpattern;
+package com.terapico.generator;
 
 import java.io.File;
 import java.io.IOException;
@@ -6,9 +6,7 @@ import java.io.StringWriter;
 import java.util.List;
 import java.util.Map;
 
-import com.terapico.generator.GenrationResult;
-import com.terapico.generator.Utils;
-
+import cla.edg.actionpattern.BaseAPGenerator;
 import freemarker.cache.StringTemplateLoader;
 import freemarker.core.ParseException;
 import freemarker.template.Configuration;
@@ -17,7 +15,7 @@ import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import freemarker.template.TemplateNotFoundException;
 
-public abstract class BaseAPGenerator {
+public abstract class BasicGenerator extends BaseAPGenerator{
 	public abstract List<GenrationResult> runJob() throws Exception;
 	
 	public String toFileName(Map<String, Object> data, String fileNameTemplate) throws Exception {

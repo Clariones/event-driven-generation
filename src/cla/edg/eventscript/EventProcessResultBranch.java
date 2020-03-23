@@ -3,7 +3,7 @@ package cla.edg.eventscript;
 import java.util.LinkedList;
 import java.util.List;
 
-import cla.edg.Utils;
+import com.terapico.generator.Utils;
 
 public class EventProcessResultBranch extends BaseEventElement{
 	protected String conditionCode;

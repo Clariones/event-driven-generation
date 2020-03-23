@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import cla.edg.Utils;
+import com.terapico.generator.Utils;
+
 import cla.edg.graphquery.terms.BaseGraphQueryDescriptor;
 import cla.edg.modelbean.BaseAttribute;
 import cla.edg.modelbean.BaseModelBean;

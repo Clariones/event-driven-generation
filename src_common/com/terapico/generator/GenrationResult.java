@@ -1,4 +1,4 @@
-package cla.edg.actionpattern;
+package com.terapico.generator;
 
 import java.util.Map;
 

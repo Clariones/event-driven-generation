@@ -9,8 +9,7 @@ import com.terapico.changerequest.spec.EventSpec;
 import com.terapico.changerequest.spec.FieldSpec;
 import com.terapico.changerequest.spec.ProjectChangeRequestSpec;
 import com.terapico.changerequest.spec.StepSpec;
-
-import cla.edg.Utils;
+import com.terapico.generator.Utils;
 
 public class ChangeRequestSpecBuildingServiceLocalImpl extends CRSBuildingServiceBaseLocalImpl {
 
@@ -94,8 +93,10 @@ public class ChangeRequestSpecBuildingServiceLocalImpl extends CRSBuildingServic
 		}
 		String tmpName = getTempEventName(eventType);
 		EventSpec newEvent = new EventSpec().withName(tmpName).withPrototype(getEvent(eventType)).withType(eventType);
-		newEvent.addI18n("zh_CN", stepSpec.getTitle()); // TODO
 		stepSpec.addEvent(newEvent);
+		EventSpec spec = sureEvent(crName, stepName, tmpName);
+		spec.addI18n("zh_CN", stepSpec.getTitle());
+		spec.getPrototype().tryeAddI18n("zh_CN", stepSpec.getTitle());
 		return tmpName;
 	}
 
@@ -133,9 +134,9 @@ public class ChangeRequestSpecBuildingServiceLocalImpl extends CRSBuildingServic
 	@Override
 	public String createDefaultStepByChangeRequest(String crName) {
 		ChangeRequestSpec crSpec = this.sureCR(crName);
-		StepSpec stepSpec = new StepSpec().withName(crSpec.getName()).withIndex(1);
-		stepSpec.addI18n("zh_CN", crSpec.getTitle());
-		crSpec.addStep(stepSpec);
+		this.createNewStep(crName, crName);
+		StepSpec stepSpec = this.getStep(crName, crName);
+		this.addStepI18n(crName, crName, "zh_CN", crSpec.getTitle());
 		return stepSpec.getName();
 	}
 

@@ -2,7 +2,7 @@ package cla.edg.graph;
 
 import org.junit.jupiter.api.Test;
 
-import cla.edg.Utils;
+import com.terapico.generator.Utils;
 
 class InMemoryGraphTest {
 	@Test

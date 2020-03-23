@@ -12,7 +12,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import cla.edg.Utils;
+import com.terapico.generator.Utils;
+
 import cla.edg.graphquery.terms.BasePathInfo;
 import cla.edg.graphquery.terms.GraphQueryInfo;
 import cla.edg.graphquery.terms.ParameterInfo;

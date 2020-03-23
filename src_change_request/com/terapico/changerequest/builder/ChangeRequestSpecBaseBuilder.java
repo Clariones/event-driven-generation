@@ -3,9 +3,7 @@ package com.terapico.changerequest.builder;
 import java.io.Serializable;
 import java.util.Map;
 
-import com.terapico.changerequest.spec.ProjectChangeRequestSpec;
-
-import cla.edg.Utils;
+import com.terapico.generator.Utils;
 
 public class ChangeRequestSpecBaseBuilder<T extends ChangeRequestSpecBaseBuilder<T>>
 		extends  ChangeRequestSpecBuilderUtil{

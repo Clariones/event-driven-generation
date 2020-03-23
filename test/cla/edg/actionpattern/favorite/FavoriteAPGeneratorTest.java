@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import cla.edg.actionpattern.GenrationResult;
+import com.terapico.generator.GenrationResult;
 
 class FavoriteAPGeneratorTest {
 

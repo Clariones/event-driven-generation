@@ -1,6 +1,7 @@
 package cla.edg.project.yourong.pageflow;
 
-import cla.edg.Utils;
+import com.terapico.generator.Utils;
+
 import cla.edg.pageflow.PageFlowScript;
 import cla.edg.pageflow.PieceOfScript;
 

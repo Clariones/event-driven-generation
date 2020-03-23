@@ -1,6 +1,6 @@
-package cla.edg;
+package cla.edg.project.jingou;
 
-import java.net.URLEncoder;
+import com.terapico.generator.Utils;
 
 import cla.edg.eventscript.BaseEventDescriptionScript;
 import cla.edg.eventscript.EventScript;
@@ -8,8 +8,6 @@ import cla.edg.generator.EventScriptGenerator;
 import cla.edg.generator.PageFlowGenerator;
 import cla.edg.pageflow.BasePageFlowDescriptionScript;
 import cla.edg.pageflow.BasePageFlowScript;
-import cla.edg.project.jingou.JobOrder;
-import cla.edg.project.jingou.WxappServiceScript;
 
 
 public class JingouMain {

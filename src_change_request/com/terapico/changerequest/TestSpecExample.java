@@ -8,11 +8,10 @@ import java.util.Map;
 
 import com.terapico.changerequest.builder.OutputName;
 import com.terapico.changerequest.generator.GenerationHelper;
-import com.terapico.generator.NewBasicGenerator;
+import com.terapico.generator.BasicGenerator;
+import com.terapico.generator.GenrationResult;
 
-import cla.edg.actionpattern.GenrationResult;
-
-public class TestSpecExample extends NewBasicGenerator{
+public class TestSpecExample extends BasicGenerator {
 	
 	protected static final String tmplSpec2form = "changerequest/tools/spec2form.html.ftl";
 	protected Map<String, Map<String, Object>> changrequestSpec;
@@ -44,7 +43,6 @@ public class TestSpecExample extends NewBasicGenerator{
 		cheker.saveToFiles(new File("."), genResult);
 	}
 
-	@Override
 	public List<GenrationResult> runJob() throws Exception {
 		List<GenrationResult> resultList = new ArrayList<>();
 		resultList.add(genFormHtml(getChangrequestSpec().get("projectSpec")));

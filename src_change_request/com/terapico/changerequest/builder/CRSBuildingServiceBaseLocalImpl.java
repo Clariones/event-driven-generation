@@ -16,8 +16,6 @@ import com.terapico.changerequest.spec.FieldSpec;
 import com.terapico.changerequest.spec.ProjectChangeRequestSpec;
 import com.terapico.changerequest.spec.StepSpec;
 
-import cla.edg.Utils;
-
 public abstract class CRSBuildingServiceBaseLocalImpl implements ChangeRequestSpecBuildingService {
 	protected ProjectChangeRequestSpec projectSpec;
 	protected static final AtomicLong eventCount = new AtomicLong(0);

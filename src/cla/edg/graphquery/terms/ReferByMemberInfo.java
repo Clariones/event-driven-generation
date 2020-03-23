@@ -1,6 +1,6 @@
 package cla.edg.graphquery.terms;
 
-import cla.edg.Utils;
+import com.terapico.generator.Utils;
 
 public class ReferByMemberInfo extends MemberInfo {
 	protected String referByClassName;

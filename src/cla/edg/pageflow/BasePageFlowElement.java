@@ -1,6 +1,6 @@
 package cla.edg.pageflow;
 
-import cla.edg.Utils;
+import com.terapico.generator.Utils;
 
 public class BasePageFlowElement {
 	protected String name;

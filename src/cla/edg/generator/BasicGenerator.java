@@ -7,7 +7,8 @@ import java.io.Writer;
 import java.util.HashMap;
 import java.util.Map;
 
-import cla.edg.Utils;
+import com.terapico.generator.Utils;
+
 import freemarker.core.ParseException;
 import freemarker.template.Configuration;
 import freemarker.template.MalformedTemplateNameException;

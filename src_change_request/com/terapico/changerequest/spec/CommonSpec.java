@@ -23,6 +23,9 @@ public abstract class CommonSpec <T extends CommonSpec<T>>{
 		return title;
 	}
 	public void setTitle(String title) {
+		if (title != null && title.equals("个人信息")) {
+			whereami("设置了title="+title+", 我的老title="+this.getTitle());
+		}
 		this.title = title;
 	}
 	public Map<String, String> getI18nName() {
@@ -35,9 +38,9 @@ public abstract class CommonSpec <T extends CommonSpec<T>>{
 		return isRequired;
 	}
 	public void setIsRequired(Boolean isRequired) {
-		if(this.getName().equals("register office")) {
-			this.whereami("isRequired="+isRequired);
-		}
+//		if(this.getName().equals("register office")) {
+//			this.whereami("isRequired="+isRequired);
+//		}
 		this.isRequired = isRequired;
 	}
 	public Integer getMinCollectionSize() {
@@ -100,6 +103,6 @@ public abstract class CommonSpec <T extends CommonSpec<T>>{
 		this.setName(newName);
 	}
 	protected void whereami(String message) {
-		// new Throwable(message).printStackTrace();
+		new Throwable(message).printStackTrace();
 	}
 }

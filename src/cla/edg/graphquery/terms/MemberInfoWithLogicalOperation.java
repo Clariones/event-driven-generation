@@ -2,7 +2,7 @@ package cla.edg.graphquery.terms;
 
 import java.util.List;
 
-import cla.edg.Utils;
+import com.terapico.generator.Utils;
 
 public class MemberInfoWithLogicalOperation extends MemberInfo implements  BaseQueryCondition{
 	protected ConditionInfo conditionInfo;

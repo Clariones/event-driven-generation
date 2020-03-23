@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import cla.edg.Utils;
+import com.terapico.generator.Utils;
 
 public class EventInfo extends BaseEventElement{
 	protected String name;

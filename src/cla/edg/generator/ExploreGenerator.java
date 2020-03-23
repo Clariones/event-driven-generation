@@ -4,7 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 
-import cla.edg.Utils;
+import com.terapico.generator.Utils;
+
 import cla.edg.objlifescript.ObjectLifeScript;
 import freemarker.template.Template;
 

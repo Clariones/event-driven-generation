@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import cla.edg.Utils;
+import com.terapico.generator.Utils;
 
 public class GraphQueryInfo {
 	protected boolean pagination;

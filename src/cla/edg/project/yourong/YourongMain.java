@@ -1,6 +1,7 @@
 package cla.edg.project.yourong;
 
-import cla.edg.Utils;
+import com.terapico.generator.Utils;
+
 import cla.edg.eventscript.EventScript;
 import cla.edg.generator.EventScriptGenerator;
 import cla.edg.generator.ExploreGenerator;

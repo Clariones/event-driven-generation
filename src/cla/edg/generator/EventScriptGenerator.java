@@ -5,7 +5,8 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import cla.edg.Utils;
+import com.terapico.generator.Utils;
+
 import cla.edg.eventscript.BasicEventScriptInfo;
 import cla.edg.eventscript.EventInfo;
 import cla.edg.eventscript.EventProcessResultBranch;

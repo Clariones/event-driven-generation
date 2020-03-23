@@ -3,7 +3,8 @@ package cla.edg.modelbean;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import cla.edg.Utils;
+import com.terapico.generator.Utils;
+
 import cla.edg.routemap.Edge;
 import cla.edg.routemap.MeetingPoint;
 import cla.edg.routemap.Node;

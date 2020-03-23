@@ -4,8 +4,7 @@ import java.io.File;
 import java.util.List;
 
 import com.terapico.changerequest.generator.ChangeRequestGenerator;
-
-import cla.edg.actionpattern.GenrationResult;
+import com.terapico.generator.GenrationResult;
 
 public class GenerationJobExample {
 	public static void main(String[] args) throws Exception {

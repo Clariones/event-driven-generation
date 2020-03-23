@@ -8,7 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import cla.edg.Utils;
+import com.terapico.generator.Utils;
+
 import cla.edg.pageflow.AccessParameter;
 import cla.edg.pageflow.BasePageFlowScript;
 import cla.edg.pageflow.Branch;

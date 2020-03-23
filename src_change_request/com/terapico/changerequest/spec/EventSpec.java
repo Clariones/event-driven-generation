@@ -1,7 +1,9 @@
 package com.terapico.changerequest.spec;
 
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 public class EventSpec extends CommonSpec<EventSpec>{
 	protected List<FieldSpec> fieldSpecs;
@@ -50,7 +52,22 @@ public class EventSpec extends CommonSpec<EventSpec>{
 		ensureFieldSpecs().add(fieldSpec);
 	}
 	
+	protected Set<String> assignFlag = new HashSet<>();
+	protected boolean testAndClearNotAssigned(String string) {
+		if (assignFlag.contains(string)) {
+			return false;
+		}
+		assignFlag.add(string);
+		return true;
+	}
+	
 	public void setI18nIfNotExists(String localeCode, String text) {
+		if (testAndClearNotAssigned("setI18nIfNotExists")) {
+			this.addI18n(localeCode, text);
+		}
+	}
+	
+	public void tryeAddI18n(String localeCode, String text) {
 		if (this.getI18nName() != null && this.getI18nName().containsKey(localeCode)) {
 			return; // 如果已经有了,就不更新
 		}
@@ -76,5 +93,6 @@ public class EventSpec extends CommonSpec<EventSpec>{
 			myField.mergeWith(baseField);
 		});
 	}
+	
 	
 }

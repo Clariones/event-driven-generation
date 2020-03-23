@@ -1,4 +1,4 @@
-package cla.edg;
+package com.terapico.generator;
 
 import java.io.File;
 import java.io.FileWriter;

@@ -7,8 +7,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.google.gson.Gson;
+import com.terapico.generator.Utils;
 
-import cla.edg.Utils;
 import cla.edg.modelbean.BaseAttribute;
 import cla.edg.modelbean.BaseModelBean;
 import cla.edg.modelbean.EnumAttribute;

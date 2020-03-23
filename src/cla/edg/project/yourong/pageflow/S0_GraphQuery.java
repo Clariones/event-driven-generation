@@ -2,13 +2,14 @@ package cla.edg.project.yourong.pageflow;
 
 import cla.edg.pageflow.PageFlowScript;
 import cla.edg.pageflow.PieceOfScript;
+/*
 import cla.edg.project.yourong.gen.graphquery.EmployeeNomination;
 import cla.edg.project.yourong.gen.graphquery.Merchant;
 import cla.edg.project.yourong.gen.graphquery.Project;
-
+*/
 public class S0_GraphQuery extends PieceOfScript{
 	
-
+/*
 	@Override
 	public PageFlowScript makeSequel(PageFlowScript script) {
 		return script.graph_query_with()
@@ -72,5 +73,5 @@ public class S0_GraphQuery extends PieceOfScript{
 	}
 
 	
-
+*/
 }

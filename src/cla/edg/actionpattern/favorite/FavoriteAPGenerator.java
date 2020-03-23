@@ -4,11 +4,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import cla.edg.Utils;
-import cla.edg.actionpattern.BaseAPGenerator;
-import cla.edg.actionpattern.GenrationResult;
+import com.terapico.generator.GenrationResult;
+import com.terapico.generator.Utils;
 
-public class FavoriteAPGenerator extends BaseAPGenerator {
+import cla.edg.actionpattern.APGenerator;
+import cla.edg.actionpattern.BaseAPGenerator;
+
+public class FavoriteAPGenerator extends BaseAPGenerator implements APGenerator{
 	protected FavoriteAPInfo input;
 	
 	public FavoriteAPInfo getInput() {

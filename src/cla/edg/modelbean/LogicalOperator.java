@@ -7,7 +7,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-import cla.edg.Utils;
+import com.terapico.generator.Utils;
+
 import cla.edg.routemap.MeetingPoint;
 import cla.edg.routemap.Node;
 import cla.edg.routemap.RouteMap;

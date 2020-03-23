@@ -9,13 +9,12 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-import com.terapico.generator.NewBasicGenerator;
-
-import cla.edg.Utils;
-import cla.edg.actionpattern.GenrationResult;
+import com.terapico.generator.BasicGenerator;
+import com.terapico.generator.GenrationResult;
+import com.terapico.generator.Utils;
 
 @SuppressWarnings("unchecked")
-public class ChangeRequestGenerator extends NewBasicGenerator {
+public class ChangeRequestGenerator extends BasicGenerator {
 	protected String projectName;
 	protected String orgName;
 	protected String changeRequestModelName = "change_request";
@@ -62,7 +61,6 @@ public class ChangeRequestGenerator extends NewBasicGenerator {
 		this.changeRequestModelName = changeRequestModelName;
 	}
 
-	@Override
 	public List<GenrationResult> runJob() throws Exception {
 		List<GenrationResult> resultList = new ArrayList<>();
 		resultList.add(generateFullySpecFile());
@@ -70,6 +68,7 @@ public class ChangeRequestGenerator extends NewBasicGenerator {
 		resultList.add(generateCRConstClass());
 		resultList.add(generateCRHelperClass());
 		resultList.add(generateCustomCRHelperClass());
+		resultList.add(generateChangeRequestXml());
 		resultList.add(generateTodoFile());
 		return resultList;
 	}
@@ -81,6 +80,20 @@ public class ChangeRequestGenerator extends NewBasicGenerator {
 		result.setFileName(fileName);
 		result.setContent(Utils.toJson(this.getChangeRequestSpec().get("projectSpec"), true));
 		return result;
+	}
+	
+	protected GenrationResult generateChangeRequestXml() throws Exception {
+		Map<String, Object> data = Utils.put("projectSpec", this.getChangeRequestSpec().get("projectSpec"))
+				.put("projectName", this.getProjectName())
+				.put("crModelName", this.getChangeRequestModelName())
+				.put("userModelName", this.getUserModelName())
+				.put("helper", new GenerationHelper())
+				.put("allEventSpec", this.getChangeRequestSpec().get("allEventSpec"))
+				.into_map();
+		String templatePath = "/changerequest/changeRequest.xml.ftl";
+		String fileName = this.toFileName(Utils.put("projectName", this.getProjectName()).into_map(),
+				"project_${projectName?lower_case}/change_request.xml");
+		return this.doGeneration(data, templatePath, fileName).as_new_file();
 	}
 	
 	protected GenrationResult generateBackendSpecFile() throws Exception {

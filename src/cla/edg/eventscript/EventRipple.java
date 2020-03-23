@@ -1,6 +1,6 @@
 package cla.edg.eventscript;
 
-import cla.edg.Utils;
+import com.terapico.generator.Utils;
 
 public class EventRipple extends BaseEventElement{
 	protected String eventCode;

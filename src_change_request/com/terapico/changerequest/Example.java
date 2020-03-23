@@ -3,11 +3,11 @@ package com.terapico.changerequest;
 import java.util.Map;
 
 import com.terapico.changerequest.builder.ChangeRequestSpecBuilder;
+import com.terapico.changerequest.builder.ChangeRequestSpecFactory;
 import com.terapico.changerequest.builder.FieldType;
+import com.terapico.generator.Utils;
 
-import cla.edg.Utils;
-
-public class Example {
+public class Example implements ChangeRequestSpecFactory{
 
 	public Map<String, Map<String, Object>> scriptExampe() {
 
@@ -15,7 +15,7 @@ public class Example {
 				.request_base("wxappService/handleChangeRequest/")
 				.change_request("marriage registration").zh_CN("婚姻注册申请")
 					.step("personal info").zh_CN("个人信息")							//默认 .cannot_skip()
-						.contains_event("citizen").as("male").zh_CN("男方信息")
+						.contains_event("citizen").zh_CN("个人信息").as("male").zh_CN("男方信息")
 							.has_field("message1")
 								.display()
 								.value("请在下面输入申请婚姻登记的男方信息")
@@ -46,7 +46,7 @@ public class Example {
 							.for_field("gender").value("female")
 							.for_field("birthday").place_holder("请输入女方的生日")
 					.step("premarital declaration").zh_CN("婚前财产及协议声明").can_skip()
-						.contains_event("premaritial notarization").as("male").zh_CN("男方婚前财产声明")
+						.contains_event("premaritial notarization").zh_CN("婚前财产及协议声明").as("male").zh_CN("男方婚前财产声明")
 							.has_field("need notarize").zh_CN("我要申请婚前财产公证")
 								.defaule_value(false)
 								.values_canbe(true, "我要申请婚前财产公证").or(false, "我放弃婚前财产公证")
@@ -81,7 +81,7 @@ public class Example {
 								.optional()
 								.tips_title("?").tips_content("前往领取结婚证的民政局")
 								.values_can_get_from("getOfficeByCity/${register city}/")
-					.change_request("show all type").zh_CN("所有数据类型")
+					.change_request("show all type").zh_CN("数据类型展示")
 						.has_field("field_text").zh_CN("短文本").which_type_of(FieldType.TEXT)
 						.has_field("field_longtext").zh_CN("长文本").which_type_of(FieldType.MULTI_TEXT)
 						.has_field("field_boolean").zh_CN("布尔").which_type_of(FieldType.BOOLEAN)
@@ -161,6 +161,12 @@ public class Example {
 //			}
 //		}
 //		System.out.println("收工");
+	}
+
+
+	@Override
+	public Map<String, Map<String, Object>> getSpec() {
+		return scriptExampe();
 	}
 	
 	

@@ -9,10 +9,10 @@ import java.util.regex.Pattern;
 
 import com.terapico.changerequest.builder.FieldType;
 import com.terapico.changerequest.builder.OutputName;
+import com.terapico.generator.BaseHelper;
+import com.terapico.generator.Utils;
 
-import cla.edg.Utils;
-
-public class GenerationHelper {
+public class GenerationHelper extends BaseHelper {
 	public String getCRName(Map<String, Object> crSpec) {
 		return Utils.toJavaConstStyle((String) crSpec.get(OutputName.CHANGE_REQUEST.TYPE)).toLowerCase();
 	}
