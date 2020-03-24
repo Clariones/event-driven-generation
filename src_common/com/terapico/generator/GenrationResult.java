@@ -52,5 +52,9 @@ public class GenrationResult {
 		this.setActionCode(ACTION_CREATE_WHEN_NEED);
 		return this;
 	}
+	public GenrationResult with_code(String contentCode) {
+		this.contentCode = contentCode;
+		return this;
+	}
 	
 }

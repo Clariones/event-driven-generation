@@ -1,5 +1,6 @@
 package com.terapico.changerequest.builder;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -15,6 +16,7 @@ import com.terapico.changerequest.spec.EventSpec;
 import com.terapico.changerequest.spec.FieldSpec;
 import com.terapico.changerequest.spec.ProjectChangeRequestSpec;
 import com.terapico.changerequest.spec.StepSpec;
+import com.terapico.generator.Utils;
 
 public abstract class CRSBuildingServiceBaseLocalImpl implements ChangeRequestSpecBuildingService {
 	protected ProjectChangeRequestSpec projectSpec;
@@ -228,10 +230,7 @@ public abstract class CRSBuildingServiceBaseLocalImpl implements ChangeRequestSp
 			result.put(FIELD.SELECTABLE, FIELD.SELECTABLE_MULTI);
 		}
 		result.put(FIELD.MUST, fieldSpec.getIsRequired());
-		if (fieldSpec.getRangeArgs() != null) {
-			putIfNotNull(result, FIELD.MIN, fieldSpec.getRangeArgs()[0]);
-			putIfNotNull(result, FIELD.MAX, fieldSpec.getRangeArgs()[1]);
-		}
+		
 		result.put(FIELD.TYPE, fieldSpec.getInputType().getSystemTypeName());
 		putIfNotNull(result, FIELD.MODEL_NAME, fieldSpec.getModelName());
 		putIfNotNull(result, FIELD.PLACE_HOLDER, fieldSpec.getPlaceholder());
@@ -241,8 +240,127 @@ public abstract class CRSBuildingServiceBaseLocalImpl implements ChangeRequestSp
 		putIfNotNull(result, FIELD.DEFAULT_VALUE, fieldSpec.getDefaultValue());
 		putIfNotNull(result, FIELD.VALUES, fieldSpec.getValuesMapping());
 		putIfNotNull(result, FIELD.VALUES_RETRIEVE_API, fieldSpec.getDataRetrieveApiUrl());
-		putIfNotNull(result, FIELD.SAMPLE_DATA, fieldSpec.getSampleData());
+		putIfNotNull(result, FIELD.SAMPLE_DATA,  calcSampleData(fieldSpec));//fieldSpec.getSampleData());
+		putIfNotNull(result, FIELD.UI_STYLE, calaFieldUiStyle(fieldSpec));
+		putIfNotNull(result, FIELD.REGULAR_EXPRESSION, calaFieldRegExp(fieldSpec));
+		if (fieldSpec.getRangeArgs() != null) {
+			putIfNotNull(result, FIELD.MIN, fieldSpec.getRangeArgs()[0]);
+			putIfNotNull(result, FIELD.MAX, fieldSpec.getRangeArgs()[1]);
+		}
 		return result;
+	}
+
+	private Object calcSampleData(FieldSpec fieldSpec) {
+		if(fieldSpec.getSampleData() != null) {
+			return fieldSpec.getSampleData();
+		}
+		if (fieldSpec.getModelName() != null) {
+			return String.format("$(%s)", Utils.toModelName(fieldSpec.getModelName()));
+		}
+		switch(fieldSpec.getInputType()) {
+		case TEXT:
+			fixFieldRangeIfNeeded(fieldSpec, "1", "30");
+			return String.format("%s|%s", fieldSpec.getName(), fieldSpec.getTitle());
+		case MULTI_TEXT:
+			fixFieldRangeIfNeeded(fieldSpec, "0", (1024*1024*1024)+"");
+			return "text()";
+		case BOOLEAN:
+			return "true|false";
+		case IMAGES:
+			fixFieldRangeIfNeeded(fieldSpec, "0", "9");
+			return "images()";
+		case IMAGE:
+			fixFieldRangeIfNeeded(fieldSpec, "0", "1");
+			return String.format("%s.jpg", Utils.toJavaVariableName(fieldSpec.getName()));
+		case DATE:
+			fixFieldRangeIfNeeded(fieldSpec, "1970-1-1", "2099-12-31");
+			return "2099-12-31";
+		case DATE_TIME:
+			fixFieldRangeIfNeeded(fieldSpec, "1970-1-1T00:00:00", "2099-12-31T23:59:59");
+			return "2099-12-31T23:59:59";
+		case TIME:
+			fixFieldRangeIfNeeded(fieldSpec, "00:00:00", "23:59:59");
+			return "23:59:00";
+		case INTEGER:
+			fixFieldRangeIfNeeded(fieldSpec, "0", "100000000");
+			return "12345678";
+		case DECIMAL:
+			fixFieldRangeIfNeeded(fieldSpec, "0.000", "100000000.000");
+			return "12345678.000";
+		case MONEY:
+			fixFieldRangeIfNeeded(fieldSpec, "-100000000.000", "100000000.000");
+			return "$12345678.000";
+		default:
+			throw new RuntimeException(fieldSpec.getInputType()+"的样例数据还没处理");
+		}
+	}
+
+	protected void fixFieldRangeIfNeeded(FieldSpec fieldSpec, String minExp, String maxExp) {
+		if (fieldSpec.getRangeArgs() != null) {
+			return;
+		}
+		fieldSpec.setRangeArgs(new Serializable[] {minExp, maxExp});
+	}
+
+	protected Object calaFieldRegExp(FieldSpec fieldSpec) {
+		if (fieldSpec.getRegularExpression() != null) {
+			return fieldSpec.getRegularExpression();
+		}
+		if (fieldSpec.getUiStyle() != null) {
+			switch (fieldSpec.getUiStyle()) {
+			case INPUT_EMAIL:
+				return "^(\\w)+(\\.\\w+)*@(\\w)+((\\.\\w+)+)$";
+			case INPUT_URL:
+				return "(https?|ftp|file)://[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]";
+			default:
+				break;
+			}
+		}
+		return null;
+	}
+
+	protected String calaFieldUiStyle(FieldSpec fieldSpec) {
+		if (fieldSpec.getUiStyle() != null) {
+			return fieldSpec.getUiStyle().getName();
+		}
+		if (fieldSpec.getMultiSelection() != null && fieldSpec.getMultiSelection().booleanValue()) {
+			return UIStyle.INPUT_MULTI_SELECT.getName();
+		}
+		if (fieldSpec.getModelName() != null) {
+			return UIStyle.INPUT_OBJECT_SELECT.getName();
+		}
+		if (fieldSpec.getSelectable() != null && fieldSpec.getSelectable().booleanValue()) {  // fieldSpec.getMultiSelection() is false now
+			return UIStyle.INPUT_SINGLE_SELECT.getName();
+		}
+		switch (fieldSpec.getInputType()) {
+		case MULTI_TEXT: 
+			return UIStyle.INPUT_LONGTEXT.getName();
+		case BOOLEAN:
+			return UIStyle.INPUT_BOOLEAN.getName();
+		case IMAGES:
+		case IMAGE:
+			return UIStyle.INPUT_IMAGE.getName();
+		case DATE:
+			return UIStyle.INPUT_DATE.getName();
+		case DATE_TIME:
+			return UIStyle.INPUT_DATETIME.getName();
+		case INTEGER:
+			return UIStyle.INPUT_INTEGER.getName();
+		case DECIMAL:
+			return UIStyle.INPUT_DECIMAL.getName();
+		case MONEY:
+			return UIStyle.INPUT_MONEY.getName();
+		case BASE_ENTITY:
+			return UIStyle.INPUT_OBJECT_SELECT.getName();
+		case TIME:
+		case TEXT:
+		default:
+			break;
+		}
+		if (fieldSpec.getValuesMapping() != null) {
+			return UIStyle.INPUT_SINGLE_SELECT.getName();
+		}
+		return UIStyle.INPUT_TEXT.getName();
 	}
 
 	@Override

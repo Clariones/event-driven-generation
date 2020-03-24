@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.terapico.changerequest.builder.FieldType;
+import com.terapico.changerequest.builder.UIStyle;
 
 public class FieldSpec extends CommonSpec<FieldSpec> implements Cloneable{
 	protected String interactionMode;
@@ -24,6 +25,8 @@ public class FieldSpec extends CommonSpec<FieldSpec> implements Cloneable{
 	protected String dataRetrieveApiUrl;
 	protected String sampleData;
 	protected String modelName;
+	protected UIStyle uiStyle;
+	protected String regularExpression;
 	
 	public String getSampleData() {
 		return sampleData;
@@ -109,6 +112,22 @@ public class FieldSpec extends CommonSpec<FieldSpec> implements Cloneable{
 	public void setModelName(String modelName) {
 		this.modelName = modelName;
 	}
+	
+	
+	
+	
+	public String getRegularExpression() {
+		return regularExpression;
+	}
+	public void setRegularExpression(String regularExpression) {
+		this.regularExpression = regularExpression;
+	}
+	public UIStyle getUiStyle() {
+		return uiStyle;
+	}
+	public void setUiStyle(UIStyle uiStyle) {
+		this.uiStyle = uiStyle;
+	}
 	protected Map<String, Serializable> ensureValuesMapping() {
 		if (valuesMapping != null) {
 			return valuesMapping;
@@ -146,6 +165,10 @@ public class FieldSpec extends CommonSpec<FieldSpec> implements Cloneable{
 		newOne.minCollectionSize = this.minCollectionSize;
 		newOne.maxCollectionSize = this.maxCollectionSize;
 		newOne.isCollection = this.isCollection;
+		newOne.modelName = this.modelName;
+		newOne.sampleData = this.sampleData;
+		newOne.regularExpression = this.regularExpression;
+		newOne.uiStyle = this.uiStyle;
 		return newOne;
 	}
 	
@@ -219,7 +242,18 @@ public class FieldSpec extends CommonSpec<FieldSpec> implements Cloneable{
 		if (this.getIsCollection() == null) {
 			this.setIsCollection(baseData.getIsCollection());
 		}
-
+		if (this.getSampleData() == null) {
+			this.setSampleData(baseData.getSampleData());
+		}
+		if (this.getModelName() == null) {
+			this.setModelName(baseData.getModelName());
+		}
+		if (this.getUiStyle() == null) {
+			this.setUiStyle(baseData.getUiStyle());
+		}
+		if (this.getRegularExpression() == null) {
+			this.setRegularExpression(baseData.getRegularExpression());
+		}
 	}
 	
 	protected transient HashMap<String, String> setTags = new HashMap<>();
@@ -283,6 +317,11 @@ public class FieldSpec extends CommonSpec<FieldSpec> implements Cloneable{
 			this.setInputType(fieldType);
 		}
 	}
+	public void setUiStyleIfNeed(UIStyle uiStyle) {
+		if (notSet("uiStyle")) {
+			this.setUiStyle(uiStyle);
+		}
+	}
 	public void setModelNameIfNeed(String modelName) {
 		if (notSet("modelName")) {
 			this.setModelName(modelName);
@@ -291,6 +330,12 @@ public class FieldSpec extends CommonSpec<FieldSpec> implements Cloneable{
 	public void setDefaultValueIfNeed(Serializable defaultValue2) {
 		if (notSet("defaultValue")) {
 			setDefaultValue(defaultValue2);
+		}
+		
+	}
+	public void setRegularExpressionIfNeed(String regExp) {
+		if (notSet("regExp")) {
+			setRegularExpression(regExp);
 		}
 		
 	}
@@ -346,6 +391,7 @@ public class FieldSpec extends CommonSpec<FieldSpec> implements Cloneable{
 		}
 		this.setSampleData(String.join("|", existedSampleDataList));
 	}
+	
 	
 
 	

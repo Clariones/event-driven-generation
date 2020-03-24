@@ -1,8 +1,8 @@
-
+<root>
   	
   <change_request_type
-	name="<#list allEventSpec?keys as eventName>${allEventSpec[eventName].title!}|</#list>[1,100]"
-	code="<#list allEventSpec?keys as eventName>${helper.JAVA_CONST(eventName)}|</#list>[1,100]"
+	name="<#list projectSpec.changeRequestList as crSpec>${crSpec.title}|</#list>[1,100]"
+	code="<#list projectSpec.changeRequestList as crSpec>${helper.NAME_AS_THIS(crSpec.changeRequestType!"what?")}|</#list>[1,100]"
     icon="download|swap|upload|account-book|edit"
     display_order="1|2|3|4|5|6"
     bind_types="text()"
@@ -16,6 +16,7 @@
 	    create_time="createTime()"
 	    remote_ip="remoteIp()"
 	    request_type="$(change_request_type)"
+	    commited="false"
 	    platform="$(platform)"
   	/>
 <#list allEventSpec?keys as eventName>
@@ -34,3 +35,4 @@
 	/>
 	
 </#list>
+</root>

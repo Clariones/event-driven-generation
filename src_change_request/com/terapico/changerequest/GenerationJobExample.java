@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.terapico.changerequest.generator.ChangeRequestGenerator;
 import com.terapico.generator.GenrationResult;
+import com.terapico.generator.Utils;
 
 public class GenerationJobExample {
 	public static void main(String[] args) throws Exception {
@@ -15,6 +16,8 @@ public class GenerationJobExample {
 		List<GenrationResult> files = generator.runJob();
 		
 		String outputFolder = "/works/jobs/front_end_poc/workspace/jingou-biz-suite/bizcore/GEN-CODE";
-		generator.saveToFiles(new File(outputFolder), files);
+		String crXmlOutputFolder = "/works/jobs/front_end_poc/workspace/web-code-generator/sky";
+		generator.saveToFiles( Utils.put("ALL", new File(outputFolder))
+				.put("changeRequest.xml", new File(crXmlOutputFolder)).into_map(File.class), files); // "changeRequest.xml"
 	}
 }

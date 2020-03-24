@@ -196,6 +196,8 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 		CRFieldData fieldData = new CRFieldData();
 		fieldData.setName(CR.GROUP_HIDDEN+"_"+fieldShortName);
 		fieldData.setValue(value);
+		fieldData.setHidden(true);
+		fieldData.setRules(hiddenFieldRules(fieldShortName));
 		group.addField(fieldData);
 	}
 
@@ -266,7 +268,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 		if (groupSpec.isMultiple()) {
 			groupData.setTitle(groupData.getTitle()+" "+curRecordIdx);
 		}
-		fulfillGroupActions(crSpec, groupData, groupSpec, groupRecordIndex);
+		fulfillGroupActions(crSpec, groupData, groupSpec, curRecordIdx);
 	}
 	
 	protected int fulfillChangeRequestFieldByGroup(ChangeRequestData reuestData, ChangeRequest dbCrData,

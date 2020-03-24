@@ -61,8 +61,10 @@ public interface ChangeRequestSpecBuildingService {
 	public void addFieldValueMapping(String crName, String stepName, String eventName, String fieldName, String key, Serializable value);
 
 	public void setFieldInputType(String crName, String stepName, String eventName, String fieldName, FieldType fieldType);
+	public void setFieldUIStyle(String crName, String stepName, String eventName, String fieldName, UIStyle uiStyle);
 	public void setFieldModelType(String crName, String stepName, String eventName, String fieldName, String modelName);
 	public void setFieldSelectable(String crName, String stepName, String eventName, String fieldName, boolean selectable, boolean multiSelection);
+	public void setRegularExpression(String crName, String stepName, String eventName, String fieldName, String regularExpression);
 
 	public FieldType getFieldInputType(String crName, String stepName, String eventName, String fieldName);
 	public boolean isFieldMultiSelectable(String crName, String stepName, String eventName, String fieldName);
@@ -89,6 +91,10 @@ public interface ChangeRequestSpecBuildingService {
 	public void setProjectBaseRequestUrlPrefix(String requestUrlPrefix);
 
 	public void setCRBaseRequestUrlPrefix(String crName, String requestUrlPrefix);
+
+	
+
+	
 
 	
 	

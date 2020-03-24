@@ -46,7 +46,17 @@ public class ChangeRequestSpecBaseBuilder<T extends ChangeRequestSpecBaseBuilder
 		}
 		return me;
 	}
-
+	
+	public T match(String regularExpression) {
+		if(workingBoard.isBuildingField()) {
+			service.setRegularExpression($CR(),$STEP(),$EVENT(),$FIELD(), regularExpression);
+			workingBoard.onJob(WorkingBoard.RANGE);
+		}else {
+			error("此时不能指定范围");
+		}
+		return me;
+	}
+	
 	public T place_holder(String text) {
 		if(workingBoard.isBuildingField()) {
 			service.setFieldPlaceholder($CR(),$STEP(),$EVENT(),$FIELD(), text);
@@ -371,4 +381,13 @@ public class ChangeRequestSpecBaseBuilder<T extends ChangeRequestSpecBaseBuilder
 		return me;
 	}
 
+	public T with_style(UIStyle uiStyle) {
+		if (workingBoard.isBuildingField()) {
+			service.setFieldUIStyle($CR(),$STEP(),$EVENT(),$FIELD(), uiStyle);
+			workingBoard.onJob(WorkingBoard.UI_STYLE);
+			return me;
+		}
+		error("不支持在此时设置字段的UI风格");
+		return null; // 如果走到这里了,直接异常
+	}
 }

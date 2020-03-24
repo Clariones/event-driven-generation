@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 
 import com.terapico.changerequest.builder.FieldType;
 import com.terapico.changerequest.builder.OutputName;
+import com.terapico.changerequest.builder.UIStyle;
 import com.terapico.generator.BaseHelper;
 import com.terapico.generator.Utils;
 
@@ -73,7 +74,20 @@ public class GenerationHelper extends BaseHelper {
 				value = "$(" + Utils.toModelName(modelName) +"?)";
 			}
 			if (FieldType.TEXT.isEquals(inputType)) {
-				value = "string1|string2";
+				String uiStyle = (String) fieldSpec.get(OutputName.CHANGE_REQUEST.STEP.EVENT.FIELD.UI_STYLE);
+				if (uiStyle.equals(UIStyle.INPUT_EMAIL.getName())) {
+					value = "someone@some.company.com|people@company.com";
+				}else if (uiStyle.equals(UIStyle.INPUT_URL.getName())) {
+					value = "https://www.baidu.com|https://www.doublechaintech.com";
+				}else {
+					value = "string1|string2";
+					if (fieldSpec.get(OutputName.CHANGE_REQUEST.STEP.EVENT.FIELD.MIN) == null) {
+						fieldSpec.put(OutputName.CHANGE_REQUEST.STEP.EVENT.FIELD.MIN, 1);
+					}
+					if (fieldSpec.get(OutputName.CHANGE_REQUEST.STEP.EVENT.FIELD.MAX) == null) {
+						fieldSpec.put(OutputName.CHANGE_REQUEST.STEP.EVENT.FIELD.MAX, 30);
+					}
+				}
 			}
 			if (FieldType.DATE.isEquals(inputType)) {
 				value = "2999-12-31|2020-12-25";

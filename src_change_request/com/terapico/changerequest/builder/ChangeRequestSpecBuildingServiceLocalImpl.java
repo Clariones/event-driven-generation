@@ -215,6 +215,13 @@ public class ChangeRequestSpecBuildingServiceLocalImpl extends CRSBuildingServic
 	}
 	
 	@Override
+	public void setFieldUIStyle(String crName, String stepName, String eventName, String fieldName,
+			UIStyle uiStyle) {
+		sureField(crName, stepName, eventName, fieldName).setUiStyle(uiStyle);
+		prototypeField(crName, stepName, eventName, fieldName).setUiStyleIfNeed(uiStyle);
+	}
+	
+	@Override
 	public void setFieldModelType(String crName, String stepName, String eventName, String fieldName,
 			String modelName) {
 		sureField(crName, stepName, eventName, fieldName).setModelName(modelName);
@@ -316,6 +323,13 @@ public class ChangeRequestSpecBuildingServiceLocalImpl extends CRSBuildingServic
 	@Override
 	public void setCRBaseRequestUrlPrefix(String crName, String requestUrlPrefix) {
 		getChangeRequest(crName).setRequestUrlPrefix(requestUrlPrefix);
+	}
+
+	@Override
+	public void setRegularExpression(String crName, String stepName, String eventName, String fieldName,
+			String regularExpression) {
+		sureField(crName, stepName, eventName, fieldName).setRegularExpression(regularExpression);
+		prototypeField(crName, stepName, eventName, fieldName).setRegularExpressionIfNeed(regularExpression);
 	}
 
 	

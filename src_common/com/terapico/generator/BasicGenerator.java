@@ -3,8 +3,10 @@ package com.terapico.generator;
 import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import cla.edg.actionpattern.BaseAPGenerator;
 import freemarker.cache.StringTemplateLoader;
@@ -55,12 +57,13 @@ public abstract class BasicGenerator extends BaseAPGenerator{
 		return result;
 	}
 
-	public void saveToFiles(File baseFolder, List<GenrationResult> list) {
+	protected void saveFiles(Map<String, File> baseFolders, List<GenrationResult> list) {
 		if (list == null || list.isEmpty()) {
 			return;
 		}
 		list.forEach(it -> {
 			try {
+				File baseFolder = findBaseFolder(it.getContentCode(), baseFolders);
 				File tgtFile = new File(baseFolder, it.getFileName());
 				boolean fileExisted = tgtFile.exists();
 				switch (it.getActionCode()) {
@@ -81,6 +84,34 @@ public abstract class BasicGenerator extends BaseAPGenerator{
 				e.printStackTrace();
 			}
 		});
+	}
+	
+	protected File findBaseFolder(String contentCode, Map<String, File> baseFolders) {
+		// first, find by exactly name
+		if (baseFolders.containsKey(contentCode)) {
+			return baseFolders.get(contentCode);
+		}
+		// next, find by patter
+		Iterator<Entry<String, File>> it = baseFolders.entrySet().iterator();
+		while(it.hasNext()) {
+			Entry<String, File> ent = it.next();
+			String codePattern = ent.getKey();
+			if (contentCode.matches(codePattern)) {
+				return ent.getValue();
+			}
+		}
+		// finally, return the only one, or the ALL one
+		if (baseFolders.containsKey("ALL")) {
+			return baseFolders.get("ALL");
+		}
+		return baseFolders.values().iterator().next();
+	}
+
+	public void saveToFiles(File baseFolder, List<GenrationResult> resultList) {
+		saveFiles(Utils.put("ALL", baseFolder).into_map(File.class), resultList);
+	}
+	public void saveToFiles(Map<String, File> baseFolders, List<GenrationResult> resultList) {
+		saveFiles(baseFolders, resultList);
 	}
 
 }

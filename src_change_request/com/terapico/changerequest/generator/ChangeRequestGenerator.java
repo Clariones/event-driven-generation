@@ -79,6 +79,7 @@ public class ChangeRequestGenerator extends BasicGenerator {
 		GenrationResult result = new GenrationResult().as_new_file();
 		result.setFileName(fileName);
 		result.setContent(Utils.toJson(this.getChangeRequestSpec().get("projectSpec"), true));
+		result.setContentCode("fully_cr_spec.json");
 		return result;
 	}
 	
@@ -92,8 +93,8 @@ public class ChangeRequestGenerator extends BasicGenerator {
 				.into_map();
 		String templatePath = "/changerequest/changeRequest.xml.ftl";
 		String fileName = this.toFileName(Utils.put("projectName", this.getProjectName()).into_map(),
-				"project_${projectName?lower_case}/change_request.xml");
-		return this.doGeneration(data, templatePath, fileName).as_new_file();
+				"modeling/project_${projectName?lower_case}/change_request.xml");
+		return this.doGeneration(data, templatePath, fileName).as_new_file().with_code("changeRequest.xml");
 	}
 	
 	protected GenrationResult generateBackendSpecFile() throws Exception {
@@ -103,7 +104,7 @@ public class ChangeRequestGenerator extends BasicGenerator {
 		String templatePath = "/changerequest/backend_spec.json.ftl";
 		String fileName = this.toFileName(Utils.put("projectName", this.getProjectName()).into_map(),
 				"${projectName?lower_case}_custom_src/META_INF/${projectName?lower_case}_cr_spec.json");
-		return this.doGeneration(data, templatePath, fileName).as_new_file();
+		return this.doGeneration(data, templatePath, fileName).as_new_file().with_code("backend_spec.json");
 	}
 
 	protected GenrationResult generateCRConstClass() throws Exception {
@@ -115,7 +116,7 @@ public class ChangeRequestGenerator extends BasicGenerator {
 		String templatePath = "/changerequest/cr_const.java.ftl";
 		String fileName = this.toFileName(data,
 				"${projectName?lower_case}_custom_src/com/${orgName?lower_case}/${projectName?lower_case}/CR.java");
-		return this.doGeneration(data, templatePath, fileName).as_new_file();
+		return this.doGeneration(data, templatePath, fileName).as_new_file().with_code("cr_const.java");
 	}
 	
 	protected GenrationResult generateCRHelperClass() throws Exception {
@@ -128,7 +129,7 @@ public class ChangeRequestGenerator extends BasicGenerator {
 		String templatePath = "/changerequest/prj_cr_helper.java.ftl";
 		String fileName = this.toFileName(data,
 				"${projectName?lower_case}_custom_src/com/${orgName?lower_case}/${projectName?lower_case}/${projectName?cap_first}ChangeRequestHelper.java");
-		return this.doGeneration(data, templatePath, fileName).as_new_file();
+		return this.doGeneration(data, templatePath, fileName).as_new_file().with_code("prj_cr_helper.java");
 	}
 	
 	protected GenrationResult generateCustomCRHelperClass() throws Exception {
@@ -141,7 +142,7 @@ public class ChangeRequestGenerator extends BasicGenerator {
 		String templatePath = "/changerequest/custom_cr_helper.java.ftl";
 		String fileName = this.toFileName(data,
 				"${projectName?lower_case}_custom_src/com/${orgName?lower_case}/${projectName?lower_case}/ChangeRequestHelper.java");
-		return this.doGeneration(data, templatePath, fileName).when_not_exist();
+		return this.doGeneration(data, templatePath, fileName).when_not_exist().with_code("custom_cr_helper.java");
 	}
 	
 	protected GenrationResult generateTodoFile() throws Exception {
@@ -155,7 +156,7 @@ public class ChangeRequestGenerator extends BasicGenerator {
 		String templatePath = "/changerequest/todo.txt.ftl";
 		String fileName = this.toFileName(Utils.put("projectName", this.getProjectName()).into_map(),
 				"${projectName?lower_case}_custom_src/META_INF/TODO_changeReqeust.txt");
-		return this.doGeneration(data, templatePath, fileName).as_new_file();
+		return this.doGeneration(data, templatePath, fileName).as_new_file().with_code("todo.txt");
 	}
 
 	
@@ -252,6 +253,8 @@ public class ChangeRequestGenerator extends BasicGenerator {
 			return value;
 		});
 	}
+
+
 	
 
 }

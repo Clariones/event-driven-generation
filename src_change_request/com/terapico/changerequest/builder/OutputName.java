@@ -51,6 +51,8 @@ public interface OutputName {
 					String VALUES = "valuesMapping";
 					String VALUES_RETRIEVE_API = "valuesRetrieveApi";
 					String SAMPLE_DATA = "sampleData";
+					String REGULAR_EXPRESSION = "regExp";
+					String UI_STYLE = "uiStyle";
 				}
 			}
 		}
