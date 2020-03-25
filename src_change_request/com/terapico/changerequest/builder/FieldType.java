@@ -12,6 +12,7 @@ public enum FieldType {
 	INTEGER("integer", "Integer"), 
 	DECIMAL("decimal", "BigDecimal"), 
 	MONEY("money", "BigDecimal"),
+	ARTICLE("article", "String"),
 	BASE_ENTITY("baseEntity", "BaseEntity");
 	
 	protected String systemTypeName;

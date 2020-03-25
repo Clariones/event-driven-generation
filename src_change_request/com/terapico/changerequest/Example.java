@@ -59,7 +59,7 @@ public class Example implements ChangeRequestSpecFactory{
 						.contains_event("premaritial notarization").as("female").zh_CN("女方婚前财产声明")
 						.contains_event("additional terms").zh_CN("补充条款").many_times(0,200).optional()
 							.has_field("content").zh_CN("内容")
-								.range(1,500).optional()
+								.range(null,500).optional()
 								.place_holder("请输入条款内容")
 					.step("registration").zh_CN("注册信息")
 						// 只有一个event,一次,必填,可以全部使用默认值: 名字和step一样,标题和step一样,cannot_skip
@@ -81,7 +81,7 @@ public class Example implements ChangeRequestSpecFactory{
 								.tips_title("?").tips_content("前往领取结婚证的民政局")
 								.values_can_get_from("getOfficeByCity/${register city}/")
 					.change_request("show all type").zh_CN("数据类型展示")
-						.has_field("field_text").zh_CN("短文本").which_type_of(FieldType.TEXT)
+						.has_field("field_text").zh_CN("短文本").which_type_of(FieldType.TEXT).with_style(UIStyle.INPUT_TEXT)
 						.has_field("field_id_number").zh_CN("身份证").which_type_of(FieldType.TEXT)
 							.range(15,18)
 						.has_field("field_email").zh_CN("电子邮件").with_style(UIStyle.INPUT_EMAIL)
@@ -102,7 +102,7 @@ public class Example implements ChangeRequestSpecFactory{
 						.has_field("field_decimal").zh_CN("小数").which_type_of(FieldType.DECIMAL)
 						.has_field("field_money").zh_CN("金融").which_type_of(FieldType.MONEY).range(100,10000)
 						.has_field("field_merchant").zh_CN("商户").which_model_of("merchant")
-						.has_field("field_text").zh_CN("短文本").which_type_of(FieldType.TEXT).with_style(UIStyle.INPUT_TEXT)
+						// .has_field("field_article").zh_CN("富文本").which_type_of(FieldType.ARTICLE)
 				.getChangeRequestSpec();
 	}
 	

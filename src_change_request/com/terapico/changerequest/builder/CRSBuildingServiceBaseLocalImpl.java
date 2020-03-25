@@ -259,10 +259,10 @@ public abstract class CRSBuildingServiceBaseLocalImpl implements ChangeRequestSp
 		}
 		switch(fieldSpec.getInputType()) {
 		case TEXT:
-			fixFieldRangeIfNeeded(fieldSpec, "1", "30");
+			fixFieldRangeIfNeeded(fieldSpec, fieldSpec.getIsRequired()?"1":null, "30");
 			return String.format("%s|%s", fieldSpec.getName(), fieldSpec.getTitle());
 		case MULTI_TEXT:
-			fixFieldRangeIfNeeded(fieldSpec, "0", (1024*1024*1024)+"");
+			fixFieldRangeIfNeeded(fieldSpec, fieldSpec.getIsRequired()?"1":null, (1024*1024*1024)+"");
 			return "text()";
 		case BOOLEAN:
 			return "true|false";
@@ -290,6 +290,9 @@ public abstract class CRSBuildingServiceBaseLocalImpl implements ChangeRequestSp
 		case MONEY:
 			fixFieldRangeIfNeeded(fieldSpec, "-100000000.000", "100000000.000");
 			return "$12345678.000";
+		case ARTICLE:
+			fixFieldRangeIfNeeded(fieldSpec, fieldSpec.getIsRequired()?"1":null, (1024*1024*1024)+"");
+			return "article()";
 		default:
 			throw new RuntimeException(fieldSpec.getInputType()+"的样例数据还没处理");
 		}
@@ -352,9 +355,13 @@ public abstract class CRSBuildingServiceBaseLocalImpl implements ChangeRequestSp
 			return UIStyle.INPUT_MONEY.getName();
 		case BASE_ENTITY:
 			return UIStyle.INPUT_OBJECT_SELECT.getName();
+		case ARTICLE:
+			return UIStyle.INPUT_ARTICLE.getName();
 		case TIME:
 		case TEXT:
+			break;
 		default:
+			error(fieldSpec.getInputType() + "的calaFieldUiStyle()还没做");
 			break;
 		}
 		if (fieldSpec.getValuesMapping() != null) {

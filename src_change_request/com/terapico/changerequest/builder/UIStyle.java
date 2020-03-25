@@ -17,6 +17,7 @@ public enum UIStyle {
 	INPUT_MULTI_SELECT("multi-select"),
 	INPUT_TREE_SELECT("tree-select"),
 	INPUT_IMAGE("image"),
+	INPUT_ARTICLE("article"),
 	INPUT_OBJECT_SELECT("object-selector");
 	
 	
