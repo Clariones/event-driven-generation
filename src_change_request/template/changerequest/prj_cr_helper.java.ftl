@@ -113,7 +113,6 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 		// 先建立一个CR
 		ChangeRequestData reuestData = new ChangeRequestData();
 		reuestData.setId(cr.getId());
-		reuestData.setSceneCode(sceneCode);
 		reuestData.setTitle(crSpec.getTitle());
 		reuestData.setBrief(crSpec.getBrief());
 		reuestData.setType(crSpec.getChangeRequestType());
@@ -138,12 +137,8 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 		}
 		// 接着填 scene 列表
 		{
-			reuestData.setSceneList(crSpec.getSceneList().stream().map(it->{
-				CRSceneData sceneData = new CRSceneData();
-				sceneData.setCode(it.getName());
-				sceneData.setTitle(it.getTitle());
-				return sceneData;
-			}).collect(Collectors.toList()));
+			List<CRSceneData> stepList = prepareSceneList(crSpec, sceneCode);
+			reuestData.setSceneList(stepList);
 		}
 		// 然后填所有的字段
 		for(CRGroupSpec groupSpec: groupSpecList) {
