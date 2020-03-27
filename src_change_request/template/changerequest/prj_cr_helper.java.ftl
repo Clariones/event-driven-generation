@@ -350,8 +350,8 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 		<#list scene.eventList as group>
 			<#list group.fieldList as field>
 				<#if field.interactionMode != 'display'>
-		case "${helper.javaVar(scene.name)+"_"+helper.javaVar(group.name)+"_"+helper.javaVar(field.name)}": 
-			doField${helper.CamelName(scene.name)+helper.CamelName(group.name)+helper.CamelName(field.name)}Checking(postedData, fieldSpec, fieldName, value);
+		case "${crSpec.shortName?lower_case}${helper.NameAsThis(scene.name)+"_"+helper.javaVar(group.name)+"_"+helper.javaVar(field.name)}": 
+			doField${helper.NameAsThis(crSpec.shortName)}${helper.CamelName(scene.name)+helper.CamelName(group.name)+helper.CamelName(field.name)}Checking(postedData, fieldSpec, fieldName, value);
 			return;
 				</#if>
 			</#list>
@@ -369,7 +369,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 		<#list scene.eventList as group>
 			<#list group.fieldList as field>
 				<#if field.interactionMode != 'display'>
-	protected void doField${helper.CamelName(scene.name)+helper.CamelName(group.name)+helper.CamelName(field.name)}Checking(ChangeRequestPostData postedData, CRFieldSpec fieldSpec, String fieldName, Object value) {
+	protected void doField${helper.NameAsThis(crSpec.shortName)}${helper.CamelName(scene.name)+helper.CamelName(group.name)+helper.CamelName(field.name)}Checking(ChangeRequestPostData postedData, CRFieldSpec fieldSpec, String fieldName, Object value) {
 		if (!isFieldMissing(postedData, fieldSpec, fieldName, value)) {
 			do${helper.CamelName(field.inputType)}FieldChecking(postedData, fieldSpec, fieldName, value);
 		}
@@ -489,7 +489,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 				${helper.getJavaType(field.inputType)} ${helper.javaVar(field.name)} = get${helper.CamelName(field.inputType)}Value(fieldValue.get("${helper.javaVar(field.name)}"));
 				</#if>
 			</#list>
-				String fieldGroup = "${helper.javaVar(scene.name)}_${helper.javaVar(group.name)}";
+				String fieldGroup = CR.${helper.JAVA_CONST(crSpec.changeRequestType)}.SCENE_${helper.JAVA_CONST(scene.name)}.GROUP_${helper.JAVA_CONST(group.name)}; //"${helper.javaVar(scene.name)}_${helper.javaVar(group.name)}";
 				String eventInitiatorType = currentUserInfo.getInternalType();
 				String eventInitiatorId = currentUserInfo.getId();
 				String changeRequestId = crId;

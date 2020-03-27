@@ -13,7 +13,14 @@ public class ChangeRequestSpec extends CommonSpec<ChangeRequestSpec>{
 	
 	protected List<StepSpec> stepSpecs;
 	protected String requestUrlPrefix;
-
+	protected String shortName;
+	
+	public String getShortName() {
+		return shortName;
+	}
+	public void setShortName(String shortName) {
+		this.shortName = shortName;
+	}
 	public List<StepSpec> getStepSpecs() {
 		return stepSpecs;
 	}

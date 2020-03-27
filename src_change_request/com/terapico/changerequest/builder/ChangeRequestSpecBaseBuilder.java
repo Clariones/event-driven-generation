@@ -152,7 +152,7 @@ public class ChangeRequestSpecBaseBuilder<T extends ChangeRequestSpecBaseBuilder
 				service.setFieldSelectable($CR(),$STEP(),$EVENT(),$FIELD(), true, false);
 				workingBoard.onJob(WorkingBoard.MORE_VALUE_MAPPING);
 			}else if(workingBoard.getCurrentJobName().equals(WorkingBoard.MORE_VALUE_MAPPING)){
-				if (service.isFieldSingleSelectable($CR(),$STEP(),$EVENT(),$FIELD())) {
+				if (!service.isFieldSingleSelectable($CR(),$STEP(),$EVENT(),$FIELD())) {
 					error("当前字段已经推断为'多选',使用or表示它应该是单选,请检查您的业务规则再决定是 and 还是 or");
 				}
 				service.addFieldValueMapping($CR(),$STEP(),$EVENT(),$FIELD(), key, value);

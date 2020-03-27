@@ -19,7 +19,7 @@
 					"groups":[
 		<#list scene.eventList as group>
 						{
-							"name":"${helper.javaVar(scene.name)}_${helper.javaVar(group.name)}",
+							"name":"${crSpec.shortName?lower_case}${helper.NameAsThis(scene.name)}_${helper.javaVar(group.name)}",
 							"title":"${group.title}",
 							"modelName":"${group.eventType}",
 							"multiple": ${group.multiple?c},
@@ -40,7 +40,7 @@
 	<#list crSpec.stepList as scene>
 		<#list scene.eventList as group>
 			<#list group.fieldList as field>
-				${helper.makeBackendFieldSpec(field, helper.javaVar(scene.name)+"_"+helper.javaVar(group.name))}<#if !(scene?is_last && group?is_last && field?is_last)>,</#if>
+				${helper.makeBackendFieldSpec(field, crSpec.shortName?lower_case+helper.NameAsThis(scene.name)+"_"+helper.javaVar(group.name))}<#if !(scene?is_last && group?is_last && field?is_last)>,</#if>
 			</#list>
 		</#list>
 	</#list>

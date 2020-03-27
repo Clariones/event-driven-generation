@@ -14,7 +14,7 @@ public interface CR extends BaseCrConst {
 			String TITLE = "${scene.title}";
 			boolean CAN_SKIP = ${scene.canSkip?c};
 		<#list scene.eventList as group>
-			String GROUP_${helper.JAVA_CONST(group.name)} = "${helper.javaVar(scene.name)}_${helper.javaVar(group.name)}";
+			String GROUP_${helper.JAVA_CONST(group.name)} = "${crSpec.shortName?lower_case}${helper.NameAsThis(scene.name)}_${helper.javaVar(group.name)}";
 		</#list>
 		}
 	</#list>

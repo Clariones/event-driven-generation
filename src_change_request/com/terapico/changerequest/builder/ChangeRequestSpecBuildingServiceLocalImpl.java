@@ -1,8 +1,10 @@
 package com.terapico.changerequest.builder;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import com.terapico.changerequest.spec.ChangeRequestSpec;
 import com.terapico.changerequest.spec.EventSpec;
@@ -24,6 +26,8 @@ public class ChangeRequestSpecBuildingServiceLocalImpl extends CRSBuildingServic
 	public Map<String, Map<String, Object>> getProjectChangeRequestSpec() {
 //		System.out.println(Utils.toJson(root(), true));
 //		System.exit(0);
+		makeChangeRequestShortName();
+		
 		root().getChangeRequestSpecs().forEach((cName, cr)->{
 			cr.getStepSpecs().forEach(step->{
 				step.getEventSpecs().forEach(event->{
@@ -41,6 +45,31 @@ public class ChangeRequestSpecBuildingServiceLocalImpl extends CRSBuildingServic
 		result.put("projectSpec", makeOutput());
 		result.put("allEventSpec", allEventSpec);
 		return result;
+	}
+
+	protected void makeChangeRequestShortName() {
+		root().getChangeRequestSpecs().forEach((cName, cr)->cr.setShortName(null));
+		Map<String, String> allShortName = new HashMap<>();
+		root().getChangeRequestSpecs().forEach((cName, cr)->{
+			String shortName = String.join("", Arrays.asList(cr.getName().split(" ")).stream().map(it -> it.charAt(0)+"")
+					.collect(Collectors.toList()));
+			if (!allShortName.containsKey(shortName)) {
+				cr.setShortName(shortName);
+				allShortName.put(shortName, cr.getName());
+				return;
+			}
+			int i=1;
+			for(;;) {
+				String newValue = shortName + i;
+				if(!allShortName.containsKey(newValue)) {
+					cr.setShortName(newValue);
+					allShortName.put(newValue, cr.getName());
+					return;
+				}
+				i++;
+			}
+			
+		});
 	}
 
 	@Override
