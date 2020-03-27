@@ -14,7 +14,7 @@ import com.${orgName?lower_case}.${projectName?lower_case}.changerequest.ChangeR
 import com.terapico.caf.appview.CRFieldData;
 import com.terapico.caf.appview.CRGroupData;
 import com.terapico.caf.appview.CRSceneData;
-import com.terapico.caf.appview.ChangeRequestData;
+import com.terapico.caf.viewcomponent.GenericFormPage;
 import com.terapico.caf.appview.ChangeRequestPostData;
 import com.terapico.caf.appview.ChangeRequestProcessResult;
 import com.terapico.changerequest.BaseChangeRequestHelper;
@@ -86,13 +86,13 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 		return processResult;
 	}
 	
-	public ChangeRequestData assemblerChangeRequstFirstStepResponse(BaseEntity currentUserInfo, String crType) throws Exception {
+	public GenericFormPage assemblerChangeRequstFirstStepResponse(BaseEntity currentUserInfo, String crType) throws Exception {
 			CRSpec crSpec = CR(crType);
 			return assemblerChangeRequstResponse(currentUserInfo, crType, crSpec.getSceneList().get(0).getName(), null);
 	}
 
 	// 根据定位信息,组装一个 cr 的response
-	public ChangeRequestData assemblerChangeRequstResponse(BaseEntity currentUserInfo, String crType, String sceneCode,
+	public GenericFormPage assemblerChangeRequstResponse(BaseEntity currentUserInfo, String crType, String sceneCode,
 			Map<String, Integer> recordIndexInfo) throws Exception {
 		// 先拿到CR spec
 		CRSpec crSpec = CR(crType);
@@ -101,17 +101,17 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 		// 再用这些Group spec, 找到系统中相关的已经存在的cr和event数据
 		ChangeRequest cr = loadCrDataByGroups(crType, currentUserInfo, groupSpecList);
 		// 然后根据需要,补足fields,填充field的默认值
-		ChangeRequestData crData = fulfillChangeRequestFields(cr, crSpec, sceneCode, groupSpecList, recordIndexInfo);
+		GenericFormPage crData = fulfillChangeRequestFields(cr, crSpec, sceneCode, groupSpecList, recordIndexInfo);
 		// 最后要交给业务模块,让业务模块有机会修正准备好的数据: 目前用返回值给业务模块来实现,没做回调
 		// adjustChangeRequestResponse(cr, crSpec, sceneCode, groupSpecList);
 		return crData;
 	}
 	// 根据 group spec list, 把这个cr装满
-	protected ChangeRequestData fulfillChangeRequestFields(ChangeRequest InputCR, CRSpec crSpec, String sceneCode,
+	protected GenericFormPage fulfillChangeRequestFields(ChangeRequest InputCR, CRSpec crSpec, String sceneCode,
 			List<CRGroupSpec> groupSpecList, Map<String, Integer> recordIndexInfo) throws Exception {
 		final ChangeRequest cr = ensureChangeRequest(InputCR, crSpec);
 		// 先建立一个CR
-		ChangeRequestData reuestData = new ChangeRequestData();
+		GenericFormPage reuestData = new GenericFormPage();
 		reuestData.setId(cr.getId());
 		reuestData.setTitle(crSpec.getTitle());
 		reuestData.setBrief(crSpec.getBrief());
@@ -186,7 +186,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 		return cr;
 	}
 
-	protected void addHiddenField(ChangeRequestData reuestData, String fieldShortName, String value) {
+	protected void addHiddenField(GenericFormPage reuestData, String fieldShortName, String value) {
 		CRGroupData group = HIDDEN_GROUP(reuestData);
 		CRFieldData fieldData = new CRFieldData();
 		fieldData.setName(CR.GROUP_HIDDEN+"_"+fieldShortName);
@@ -244,7 +244,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 	}
 	
 </#list>
-	protected void fulfillChangeRequestField(ChangeRequestData reuestData, ChangeRequest dbCrData, CRSpec crSpec, CRGroupData groupData, CRGroupSpec groupSpec,
+	protected void fulfillChangeRequestField(GenericFormPage reuestData, ChangeRequest dbCrData, CRSpec crSpec, CRGroupData groupData, CRGroupSpec groupSpec,
 			List<CRFieldSpec> fieldSpecList, int groupRecordIndex) throws Exception {
 		int curRecordIdx = groupRecordIndex;
 		switch (groupSpec.getName()) {
@@ -266,7 +266,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 		fulfillGroupActions(crSpec, groupData, groupSpec, curRecordIdx);
 	}
 	
-	protected int fulfillChangeRequestFieldByGroup(ChangeRequestData reuestData, ChangeRequest dbCrData,
+	protected int fulfillChangeRequestFieldByGroup(GenericFormPage reuestData, ChangeRequest dbCrData,
 			CRGroupData groupData, List<CRFieldSpec> fieldSpecList, SmartList<? extends BaseEntity> eventList, int groupRecordIndex) {
 		String gName = CR.GROUP_HIDDEN+"_indexof_"+groupData.getName();
 		CRFieldData gidField = HIDDEN_GROUP(reuestData).getFieldList().stream().filter(it -> it.getName().equals(gName))
@@ -414,6 +414,14 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 			throw exception;
 		}
 		List<CRGroupSpec> groupSpecList = GROUPS(crSpec, postedData.getSceneCode());
+		if (postedData.getFieldData() == null || postedData.getFieldData().isEmpty()) {
+			// 没提交任何数据, 那么,只有全部都是可选,才能这样
+			if (mustFillSomeField(crSpec, groupSpecList)) {
+				throw new FrontendpocException("您未填写任何数据");
+			} else {
+				return; // 啥也没提, 但是都是可选, 那就不用
+			}
+		}
 		Iterator<Entry<String, List<Map<String, Object>>>> git = postedData.getFieldData().entrySet().iterator();
 		while(git.hasNext()) {
 			Entry<String, List<Map<String, Object>>> gEntity = git.next();
