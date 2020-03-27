@@ -92,8 +92,8 @@ public class ChangeRequestGenerator extends BasicGenerator {
 				.put("allEventSpec", this.getChangeRequestSpec().get("allEventSpec"))
 				.into_map();
 		String templatePath = "/changerequest/changeRequest.xml.ftl";
-		String fileName = this.toFileName(Utils.put("projectName", this.getProjectName()).into_map(),
-				"modeling/project_${projectName?lower_case}/change_request.xml");
+		String fileName = this.toFileName(data,
+				"modeling/project_${helper.name_as_this(projectName)}/change_request.xml");
 		return this.doGeneration(data, templatePath, fileName).as_new_file().with_code("changeRequest.xml");
 	}
 	

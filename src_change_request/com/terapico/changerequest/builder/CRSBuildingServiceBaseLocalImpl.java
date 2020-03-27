@@ -258,9 +258,20 @@ public abstract class CRSBuildingServiceBaseLocalImpl implements ChangeRequestSp
 			return String.format("$(%s)", Utils.toModelName(fieldSpec.getModelName()));
 		}
 		switch(fieldSpec.getInputType()) {
-		case TEXT:
+		case TEXT:{
+			if (fieldSpec.getUiStyle() != null) {
+				switch (fieldSpec.getUiStyle()) {
+				case INPUT_EMAIL:
+					return "someone@company.com";
+				case INPUT_URL:
+					return "https://www/baidu.com";
+				default:
+					break;
+				}
+			}
 			fixFieldRangeIfNeeded(fieldSpec, fieldSpec.getIsRequired()?"1":null, "30");
 			return String.format("%s|%s", fieldSpec.getName(), fieldSpec.getTitle());
+		}
 		case MULTI_TEXT:
 			fixFieldRangeIfNeeded(fieldSpec, fieldSpec.getIsRequired()?"1":null, (1024*1024*1024)+"");
 			return "text()";

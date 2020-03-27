@@ -18,6 +18,7 @@
 	    request_type="$(change_request_type)"
 	    commited="false"
 	    platform="$(platform)"
+	    _features="change_request"
   	/>
 <#list allEventSpec?keys as eventName>
 <event_${helper.toModelStyleName(allEventSpec[eventName].eventType)}
