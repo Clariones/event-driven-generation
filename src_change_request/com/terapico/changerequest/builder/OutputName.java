@@ -11,6 +11,8 @@ public interface OutputName {
 		String TYPE = "changeRequestType";
 		String REQUEST_PREFIX = "requestPrefix";
 		String STEP_LIST = "stepList";
+		String ICON = "icon";
+		String BIND_TYPES = "bindTypes";
 
 		interface STEP {
 			String NAME = "name";

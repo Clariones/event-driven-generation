@@ -92,6 +92,10 @@ public interface ChangeRequestSpecBuildingService {
 
 	public void setCRBaseRequestUrlPrefix(String crName, String requestUrlPrefix);
 
+	public void setIcon(String crName, String icon);
+
+	public void setBindTypes(String crName, String bind_types);
+
 	
 
 	

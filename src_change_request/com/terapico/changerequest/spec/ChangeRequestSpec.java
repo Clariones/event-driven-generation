@@ -14,6 +14,8 @@ public class ChangeRequestSpec extends CommonSpec<ChangeRequestSpec>{
 	protected List<StepSpec> stepSpecs;
 	protected String requestUrlPrefix;
 	protected String shortName;
+	protected String icon = "bars";
+	protected String bindTypes;
 	
 	public String getShortName() {
 		return shortName;
@@ -27,7 +29,18 @@ public class ChangeRequestSpec extends CommonSpec<ChangeRequestSpec>{
 	public void setStepSpecs(List<StepSpec> stepSpes) {
 		this.stepSpecs = stepSpes;
 	}
-
+	public String getIcon() {
+		return icon;
+	}
+	public void setIcon(String icon) {
+		this.icon = icon;
+	}
+	public String getBindTypes() {
+		return bindTypes;
+	}
+	public void setBindTypes(String bindTypes) {
+		this.bindTypes = bindTypes;
+	}
 	public ChangeRequestSpec withRequestUrlPrefix(String urlPrefix) {
 		this.setRequestUrlPrefix(urlPrefix);
 		return this;

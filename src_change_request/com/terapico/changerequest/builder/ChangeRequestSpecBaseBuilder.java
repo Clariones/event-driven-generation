@@ -390,4 +390,22 @@ public class ChangeRequestSpecBaseBuilder<T extends ChangeRequestSpecBaseBuilder
 		error("不支持在此时设置字段的UI风格");
 		return null; // 如果走到这里了,直接异常
 	}
+	
+	public T icon(String icon) {
+		if (workingBoard.isBuildingChangeRequest()) {
+			service.setIcon($CR(), icon);
+			return me;
+		}
+		error("只有change request才可以设定Icon");
+		return null;
+	}
+	public T bind_types(String bind_types) {
+		if (workingBoard.isBuildingChangeRequest()) {
+			service.setBindTypes($CR(), bind_types);
+			return me;
+		}
+		error("只有change request才可以设定Icon");
+		return null;
+	}
+
 }

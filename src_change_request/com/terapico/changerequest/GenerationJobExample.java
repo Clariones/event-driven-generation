@@ -15,7 +15,7 @@ public class GenerationJobExample {
 		generator.setOrgName("recycleSupplyChain");
 		List<GenrationResult> files = generator.runJob();
 		
-		String outputFolder = "/works/jobs/front_end_poc/workspace/jingou-biz-suite/bizcore/GEN-CODE";
+		String outputFolder = "/works/jobs/front_end_poc/workspace/frontendpoc-biz-suite/bizcore/GEN-CODE";
 		String crXmlOutputFolder = "/works/jobs/front_end_poc/workspace/web-code-generator/sky";
 		generator.saveToFiles( Utils.put("ALL", new File(outputFolder))
 				.put("changeRequest.xml", new File(crXmlOutputFolder)).into_map(File.class), files); // "changeRequest.xml"

@@ -20,6 +20,7 @@ public class YourongCR implements ChangeRequestSpecFactory {
 				
 				
 			.change_request("show all type").zh_CN("数据类型展示")
+				.icon("table")
 				.has_field("field_text").zh_CN("短文本").which_type_of(FieldType.TEXT).with_style(UIStyle.INPUT_TEXT)
 				.has_field("field_id_number").zh_CN("身份证").which_type_of(FieldType.TEXT)
 					.range(15,18)
@@ -42,6 +43,7 @@ public class YourongCR implements ChangeRequestSpecFactory {
 				.has_field("field_money").zh_CN("金融").which_type_of(FieldType.MONEY).range(100,10000)
 				
 			.change_request("task daily report").zh_CN("施工日志")
+				.icon("calendar")
 				.step("basic info").zh_CN("基本信息")
 					.contains_event("task report basic info").zh_CN("施工基础信息")
 						.has_field("task id").zh_CN("工程").hidden().defaule_value("T000001")
@@ -87,6 +89,7 @@ public class YourongCR implements ChangeRequestSpecFactory {
 					.contains_event("common report").zh_CN("施工配合情况")
 					
 			.change_request("project manager daily report").zh_CN("项目经理日志")
+				.icon("tachometer")
 				.step("basic info").zh_CN("基本信息")
 					.contains_event("project manager report basic info").zh_CN("施工基础信息")
 						.has_field("project id").zh_CN("项目").hidden().defaule_value("P000001")

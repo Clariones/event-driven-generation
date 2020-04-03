@@ -15,6 +15,7 @@ public class Example implements ChangeRequestSpecFactory{
 		return ChangeRequestSpecBuilder.for_project("example")
 				.request_base("wxappService/handleChangeRequest/")
 				.change_request("marriage registration").zh_CN("婚姻注册申请")
+					.icon("groups").bind_types("platform")
 					.step("personal info").zh_CN("个人信息")							//默认 .cannot_skip()
 						.contains_event("citizen").zh_CN("个人信息").as("male").zh_CN("男方信息")
 							.has_field("message1")

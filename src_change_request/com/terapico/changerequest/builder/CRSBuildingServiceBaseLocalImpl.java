@@ -167,6 +167,8 @@ public abstract class CRSBuildingServiceBaseLocalImpl implements ChangeRequestSp
 		result.put(CHANGE_REQUEST.TITLE, spec.getTitle());
 		result.put(CHANGE_REQUEST.TYPE, spec.getName());
 		result.put("shortName", spec.getShortName());
+		result.put(CHANGE_REQUEST.ICON, spec.getIcon());
+		result.put(CHANGE_REQUEST.BIND_TYPES, spec.getBindTypes());
 		result.put(CHANGE_REQUEST.REQUEST_PREFIX, spec.getRequestUrlPrefix());
 		List<Object> stepSpecs = new ArrayList<>();
 		spec.getStepSpecs().forEach(stepSpec->{

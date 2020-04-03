@@ -361,6 +361,14 @@ public class ChangeRequestSpecBuildingServiceLocalImpl extends CRSBuildingServic
 		prototypeField(crName, stepName, eventName, fieldName).setRegularExpressionIfNeed(regularExpression);
 	}
 
+	@Override
+	public void setIcon(String crName, String icon) {
+		getChangeRequest(crName).setIcon(icon);
+	}
+	@Override
+	public void setBindTypes(String crName, String values) {
+		getChangeRequest(crName).setBindTypes(values);
+	}
 	
 	
 }

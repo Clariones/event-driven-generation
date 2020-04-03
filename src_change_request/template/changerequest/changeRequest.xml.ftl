@@ -3,7 +3,7 @@
   <change_request_type
 	name="<#list projectSpec.changeRequestList as crSpec>${crSpec.title}|</#list>[1,100]"
 	code="<#list projectSpec.changeRequestList as crSpec>${helper.NAME_AS_THIS(crSpec.changeRequestType!"what?")}|</#list>[1,100]"
-    icon="download|swap|upload|account-book|edit"
+    icon="<#list projectSpec.changeRequestList as crSpec>${crSpec.icon}|</#list>[1,100]"
     display_order="1|2|3|4|5|6"
     bind_types="text()"
     step_configuration="text()"
