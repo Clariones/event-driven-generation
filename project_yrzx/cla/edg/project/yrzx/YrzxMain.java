@@ -8,21 +8,18 @@ import com.terapico.changerequest.generator.ChangeRequestGenerator;
 import com.terapico.generator.GenrationResult;
 import com.terapico.generator.Utils;
 
-import cla.edg.eventscript.EventScript;
-import cla.edg.generator.EventScriptGenerator;
 import cla.edg.generator.PageFlowGenerator;
 import cla.edg.pageflow.BasePageFlowDescriptionScript;
 import cla.edg.pageflow.BasePageFlowScript;
-import cla.gen.changerequest.script.YourongCR;
 
 public class YrzxMain {
 	private static String OUTPUT_FOLDER = "/works/jobs/yrzx_v3/workspace/yrzx-biz-suite/bizcore/WEB-INF/yrzx_custom_src";
 	
 	public static void main(String[] args) throws Exception {
-//		testPageFlow(new MainPageFlow());
+		testPageFlow(new MainPageFlow());
 //		testV3EventService(new V3InkDeedService());
 //		testV3EventService(new V3AuctionService());
-		testChagneRequest(new MainChangeRequest().getSpec());
+//		testChagneRequest(new MainChangeRequest().getSpec());
 	}
 
 	private static void testPageFlow(BasePageFlowDescriptionScript test) throws Exception {

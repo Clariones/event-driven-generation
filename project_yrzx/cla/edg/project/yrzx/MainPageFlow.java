@@ -19,7 +19,7 @@ public class MainPageFlow extends BasePageFlowDescriptionScript {
 	@Override
 	public PageFlowScript getScript() {
 		return SCRIPT.import_from(new HighLevelMePageFlowPiece())
-				.import_from(new ProjectMallPageFlowPiece())
+				.import_from(new ProjectHallPageFlowPiece())
 				;
 	}
 

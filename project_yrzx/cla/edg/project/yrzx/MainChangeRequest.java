@@ -21,6 +21,7 @@ public class MainChangeRequest implements ChangeRequestSpecFactory {
 				
 			.change_request("show all type").zh_CN("数据类型展示")
 				.icon("table")
+				.has_field("field_display").value("只是显示").display()
 				.has_field("field_text").zh_CN("短文本").which_type_of(FieldType.TEXT).with_style(UIStyle.INPUT_TEXT)
 				.has_field("field_id_number").zh_CN("身份证").which_type_of(FieldType.TEXT)
 					.range(15,18)
