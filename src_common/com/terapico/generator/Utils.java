@@ -235,4 +235,8 @@ public class Utils {
 	public static String toModelName(String name) {
 		return name.trim().replace(' ', '_').toLowerCase();
 	}
+	
+	public static String toWords(String name) {
+		return name.trim().toLowerCase().replace('_', ' ');
+	}
 }

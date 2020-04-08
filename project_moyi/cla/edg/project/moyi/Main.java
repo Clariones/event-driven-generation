@@ -1,11 +1,11 @@
 package cla.edg.project.moyi;
 
-import cla.edg.Utils;
 import cla.edg.eventscript.EventScript;
 import cla.edg.generator.EventScriptGenerator;
 import cla.edg.generator.PageFlowGenerator;
 import cla.edg.pageflow.BasePageFlowDescriptionScript;
 import cla.edg.pageflow.BasePageFlowScript;
+import com.terapico.generator.Utils;
 
 public class Main {
 

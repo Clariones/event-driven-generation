@@ -1,9 +1,9 @@
 package cla.edg.project.moyi.gen.graphquery;
 
-import java.util.Map;
-
-import cla.edg.Utils;
-import cla.edg.modelbean.*;
+import cla.edg.modelbean.BaseModelBean;
+import cla.edg.modelbean.EnumAttribute;
+import cla.edg.modelbean.NumberAttribute;
+import cla.edg.modelbean.StringAttribute;
 
 public class AdditionalPlatformConfiguration extends BaseModelBean{
 	public String getFullClassName() {

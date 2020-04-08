@@ -75,7 +75,7 @@ public class ChangeRequestGenerator extends BasicGenerator {
 
 	protected GenrationResult generateFullySpecFile() throws Exception {
 		String fileName = this.toFileName(Utils.put("projectName", this.getProjectName()).into_map(),
-				"${projectName?lower_case}_custom_src/META_INF/${projectName?lower_case}_fully_cr_spec.json");
+				"${projectName?lower_case}_core_src/META_INF/${projectName?lower_case}_fully_cr_spec.json");
 		GenrationResult result = new GenrationResult().as_new_file();
 		result.setFileName(fileName);
 		result.setContent(Utils.toJson(this.getChangeRequestSpec().get("projectSpec"), true));
@@ -103,7 +103,7 @@ public class ChangeRequestGenerator extends BasicGenerator {
 				.into_map();
 		String templatePath = "/changerequest/backend_spec.json.ftl";
 		String fileName = this.toFileName(Utils.put("projectName", this.getProjectName()).into_map(),
-				"${projectName?lower_case}_custom_src/META_INF/${projectName?lower_case}_cr_spec.json");
+				"${projectName?lower_case}_core_src/META_INF/${projectName?lower_case}_cr_spec.json");
 		return this.doGeneration(data, templatePath, fileName).as_new_file().with_code("backend_spec.json");
 	}
 
@@ -115,7 +115,7 @@ public class ChangeRequestGenerator extends BasicGenerator {
 				.into_map();
 		String templatePath = "/changerequest/cr_const.java.ftl";
 		String fileName = this.toFileName(data,
-				"${projectName?lower_case}_custom_src/com/${orgName?lower_case}/${projectName?lower_case}/CR.java");
+				"${projectName?lower_case}_core_src/com/${orgName?lower_case}/${projectName?lower_case}/CR.java");
 		return this.doGeneration(data, templatePath, fileName).as_new_file().with_code("cr_const.java");
 	}
 	
@@ -128,7 +128,7 @@ public class ChangeRequestGenerator extends BasicGenerator {
 				.into_map();
 		String templatePath = "/changerequest/prj_cr_helper.java.ftl";
 		String fileName = this.toFileName(data,
-				"${projectName?lower_case}_custom_src/com/${orgName?lower_case}/${projectName?lower_case}/${projectName?cap_first}ChangeRequestHelper.java");
+				"${projectName?lower_case}_core_src/com/${orgName?lower_case}/${projectName?lower_case}/${projectName?cap_first}ChangeRequestHelper.java");
 		return this.doGeneration(data, templatePath, fileName).as_new_file().with_code("prj_cr_helper.java");
 	}
 	
