@@ -75,7 +75,7 @@ public class ChangeRequestGenerator extends BasicGenerator {
 
 	protected GenrationResult generateFullySpecFile() throws Exception {
 		String fileName = this.toFileName(Utils.put("projectName", this.getProjectName()).into_map(),
-				"${projectName?lower_case}_core_src/META_INF/${projectName?lower_case}_fully_cr_spec.json");
+				"${projectName?lower_case}_core_src/META-INF/${projectName?lower_case}_fully_cr_spec.json");
 		GenrationResult result = new GenrationResult().as_new_file();
 		result.setFileName(fileName);
 		result.setContent(Utils.toJson(this.getChangeRequestSpec().get("projectSpec"), true));
@@ -155,7 +155,7 @@ public class ChangeRequestGenerator extends BasicGenerator {
 				.into_map();
 		String templatePath = "/changerequest/todo.txt.ftl";
 		String fileName = this.toFileName(Utils.put("projectName", this.getProjectName()).into_map(),
-				"${projectName?lower_case}_custom_src/META_INF/TODO_changeReqeust.txt");
+				"${projectName?lower_case}_custom_src/META-INF/TODO_changeReqeust.txt");
 		return this.doGeneration(data, templatePath, fileName).as_new_file().with_code("todo.txt");
 	}
 

@@ -60,7 +60,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 		this.userContext = userContext;
 	}
 	protected void loadCrSpec() throws Exception {
-		loadCrSpecFromJar("/META_INF/${projectName?lower_case}_cr_spec.json");
+		loadCrSpecFromJar("/META-INF/${projectName?lower_case}_cr_spec.json");
 	}
 
 	protected Object toEventTableName(CRGroupSpec groupSpec) {

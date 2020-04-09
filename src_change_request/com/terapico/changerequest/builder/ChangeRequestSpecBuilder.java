@@ -89,6 +89,13 @@ public class ChangeRequestSpecBuilder extends ChangeRequestSpecBaseBuilder<Chang
 		return this.or_another_value(key?"true":"false", value, true);
 	}
 
+	public ChangeRequestSpecBuilder values_can_check_from_query_by(String relatedFieldName) {
+		return this.values_can_get_from("query(" + (relatedFieldName==null?"NA":relatedFieldName) +")").do_multiple_select();
+	}
+	public ChangeRequestSpecBuilder values_can_select_from_query_by(String relatedFieldName) {
+		return this.values_can_get_from("query(" + (relatedFieldName==null?"NA":relatedFieldName) +")");
+	}
+
 	
 	
 
