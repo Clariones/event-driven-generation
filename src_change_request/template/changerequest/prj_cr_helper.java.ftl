@@ -24,6 +24,7 @@ import com.terapico.changerequest.CRSpec;
 
 import com.terapico.utils.TextUtil;
 import com.terapico.uccaf.CafEntity;
+import com.terapico.caf.baseelement.CandidateQuery;
 import com.terapico.caf.Images;
 import com.terapico.caf.DateTime;
 
@@ -309,7 +310,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 						fieldData.setValue(TO_VALUE(kv.getValue()));
 					}
 				}
-				setFieldSpecInfo(fieldData, fieldSpec);
+				setFieldSpecInfo(groupData, fieldData, fieldSpec);
 				groupData.addField(fieldData);
 				fillAny = true;
 			}
@@ -338,7 +339,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 			}else {
 				fieldData.setValue(TO_VALUE(fieldSpec.getDefaultValue()));
 			}
-			setFieldSpecInfo(fieldData, fieldSpec);
+			setFieldSpecInfo(groupData, fieldData, fieldSpec);
 			groupData.addField(fieldData);
 		}
 	}
@@ -417,7 +418,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 		if (postedData.getFieldData() == null || postedData.getFieldData().isEmpty()) {
 			// 没提交任何数据, 那么,只有全部都是可选,才能这样
 			if (mustFillSomeField(crSpec, groupSpecList)) {
-				throw new FrontendpocException("您未填写任何数据");
+				throw new ${projectName?cap_first}Exception("您未填写任何数据");
 			} else {
 				return; // 啥也没提, 但是都是可选, 那就不用
 			}
@@ -545,5 +546,48 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 		if(obj == null) {
 			postedData.addVerifyErrorMessage(fieldName, fieldSpec.getLabel(), String.format("输入的%s:%s不存在", fieldSpec.getLabel(), baseEntityId));
 		}
+	}
+	
+	@Override
+	protected Object queryCandidatesForModel(CRGroupData groupData, CRFieldData fieldData, CRFieldSpec fieldSpec) {
+		String modelType = TextUtil.toCamelCase(fieldSpec.getModelName());
+		try {
+			List<Object> params = prepareParamsForQueryCandidatesBySpec(groupData, fieldData, fieldSpec);
+			CandidateQuery query = new CandidateQuery();
+			query.setTargetType(modelType);
+			switch (modelType) {
+<#list helper.getAllModelNamesNeedCandidates(projectSpec) as modelType>
+			case ${helper.NameAsThis(modelType)}.INTERNAL_TYPE:
+				return this.convertToUiCandidateValues(fieldSpec, userContext.getManagerGroup().get${helper.NameAsThis(modelType)}Manager().queryCandidates(userContext, query));
+</#list>
+			default:
+				new Throwable("不支持自动填充"+modelType+"的候选值").printStackTrace();
+				return null;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	@Override
+	protected String getCandidateDataTitle(CRFieldSpec fieldSpec, Object val) {
+		if (val instanceof Map) {
+			return (String) ((Map) val).get("name");
+		}
+		if (val instanceof BaseEntity) {
+			return ((BaseEntity)val).getDisplayName();
+		}
+		return null;
+	}
+	@Override
+	protected String getCandidateDataValue(CRFieldSpec fieldSpec, Object val) {
+		if (val instanceof Map) {
+			return (String) ((Map) val).get("id");
+		}
+		if (val instanceof BaseEntity) {
+			return ((BaseEntity)val).getId();
+		}
+		return null;
 	}
 }

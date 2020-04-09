@@ -103,7 +103,7 @@ public class ChangeRequestGenerator extends BasicGenerator {
 				.into_map();
 		String templatePath = "/changerequest/backend_spec.json.ftl";
 		String fileName = this.toFileName(Utils.put("projectName", this.getProjectName()).into_map(),
-				"${projectName?lower_case}_core_src/META_INF/${projectName?lower_case}_cr_spec.json");
+				"${projectName?lower_case}_core_src/META-INF/${projectName?lower_case}_cr_spec.json");
 		return this.doGeneration(data, templatePath, fileName).as_new_file().with_code("backend_spec.json");
 	}
 

@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
-	<classpathentry excluding="cla/edg/project/yourong/pageflow/S0_GraphQuery.java" kind="src" path="src"/>
 	<classpathentry kind="src" path="test"/>
-	<classpathentry kind="src" path="project_moyi"/>
+	<classpathentry kind="src" path="src_change_request"/>
+	<classpathentry kind="src" path="src_common"/>
+	<classpathentry kind="src" path="src_search"/>
+	<classpathentry kind="src" path="src_page_flow_model"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="project_yrzx"/>
 	<classpathentry kind="lib" path="lib/freemarker.jar" sourcepath="/Users/clariones/.m2/repository/org/freemarker/freemarker/2.3.28/freemarker-2.3.28-sources.jar"/>
 	<classpathentry kind="lib" path="lib/gson-2.8.5.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>

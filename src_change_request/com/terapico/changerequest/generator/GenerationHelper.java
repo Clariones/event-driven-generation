@@ -2,8 +2,10 @@ package com.terapico.changerequest.generator;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -13,6 +15,7 @@ import com.terapico.changerequest.builder.UIStyle;
 import com.terapico.generator.BaseHelper;
 import com.terapico.generator.Utils;
 
+@SuppressWarnings("unchecked")
 public class GenerationHelper extends BaseHelper {
 	public String getCRName(Map<String, Object> crSpec) {
 		return Utils.toJavaConstStyle((String) crSpec.get(OutputName.CHANGE_REQUEST.TYPE)).toLowerCase();
@@ -201,6 +204,33 @@ public class GenerationHelper extends BaseHelper {
 		} else {
 			return "OK";
 		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public Set<String> getAllModelNamesNeedCandidates(Map<String, Object> projectSpec) {
+		Set<String> result = new HashSet<>();
+		List<Map<String, Object>> allCRs = (List<Map<String, Object>>) projectSpec.get(OutputName.CHANGE_REQUEST_LIST);
+		allCRs.forEach(crSpec -> {
+			String crType = (String) crSpec.get(OutputName.CHANGE_REQUEST.TYPE);
+			List<Map<String, Object>> stepList = (List<Map<String, Object>>) crSpec
+					.get(OutputName.CHANGE_REQUEST.STEP_LIST);
+			stepList.forEach(stepEvent -> {
+				List<Map<String, Object>> eventList = (List<Map<String, Object>>) stepEvent
+						.get(OutputName.CHANGE_REQUEST.STEP.EVENT_LIST);
+				eventList.forEach(eventSepc->{
+					List<Map<String, Object>> fieldList = (List<Map<String, Object>>) eventSepc
+							.get(OutputName.CHANGE_REQUEST.STEP.EVENT.FIELD_LIST);
+					fieldList.forEach(fieldSpec->{
+						String mName = (String) fieldSpec.get(OutputName.CHANGE_REQUEST.STEP.EVENT.FIELD.MODEL_NAME);
+						if (Utils.isBlank(mName)) {
+							return;
+						}
+						result.add(mName);
+					});
+				});
+			});
+		});
+		return result;
 	}
 	
 }
