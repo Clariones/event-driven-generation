@@ -135,7 +135,11 @@ public abstract class Base${class_name}ViewService extends ${parent_class_name} 
 		return makeUrlF(methodName, true, params);
 	}
 	protected static String makeUrlF(String methodName, boolean encode, Object ... params) {
+	<#if bean_name?has_content>
+		StringBuilder sb = new StringBuilder("${bean_name}").append("/").append(methodName).append("/");
+	<#else>
 		StringBuilder sb = new StringBuilder(methodName).append("/");
+	</#if>
 		if (params != null) {
 			for(Object param : params) {
 				if (param == null || ((param instanceof String) && TextUtil.isBlank((String) param))) {
@@ -183,6 +187,9 @@ public abstract class Base${class_name}ViewService extends ${parent_class_name} 
 </#list>
 
 <#list script.pages as name,page>
+	<#if page.name == "general_cr_page">
+		<#continue>
+	</#if>
 	protected ${NAMING.toCamelCase(page.name)}Page assembler${NAMING.toCamelCase(page.name)}Page(${custom_context_name} ctx, String requestName)throws Exception {
 		${NAMING.toCamelCase(page.name)}Page page = new ${NAMING.toCamelCase(page.name)}Page();
 		page.assemblerContent(ctx, requestName);

@@ -12,6 +12,7 @@ public class MainPageFlow extends BasePageFlowDescriptionScript {
 				.project_name("yrzx")
 				.parent_class_package("com.yrdec.yrzx.wxapp")
 				.parent_class_name("CustomWxappService")
+				.bean_name("wxappService")
 			;
 		
 //			
@@ -20,6 +21,7 @@ public class MainPageFlow extends BasePageFlowDescriptionScript {
 	public PageFlowScript getScript() {
 		return SCRIPT.import_from(new HighLevelMePageFlowPiece())
 				.import_from(new ProjectHallPageFlowPiece())
+				.import_from(new ClientCRPageFlowPiece())
 				.import_from(new MiscPageFlowPiece())
 				;
 	}

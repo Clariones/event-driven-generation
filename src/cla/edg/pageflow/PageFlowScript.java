@@ -630,6 +630,10 @@ public class PageFlowScript extends BasePageFlowScript {
 	public PageFlowScript top_10() {
 		return top("10");
 	}
+	public PageFlowScript got_cr_page() {
+		return got_page("general_cr_page");
+	}
+	
 	
 	
 }

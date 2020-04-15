@@ -195,6 +195,9 @@ public class BasePageFlowScript extends BasePageFlowElement{
 	public PageFlowScript parent_class_name(String value) {
 		return addConfiuration("parent_class_name", value);
 	}
+	public PageFlowScript bean_name(String value) {
+		return addConfiuration("bean_name", value);
+	}
 	public String parent_class_name() {
 		return getConfigureValue("parent_class_name");
 	}
@@ -205,5 +208,7 @@ public class BasePageFlowScript extends BasePageFlowElement{
 	public String parent_class_package() {
 		return getConfigureValue("parent_class_package");
 	}
-	
+	public String bean_name() {
+		return getConfigureValue("bean_name");
+	}
 }

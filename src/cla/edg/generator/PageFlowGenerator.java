@@ -63,6 +63,7 @@ public class PageFlowGenerator extends BasicGenerator {
 		data.put("parent_class_name", getParentClassName());
 		data.put("parent_class_package", getParentClassPackage());
 		data.put("project_name", getProjectName());
+		data.put("bean_name", script.bean_name());
 		data.put("helper", new PageFlowGeneratorHelper());
 		
 		// 第一个文件, BaseXXXViewService
@@ -114,6 +115,9 @@ public class PageFlowGenerator extends BasicGenerator {
 		// 和一套 ViewPage文件
 		packageName += "pageview";
 		for(Page page: script.getPages().values()) {
+			if ("general_cr_page".equals(page.getName())) {
+				continue;
+			}
 			className = Utils.toCamelCase(page.getName());
 			data.put("class_name", className);
 			data.put("page", page);

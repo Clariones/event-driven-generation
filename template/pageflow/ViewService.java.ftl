@@ -111,15 +111,23 @@ public abstract class ${class_name}ViewService extends Base${class_name}ViewServ
 		<#list otherBranches as branch>
 			${prefix}case PRC_${NAMING.toJavaConstStyle(branch.name)}:{
 				${prefix}// ${branch.comments!}
+			<#if branch.page=="general_cr_page">
+				${prefix}return ctx.getChangeRequestResponse();
+			<#else>
 				${prefix}page = assembler${NAMING.toCamelCase(branch.page)}Page(ctx, "${T.getRequestProcessingMethodName(request)}");
 				${prefix}break;
+			</#if>
 			${prefix}}
 		</#list>
 			<#assign branch=helper.getDefaultBranch(request)/>
 			${prefix}case PRC_${NAMING.toJavaConstStyle(branch.name)}:<#if branch.name != 'by default'>
 			${prefix}case PRC_BY_DEFAULT:</#if> {
+			<#if branch.page=="general_cr_page">
+				${prefix}return ctx.getChangeRequestResponse();
+			<#else>
 				${prefix}page = assembler${NAMING.toCamelCase(branch.page)}Page(ctx, "${T.getRequestProcessingMethodName(request)}");
 				${prefix}break;
+			</#if>
 			${prefix}}
 			${prefix}default: {
 				${prefix}throw new Exception("未定义的分支代码"+resultCode);
@@ -141,16 +149,20 @@ public abstract class ${class_name}ViewService extends Base${class_name}ViewServ
 		${prefix}if (returnRightNow(resultCode)){
 		${prefix}	return ctx.getResultObject();
 		${prefix}}
+		<#if branch.page=="general_cr_page">
+		${prefix}return ctx.getChangeRequestResponse();
+		<#else>
 		${prefix}BaseViewPage page = assembler${NAMING.toCamelCase(branch.page)}Page(ctx, "${T.getRequestProcessingMethodName(request)}");
-		<#if request.canRefresh>
+			<#if request.canRefresh>
 		${prefix}page.setLinkToUrl(accessUrl);
-		</#if>
-		<#if request.cacheTimeInSeconds gt 0>
+			</#if>
+			<#if request.cacheTimeInSeconds gt 0>
 		${prefix}existedResult = page.doRender(ctx);
 		${prefix}userContext.putToCache(accessUrl, existedResult, ${request.cacheTimeInSeconds});
 		${prefix}return existedResult;
-		<#else>
+			<#else>
 		${prefix}return page.doRender(ctx);
+			</#if>
 		</#if>
 	</#if>
 </#macro>

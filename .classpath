@@ -8,6 +8,7 @@
 	<classpathentry kind="src" path="src_page_flow_model"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="project_yrzx"/>
+	<classpathentry kind="src" path="src_view_component"/>
 	<classpathentry kind="lib" path="lib/freemarker.jar" sourcepath="/Users/clariones/.m2/repository/org/freemarker/freemarker/2.3.28/freemarker-2.3.28-sources.jar"/>
 	<classpathentry kind="lib" path="lib/gson-2.8.5.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
