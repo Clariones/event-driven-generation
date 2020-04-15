@@ -308,7 +308,7 @@ public abstract class CRSBuildingServiceBaseLocalImpl implements ChangeRequestSp
 			fixFieldRangeIfNeeded(fieldSpec, fieldSpec.getIsRequired()?"1":null, (1024*1024*1024)+"");
 			return "article()";
 		default:
-			throw new RuntimeException(fieldSpec.getInputType()+"的样例数据还没处理");
+			throw new RuntimeException(fieldSpec.getName()+"出错: " + fieldSpec.getInputType()+"的样例数据还没处理");
 		}
 	}
 

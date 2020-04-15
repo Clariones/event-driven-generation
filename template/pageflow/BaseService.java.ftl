@@ -41,6 +41,7 @@ import ${package}pageview.*;
 import com.terapico.utils.DateTimeUtil;
 import com.terapico.utils.JWTUtil;
 import com.terapico.utils.MapUtil;
+import com.terapico.utils.DebugUtil;
 import com.terapico.utils.RandomUtil;
 import com.terapico.utils.TextUtil;
 
@@ -84,9 +85,34 @@ public abstract class Base${class_name}ViewService extends ${parent_class_name} 
 	protected boolean returnRightNow(int resultCode) {
 		return $PRC_RESULT_OBJECT_WAS_SET == resultCode;
 	}
-	protected abstract void commonLog(${custom_context_name} ctx, String eventCode, String title, 
-			String key1, String key2, String key3, Object detailInfo);
-			
+	protected void getCurrentUserInfo(${custom_context_name} ctx) {
+		// 从redis的数据中获得当前用户. 默认已经在checkAccess/loginXXX中完成, 如果有特别处理,可以在此完成
+	}
+	protected void ensureCurrentUserInfo(${custom_context_name} ctx) throws Exception{
+		getCurrentUserInfo(ctx);
+		if (ctx.getCurrentUserInfo() == null){
+			throw new Exception("请先登录");
+		}
+	}
+	protected void commonLog(${custom_context_name} ctx, String eventCode, String title, String key1, String key2,
+			String key3, Object detailInfo) {
+		// by default, only print log
+		try {
+			System.out.println("[  ${class_name}ViewBizService]: " + DebugUtil.dumpAsJson(MapUtil.putIf("eventCode", eventCode)
+					.putIf("title", title).putIf("key1", key1).putIf("key2", key2).putIf("key3", key3)
+					.putIf("detailInfo", detailInfo).into_map()	, true));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Override
+	public void onAccess(BaseUserContext baseUserContext, String methodName, Object[] parameters) {
+		super.onAccess(baseUserContext, methodName, parameters);
+		${custom_context_name} ctx = (${custom_context_name}) baseUserContext;
+		ctx.saveAccessInfo(getBeanName(), methodName, parameters);
+	}
+	
 	protected boolean hasFormResubmitFlag(${custom_context_name}  ctx) {
 		Object flag = ctx.getFromContextLocalStorage(${NAMING.toCamelCase(project_name)}BaseConstants.KEY_RE_SUBMIT);
 		if (flag == null) {
@@ -153,7 +179,7 @@ public abstract class Base${class_name}ViewService extends ${parent_class_name} 
 
 <#list script.requests as request>
 	/** 处理请求：${request.comments!}. 返回值：<#list request.branches as branch>PRC_${NAMING.toJavaConstStyle(branch.name)}: ${branch.comments!}; </#list> */
-	protected abstract int processRequest${T.getRequestProcessingMethodName(request)?cap_first}(${custom_context_name} ctx) throws Exception;
+	protected int processRequest${T.getRequestProcessingMethodName(request)?cap_first}(${custom_context_name} ctx) throws Exception { return PRC_BY_DEFAULT;}
 </#list>
 
 <#list script.pages as name,page>
@@ -163,7 +189,4 @@ public abstract class Base${class_name}ViewService extends ${parent_class_name} 
 		return page;
 	}
 </#list>
-
-	protected abstract void getCurrentUserInfo(${custom_context_name} ctx);
-	protected abstract void ensureCurrentUserInfo(${custom_context_name} ctx) throws Exception;
 }

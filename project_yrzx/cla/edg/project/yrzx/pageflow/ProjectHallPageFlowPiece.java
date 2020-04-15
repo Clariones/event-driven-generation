@@ -1,4 +1,4 @@
-package cla.edg.project.yrzx;
+package cla.edg.project.yrzx.pageflow;
 
 import com.terapico.generator.Utils;
 

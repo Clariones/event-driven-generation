@@ -11,6 +11,8 @@ import com.terapico.generator.Utils;
 import cla.edg.generator.PageFlowGenerator;
 import cla.edg.pageflow.BasePageFlowDescriptionScript;
 import cla.edg.pageflow.BasePageFlowScript;
+import cla.edg.project.yrzx.changerequest.MainChangeRequest;
+import cla.edg.project.yrzx.pageflow.MainPageFlow;
 
 public class YrzxMain {
 	private static String OUTPUT_FOLDER = "/works/jobs/yrzx_v3/workspace/yrzx-biz-suite/bizcore/WEB-INF/yrzx_custom_src";
@@ -19,7 +21,7 @@ public class YrzxMain {
 		testPageFlow(new MainPageFlow());
 //		testV3EventService(new V3InkDeedService());
 //		testV3EventService(new V3AuctionService());
-//		testChagneRequest(new MainChangeRequest().getSpec());
+		testChagneRequest(new MainChangeRequest().getSpec());
 	}
 
 	private static void testPageFlow(BasePageFlowDescriptionScript test) throws Exception {

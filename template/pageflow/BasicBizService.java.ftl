@@ -1,6 +1,11 @@
 <#import "tools.ftl" as T/>
 package ${package};
 
+import com.terapico.utils.DebugUtil;
+import com.terapico.utils.MapUtil;
+import com.terapico.utils.RandomUtil;
+import com.terapico.utils.TextUtil;
+
 import ${base_package}.${context_name};
 import ${base_package}.${custom_context_name};
 import ${base_package}.Footprint;
@@ -12,15 +17,7 @@ import ${base_package}.FootprintProducer;
  *
  */
 public abstract class Basic${class_name}ViewBizService extends ${class_name}ViewService implements FootprintProducer {
-	protected void getCurrentUserInfo(${custom_context_name} ctx) {
-		// 从redis的数据中获得当前用户. 默认已经在checkAccess/loginXXX中完成, 如果有特别处理,可以在此完成
-	}
-	protected void ensureCurrentUserInfo(${custom_context_name} ctx) throws Exception{
-		getCurrentUserInfo(ctx);
-		if (ctx.getCurrentUserInfo() == null){
-			throw new Exception("请先登录");
-		}
-	}
+	
 	@Override
 	public boolean canReplaceFootPrint(Footprint fp1, Footprint fp2) {
 		if (!fp1.getMethodName().equals(fp2.getMethodName())) {
@@ -32,5 +29,23 @@ public abstract class Basic${class_name}ViewBizService extends ${class_name}View
 	@Override
 	public boolean clearTop() {
 		return true;
+	}
+	
+	public Object sendVerifyCode(${custom_context_name} ctx, String mobile) throws Exception {
+		mobile = TextUtil.formatChinaMobile(mobile);
+		if (mobile == null) {
+			throw new Exception("您输入的" + mobile + "不是有效的手机号");
+		}
+		String verifyCode = RandomUtil.randomNum(6);
+		cacheVerifyCode(ctx, mobile, verifyCode);
+		ctx.sendMessage(mobile, getSmsSign(ctx), getSmsVCodeTemplate(ctx), MapUtil.with("code", verifyCode));
+		if (ctx.isProductEnvironment()) {
+			ctx.setToast(makeToast("验证码已经发送到手机" + TextUtil.shrink(mobile, 3, 3, "***") + ",请注意查收", 5, "info"));
+		} else {
+			ctx.setToast(makeToast("验证码" + verifyCode + "已经发送到手机" + TextUtil.shrink(mobile, 3, 3, "***") + ",请注意查收", 5,
+					"info"));
+		}
+		SimpleToastPage page = this.assemblerSimpleToastPage(ctx, "sendVerifyCode");
+		return page.doRender(ctx);
 	}
 }

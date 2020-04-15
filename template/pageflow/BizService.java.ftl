@@ -13,18 +13,8 @@ import ${base_package}.${custom_context_name};
  *
  */
 public class ${class_name}ViewBizService extends Basic${class_name}ViewBizService{
-	@Override
-	protected void commonLog(CustomYrzxUserContextImpl ctx, String eventCode, String title, String key1, String key2,
-			String key3, Object detailInfo) {
-		// by default, only print log
-		try {
-			System.out.println("[  WxappV3ViewBizService]: " + DebugUtil.dumpAsJson(MapUtil.putIf("eventCode", eventCode)
-					.putIf("title", title).putIf("key1", key1).putIf("key2", key2).putIf("key3", key3)
-					.putIf("detailInfo", detailInfo).into_map()	, true));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	
+<#-- processXXX 现在也不用生成了
 <#list script.requests as request>
 	// 处理请求：${request.comments!}. 返回值：<#list request.branches as branch>PRC_${NAMING.toJavaConstStyle(branch.name)}: ${branch.comments!}; </#list>
 	@Override
@@ -34,6 +24,7 @@ public class ${class_name}ViewBizService extends Basic${class_name}ViewBizServic
 	}
 	
 </#list>
+-->
 
 <#-- assembler pages 现在都不用生成了
 <#list script.pages as name,page>

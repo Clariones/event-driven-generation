@@ -1,4 +1,4 @@
-package cla.edg.project.yrzx;
+package cla.edg.project.yrzx.pageflow;
 
 import cla.edg.pageflow.BasePageFlowDescriptionScript;
 import cla.edg.pageflow.PageFlowScript;
@@ -20,6 +20,7 @@ public class MainPageFlow extends BasePageFlowDescriptionScript {
 	public PageFlowScript getScript() {
 		return SCRIPT.import_from(new HighLevelMePageFlowPiece())
 				.import_from(new ProjectHallPageFlowPiece())
+				.import_from(new MiscPageFlowPiece())
 				;
 	}
 

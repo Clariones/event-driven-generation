@@ -1,13 +1,23 @@
+	
 	public Object sendVerifyCode(${custom_context_name} ctx, String mobile) throws Exception {
-		String vCode = RandomUtil.randomNum(6);
-		mobile = ${NAMING.toCamelCase(project_name)}BaseUtils.formatChinaMobile(mobile);
-		cacheVerifyCode(ctx, mobile, vCode);
-		ctx.sendMessage(mobile, getSmsSign(ctx), getSmsVCodeTemplate(ctx), MapUtil.put("code", vCode).into_map(String.class));
-		if (ctx.isProductEnvironment()) {
-			return makeToast("短信已经发送到"+TextUtil.shrink(mobile, 3, 2, "***")+",请注意查收", 10, "info");
-		}else {
-			return makeToast("验证码"+vCode+"已经发送到"+TextUtil.shrink(mobile, 3, 2, "***")+",请注意查收", 10, "info");
+		mobile = TextUtil.formatChinaMobile(mobile);
+		if (mobile == null) {
+			throw new Exception("您输入的" + mobile + "不是有效的手机号");
 		}
+		String verifyCode = RandomUtil.randomNum(6);
+		cacheVerifyCode(ctx, mobile, verifyCode);
+		ctx.sendMessage(mobile, getSmsSign(ctx), getSmsVCodeTemplate(ctx), MapUtil.with("code", verifyCode));
+		if (ctx.isProductEnvironment()) {
+			ctx.setToast(makeToast("验证码已经发送到手机" + TextUtil.shrink(mobile, 3, 3, "***") + ",请注意查收", 5, "info"));
+		} else {
+			ctx.setToast(makeToast("验证码" + verifyCode + "已经发送到手机" + TextUtil.shrink(mobile, 3, 3, "***") + ",请注意查收", 5,
+					"info"));
+		}
+		return assemblerToastPage(ctx, "sendVerifyCode");
+		
+	}
+	protected Object assemblerToastPage(${custom_context_name} ctx, String methodName) throws Exception {
+		return ctx.getToast();
 	}
     
     protected String getSmsVCodeTemplate(${custom_context_name} ctx) {

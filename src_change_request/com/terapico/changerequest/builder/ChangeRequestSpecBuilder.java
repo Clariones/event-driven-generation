@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
+import cla.edg.project.yrzx.changerequest.ProjectReportChangeRequest;
+
 public class ChangeRequestSpecBuilder extends ChangeRequestSpecBaseBuilder<ChangeRequestSpecBuilder>{
 	private static Map<String, ChangeRequestSpecBuilder> instances = new HashMap<>();
 	private ChangeRequestSpecBuilder() {}
@@ -94,6 +96,10 @@ public class ChangeRequestSpecBuilder extends ChangeRequestSpecBaseBuilder<Chang
 	}
 	public ChangeRequestSpecBuilder values_can_select_from_query_by(String relatedFieldName) {
 		return this.values_can_get_from("query(" + (relatedFieldName==null?"NA":relatedFieldName) +")");
+	}
+
+	public ChangeRequestSpecBuilder import_from(ChangeRequestSpecFactory factory) {
+		return factory.makeSequel(this);
 	}
 
 	
