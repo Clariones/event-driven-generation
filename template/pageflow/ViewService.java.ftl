@@ -1,13 +1,20 @@
 <#import "tools.ftl" as T/>
 package ${package};
 
-import ${base_package}.${context_name};
-import ${base_package}.${custom_context_name};
-import ${base_package}.BaseViewPage;
-
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Map;
+import com.terapico.caf.appview.ChangeRequestPostData;
+import com.terapico.caf.appview.ChangeRequestProcessResult;
+import com.terapico.caf.viewcomponent.GenericFormPage;
+
+import ${base_package}.${context_name};
+import ${base_package}.${custom_context_name};
+import ${base_package}.BaseViewPage;
+import ${base_package}.CR;
+import ${base_package}.ChangeRequestHelper;
+
+
 
 <#list helper.getAllForms(script) as form>
 	<#if form.customized>
@@ -25,7 +32,9 @@ import ${base_package}.${NAMING.toCamelCase(form.formName)?lower_case}.${helper.
 public abstract class ${class_name}ViewService extends Base${class_name}ViewService{
 <#list script.requests as request>
 	// ${request.comments!}(${request.name})
-	<#if request.handleForm>
+	<#if request.changeRequestName?has_content>
+		<@changeRequestHanlingMethod request />
+	<#elseif request.handleForm>
 		<@formPostHanlingMethod request />
 	<#else>
 		<@commonRequestHanlingMethod request />
@@ -66,7 +75,7 @@ public abstract class ${class_name}ViewService extends Base${class_name}ViewServ
 	public Object ${T.getRequestProcessingMethodName(request)}(${context_name} userContext<@T.getRequestProcessingMethodParameters request/>) throws Exception {
 		${custom_context_name} ctx = (${custom_context_name}) userContext;
 		if (hasFormResubmitFlag(ctx)) {
-			throwsExceptionWithMessage(ctx, "请不要重复提交");
+			throwExceptionWithMessage(ctx, "请不要重复提交");
 		}
 		try{
 			String accessUrl = makeUrlF("${T.getRequestProcessingMethodName(request)}", false, "formData");
@@ -88,7 +97,43 @@ public abstract class ${class_name}ViewService extends Base${class_name}ViewServ
 	}
 </#macro>
 
-
+<#macro changeRequestHanlingMethod request>
+	<#if request.needLogin>
+		<#assign methodName = "customerStartCr"+NAMING.toCamelCase(request.changeRequestName) />
+	<#else>
+		<#assign methodName = "startCr"+NAMING.toCamelCase(request.changeRequestName) />
+	</#if>
+	public Object ${methodName}(${context_name} userContext<@T.getRequestProcessingMethodParameters request/>) throws Exception {
+		${custom_context_name} ctx = (${custom_context_name}) userContext;
+		String accessUrl = makeUrlF("${methodName}", false<@T.getRequestProcessingUrlMethodParametersWithoutType request/>);
+		ctx.setAccessUrl(accessUrl);
+		<@getRequestUser request ""/>
+		commonLog(ctx, "${methodName}", "开始:${request.comments!}", ctx.getRemoteIP(), ctx.tokenId(), accessUrl, null);
+		int resultCode = processRequest${methodName?cap_first}(ctx);
+		if (returnRightNow(resultCode)){
+			return ctx.getResultObject();
+		}
+		return ctx.getChangeRequestResponse();
+	}
+	
+	public Object ${T.getRequestProcessingMethodName(request)}(${context_name} userContext) throws Exception {
+		${custom_context_name} ctx = (${custom_context_name}) userContext;
+		if (hasFormResubmitFlag(ctx)) {
+			throwExceptionWithMessage(ctx, "请不要重复提交");
+		}
+		try{
+			String accessUrl = makeUrlF("${T.getRequestProcessingMethodName(request)}", false);
+			ctx.setAccessUrl(accessUrl);
+			<@getRequestUser request "	"/>
+		<#assign crName = request.changeRequestName/>
+			commonLog(ctx, "${T.getRequestProcessingMethodName(request)}", "${request.comments!}", ctx.getRemoteIP(), ctx.tokenId(), null, ctx.getRequestParameters());
+		<@requestProcessAndReturn request "	">
+		</@>
+		}finally {
+			ctx.clearFormResubmitFlag();
+		}
+	}
+</#macro>
 
 <#macro getRequestUser request prefix="">
 	<#if request.needLogin>

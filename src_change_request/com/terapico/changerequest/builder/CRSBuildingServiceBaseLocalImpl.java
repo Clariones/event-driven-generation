@@ -166,6 +166,7 @@ public abstract class CRSBuildingServiceBaseLocalImpl implements ChangeRequestSp
 		Map<String, Object> result = new HashMap<>();
 		result.put(CHANGE_REQUEST.TITLE, spec.getTitle());
 		result.put(CHANGE_REQUEST.TYPE, spec.getName());
+		result.put(CHANGE_REQUEST.NEED_LOGIN, spec.isNeedLogin());
 		result.put("shortName", spec.getShortName());
 		result.put(CHANGE_REQUEST.ICON, spec.getIcon());
 		result.put(CHANGE_REQUEST.BIND_TYPES, spec.getBindTypes());
@@ -307,6 +308,8 @@ public abstract class CRSBuildingServiceBaseLocalImpl implements ChangeRequestSp
 		case ARTICLE:
 			fixFieldRangeIfNeeded(fieldSpec, fieldSpec.getIsRequired()?"1":null, (1024*1024*1024)+"");
 			return "article()";
+		case MOBILE:
+			return "13300001234";
 		default:
 			throw new RuntimeException(fieldSpec.getName()+"出错: " + fieldSpec.getInputType()+"的样例数据还没处理");
 		}
@@ -322,6 +325,9 @@ public abstract class CRSBuildingServiceBaseLocalImpl implements ChangeRequestSp
 	protected Object calaFieldRegExp(FieldSpec fieldSpec) {
 		if (fieldSpec.getRegularExpression() != null) {
 			return fieldSpec.getRegularExpression();
+		}
+		if (fieldSpec.getInputType().equals(FieldType.MOBILE)) {
+			return "1[3-9]\\d{9}";
 		}
 		if (fieldSpec.getUiStyle() != null) {
 			switch (fieldSpec.getUiStyle()) {
@@ -371,6 +377,8 @@ public abstract class CRSBuildingServiceBaseLocalImpl implements ChangeRequestSp
 			return UIStyle.INPUT_OBJECT_SELECT.getName();
 		case ARTICLE:
 			return UIStyle.INPUT_ARTICLE.getName();
+		case MOBILE:
+			return UIStyle.INPUT_TEXT.getName();
 		case TIME:
 		case TEXT:
 			break;

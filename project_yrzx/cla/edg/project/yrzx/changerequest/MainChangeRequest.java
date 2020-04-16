@@ -23,6 +23,7 @@ public class MainChangeRequest implements ChangeRequestSpecFactory {
 			.import_from(new ExampleChangeRequest())
 			.import_from(new ProjectCommandChangeRequest())
 			.import_from(new ProjectReportChangeRequest())
+			.import_from(new ApplyEmplacementAndRecommendationChangeRequest())
 			
 			.getChangeRequestSpec();
 	}

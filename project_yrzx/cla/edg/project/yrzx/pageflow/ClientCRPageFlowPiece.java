@@ -7,15 +7,20 @@ public class ClientCRPageFlowPiece extends PieceOfScript {
 	@Override
 	public PageFlowScript makeSequel(PageFlowScript script) {
 		return script
-				.request("start CR application").need_login()
-					.comments("打开 我要装修 的表单")
-					.got_cr_page()
-				.request("start CR recommendation").need_login()
-					.comments("打开 我要推荐 的表单")
-					.got_cr_page()
-				.request("start CR emplacement").need_login()
-					.comments("打开 我要入驻 的表单")
-					.got_cr_page()
+				.request_with_changerequest("apply decoration").with_string("user id")
+					.comments("申请装修项目").no_login()
+					.got_page("application list")
+				
+				.request_with_changerequest("apply recommendation")
+					.comments("进行推荐").need_login()
+					.got_page("recommendation list")
+
+				.request_with_changerequest("apply emplacement")
+					.comments("申请入驻").need_login()
+					.got_page("emplacement list")
+
+
+
 			;
 	}
 }

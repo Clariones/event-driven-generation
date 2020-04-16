@@ -13,6 +13,7 @@ public interface OutputName {
 		String STEP_LIST = "stepList";
 		String ICON = "icon";
 		String BIND_TYPES = "bindTypes";
+		String NEED_LOGIN = "needLogin";
 
 		interface STEP {
 			String NAME = "name";

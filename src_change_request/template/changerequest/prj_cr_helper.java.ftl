@@ -87,14 +87,14 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 		return processResult;
 	}
 	
-	public GenericFormPage assemblerChangeRequstFirstStepResponse(BaseEntity currentUserInfo, String crType) throws Exception {
+	public GenericFormPage assemblerChangeRequstFirstStepResponse(BaseEntity currentUserInfo, String crType, String processUrl) throws Exception {
 			CRSpec crSpec = CR(crType);
-			return assemblerChangeRequstResponse(currentUserInfo, crType, crSpec.getSceneList().get(0).getName(), null);
+			return assemblerChangeRequstResponse(currentUserInfo, crType, crSpec.getSceneList().get(0).getName(), null, processUrl);
 	}
 
 	// 根据定位信息,组装一个 cr 的response
 	public GenericFormPage assemblerChangeRequstResponse(BaseEntity currentUserInfo, String crType, String sceneCode,
-			Map<String, Integer> recordIndexInfo) throws Exception {
+			Map<String, Integer> recordIndexInfo, String processUrl) throws Exception {
 		// 先拿到CR spec
 		CRSpec crSpec = CR(crType);
 		// 再根据scene code, 找到有哪几个group的spec被需要
@@ -102,14 +102,14 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 		// 再用这些Group spec, 找到系统中相关的已经存在的cr和event数据
 		ChangeRequest cr = loadCrDataByGroups(crType, currentUserInfo, groupSpecList);
 		// 然后根据需要,补足fields,填充field的默认值
-		GenericFormPage crData = fulfillChangeRequestFields(cr, crSpec, sceneCode, groupSpecList, recordIndexInfo);
+		GenericFormPage crData = fulfillChangeRequestFields(cr, crSpec, sceneCode, groupSpecList, recordIndexInfo, processUrl);
 		// 最后要交给业务模块,让业务模块有机会修正准备好的数据: 目前用返回值给业务模块来实现,没做回调
 		// adjustChangeRequestResponse(cr, crSpec, sceneCode, groupSpecList);
 		return crData;
 	}
 	// 根据 group spec list, 把这个cr装满
 	protected GenericFormPage fulfillChangeRequestFields(ChangeRequest InputCR, CRSpec crSpec, String sceneCode,
-			List<CRGroupSpec> groupSpecList, Map<String, Integer> recordIndexInfo) throws Exception {
+			List<CRGroupSpec> groupSpecList, Map<String, Integer> recordIndexInfo, String processUrl) throws Exception {
 		final ChangeRequest cr = ensureChangeRequest(InputCR, crSpec);
 		// 先建立一个CR
 		GenericFormPage reuestData = new GenericFormPage();
@@ -150,10 +150,10 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 			reuestData.getGroupList().add(groupData);
 			
 			int groupRecordIndex = getIndexOfGroup(reuestData, groupSpec);
-			fulfillChangeRequestField(reuestData, cr, crSpec, groupData, groupSpec, crSpec.getFieldList(), groupRecordIndex);
+			fulfillChangeRequestField(reuestData, cr, crSpec, groupData, groupSpec, crSpec.getFieldList(), groupRecordIndex, processUrl);
 		}
 		// 最后是CR级别的actions
-		fulfillChangeRequestActions(reuestData, crSpec, sceneCode);
+		fulfillChangeRequestActions(reuestData, crSpec, sceneCode, processUrl);
 		return reuestData;
 	}
 	
@@ -246,7 +246,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 	
 </#list>
 	protected void fulfillChangeRequestField(GenericFormPage reuestData, ChangeRequest dbCrData, CRSpec crSpec, CRGroupData groupData, CRGroupSpec groupSpec,
-			List<CRFieldSpec> fieldSpecList, int groupRecordIndex) throws Exception {
+			List<CRFieldSpec> fieldSpecList, int groupRecordIndex, String processUrl) throws Exception {
 		int curRecordIdx = groupRecordIndex;
 		switch (groupSpec.getName()) {
 <#list projectSpec.changeRequestList as crSpec>
@@ -264,7 +264,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 		if (groupSpec.isMultiple()) {
 			groupData.setTitle(groupData.getTitle()+" "+curRecordIdx);
 		}
-		fulfillGroupActions(crSpec, groupData, groupSpec, curRecordIdx);
+		fulfillGroupActions(crSpec, groupData, groupSpec, curRecordIdx, processUrl);
 	}
 	
 	protected int fulfillChangeRequestFieldByGroup(GenericFormPage reuestData, ChangeRequest dbCrData,

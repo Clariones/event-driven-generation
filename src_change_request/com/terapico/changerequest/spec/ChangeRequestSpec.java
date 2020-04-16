@@ -16,6 +16,7 @@ public class ChangeRequestSpec extends CommonSpec<ChangeRequestSpec>{
 	protected String shortName;
 	protected String icon = "bars";
 	protected String bindTypes;
+	protected boolean needLogin = true; // 默认CR需要登录后才能发起
 	
 	public String getShortName() {
 		return shortName;
@@ -72,6 +73,12 @@ public class ChangeRequestSpec extends CommonSpec<ChangeRequestSpec>{
 	@Override
 	public String getSpecType() {
 		return "ChangeRequest";
+	}
+	public boolean isNeedLogin() {
+		return needLogin;
+	}
+	public void setNeedLogin(boolean needLogin) {
+		this.needLogin = needLogin;
 	}
 
 	

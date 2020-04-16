@@ -13,7 +13,8 @@ public enum FieldType {
 	DECIMAL("decimal", "BigDecimal"), 
 	MONEY("money", "BigDecimal"),
 	ARTICLE("article", "String"),
-	BASE_ENTITY("baseEntity", "BaseEntity");
+	BASE_ENTITY("baseEntity", "BaseEntity"), 
+	MOBILE("mobile", "String");
 	
 	protected String systemTypeName;
 	protected String javaTypeName;

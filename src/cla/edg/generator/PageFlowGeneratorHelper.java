@@ -12,6 +12,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import com.terapico.generator.BaseHelper;
 import com.terapico.generator.Utils;
 
 import cla.edg.graphquery.terms.BasePathInfo;
@@ -24,7 +25,7 @@ import cla.edg.pageflow.Branch;
 import cla.edg.pageflow.Page;
 import cla.edg.pageflow.Request;
 
-public class PageFlowGeneratorHelper{
+public class PageFlowGeneratorHelper extends BaseHelper{
 	public boolean isRequestHasBranch(Request req) {
 		if (req.getBranches() == null || req.getBranches().size() <= 1) {
 			return false;

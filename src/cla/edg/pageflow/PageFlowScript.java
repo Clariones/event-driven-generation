@@ -635,5 +635,12 @@ public class PageFlowScript extends BasePageFlowScript {
 	}
 	
 	
+	public PageFlowScript request_with_changerequest(String crName) {
+		request("submit cr " + crName);
+		currentRequest.setChangeRequestName(crName);
+		return this;
+	}
+	
+	
 	
 }

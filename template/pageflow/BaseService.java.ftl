@@ -1,4 +1,10 @@
 <#import "tools.ftl" as T/>
+<#assign has_cr_need_process=false />
+<#list script.requests as request>
+	<#if request.changeRequestName?has_content>
+		<#assign has_cr_need_process=true />
+	</#if>
+</#list>
 package ${package};
 
 import java.io.UnsupportedEncodingException;
@@ -47,7 +53,17 @@ import com.terapico.utils.TextUtil;
 
 import com.terapico.uccaf.BaseUserContext;
 import com.terapico.caf.baseelement.LoginParam;
-
+import com.terapico.caf.appview.ChangeRequestPostData;
+import com.terapico.caf.appview.ChangeRequestProcessResult;
+import com.terapico.caf.viewcomponent.GenericFormPage;
+import ${base_package}.ChangeRequestHelper;
+import ${base_package}.CR;
+import ${base_package}.ChangeRequestHelper;
+<#if has_cr_need_process>
+import com.terapico.uccaf.CafEntity;
+import ${base_package}.changerequest.ChangeRequest;
+import ${base_package}.changerequest.ChangeRequestService;
+</#if>
 /**
  * 此类负责：声明所有${class_name}ViewService中所使用的方法和常量。 单独列出的目的是便于维护。
  * @author clariones
@@ -173,17 +189,64 @@ public abstract class Base${class_name}ViewService extends ${parent_class_name} 
 	<#include "/actions/login/login.java.ftl">
 	<#include "/actions/login/checkAccess.java.ftl">
 </#if>
+	<#include "/actions/changerequest/process.java.ftl">
 
 <#list script.requests as request>
-	// 处理请求：${request.comments!}
+	// 处理请求：${request.comments!} (${request.name})
+	<#if request.changeRequestName?has_content>
+		<#if request.needLogin>
+			<#assign methodName = "customerStartCr"+NAMING.toCamelCase(request.changeRequestName) />
+		<#else>
+			<#assign methodName = "startCr"+NAMING.toCamelCase(request.changeRequestName) />
+		</#if>
+	public static String makeStartCr${NAMING.toCamelCase(request.changeRequestName)}Url(${custom_context_name} ctx<@T.getRequestProcessingUrlMethodParameters request/>){
+		return makeUrl("${methodName}"<@T.getRequestProcessingMethodParameterNames request/>);
+	}
+	public static String make${NAMING.toCamelCase(request.name)}Url(${custom_context_name} ctx){
+		return makeUrl("${T.getRequestProcessingMethodName(request)}");
+	}
+	<#else>
 	public static String make${NAMING.toCamelCase(request.name)}Url(${custom_context_name} ctx<@T.getRequestProcessingUrlMethodParameters request/>){
 		return makeUrl("${T.getRequestProcessingMethodName(request)}"<@T.getRequestProcessingMethodParameterNames request/>);
 	}
+	</#if>
 </#list>
 
 <#list script.requests as request>
-	/** 处理请求：${request.comments!}. 返回值：<#list request.branches as branch>PRC_${NAMING.toJavaConstStyle(branch.name)}: ${branch.comments!}; </#list> */
-	protected int processRequest${T.getRequestProcessingMethodName(request)?cap_first}(${custom_context_name} ctx) throws Exception { return PRC_BY_DEFAULT;}
+	<#if request.changeRequestName?has_content>
+		<#if request.needLogin>
+			<#assign methodName = "customerStartCr"+NAMING.toCamelCase(request.changeRequestName) />
+		<#else>
+			<#assign methodName = "startCr"+NAMING.toCamelCase(request.changeRequestName) />
+		</#if>
+		<#assign crName = request.changeRequestName/>
+	/** 处理请求：开始:${request.comments!}. */
+	protected int processRequest${methodName?cap_first}(${custom_context_name} ctx) throws Exception {
+		ChangeRequestHelper crHelper = ChangeRequestHelper.of(ctx);
+		GenericFormPage response = crHelper.assemblerChangeRequstFirstStepResponse(ctx.getCurrentUserInfo(),
+					CR.${helper.NAME_AS_THIS(crName)}.NAME, make${NAMING.toCamelCase(request.name)}Url(ctx));
+		ctx.setChangeRequestResponse(response);
+		return PRC_BY_DEFAULT;
+	}
+	</#if>
+	/** 处理请求：<#if request.changeRequestName?has_content>提交:</#if>${request.comments!}. 返回值：<#list request.branches as branch>PRC_${NAMING.toJavaConstStyle(branch.name)}: ${branch.comments!}; </#list> */
+	protected int processRequest${T.getRequestProcessingMethodName(request)?cap_first}(${custom_context_name} ctx) throws Exception { <#if !request.changeRequestName?has_content>return PRC_BY_DEFAULT;}
+	<#else>
+
+		ChangeRequestHelper crHelper = ChangeRequestHelper.of(ctx);
+		ChangeRequestPostData postedData = crHelper.parsePostedData(ctx.getRequestParameters());
+		ChangeRequestProcessResult crResult = crHelper.processChangeRequest(postedData, ctx.getCurrentUserInfo());
+		ctx.setChangeRequestProcessResult(crResult);
+		if (crResult.getResultCode().equals(ChangeRequestProcessResult.CODE_NOT_COMMITTED)) {
+			Object response = crHelper.assemblerChangeRequstResponse(ctx.getCurrentUserInfo(), crResult.getNewChangeRequestType(),
+					crResult.getNewSceneCode(), crResult.getNewGroupIds(), make${NAMING.toCamelCase(request.name)}Url(ctx));
+			ctx.setResultObject(response);
+			return $PRC_RESULT_OBJECT_WAS_SET;	
+		}
+		processChangeRequest(ctx, crResult.getChangeRequest());
+		return PRC_BY_DEFAULT;
+	}
+	</#if>
 </#list>
 
 <#list script.pages as name,page>

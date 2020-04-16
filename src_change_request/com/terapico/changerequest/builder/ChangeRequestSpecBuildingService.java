@@ -96,6 +96,8 @@ public interface ChangeRequestSpecBuildingService {
 
 	public void setBindTypes(String crName, String bind_types);
 
+	public void setNeedLogin(String crName, boolean needLogin);
+
 	
 
 	

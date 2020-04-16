@@ -95,7 +95,8 @@ public class ChangeRequestSpecBuildingServiceLocalImpl extends CRSBuildingServic
 	@Override
 	public void createNewChangeRequest(String crTypeName) {
 		root().addChangeRequestSpec(new ChangeRequestSpec()
-				.withName(crTypeName).withRequestUrlPrefix(root().getRequestUrlPrefix()));
+				.withName(crTypeName)
+				.withRequestUrlPrefix(root().getRequestUrlPrefix()));
 	}
 
 	@Override
@@ -368,6 +369,11 @@ public class ChangeRequestSpecBuildingServiceLocalImpl extends CRSBuildingServic
 	@Override
 	public void setBindTypes(String crName, String values) {
 		getChangeRequest(crName).setBindTypes(values);
+	}
+
+	@Override
+	public void setNeedLogin(String crName, boolean needLogin) {
+		getChangeRequest(crName).setNeedLogin(needLogin);
 	}
 	
 	

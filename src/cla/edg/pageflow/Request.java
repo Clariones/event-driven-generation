@@ -10,6 +10,7 @@ public class Request extends BasePageFlowElement{
 	protected boolean canRefresh = false;
 	protected List<Branch> branches;
 	protected int cacheTimeInSeconds = 0;
+	protected String changeRequestName;
 	
 	
 	public boolean isCanRefresh() {
@@ -54,6 +55,12 @@ public class Request extends BasePageFlowElement{
 	}
 	public void setHasFootprint(boolean hasFootprint) {
 		this.hasFootprint = hasFootprint;
+	}
+	public String getChangeRequestName() {
+		return changeRequestName;
+	}
+	public void setChangeRequestName(String changeRequestName) {
+		this.changeRequestName = changeRequestName;
 	}
 	public Branch addBranch(String code) {
 		ensureBranches();
@@ -137,5 +144,6 @@ public class Request extends BasePageFlowElement{
 		rst.setExtType(true);
 		return rst;
 	}
+	
 	
 }

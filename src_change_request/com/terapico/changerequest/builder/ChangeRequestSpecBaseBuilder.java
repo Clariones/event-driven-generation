@@ -408,4 +408,20 @@ public class ChangeRequestSpecBaseBuilder<T extends ChangeRequestSpecBaseBuilder
 		return null;
 	}
 
+	public T need_login() {
+		if (workingBoard.isBuildingChangeRequest()) {
+			service.setNeedLogin($CR(), true);
+			return me;
+		}
+		error("只有change request才可以设定需要登录");
+		return null;
+	}
+	public T not_login() {
+		if (workingBoard.isBuildingChangeRequest()) {
+			service.setNeedLogin($CR(), false);
+			return me;
+		}
+		error("只有change request才可以设定不需要登录");
+		return null;
+	}
 }
