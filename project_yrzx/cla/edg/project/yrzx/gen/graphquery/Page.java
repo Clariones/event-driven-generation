@@ -9,6 +9,13 @@ public class Page extends BaseModelBean{
 		return "com.yrdec.yrzx.page.Page";
 	}
 	// 枚举对象
+	public static EnumAttribute WXAPP_HOMEPAGE = new EnumAttribute("com.yrdec.yrzx.page.Page", "WXAPP_HOMEPAGE");
+	public static EnumAttribute GOLDEN_SERVICE = new EnumAttribute("com.yrdec.yrzx.page.Page", "GOLDEN_SERVICE");
+	public static EnumAttribute DESIGNER = new EnumAttribute("com.yrdec.yrzx.page.Page", "DESIGNER");
+	public static EnumAttribute ORGNIZATION = new EnumAttribute("com.yrdec.yrzx.page.Page", "ORGNIZATION");
+	public static EnumAttribute ASSOCIATION = new EnumAttribute("com.yrdec.yrzx.page.Page", "ASSOCIATION");
+	public static EnumAttribute BIZ_CHAIN = new EnumAttribute("com.yrdec.yrzx.page.Page", "BIZ_CHAIN");
+	public static EnumAttribute REAL_ESTATE = new EnumAttribute("com.yrdec.yrzx.page.Page", "REAL_ESTATE");
 
 	// 引用的对象
 
@@ -53,6 +60,26 @@ public class Page extends BaseModelBean{
 		append(member);
 		return member;
 	}
+	
+	public Section sectionList() {
+		Section member = new Section();
+		member.setModelTypeName("section");
+		member.setName("page");
+		member.setMemberName("sectionList");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+	
+	public WelcomeSlide welcomeSlideList() {
+		WelcomeSlide member = new WelcomeSlide();
+		member.setModelTypeName("welcome_slide");
+		member.setName("show_in");
+		member.setMemberName("welcomeSlideList");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
 
 	
 	// 普通属性
@@ -77,6 +104,14 @@ public class Page extends BaseModelBean{
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
 		member.setName("linkToUrl");
+		useMember(member);
+		return member;
+	}
+
+	public StringAttribute code(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string");
+		member.setName("code");
 		useMember(member);
 		return member;
 	}

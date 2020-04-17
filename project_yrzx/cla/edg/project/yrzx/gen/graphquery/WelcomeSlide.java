@@ -12,9 +12,9 @@ public class WelcomeSlide extends BaseModelBean{
 
 	// 引用的对象
 
-	public HomepageShowConfiguration showIn() {
-		HomepageShowConfiguration member = new HomepageShowConfiguration();
-		member.setModelTypeName("homepage_show_configuration");
+	public Page showIn() {
+		Page member = new Page();
+		member.setModelTypeName("page");
 		member.setName("show_in");
 		member.setMemberName("showIn");
 		member.setReferDirection(true);

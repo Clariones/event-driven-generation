@@ -24,11 +24,11 @@ public class LicenseType extends BaseModelBean{
 
 	// 被引用的对象
 	
-	public LicenseCopy licenseCopyList() {
-		LicenseCopy member = new LicenseCopy();
-		member.setModelTypeName("license_copy");
+	public License licenseList() {
+		License member = new License();
+		member.setModelTypeName("license");
 		member.setName("license_type");
-		member.setMemberName("licenseCopyList");
+		member.setMemberName("licenseList");
 		member.setReferDirection(false);
 		append(member);
 		return member;

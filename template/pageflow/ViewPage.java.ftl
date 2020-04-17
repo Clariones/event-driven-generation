@@ -2,12 +2,12 @@
 package ${package}pageview;
 
 import com.terapico.caf.viewpage.SerializeScope;
-import ${base_package}.BaseViewPage;
+import ${package}pageview.CustomBaseViewPage;
 import ${base_package}.${context_name};
 import ${base_package}.${custom_context_name};
 import ${base_package}.${NAMING.toCamelCase(project_name)}ViewScope;
 
-public class ${class_name}Page extends BaseViewPage{
+public class ${class_name}Page extends CustomBaseViewPage{
 	private static final long serialVersionUID = 1L;
 	private static ${NAMING.toCamelCase(project_name)}ViewScope ViewScope = ${NAMING.toCamelCase(project_name)}ViewScope.getInstance();
 	protected static final SerializeScope SCOPE = SerializeScope.INCLUDE()

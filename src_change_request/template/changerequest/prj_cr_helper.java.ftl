@@ -48,6 +48,14 @@ import com.${orgName?lower_case}.${projectName?lower_case}.${helper.CamelName(mo
 </#list>
 
 public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeRequestHelper{
+    protected class AnonymousUser extends BaseEntity{
+        public AnonymousUser(String id) {
+            this.id = id;
+        }
+    }
+    protected BaseEntity anonymousUser() {
+        return new AnonymousUser(userContext.tokenId);
+    }
 	protected ${projectName?cap_first}UserContextImpl userContext;
 	
 	protected static String key(${projectName?cap_first}UserContextImpl ctx) {
@@ -69,6 +77,9 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 	}
 	
 	public ChangeRequestProcessResult processChangeRequest(ChangeRequestPostData postedData, BaseEntity currentUserInfo) throws Exception {
+	    if (currentUserInfo == null) {
+    		currentUserInfo = anonymousUser();
+    	}
 		ChangeRequestProcessResult processResult = new ChangeRequestProcessResult();
 		processResult.setPostedData(postedData);
 		
@@ -95,6 +106,9 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 	// 根据定位信息,组装一个 cr 的response
 	public GenericFormPage assemblerChangeRequstResponse(BaseEntity currentUserInfo, String crType, String sceneCode,
 			Map<String, Integer> recordIndexInfo, String processUrl) throws Exception {
+		if (currentUserInfo == null) {
+            currentUserInfo = anonymousUser();
+        }
 		// 先拿到CR spec
 		CRSpec crSpec = CR(crType);
 		// 再根据scene code, 找到有哪几个group的spec被需要

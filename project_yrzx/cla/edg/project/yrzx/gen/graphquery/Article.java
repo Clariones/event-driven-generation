@@ -64,21 +64,11 @@ public class Article extends BaseModelBean{
 		return member;
 	}
 	
-	public HomepageSlide homepageSlideList() {
-		HomepageSlide member = new HomepageSlide();
-		member.setModelTypeName("homepage_slide");
+	public PageArticle pageArticleList() {
+		PageArticle member = new PageArticle();
+		member.setModelTypeName("page_article");
 		member.setName("article");
-		member.setMemberName("homepageSlideList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public HomepageArticle homepageArticleList() {
-		HomepageArticle member = new HomepageArticle();
-		member.setModelTypeName("homepage_article");
-		member.setName("article");
-		member.setMemberName("homepageArticleList");
+		member.setMemberName("pageArticleList");
 		member.setReferDirection(false);
 		append(member);
 		return member;

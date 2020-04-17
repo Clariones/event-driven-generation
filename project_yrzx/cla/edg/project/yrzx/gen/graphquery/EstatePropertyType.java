@@ -12,11 +12,11 @@ public class EstatePropertyType extends BaseModelBean{
 
 	// 引用的对象
 
-	public Platform platform() {
-		Platform member = new Platform();
-		member.setModelTypeName("platform");
-		member.setName("platform");
-		member.setMemberName("platform");
+	public PlatformConfiguration platformConfiguration() {
+		PlatformConfiguration member = new PlatformConfiguration();
+		member.setModelTypeName("platform_configuration");
+		member.setName("platform_configuration");
+		member.setMemberName("platformConfiguration");
 		member.setReferDirection(true);
 		append(member);
 		return member;
@@ -29,6 +29,16 @@ public class EstatePropertyType extends BaseModelBean{
 		member.setModelTypeName("customer_project_application");
 		member.setName("property_type");
 		member.setMemberName("customerProjectApplicationList");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+	
+	public EventApplyDecoration eventApplyDecorationList() {
+		EventApplyDecoration member = new EventApplyDecoration();
+		member.setModelTypeName("event_apply_decoration");
+		member.setName("property_type");
+		member.setMemberName("eventApplyDecorationList");
 		member.setReferDirection(false);
 		append(member);
 		return member;

@@ -9,6 +9,8 @@ public class MerchantType extends BaseModelBean{
 		return "com.yrdec.yrzx.merchanttype.MerchantType";
 	}
 	// 枚举对象
+	public static EnumAttribute PERSONAL = new EnumAttribute("com.yrdec.yrzx.merchanttype.MerchantType", "PERSONAL");
+	public static EnumAttribute ORGANIZATION = new EnumAttribute("com.yrdec.yrzx.merchanttype.MerchantType", "ORGANIZATION");
 
 	// 引用的对象
 

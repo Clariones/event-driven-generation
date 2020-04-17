@@ -24,11 +24,21 @@ public class AvailableServiceLocation extends BaseModelBean{
 
 	// 被引用的对象
 	
-	public PartnerApplication partnerApplicationList() {
-		PartnerApplication member = new PartnerApplication();
-		member.setModelTypeName("partner_application");
+	public PartnerSettlementApplication partnerSettlementApplicationList() {
+		PartnerSettlementApplication member = new PartnerSettlementApplication();
+		member.setModelTypeName("partner_settlement_application");
 		member.setName("service_location");
-		member.setMemberName("partnerApplicationList");
+		member.setMemberName("partnerSettlementApplicationList");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+	
+	public EventApplyEmplacement eventApplyEmplacementList() {
+		EventApplyEmplacement member = new EventApplyEmplacement();
+		member.setModelTypeName("event_apply_emplacement");
+		member.setName("service_location");
+		member.setMemberName("eventApplyEmplacementList");
 		member.setReferDirection(false);
 		append(member);
 		return member;

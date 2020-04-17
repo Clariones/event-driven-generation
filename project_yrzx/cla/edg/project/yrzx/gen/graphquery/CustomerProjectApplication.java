@@ -22,9 +22,9 @@ public class CustomerProjectApplication extends BaseModelBean{
 		return member;
 	}
 
-	public CustomerApplicationStatus status() {
-		CustomerApplicationStatus member = new CustomerApplicationStatus();
-		member.setModelTypeName("customer_application_status");
+	public ApplicationStatus status() {
+		ApplicationStatus member = new ApplicationStatus();
+		member.setModelTypeName("application_status");
 		member.setName("status");
 		member.setMemberName("status");
 		member.setReferDirection(true);
@@ -103,6 +103,14 @@ public class CustomerProjectApplication extends BaseModelBean{
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_china_mobile_phone");
 		member.setName("contactMobile");
+		useMember(member);
+		return member;
+	}
+
+	public StringAttribute comments(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string_longtext");
+		member.setName("comments");
 		useMember(member);
 		return member;
 	}

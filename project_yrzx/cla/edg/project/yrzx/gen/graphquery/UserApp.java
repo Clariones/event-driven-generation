@@ -43,16 +43,6 @@ public class UserApp extends BaseModelBean{
 		append(member);
 		return member;
 	}
-	
-	public ObjectAccess objectAccessList() {
-		ObjectAccess member = new ObjectAccess();
-		member.setModelTypeName("object_access");
-		member.setName("app");
-		member.setMemberName("objectAccessList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
 
 	
 	// 普通属性

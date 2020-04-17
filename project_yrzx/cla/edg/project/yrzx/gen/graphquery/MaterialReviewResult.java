@@ -1,0 +1,78 @@
+package cla.edg.project.yrzx.gen.graphquery;
+
+import java.util.Map;
+
+import cla.edg.modelbean.*;
+
+public class MaterialReviewResult extends BaseModelBean{
+	public String getFullClassName() {
+		return "com.yrdec.yrzx.materialreviewresult.MaterialReviewResult";
+	}
+	// 枚举对象
+	public static EnumAttribute PENDING = new EnumAttribute("com.yrdec.yrzx.materialreviewresult.MaterialReviewResult", "PENDING");
+	public static EnumAttribute PASS = new EnumAttribute("com.yrdec.yrzx.materialreviewresult.MaterialReviewResult", "PASS");
+	public static EnumAttribute NOPASS = new EnumAttribute("com.yrdec.yrzx.materialreviewresult.MaterialReviewResult", "NOPASS");
+
+	// 引用的对象
+
+	public Platform platform() {
+		Platform member = new Platform();
+		member.setModelTypeName("platform");
+		member.setName("platform");
+		member.setMemberName("platform");
+		member.setReferDirection(true);
+		append(member);
+		return member;
+	}
+
+	// 被引用的对象
+	
+	public ProjectMaterial projectMaterialList() {
+		ProjectMaterial member = new ProjectMaterial();
+		member.setModelTypeName("project_material");
+		member.setName("material_review_result");
+		member.setMemberName("projectMaterialList");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	
+	// 普通属性
+
+	public StringAttribute id(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string");
+		member.setName("id");
+		useMember(member);
+		return member;
+	}
+
+	public StringAttribute name(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string");
+		member.setName("name");
+		useMember(member);
+		return member;
+	}
+
+	public StringAttribute code(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string");
+		member.setName("code");
+		useMember(member);
+		return member;
+	}
+
+	public NumberAttribute version(){
+		NumberAttribute member = new NumberAttribute();
+		member.setModelTypeName("int");
+		member.setName("version");
+		useMember(member);
+		return member;
+	}
+
+
+	
+}
+

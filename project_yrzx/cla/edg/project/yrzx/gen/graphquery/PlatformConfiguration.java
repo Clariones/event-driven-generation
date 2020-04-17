@@ -24,36 +24,6 @@ public class PlatformConfiguration extends BaseModelBean{
 
 	// 被引用的对象
 	
-	public AccountTitleMapping accountTitleMappingList() {
-		AccountTitleMapping member = new AccountTitleMapping();
-		member.setModelTypeName("account_title_mapping");
-		member.setName("platform_configuration");
-		member.setMemberName("accountTitleMappingList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public FinancialBusinessConfiguration financialBusinessConfigurationList() {
-		FinancialBusinessConfiguration member = new FinancialBusinessConfiguration();
-		member.setModelTypeName("financial_business_configuration");
-		member.setName("platform_configuration");
-		member.setMemberName("financialBusinessConfigurationList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public PropertyOwnerMission propertyOwnerMissionList() {
-		PropertyOwnerMission member = new PropertyOwnerMission();
-		member.setModelTypeName("property_owner_mission");
-		member.setName("platform_configuration");
-		member.setMemberName("propertyOwnerMissionList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
 	public ArticleCategory articleCategoryList() {
 		ArticleCategory member = new ArticleCategory();
 		member.setModelTypeName("article_category");
@@ -64,71 +34,41 @@ public class PlatformConfiguration extends BaseModelBean{
 		return member;
 	}
 	
-	public HomepageShowConfiguration homepageShowConfigurationList() {
-		HomepageShowConfiguration member = new HomepageShowConfiguration();
-		member.setModelTypeName("homepage_show_configuration");
+	public ApplicationStatus applicationStatusList() {
+		ApplicationStatus member = new ApplicationStatus();
+		member.setModelTypeName("application_status");
 		member.setName("platform_configuration");
-		member.setMemberName("homepageShowConfigurationList");
+		member.setMemberName("applicationStatusList");
 		member.setReferDirection(false);
 		append(member);
 		return member;
 	}
 	
-	public DocumentTag documentTagList() {
-		DocumentTag member = new DocumentTag();
-		member.setModelTypeName("document_tag");
+	public RecommendationType recommendationTypeList() {
+		RecommendationType member = new RecommendationType();
+		member.setModelTypeName("recommendation_type");
 		member.setName("platform_configuration");
-		member.setMemberName("documentTagList");
+		member.setMemberName("recommendationTypeList");
 		member.setReferDirection(false);
 		append(member);
 		return member;
 	}
 	
-	public ProjectJob projectJobList() {
-		ProjectJob member = new ProjectJob();
-		member.setModelTypeName("project_job");
+	public EstatePropertyType estatePropertyTypeList() {
+		EstatePropertyType member = new EstatePropertyType();
+		member.setModelTypeName("estate_property_type");
 		member.setName("platform_configuration");
-		member.setMemberName("projectJobList");
+		member.setMemberName("estatePropertyTypeList");
 		member.setReferDirection(false);
 		append(member);
 		return member;
 	}
 	
-	public ReportCheckItem reportCheckItemList() {
-		ReportCheckItem member = new ReportCheckItem();
-		member.setModelTypeName("report_check_item");
+	public PartnerType partnerTypeList() {
+		PartnerType member = new PartnerType();
+		member.setModelTypeName("partner_type");
 		member.setName("platform_configuration");
-		member.setMemberName("reportCheckItemList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public ReportSegmentType reportSegmentTypeList() {
-		ReportSegmentType member = new ReportSegmentType();
-		member.setModelTypeName("report_segment_type");
-		member.setName("platform_configuration");
-		member.setMemberName("reportSegmentTypeList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public ProjectDailyReportTemplate projectDailyReportTemplateList() {
-		ProjectDailyReportTemplate member = new ProjectDailyReportTemplate();
-		member.setModelTypeName("project_daily_report_template");
-		member.setName("platform_configuration");
-		member.setMemberName("projectDailyReportTemplateList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public AvailableServiceType availableServiceTypeList() {
-		AvailableServiceType member = new AvailableServiceType();
-		member.setModelTypeName("available_service_type");
-		member.setName("platform_configuration");
-		member.setMemberName("availableServiceTypeList");
+		member.setMemberName("partnerTypeList");
 		member.setReferDirection(false);
 		append(member);
 		return member;
@@ -139,16 +79,6 @@ public class PlatformConfiguration extends BaseModelBean{
 		member.setModelTypeName("available_service_location");
 		member.setName("platform_configuration");
 		member.setMemberName("availableServiceLocationList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public AvailableIndustry availableIndustryList() {
-		AvailableIndustry member = new AvailableIndustry();
-		member.setModelTypeName("available_industry");
-		member.setName("platform_configuration");
-		member.setMemberName("availableIndustryList");
 		member.setReferDirection(false);
 		append(member);
 		return member;

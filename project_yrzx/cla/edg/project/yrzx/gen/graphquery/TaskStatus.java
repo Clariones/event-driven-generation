@@ -9,6 +9,10 @@ public class TaskStatus extends BaseModelBean{
 		return "com.yrdec.yrzx.taskstatus.TaskStatus";
 	}
 	// 枚举对象
+	public static EnumAttribute PENDING = new EnumAttribute("com.yrdec.yrzx.taskstatus.TaskStatus", "PENDING");
+	public static EnumAttribute PROCESSING = new EnumAttribute("com.yrdec.yrzx.taskstatus.TaskStatus", "PROCESSING");
+	public static EnumAttribute READY_FOR_ACCEPTANCE = new EnumAttribute("com.yrdec.yrzx.taskstatus.TaskStatus", "READY_FOR_ACCEPTANCE");
+	public static EnumAttribute COMPLETED = new EnumAttribute("com.yrdec.yrzx.taskstatus.TaskStatus", "COMPLETED");
 
 	// 引用的对象
 

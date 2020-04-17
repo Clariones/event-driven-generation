@@ -9,6 +9,9 @@ public class MerchantStatus extends BaseModelBean{
 		return "com.yrdec.yrzx.merchantstatus.MerchantStatus";
 	}
 	// 枚举对象
+	public static EnumAttribute OPENNING = new EnumAttribute("com.yrdec.yrzx.merchantstatus.MerchantStatus", "OPENNING");
+	public static EnumAttribute STOPPED = new EnumAttribute("com.yrdec.yrzx.merchantstatus.MerchantStatus", "STOPPED");
+	public static EnumAttribute CANCELLED = new EnumAttribute("com.yrdec.yrzx.merchantstatus.MerchantStatus", "CANCELLED");
 
 	// 引用的对象
 
@@ -57,14 +60,6 @@ public class MerchantStatus extends BaseModelBean{
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
 		member.setName("code");
-		useMember(member);
-		return member;
-	}
-
-	public StringAttribute description(){
-		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
-		member.setName("description");
 		useMember(member);
 		return member;
 	}

@@ -33,16 +33,6 @@ public class ProjectType extends BaseModelBean{
 		append(member);
 		return member;
 	}
-	
-	public WorkPackage workPackageList() {
-		WorkPackage member = new WorkPackage();
-		member.setModelTypeName("work_package");
-		member.setName("work_package_type");
-		member.setMemberName("workPackageList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
 
 	
 	// 普通属性
@@ -59,6 +49,14 @@ public class ProjectType extends BaseModelBean{
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
 		member.setName("name");
+		useMember(member);
+		return member;
+	}
+
+	public StringAttribute category(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string");
+		member.setName("category");
 		useMember(member);
 		return member;
 	}

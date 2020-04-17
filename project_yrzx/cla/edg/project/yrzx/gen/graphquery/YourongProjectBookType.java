@@ -9,6 +9,12 @@ public class YourongProjectBookType extends BaseModelBean{
 		return "com.yrdec.yrzx.yourongprojectbooktype.YourongProjectBookType";
 	}
 	// 枚举对象
+	public static EnumAttribute PROPOSAL = new EnumAttribute("com.yrdec.yrzx.yourongprojectbooktype.YourongProjectBookType", "PROPOSAL");
+	public static EnumAttribute DESIGN = new EnumAttribute("com.yrdec.yrzx.yourongprojectbooktype.YourongProjectBookType", "DESIGN");
+	public static EnumAttribute PRICING = new EnumAttribute("com.yrdec.yrzx.yourongprojectbooktype.YourongProjectBookType", "PRICING");
+	public static EnumAttribute CONSTRUCTION = new EnumAttribute("com.yrdec.yrzx.yourongprojectbooktype.YourongProjectBookType", "CONSTRUCTION");
+	public static EnumAttribute DESIGN_RFP = new EnumAttribute("com.yrdec.yrzx.yourongprojectbooktype.YourongProjectBookType", "DESIGN_RFP");
+	public static EnumAttribute CONSTRUCTION_RFP = new EnumAttribute("com.yrdec.yrzx.yourongprojectbooktype.YourongProjectBookType", "CONSTRUCTION_RFP");
 
 	// 引用的对象
 

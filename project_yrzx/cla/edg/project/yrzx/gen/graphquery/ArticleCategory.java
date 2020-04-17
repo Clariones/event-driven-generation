@@ -24,21 +24,21 @@ public class ArticleCategory extends BaseModelBean{
 
 	// 被引用的对象
 	
-	public Article articleList() {
-		Article member = new Article();
-		member.setModelTypeName("article");
-		member.setName("category");
-		member.setMemberName("articleList");
+	public Section sectionList() {
+		Section member = new Section();
+		member.setModelTypeName("section");
+		member.setName("article_category");
+		member.setMemberName("sectionList");
 		member.setReferDirection(false);
 		append(member);
 		return member;
 	}
 	
-	public HomepageArticleGroup homepageArticleGroupList() {
-		HomepageArticleGroup member = new HomepageArticleGroup();
-		member.setModelTypeName("homepage_article_group");
-		member.setName("article_category");
-		member.setMemberName("homepageArticleGroupList");
+	public Article articleList() {
+		Article member = new Article();
+		member.setModelTypeName("article");
+		member.setName("category");
+		member.setMemberName("articleList");
 		member.setReferDirection(false);
 		append(member);
 		return member;

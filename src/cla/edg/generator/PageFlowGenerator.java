@@ -114,6 +114,18 @@ public class PageFlowGenerator extends BasicGenerator {
 		
 		// 和一套 ViewPage文件
 		packageName += "pageview";
+		{
+			outputFileName = "CustomBaseViewPage.java";
+			outputFile = new File(getBaseOutputFolderFile(), Utils.packageNameToPath(packageName)+"/"+outputFileName);
+			if (!force && outputFile.exists()) {
+				System.out.println(outputFile.getCanonicalPath()+" exists, skip.");
+			} else {
+				System.out.println("Write to " + outputFile.getCanonicalPath());
+				tmplFileName = "pageflow/CustomBaseViewPage.java.ftl";
+				template = getTemplate(tmplFileName);
+				doGeneration(outputFile, data, template);
+			}
+		}
 		for(Page page: script.getPages().values()) {
 			if ("general_cr_page".equals(page.getName())) {
 				continue;

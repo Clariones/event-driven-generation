@@ -11,7 +11,14 @@ public class VComponent${helper.NameAsThis(component.name)} extends BaseVC{
 		super();
 		this.setComponentType(VComponent.${helper.NAME_AS_THIS(component.name)});
 	}
-	
+	public VComponent${helper.NameAsThis(component.name)} id(String id) {
+        this.setId(id);
+        return this;
+    }
+    public VComponent${helper.NameAsThis(component.name)} linkToUrl(String linkToUrl) {
+        this.setLinkToUrl(linkToUrl);
+        return this;
+    }
 <#list component.attributes as attribute>
 	public ${helper.JavaType(attribute.type)} get${helper.NameAsThis(attribute.name)}() {
     	return this.${helper.nameAsThis(attribute.name)};

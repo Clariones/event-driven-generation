@@ -20,7 +20,7 @@ public class HomePageFlowPiece extends PieceOfScript {
 
     private void request4MerketingBlock(PageFlowScript script, String[] codes) {
         for(String code: codes) {
-            String url = "view " + Utils.toWords(code);
+            String url = "view " + Utils.toWords(code)+" page";
             script.request(url).no_login().has_footprint()
                     .comments("查看code="+code+"的页面")
                     .got_page(Utils.toWords(code)+" home").title(code)

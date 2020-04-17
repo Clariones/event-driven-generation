@@ -9,6 +9,15 @@ public class ProjectPhase extends BaseModelBean{
 		return "com.yrdec.yrzx.projectphase.ProjectPhase";
 	}
 	// 枚举对象
+	public static EnumAttribute INTENTION = new EnumAttribute("com.yrdec.yrzx.projectphase.ProjectPhase", "INTENTION");
+	public static EnumAttribute EPC_HOSTING = new EnumAttribute("com.yrdec.yrzx.projectphase.ProjectPhase", "EPC_HOSTING");
+	public static EnumAttribute DESIGN_PREPARATION = new EnumAttribute("com.yrdec.yrzx.projectphase.ProjectPhase", "DESIGN_PREPARATION");
+	public static EnumAttribute DESGIN_RFP = new EnumAttribute("com.yrdec.yrzx.projectphase.ProjectPhase", "DESGIN_RFP");
+	public static EnumAttribute DESIGN_EXECUTING = new EnumAttribute("com.yrdec.yrzx.projectphase.ProjectPhase", "DESIGN_EXECUTING");
+	public static EnumAttribute CONSTRUCTING_PREPARATION = new EnumAttribute("com.yrdec.yrzx.projectphase.ProjectPhase", "CONSTRUCTING_PREPARATION");
+	public static EnumAttribute CONSTRUCTION_RFP = new EnumAttribute("com.yrdec.yrzx.projectphase.ProjectPhase", "CONSTRUCTION_RFP");
+	public static EnumAttribute CONSTRUCTING = new EnumAttribute("com.yrdec.yrzx.projectphase.ProjectPhase", "CONSTRUCTING");
+	public static EnumAttribute MAINTENANCE = new EnumAttribute("com.yrdec.yrzx.projectphase.ProjectPhase", "MAINTENANCE");
 
 	// 引用的对象
 
@@ -29,16 +38,6 @@ public class ProjectPhase extends BaseModelBean{
 		member.setModelTypeName("project");
 		member.setName("project_phase");
 		member.setMemberName("projectList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public ProjectProgress projectProgressList() {
-		ProjectProgress member = new ProjectProgress();
-		member.setModelTypeName("project_progress");
-		member.setName("project_phase");
-		member.setMemberName("projectProgressList");
 		member.setReferDirection(false);
 		append(member);
 		return member;

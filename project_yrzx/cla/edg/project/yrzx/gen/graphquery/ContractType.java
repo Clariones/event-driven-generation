@@ -24,41 +24,21 @@ public class ContractType extends BaseModelBean{
 
 	// 被引用的对象
 	
-	public ContractLedger contractLedgerList() {
-		ContractLedger member = new ContractLedger();
-		member.setModelTypeName("contract_ledger");
-		member.setName("contract_type");
-		member.setMemberName("contractLedgerList");
+	public ContractTemplate contractTemplateList() {
+		ContractTemplate member = new ContractTemplate();
+		member.setModelTypeName("contract_template");
+		member.setName("template_type");
+		member.setMemberName("contractTemplateList");
 		member.setReferDirection(false);
 		append(member);
 		return member;
 	}
 	
-	public ContractRisk contractRiskList() {
-		ContractRisk member = new ContractRisk();
-		member.setModelTypeName("contract_risk");
+	public StandardContract standardContractList() {
+		StandardContract member = new StandardContract();
+		member.setModelTypeName("standard_contract");
 		member.setName("contract_type");
-		member.setMemberName("contractRiskList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public ContractReport contractReportList() {
-		ContractReport member = new ContractReport();
-		member.setModelTypeName("contract_report");
-		member.setName("contract_type");
-		member.setMemberName("contractReportList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public ContractStatisticReport contractStatisticReportList() {
-		ContractStatisticReport member = new ContractStatisticReport();
-		member.setModelTypeName("contract_statistic_report");
-		member.setName("contract_type");
-		member.setMemberName("contractStatisticReportList");
+		member.setMemberName("standardContractList");
 		member.setReferDirection(false);
 		append(member);
 		return member;
@@ -87,6 +67,14 @@ public class ContractType extends BaseModelBean{
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
 		member.setName("code");
+		useMember(member);
+		return member;
+	}
+
+	public StringAttribute category(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string");
+		member.setName("category");
 		useMember(member);
 		return member;
 	}
