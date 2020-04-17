@@ -22,6 +22,7 @@ public class MainPageFlow extends BasePageFlowDescriptionScript {
 		return SCRIPT.import_from(new HighLevelMePageFlowPiece())
 				.import_from(new ProjectHallPageFlowPiece())
 				.import_from(new ClientCRPageFlowPiece())
+				.import_from(new HomePageFlowPiece())
 				.import_from(new MiscPageFlowPiece())
 				;
 	}

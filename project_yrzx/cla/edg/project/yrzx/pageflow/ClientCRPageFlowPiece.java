@@ -16,7 +16,7 @@ public class ClientCRPageFlowPiece extends PieceOfScript {
 					.got_page("recommendation list")
 
 				.request_with_changerequest("apply emplacement")
-					.comments("申请入驻").need_login()
+					.comments("申请入驻").no_login()
 					.got_page("emplacement list")
 
 
