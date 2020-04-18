@@ -15,6 +15,15 @@ public class HomePageFlowPiece extends PieceOfScript {
         request4MerketingBlock(script, new String[]{"REAL_ESTATE", "BIZ_CHAIN", "ASSOCIATION", "ORGNIZATION"});
         // footer 的两个页面
         request4MerketingBlock(script, new String[]{"GOLDEN_SERVICE", "DESIGNER"});
+        // article 的几个
+        script.request("view article category").with_string("category id").with_last_record_id()
+                .comments("按分类查看文章列表").no_login().has_footprint()
+                .got_page("article category").title("文章列表").list_of("article")
+            .request("view article").with_string("article id")
+                .comments("查看文章").no_login().has_footprint()
+                .got_page("article detail").title("文章内容")
+            ;
+
         return script;
     }
 
