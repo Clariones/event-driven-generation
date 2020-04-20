@@ -73,6 +73,10 @@ public class ComponentInfo {
 		currentAttr.setType("boolean");
 		return this;
 	}
-	
-	
+	public ComponentInfo datetimeType() {
+		currentAttr.setType("datetime");
+		return this;
+	}
+
+
 }

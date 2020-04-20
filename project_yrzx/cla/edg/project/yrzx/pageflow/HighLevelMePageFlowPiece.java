@@ -20,8 +20,13 @@ public class HighLevelMePageFlowPiece extends PieceOfScript {
 				// 项目
 				.request("view my project list").with_string("filter").with_last_record_id()
 					.comments("查看我的项目列表").need_login()
-					.got_page("project list").title("我的项目").list_of("project")
-						.may_request("view project hall")
+					.when("only one").comments("只有一个项目")
+						.got_page("project hall").title("项目大厅")
+					.when_others().comments("正常情况")
+						.got_page("project list").title("我的项目").list_of("project")
+							.may_request("view project hall")
+
+
 				// 账户
 				.request("view my account list").with_string("filter")
 					.comments("查看我的账户").need_login()
@@ -36,7 +41,7 @@ public class HighLevelMePageFlowPiece extends PieceOfScript {
 				.request("view my application list").with_string("filter").with_last_record_id()
 					.comments("查看我的申请").need_login()
 					.got_page("application list").title("我的装修").list_of("application")
-
+						
 				// 推荐
 				.request("view my recommendation list").with_string("filter").with_last_record_id()
 					.comments("查看我的推荐").need_login()
@@ -56,7 +61,7 @@ public class HighLevelMePageFlowPiece extends PieceOfScript {
 			.request("view order detail").with_string("order id")
 				.comments("查看订单详情")
 				.got_page("order detail").title("订单详情").as_class("")
-
+				
 			;
 	}
 }

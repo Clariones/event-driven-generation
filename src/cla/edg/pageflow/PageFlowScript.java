@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import cla.edg.project.yrzx.gen.graphquery.ProjectPhase;
 import com.terapico.generator.Utils;
 
 import cla.edg.graphquery.terms.BaseGraphQueryDescriptor;
@@ -567,6 +568,26 @@ public class PageFlowScript extends BasePageFlowScript {
 		}
 		return this;
 	}
+	public PageFlowScript count_by(BaseAttribute countByAttr) {
+		if (currentWork instanceof QueryInfo && queryActionInfo != null) {
+			// 目前只支持这种场景
+			queryActionInfo.setCounting(true);
+			queryActionInfo.setSumAttribute(countByAttr);
+		} else {
+			throw new RuntimeException("当前任务是" + currentWork.getClass().getSimpleName() + ", 不能指定count by条件");
+		}
+		return this;
+	}
+	public PageFlowScript count_by(BaseModelBean countByAttr) {
+		if (currentWork instanceof QueryInfo && queryActionInfo != null) {
+			// 目前只支持这种场景
+			queryActionInfo.setCounting(true);
+			queryActionInfo.setSumAttribute(countByAttr.id());
+		} else {
+			throw new RuntimeException("当前任务是" + currentWork.getClass().getSimpleName() + ", 不能指定count_by条件");
+		}
+		return this;
+	}
 	public PageFlowScript sum(NumberAttribute attribute) {
 		if (currentWork instanceof QueryInfo && queryActionInfo != null) {
 			// 目前只支持这种场景
@@ -640,7 +661,7 @@ public class PageFlowScript extends BasePageFlowScript {
 		currentRequest.setChangeRequestName(crName);
 		return this;
 	}
-	
-	
-	
+
+
+
 }

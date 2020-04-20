@@ -33,9 +33,19 @@ public class QueryActionInfo {
 	protected boolean pagination;
 	protected boolean counting = false;
 	protected boolean sum = false;
-	protected NumberAttribute sumAttribute;
+	public BaseAttribute sumAttribute;
 	protected boolean notGeneratePaginationParams = false;
 	protected String limitExp = null;
+
+	public String getCountByAttrName() {
+		return countByAttrName;
+	}
+
+	public void setCountByAttrName(String countByAttrName) {
+		this.countByAttrName = countByAttrName;
+	}
+
+	protected String countByAttrName = null;
 	
 	
 	public boolean isSum() {
@@ -44,10 +54,10 @@ public class QueryActionInfo {
 	public void setSum(boolean sum) {
 		this.sum = sum;
 	}
-	public NumberAttribute getSumAttribute() {
+	public BaseAttribute getSumAttribute() {
 		return sumAttribute;
 	}
-	public void setSumAttribute(NumberAttribute sumAttribute) {
+	public void setSumAttribute(BaseAttribute sumAttribute) {
 		this.sumAttribute = sumAttribute;
 	}
 	public String getLimitExp() {
@@ -208,6 +218,9 @@ public class QueryActionInfo {
 		params = new ArrayList<>();
 		String whereClause = RouteUtil.getWhereClause(params, this.getSearchWhere());
 		sb.append(whereClause);
+		if (this.isCounting() && this.getSumAttribute() != null) {
+			sb.append("\r\n    GROUP by ").append(beanRoute.getTargetModelAlias()).append(".").append(this.getSumAttribute().getContainerBean().getName());
+		}
 		return makeOutputString(sb.toString());
 	}
 	private String makeOutputString(String str) {
@@ -505,6 +518,13 @@ public class QueryActionInfo {
 	}
 	
 	public String getSumDataType() {
+		if (this.isCounting()){
+			if (this.sumAttribute != null){
+				return "Map<String, Integer>";
+			}else{
+				return "Integer";
+			}
+		}
 		switch (this.sumAttribute.getModelTypeName()) {
 		case "long":
 			return "Long";

@@ -1,5 +1,7 @@
 package com.terapico.caf.viewcomponent;
 
+import java.util.Date;
+
 public class VComponent${helper.NameAsThis(component.name)} extends BaseVC{
 <#list component.attributes as attribute>
 	protected ${helper.JavaType(attribute.type)} ${helper.nameAsThis(attribute.name)};

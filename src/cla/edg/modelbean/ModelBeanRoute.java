@@ -42,14 +42,14 @@ public class ModelBeanRoute extends RouteMap<BaseModelBean, BeanRelation>{
 	}
 
 	
-	public String getCountOrSumSelectClause(String targetModelType, NumberAttribute sumAttribute) {
+	public String getCountOrSumSelectClause(String targetModelType, BaseAttribute sumAttribute) {
 		return getSelectClause(targetModelType, sumAttribute, true);
 	}
 	
 	public String getSelectClause(String targetModelType) {
 		return getSelectClause(targetModelType, null, false);
 	}
-	protected String getSelectClause(String targetModelType, NumberAttribute sumAttribute, boolean isCountOrSum) {
+	protected String getSelectClause(String targetModelType, BaseAttribute sumAttribute, boolean isCountOrSum) {
 		Node<BaseModelBean, BeanRelation> node = this.getNodeByKey(targetModelType);
 		if (node == null) {
 			exception("目标模型"+targetModelType+"没有在bean route中");
@@ -64,14 +64,19 @@ public class ModelBeanRoute extends RouteMap<BaseModelBean, BeanRelation>{
 		startPoint = this.getStartNode().getMeetingPointList().get(0);
 		StringBuilder sb = new StringBuilder();
 		if (isCountOrSum) {
-			if (sumAttribute != null) {
-				MeetingPoint<BaseModelBean, BeanRelation> mp = sumAttribute.getContainerBean().getLastMeetingPoint();
-				if (mp == null) {
-					mp = sumAttribute.getContainerBean().getBeanRoute().getCurrentMeetingPoint();
-				}
-				sb.append("SELECT SUM( ").append(mp.getAlias()).append(".").append(sumAttribute.getName()).append(") from ");
-			}else {
+			if (sumAttribute == null) {
 				sb.append("SELECT COUNT(DISTINCT ").append(targetAlias).append(".id) from ");
+			}else {
+				if (sumAttribute.getName().equalsIgnoreCase("id")) {
+					sb.append("SELECT ").append(targetAlias).append(".").append(sumAttribute.getContainerBean().getName())
+							.append(", COUNT(DISTINCT ").append(targetAlias).append(".").append(sumAttribute.getContainerBean().getName()).append(") from ");
+				} else {
+					MeetingPoint<BaseModelBean, BeanRelation> mp = sumAttribute.getContainerBean().getLastMeetingPoint();
+					if (mp == null) {
+						mp = sumAttribute.getContainerBean().getBeanRoute().getCurrentMeetingPoint();
+					}
+					sb.append("SELECT SUM( ").append(mp.getAlias()).append(".").append(sumAttribute.getName()).append(") from ");
+				}
 			}
 		}else {
 			sb.append("SELECT DISTINCT ").append(targetAlias).append(".* from ");

@@ -17,6 +17,8 @@ public class VCGenerationHelper extends BaseHelper {
 			return "String";
 		case "boolean":
 			return "Boolean";
+		case "datetime":
+			return "Date";
 		default:
 			throw new RuntimeException("还没处理"+name+"转成java类型");
 		}

@@ -1,6 +1,6 @@
 <#if query.queryActionInfo?has_content && (query.queryActionInfo.counting || query.queryActionInfo.sum)>
 	${''}<@compress single_line=true>
-    public <#if query.queryActionInfo.counting>int<#else>${query.queryActionInfo.sumDataType}</#if>
+    public ${query.queryActionInfo.sumDataType}
 		${getSingleMethodPrefix(query.queryActionInfo)}${typeClass}Which${NAMING.toCamelCase(query.name)}(
 		${custom_context_name} ctx
 		<@T.getRequestProcessingUrlMethodParameters query/>
@@ -8,9 +8,13 @@
 	</@>${''}
 		List<Object> params = new ArrayList<>();
 		String sql = prepareSqlAndParamsFor${getSingleMethodPrefix(query.queryActionInfo)?cap_first}${typeClass}Which${NAMING.toCamelCase(query.name)}(ctx, params<@T.getRequestProcessingMethodParameterNames query/>);
-		<#if query.queryActionInfo.counting>
+		<#if query.queryActionInfo.counting && ! (query.queryActionInfo.sunDataType?has_content)>
+		    <#if query.queryActionInfo.sumAttribute?has_content>
+		Map<String, Integer> cnt = toCountMap(ctx.dao().queryAsMapList(sql, params.toArray()));
+        return cnt;
+		    <#else>
 		Integer cnt = ctx.dao().queryForObject(sql, params.toArray(), Integer.class);
-		return cnt == null ? 0 : cnt;
+		    </#if>
 		<#else>
 		${query.queryActionInfo.sumDataType} cnt = ctx.dao().queryForObject(sql, params.toArray(), ${query.queryActionInfo.sumDataType}.class);
 		return cnt;

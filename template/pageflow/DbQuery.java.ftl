@@ -40,6 +40,24 @@ public abstract class ${class_name}DBQueryHelper{
 	public int getPageSize(${custom_context_name} ctx, String queryName) {
 		return 20;
 	}
+	protected Map<String, Integer> toCountMap(List<Map<String, Object>> mapList) {
+        Map<String, Integer> countMap = new HashMap<>();
+        for(Map<String, Object> mapData : mapList) {
+            String key = null;
+            int num = 0;
+            for(Object val: mapData.values()) {
+                if (val instanceof String) {
+                    key = (String) val;
+                    continue;
+                }
+                if (val instanceof Number) {
+                    num = ((Number) val).intValue();
+                }
+            }
+            countMap.put(key, num);
+        }
+        return countMap;
+    }
 	@SuppressWarnings("serial")
 	public <T> List<T> asList(T object) {
 		return new ArrayList<T>() {{add(object);}};
