@@ -50,6 +50,7 @@ public class EventApplyEmplacement extends BaseModelBean{
 	public StringAttribute id(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("id");
 		member.setName("id");
 		useMember(member);
 		return member;
@@ -58,7 +59,8 @@ public class EventApplyEmplacement extends BaseModelBean{
 	public StringAttribute merchantName(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("merchantName");
+		// member.setName("merchantName");
+		member.setName("merchant_name");
 		useMember(member);
 		return member;
 	}
@@ -66,7 +68,8 @@ public class EventApplyEmplacement extends BaseModelBean{
 	public StringAttribute merchantLocation(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("merchantLocation");
+		// member.setName("merchantLocation");
+		member.setName("merchant_location");
 		useMember(member);
 		return member;
 	}
@@ -74,7 +77,8 @@ public class EventApplyEmplacement extends BaseModelBean{
 	public StringAttribute merchantWebsite(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_url");
-		member.setName("merchantWebsite");
+		// member.setName("merchantWebsite");
+		member.setName("merchant_website");
 		useMember(member);
 		return member;
 	}
@@ -82,6 +86,7 @@ public class EventApplyEmplacement extends BaseModelBean{
 	public StringAttribute comments(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("comments");
 		member.setName("comments");
 		useMember(member);
 		return member;
@@ -90,7 +95,8 @@ public class EventApplyEmplacement extends BaseModelBean{
 	public StringAttribute contactName(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("contactName");
+		// member.setName("contactName");
+		member.setName("contact_name");
 		useMember(member);
 		return member;
 	}
@@ -98,7 +104,8 @@ public class EventApplyEmplacement extends BaseModelBean{
 	public StringAttribute contactMobile(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_china_mobile_phone");
-		member.setName("contactMobile");
+		// member.setName("contactMobile");
+		member.setName("contact_mobile");
 		useMember(member);
 		return member;
 	}
@@ -106,7 +113,8 @@ public class EventApplyEmplacement extends BaseModelBean{
 	public StringAttribute fieldGroup(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("fieldGroup");
+		// member.setName("fieldGroup");
+		member.setName("field_group");
 		useMember(member);
 		return member;
 	}
@@ -114,7 +122,8 @@ public class EventApplyEmplacement extends BaseModelBean{
 	public StringAttribute eventInitiatorType(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("eventInitiatorType");
+		// member.setName("eventInitiatorType");
+		member.setName("event_initiator_type");
 		useMember(member);
 		return member;
 	}
@@ -122,7 +131,8 @@ public class EventApplyEmplacement extends BaseModelBean{
 	public StringAttribute eventInitiatorId(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("eventInitiatorId");
+		// member.setName("eventInitiatorId");
+		member.setName("event_initiator_id");
 		useMember(member);
 		return member;
 	}
@@ -130,6 +140,7 @@ public class EventApplyEmplacement extends BaseModelBean{
 	public NumberAttribute version(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
+		// member.setName("version");
 		member.setName("version");
 		useMember(member);
 		return member;

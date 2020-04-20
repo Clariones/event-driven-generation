@@ -30,6 +30,7 @@ public class EventTaskReportBasicInfo extends BaseModelBean{
 	public StringAttribute id(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("id");
 		member.setName("id");
 		useMember(member);
 		return member;
@@ -38,7 +39,8 @@ public class EventTaskReportBasicInfo extends BaseModelBean{
 	public StringAttribute taskId(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("taskId");
+		// member.setName("taskId");
+		member.setName("task_id");
 		useMember(member);
 		return member;
 	}
@@ -46,7 +48,8 @@ public class EventTaskReportBasicInfo extends BaseModelBean{
 	public StringAttribute taskName(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("taskName");
+		// member.setName("taskName");
+		member.setName("task_name");
 		useMember(member);
 		return member;
 	}
@@ -54,7 +57,8 @@ public class EventTaskReportBasicInfo extends BaseModelBean{
 	public StringAttribute subcontractorName(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("subcontractorName");
+		// member.setName("subcontractorName");
+		member.setName("subcontractor_name");
 		useMember(member);
 		return member;
 	}
@@ -62,7 +66,8 @@ public class EventTaskReportBasicInfo extends BaseModelBean{
 	public StringAttribute responsibleName(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("responsibleName");
+		// member.setName("responsibleName");
+		member.setName("responsible_name");
 		useMember(member);
 		return member;
 	}
@@ -70,6 +75,7 @@ public class EventTaskReportBasicInfo extends BaseModelBean{
 	public NumberAttribute temperature(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("double");
+		// member.setName("temperature");
 		member.setName("temperature");
 		useMember(member);
 		return member;
@@ -78,7 +84,8 @@ public class EventTaskReportBasicInfo extends BaseModelBean{
 	public StringAttribute weatherConditions(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("weatherConditions");
+		// member.setName("weatherConditions");
+		member.setName("weather_conditions");
 		useMember(member);
 		return member;
 	}
@@ -86,7 +93,8 @@ public class EventTaskReportBasicInfo extends BaseModelBean{
 	public StringAttribute fieldGroup(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("fieldGroup");
+		// member.setName("fieldGroup");
+		member.setName("field_group");
 		useMember(member);
 		return member;
 	}
@@ -94,7 +102,8 @@ public class EventTaskReportBasicInfo extends BaseModelBean{
 	public StringAttribute eventInitiatorType(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("eventInitiatorType");
+		// member.setName("eventInitiatorType");
+		member.setName("event_initiator_type");
 		useMember(member);
 		return member;
 	}
@@ -102,7 +111,8 @@ public class EventTaskReportBasicInfo extends BaseModelBean{
 	public StringAttribute eventInitiatorId(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("eventInitiatorId");
+		// member.setName("eventInitiatorId");
+		member.setName("event_initiator_id");
 		useMember(member);
 		return member;
 	}
@@ -110,6 +120,7 @@ public class EventTaskReportBasicInfo extends BaseModelBean{
 	public NumberAttribute version(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
+		// member.setName("version");
 		member.setName("version");
 		useMember(member);
 		return member;

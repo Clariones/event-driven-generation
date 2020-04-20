@@ -30,6 +30,7 @@ public class UiAction extends BaseModelBean{
 	public StringAttribute id(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("id");
 		member.setName("id");
 		useMember(member);
 		return member;
@@ -38,6 +39,7 @@ public class UiAction extends BaseModelBean{
 	public StringAttribute code(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("code");
 		member.setName("code");
 		useMember(member);
 		return member;
@@ -46,6 +48,7 @@ public class UiAction extends BaseModelBean{
 	public StringAttribute icon(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("icon");
 		member.setName("icon");
 		useMember(member);
 		return member;
@@ -54,6 +57,7 @@ public class UiAction extends BaseModelBean{
 	public StringAttribute title(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("title");
 		member.setName("title");
 		useMember(member);
 		return member;
@@ -62,6 +66,7 @@ public class UiAction extends BaseModelBean{
 	public StringAttribute brief(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("brief");
 		member.setName("brief");
 		useMember(member);
 		return member;
@@ -70,7 +75,8 @@ public class UiAction extends BaseModelBean{
 	public StringAttribute imageUrl(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_image");
-		member.setName("imageUrl");
+		// member.setName("imageUrl");
+		member.setName("image_url");
 		useMember(member);
 		return member;
 	}
@@ -78,7 +84,8 @@ public class UiAction extends BaseModelBean{
 	public StringAttribute linkToUrl(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("linkToUrl");
+		// member.setName("linkToUrl");
+		member.setName("link_to_url");
 		useMember(member);
 		return member;
 	}
@@ -86,7 +93,8 @@ public class UiAction extends BaseModelBean{
 	public StringAttribute extraData(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_longtext");
-		member.setName("extraData");
+		// member.setName("extraData");
+		member.setName("extra_data");
 		useMember(member);
 		return member;
 	}
@@ -94,6 +102,7 @@ public class UiAction extends BaseModelBean{
 	public NumberAttribute version(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
+		// member.setName("version");
 		member.setName("version");
 		useMember(member);
 		return member;

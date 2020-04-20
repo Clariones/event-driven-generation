@@ -53,6 +53,12 @@ public class MODEL{
 		return rst;
 	}
 
+	public static IconConfiguration iconConfiguration() {
+		IconConfiguration rst = new IconConfiguration();
+		rst.setModelTypeName("icon_configuration");
+		return rst;
+	}
+
 	public static ContractTemplate contractTemplate() {
 		ContractTemplate rst = new ContractTemplate();
 		rst.setModelTypeName("contract_template");
@@ -248,6 +254,12 @@ public class MODEL{
 	public static Project project() {
 		Project rst = new Project();
 		rst.setModelTypeName("project");
+		return rst;
+	}
+
+	public static ProjectImage projectImage() {
+		ProjectImage rst = new ProjectImage();
+		rst.setModelTypeName("project_image");
 		return rst;
 	}
 

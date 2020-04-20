@@ -35,14 +35,13 @@ public class ApplicationAndRecommendationQueryPiece extends PieceOfScript {
 			.do_it_as()
 				.where(
 						MODEL.recommendation().applicantMerchant().eq("${merchant id}"),
-						MODEL.recommendation().type().eq("${filter}")
+						MODEL.recommendation().status().eq("${filter}")
 				)
 				.wants(
 						MODEL.recommendation().applicantEmployee(),
 						MODEL.recommendation().status(),
 						MODEL.recommendation().applicantMerchant(),
 						MODEL.recommendation().referrerEmployee(),
-						MODEL.recommendation().recommendationStatus(),
 						MODEL.recommendation().recommendationType()
 						)
 

@@ -20,6 +20,7 @@ public class TreeNode extends BaseModelBean{
 	public StringAttribute id(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("id");
 		member.setName("id");
 		useMember(member);
 		return member;
@@ -28,7 +29,8 @@ public class TreeNode extends BaseModelBean{
 	public StringAttribute nodeId(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("nodeId");
+		// member.setName("nodeId");
+		member.setName("node_id");
 		useMember(member);
 		return member;
 	}
@@ -36,7 +38,8 @@ public class TreeNode extends BaseModelBean{
 	public StringAttribute nodeType(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("nodeType");
+		// member.setName("nodeType");
+		member.setName("node_type");
 		useMember(member);
 		return member;
 	}
@@ -44,7 +47,8 @@ public class TreeNode extends BaseModelBean{
 	public NumberAttribute leftValue(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
-		member.setName("leftValue");
+		// member.setName("leftValue");
+		member.setName("left_value");
 		useMember(member);
 		return member;
 	}
@@ -52,7 +56,8 @@ public class TreeNode extends BaseModelBean{
 	public NumberAttribute rightValue(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
-		member.setName("rightValue");
+		// member.setName("rightValue");
+		member.setName("right_value");
 		useMember(member);
 		return member;
 	}
@@ -60,6 +65,7 @@ public class TreeNode extends BaseModelBean{
 	public NumberAttribute version(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
+		// member.setName("version");
 		member.setName("version");
 		useMember(member);
 		return member;

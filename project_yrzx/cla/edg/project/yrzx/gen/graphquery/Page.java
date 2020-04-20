@@ -87,6 +87,7 @@ public class Page extends BaseModelBean{
 	public StringAttribute id(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("id");
 		member.setName("id");
 		useMember(member);
 		return member;
@@ -95,7 +96,8 @@ public class Page extends BaseModelBean{
 	public StringAttribute pageTitle(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("pageTitle");
+		// member.setName("pageTitle");
+		member.setName("page_title");
 		useMember(member);
 		return member;
 	}
@@ -103,7 +105,8 @@ public class Page extends BaseModelBean{
 	public StringAttribute linkToUrl(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("linkToUrl");
+		// member.setName("linkToUrl");
+		member.setName("link_to_url");
 		useMember(member);
 		return member;
 	}
@@ -111,6 +114,7 @@ public class Page extends BaseModelBean{
 	public StringAttribute code(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("code");
 		member.setName("code");
 		useMember(member);
 		return member;
@@ -119,6 +123,7 @@ public class Page extends BaseModelBean{
 	public NumberAttribute version(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
+		// member.setName("version");
 		member.setName("version");
 		useMember(member);
 		return member;

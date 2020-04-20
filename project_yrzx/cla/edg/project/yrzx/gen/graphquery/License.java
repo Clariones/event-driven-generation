@@ -90,6 +90,7 @@ public class License extends BaseModelBean{
 	public StringAttribute id(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("id");
 		member.setName("id");
 		useMember(member);
 		return member;
@@ -98,6 +99,7 @@ public class License extends BaseModelBean{
 	public StringAttribute name(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("name");
 		member.setName("name");
 		useMember(member);
 		return member;
@@ -106,7 +108,8 @@ public class License extends BaseModelBean{
 	public StringAttribute licenseCopy(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("images");
-		member.setName("licenseCopy");
+		// member.setName("licenseCopy");
+		member.setName("license_copy");
 		useMember(member);
 		return member;
 	}
@@ -114,7 +117,8 @@ public class License extends BaseModelBean{
 	public StringAttribute licenseNumber(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("licenseNumber");
+		// member.setName("licenseNumber");
+		member.setName("license_number");
 		useMember(member);
 		return member;
 	}
@@ -122,7 +126,8 @@ public class License extends BaseModelBean{
 	public StringAttribute expiredDate(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("expiredDate");
+		// member.setName("expiredDate");
+		member.setName("expired_date");
 		useMember(member);
 		return member;
 	}
@@ -130,7 +135,8 @@ public class License extends BaseModelBean{
 	public DateTimeAttribute createTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_create");
-		member.setName("createTime");
+		// member.setName("createTime");
+		member.setName("create_time");
 		useMember(member);
 		return member;
 	}
@@ -138,7 +144,8 @@ public class License extends BaseModelBean{
 	public DateTimeAttribute lastUpdateTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_update");
-		member.setName("lastUpdateTime");
+		// member.setName("lastUpdateTime");
+		member.setName("last_update_time");
 		useMember(member);
 		return member;
 	}
@@ -146,7 +153,8 @@ public class License extends BaseModelBean{
 	public DateTimeAttribute authenticateDateTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time");
-		member.setName("authenticateDateTime");
+		// member.setName("authenticateDateTime");
+		member.setName("authenticate_date_time");
 		useMember(member);
 		return member;
 	}
@@ -154,7 +162,8 @@ public class License extends BaseModelBean{
 	public StringAttribute authenticateComment(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("authenticateComment");
+		// member.setName("authenticateComment");
+		member.setName("authenticate_comment");
 		useMember(member);
 		return member;
 	}
@@ -162,6 +171,7 @@ public class License extends BaseModelBean{
 	public NumberAttribute version(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
+		// member.setName("version");
 		member.setName("version");
 		useMember(member);
 		return member;

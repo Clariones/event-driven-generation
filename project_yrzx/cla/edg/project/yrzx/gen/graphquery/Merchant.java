@@ -300,6 +300,7 @@ public class Merchant extends BaseModelBean{
 	public StringAttribute id(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("id");
 		member.setName("id");
 		useMember(member);
 		return member;
@@ -308,6 +309,7 @@ public class Merchant extends BaseModelBean{
 	public StringAttribute name(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("name");
 		member.setName("name");
 		useMember(member);
 		return member;
@@ -316,7 +318,8 @@ public class Merchant extends BaseModelBean{
 	public StringAttribute contactMobile(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_china_mobile_phone");
-		member.setName("contactMobile");
+		// member.setName("contactMobile");
+		member.setName("contact_mobile");
 		useMember(member);
 		return member;
 	}
@@ -324,7 +327,8 @@ public class Merchant extends BaseModelBean{
 	public StringAttribute contactAddress(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("contactAddress");
+		// member.setName("contactAddress");
+		member.setName("contact_address");
 		useMember(member);
 		return member;
 	}
@@ -332,6 +336,7 @@ public class Merchant extends BaseModelBean{
 	public StringAttribute avatar(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_image");
+		// member.setName("avatar");
 		member.setName("avatar");
 		useMember(member);
 		return member;
@@ -340,7 +345,8 @@ public class Merchant extends BaseModelBean{
 	public DateTimeAttribute createTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_create");
-		member.setName("createTime");
+		// member.setName("createTime");
+		member.setName("create_time");
 		useMember(member);
 		return member;
 	}
@@ -348,7 +354,8 @@ public class Merchant extends BaseModelBean{
 	public DateTimeAttribute lastUpdateTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_update");
-		member.setName("lastUpdateTime");
+		// member.setName("lastUpdateTime");
+		member.setName("last_update_time");
 		useMember(member);
 		return member;
 	}
@@ -356,6 +363,7 @@ public class Merchant extends BaseModelBean{
 	public NumberAttribute version(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
+		// member.setName("version");
 		member.setName("version");
 		useMember(member);
 		return member;

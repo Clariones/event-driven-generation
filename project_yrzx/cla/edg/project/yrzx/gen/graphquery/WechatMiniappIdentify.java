@@ -30,6 +30,7 @@ public class WechatMiniappIdentify extends BaseModelBean{
 	public StringAttribute id(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("id");
 		member.setName("id");
 		useMember(member);
 		return member;
@@ -38,7 +39,8 @@ public class WechatMiniappIdentify extends BaseModelBean{
 	public StringAttribute openId(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("openId");
+		// member.setName("openId");
+		member.setName("open_id");
 		useMember(member);
 		return member;
 	}
@@ -46,7 +48,8 @@ public class WechatMiniappIdentify extends BaseModelBean{
 	public StringAttribute appId(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("appId");
+		// member.setName("appId");
+		member.setName("app_id");
 		useMember(member);
 		return member;
 	}
@@ -54,7 +57,8 @@ public class WechatMiniappIdentify extends BaseModelBean{
 	public DateTimeAttribute createTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_create");
-		member.setName("createTime");
+		// member.setName("createTime");
+		member.setName("create_time");
 		useMember(member);
 		return member;
 	}
@@ -62,7 +66,8 @@ public class WechatMiniappIdentify extends BaseModelBean{
 	public DateTimeAttribute lastLoginTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time");
-		member.setName("lastLoginTime");
+		// member.setName("lastLoginTime");
+		member.setName("last_login_time");
 		useMember(member);
 		return member;
 	}
@@ -70,6 +75,7 @@ public class WechatMiniappIdentify extends BaseModelBean{
 	public NumberAttribute version(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
+		// member.setName("version");
 		member.setName("version");
 		useMember(member);
 		return member;

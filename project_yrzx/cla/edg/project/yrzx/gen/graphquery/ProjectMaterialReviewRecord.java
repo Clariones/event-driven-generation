@@ -50,6 +50,7 @@ public class ProjectMaterialReviewRecord extends BaseModelBean{
 	public StringAttribute id(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("id");
 		member.setName("id");
 		useMember(member);
 		return member;
@@ -58,6 +59,7 @@ public class ProjectMaterialReviewRecord extends BaseModelBean{
 	public StringAttribute title(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("title");
 		member.setName("title");
 		useMember(member);
 		return member;
@@ -66,7 +68,8 @@ public class ProjectMaterialReviewRecord extends BaseModelBean{
 	public StringAttribute reviewComment(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("reviewComment");
+		// member.setName("reviewComment");
+		member.setName("review_comment");
 		useMember(member);
 		return member;
 	}
@@ -74,7 +77,8 @@ public class ProjectMaterialReviewRecord extends BaseModelBean{
 	public DateTimeAttribute lastReadTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_update");
-		member.setName("lastReadTime");
+		// member.setName("lastReadTime");
+		member.setName("last_read_time");
 		useMember(member);
 		return member;
 	}
@@ -82,7 +86,8 @@ public class ProjectMaterialReviewRecord extends BaseModelBean{
 	public DateTimeAttribute createTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_create");
-		member.setName("createTime");
+		// member.setName("createTime");
+		member.setName("create_time");
 		useMember(member);
 		return member;
 	}
@@ -90,7 +95,8 @@ public class ProjectMaterialReviewRecord extends BaseModelBean{
 	public DateTimeAttribute lastUpdateTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_update");
-		member.setName("lastUpdateTime");
+		// member.setName("lastUpdateTime");
+		member.setName("last_update_time");
 		useMember(member);
 		return member;
 	}
@@ -98,6 +104,7 @@ public class ProjectMaterialReviewRecord extends BaseModelBean{
 	public NumberAttribute version(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
+		// member.setName("version");
 		member.setName("version");
 		useMember(member);
 		return member;

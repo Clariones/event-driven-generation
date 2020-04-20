@@ -4,35 +4,25 @@ import java.util.Map;
 
 import cla.edg.modelbean.*;
 
-public class WorkPackageType extends BaseModelBean{
+public class ProjectImage extends BaseModelBean{
 	public String getFullClassName() {
-		return "com.yrdec.yrzx.workpackagetype.WorkPackageType";
+		return "com.yrdec.yrzx.projectimage.ProjectImage";
 	}
 	// 枚举对象
 
 	// 引用的对象
 
-	public Platform platform() {
-		Platform member = new Platform();
-		member.setModelTypeName("platform");
-		member.setName("platform");
-		member.setMemberName("platform");
+	public Project project() {
+		Project member = new Project();
+		member.setModelTypeName("project");
+		member.setName("project");
+		member.setMemberName("project");
 		member.setReferDirection(true);
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
-	
-	public WorkPackage workPackageList() {
-		WorkPackage member = new WorkPackage();
-		member.setModelTypeName("work_package");
-		member.setName("work_package_type");
-		member.setMemberName("workPackageList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
 
 	
 	// 普通属性
@@ -46,29 +36,29 @@ public class WorkPackageType extends BaseModelBean{
 		return member;
 	}
 
-	public StringAttribute name(){
+	public StringAttribute title(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		// member.setName("name");
-		member.setName("name");
+		// member.setName("title");
+		member.setName("title");
 		useMember(member);
 		return member;
 	}
 
-	public StringAttribute category(){
+	public StringAttribute image(){
 		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
-		// member.setName("category");
-		member.setName("category");
+		member.setModelTypeName("string_image");
+		// member.setName("image");
+		member.setName("image");
 		useMember(member);
 		return member;
 	}
 
-	public StringAttribute code(){
-		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
-		// member.setName("code");
-		member.setName("code");
+	public DateTimeAttribute createTime(){
+		DateTimeAttribute member = new DateTimeAttribute();
+		member.setModelTypeName("date_time_create");
+		// member.setName("createTime");
+		member.setName("create_time");
 		useMember(member);
 		return member;
 	}

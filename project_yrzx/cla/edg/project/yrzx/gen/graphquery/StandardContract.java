@@ -130,6 +130,7 @@ public class StandardContract extends BaseModelBean{
 	public StringAttribute id(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("id");
 		member.setName("id");
 		useMember(member);
 		return member;
@@ -138,6 +139,7 @@ public class StandardContract extends BaseModelBean{
 	public StringAttribute name(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("name");
 		member.setName("name");
 		useMember(member);
 		return member;
@@ -146,7 +148,8 @@ public class StandardContract extends BaseModelBean{
 	public StringAttribute contractNumber(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("contractNumber");
+		// member.setName("contractNumber");
+		member.setName("contract_number");
 		useMember(member);
 		return member;
 	}
@@ -154,6 +157,7 @@ public class StandardContract extends BaseModelBean{
 	public StringAttribute contract(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_document");
+		// member.setName("contract");
 		member.setName("contract");
 		useMember(member);
 		return member;
@@ -162,7 +166,8 @@ public class StandardContract extends BaseModelBean{
 	public DateTimeAttribute startDate(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date");
-		member.setName("startDate");
+		// member.setName("startDate");
+		member.setName("start_date");
 		useMember(member);
 		return member;
 	}
@@ -170,7 +175,8 @@ public class StandardContract extends BaseModelBean{
 	public DateTimeAttribute endDate(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date");
-		member.setName("endDate");
+		// member.setName("endDate");
+		member.setName("end_date");
 		useMember(member);
 		return member;
 	}
@@ -178,7 +184,8 @@ public class StandardContract extends BaseModelBean{
 	public StringAttribute contractSummary(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_longtext");
-		member.setName("contractSummary");
+		// member.setName("contractSummary");
+		member.setName("contract_summary");
 		useMember(member);
 		return member;
 	}
@@ -186,7 +193,8 @@ public class StandardContract extends BaseModelBean{
 	public DateTimeAttribute createTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_create");
-		member.setName("createTime");
+		// member.setName("createTime");
+		member.setName("create_time");
 		useMember(member);
 		return member;
 	}
@@ -194,7 +202,8 @@ public class StandardContract extends BaseModelBean{
 	public DateTimeAttribute lastUpdateTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_update");
-		member.setName("lastUpdateTime");
+		// member.setName("lastUpdateTime");
+		member.setName("last_update_time");
 		useMember(member);
 		return member;
 	}
@@ -202,6 +211,7 @@ public class StandardContract extends BaseModelBean{
 	public NumberAttribute amount(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
+		// member.setName("amount");
 		member.setName("amount");
 		useMember(member);
 		return member;
@@ -210,6 +220,7 @@ public class StandardContract extends BaseModelBean{
 	public NumberAttribute version(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
+		// member.setName("version");
 		member.setName("version");
 		useMember(member);
 		return member;

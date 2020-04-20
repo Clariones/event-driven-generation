@@ -30,6 +30,7 @@ public class ListAccess extends BaseModelBean{
 	public StringAttribute id(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("id");
 		member.setName("id");
 		useMember(member);
 		return member;
@@ -38,6 +39,7 @@ public class ListAccess extends BaseModelBean{
 	public StringAttribute name(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("name");
 		member.setName("name");
 		useMember(member);
 		return member;
@@ -46,7 +48,8 @@ public class ListAccess extends BaseModelBean{
 	public StringAttribute internalName(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		member.setName("internalName");
+		// member.setName("internalName");
+		member.setName("internal_name");
 		useMember(member);
 		return member;
 	}
@@ -54,7 +57,8 @@ public class ListAccess extends BaseModelBean{
 	public BooleanAttribute readPermission(){
 		BooleanAttribute member = new BooleanAttribute();
 		member.setModelTypeName("bool");
-		member.setName("readPermission");
+		// member.setName("readPermission");
+		member.setName("read_permission");
 		useMember(member);
 		return member;
 	}
@@ -62,7 +66,8 @@ public class ListAccess extends BaseModelBean{
 	public BooleanAttribute createPermission(){
 		BooleanAttribute member = new BooleanAttribute();
 		member.setModelTypeName("bool");
-		member.setName("createPermission");
+		// member.setName("createPermission");
+		member.setName("create_permission");
 		useMember(member);
 		return member;
 	}
@@ -70,7 +75,8 @@ public class ListAccess extends BaseModelBean{
 	public BooleanAttribute deletePermission(){
 		BooleanAttribute member = new BooleanAttribute();
 		member.setModelTypeName("bool");
-		member.setName("deletePermission");
+		// member.setName("deletePermission");
+		member.setName("delete_permission");
 		useMember(member);
 		return member;
 	}
@@ -78,7 +84,8 @@ public class ListAccess extends BaseModelBean{
 	public BooleanAttribute updatePermission(){
 		BooleanAttribute member = new BooleanAttribute();
 		member.setModelTypeName("bool");
-		member.setName("updatePermission");
+		// member.setName("updatePermission");
+		member.setName("update_permission");
 		useMember(member);
 		return member;
 	}
@@ -86,7 +93,8 @@ public class ListAccess extends BaseModelBean{
 	public BooleanAttribute executionPermission(){
 		BooleanAttribute member = new BooleanAttribute();
 		member.setModelTypeName("bool");
-		member.setName("executionPermission");
+		// member.setName("executionPermission");
+		member.setName("execution_permission");
 		useMember(member);
 		return member;
 	}
@@ -94,6 +102,7 @@ public class ListAccess extends BaseModelBean{
 	public NumberAttribute version(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
+		// member.setName("version");
 		member.setName("version");
 		useMember(member);
 		return member;

@@ -210,6 +210,7 @@ public class EmployeeNomination extends BaseModelBean{
 	public StringAttribute id(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("id");
 		member.setName("id");
 		useMember(member);
 		return member;
@@ -218,6 +219,7 @@ public class EmployeeNomination extends BaseModelBean{
 	public StringAttribute title(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("title");
 		member.setName("title");
 		useMember(member);
 		return member;
@@ -226,7 +228,8 @@ public class EmployeeNomination extends BaseModelBean{
 	public DateTimeAttribute startDate(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date");
-		member.setName("startDate");
+		// member.setName("startDate");
+		member.setName("start_date");
 		useMember(member);
 		return member;
 	}
@@ -234,7 +237,8 @@ public class EmployeeNomination extends BaseModelBean{
 	public DateTimeAttribute endDate(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date");
-		member.setName("endDate");
+		// member.setName("endDate");
+		member.setName("end_date");
 		useMember(member);
 		return member;
 	}
@@ -242,6 +246,7 @@ public class EmployeeNomination extends BaseModelBean{
 	public NumberAttribute version(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
+		// member.setName("version");
 		member.setName("version");
 		useMember(member);
 		return member;

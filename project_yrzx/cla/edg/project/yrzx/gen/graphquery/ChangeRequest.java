@@ -160,6 +160,7 @@ public class ChangeRequest extends BaseModelBean{
 	public StringAttribute id(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("id");
 		member.setName("id");
 		useMember(member);
 		return member;
@@ -168,6 +169,7 @@ public class ChangeRequest extends BaseModelBean{
 	public StringAttribute name(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("name");
 		member.setName("name");
 		useMember(member);
 		return member;
@@ -176,7 +178,8 @@ public class ChangeRequest extends BaseModelBean{
 	public DateTimeAttribute createTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_create");
-		member.setName("createTime");
+		// member.setName("createTime");
+		member.setName("create_time");
 		useMember(member);
 		return member;
 	}
@@ -184,7 +187,8 @@ public class ChangeRequest extends BaseModelBean{
 	public StringAttribute remoteIp(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_client_ip");
-		member.setName("remoteIp");
+		// member.setName("remoteIp");
+		member.setName("remote_ip");
 		useMember(member);
 		return member;
 	}
@@ -192,6 +196,7 @@ public class ChangeRequest extends BaseModelBean{
 	public BooleanAttribute commited(){
 		BooleanAttribute member = new BooleanAttribute();
 		member.setModelTypeName("bool");
+		// member.setName("commited");
 		member.setName("commited");
 		useMember(member);
 		return member;
@@ -200,6 +205,7 @@ public class ChangeRequest extends BaseModelBean{
 	public NumberAttribute version(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
+		// member.setName("version");
 		member.setName("version");
 		useMember(member);
 		return member;
