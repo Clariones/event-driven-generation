@@ -2,6 +2,7 @@ package cla.edg.project.yrzx.pageflow;
 
 import cla.edg.pageflow.BasePageFlowDescriptionScript;
 import cla.edg.pageflow.PageFlowScript;
+import cla.edg.project.yrzx.query.ApplicationAndRecommendationQueryPiece;
 import cla.edg.project.yrzx.query.HomepageQueryPiece;
 
 public class MainPageFlow extends BasePageFlowDescriptionScript {
@@ -28,6 +29,7 @@ public class MainPageFlow extends BasePageFlowDescriptionScript {
 
 				// 查询
 				.import_from(new HomepageQueryPiece())
+				.import_from(new ApplicationAndRecommendationQueryPiece())
 				;
 	}
 

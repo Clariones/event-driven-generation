@@ -36,7 +36,7 @@ public class HighLevelMePageFlowPiece extends PieceOfScript {
 				.request("view my application list").with_string("filter").with_last_record_id()
 					.comments("查看我的申请").need_login()
 					.got_page("application list").title("我的装修").list_of("application")
-						
+
 				// 推荐
 				.request("view my recommendation list").with_string("filter").with_last_record_id()
 					.comments("查看我的推荐").need_login()
@@ -45,7 +45,7 @@ public class HighLevelMePageFlowPiece extends PieceOfScript {
 				// 入驻申请
 				.request("view my emplacement list").with_string("filter").with_last_record_id()
 					.comments("查看我的入驻申请").need_login()
-					.got_page("emplacement list").title("我的申请").list_of("recommendation")
+					.got_page("emplacement list").title("我的申请").list_of("emplacement_application")
 						
 			// 账户详情		
 			.request("view account detail").with_string("account id").with_last_record_id()
@@ -56,7 +56,7 @@ public class HighLevelMePageFlowPiece extends PieceOfScript {
 			.request("view order detail").with_string("order id")
 				.comments("查看订单详情")
 				.got_page("order detail").title("订单详情").as_class("")
-				
+
 			;
 	}
 }
