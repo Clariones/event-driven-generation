@@ -57,16 +57,6 @@ public class MerchantBaseType extends BaseModelBean{
 		append(member);
 		return member;
 	}
-	
-	public EmplacementApplication emplacementApplicationList() {
-		EmplacementApplication member = new EmplacementApplication();
-		member.setModelTypeName("emplacement_application");
-		member.setName("type");
-		member.setMemberName("emplacementApplicationList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
 
 	
 	// 普通属性

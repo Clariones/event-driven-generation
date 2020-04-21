@@ -224,31 +224,11 @@ public class Merchant extends BaseModelBean{
 		return member;
 	}
 	
-	public Recommendation recommendationListAsApplicantMerchant() {
+	public Recommendation recommendationList() {
 		Recommendation member = new Recommendation();
 		member.setModelTypeName("recommendation");
 		member.setName("applicant_merchant");
-		member.setMemberName("recommendationListAsApplicantMerchant");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public Recommendation recommendationListAsReferrerEmployee() {
-		Recommendation member = new Recommendation();
-		member.setModelTypeName("recommendation");
-		member.setName("referrer_employee");
-		member.setMemberName("recommendationListAsReferrerEmployee");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public Recommendation recommendationListAsReferrerEmployer() {
-		Recommendation member = new Recommendation();
-		member.setModelTypeName("recommendation");
-		member.setName("referrer_employer");
-		member.setMemberName("recommendationListAsReferrerEmployer");
+		member.setMemberName("recommendationList");
 		member.setReferDirection(false);
 		append(member);
 		return member;

@@ -154,31 +154,11 @@ public class EmployeeNomination extends BaseModelBean{
 		return member;
 	}
 	
-	public Recommendation recommendationListAsApplicantEmployee() {
+	public Recommendation recommendationList() {
 		Recommendation member = new Recommendation();
 		member.setModelTypeName("recommendation");
 		member.setName("applicant_employee");
-		member.setMemberName("recommendationListAsApplicantEmployee");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public Recommendation recommendationListAsReferrer() {
-		Recommendation member = new Recommendation();
-		member.setModelTypeName("recommendation");
-		member.setName("referrer");
-		member.setMemberName("recommendationListAsReferrer");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public EmplacementApplication emplacementApplicationList() {
-		EmplacementApplication member = new EmplacementApplication();
-		member.setModelTypeName("emplacement_application");
-		member.setName("applicant_employee");
-		member.setMemberName("emplacementApplicationList");
+		member.setMemberName("recommendationList");
 		member.setReferDirection(false);
 		append(member);
 		return member;

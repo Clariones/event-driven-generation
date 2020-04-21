@@ -40,9 +40,8 @@ public class ApplicationAndRecommendationQueryPiece extends PieceOfScript {
 				.wants(
 						MODEL.recommendation().applicantEmployee(),
 						MODEL.recommendation().status(),
-						MODEL.recommendation().applicantMerchant(),
-						MODEL.recommendation().referrerEmployee(),
-						MODEL.recommendation().recommendationType()
+						MODEL.recommendation().applicantMerchant()
+
 						)
 
 		/**
@@ -55,8 +54,10 @@ public class ApplicationAndRecommendationQueryPiece extends PieceOfScript {
 						MODEL.emplacementApplication().status().eq("${filter}")
 				)
 				.wants(
-						MODEL.emplacementApplication().applicantEmployee(),
+						MODEL.emplacementApplication().partnerType(),
+						MODEL.emplacementApplication().serviceLocation(),
 						MODEL.emplacementApplication().applicantMerchant()
+
 				)
 
 		;return script;
