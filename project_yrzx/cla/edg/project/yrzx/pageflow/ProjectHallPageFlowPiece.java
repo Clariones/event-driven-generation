@@ -33,10 +33,11 @@ public class ProjectHallPageFlowPiece extends PieceOfScript {
 		viewProjectInfo(script, "项目信息", "PROJECT_INFO");
 		viewProjectElementIn3Levels(script, "项目报告", "PROJECT_REPORT");
 		viewProjectProgress(script, "项目进度", "PROJECT_PROGRESS");
-		viewProjectElementIn3Levels(script, "项目报告", "PROJECT_ACCEPTANCE");
+		viewProjectElementIn3Levels(script, "项目验收", "PROJECT_ACCEPTANCE");
 		viewProjectLaborSupervision(script, "劳务监督", "LABOR_SUPERVISION");
 		viewProjectElementIn3Levels(script, "售后服务", "AFTER_SALES_SERVICE");
 		viewProjectElementIn3Levels(script, "先行赔付", "COMPENSATION_IN_ADVANCE");
+		viewProjectElementIn3Levels(script, "违约处罚", "PENALTIES");
 		viewProjectOrgnization(script, "项目组织", "PROJECT_ORGNIZATION");
 		viewProject5Book(script, "五书详情", "YOURONG_5BOOK");
 		viewProjectContracts(script, "合同任务", "PROJECT_CONTRACT");

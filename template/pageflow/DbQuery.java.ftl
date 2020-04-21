@@ -93,14 +93,14 @@ public abstract class ${class_name}DBQueryHelper{
 	</#if>
 		
 		SmartList<${typeClass}> list = executeQuery${typeClass}ListOf${NAMING.toCamelCase(query.name)}(ctx, sql, params);
+		if (list == null || list.isEmpty()){
+        	return list;
+       	}
 	<#if query.pagination>
 		list.setRowsPerPage(pageSize);
 	<#else>
 		list.setRowsPerPage(Integer.MAX_VALUE);
 	</#if>
-		if (list == null || list.isEmpty()){
-			return list;
-		}
 	<#if query.pagination>
 		if (list.size() > pageSize){
 			ctx.setLastRecordId(list.last().getId());
