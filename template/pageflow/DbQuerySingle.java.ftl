@@ -10,8 +10,7 @@
 		String sql = prepareSqlAndParamsFor${getSingleMethodPrefix(query.queryActionInfo)?cap_first}${typeClass}Which${NAMING.toCamelCase(query.name)}(ctx, params<@T.getRequestProcessingMethodParameterNames query/>);
 		<#if query.queryActionInfo.counting && ! (query.queryActionInfo.sunDataType?has_content)>
 		    <#if query.queryActionInfo.sumAttribute?has_content>
-		Map<String, Integer> cnt = toCountMap(ctx.dao().queryAsMapList(sql, params.toArray()));
-        return cnt;
+		return ctx.dao().countBySql(sql, params.toArray());
 		    <#else>
 		Integer cnt = ctx.dao().queryForObject(sql, params.toArray(), Integer.class);
 		    </#if>
