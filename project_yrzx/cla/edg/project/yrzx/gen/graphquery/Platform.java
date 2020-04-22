@@ -404,16 +404,6 @@ public class Platform extends BaseModelBean{
 		return member;
 	}
 	
-	public RecommendationType recommendationTypeList() {
-		RecommendationType member = new RecommendationType();
-		member.setModelTypeName("recommendation_type");
-		member.setName("platform");
-		member.setMemberName("recommendationTypeList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
 	public Recommendation recommendationList() {
 		Recommendation member = new Recommendation();
 		member.setModelTypeName("recommendation");
@@ -479,16 +469,6 @@ public class Platform extends BaseModelBean{
 		member.setModelTypeName("business_type");
 		member.setName("platform");
 		member.setMemberName("businessTypeList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public RecommendationStatus recommendationStatusList() {
-		RecommendationStatus member = new RecommendationStatus();
-		member.setModelTypeName("recommendation_status");
-		member.setName("platform");
-		member.setMemberName("recommendationStatusList");
 		member.setReferDirection(false);
 		append(member);
 		return member;

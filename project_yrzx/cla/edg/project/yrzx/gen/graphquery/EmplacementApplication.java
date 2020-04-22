@@ -12,11 +12,21 @@ public class EmplacementApplication extends BaseModelBean{
 
 	// 引用的对象
 
-	public MerchantBaseType type() {
-		MerchantBaseType member = new MerchantBaseType();
-		member.setModelTypeName("merchant_base_type");
-		member.setName("type");
-		member.setMemberName("type");
+	public PartnerType partnerType() {
+		PartnerType member = new PartnerType();
+		member.setModelTypeName("partner_type");
+		member.setName("partner_type");
+		member.setMemberName("partnerType");
+		member.setReferDirection(true);
+		append(member);
+		return member;
+	}
+
+	public AvailableServiceLocation serviceLocation() {
+		AvailableServiceLocation member = new AvailableServiceLocation();
+		member.setModelTypeName("available_service_location");
+		member.setName("service_location");
+		member.setMemberName("serviceLocation");
 		member.setReferDirection(true);
 		append(member);
 		return member;
@@ -37,16 +47,6 @@ public class EmplacementApplication extends BaseModelBean{
 		member.setModelTypeName("merchant");
 		member.setName("applicant_merchant");
 		member.setMemberName("applicantMerchant");
-		member.setReferDirection(true);
-		append(member);
-		return member;
-	}
-
-	public EmployeeNomination applicantEmployee() {
-		EmployeeNomination member = new EmployeeNomination();
-		member.setModelTypeName("employee_nomination");
-		member.setName("applicant_employee");
-		member.setMemberName("applicantEmployee");
 		member.setReferDirection(true);
 		append(member);
 		return member;
@@ -85,6 +85,42 @@ public class EmplacementApplication extends BaseModelBean{
 		return member;
 	}
 
+	public StringAttribute companyName(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string");
+		// member.setName("companyName");
+		member.setName("company_name");
+		useMember(member);
+		return member;
+	}
+
+	public StringAttribute companyLocation(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string");
+		// member.setName("companyLocation");
+		member.setName("company_location");
+		useMember(member);
+		return member;
+	}
+
+	public StringAttribute companyWebsite(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string_url");
+		// member.setName("companyWebsite");
+		member.setName("company_website");
+		useMember(member);
+		return member;
+	}
+
+	public StringAttribute comments(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string");
+		// member.setName("comments");
+		member.setName("comments");
+		useMember(member);
+		return member;
+	}
+
 	public StringAttribute contactName(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
@@ -99,15 +135,6 @@ public class EmplacementApplication extends BaseModelBean{
 		member.setModelTypeName("string_china_mobile_phone");
 		// member.setName("contactMobile");
 		member.setName("contact_mobile");
-		useMember(member);
-		return member;
-	}
-
-	public StringAttribute comments(){
-		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string_longtext");
-		// member.setName("comments");
-		member.setName("comments");
 		useMember(member);
 		return member;
 	}

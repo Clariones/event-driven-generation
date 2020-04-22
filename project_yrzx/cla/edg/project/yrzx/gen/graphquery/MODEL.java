@@ -515,12 +515,6 @@ public class MODEL{
 		return rst;
 	}
 
-	public static RecommendationStatus recommendationStatus() {
-		RecommendationStatus rst = new RecommendationStatus();
-		rst.setModelTypeName("recommendation_status");
-		return rst;
-	}
-
 	public static UserDomain userDomain() {
 		UserDomain rst = new UserDomain();
 		rst.setModelTypeName("user_domain");

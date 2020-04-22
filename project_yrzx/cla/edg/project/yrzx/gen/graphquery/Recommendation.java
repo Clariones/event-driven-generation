@@ -62,56 +62,6 @@ public class Recommendation extends BaseModelBean{
 		return member;
 	}
 
-	public EmployeeNomination referrer() {
-		EmployeeNomination member = new EmployeeNomination();
-		member.setModelTypeName("employee_nomination");
-		member.setName("referrer");
-		member.setMemberName("referrer");
-		member.setReferDirection(true);
-		append(member);
-		return member;
-	}
-
-	public Merchant referrerEmployee() {
-		Merchant member = new Merchant();
-		member.setModelTypeName("merchant");
-		member.setName("referrer_employee");
-		member.setMemberName("referrerEmployee");
-		member.setReferDirection(true);
-		append(member);
-		return member;
-	}
-
-	public Merchant referrerEmployer() {
-		Merchant member = new Merchant();
-		member.setModelTypeName("merchant");
-		member.setName("referrer_employer");
-		member.setMemberName("referrerEmployer");
-		member.setReferDirection(true);
-		append(member);
-		return member;
-	}
-
-	public RecommendationStatus recommendationStatus() {
-		RecommendationStatus member = new RecommendationStatus();
-		member.setModelTypeName("recommendation_status");
-		member.setName("recommendation_status");
-		member.setMemberName("recommendationStatus");
-		member.setReferDirection(true);
-		append(member);
-		return member;
-	}
-
-	public RecommendationType recommendationType() {
-		RecommendationType member = new RecommendationType();
-		member.setModelTypeName("recommendation_type");
-		member.setName("recommendation_type");
-		member.setMemberName("recommendationType");
-		member.setReferDirection(true);
-		append(member);
-		return member;
-	}
-
 	// 被引用的对象
 
 	
