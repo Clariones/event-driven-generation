@@ -1,5 +1,8 @@
 package com.terapico.caf.viewcomponent;
 
+import java.util.Date;
+import java.util.List;
+
 public class ViewComponentBuilder<T extends BaseVC> {
 	protected T vComponet;
 

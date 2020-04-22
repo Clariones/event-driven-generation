@@ -41,7 +41,8 @@ public class PieceOfScript {
 		}else {
 			script.no_login();
 		}
-		script.got_page(request).comments(comments+"的页面").list_of(displayMode);
+		script.got_page(request).comments(comments+"的页面").list_of(displayMode)
+		;
 	}
 
 }

@@ -28,15 +28,35 @@ public class ProjectQueryPiece extends PieceOfScript {
 				.where(MODEL.projectMaterial().project().eq("${project id}"),
 						MODEL.projectMaterial().dailyTaskType().eq("${type id}"))
 
-			.query(MODEL.projectMaterial()).which("by daily task type").pagination().with_string("project id").with_string("type id")
-				.comments("查找项目下的，某个daily task type 的文档")
+			.query(MODEL.projectMaterial()).which("by result with daily task type").pagination().with_string("project id").with_string("type id").with_string("result")
+				.comments("查找项目下的，某个daily task type 内的，review result为指定状态的文档")
 				.do_it_as()
 				.where(MODEL.projectMaterial().project().eq("${project id}"),
-						MODEL.projectMaterial().dailyTaskType().eq("${type id}"))
+						MODEL.projectMaterial().dailyTaskType().eq("${type id}"),
+						MODEL.projectMaterial().materialReviewResult().eq("${result}"))
 				.wants(MODEL.projectMaterial().dailyTaskType(),
 						MODEL.projectMaterial().materialReviewResult(),
 						MODEL.projectMaterial().materialSubmitter().employee())
 				.order_by(MODEL.projectMaterial().createTime()).desc()
+
+			.find(MODEL.projectMaterial()).which("by status in daily task of project").with_string("project id").with_string("task type")
+				.comments("按照review结果的状态，统计某个项目中某类日常工作的相关资料的数量")
+				.do_it_as().count_by(MODEL.projectMaterial().projectMaterialType())
+				.where(MODEL.projectMaterial().project().eq("${project id}"),
+						MODEL.projectMaterial().dailyTaskType().eq("${task type}"))
+
+			.query(MODEL.projectMaterialReviewRecord()).which("by project material").pagination().with_string("material id").with_integer("number")
+				.comments("查找某个项目资料所相关联的review记录列表")
+				.do_it_as()
+				.where(MODEL.projectMaterialReviewRecord().projectMaterial().eq("${material id}"))
+				.top("${number}")
+				.wants(MODEL.projectMaterialReviewRecord().reviewStatus(), MODEL.projectMaterialReviewRecord().reviewer().merchant())
+			.query(MODEL.projectMaterialCommentsRecord()).which("by project material").pagination().with_string("material id").with_integer("number")
+				.comments("查找某个项目资料所相关联的批注记录列表")
+				.do_it_as()
+				.where(MODEL.projectMaterialCommentsRecord().projectMaterial().eq("${material id}"))
+				.top("${number}")
+				.wants(MODEL.projectMaterialCommentsRecord().submitter().merchant())
 			;
 		return script;
 	}

@@ -19,7 +19,13 @@ public class ClientCRPageFlowPiece extends PieceOfScript {
 					.comments("申请入驻").no_login()
 					.got_page("emplacement list")
 
+				.request_with_changerequest("add project material comments").with_string("item id").with_string("review result")
+					.comments("资料批注").no_login()
+					.got_page("project material detail")
 
+				.request_with_changerequest("add contract comments").with_string("item id").with_string("review result")
+					.comments("合同批注").no_login()
+					.got_page("project contract detail")
 
 			;
 	}

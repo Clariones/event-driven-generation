@@ -2,6 +2,7 @@ package cla.edg.project.yrzx.changerequest;
 
 import java.util.Map;
 
+import cla.edg.project.yrzx.gen.graphquery.ProjectMaterial;
 import com.terapico.changerequest.builder.ChangeRequestSpecBuilder;
 import com.terapico.changerequest.builder.ChangeRequestSpecFactory;
 import com.terapico.changerequest.builder.FieldType;
@@ -24,6 +25,7 @@ public class MainChangeRequest implements ChangeRequestSpecFactory {
 			.import_from(new ProjectCommandChangeRequest())
 			.import_from(new ProjectReportChangeRequest())
 			.import_from(new ApplyEmplacementAndRecommendationChangeRequest())
+			.import_from(new ProjectMaterialChangeRequest())
 			
 			.getChangeRequestSpec();
 	}

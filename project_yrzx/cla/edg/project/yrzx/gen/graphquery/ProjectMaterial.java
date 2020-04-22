@@ -91,6 +91,28 @@ public class ProjectMaterial extends BaseModelBean{
 		return member;
 	}
 
+	public ProjectMaterialCommentsRecord projectMaterialCommentsRecordList() {
+		ProjectMaterialCommentsRecord member = new ProjectMaterialCommentsRecord();
+		member.setModelTypeName("project_material_comments_record");
+		member.setName("project_material");
+		member.setMemberName("projectMaterialCommentsRecordList");
+		member.setRelationName("projectMaterial");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ProjectMaterialViewRecord projectMaterialViewRecordList() {
+		ProjectMaterialViewRecord member = new ProjectMaterialViewRecord();
+		member.setModelTypeName("project_material_view_record");
+		member.setName("project_material");
+		member.setMemberName("projectMaterialViewRecordList");
+		member.setRelationName("projectMaterial");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 
 	// 普通属性
 

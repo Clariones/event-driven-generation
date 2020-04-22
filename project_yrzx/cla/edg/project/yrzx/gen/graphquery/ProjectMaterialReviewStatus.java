@@ -39,6 +39,17 @@ public class ProjectMaterialReviewStatus extends BaseModelBean{
 		return member;
 	}
 
+	public EventProjectMaterialComments eventProjectMaterialCommentsList() {
+		EventProjectMaterialComments member = new EventProjectMaterialComments();
+		member.setModelTypeName("event_project_material_comments");
+		member.setName("review_result");
+		member.setMemberName("eventProjectMaterialCommentsList");
+		member.setRelationName("reviewResult");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 
 	// 普通属性
 

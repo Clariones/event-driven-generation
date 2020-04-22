@@ -26,9 +26,16 @@ public class ProjectHallPageFlowPiece extends PieceOfScript {
 		viewPureDocumentPages(script, "设计管理", "DESIGN_MANAGMENT");
 		viewPureDocumentPages(script, "材料管理", "MATERIALS_MANAGEMENT");
 		// 纯文档的2级页面
-		viewList(script, "document list by category", "按照文档的类目查看当前项目的文档列表",
-				new String[] { "string:project id", "string:document category id" },
-				true, "project-document");
+//		viewList(script, "document list by category", "按照文档的类目查看当前项目的文档列表",
+//				new String[] { "string:project id", "string:document category id" },
+//				true, "user");
+        viewList(script, "document list by daily task", "按照文档查所属的日常工作类型，看当前项目的文档列表",
+                new String[] { "string:project id", "string:label", "string:filter" },
+                true, "card");
+        script.request("view project material detail").with_string("item id")
+                .comments("查看项目资料详情").need_login().has_footprint()
+                .got_page("project material detail").comments("项目资料的详情")
+                ;
 		// 需要case by case写的
 		viewProjectInfo(script, "项目信息", "PROJECT_INFO");
 		viewProjectElementIn3Levels(script, "项目报告", "PROJECT_REPORT");
@@ -42,6 +49,20 @@ public class ProjectHallPageFlowPiece extends PieceOfScript {
 		viewProject5Book(script, "五书详情", "YOURONG_5BOOK");
 		viewProjectContracts(script, "合同任务", "PROJECT_CONTRACT");
 		viewProjectElementIn3Levels(script, "项目资料", "PROJECT_DOCS");
+
+		script.request("view project material review list").with_string("item id").with_last_record_id()
+				.comments("查看项目资料的所有审批记录列表").need_login().no_footprint()
+				.got_page("review record list").title("审核记录").list_of("card")
+			.request("view project material comments list").with_string("item id").with_last_record_id()
+				.comments("查看项目资料的所有批注列表").need_login().no_footprint()
+				.got_page("comments record list").title("批注列表").list_of("card")
+
+			.request("view contract review list").with_string("item id").with_last_record_id()
+				.comments("查看合同的所有审批记录列表").need_login().no_footprint()
+				.got_page("contract review record list").title("审核记录").list_of("card")
+			.request("view contract comments list").with_string("item id").with_last_record_id()
+				.comments("查看合同的所有批注列表").need_login().no_footprint()
+				.got_page("contract comments record list").title("批注列表").list_of("card");
 		return script;
 	}
 
@@ -148,7 +169,7 @@ public class ProjectHallPageFlowPiece extends PieceOfScript {
 		script.request(reqViewCategoryList).with_string("project id")
 			.comments("查看 " + title +" 的分类列表").need_login()
 			.got_page("project document category list").title("分类列表").list_of("document category")
-				.may_request("view document list by category")
+				.may_request("view document list by daily task")
 				
 		;
 	}

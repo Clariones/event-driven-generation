@@ -1,6 +1,7 @@
 package com.terapico.caf.viewcomponent;
 
 import java.util.Date;
+import java.util.List;
 
 public class VComponent${helper.NameAsThis(component.name)} extends BaseVC{
 <#list component.attributes as attribute>
@@ -42,7 +43,11 @@ public class VComponent${helper.NameAsThis(component.name)} extends BaseVC{
 		switch  (attrName) {
 <#list component.attributes as attribute>
 		case "${helper.nameAsThis(attribute.name)}":
+	<#if helper.isListType(attribute.type) >
+	        if (checkAttributeValueAssignableFromList(value, ${helper.getListItemType(attribute.type)}.class, "${helper.name_as_this(component.name)}的${helper.nameAsThis(attribute.name)}必须是${helper.JavaType(attribute.type)}类型")){
+	<#else>
 			if (checkAttributeValueAssignable(value, ${helper.JavaType(attribute.type)}.class, "${helper.name_as_this(component.name)}的${helper.nameAsThis(attribute.name)}必须是${helper.JavaType(attribute.type)}类型")){
+	</#if>
 				set${helper.NameAsThis(attribute.name)}((${helper.JavaType(attribute.type)})value);
 			}
 			return this;

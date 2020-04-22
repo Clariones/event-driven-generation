@@ -353,6 +353,18 @@ public class MODEL{
 		return rst;
 	}
 
+	public static ProjectMaterialCommentsRecord projectMaterialCommentsRecord() {
+		ProjectMaterialCommentsRecord rst = new ProjectMaterialCommentsRecord();
+		rst.setModelTypeName("project_material_comments_record");
+		return rst;
+	}
+
+	public static ProjectMaterialViewRecord projectMaterialViewRecord() {
+		ProjectMaterialViewRecord rst = new ProjectMaterialViewRecord();
+		rst.setModelTypeName("project_material_view_record");
+		return rst;
+	}
+
 	public static YourongProjectBook yourongProjectBook() {
 		YourongProjectBook rst = new YourongProjectBook();
 		rst.setModelTypeName("yourong_project_book");
@@ -467,24 +479,6 @@ public class MODEL{
 		return rst;
 	}
 
-	public static EventTaskReportBasicInfo eventTaskReportBasicInfo() {
-		EventTaskReportBasicInfo rst = new EventTaskReportBasicInfo();
-		rst.setModelTypeName("event_task_report_basic_info");
-		return rst;
-	}
-
-	public static EventCommonReport eventCommonReport() {
-		EventCommonReport rst = new EventCommonReport();
-		rst.setModelTypeName("event_common_report");
-		return rst;
-	}
-
-	public static EventReportCheckItem eventReportCheckItem() {
-		EventReportCheckItem rst = new EventReportCheckItem();
-		rst.setModelTypeName("event_report_check_item");
-		return rst;
-	}
-
 	public static EventProjectSupervisorReportBasicInfo eventProjectSupervisorReportBasicInfo() {
 		EventProjectSupervisorReportBasicInfo rst = new EventProjectSupervisorReportBasicInfo();
 		rst.setModelTypeName("event_project_supervisor_report_basic_info");
@@ -500,12 +494,6 @@ public class MODEL{
 	public static EventShowAllType eventShowAllType() {
 		EventShowAllType rst = new EventShowAllType();
 		rst.setModelTypeName("event_show_all_type");
-		return rst;
-	}
-
-	public static EventApplyEmplacement eventApplyEmplacement() {
-		EventApplyEmplacement rst = new EventApplyEmplacement();
-		rst.setModelTypeName("event_apply_emplacement");
 		return rst;
 	}
 
@@ -536,6 +524,42 @@ public class MODEL{
 	public static EventApplyDecoration eventApplyDecoration() {
 		EventApplyDecoration rst = new EventApplyDecoration();
 		rst.setModelTypeName("event_apply_decoration");
+		return rst;
+	}
+
+	public static EventTaskReportBasicInfo eventTaskReportBasicInfo() {
+		EventTaskReportBasicInfo rst = new EventTaskReportBasicInfo();
+		rst.setModelTypeName("event_task_report_basic_info");
+		return rst;
+	}
+
+	public static EventCommonReport eventCommonReport() {
+		EventCommonReport rst = new EventCommonReport();
+		rst.setModelTypeName("event_common_report");
+		return rst;
+	}
+
+	public static EventReportCheckItem eventReportCheckItem() {
+		EventReportCheckItem rst = new EventReportCheckItem();
+		rst.setModelTypeName("event_report_check_item");
+		return rst;
+	}
+
+	public static EventProjectMaterialComments eventProjectMaterialComments() {
+		EventProjectMaterialComments rst = new EventProjectMaterialComments();
+		rst.setModelTypeName("event_project_material_comments");
+		return rst;
+	}
+
+	public static EventApplyEmplacement eventApplyEmplacement() {
+		EventApplyEmplacement rst = new EventApplyEmplacement();
+		rst.setModelTypeName("event_apply_emplacement");
+		return rst;
+	}
+
+	public static EventContractComments eventContractComments() {
+		EventContractComments rst = new EventContractComments();
+		rst.setModelTypeName("event_contract_comments");
 		return rst;
 	}
 

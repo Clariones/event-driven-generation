@@ -78,5 +78,8 @@ public class ComponentInfo {
 		return this;
 	}
 
-
+	public ComponentInfo listType(String typeName) {
+		currentAttr.setType("List<"+typeName+">");
+		return this;
+	}
 }

@@ -36,39 +36,6 @@ public class ChangeRequest extends BaseModelBean{
 
 	// 被引用的对象
 
-	public EventTaskReportBasicInfo eventTaskReportBasicInfoList() {
-		EventTaskReportBasicInfo member = new EventTaskReportBasicInfo();
-		member.setModelTypeName("event_task_report_basic_info");
-		member.setName("change_request");
-		member.setMemberName("eventTaskReportBasicInfoList");
-		member.setRelationName("changeRequest");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-
-	public EventCommonReport eventCommonReportList() {
-		EventCommonReport member = new EventCommonReport();
-		member.setModelTypeName("event_common_report");
-		member.setName("change_request");
-		member.setMemberName("eventCommonReportList");
-		member.setRelationName("changeRequest");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-
-	public EventReportCheckItem eventReportCheckItemList() {
-		EventReportCheckItem member = new EventReportCheckItem();
-		member.setModelTypeName("event_report_check_item");
-		member.setName("change_request");
-		member.setMemberName("eventReportCheckItemList");
-		member.setRelationName("changeRequest");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-
 	public EventProjectSupervisorReportBasicInfo eventProjectSupervisorReportBasicInfoList() {
 		EventProjectSupervisorReportBasicInfo member = new EventProjectSupervisorReportBasicInfo();
 		member.setModelTypeName("event_project_supervisor_report_basic_info");
@@ -96,17 +63,6 @@ public class ChangeRequest extends BaseModelBean{
 		member.setModelTypeName("event_show_all_type");
 		member.setName("change_request");
 		member.setMemberName("eventShowAllTypeList");
-		member.setRelationName("changeRequest");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-
-	public EventApplyEmplacement eventApplyEmplacementList() {
-		EventApplyEmplacement member = new EventApplyEmplacement();
-		member.setModelTypeName("event_apply_emplacement");
-		member.setName("change_request");
-		member.setMemberName("eventApplyEmplacementList");
 		member.setRelationName("changeRequest");
 		member.setReferDirection(false);
 		append(member);
@@ -162,6 +118,72 @@ public class ChangeRequest extends BaseModelBean{
 		member.setModelTypeName("event_apply_decoration");
 		member.setName("change_request");
 		member.setMemberName("eventApplyDecorationList");
+		member.setRelationName("changeRequest");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EventTaskReportBasicInfo eventTaskReportBasicInfoList() {
+		EventTaskReportBasicInfo member = new EventTaskReportBasicInfo();
+		member.setModelTypeName("event_task_report_basic_info");
+		member.setName("change_request");
+		member.setMemberName("eventTaskReportBasicInfoList");
+		member.setRelationName("changeRequest");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EventCommonReport eventCommonReportList() {
+		EventCommonReport member = new EventCommonReport();
+		member.setModelTypeName("event_common_report");
+		member.setName("change_request");
+		member.setMemberName("eventCommonReportList");
+		member.setRelationName("changeRequest");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EventReportCheckItem eventReportCheckItemList() {
+		EventReportCheckItem member = new EventReportCheckItem();
+		member.setModelTypeName("event_report_check_item");
+		member.setName("change_request");
+		member.setMemberName("eventReportCheckItemList");
+		member.setRelationName("changeRequest");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EventProjectMaterialComments eventProjectMaterialCommentsList() {
+		EventProjectMaterialComments member = new EventProjectMaterialComments();
+		member.setModelTypeName("event_project_material_comments");
+		member.setName("change_request");
+		member.setMemberName("eventProjectMaterialCommentsList");
+		member.setRelationName("changeRequest");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EventApplyEmplacement eventApplyEmplacementList() {
+		EventApplyEmplacement member = new EventApplyEmplacement();
+		member.setModelTypeName("event_apply_emplacement");
+		member.setName("change_request");
+		member.setMemberName("eventApplyEmplacementList");
+		member.setRelationName("changeRequest");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EventContractComments eventContractCommentsList() {
+		EventContractComments member = new EventContractComments();
+		member.setModelTypeName("event_contract_comments");
+		member.setName("change_request");
+		member.setMemberName("eventContractCommentsList");
 		member.setRelationName("changeRequest");
 		member.setReferDirection(false);
 		append(member);

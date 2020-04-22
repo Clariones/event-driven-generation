@@ -107,6 +107,11 @@ public abstract class ${class_name}ViewService extends Base${class_name}ViewServ
 		${custom_context_name} ctx = (${custom_context_name}) userContext;
 		String accessUrl = makeUrlF("${methodName}", false<@T.getRequestProcessingUrlMethodParametersWithoutType request/>);
 		ctx.setAccessUrl(accessUrl);
+    <#if request.parameters?has_content>
+        <#list request.parameters as param>
+        ctx.set${NAMING.toCamelCase(param.paramName)}(${NAMING.toCamelCase(param.paramName)?uncap_first});
+        </#list>
+    </#if>
 		<@getRequestUser request ""/>
 		commonLog(ctx, "${methodName}", "开始:${request.comments!}", ctx.getRemoteIP(), ctx.tokenId(), accessUrl, null);
 		int resultCode = processRequest${methodName?cap_first}(ctx);

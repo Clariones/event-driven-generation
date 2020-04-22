@@ -20,6 +20,9 @@ public class VCGenerationHelper extends BaseHelper {
 		case "datetime":
 			return "Date";
 		default:
+			if (name.matches("^List<.*>$")) {
+				return name;
+			}
 			throw new RuntimeException("还没处理"+name+"转成java类型");
 		}
 	}
@@ -47,5 +50,12 @@ public class VCGenerationHelper extends BaseHelper {
 			});
 		});
 		return result;
+	}
+
+	public boolean isListType(String typeName){
+		return typeName.matches("^List<.*>$");
+	}
+	public String getListItemType(String typeName){
+		return typeName.substring(5, typeName.length()-1);
 	}
 }

@@ -245,6 +245,17 @@ public class Merchant extends BaseModelBean{
 		return member;
 	}
 
+	public ProjectMaterialViewRecord projectMaterialViewRecordList() {
+		ProjectMaterialViewRecord member = new ProjectMaterialViewRecord();
+		member.setModelTypeName("project_material_view_record");
+		member.setName("merchant");
+		member.setMemberName("projectMaterialViewRecordList");
+		member.setRelationName("merchant");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 	public Recommendation recommendationList() {
 		Recommendation member = new Recommendation();
 		member.setModelTypeName("recommendation");

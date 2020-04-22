@@ -4,9 +4,9 @@ import java.util.Map;
 
 import cla.edg.modelbean.*;
 
-public class ProjectMaterialReviewRecord extends BaseModelBean{
+public class ProjectMaterialViewRecord extends BaseModelBean{
 	public String getFullClassName() {
-		return "com.yrdec.yrzx.projectmaterialreviewrecord.ProjectMaterialReviewRecord";
+		return "com.yrdec.yrzx.projectmaterialviewrecord.ProjectMaterialViewRecord";
 	}
 	// 枚举对象
 
@@ -23,24 +23,13 @@ public class ProjectMaterialReviewRecord extends BaseModelBean{
 		return member;
 	}
 
-	public ProjectNomination reviewer() {
-		ProjectNomination member = new ProjectNomination();
-		member.setModelTypeName("project_nomination");
-		member.setName("reviewer");
-		member.setMemberName("reviewer");
+	public Merchant merchant() {
+		Merchant member = new Merchant();
+		member.setModelTypeName("merchant");
+		member.setName("merchant");
+		member.setMemberName("merchant");
 		member.setReferDirection(true);
-		member.setRelationName("reviewer");
-		append(member);
-		return member;
-	}
-
-	public ProjectMaterialReviewStatus reviewStatus() {
-		ProjectMaterialReviewStatus member = new ProjectMaterialReviewStatus();
-		member.setModelTypeName("project_material_review_status");
-		member.setName("review_status");
-		member.setMemberName("reviewStatus");
-		member.setReferDirection(true);
-		member.setRelationName("reviewStatus");
+		member.setRelationName("merchant");
 		append(member);
 		return member;
 	}
@@ -59,29 +48,11 @@ public class ProjectMaterialReviewRecord extends BaseModelBean{
 		return member;
 	}
 
-	public StringAttribute title(){
-		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
-		// member.setName("title");
-		member.setName("title");
-		useMember(member);
-		return member;
-	}
-
-	public StringAttribute reviewComment(){
-		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string_longtext");
-		// member.setName("reviewComment");
-		member.setName("review_comment");
-		useMember(member);
-		return member;
-	}
-
-	public DateTimeAttribute lastReadTime(){
-		DateTimeAttribute member = new DateTimeAttribute();
-		member.setModelTypeName("date_time_update");
-		// member.setName("lastReadTime");
-		member.setName("last_read_time");
+	public NumberAttribute viewCount(){
+		NumberAttribute member = new NumberAttribute();
+		member.setModelTypeName("int");
+		// member.setName("viewCount");
+		member.setName("view_count");
 		useMember(member);
 		return member;
 	}

@@ -80,6 +80,17 @@ public class ProjectNomination extends BaseModelBean{
 		return member;
 	}
 
+	public ProjectMaterialCommentsRecord projectMaterialCommentsRecordList() {
+		ProjectMaterialCommentsRecord member = new ProjectMaterialCommentsRecord();
+		member.setModelTypeName("project_material_comments_record");
+		member.setName("submitter");
+		member.setMemberName("projectMaterialCommentsRecordList");
+		member.setRelationName("submitter");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 
 	// 普通属性
 
