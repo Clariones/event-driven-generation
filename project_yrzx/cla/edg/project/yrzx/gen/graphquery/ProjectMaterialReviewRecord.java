@@ -18,6 +18,7 @@ public class ProjectMaterialReviewRecord extends BaseModelBean{
 		member.setName("project_material");
 		member.setMemberName("projectMaterial");
 		member.setReferDirection(true);
+		member.setRelationName("projectMaterial");
 		append(member);
 		return member;
 	}
@@ -28,6 +29,7 @@ public class ProjectMaterialReviewRecord extends BaseModelBean{
 		member.setName("reviewer");
 		member.setMemberName("reviewer");
 		member.setReferDirection(true);
+		member.setRelationName("reviewer");
 		append(member);
 		return member;
 	}
@@ -38,13 +40,14 @@ public class ProjectMaterialReviewRecord extends BaseModelBean{
 		member.setName("review_status");
 		member.setMemberName("reviewStatus");
 		member.setReferDirection(true);
+		member.setRelationName("reviewStatus");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
@@ -111,6 +114,6 @@ public class ProjectMaterialReviewRecord extends BaseModelBean{
 	}
 
 
-	
+
 }
 

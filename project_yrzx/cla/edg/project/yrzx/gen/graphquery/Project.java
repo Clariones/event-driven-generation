@@ -18,6 +18,7 @@ public class Project extends BaseModelBean{
 		member.setName("project_owner");
 		member.setMemberName("projectOwner");
 		member.setReferDirection(true);
+		member.setRelationName("projectOwner");
 		append(member);
 		return member;
 	}
@@ -28,6 +29,7 @@ public class Project extends BaseModelBean{
 		member.setName("store");
 		member.setMemberName("store");
 		member.setReferDirection(true);
+		member.setRelationName("store");
 		append(member);
 		return member;
 	}
@@ -38,6 +40,7 @@ public class Project extends BaseModelBean{
 		member.setName("partner");
 		member.setMemberName("partner");
 		member.setReferDirection(true);
+		member.setRelationName("partner");
 		append(member);
 		return member;
 	}
@@ -48,6 +51,7 @@ public class Project extends BaseModelBean{
 		member.setName("project_type");
 		member.setMemberName("projectType");
 		member.setReferDirection(true);
+		member.setRelationName("projectType");
 		append(member);
 		return member;
 	}
@@ -58,6 +62,7 @@ public class Project extends BaseModelBean{
 		member.setName("project_service_type");
 		member.setMemberName("projectServiceType");
 		member.setReferDirection(true);
+		member.setRelationName("projectServiceType");
 		append(member);
 		return member;
 	}
@@ -68,6 +73,7 @@ public class Project extends BaseModelBean{
 		member.setName("project_phase");
 		member.setMemberName("projectPhase");
 		member.setReferDirection(true);
+		member.setRelationName("projectPhase");
 		append(member);
 		return member;
 	}
@@ -78,6 +84,7 @@ public class Project extends BaseModelBean{
 		member.setName("design_status");
 		member.setMemberName("designStatus");
 		member.setReferDirection(true);
+		member.setRelationName("designStatus");
 		append(member);
 		return member;
 	}
@@ -88,6 +95,7 @@ public class Project extends BaseModelBean{
 		member.setName("construction_status");
 		member.setMemberName("constructionStatus");
 		member.setReferDirection(true);
+		member.setRelationName("constructionStatus");
 		append(member);
 		return member;
 	}
@@ -98,93 +106,102 @@ public class Project extends BaseModelBean{
 		member.setName("platform");
 		member.setMemberName("platform");
 		member.setReferDirection(true);
+		member.setRelationName("platform");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
-	
+
 	public StandardContract standardContractList() {
 		StandardContract member = new StandardContract();
 		member.setModelTypeName("standard_contract");
 		member.setName("project");
 		member.setMemberName("standardContractList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public ProjectNomination projectNominationList() {
-		ProjectNomination member = new ProjectNomination();
-		member.setModelTypeName("project_nomination");
-		member.setName("project");
-		member.setMemberName("projectNominationList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public WorkPackage workPackageList() {
-		WorkPackage member = new WorkPackage();
-		member.setModelTypeName("work_package");
-		member.setName("project");
-		member.setMemberName("workPackageList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public ProjectImage projectImageList() {
-		ProjectImage member = new ProjectImage();
-		member.setModelTypeName("project_image");
-		member.setName("project");
-		member.setMemberName("projectImageList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public ProjectOrganization projectOrganizationList() {
-		ProjectOrganization member = new ProjectOrganization();
-		member.setModelTypeName("project_organization");
-		member.setName("project");
-		member.setMemberName("projectOrganizationList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public ProjectMaterial projectMaterialList() {
-		ProjectMaterial member = new ProjectMaterial();
-		member.setModelTypeName("project_material");
-		member.setName("project");
-		member.setMemberName("projectMaterialList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public YourongProjectBook yourongProjectBookList() {
-		YourongProjectBook member = new YourongProjectBook();
-		member.setModelTypeName("yourong_project_book");
-		member.setName("project");
-		member.setMemberName("yourongProjectBookList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public EventAfterSales eventAfterSalesList() {
-		EventAfterSales member = new EventAfterSales();
-		member.setModelTypeName("event_after_sales");
-		member.setName("project");
-		member.setMemberName("eventAfterSalesList");
+		member.setRelationName("project");
 		member.setReferDirection(false);
 		append(member);
 		return member;
 	}
 
-	
+	public ProjectNomination projectNominationList() {
+		ProjectNomination member = new ProjectNomination();
+		member.setModelTypeName("project_nomination");
+		member.setName("project");
+		member.setMemberName("projectNominationList");
+		member.setRelationName("project");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public WorkPackage workPackageList() {
+		WorkPackage member = new WorkPackage();
+		member.setModelTypeName("work_package");
+		member.setName("project");
+		member.setMemberName("workPackageList");
+		member.setRelationName("project");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ProjectImage projectImageList() {
+		ProjectImage member = new ProjectImage();
+		member.setModelTypeName("project_image");
+		member.setName("project");
+		member.setMemberName("projectImageList");
+		member.setRelationName("project");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ProjectOrganization projectOrganizationList() {
+		ProjectOrganization member = new ProjectOrganization();
+		member.setModelTypeName("project_organization");
+		member.setName("project");
+		member.setMemberName("projectOrganizationList");
+		member.setRelationName("project");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ProjectMaterial projectMaterialList() {
+		ProjectMaterial member = new ProjectMaterial();
+		member.setModelTypeName("project_material");
+		member.setName("project");
+		member.setMemberName("projectMaterialList");
+		member.setRelationName("project");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public YourongProjectBook yourongProjectBookList() {
+		YourongProjectBook member = new YourongProjectBook();
+		member.setModelTypeName("yourong_project_book");
+		member.setName("project");
+		member.setMemberName("yourongProjectBookList");
+		member.setRelationName("project");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EventAfterSales eventAfterSalesList() {
+		EventAfterSales member = new EventAfterSales();
+		member.setModelTypeName("event_after_sales");
+		member.setName("project");
+		member.setMemberName("eventAfterSalesList");
+		member.setRelationName("project");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+
 	// 普通属性
 
 	public StringAttribute id(){
@@ -269,6 +286,6 @@ public class Project extends BaseModelBean{
 	}
 
 
-	
+
 }
 

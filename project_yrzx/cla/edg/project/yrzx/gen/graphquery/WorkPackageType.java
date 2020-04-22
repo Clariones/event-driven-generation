@@ -18,23 +18,25 @@ public class WorkPackageType extends BaseModelBean{
 		member.setName("platform");
 		member.setMemberName("platform");
 		member.setReferDirection(true);
+		member.setRelationName("platform");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
-	
+
 	public WorkPackage workPackageList() {
 		WorkPackage member = new WorkPackage();
 		member.setModelTypeName("work_package");
 		member.setName("work_package_type");
 		member.setMemberName("workPackageList");
+		member.setRelationName("workPackageType");
 		member.setReferDirection(false);
 		append(member);
 		return member;
 	}
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
@@ -83,6 +85,6 @@ public class WorkPackageType extends BaseModelBean{
 	}
 
 
-	
+
 }
 

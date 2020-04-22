@@ -21,23 +21,25 @@ public class MaterialReviewResult extends BaseModelBean{
 		member.setName("platform");
 		member.setMemberName("platform");
 		member.setReferDirection(true);
+		member.setRelationName("platform");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
-	
+
 	public ProjectMaterial projectMaterialList() {
 		ProjectMaterial member = new ProjectMaterial();
 		member.setModelTypeName("project_material");
 		member.setName("material_review_result");
 		member.setMemberName("projectMaterialList");
+		member.setRelationName("materialReviewResult");
 		member.setReferDirection(false);
 		append(member);
 		return member;
 	}
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
@@ -77,6 +79,6 @@ public class MaterialReviewResult extends BaseModelBean{
 	}
 
 
-	
+
 }
 

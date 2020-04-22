@@ -18,23 +18,25 @@ public class ProjectMaterialType extends BaseModelBean{
 		member.setName("platform");
 		member.setMemberName("platform");
 		member.setReferDirection(true);
+		member.setRelationName("platform");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
-	
+
 	public ProjectMaterial projectMaterialList() {
 		ProjectMaterial member = new ProjectMaterial();
 		member.setModelTypeName("project_material");
 		member.setName("project_material_type");
 		member.setMemberName("projectMaterialList");
+		member.setRelationName("projectMaterialType");
 		member.setReferDirection(false);
 		append(member);
 		return member;
 	}
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
@@ -74,6 +76,6 @@ public class ProjectMaterialType extends BaseModelBean{
 	}
 
 
-	
+
 }
 

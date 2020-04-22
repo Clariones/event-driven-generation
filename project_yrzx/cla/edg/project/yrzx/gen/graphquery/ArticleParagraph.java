@@ -18,13 +18,14 @@ public class ArticleParagraph extends BaseModelBean{
 		member.setName("article");
 		member.setMemberName("article");
 		member.setReferDirection(true);
+		member.setRelationName("article");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
@@ -73,6 +74,6 @@ public class ArticleParagraph extends BaseModelBean{
 	}
 
 
-	
+
 }
 

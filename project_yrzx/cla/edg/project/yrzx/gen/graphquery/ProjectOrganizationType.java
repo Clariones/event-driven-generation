@@ -18,23 +18,25 @@ public class ProjectOrganizationType extends BaseModelBean{
 		member.setName("platform");
 		member.setMemberName("platform");
 		member.setReferDirection(true);
+		member.setRelationName("platform");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
-	
+
 	public ProjectOrganization projectOrganizationList() {
 		ProjectOrganization member = new ProjectOrganization();
 		member.setModelTypeName("project_organization");
 		member.setName("type");
 		member.setMemberName("projectOrganizationList");
+		member.setRelationName("type");
 		member.setReferDirection(false);
 		append(member);
 		return member;
 	}
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
@@ -83,6 +85,6 @@ public class ProjectOrganizationType extends BaseModelBean{
 	}
 
 
-	
+
 }
 

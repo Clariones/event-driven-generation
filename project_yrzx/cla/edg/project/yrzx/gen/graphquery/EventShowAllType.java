@@ -18,6 +18,7 @@ public class EventShowAllType extends BaseModelBean{
 		member.setName("field_biz_candidate");
 		member.setMemberName("fieldBizCandidate");
 		member.setReferDirection(true);
+		member.setRelationName("fieldBizCandidate");
 		append(member);
 		return member;
 	}
@@ -28,13 +29,14 @@ public class EventShowAllType extends BaseModelBean{
 		member.setName("change_request");
 		member.setMemberName("changeRequest");
 		member.setReferDirection(true);
+		member.setRelationName("changeRequest");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
@@ -227,6 +229,6 @@ public class EventShowAllType extends BaseModelBean{
 	}
 
 
-	
+
 }
 

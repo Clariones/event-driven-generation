@@ -13,6 +13,7 @@
 		return ctx.dao().countBySql(sql, params.toArray());
 		    <#else>
 		Integer cnt = ctx.dao().queryForObject(sql, params.toArray(), Integer.class);
+		return cnt == null ? 0 : cnt;
 		    </#if>
 		<#else>
 		${query.queryActionInfo.sumDataType} cnt = ctx.dao().queryForObject(sql, params.toArray(), ${query.queryActionInfo.sumDataType}.class);

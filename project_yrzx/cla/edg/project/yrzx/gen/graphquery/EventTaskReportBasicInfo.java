@@ -18,13 +18,14 @@ public class EventTaskReportBasicInfo extends BaseModelBean{
 		member.setName("change_request");
 		member.setMemberName("changeRequest");
 		member.setReferDirection(true);
+		member.setRelationName("changeRequest");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
@@ -127,6 +128,6 @@ public class EventTaskReportBasicInfo extends BaseModelBean{
 	}
 
 
-	
+
 }
 

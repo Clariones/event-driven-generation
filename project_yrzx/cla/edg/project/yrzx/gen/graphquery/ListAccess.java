@@ -18,13 +18,14 @@ public class ListAccess extends BaseModelBean{
 		member.setName("app");
 		member.setMemberName("app");
 		member.setReferDirection(true);
+		member.setRelationName("app");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
@@ -109,6 +110,6 @@ public class ListAccess extends BaseModelBean{
 	}
 
 
-	
+
 }
 

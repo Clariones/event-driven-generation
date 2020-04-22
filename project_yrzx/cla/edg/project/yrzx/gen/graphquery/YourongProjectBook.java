@@ -18,6 +18,7 @@ public class YourongProjectBook extends BaseModelBean{
 		member.setName("type");
 		member.setMemberName("type");
 		member.setReferDirection(true);
+		member.setRelationName("type");
 		append(member);
 		return member;
 	}
@@ -28,6 +29,7 @@ public class YourongProjectBook extends BaseModelBean{
 		member.setName("status");
 		member.setMemberName("status");
 		member.setReferDirection(true);
+		member.setRelationName("status");
 		append(member);
 		return member;
 	}
@@ -38,13 +40,14 @@ public class YourongProjectBook extends BaseModelBean{
 		member.setName("project");
 		member.setMemberName("project");
 		member.setReferDirection(true);
+		member.setRelationName("project");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
@@ -120,6 +123,6 @@ public class YourongProjectBook extends BaseModelBean{
 	}
 
 
-	
+
 }
 

@@ -20,23 +20,25 @@ public class ProjectRole extends BaseModelBean{
 		member.setName("platform");
 		member.setMemberName("platform");
 		member.setReferDirection(true);
+		member.setRelationName("platform");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
-	
+
 	public ProjectNomination projectNominationList() {
 		ProjectNomination member = new ProjectNomination();
 		member.setModelTypeName("project_nomination");
 		member.setName("project_role");
 		member.setMemberName("projectNominationList");
+		member.setRelationName("projectRole");
 		member.setReferDirection(false);
 		append(member);
 		return member;
 	}
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
@@ -76,6 +78,6 @@ public class ProjectRole extends BaseModelBean{
 	}
 
 
-	
+
 }
 

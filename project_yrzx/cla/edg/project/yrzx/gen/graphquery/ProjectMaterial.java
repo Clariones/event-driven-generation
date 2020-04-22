@@ -18,6 +18,7 @@ public class ProjectMaterial extends BaseModelBean{
 		member.setName("daily_task_type");
 		member.setMemberName("dailyTaskType");
 		member.setReferDirection(true);
+		member.setRelationName("dailyTaskType");
 		append(member);
 		return member;
 	}
@@ -28,6 +29,7 @@ public class ProjectMaterial extends BaseModelBean{
 		member.setName("daily_task_template");
 		member.setMemberName("dailyTaskTemplate");
 		member.setReferDirection(true);
+		member.setRelationName("dailyTaskTemplate");
 		append(member);
 		return member;
 	}
@@ -38,6 +40,7 @@ public class ProjectMaterial extends BaseModelBean{
 		member.setName("project_material_type");
 		member.setMemberName("projectMaterialType");
 		member.setReferDirection(true);
+		member.setRelationName("projectMaterialType");
 		append(member);
 		return member;
 	}
@@ -48,6 +51,7 @@ public class ProjectMaterial extends BaseModelBean{
 		member.setName("material_submitter");
 		member.setMemberName("materialSubmitter");
 		member.setReferDirection(true);
+		member.setRelationName("materialSubmitter");
 		append(member);
 		return member;
 	}
@@ -58,6 +62,7 @@ public class ProjectMaterial extends BaseModelBean{
 		member.setName("project");
 		member.setMemberName("project");
 		member.setReferDirection(true);
+		member.setRelationName("project");
 		append(member);
 		return member;
 	}
@@ -68,23 +73,25 @@ public class ProjectMaterial extends BaseModelBean{
 		member.setName("material_review_result");
 		member.setMemberName("materialReviewResult");
 		member.setReferDirection(true);
+		member.setRelationName("materialReviewResult");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
-	
+
 	public ProjectMaterialReviewRecord projectMaterialReviewRecordList() {
 		ProjectMaterialReviewRecord member = new ProjectMaterialReviewRecord();
 		member.setModelTypeName("project_material_review_record");
 		member.setName("project_material");
 		member.setMemberName("projectMaterialReviewRecordList");
+		member.setRelationName("projectMaterial");
 		member.setReferDirection(false);
 		append(member);
 		return member;
 	}
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
@@ -151,6 +158,6 @@ public class ProjectMaterial extends BaseModelBean{
 	}
 
 
-	
+
 }
 

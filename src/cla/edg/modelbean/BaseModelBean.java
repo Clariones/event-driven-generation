@@ -19,6 +19,7 @@ public abstract class BaseModelBean {
 	protected transient BaseModelBean previousBean;
 	protected ModelBeanAdditionalData additonalData = new ModelBeanAdditionalData();
 	protected String memberName;
+	protected String relationName;
 	///////////////////////////////////////////////////////////////////////////
 	protected ModelBeanRoute beanRoute;
 	protected MeetingPoint<BaseModelBean, BeanRelation> lastMeetingPoint = null;
@@ -26,6 +27,12 @@ public abstract class BaseModelBean {
 	public String getInternalType() {
 		String fullClassName = getFullClassName();
 		return fullClassName.substring(fullClassName.lastIndexOf('.')+1);
+	}
+	public String getRelationName() {
+		return relationName;
+	}
+	public void setRelationName(String relationName) {
+		this.relationName = relationName;
 	}
 	public ModelBeanAdditionalData getAdditonalData() {
 		return additonalData;

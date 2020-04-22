@@ -4,37 +4,15 @@ import java.util.Map;
 
 import cla.edg.modelbean.*;
 
-public class ProjectType extends BaseModelBean{
+public class BpmnModel extends BaseModelBean{
 	public String getFullClassName() {
-		return "com.yrdec.yrzx.projecttype.ProjectType";
+		return "com.yrdec.yrzx.bpmnmodel.BpmnModel";
 	}
 	// 枚举对象
 
 	// 引用的对象
 
-	public Platform platform() {
-		Platform member = new Platform();
-		member.setModelTypeName("platform");
-		member.setName("platform");
-		member.setMemberName("platform");
-		member.setReferDirection(true);
-		member.setRelationName("platform");
-		append(member);
-		return member;
-	}
-
 	// 被引用的对象
-
-	public Project projectList() {
-		Project member = new Project();
-		member.setModelTypeName("project");
-		member.setName("project_type");
-		member.setMemberName("projectList");
-		member.setRelationName("projectType");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
 
 
 	// 普通属性
@@ -57,20 +35,38 @@ public class ProjectType extends BaseModelBean{
 		return member;
 	}
 
-	public StringAttribute category(){
+	public StringAttribute modelKey(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		// member.setName("category");
-		member.setName("category");
+		// member.setName("modelKey");
+		member.setName("model_key");
 		useMember(member);
 		return member;
 	}
 
-	public StringAttribute code(){
+	public StringAttribute definition(){
 		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
-		// member.setName("code");
-		member.setName("code");
+		member.setModelTypeName("string_longtext");
+		// member.setName("definition");
+		member.setName("definition");
+		useMember(member);
+		return member;
+	}
+
+	public DateTimeAttribute updateTime(){
+		DateTimeAttribute member = new DateTimeAttribute();
+		member.setModelTypeName("date_time_update");
+		// member.setName("updateTime");
+		member.setName("update_time");
+		useMember(member);
+		return member;
+	}
+
+	public DateTimeAttribute createTime(){
+		DateTimeAttribute member = new DateTimeAttribute();
+		member.setModelTypeName("date_time_create");
+		// member.setName("createTime");
+		member.setName("create_time");
 		useMember(member);
 		return member;
 	}

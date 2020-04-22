@@ -4,21 +4,32 @@ import java.util.Map;
 
 import cla.edg.modelbean.*;
 
-public class QuickLink extends BaseModelBean{
+public class NodeInstance extends BaseModelBean{
 	public String getFullClassName() {
-		return "com.yrdec.yrzx.quicklink.QuickLink";
+		return "com.yrdec.yrzx.nodeinstance.NodeInstance";
 	}
 	// 枚举对象
 
 	// 引用的对象
 
-	public UserApp app() {
-		UserApp member = new UserApp();
-		member.setModelTypeName("user_app");
-		member.setName("app");
-		member.setMemberName("app");
+	public ProcessInstance processInstance() {
+		ProcessInstance member = new ProcessInstance();
+		member.setModelTypeName("process_instance");
+		member.setName("process_instance");
+		member.setMemberName("processInstance");
 		member.setReferDirection(true);
-		member.setRelationName("app");
+		member.setRelationName("processInstance");
+		append(member);
+		return member;
+	}
+
+	public NodeInstanceStatus status() {
+		NodeInstanceStatus member = new NodeInstanceStatus();
+		member.setModelTypeName("node_instance_status");
+		member.setName("status");
+		member.setMemberName("status");
+		member.setReferDirection(true);
+		member.setRelationName("status");
 		append(member);
 		return member;
 	}
@@ -39,36 +50,36 @@ public class QuickLink extends BaseModelBean{
 
 	public StringAttribute name(){
 		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
+		member.setModelTypeName("string_longtext");
 		// member.setName("name");
 		member.setName("name");
 		useMember(member);
 		return member;
 	}
 
-	public StringAttribute icon(){
+	public StringAttribute nodeDefinitionId(){
 		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
-		// member.setName("icon");
-		member.setName("icon");
+		member.setModelTypeName("string_longtext");
+		// member.setName("nodeDefinitionId");
+		member.setName("node_definition_id");
 		useMember(member);
 		return member;
 	}
 
-	public StringAttribute imagePath(){
+	public StringAttribute processResult(){
 		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string_image");
-		// member.setName("imagePath");
-		member.setName("image_path");
+		member.setModelTypeName("string_longtext");
+		// member.setName("processResult");
+		member.setName("process_result");
 		useMember(member);
 		return member;
 	}
 
-	public StringAttribute linkTarget(){
-		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
-		// member.setName("linkTarget");
-		member.setName("link_target");
+	public DateTimeAttribute updateTime(){
+		DateTimeAttribute member = new DateTimeAttribute();
+		member.setModelTypeName("date_time_update");
+		// member.setName("updateTime");
+		member.setName("update_time");
 		useMember(member);
 		return member;
 	}

@@ -14,7 +14,7 @@ public class TreeNode extends BaseModelBean{
 
 	// 被引用的对象
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
@@ -72,9 +72,9 @@ public class TreeNode extends BaseModelBean{
 	}
 
 
-	
+
 }
-	
+
 
 
 

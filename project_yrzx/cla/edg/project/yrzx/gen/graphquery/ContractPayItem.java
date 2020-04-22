@@ -18,6 +18,7 @@ public class ContractPayItem extends BaseModelBean{
 		member.setName("contract");
 		member.setMemberName("contract");
 		member.setReferDirection(true);
+		member.setRelationName("contract");
 		append(member);
 		return member;
 	}
@@ -28,6 +29,7 @@ public class ContractPayItem extends BaseModelBean{
 		member.setName("payer");
 		member.setMemberName("payer");
 		member.setReferDirection(true);
+		member.setRelationName("payer");
 		append(member);
 		return member;
 	}
@@ -38,6 +40,7 @@ public class ContractPayItem extends BaseModelBean{
 		member.setName("payee");
 		member.setMemberName("payee");
 		member.setReferDirection(true);
+		member.setRelationName("payee");
 		append(member);
 		return member;
 	}
@@ -48,23 +51,25 @@ public class ContractPayItem extends BaseModelBean{
 		member.setName("pay_item_status");
 		member.setMemberName("payItemStatus");
 		member.setReferDirection(true);
+		member.setRelationName("payItemStatus");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
-	
+
 	public CommissionPayItem commissionPayItemList() {
 		CommissionPayItem member = new CommissionPayItem();
 		member.setModelTypeName("commission_pay_item");
 		member.setName("contract_pay_item");
 		member.setMemberName("commissionPayItemList");
+		member.setRelationName("contractPayItem");
 		member.setReferDirection(false);
 		append(member);
 		return member;
 	}
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
@@ -122,6 +127,6 @@ public class ContractPayItem extends BaseModelBean{
 	}
 
 
-	
+
 }
 

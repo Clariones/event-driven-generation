@@ -18,6 +18,7 @@ public class License extends BaseModelBean{
 		member.setName("license_category");
 		member.setMemberName("licenseCategory");
 		member.setReferDirection(true);
+		member.setRelationName("licenseCategory");
 		append(member);
 		return member;
 	}
@@ -28,6 +29,7 @@ public class License extends BaseModelBean{
 		member.setName("license_type");
 		member.setMemberName("licenseType");
 		member.setReferDirection(true);
+		member.setRelationName("licenseType");
 		append(member);
 		return member;
 	}
@@ -38,6 +40,7 @@ public class License extends BaseModelBean{
 		member.setName("validate_status");
 		member.setMemberName("validateStatus");
 		member.setReferDirection(true);
+		member.setRelationName("validateStatus");
 		append(member);
 		return member;
 	}
@@ -48,6 +51,7 @@ public class License extends BaseModelBean{
 		member.setName("owner");
 		member.setMemberName("owner");
 		member.setReferDirection(true);
+		member.setRelationName("owner");
 		append(member);
 		return member;
 	}
@@ -58,6 +62,7 @@ public class License extends BaseModelBean{
 		member.setName("platform");
 		member.setMemberName("platform");
 		member.setReferDirection(true);
+		member.setRelationName("platform");
 		append(member);
 		return member;
 	}
@@ -68,6 +73,7 @@ public class License extends BaseModelBean{
 		member.setName("authenticator");
 		member.setMemberName("authenticator");
 		member.setReferDirection(true);
+		member.setRelationName("authenticator");
 		append(member);
 		return member;
 	}
@@ -78,13 +84,14 @@ public class License extends BaseModelBean{
 		member.setName("authenticate_status");
 		member.setMemberName("authenticateStatus");
 		member.setReferDirection(true);
+		member.setRelationName("authenticateStatus");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
@@ -178,6 +185,6 @@ public class License extends BaseModelBean{
 	}
 
 
-	
+
 }
 

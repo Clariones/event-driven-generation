@@ -18,33 +18,36 @@ public class RecommendationType extends BaseModelBean{
 		member.setName("platform_configuration");
 		member.setMemberName("platformConfiguration");
 		member.setReferDirection(true);
+		member.setRelationName("platformConfiguration");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
-	
+
 	public Recommendation recommendationList() {
 		Recommendation member = new Recommendation();
 		member.setModelTypeName("recommendation");
 		member.setName("type");
 		member.setMemberName("recommendationList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public EventApplyRecommendation eventApplyRecommendationList() {
-		EventApplyRecommendation member = new EventApplyRecommendation();
-		member.setModelTypeName("event_apply_recommendation");
-		member.setName("recommendation_type");
-		member.setMemberName("eventApplyRecommendationList");
+		member.setRelationName("type");
 		member.setReferDirection(false);
 		append(member);
 		return member;
 	}
 
-	
+	public EventApplyRecommendation eventApplyRecommendationList() {
+		EventApplyRecommendation member = new EventApplyRecommendation();
+		member.setModelTypeName("event_apply_recommendation");
+		member.setName("recommendation_type");
+		member.setMemberName("eventApplyRecommendationList");
+		member.setRelationName("recommendationType");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+
 	// 普通属性
 
 	public StringAttribute id(){
@@ -84,6 +87,6 @@ public class RecommendationType extends BaseModelBean{
 	}
 
 
-	
+
 }
 

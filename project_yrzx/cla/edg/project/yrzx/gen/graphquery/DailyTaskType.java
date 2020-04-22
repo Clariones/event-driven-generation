@@ -18,6 +18,7 @@ public class DailyTaskType extends BaseModelBean{
 		member.setName("category");
 		member.setMemberName("category");
 		member.setReferDirection(true);
+		member.setRelationName("category");
 		append(member);
 		return member;
 	}
@@ -28,53 +29,58 @@ public class DailyTaskType extends BaseModelBean{
 		member.setName("platform");
 		member.setMemberName("platform");
 		member.setReferDirection(true);
+		member.setRelationName("platform");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
-	
+
 	public DailyTaskTemplate dailyTaskTemplateList() {
 		DailyTaskTemplate member = new DailyTaskTemplate();
 		member.setModelTypeName("daily_task_template");
 		member.setName("daily_task_type");
 		member.setMemberName("dailyTaskTemplateList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public ProjectMaterial projectMaterialList() {
-		ProjectMaterial member = new ProjectMaterial();
-		member.setModelTypeName("project_material");
-		member.setName("daily_task_type");
-		member.setMemberName("projectMaterialList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public EventProjectCommand eventProjectCommandList() {
-		EventProjectCommand member = new EventProjectCommand();
-		member.setModelTypeName("event_project_command");
-		member.setName("directive_type");
-		member.setMemberName("eventProjectCommandList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public EventAcceptanceApplication eventAcceptanceApplicationList() {
-		EventAcceptanceApplication member = new EventAcceptanceApplication();
-		member.setModelTypeName("event_acceptance_application");
-		member.setName("acceptance_type");
-		member.setMemberName("eventAcceptanceApplicationList");
+		member.setRelationName("dailyTaskType");
 		member.setReferDirection(false);
 		append(member);
 		return member;
 	}
 
-	
+	public ProjectMaterial projectMaterialList() {
+		ProjectMaterial member = new ProjectMaterial();
+		member.setModelTypeName("project_material");
+		member.setName("daily_task_type");
+		member.setMemberName("projectMaterialList");
+		member.setRelationName("dailyTaskType");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EventProjectCommand eventProjectCommandList() {
+		EventProjectCommand member = new EventProjectCommand();
+		member.setModelTypeName("event_project_command");
+		member.setName("directive_type");
+		member.setMemberName("eventProjectCommandList");
+		member.setRelationName("directiveType");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EventAcceptanceApplication eventAcceptanceApplicationList() {
+		EventAcceptanceApplication member = new EventAcceptanceApplication();
+		member.setModelTypeName("event_acceptance_application");
+		member.setName("acceptance_type");
+		member.setMemberName("eventAcceptanceApplicationList");
+		member.setRelationName("acceptanceType");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+
 	// 普通属性
 
 	public StringAttribute id(){
@@ -104,6 +110,15 @@ public class DailyTaskType extends BaseModelBean{
 		return member;
 	}
 
+	public NumberAttribute displayOrder(){
+		NumberAttribute member = new NumberAttribute();
+		member.setModelTypeName("int");
+		// member.setName("displayOrder");
+		member.setName("display_order");
+		useMember(member);
+		return member;
+	}
+
 	public StringAttribute icon(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_image");
@@ -123,6 +138,6 @@ public class DailyTaskType extends BaseModelBean{
 	}
 
 
-	
+
 }
 

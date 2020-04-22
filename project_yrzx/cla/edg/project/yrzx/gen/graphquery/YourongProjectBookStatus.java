@@ -28,23 +28,25 @@ public class YourongProjectBookStatus extends BaseModelBean{
 		member.setName("platform");
 		member.setMemberName("platform");
 		member.setReferDirection(true);
+		member.setRelationName("platform");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
-	
+
 	public YourongProjectBook yourongProjectBookList() {
 		YourongProjectBook member = new YourongProjectBook();
 		member.setModelTypeName("yourong_project_book");
 		member.setName("status");
 		member.setMemberName("yourongProjectBookList");
+		member.setRelationName("status");
 		member.setReferDirection(false);
 		append(member);
 		return member;
 	}
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
@@ -84,6 +86,6 @@ public class YourongProjectBookStatus extends BaseModelBean{
 	}
 
 
-	
+
 }
 

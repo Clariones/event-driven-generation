@@ -13,38 +13,41 @@ public class UserDomain extends BaseModelBean{
 	// 引用的对象
 
 	// 被引用的对象
-	
+
 	public UserWhiteList userWhiteListList() {
 		UserWhiteList member = new UserWhiteList();
 		member.setModelTypeName("user_white_list");
 		member.setName("domain");
 		member.setMemberName("userWhiteListList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public SecUser secUserList() {
-		SecUser member = new SecUser();
-		member.setModelTypeName("sec_user");
-		member.setName("domain");
-		member.setMemberName("secUserList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public PublicKeyType publicKeyTypeList() {
-		PublicKeyType member = new PublicKeyType();
-		member.setModelTypeName("public_key_type");
-		member.setName("domain");
-		member.setMemberName("publicKeyTypeList");
+		member.setRelationName("domain");
 		member.setReferDirection(false);
 		append(member);
 		return member;
 	}
 
-	
+	public SecUser secUserList() {
+		SecUser member = new SecUser();
+		member.setModelTypeName("sec_user");
+		member.setName("domain");
+		member.setMemberName("secUserList");
+		member.setRelationName("domain");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public PublicKeyType publicKeyTypeList() {
+		PublicKeyType member = new PublicKeyType();
+		member.setModelTypeName("public_key_type");
+		member.setName("domain");
+		member.setMemberName("publicKeyTypeList");
+		member.setRelationName("domain");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+
 	// 普通属性
 
 	public StringAttribute id(){
@@ -75,6 +78,6 @@ public class UserDomain extends BaseModelBean{
 	}
 
 
-	
+
 }
 

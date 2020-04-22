@@ -18,6 +18,7 @@ public class StandardContract extends BaseModelBean{
 		member.setName("party_a");
 		member.setMemberName("partyA");
 		member.setReferDirection(true);
+		member.setRelationName("partyA");
 		append(member);
 		return member;
 	}
@@ -28,6 +29,7 @@ public class StandardContract extends BaseModelBean{
 		member.setName("party_b");
 		member.setMemberName("partyB");
 		member.setReferDirection(true);
+		member.setRelationName("partyB");
 		append(member);
 		return member;
 	}
@@ -38,6 +40,7 @@ public class StandardContract extends BaseModelBean{
 		member.setName("contract_type");
 		member.setMemberName("contractType");
 		member.setReferDirection(true);
+		member.setRelationName("contractType");
 		append(member);
 		return member;
 	}
@@ -48,6 +51,7 @@ public class StandardContract extends BaseModelBean{
 		member.setName("contract_template");
 		member.setMemberName("contractTemplate");
 		member.setReferDirection(true);
+		member.setRelationName("contractTemplate");
 		append(member);
 		return member;
 	}
@@ -58,6 +62,7 @@ public class StandardContract extends BaseModelBean{
 		member.setName("submitter");
 		member.setMemberName("submitter");
 		member.setReferDirection(true);
+		member.setRelationName("submitter");
 		append(member);
 		return member;
 	}
@@ -68,6 +73,7 @@ public class StandardContract extends BaseModelBean{
 		member.setName("project");
 		member.setMemberName("project");
 		member.setReferDirection(true);
+		member.setRelationName("project");
 		append(member);
 		return member;
 	}
@@ -78,6 +84,7 @@ public class StandardContract extends BaseModelBean{
 		member.setName("work_package");
 		member.setMemberName("workPackage");
 		member.setReferDirection(true);
+		member.setRelationName("workPackage");
 		append(member);
 		return member;
 	}
@@ -88,6 +95,7 @@ public class StandardContract extends BaseModelBean{
 		member.setName("task");
 		member.setMemberName("task");
 		member.setReferDirection(true);
+		member.setRelationName("task");
 		append(member);
 		return member;
 	}
@@ -98,33 +106,36 @@ public class StandardContract extends BaseModelBean{
 		member.setName("platform");
 		member.setMemberName("platform");
 		member.setReferDirection(true);
+		member.setRelationName("platform");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
-	
+
 	public ContractPayItem contractPayItemList() {
 		ContractPayItem member = new ContractPayItem();
 		member.setModelTypeName("contract_pay_item");
 		member.setName("contract");
 		member.setMemberName("contractPayItemList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public CommissionPayItem commissionPayItemList() {
-		CommissionPayItem member = new CommissionPayItem();
-		member.setModelTypeName("commission_pay_item");
-		member.setName("contract");
-		member.setMemberName("commissionPayItemList");
+		member.setRelationName("contract");
 		member.setReferDirection(false);
 		append(member);
 		return member;
 	}
 
-	
+	public CommissionPayItem commissionPayItemList() {
+		CommissionPayItem member = new CommissionPayItem();
+		member.setModelTypeName("commission_pay_item");
+		member.setName("contract");
+		member.setMemberName("commissionPayItemList");
+		member.setRelationName("contract");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+
 	// 普通属性
 
 	public StringAttribute id(){
@@ -227,6 +238,6 @@ public class StandardContract extends BaseModelBean{
 	}
 
 
-	
+
 }
 

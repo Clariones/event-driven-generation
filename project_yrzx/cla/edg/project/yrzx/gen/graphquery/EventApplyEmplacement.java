@@ -18,6 +18,7 @@ public class EventApplyEmplacement extends BaseModelBean{
 		member.setName("partner_type");
 		member.setMemberName("partnerType");
 		member.setReferDirection(true);
+		member.setRelationName("partnerType");
 		append(member);
 		return member;
 	}
@@ -28,6 +29,7 @@ public class EventApplyEmplacement extends BaseModelBean{
 		member.setName("service_location");
 		member.setMemberName("serviceLocation");
 		member.setReferDirection(true);
+		member.setRelationName("serviceLocation");
 		append(member);
 		return member;
 	}
@@ -38,13 +40,14 @@ public class EventApplyEmplacement extends BaseModelBean{
 		member.setName("change_request");
 		member.setMemberName("changeRequest");
 		member.setReferDirection(true);
+		member.setRelationName("changeRequest");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
@@ -147,6 +150,6 @@ public class EventApplyEmplacement extends BaseModelBean{
 	}
 
 
-	
+
 }
 

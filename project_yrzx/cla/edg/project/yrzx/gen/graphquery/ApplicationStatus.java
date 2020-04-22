@@ -22,53 +22,58 @@ public class ApplicationStatus extends BaseModelBean{
 		member.setName("platform_configuration");
 		member.setMemberName("platformConfiguration");
 		member.setReferDirection(true);
+		member.setRelationName("platformConfiguration");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
-	
+
 	public Recommendation recommendationList() {
 		Recommendation member = new Recommendation();
 		member.setModelTypeName("recommendation");
 		member.setName("status");
 		member.setMemberName("recommendationList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public EmplacementApplication emplacementApplicationList() {
-		EmplacementApplication member = new EmplacementApplication();
-		member.setModelTypeName("emplacement_application");
-		member.setName("status");
-		member.setMemberName("emplacementApplicationList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public CustomerProjectApplication customerProjectApplicationList() {
-		CustomerProjectApplication member = new CustomerProjectApplication();
-		member.setModelTypeName("customer_project_application");
-		member.setName("status");
-		member.setMemberName("customerProjectApplicationList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public PartnerSettlementApplication partnerSettlementApplicationList() {
-		PartnerSettlementApplication member = new PartnerSettlementApplication();
-		member.setModelTypeName("partner_settlement_application");
-		member.setName("status");
-		member.setMemberName("partnerSettlementApplicationList");
+		member.setRelationName("status");
 		member.setReferDirection(false);
 		append(member);
 		return member;
 	}
 
-	
+	public EmplacementApplication emplacementApplicationList() {
+		EmplacementApplication member = new EmplacementApplication();
+		member.setModelTypeName("emplacement_application");
+		member.setName("status");
+		member.setMemberName("emplacementApplicationList");
+		member.setRelationName("status");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public CustomerProjectApplication customerProjectApplicationList() {
+		CustomerProjectApplication member = new CustomerProjectApplication();
+		member.setModelTypeName("customer_project_application");
+		member.setName("status");
+		member.setMemberName("customerProjectApplicationList");
+		member.setRelationName("status");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public PartnerSettlementApplication partnerSettlementApplicationList() {
+		PartnerSettlementApplication member = new PartnerSettlementApplication();
+		member.setModelTypeName("partner_settlement_application");
+		member.setName("status");
+		member.setMemberName("partnerSettlementApplicationList");
+		member.setRelationName("status");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+
 	// 普通属性
 
 	public StringAttribute id(){
@@ -108,6 +113,6 @@ public class ApplicationStatus extends BaseModelBean{
 	}
 
 
-	
+
 }
 

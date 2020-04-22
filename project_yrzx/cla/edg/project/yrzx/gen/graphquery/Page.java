@@ -25,6 +25,7 @@ public class Page extends BaseModelBean{
 		member.setName("page_type");
 		member.setMemberName("pageType");
 		member.setReferDirection(true);
+		member.setRelationName("pageType");
 		append(member);
 		return member;
 	}
@@ -35,53 +36,58 @@ public class Page extends BaseModelBean{
 		member.setName("mobile_app");
 		member.setMemberName("mobileApp");
 		member.setReferDirection(true);
+		member.setRelationName("mobileApp");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
-	
+
 	public Slide slideList() {
 		Slide member = new Slide();
 		member.setModelTypeName("slide");
 		member.setName("page");
 		member.setMemberName("slideList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public UiAction uiActionList() {
-		UiAction member = new UiAction();
-		member.setModelTypeName("ui_action");
-		member.setName("page");
-		member.setMemberName("uiActionList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public Section sectionList() {
-		Section member = new Section();
-		member.setModelTypeName("section");
-		member.setName("page");
-		member.setMemberName("sectionList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public WelcomeSlide welcomeSlideList() {
-		WelcomeSlide member = new WelcomeSlide();
-		member.setModelTypeName("welcome_slide");
-		member.setName("show_in");
-		member.setMemberName("welcomeSlideList");
+		member.setRelationName("page");
 		member.setReferDirection(false);
 		append(member);
 		return member;
 	}
 
-	
+	public UiAction uiActionList() {
+		UiAction member = new UiAction();
+		member.setModelTypeName("ui_action");
+		member.setName("page");
+		member.setMemberName("uiActionList");
+		member.setRelationName("page");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public Section sectionList() {
+		Section member = new Section();
+		member.setModelTypeName("section");
+		member.setName("page");
+		member.setMemberName("sectionList");
+		member.setRelationName("page");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public WelcomeSlide welcomeSlideList() {
+		WelcomeSlide member = new WelcomeSlide();
+		member.setModelTypeName("welcome_slide");
+		member.setName("show_in");
+		member.setMemberName("welcomeSlideList");
+		member.setRelationName("showIn");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+
 	// 普通属性
 
 	public StringAttribute id(){
@@ -130,6 +136,6 @@ public class Page extends BaseModelBean{
 	}
 
 
-	
+
 }
 

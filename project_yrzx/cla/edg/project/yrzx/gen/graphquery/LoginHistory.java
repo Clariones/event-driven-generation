@@ -18,13 +18,14 @@ public class LoginHistory extends BaseModelBean{
 		member.setName("sec_user");
 		member.setMemberName("secUser");
 		member.setReferDirection(true);
+		member.setRelationName("secUser");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
@@ -73,6 +74,6 @@ public class LoginHistory extends BaseModelBean{
 	}
 
 
-	
+
 }
 

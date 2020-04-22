@@ -18,6 +18,7 @@ public class Recommendation extends BaseModelBean{
 		member.setName("type");
 		member.setMemberName("type");
 		member.setReferDirection(true);
+		member.setRelationName("type");
 		append(member);
 		return member;
 	}
@@ -28,6 +29,7 @@ public class Recommendation extends BaseModelBean{
 		member.setName("status");
 		member.setMemberName("status");
 		member.setReferDirection(true);
+		member.setRelationName("status");
 		append(member);
 		return member;
 	}
@@ -38,6 +40,7 @@ public class Recommendation extends BaseModelBean{
 		member.setName("applicant_merchant");
 		member.setMemberName("applicantMerchant");
 		member.setReferDirection(true);
+		member.setRelationName("applicantMerchant");
 		append(member);
 		return member;
 	}
@@ -48,6 +51,7 @@ public class Recommendation extends BaseModelBean{
 		member.setName("applicant_employee");
 		member.setMemberName("applicantEmployee");
 		member.setReferDirection(true);
+		member.setRelationName("applicantEmployee");
 		append(member);
 		return member;
 	}
@@ -58,13 +62,14 @@ public class Recommendation extends BaseModelBean{
 		member.setName("platform");
 		member.setMemberName("platform");
 		member.setReferDirection(true);
+		member.setRelationName("platform");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
@@ -140,6 +145,6 @@ public class Recommendation extends BaseModelBean{
 	}
 
 
-	
+
 }
 

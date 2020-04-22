@@ -27,13 +27,14 @@ public class ProjectPhaseType extends BaseModelBean{
 		member.setName("platform");
 		member.setMemberName("platform");
 		member.setReferDirection(true);
+		member.setRelationName("platform");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
@@ -73,6 +74,6 @@ public class ProjectPhaseType extends BaseModelBean{
 	}
 
 
-	
+
 }
 

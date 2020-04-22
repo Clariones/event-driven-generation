@@ -22,23 +22,25 @@ public class ValidateStatus extends BaseModelBean{
 		member.setName("platform");
 		member.setMemberName("platform");
 		member.setReferDirection(true);
+		member.setRelationName("platform");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
-	
+
 	public License licenseList() {
 		License member = new License();
 		member.setModelTypeName("license");
 		member.setName("validate_status");
 		member.setMemberName("licenseList");
+		member.setRelationName("validateStatus");
 		member.setReferDirection(false);
 		append(member);
 		return member;
 	}
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
@@ -78,6 +80,6 @@ public class ValidateStatus extends BaseModelBean{
 	}
 
 
-	
+
 }
 

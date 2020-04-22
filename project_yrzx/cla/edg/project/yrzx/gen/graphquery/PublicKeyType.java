@@ -18,23 +18,25 @@ public class PublicKeyType extends BaseModelBean{
 		member.setName("domain");
 		member.setMemberName("domain");
 		member.setReferDirection(true);
+		member.setRelationName("domain");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
-	
+
 	public KeypairIdentify keypairIdentifyList() {
 		KeypairIdentify member = new KeypairIdentify();
 		member.setModelTypeName("keypair_identify");
 		member.setName("key_type");
 		member.setMemberName("keypairIdentifyList");
+		member.setRelationName("keyType");
 		member.setReferDirection(false);
 		append(member);
 		return member;
 	}
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
@@ -74,6 +76,6 @@ public class PublicKeyType extends BaseModelBean{
 	}
 
 
-	
+
 }
 

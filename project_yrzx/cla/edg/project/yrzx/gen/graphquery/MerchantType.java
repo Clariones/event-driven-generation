@@ -20,23 +20,25 @@ public class MerchantType extends BaseModelBean{
 		member.setName("platform");
 		member.setMemberName("platform");
 		member.setReferDirection(true);
+		member.setRelationName("platform");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
-	
+
 	public Merchant merchantList() {
 		Merchant member = new Merchant();
 		member.setModelTypeName("merchant");
 		member.setName("merchant_type");
 		member.setMemberName("merchantList");
+		member.setRelationName("merchantType");
 		member.setReferDirection(false);
 		append(member);
 		return member;
 	}
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
@@ -76,6 +78,6 @@ public class MerchantType extends BaseModelBean{
 	}
 
 
-	
+
 }
 

@@ -18,6 +18,7 @@ public class ProjectNomination extends BaseModelBean{
 		member.setName("project");
 		member.setMemberName("project");
 		member.setReferDirection(true);
+		member.setRelationName("project");
 		append(member);
 		return member;
 	}
@@ -28,6 +29,7 @@ public class ProjectNomination extends BaseModelBean{
 		member.setName("worker");
 		member.setMemberName("worker");
 		member.setReferDirection(true);
+		member.setRelationName("worker");
 		append(member);
 		return member;
 	}
@@ -38,6 +40,7 @@ public class ProjectNomination extends BaseModelBean{
 		member.setName("project_role");
 		member.setMemberName("projectRole");
 		member.setReferDirection(true);
+		member.setRelationName("projectRole");
 		append(member);
 		return member;
 	}
@@ -48,6 +51,7 @@ public class ProjectNomination extends BaseModelBean{
 		member.setName("merchant");
 		member.setMemberName("merchant");
 		member.setReferDirection(true);
+		member.setRelationName("merchant");
 		append(member);
 		return member;
 	}
@@ -58,23 +62,25 @@ public class ProjectNomination extends BaseModelBean{
 		member.setName("platform");
 		member.setMemberName("platform");
 		member.setReferDirection(true);
+		member.setRelationName("platform");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
-	
+
 	public ProjectMaterialReviewRecord projectMaterialReviewRecordList() {
 		ProjectMaterialReviewRecord member = new ProjectMaterialReviewRecord();
 		member.setModelTypeName("project_material_review_record");
 		member.setName("reviewer");
 		member.setMemberName("projectMaterialReviewRecordList");
+		member.setRelationName("reviewer");
 		member.setReferDirection(false);
 		append(member);
 		return member;
 	}
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
@@ -150,6 +156,6 @@ public class ProjectNomination extends BaseModelBean{
 	}
 
 
-	
+
 }
 

@@ -25,33 +25,36 @@ public class WorkingStatus extends BaseModelBean{
 		member.setName("platform");
 		member.setMemberName("platform");
 		member.setReferDirection(true);
+		member.setRelationName("platform");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
-	
+
 	public Project projectListAsDesignStatus() {
 		Project member = new Project();
 		member.setModelTypeName("project");
 		member.setName("design_status");
 		member.setMemberName("projectListAsDesignStatus");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public Project projectListAsConstructionStatus() {
-		Project member = new Project();
-		member.setModelTypeName("project");
-		member.setName("construction_status");
-		member.setMemberName("projectListAsConstructionStatus");
+		member.setRelationName("designStatus");
 		member.setReferDirection(false);
 		append(member);
 		return member;
 	}
 
-	
+	public Project projectListAsConstructionStatus() {
+		Project member = new Project();
+		member.setModelTypeName("project");
+		member.setName("construction_status");
+		member.setMemberName("projectListAsConstructionStatus");
+		member.setRelationName("designStatus");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+
 	// 普通属性
 
 	public StringAttribute id(){
@@ -91,6 +94,6 @@ public class WorkingStatus extends BaseModelBean{
 	}
 
 
-	
+
 }
 

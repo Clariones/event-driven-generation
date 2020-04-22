@@ -18,6 +18,7 @@ public class Merchant extends BaseModelBean{
 		member.setName("merchant_type");
 		member.setMemberName("merchantType");
 		member.setReferDirection(true);
+		member.setRelationName("merchantType");
 		append(member);
 		return member;
 	}
@@ -28,6 +29,7 @@ public class Merchant extends BaseModelBean{
 		member.setName("merchant_base_type");
 		member.setMemberName("merchantBaseType");
 		member.setReferDirection(true);
+		member.setRelationName("merchantBaseType");
 		append(member);
 		return member;
 	}
@@ -38,6 +40,7 @@ public class Merchant extends BaseModelBean{
 		member.setName("merchant_status");
 		member.setMemberName("merchantStatus");
 		member.setReferDirection(true);
+		member.setRelationName("merchantStatus");
 		append(member);
 		return member;
 	}
@@ -48,233 +51,256 @@ public class Merchant extends BaseModelBean{
 		member.setName("platform");
 		member.setMemberName("platform");
 		member.setReferDirection(true);
+		member.setRelationName("platform");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
-	
+
 	public StandardContract standardContractListAsPartyA() {
 		StandardContract member = new StandardContract();
 		member.setModelTypeName("standard_contract");
 		member.setName("party_a");
 		member.setMemberName("standardContractListAsPartyA");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public StandardContract standardContractListAsPartyB() {
-		StandardContract member = new StandardContract();
-		member.setModelTypeName("standard_contract");
-		member.setName("party_b");
-		member.setMemberName("standardContractListAsPartyB");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public ContractPayItem contractPayItemListAsPayer() {
-		ContractPayItem member = new ContractPayItem();
-		member.setModelTypeName("contract_pay_item");
-		member.setName("payer");
-		member.setMemberName("contractPayItemListAsPayer");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public ContractPayItem contractPayItemListAsPayee() {
-		ContractPayItem member = new ContractPayItem();
-		member.setModelTypeName("contract_pay_item");
-		member.setName("payee");
-		member.setMemberName("contractPayItemListAsPayee");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public CommissionPayItem commissionPayItemListAsPayer() {
-		CommissionPayItem member = new CommissionPayItem();
-		member.setModelTypeName("commission_pay_item");
-		member.setName("payer");
-		member.setMemberName("commissionPayItemListAsPayer");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public CommissionPayItem commissionPayItemListAsPayee() {
-		CommissionPayItem member = new CommissionPayItem();
-		member.setModelTypeName("commission_pay_item");
-		member.setName("payee");
-		member.setMemberName("commissionPayItemListAsPayee");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public Article articleList() {
-		Article member = new Article();
-		member.setModelTypeName("article");
-		member.setName("post_by_merchant");
-		member.setMemberName("articleList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public MerchantActiveNomination merchantActiveNominationList() {
-		MerchantActiveNomination member = new MerchantActiveNomination();
-		member.setModelTypeName("merchant_active_nomination");
-		member.setName("merchant");
-		member.setMemberName("merchantActiveNominationList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public License licenseList() {
-		License member = new License();
-		member.setModelTypeName("license");
-		member.setName("owner");
-		member.setMemberName("licenseList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public ProjectNomination projectNominationList() {
-		ProjectNomination member = new ProjectNomination();
-		member.setModelTypeName("project_nomination");
-		member.setName("merchant");
-		member.setMemberName("projectNominationList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public Job jobList() {
-		Job member = new Job();
-		member.setModelTypeName("job");
-		member.setName("merchant");
-		member.setMemberName("jobList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public EmployeeNomination employeeNominationListAsEmployee() {
-		EmployeeNomination member = new EmployeeNomination();
-		member.setModelTypeName("employee_nomination");
-		member.setName("employee");
-		member.setMemberName("employeeNominationListAsEmployee");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public EmployeeNomination employeeNominationListAsEmployer() {
-		EmployeeNomination member = new EmployeeNomination();
-		member.setModelTypeName("employee_nomination");
-		member.setName("employer");
-		member.setMemberName("employeeNominationListAsEmployer");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public WorkPackage workPackageList() {
-		WorkPackage member = new WorkPackage();
-		member.setModelTypeName("work_package");
-		member.setName("vendor");
-		member.setMemberName("workPackageList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public Project projectListAsProjectOwner() {
-		Project member = new Project();
-		member.setModelTypeName("project");
-		member.setName("project_owner");
-		member.setMemberName("projectListAsProjectOwner");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public Project projectListAsStore() {
-		Project member = new Project();
-		member.setModelTypeName("project");
-		member.setName("store");
-		member.setMemberName("projectListAsStore");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public Project projectListAsPartner() {
-		Project member = new Project();
-		member.setModelTypeName("project");
-		member.setName("partner");
-		member.setMemberName("projectListAsPartner");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public Recommendation recommendationList() {
-		Recommendation member = new Recommendation();
-		member.setModelTypeName("recommendation");
-		member.setName("applicant_merchant");
-		member.setMemberName("recommendationList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public EmplacementApplication emplacementApplicationList() {
-		EmplacementApplication member = new EmplacementApplication();
-		member.setModelTypeName("emplacement_application");
-		member.setName("applicant_merchant");
-		member.setMemberName("emplacementApplicationList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public CustomerProjectApplication customerProjectApplicationList() {
-		CustomerProjectApplication member = new CustomerProjectApplication();
-		member.setModelTypeName("customer_project_application");
-		member.setName("applicant_merchant");
-		member.setMemberName("customerProjectApplicationList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public PartnerSettlementApplication partnerSettlementApplicationList() {
-		PartnerSettlementApplication member = new PartnerSettlementApplication();
-		member.setModelTypeName("partner_settlement_application");
-		member.setName("applicant_merchant");
-		member.setMemberName("partnerSettlementApplicationList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public EventShowAllType eventShowAllTypeList() {
-		EventShowAllType member = new EventShowAllType();
-		member.setModelTypeName("event_show_all_type");
-		member.setName("field_biz_candidate");
-		member.setMemberName("eventShowAllTypeList");
+		member.setRelationName("partyA");
 		member.setReferDirection(false);
 		append(member);
 		return member;
 	}
 
-	
+	public StandardContract standardContractListAsPartyB() {
+		StandardContract member = new StandardContract();
+		member.setModelTypeName("standard_contract");
+		member.setName("party_b");
+		member.setMemberName("standardContractListAsPartyB");
+		member.setRelationName("partyA");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ContractPayItem contractPayItemListAsPayer() {
+		ContractPayItem member = new ContractPayItem();
+		member.setModelTypeName("contract_pay_item");
+		member.setName("payer");
+		member.setMemberName("contractPayItemListAsPayer");
+		member.setRelationName("payer");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ContractPayItem contractPayItemListAsPayee() {
+		ContractPayItem member = new ContractPayItem();
+		member.setModelTypeName("contract_pay_item");
+		member.setName("payee");
+		member.setMemberName("contractPayItemListAsPayee");
+		member.setRelationName("payer");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public CommissionPayItem commissionPayItemListAsPayer() {
+		CommissionPayItem member = new CommissionPayItem();
+		member.setModelTypeName("commission_pay_item");
+		member.setName("payer");
+		member.setMemberName("commissionPayItemListAsPayer");
+		member.setRelationName("payer");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public CommissionPayItem commissionPayItemListAsPayee() {
+		CommissionPayItem member = new CommissionPayItem();
+		member.setModelTypeName("commission_pay_item");
+		member.setName("payee");
+		member.setMemberName("commissionPayItemListAsPayee");
+		member.setRelationName("payer");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public Article articleList() {
+		Article member = new Article();
+		member.setModelTypeName("article");
+		member.setName("post_by_merchant");
+		member.setMemberName("articleList");
+		member.setRelationName("postByMerchant");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public MerchantActiveNomination merchantActiveNominationList() {
+		MerchantActiveNomination member = new MerchantActiveNomination();
+		member.setModelTypeName("merchant_active_nomination");
+		member.setName("merchant");
+		member.setMemberName("merchantActiveNominationList");
+		member.setRelationName("merchant");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public License licenseList() {
+		License member = new License();
+		member.setModelTypeName("license");
+		member.setName("owner");
+		member.setMemberName("licenseList");
+		member.setRelationName("owner");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ProjectNomination projectNominationList() {
+		ProjectNomination member = new ProjectNomination();
+		member.setModelTypeName("project_nomination");
+		member.setName("merchant");
+		member.setMemberName("projectNominationList");
+		member.setRelationName("merchant");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public Job jobList() {
+		Job member = new Job();
+		member.setModelTypeName("job");
+		member.setName("merchant");
+		member.setMemberName("jobList");
+		member.setRelationName("merchant");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EmployeeNomination employeeNominationListAsEmployee() {
+		EmployeeNomination member = new EmployeeNomination();
+		member.setModelTypeName("employee_nomination");
+		member.setName("employee");
+		member.setMemberName("employeeNominationListAsEmployee");
+		member.setRelationName("employee");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EmployeeNomination employeeNominationListAsEmployer() {
+		EmployeeNomination member = new EmployeeNomination();
+		member.setModelTypeName("employee_nomination");
+		member.setName("employer");
+		member.setMemberName("employeeNominationListAsEmployer");
+		member.setRelationName("employee");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public WorkPackage workPackageList() {
+		WorkPackage member = new WorkPackage();
+		member.setModelTypeName("work_package");
+		member.setName("vendor");
+		member.setMemberName("workPackageList");
+		member.setRelationName("vendor");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public Project projectListAsProjectOwner() {
+		Project member = new Project();
+		member.setModelTypeName("project");
+		member.setName("project_owner");
+		member.setMemberName("projectListAsProjectOwner");
+		member.setRelationName("projectOwner");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public Project projectListAsStore() {
+		Project member = new Project();
+		member.setModelTypeName("project");
+		member.setName("store");
+		member.setMemberName("projectListAsStore");
+		member.setRelationName("projectOwner");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public Project projectListAsPartner() {
+		Project member = new Project();
+		member.setModelTypeName("project");
+		member.setName("partner");
+		member.setMemberName("projectListAsPartner");
+		member.setRelationName("projectOwner");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public Recommendation recommendationList() {
+		Recommendation member = new Recommendation();
+		member.setModelTypeName("recommendation");
+		member.setName("applicant_merchant");
+		member.setMemberName("recommendationList");
+		member.setRelationName("applicantMerchant");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EmplacementApplication emplacementApplicationList() {
+		EmplacementApplication member = new EmplacementApplication();
+		member.setModelTypeName("emplacement_application");
+		member.setName("applicant_merchant");
+		member.setMemberName("emplacementApplicationList");
+		member.setRelationName("applicantMerchant");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public CustomerProjectApplication customerProjectApplicationList() {
+		CustomerProjectApplication member = new CustomerProjectApplication();
+		member.setModelTypeName("customer_project_application");
+		member.setName("applicant_merchant");
+		member.setMemberName("customerProjectApplicationList");
+		member.setRelationName("applicantMerchant");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public PartnerSettlementApplication partnerSettlementApplicationList() {
+		PartnerSettlementApplication member = new PartnerSettlementApplication();
+		member.setModelTypeName("partner_settlement_application");
+		member.setName("applicant_merchant");
+		member.setMemberName("partnerSettlementApplicationList");
+		member.setRelationName("applicantMerchant");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EventShowAllType eventShowAllTypeList() {
+		EventShowAllType member = new EventShowAllType();
+		member.setModelTypeName("event_show_all_type");
+		member.setName("field_biz_candidate");
+		member.setMemberName("eventShowAllTypeList");
+		member.setRelationName("fieldBizCandidate");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+
 	// 普通属性
 
 	public StringAttribute id(){
@@ -350,6 +376,6 @@ public class Merchant extends BaseModelBean{
 	}
 
 
-	
+
 }
 

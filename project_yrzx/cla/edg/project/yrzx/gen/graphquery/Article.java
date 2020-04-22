@@ -18,6 +18,7 @@ public class Article extends BaseModelBean{
 		member.setName("category");
 		member.setMemberName("category");
 		member.setReferDirection(true);
+		member.setRelationName("category");
 		append(member);
 		return member;
 	}
@@ -28,6 +29,7 @@ public class Article extends BaseModelBean{
 		member.setName("post_by_merchant");
 		member.setMemberName("postByMerchant");
 		member.setReferDirection(true);
+		member.setRelationName("postByMerchant");
 		append(member);
 		return member;
 	}
@@ -38,6 +40,7 @@ public class Article extends BaseModelBean{
 		member.setName("post_by_employee");
 		member.setMemberName("postByEmployee");
 		member.setReferDirection(true);
+		member.setRelationName("postByEmployee");
 		append(member);
 		return member;
 	}
@@ -48,33 +51,36 @@ public class Article extends BaseModelBean{
 		member.setName("platform");
 		member.setMemberName("platform");
 		member.setReferDirection(true);
+		member.setRelationName("platform");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
-	
+
 	public ArticleParagraph articleParagraphList() {
 		ArticleParagraph member = new ArticleParagraph();
 		member.setModelTypeName("article_paragraph");
 		member.setName("article");
 		member.setMemberName("articleParagraphList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public PageArticle pageArticleList() {
-		PageArticle member = new PageArticle();
-		member.setModelTypeName("page_article");
-		member.setName("article");
-		member.setMemberName("pageArticleList");
+		member.setRelationName("article");
 		member.setReferDirection(false);
 		append(member);
 		return member;
 	}
 
-	
+	public PageArticle pageArticleList() {
+		PageArticle member = new PageArticle();
+		member.setModelTypeName("page_article");
+		member.setName("article");
+		member.setMemberName("pageArticleList");
+		member.setRelationName("article");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+
 	// 普通属性
 
 	public StringAttribute id(){
@@ -141,6 +147,6 @@ public class Article extends BaseModelBean{
 	}
 
 
-	
+
 }
 

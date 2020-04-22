@@ -18,13 +18,14 @@ public class UserWhiteList extends BaseModelBean{
 		member.setName("domain");
 		member.setMemberName("domain");
 		member.setReferDirection(true);
+		member.setRelationName("domain");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
@@ -64,6 +65,6 @@ public class UserWhiteList extends BaseModelBean{
 	}
 
 
-	
+
 }
 

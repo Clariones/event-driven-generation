@@ -13,18 +13,19 @@ public class CandidateContainer extends BaseModelBean{
 	// 引用的对象
 
 	// 被引用的对象
-	
+
 	public CandidateElement candidateElementList() {
 		CandidateElement member = new CandidateElement();
 		member.setModelTypeName("candidate_element");
 		member.setName("container");
 		member.setMemberName("candidateElementList");
+		member.setRelationName("container");
 		member.setReferDirection(false);
 		append(member);
 		return member;
 	}
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
@@ -55,6 +56,6 @@ public class CandidateContainer extends BaseModelBean{
 	}
 
 
-	
+
 }
 

@@ -24,23 +24,25 @@ public class PageType extends BaseModelBean{
 		member.setName("mobile_app");
 		member.setMemberName("mobileApp");
 		member.setReferDirection(true);
+		member.setRelationName("mobileApp");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
-	
+
 	public Page pageList() {
 		Page member = new Page();
 		member.setModelTypeName("page");
 		member.setName("page_type");
 		member.setMemberName("pageList");
+		member.setRelationName("pageType");
 		member.setReferDirection(false);
 		append(member);
 		return member;
 	}
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
@@ -89,6 +91,6 @@ public class PageType extends BaseModelBean{
 	}
 
 
-	
+
 }
 

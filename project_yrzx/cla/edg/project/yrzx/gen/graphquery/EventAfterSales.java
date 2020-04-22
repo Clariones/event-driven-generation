@@ -18,6 +18,7 @@ public class EventAfterSales extends BaseModelBean{
 		member.setName("project");
 		member.setMemberName("project");
 		member.setReferDirection(true);
+		member.setRelationName("project");
 		append(member);
 		return member;
 	}
@@ -28,13 +29,14 @@ public class EventAfterSales extends BaseModelBean{
 		member.setName("change_request");
 		member.setMemberName("changeRequest");
 		member.setReferDirection(true);
+		member.setRelationName("changeRequest");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
@@ -119,6 +121,6 @@ public class EventAfterSales extends BaseModelBean{
 	}
 
 
-	
+
 }
 

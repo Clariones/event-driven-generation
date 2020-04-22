@@ -21,23 +21,25 @@ public class ProjectServiceType extends BaseModelBean{
 		member.setName("platform");
 		member.setMemberName("platform");
 		member.setReferDirection(true);
+		member.setRelationName("platform");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
-	
+
 	public Project projectList() {
 		Project member = new Project();
 		member.setModelTypeName("project");
 		member.setName("project_service_type");
 		member.setMemberName("projectList");
+		member.setRelationName("projectServiceType");
 		member.setReferDirection(false);
 		append(member);
 		return member;
 	}
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
@@ -77,6 +79,6 @@ public class ProjectServiceType extends BaseModelBean{
 	}
 
 
-	
+
 }
 

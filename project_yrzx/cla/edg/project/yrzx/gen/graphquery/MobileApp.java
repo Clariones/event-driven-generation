@@ -13,28 +13,30 @@ public class MobileApp extends BaseModelBean{
 	// 引用的对象
 
 	// 被引用的对象
-	
+
 	public Page pageList() {
 		Page member = new Page();
 		member.setModelTypeName("page");
 		member.setName("mobile_app");
 		member.setMemberName("pageList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public PageType pageTypeList() {
-		PageType member = new PageType();
-		member.setModelTypeName("page_type");
-		member.setName("mobile_app");
-		member.setMemberName("pageTypeList");
+		member.setRelationName("mobileApp");
 		member.setReferDirection(false);
 		append(member);
 		return member;
 	}
 
-	
+	public PageType pageTypeList() {
+		PageType member = new PageType();
+		member.setModelTypeName("page_type");
+		member.setName("mobile_app");
+		member.setMemberName("pageTypeList");
+		member.setRelationName("mobileApp");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+
 	// 普通属性
 
 	public StringAttribute id(){
@@ -65,6 +67,6 @@ public class MobileApp extends BaseModelBean{
 	}
 
 
-	
+
 }
 

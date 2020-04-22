@@ -18,23 +18,25 @@ public class LicenseCategory extends BaseModelBean{
 		member.setName("platform");
 		member.setMemberName("platform");
 		member.setReferDirection(true);
+		member.setRelationName("platform");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
-	
+
 	public License licenseList() {
 		License member = new License();
 		member.setModelTypeName("license");
 		member.setName("license_category");
 		member.setMemberName("licenseList");
+		member.setRelationName("licenseCategory");
 		member.setReferDirection(false);
 		append(member);
 		return member;
 	}
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
@@ -83,6 +85,6 @@ public class LicenseCategory extends BaseModelBean{
 	}
 
 
-	
+
 }
 

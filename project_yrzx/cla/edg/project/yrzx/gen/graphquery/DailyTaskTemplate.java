@@ -18,6 +18,7 @@ public class DailyTaskTemplate extends BaseModelBean{
 		member.setName("daily_task_type");
 		member.setMemberName("dailyTaskType");
 		member.setReferDirection(true);
+		member.setRelationName("dailyTaskType");
 		append(member);
 		return member;
 	}
@@ -28,6 +29,7 @@ public class DailyTaskTemplate extends BaseModelBean{
 		member.setName("creator");
 		member.setMemberName("creator");
 		member.setReferDirection(true);
+		member.setRelationName("creator");
 		append(member);
 		return member;
 	}
@@ -38,23 +40,25 @@ public class DailyTaskTemplate extends BaseModelBean{
 		member.setName("platform");
 		member.setMemberName("platform");
 		member.setReferDirection(true);
+		member.setRelationName("platform");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
-	
+
 	public ProjectMaterial projectMaterialList() {
 		ProjectMaterial member = new ProjectMaterial();
 		member.setModelTypeName("project_material");
 		member.setName("daily_task_template");
 		member.setMemberName("projectMaterialList");
+		member.setRelationName("dailyTaskTemplate");
 		member.setReferDirection(false);
 		append(member);
 		return member;
 	}
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
@@ -112,6 +116,6 @@ public class DailyTaskTemplate extends BaseModelBean{
 	}
 
 
-	
+
 }
 

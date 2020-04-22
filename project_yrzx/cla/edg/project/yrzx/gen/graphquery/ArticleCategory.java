@@ -18,33 +18,36 @@ public class ArticleCategory extends BaseModelBean{
 		member.setName("platform_configuration");
 		member.setMemberName("platformConfiguration");
 		member.setReferDirection(true);
+		member.setRelationName("platformConfiguration");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
-	
+
 	public Section sectionList() {
 		Section member = new Section();
 		member.setModelTypeName("section");
 		member.setName("article_category");
 		member.setMemberName("sectionList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public Article articleList() {
-		Article member = new Article();
-		member.setModelTypeName("article");
-		member.setName("category");
-		member.setMemberName("articleList");
+		member.setRelationName("articleCategory");
 		member.setReferDirection(false);
 		append(member);
 		return member;
 	}
 
-	
+	public Article articleList() {
+		Article member = new Article();
+		member.setModelTypeName("article");
+		member.setName("category");
+		member.setMemberName("articleList");
+		member.setRelationName("category");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+
 	// 普通属性
 
 	public StringAttribute id(){
@@ -102,6 +105,6 @@ public class ArticleCategory extends BaseModelBean{
 	}
 
 
-	
+
 }
 

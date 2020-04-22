@@ -18,6 +18,7 @@ public class EventProjectCommand extends BaseModelBean{
 		member.setName("directive_type");
 		member.setMemberName("directiveType");
 		member.setReferDirection(true);
+		member.setRelationName("directiveType");
 		append(member);
 		return member;
 	}
@@ -28,13 +29,14 @@ public class EventProjectCommand extends BaseModelBean{
 		member.setName("change_request");
 		member.setMemberName("changeRequest");
 		member.setReferDirection(true);
+		member.setRelationName("changeRequest");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
@@ -155,6 +157,6 @@ public class EventProjectCommand extends BaseModelBean{
 	}
 
 
-	
+
 }
 

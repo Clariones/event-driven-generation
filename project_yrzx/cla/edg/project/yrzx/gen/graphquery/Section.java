@@ -18,6 +18,7 @@ public class Section extends BaseModelBean{
 		member.setName("page");
 		member.setMemberName("page");
 		member.setReferDirection(true);
+		member.setRelationName("page");
 		append(member);
 		return member;
 	}
@@ -28,23 +29,25 @@ public class Section extends BaseModelBean{
 		member.setName("article_category");
 		member.setMemberName("articleCategory");
 		member.setReferDirection(true);
+		member.setRelationName("articleCategory");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
-	
+
 	public PageArticle pageArticleList() {
 		PageArticle member = new PageArticle();
 		member.setModelTypeName("page_article");
 		member.setName("section");
 		member.setMemberName("pageArticleList");
+		member.setRelationName("section");
 		member.setReferDirection(false);
 		append(member);
 		return member;
 	}
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
@@ -111,6 +114,6 @@ public class Section extends BaseModelBean{
 	}
 
 
-	
+
 }
 

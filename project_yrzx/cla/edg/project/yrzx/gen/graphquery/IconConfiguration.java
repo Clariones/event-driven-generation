@@ -9,14 +9,19 @@ public class IconConfiguration extends BaseModelBean{
 		return "com.yrdec.yrzx.iconconfiguration.IconConfiguration";
 	}
 	// 枚举对象
-	public static EnumAttribute JZLP_RK_SY = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "JZLP_RK_SY");
-	public static EnumAttribute SYLS_RK_SY = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "SYLS_RK_SY");
-	public static EnumAttribute SHXH_RK_SY = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "SHXH_RK_SY");
-	public static EnumAttribute JGDW_RK_SY = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "JGDW_RK_SY");
-	public static EnumAttribute WYZX_GN_SY = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "WYZX_GN_SY");
-	public static EnumAttribute XMTJ_GN_SY = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "XMTJ_GN_SY");
-	public static EnumAttribute XMGL_GN_SY = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "XMGL_GN_SY");
-	public static EnumAttribute XMFM_XM_YW = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "XMFM_XM_YW");
+	public static EnumAttribute SY_RK_JZLP = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "SY_RK_JZLP");
+	public static EnumAttribute SY_RK_SYLS = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "SY_RK_SYLS");
+	public static EnumAttribute SY_RK_SHXH = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "SY_RK_SHXH");
+	public static EnumAttribute SY_RK_JGDW = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "SY_RK_JGDW");
+	public static EnumAttribute SY_GN_WYZX = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "SY_GN_WYZX");
+	public static EnumAttribute SY_GN_XMTJ = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "SY_GN_XMTJ");
+	public static EnumAttribute SY_GN_XMGL = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "SY_GN_XMGL");
+	public static EnumAttribute YM_XM_XMFM = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "YM_XM_XMFM");
+	public static EnumAttribute XM_DT_YRWS = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "XM_DT_YRWS");
+	public static EnumAttribute XM_DT_XMZZ = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "XM_DT_XMZZ");
+	public static EnumAttribute XM_DT_HTRW = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "XM_DT_HTRW");
+	public static EnumAttribute XM_DT_ZLDA = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "XM_DT_ZLDA");
+	public static EnumAttribute TEST_FOR_YR = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "TEST_FOR_YR");
 
 	// 引用的对象
 
@@ -26,13 +31,14 @@ public class IconConfiguration extends BaseModelBean{
 		member.setName("platform_configuration");
 		member.setMemberName("platformConfiguration");
 		member.setReferDirection(true);
+		member.setRelationName("platformConfiguration");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
@@ -90,6 +96,6 @@ public class IconConfiguration extends BaseModelBean{
 	}
 
 
-	
+
 }
 

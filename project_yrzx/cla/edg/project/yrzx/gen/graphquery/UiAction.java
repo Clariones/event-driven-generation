@@ -18,13 +18,14 @@ public class UiAction extends BaseModelBean{
 		member.setName("page");
 		member.setMemberName("page");
 		member.setReferDirection(true);
+		member.setRelationName("page");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
@@ -109,6 +110,6 @@ public class UiAction extends BaseModelBean{
 	}
 
 
-	
+
 }
 

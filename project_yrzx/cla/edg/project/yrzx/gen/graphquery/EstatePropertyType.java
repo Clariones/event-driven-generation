@@ -18,33 +18,36 @@ public class EstatePropertyType extends BaseModelBean{
 		member.setName("platform_configuration");
 		member.setMemberName("platformConfiguration");
 		member.setReferDirection(true);
+		member.setRelationName("platformConfiguration");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
-	
+
 	public CustomerProjectApplication customerProjectApplicationList() {
 		CustomerProjectApplication member = new CustomerProjectApplication();
 		member.setModelTypeName("customer_project_application");
 		member.setName("property_type");
 		member.setMemberName("customerProjectApplicationList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public EventApplyDecoration eventApplyDecorationList() {
-		EventApplyDecoration member = new EventApplyDecoration();
-		member.setModelTypeName("event_apply_decoration");
-		member.setName("property_type");
-		member.setMemberName("eventApplyDecorationList");
+		member.setRelationName("propertyType");
 		member.setReferDirection(false);
 		append(member);
 		return member;
 	}
 
-	
+	public EventApplyDecoration eventApplyDecorationList() {
+		EventApplyDecoration member = new EventApplyDecoration();
+		member.setModelTypeName("event_apply_decoration");
+		member.setName("property_type");
+		member.setMemberName("eventApplyDecorationList");
+		member.setRelationName("propertyType");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+
 	// 普通属性
 
 	public StringAttribute id(){
@@ -75,6 +78,6 @@ public class EstatePropertyType extends BaseModelBean{
 	}
 
 
-	
+
 }
 

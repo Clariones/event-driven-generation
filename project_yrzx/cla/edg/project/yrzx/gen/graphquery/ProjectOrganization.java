@@ -18,6 +18,7 @@ public class ProjectOrganization extends BaseModelBean{
 		member.setName("type");
 		member.setMemberName("type");
 		member.setReferDirection(true);
+		member.setRelationName("type");
 		append(member);
 		return member;
 	}
@@ -28,6 +29,7 @@ public class ProjectOrganization extends BaseModelBean{
 		member.setName("worker");
 		member.setMemberName("worker");
 		member.setReferDirection(true);
+		member.setRelationName("worker");
 		append(member);
 		return member;
 	}
@@ -38,6 +40,7 @@ public class ProjectOrganization extends BaseModelBean{
 		member.setName("project");
 		member.setMemberName("project");
 		member.setReferDirection(true);
+		member.setRelationName("project");
 		append(member);
 		return member;
 	}
@@ -48,13 +51,14 @@ public class ProjectOrganization extends BaseModelBean{
 		member.setName("work_package");
 		member.setMemberName("workPackage");
 		member.setReferDirection(true);
+		member.setRelationName("workPackage");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
@@ -103,6 +107,6 @@ public class ProjectOrganization extends BaseModelBean{
 	}
 
 
-	
+
 }
 

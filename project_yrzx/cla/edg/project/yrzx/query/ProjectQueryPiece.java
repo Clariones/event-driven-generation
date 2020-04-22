@@ -21,6 +21,22 @@ public class ProjectQueryPiece extends PieceOfScript {
 						MODEL.project().projectPhase().eq("${phase code}"))
 				.wants(MODEL.project().projectPhase(), MODEL.project().projectOwner(), MODEL.project().projectImageList(), MODEL.project().projectServiceType(), MODEL.project().constructionStatus())
 				.order_by(MODEL.project().createTime()).desc()
+
+			.find(MODEL.projectMaterial()).which("by daily task type").with_string("project id").with_string("type id")
+				.comments("统计项目下的，某个daily task type 的文档")
+				.do_it_as().count()
+				.where(MODEL.projectMaterial().project().eq("${project id}"),
+						MODEL.projectMaterial().dailyTaskType().eq("${type id}"))
+
+			.query(MODEL.projectMaterial()).which("by daily task type").pagination().with_string("project id").with_string("type id")
+				.comments("查找项目下的，某个daily task type 的文档")
+				.do_it_as()
+				.where(MODEL.projectMaterial().project().eq("${project id}"),
+						MODEL.projectMaterial().dailyTaskType().eq("${type id}"))
+				.wants(MODEL.projectMaterial().dailyTaskType(),
+						MODEL.projectMaterial().materialReviewResult(),
+						MODEL.projectMaterial().materialSubmitter().employee())
+				.order_by(MODEL.projectMaterial().createTime()).desc()
 			;
 		return script;
 	}

@@ -18,6 +18,7 @@ public class EmployeeNomination extends BaseModelBean{
 		member.setName("employee");
 		member.setMemberName("employee");
 		member.setReferDirection(true);
+		member.setRelationName("employee");
 		append(member);
 		return member;
 	}
@@ -28,6 +29,7 @@ public class EmployeeNomination extends BaseModelBean{
 		member.setName("employer");
 		member.setMemberName("employer");
 		member.setReferDirection(true);
+		member.setRelationName("employer");
 		append(member);
 		return member;
 	}
@@ -38,6 +40,7 @@ public class EmployeeNomination extends BaseModelBean{
 		member.setName("role");
 		member.setMemberName("role");
 		member.setReferDirection(true);
+		member.setRelationName("role");
 		append(member);
 		return member;
 	}
@@ -48,6 +51,7 @@ public class EmployeeNomination extends BaseModelBean{
 		member.setName("job");
 		member.setMemberName("job");
 		member.setReferDirection(true);
+		member.setRelationName("job");
 		append(member);
 		return member;
 	}
@@ -58,133 +62,146 @@ public class EmployeeNomination extends BaseModelBean{
 		member.setName("platform");
 		member.setMemberName("platform");
 		member.setReferDirection(true);
+		member.setRelationName("platform");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
-	
+
 	public ContractTemplate contractTemplateList() {
 		ContractTemplate member = new ContractTemplate();
 		member.setModelTypeName("contract_template");
 		member.setName("submitter");
 		member.setMemberName("contractTemplateList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public StandardContract standardContractList() {
-		StandardContract member = new StandardContract();
-		member.setModelTypeName("standard_contract");
-		member.setName("submitter");
-		member.setMemberName("standardContractList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public Article articleList() {
-		Article member = new Article();
-		member.setModelTypeName("article");
-		member.setName("post_by_employee");
-		member.setMemberName("articleList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public MerchantActiveNomination merchantActiveNominationList() {
-		MerchantActiveNomination member = new MerchantActiveNomination();
-		member.setModelTypeName("merchant_active_nomination");
-		member.setName("nomination");
-		member.setMemberName("merchantActiveNominationList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public License licenseList() {
-		License member = new License();
-		member.setModelTypeName("license");
-		member.setName("authenticator");
-		member.setMemberName("licenseList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public ProjectNomination projectNominationList() {
-		ProjectNomination member = new ProjectNomination();
-		member.setModelTypeName("project_nomination");
-		member.setName("worker");
-		member.setMemberName("projectNominationList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public ProjectOrganization projectOrganizationList() {
-		ProjectOrganization member = new ProjectOrganization();
-		member.setModelTypeName("project_organization");
-		member.setName("worker");
-		member.setMemberName("projectOrganizationList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public DailyTaskTemplate dailyTaskTemplateList() {
-		DailyTaskTemplate member = new DailyTaskTemplate();
-		member.setModelTypeName("daily_task_template");
-		member.setName("creator");
-		member.setMemberName("dailyTaskTemplateList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public ProjectMaterial projectMaterialList() {
-		ProjectMaterial member = new ProjectMaterial();
-		member.setModelTypeName("project_material");
-		member.setName("material_submitter");
-		member.setMemberName("projectMaterialList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public Recommendation recommendationList() {
-		Recommendation member = new Recommendation();
-		member.setModelTypeName("recommendation");
-		member.setName("applicant_employee");
-		member.setMemberName("recommendationList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public CustomerProjectApplication customerProjectApplicationList() {
-		CustomerProjectApplication member = new CustomerProjectApplication();
-		member.setModelTypeName("customer_project_application");
-		member.setName("applicant_employee");
-		member.setMemberName("customerProjectApplicationList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public PartnerSettlementApplication partnerSettlementApplicationList() {
-		PartnerSettlementApplication member = new PartnerSettlementApplication();
-		member.setModelTypeName("partner_settlement_application");
-		member.setName("applicant_employee");
-		member.setMemberName("partnerSettlementApplicationList");
+		member.setRelationName("submitter");
 		member.setReferDirection(false);
 		append(member);
 		return member;
 	}
 
-	
+	public StandardContract standardContractList() {
+		StandardContract member = new StandardContract();
+		member.setModelTypeName("standard_contract");
+		member.setName("submitter");
+		member.setMemberName("standardContractList");
+		member.setRelationName("submitter");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public Article articleList() {
+		Article member = new Article();
+		member.setModelTypeName("article");
+		member.setName("post_by_employee");
+		member.setMemberName("articleList");
+		member.setRelationName("postByEmployee");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public MerchantActiveNomination merchantActiveNominationList() {
+		MerchantActiveNomination member = new MerchantActiveNomination();
+		member.setModelTypeName("merchant_active_nomination");
+		member.setName("nomination");
+		member.setMemberName("merchantActiveNominationList");
+		member.setRelationName("nomination");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public License licenseList() {
+		License member = new License();
+		member.setModelTypeName("license");
+		member.setName("authenticator");
+		member.setMemberName("licenseList");
+		member.setRelationName("authenticator");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ProjectNomination projectNominationList() {
+		ProjectNomination member = new ProjectNomination();
+		member.setModelTypeName("project_nomination");
+		member.setName("worker");
+		member.setMemberName("projectNominationList");
+		member.setRelationName("worker");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ProjectOrganization projectOrganizationList() {
+		ProjectOrganization member = new ProjectOrganization();
+		member.setModelTypeName("project_organization");
+		member.setName("worker");
+		member.setMemberName("projectOrganizationList");
+		member.setRelationName("worker");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public DailyTaskTemplate dailyTaskTemplateList() {
+		DailyTaskTemplate member = new DailyTaskTemplate();
+		member.setModelTypeName("daily_task_template");
+		member.setName("creator");
+		member.setMemberName("dailyTaskTemplateList");
+		member.setRelationName("creator");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ProjectMaterial projectMaterialList() {
+		ProjectMaterial member = new ProjectMaterial();
+		member.setModelTypeName("project_material");
+		member.setName("material_submitter");
+		member.setMemberName("projectMaterialList");
+		member.setRelationName("materialSubmitter");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public Recommendation recommendationList() {
+		Recommendation member = new Recommendation();
+		member.setModelTypeName("recommendation");
+		member.setName("applicant_employee");
+		member.setMemberName("recommendationList");
+		member.setRelationName("applicantEmployee");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public CustomerProjectApplication customerProjectApplicationList() {
+		CustomerProjectApplication member = new CustomerProjectApplication();
+		member.setModelTypeName("customer_project_application");
+		member.setName("applicant_employee");
+		member.setMemberName("customerProjectApplicationList");
+		member.setRelationName("applicantEmployee");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public PartnerSettlementApplication partnerSettlementApplicationList() {
+		PartnerSettlementApplication member = new PartnerSettlementApplication();
+		member.setModelTypeName("partner_settlement_application");
+		member.setName("applicant_employee");
+		member.setMemberName("partnerSettlementApplicationList");
+		member.setRelationName("applicantEmployee");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+
 	// 普通属性
 
 	public StringAttribute id(){
@@ -233,6 +250,6 @@ public class EmployeeNomination extends BaseModelBean{
 	}
 
 
-	
+
 }
 

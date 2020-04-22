@@ -18,33 +18,36 @@ public class UserApp extends BaseModelBean{
 		member.setName("sec_user");
 		member.setMemberName("secUser");
 		member.setReferDirection(true);
+		member.setRelationName("secUser");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
-	
+
 	public QuickLink quickLinkList() {
 		QuickLink member = new QuickLink();
 		member.setModelTypeName("quick_link");
 		member.setName("app");
 		member.setMemberName("quickLinkList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public ListAccess listAccessList() {
-		ListAccess member = new ListAccess();
-		member.setModelTypeName("list_access");
-		member.setName("app");
-		member.setMemberName("listAccessList");
+		member.setRelationName("app");
 		member.setReferDirection(false);
 		append(member);
 		return member;
 	}
 
-	
+	public ListAccess listAccessList() {
+		ListAccess member = new ListAccess();
+		member.setModelTypeName("list_access");
+		member.setName("app");
+		member.setMemberName("listAccessList");
+		member.setRelationName("app");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+
 	// 普通属性
 
 	public StringAttribute id(){
@@ -129,6 +132,6 @@ public class UserApp extends BaseModelBean{
 	}
 
 
-	
+
 }
 

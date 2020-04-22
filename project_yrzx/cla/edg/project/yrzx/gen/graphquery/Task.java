@@ -18,6 +18,7 @@ public class Task extends BaseModelBean{
 		member.setName("task_status");
 		member.setMemberName("taskStatus");
 		member.setReferDirection(true);
+		member.setRelationName("taskStatus");
 		append(member);
 		return member;
 	}
@@ -28,23 +29,25 @@ public class Task extends BaseModelBean{
 		member.setName("work_package");
 		member.setMemberName("workPackage");
 		member.setReferDirection(true);
+		member.setRelationName("workPackage");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
-	
+
 	public StandardContract standardContractList() {
 		StandardContract member = new StandardContract();
 		member.setModelTypeName("standard_contract");
 		member.setName("task");
 		member.setMemberName("standardContractList");
+		member.setRelationName("task");
 		member.setReferDirection(false);
 		append(member);
 		return member;
 	}
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
@@ -84,6 +87,6 @@ public class Task extends BaseModelBean{
 	}
 
 
-	
+
 }
 

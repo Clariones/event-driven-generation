@@ -18,6 +18,7 @@ public class MerchantActiveNomination extends BaseModelBean{
 		member.setName("merchant");
 		member.setMemberName("merchant");
 		member.setReferDirection(true);
+		member.setRelationName("merchant");
 		append(member);
 		return member;
 	}
@@ -28,13 +29,14 @@ public class MerchantActiveNomination extends BaseModelBean{
 		member.setName("nomination");
 		member.setMemberName("nomination");
 		member.setReferDirection(true);
+		member.setRelationName("nomination");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
@@ -74,6 +76,6 @@ public class MerchantActiveNomination extends BaseModelBean{
 	}
 
 
-	
+
 }
 

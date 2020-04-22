@@ -21,23 +21,25 @@ public class Role extends BaseModelBean{
 		member.setName("platform");
 		member.setMemberName("platform");
 		member.setReferDirection(true);
+		member.setRelationName("platform");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
-	
+
 	public EmployeeNomination employeeNominationList() {
 		EmployeeNomination member = new EmployeeNomination();
 		member.setModelTypeName("employee_nomination");
 		member.setName("role");
 		member.setMemberName("employeeNominationList");
+		member.setRelationName("role");
 		member.setReferDirection(false);
 		append(member);
 		return member;
 	}
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
@@ -77,6 +79,6 @@ public class Role extends BaseModelBean{
 	}
 
 
-	
+
 }
 

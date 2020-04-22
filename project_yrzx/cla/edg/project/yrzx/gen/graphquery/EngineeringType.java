@@ -18,23 +18,25 @@ public class EngineeringType extends BaseModelBean{
 		member.setName("platform");
 		member.setMemberName("platform");
 		member.setReferDirection(true);
+		member.setRelationName("platform");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
-	
+
 	public WorkPackage workPackageList() {
 		WorkPackage member = new WorkPackage();
 		member.setModelTypeName("work_package");
 		member.setName("engineering_type");
 		member.setMemberName("workPackageList");
+		member.setRelationName("engineeringType");
 		member.setReferDirection(false);
 		append(member);
 		return member;
 	}
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
@@ -74,6 +76,6 @@ public class EngineeringType extends BaseModelBean{
 	}
 
 
-	
+
 }
 

@@ -18,43 +18,47 @@ public class AvailableServiceLocation extends BaseModelBean{
 		member.setName("platform_configuration");
 		member.setMemberName("platformConfiguration");
 		member.setReferDirection(true);
+		member.setRelationName("platformConfiguration");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
-	
+
 	public EmplacementApplication emplacementApplicationList() {
 		EmplacementApplication member = new EmplacementApplication();
 		member.setModelTypeName("emplacement_application");
 		member.setName("service_location");
 		member.setMemberName("emplacementApplicationList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public PartnerSettlementApplication partnerSettlementApplicationList() {
-		PartnerSettlementApplication member = new PartnerSettlementApplication();
-		member.setModelTypeName("partner_settlement_application");
-		member.setName("service_location");
-		member.setMemberName("partnerSettlementApplicationList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public EventApplyEmplacement eventApplyEmplacementList() {
-		EventApplyEmplacement member = new EventApplyEmplacement();
-		member.setModelTypeName("event_apply_emplacement");
-		member.setName("service_location");
-		member.setMemberName("eventApplyEmplacementList");
+		member.setRelationName("serviceLocation");
 		member.setReferDirection(false);
 		append(member);
 		return member;
 	}
 
-	
+	public PartnerSettlementApplication partnerSettlementApplicationList() {
+		PartnerSettlementApplication member = new PartnerSettlementApplication();
+		member.setModelTypeName("partner_settlement_application");
+		member.setName("service_location");
+		member.setMemberName("partnerSettlementApplicationList");
+		member.setRelationName("serviceLocation");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EventApplyEmplacement eventApplyEmplacementList() {
+		EventApplyEmplacement member = new EventApplyEmplacement();
+		member.setModelTypeName("event_apply_emplacement");
+		member.setName("service_location");
+		member.setMemberName("eventApplyEmplacementList");
+		member.setRelationName("serviceLocation");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+
 	// 普通属性
 
 	public StringAttribute id(){
@@ -85,6 +89,6 @@ public class AvailableServiceLocation extends BaseModelBean{
 	}
 
 
-	
+
 }
 

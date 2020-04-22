@@ -18,13 +18,14 @@ public class ProjectImage extends BaseModelBean{
 		member.setName("project");
 		member.setMemberName("project");
 		member.setReferDirection(true);
+		member.setRelationName("project");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
@@ -73,6 +74,6 @@ public class ProjectImage extends BaseModelBean{
 	}
 
 
-	
+
 }
 

@@ -18,13 +18,14 @@ public class CandidateElement extends BaseModelBean{
 		member.setName("container");
 		member.setMemberName("container");
 		member.setReferDirection(true);
+		member.setRelationName("container");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
@@ -73,6 +74,6 @@ public class CandidateElement extends BaseModelBean{
 	}
 
 
-	
+
 }
 

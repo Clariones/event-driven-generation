@@ -28,23 +28,25 @@ public class ChangeRequestType extends BaseModelBean{
 		member.setName("platform");
 		member.setMemberName("platform");
 		member.setReferDirection(true);
+		member.setRelationName("platform");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
-	
+
 	public ChangeRequest changeRequestList() {
 		ChangeRequest member = new ChangeRequest();
 		member.setModelTypeName("change_request");
 		member.setName("request_type");
 		member.setMemberName("changeRequestList");
+		member.setRelationName("requestType");
 		member.setReferDirection(false);
 		append(member);
 		return member;
 	}
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
@@ -120,6 +122,6 @@ public class ChangeRequestType extends BaseModelBean{
 	}
 
 
-	
+
 }
 

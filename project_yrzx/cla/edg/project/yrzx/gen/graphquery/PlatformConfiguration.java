@@ -18,83 +18,91 @@ public class PlatformConfiguration extends BaseModelBean{
 		member.setName("platform");
 		member.setMemberName("platform");
 		member.setReferDirection(true);
+		member.setRelationName("platform");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
-	
+
 	public IconConfiguration iconConfigurationList() {
 		IconConfiguration member = new IconConfiguration();
 		member.setModelTypeName("icon_configuration");
 		member.setName("platform_configuration");
 		member.setMemberName("iconConfigurationList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public ArticleCategory articleCategoryList() {
-		ArticleCategory member = new ArticleCategory();
-		member.setModelTypeName("article_category");
-		member.setName("platform_configuration");
-		member.setMemberName("articleCategoryList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public ApplicationStatus applicationStatusList() {
-		ApplicationStatus member = new ApplicationStatus();
-		member.setModelTypeName("application_status");
-		member.setName("platform_configuration");
-		member.setMemberName("applicationStatusList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public RecommendationType recommendationTypeList() {
-		RecommendationType member = new RecommendationType();
-		member.setModelTypeName("recommendation_type");
-		member.setName("platform_configuration");
-		member.setMemberName("recommendationTypeList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public EstatePropertyType estatePropertyTypeList() {
-		EstatePropertyType member = new EstatePropertyType();
-		member.setModelTypeName("estate_property_type");
-		member.setName("platform_configuration");
-		member.setMemberName("estatePropertyTypeList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public PartnerType partnerTypeList() {
-		PartnerType member = new PartnerType();
-		member.setModelTypeName("partner_type");
-		member.setName("platform_configuration");
-		member.setMemberName("partnerTypeList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public AvailableServiceLocation availableServiceLocationList() {
-		AvailableServiceLocation member = new AvailableServiceLocation();
-		member.setModelTypeName("available_service_location");
-		member.setName("platform_configuration");
-		member.setMemberName("availableServiceLocationList");
+		member.setRelationName("platformConfiguration");
 		member.setReferDirection(false);
 		append(member);
 		return member;
 	}
 
-	
+	public ArticleCategory articleCategoryList() {
+		ArticleCategory member = new ArticleCategory();
+		member.setModelTypeName("article_category");
+		member.setName("platform_configuration");
+		member.setMemberName("articleCategoryList");
+		member.setRelationName("platformConfiguration");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ApplicationStatus applicationStatusList() {
+		ApplicationStatus member = new ApplicationStatus();
+		member.setModelTypeName("application_status");
+		member.setName("platform_configuration");
+		member.setMemberName("applicationStatusList");
+		member.setRelationName("platformConfiguration");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public RecommendationType recommendationTypeList() {
+		RecommendationType member = new RecommendationType();
+		member.setModelTypeName("recommendation_type");
+		member.setName("platform_configuration");
+		member.setMemberName("recommendationTypeList");
+		member.setRelationName("platformConfiguration");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EstatePropertyType estatePropertyTypeList() {
+		EstatePropertyType member = new EstatePropertyType();
+		member.setModelTypeName("estate_property_type");
+		member.setName("platform_configuration");
+		member.setMemberName("estatePropertyTypeList");
+		member.setRelationName("platformConfiguration");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public PartnerType partnerTypeList() {
+		PartnerType member = new PartnerType();
+		member.setModelTypeName("partner_type");
+		member.setName("platform_configuration");
+		member.setMemberName("partnerTypeList");
+		member.setRelationName("platformConfiguration");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public AvailableServiceLocation availableServiceLocationList() {
+		AvailableServiceLocation member = new AvailableServiceLocation();
+		member.setModelTypeName("available_service_location");
+		member.setName("platform_configuration");
+		member.setMemberName("availableServiceLocationList");
+		member.setRelationName("platformConfiguration");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+
 	// 普通属性
 
 	public StringAttribute id(){
@@ -197,6 +205,6 @@ public class PlatformConfiguration extends BaseModelBean{
 	}
 
 
-	
+
 }
 

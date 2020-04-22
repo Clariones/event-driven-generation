@@ -38,23 +38,25 @@ public class DailyTaskCategory extends BaseModelBean{
 		member.setName("platform");
 		member.setMemberName("platform");
 		member.setReferDirection(true);
+		member.setRelationName("platform");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
-	
+
 	public DailyTaskType dailyTaskTypeList() {
 		DailyTaskType member = new DailyTaskType();
 		member.setModelTypeName("daily_task_type");
 		member.setName("category");
 		member.setMemberName("dailyTaskTypeList");
+		member.setRelationName("category");
 		member.setReferDirection(false);
 		append(member);
 		return member;
 	}
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
@@ -112,6 +114,6 @@ public class DailyTaskCategory extends BaseModelBean{
 	}
 
 
-	
+
 }
 

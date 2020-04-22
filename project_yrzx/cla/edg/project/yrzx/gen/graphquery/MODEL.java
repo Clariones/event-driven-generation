@@ -425,6 +425,36 @@ public class MODEL{
 		return rst;
 	}
 
+	public static BpmnModel bpmnModel() {
+		BpmnModel rst = new BpmnModel();
+		rst.setModelTypeName("bpmn_model");
+		return rst;
+	}
+
+	public static ProcessInstance processInstance() {
+		ProcessInstance rst = new ProcessInstance();
+		rst.setModelTypeName("process_instance");
+		return rst;
+	}
+
+	public static ProcessInstanceVariable processInstanceVariable() {
+		ProcessInstanceVariable rst = new ProcessInstanceVariable();
+		rst.setModelTypeName("process_instance_variable");
+		return rst;
+	}
+
+	public static NodeInstance nodeInstance() {
+		NodeInstance rst = new NodeInstance();
+		rst.setModelTypeName("node_instance");
+		return rst;
+	}
+
+	public static NodeInstanceStatus nodeInstanceStatus() {
+		NodeInstanceStatus rst = new NodeInstanceStatus();
+		rst.setModelTypeName("node_instance_status");
+		return rst;
+	}
+
 	public static ChangeRequestType changeRequestType() {
 		ChangeRequestType rst = new ChangeRequestType();
 		rst.setModelTypeName("change_request_type");

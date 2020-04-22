@@ -18,6 +18,7 @@ public class WorkPackage extends BaseModelBean{
 		member.setName("vendor");
 		member.setMemberName("vendor");
 		member.setReferDirection(true);
+		member.setRelationName("vendor");
 		append(member);
 		return member;
 	}
@@ -28,6 +29,7 @@ public class WorkPackage extends BaseModelBean{
 		member.setName("work_package_type");
 		member.setMemberName("workPackageType");
 		member.setReferDirection(true);
+		member.setRelationName("workPackageType");
 		append(member);
 		return member;
 	}
@@ -38,6 +40,7 @@ public class WorkPackage extends BaseModelBean{
 		member.setName("engineering_type");
 		member.setMemberName("engineeringType");
 		member.setReferDirection(true);
+		member.setRelationName("engineeringType");
 		append(member);
 		return member;
 	}
@@ -48,6 +51,7 @@ public class WorkPackage extends BaseModelBean{
 		member.setName("work_status");
 		member.setMemberName("workStatus");
 		member.setReferDirection(true);
+		member.setRelationName("workStatus");
 		append(member);
 		return member;
 	}
@@ -58,43 +62,47 @@ public class WorkPackage extends BaseModelBean{
 		member.setName("project");
 		member.setMemberName("project");
 		member.setReferDirection(true);
+		member.setRelationName("project");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
-	
+
 	public StandardContract standardContractList() {
 		StandardContract member = new StandardContract();
 		member.setModelTypeName("standard_contract");
 		member.setName("work_package");
 		member.setMemberName("standardContractList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public Task taskList() {
-		Task member = new Task();
-		member.setModelTypeName("task");
-		member.setName("work_package");
-		member.setMemberName("taskList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public ProjectOrganization projectOrganizationList() {
-		ProjectOrganization member = new ProjectOrganization();
-		member.setModelTypeName("project_organization");
-		member.setName("work_package");
-		member.setMemberName("projectOrganizationList");
+		member.setRelationName("workPackage");
 		member.setReferDirection(false);
 		append(member);
 		return member;
 	}
 
-	
+	public Task taskList() {
+		Task member = new Task();
+		member.setModelTypeName("task");
+		member.setName("work_package");
+		member.setMemberName("taskList");
+		member.setRelationName("workPackage");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ProjectOrganization projectOrganizationList() {
+		ProjectOrganization member = new ProjectOrganization();
+		member.setModelTypeName("project_organization");
+		member.setName("work_package");
+		member.setMemberName("projectOrganizationList");
+		member.setRelationName("workPackage");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+
 	// 普通属性
 
 	public StringAttribute id(){
@@ -134,6 +142,6 @@ public class WorkPackage extends BaseModelBean{
 	}
 
 
-	
+
 }
 

@@ -18,6 +18,7 @@ public class ContractTemplate extends BaseModelBean{
 		member.setName("template_type");
 		member.setMemberName("templateType");
 		member.setReferDirection(true);
+		member.setRelationName("templateType");
 		append(member);
 		return member;
 	}
@@ -28,6 +29,7 @@ public class ContractTemplate extends BaseModelBean{
 		member.setName("submitter");
 		member.setMemberName("submitter");
 		member.setReferDirection(true);
+		member.setRelationName("submitter");
 		append(member);
 		return member;
 	}
@@ -38,23 +40,25 @@ public class ContractTemplate extends BaseModelBean{
 		member.setName("platform");
 		member.setMemberName("platform");
 		member.setReferDirection(true);
+		member.setRelationName("platform");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
-	
+
 	public StandardContract standardContractList() {
 		StandardContract member = new StandardContract();
 		member.setModelTypeName("standard_contract");
 		member.setName("contract_template");
 		member.setMemberName("standardContractList");
+		member.setRelationName("contractTemplate");
 		member.setReferDirection(false);
 		append(member);
 		return member;
 	}
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
@@ -112,6 +116,6 @@ public class ContractTemplate extends BaseModelBean{
 	}
 
 
-	
+
 }
 

@@ -18,63 +18,69 @@ public class SecUser extends BaseModelBean{
 		member.setName("domain");
 		member.setMemberName("domain");
 		member.setReferDirection(true);
+		member.setRelationName("domain");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
-	
+
 	public UserApp userAppList() {
 		UserApp member = new UserApp();
 		member.setModelTypeName("user_app");
 		member.setName("sec_user");
 		member.setMemberName("userAppList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public LoginHistory loginHistoryList() {
-		LoginHistory member = new LoginHistory();
-		member.setModelTypeName("login_history");
-		member.setName("sec_user");
-		member.setMemberName("loginHistoryList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public WechatWorkappIdentify wechatWorkappIdentifyList() {
-		WechatWorkappIdentify member = new WechatWorkappIdentify();
-		member.setModelTypeName("wechat_workapp_identify");
-		member.setName("sec_user");
-		member.setMemberName("wechatWorkappIdentifyList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public WechatMiniappIdentify wechatMiniappIdentifyList() {
-		WechatMiniappIdentify member = new WechatMiniappIdentify();
-		member.setModelTypeName("wechat_miniapp_identify");
-		member.setName("sec_user");
-		member.setMemberName("wechatMiniappIdentifyList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public KeypairIdentify keypairIdentifyList() {
-		KeypairIdentify member = new KeypairIdentify();
-		member.setModelTypeName("keypair_identify");
-		member.setName("sec_user");
-		member.setMemberName("keypairIdentifyList");
+		member.setRelationName("secUser");
 		member.setReferDirection(false);
 		append(member);
 		return member;
 	}
 
-	
+	public LoginHistory loginHistoryList() {
+		LoginHistory member = new LoginHistory();
+		member.setModelTypeName("login_history");
+		member.setName("sec_user");
+		member.setMemberName("loginHistoryList");
+		member.setRelationName("secUser");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public WechatWorkappIdentify wechatWorkappIdentifyList() {
+		WechatWorkappIdentify member = new WechatWorkappIdentify();
+		member.setModelTypeName("wechat_workapp_identify");
+		member.setName("sec_user");
+		member.setMemberName("wechatWorkappIdentifyList");
+		member.setRelationName("secUser");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public WechatMiniappIdentify wechatMiniappIdentifyList() {
+		WechatMiniappIdentify member = new WechatMiniappIdentify();
+		member.setModelTypeName("wechat_miniapp_identify");
+		member.setName("sec_user");
+		member.setMemberName("wechatMiniappIdentifyList");
+		member.setRelationName("secUser");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public KeypairIdentify keypairIdentifyList() {
+		KeypairIdentify member = new KeypairIdentify();
+		member.setModelTypeName("keypair_identify");
+		member.setName("sec_user");
+		member.setMemberName("keypairIdentifyList");
+		member.setRelationName("secUser");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+
 	// 普通属性
 
 	public StringAttribute id(){
@@ -186,6 +192,6 @@ public class SecUser extends BaseModelBean{
 	}
 
 
-	
+
 }
 
