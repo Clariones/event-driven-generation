@@ -135,17 +135,6 @@ public class EmployeeNomination extends BaseModelBean{
 		return member;
 	}
 
-	public ProjectOrganization projectOrganizationList() {
-		ProjectOrganization member = new ProjectOrganization();
-		member.setModelTypeName("project_organization");
-		member.setName("worker");
-		member.setMemberName("projectOrganizationList");
-		member.setRelationName("worker");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-
 	public DailyTaskTemplate dailyTaskTemplateList() {
 		DailyTaskTemplate member = new DailyTaskTemplate();
 		member.setModelTypeName("daily_task_template");

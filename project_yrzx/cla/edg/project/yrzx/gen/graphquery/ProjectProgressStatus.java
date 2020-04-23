@@ -4,20 +4,17 @@ import java.util.Map;
 
 import cla.edg.modelbean.*;
 
-public class ProjectPhase extends BaseModelBean{
+public class ProjectProgressStatus extends BaseModelBean{
 	public String getFullClassName() {
-		return "com.yrdec.yrzx.projectphase.ProjectPhase";
+		return "com.yrdec.yrzx.projectprogressstatus.ProjectProgressStatus";
 	}
 	// 枚举对象
-	public static EnumAttribute INTENTION = new EnumAttribute("com.yrdec.yrzx.projectphase.ProjectPhase", "INTENTION");
-	public static EnumAttribute EPC_HOSTING = new EnumAttribute("com.yrdec.yrzx.projectphase.ProjectPhase", "EPC_HOSTING");
-	public static EnumAttribute DESIGN_PREPARATION = new EnumAttribute("com.yrdec.yrzx.projectphase.ProjectPhase", "DESIGN_PREPARATION");
-	public static EnumAttribute DESGIN_RFP = new EnumAttribute("com.yrdec.yrzx.projectphase.ProjectPhase", "DESGIN_RFP");
-	public static EnumAttribute DESIGN_EXECUTING = new EnumAttribute("com.yrdec.yrzx.projectphase.ProjectPhase", "DESIGN_EXECUTING");
-	public static EnumAttribute CONSTRUCTING_PREPARATION = new EnumAttribute("com.yrdec.yrzx.projectphase.ProjectPhase", "CONSTRUCTING_PREPARATION");
-	public static EnumAttribute CONSTRUCTION_RFP = new EnumAttribute("com.yrdec.yrzx.projectphase.ProjectPhase", "CONSTRUCTION_RFP");
-	public static EnumAttribute CONSTRUCTING = new EnumAttribute("com.yrdec.yrzx.projectphase.ProjectPhase", "CONSTRUCTING");
-	public static EnumAttribute MAINTENANCE = new EnumAttribute("com.yrdec.yrzx.projectphase.ProjectPhase", "MAINTENANCE");
+	public static EnumAttribute PLANNED = new EnumAttribute("com.yrdec.yrzx.projectprogressstatus.ProjectProgressStatus", "PLANNED");
+	public static EnumAttribute EXECUTING = new EnumAttribute("com.yrdec.yrzx.projectprogressstatus.ProjectProgressStatus", "EXECUTING");
+	public static EnumAttribute ACCEPTED = new EnumAttribute("com.yrdec.yrzx.projectprogressstatus.ProjectProgressStatus", "ACCEPTED");
+	public static EnumAttribute SETTLEMENT = new EnumAttribute("com.yrdec.yrzx.projectprogressstatus.ProjectProgressStatus", "SETTLEMENT");
+	public static EnumAttribute DELAYED = new EnumAttribute("com.yrdec.yrzx.projectprogressstatus.ProjectProgressStatus", "DELAYED");
+	public static EnumAttribute WARNNING = new EnumAttribute("com.yrdec.yrzx.projectprogressstatus.ProjectProgressStatus", "WARNNING");
 
 	// 引用的对象
 
@@ -34,23 +31,12 @@ public class ProjectPhase extends BaseModelBean{
 
 	// 被引用的对象
 
-	public Project projectList() {
-		Project member = new Project();
-		member.setModelTypeName("project");
-		member.setName("project_phase");
-		member.setMemberName("projectList");
-		member.setRelationName("projectPhase");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-
 	public ProjectProgress projectProgressList() {
 		ProjectProgress member = new ProjectProgress();
 		member.setModelTypeName("project_progress");
-		member.setName("project_phase");
+		member.setName("status");
 		member.setMemberName("projectProgressList");
-		member.setRelationName("projectPhase");
+		member.setRelationName("status");
 		member.setReferDirection(false);
 		append(member);
 		return member;

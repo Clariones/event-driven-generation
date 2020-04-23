@@ -124,17 +124,6 @@ public class Project extends BaseModelBean{
 		return member;
 	}
 
-	public ProjectNomination projectNominationList() {
-		ProjectNomination member = new ProjectNomination();
-		member.setModelTypeName("project_nomination");
-		member.setName("project");
-		member.setMemberName("projectNominationList");
-		member.setRelationName("project");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-
 	public WorkPackage workPackageList() {
 		WorkPackage member = new WorkPackage();
 		member.setModelTypeName("work_package");
@@ -157,11 +146,22 @@ public class Project extends BaseModelBean{
 		return member;
 	}
 
-	public ProjectOrganization projectOrganizationList() {
-		ProjectOrganization member = new ProjectOrganization();
-		member.setModelTypeName("project_organization");
+	public ProjectNomination projectNominationList() {
+		ProjectNomination member = new ProjectNomination();
+		member.setModelTypeName("project_nomination");
 		member.setName("project");
-		member.setMemberName("projectOrganizationList");
+		member.setMemberName("projectNominationList");
+		member.setRelationName("project");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ProjectProgress projectProgressList() {
+		ProjectProgress member = new ProjectProgress();
+		member.setModelTypeName("project_progress");
+		member.setName("project");
+		member.setMemberName("projectProgressList");
 		member.setRelationName("project");
 		member.setReferDirection(false);
 		append(member);

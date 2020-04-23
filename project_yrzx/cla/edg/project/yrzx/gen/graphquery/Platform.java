@@ -146,28 +146,6 @@ public class Platform extends BaseModelBean{
 		return member;
 	}
 
-	public ProjectNomination projectNominationList() {
-		ProjectNomination member = new ProjectNomination();
-		member.setModelTypeName("project_nomination");
-		member.setName("platform");
-		member.setMemberName("projectNominationList");
-		member.setRelationName("platform");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-
-	public ProjectRole projectRoleList() {
-		ProjectRole member = new ProjectRole();
-		member.setModelTypeName("project_role");
-		member.setName("platform");
-		member.setMemberName("projectRoleList");
-		member.setRelationName("platform");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-
 	public MerchantBaseType merchantBaseTypeList() {
 		MerchantBaseType member = new MerchantBaseType();
 		member.setModelTypeName("merchant_base_type");
@@ -360,6 +338,28 @@ public class Platform extends BaseModelBean{
 		member.setModelTypeName("project_organization_type");
 		member.setName("platform");
 		member.setMemberName("projectOrganizationTypeList");
+		member.setRelationName("platform");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ProjectRole projectRoleList() {
+		ProjectRole member = new ProjectRole();
+		member.setModelTypeName("project_role");
+		member.setName("platform");
+		member.setMemberName("projectRoleList");
+		member.setRelationName("platform");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ProjectProgressStatus projectProgressStatusList() {
+		ProjectProgressStatus member = new ProjectProgressStatus();
+		member.setModelTypeName("project_progress_status");
+		member.setName("platform");
+		member.setMemberName("projectProgressStatusList");
 		member.setRelationName("platform");
 		member.setReferDirection(false);
 		append(member);

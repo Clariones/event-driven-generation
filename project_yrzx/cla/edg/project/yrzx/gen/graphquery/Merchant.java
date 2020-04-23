@@ -179,17 +179,6 @@ public class Merchant extends BaseModelBean{
 		return member;
 	}
 
-	public ProjectNomination projectNominationList() {
-		ProjectNomination member = new ProjectNomination();
-		member.setModelTypeName("project_nomination");
-		member.setName("merchant");
-		member.setMemberName("projectNominationList");
-		member.setRelationName("merchant");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-
 	public Job jobList() {
 		Job member = new Job();
 		member.setModelTypeName("job");

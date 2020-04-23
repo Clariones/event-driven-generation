@@ -25,11 +25,11 @@ public class ProjectOrganizationType extends BaseModelBean{
 
 	// 被引用的对象
 
-	public ProjectOrganization projectOrganizationList() {
-		ProjectOrganization member = new ProjectOrganization();
-		member.setModelTypeName("project_organization");
+	public ProjectNomination projectNominationList() {
+		ProjectNomination member = new ProjectNomination();
+		member.setModelTypeName("project_nomination");
 		member.setName("type");
-		member.setMemberName("projectOrganizationList");
+		member.setMemberName("projectNominationList");
 		member.setRelationName("type");
 		member.setReferDirection(false);
 		append(member);

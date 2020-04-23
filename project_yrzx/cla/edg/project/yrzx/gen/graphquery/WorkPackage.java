@@ -91,11 +91,11 @@ public class WorkPackage extends BaseModelBean{
 		return member;
 	}
 
-	public ProjectOrganization projectOrganizationList() {
-		ProjectOrganization member = new ProjectOrganization();
-		member.setModelTypeName("project_organization");
+	public ProjectNomination projectNominationList() {
+		ProjectNomination member = new ProjectNomination();
+		member.setModelTypeName("project_nomination");
 		member.setName("work_package");
-		member.setMemberName("projectOrganizationList");
+		member.setMemberName("projectNominationList");
 		member.setRelationName("workPackage");
 		member.setReferDirection(false);
 		append(member);

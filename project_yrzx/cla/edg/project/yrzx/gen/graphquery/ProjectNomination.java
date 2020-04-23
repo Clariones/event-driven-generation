@@ -12,13 +12,13 @@ public class ProjectNomination extends BaseModelBean{
 
 	// 引用的对象
 
-	public Project project() {
-		Project member = new Project();
-		member.setModelTypeName("project");
-		member.setName("project");
-		member.setMemberName("project");
+	public ProjectOrganizationType type() {
+		ProjectOrganizationType member = new ProjectOrganizationType();
+		member.setModelTypeName("project_organization_type");
+		member.setName("type");
+		member.setMemberName("type");
 		member.setReferDirection(true);
-		member.setRelationName("project");
+		member.setRelationName("type");
 		append(member);
 		return member;
 	}
@@ -45,24 +45,24 @@ public class ProjectNomination extends BaseModelBean{
 		return member;
 	}
 
-	public Merchant merchant() {
-		Merchant member = new Merchant();
-		member.setModelTypeName("merchant");
-		member.setName("merchant");
-		member.setMemberName("merchant");
+	public Project project() {
+		Project member = new Project();
+		member.setModelTypeName("project");
+		member.setName("project");
+		member.setMemberName("project");
 		member.setReferDirection(true);
-		member.setRelationName("merchant");
+		member.setRelationName("project");
 		append(member);
 		return member;
 	}
 
-	public Platform platform() {
-		Platform member = new Platform();
-		member.setModelTypeName("platform");
-		member.setName("platform");
-		member.setMemberName("platform");
+	public WorkPackage workPackage() {
+		WorkPackage member = new WorkPackage();
+		member.setModelTypeName("work_package");
+		member.setName("work_package");
+		member.setMemberName("workPackage");
 		member.setReferDirection(true);
-		member.setRelationName("platform");
+		member.setRelationName("workPackage");
 		append(member);
 		return member;
 	}
@@ -125,38 +125,20 @@ public class ProjectNomination extends BaseModelBean{
 		return member;
 	}
 
-	public StringAttribute name(){
+	public StringAttribute title(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		// member.setName("name");
-		member.setName("name");
+		// member.setName("title");
+		member.setName("title");
 		useMember(member);
 		return member;
 	}
 
-	public StringAttribute workTitle(){
-		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
-		// member.setName("workTitle");
-		member.setName("work_title");
-		useMember(member);
-		return member;
-	}
-
-	public DateTimeAttribute startDate(){
-		DateTimeAttribute member = new DateTimeAttribute();
-		member.setModelTypeName("date_time");
-		// member.setName("startDate");
-		member.setName("start_date");
-		useMember(member);
-		return member;
-	}
-
-	public DateTimeAttribute endDate(){
-		DateTimeAttribute member = new DateTimeAttribute();
-		member.setModelTypeName("date_time");
-		// member.setName("endDate");
-		member.setName("end_date");
+	public BooleanAttribute active(){
+		BooleanAttribute member = new BooleanAttribute();
+		member.setModelTypeName("bool");
+		// member.setName("active");
+		member.setName("active");
 		useMember(member);
 		return member;
 	}

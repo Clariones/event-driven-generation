@@ -191,18 +191,6 @@ public class MODEL{
 		return rst;
 	}
 
-	public static ProjectNomination projectNomination() {
-		ProjectNomination rst = new ProjectNomination();
-		rst.setModelTypeName("project_nomination");
-		return rst;
-	}
-
-	public static ProjectRole projectRole() {
-		ProjectRole rst = new ProjectRole();
-		rst.setModelTypeName("project_role");
-		return rst;
-	}
-
 	public static MerchantBaseType merchantBaseType() {
 		MerchantBaseType rst = new MerchantBaseType();
 		rst.setModelTypeName("merchant_base_type");
@@ -329,9 +317,27 @@ public class MODEL{
 		return rst;
 	}
 
-	public static ProjectOrganization projectOrganization() {
-		ProjectOrganization rst = new ProjectOrganization();
-		rst.setModelTypeName("project_organization");
+	public static ProjectNomination projectNomination() {
+		ProjectNomination rst = new ProjectNomination();
+		rst.setModelTypeName("project_nomination");
+		return rst;
+	}
+
+	public static ProjectRole projectRole() {
+		ProjectRole rst = new ProjectRole();
+		rst.setModelTypeName("project_role");
+		return rst;
+	}
+
+	public static ProjectProgressStatus projectProgressStatus() {
+		ProjectProgressStatus rst = new ProjectProgressStatus();
+		rst.setModelTypeName("project_progress_status");
+		return rst;
+	}
+
+	public static ProjectProgress projectProgress() {
+		ProjectProgress rst = new ProjectProgress();
+		rst.setModelTypeName("project_progress");
 		return rst;
 	}
 
