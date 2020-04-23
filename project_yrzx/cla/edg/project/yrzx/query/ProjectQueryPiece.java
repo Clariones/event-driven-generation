@@ -61,6 +61,26 @@ public class ProjectQueryPiece extends PieceOfScript {
 				.wants(MODEL.projectMaterialCommentsRecord().submitter().worker().employee(),
 						MODEL.projectMaterialCommentsRecord().submitter().worker().job(),
 						MODEL.projectMaterialCommentsRecord().submitter().type())
+
+
+		/// 查询 项目资料 | 资料档案 相关的数据
+			.find(MODEL.projectMaterial()).which("by material type").with_string("project id")
+				.comments("按照项目资料类型统计资料数量")
+				.do_it_as().count_by(MODEL.projectMaterial().projectMaterialType())
+				.where(MODEL.projectMaterial().project().eq("${project id}"))
+			.find(MODEL.projectMaterial()).which("by material type and status").with_string("project id").with_string("type")
+				.comments("按照项目资料类型统计资料数量")
+				.do_it_as().count_by(MODEL.projectMaterial().materialReviewResult())
+				.where(MODEL.projectMaterial().project().eq("${project id}"), MODEL.projectMaterial().projectMaterialType().eq("${type}"))
+			.query(MODEL.projectMaterial()).which("by status and type").pagination().with_string("project id").with_string("type").with_string("filter")
+				.comments("查询指定项目中某个类型的资料档案")
+				.do_it_as()
+				.where(MODEL.projectMaterial().project().eq("${project id}"),
+						MODEL.projectMaterial().projectMaterialType().eq("${type}"),
+						MODEL.projectMaterial().materialReviewResult().eq("${filter}"))
+				.order_by(MODEL.projectMaterial().createTime()).desc()
+				.wants(MODEL.projectMaterial().projectMaterialType(),
+						MODEL.projectMaterial().materialSubmitter().employee())
 			;
 		return script;
 	}
