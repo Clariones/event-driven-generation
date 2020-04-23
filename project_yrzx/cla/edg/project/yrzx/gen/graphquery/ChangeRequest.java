@@ -135,6 +135,17 @@ public class ChangeRequest extends BaseModelBean{
 		return member;
 	}
 
+	public EventMaterialComment eventMaterialCommentList() {
+		EventMaterialComment member = new EventMaterialComment();
+		member.setModelTypeName("event_material_comment");
+		member.setName("change_request");
+		member.setMemberName("eventMaterialCommentList");
+		member.setRelationName("changeRequest");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 	public EventCommonReport eventCommonReportList() {
 		EventCommonReport member = new EventCommonReport();
 		member.setModelTypeName("event_common_report");
@@ -157,11 +168,11 @@ public class ChangeRequest extends BaseModelBean{
 		return member;
 	}
 
-	public EventProjectMaterialComments eventProjectMaterialCommentsList() {
-		EventProjectMaterialComments member = new EventProjectMaterialComments();
-		member.setModelTypeName("event_project_material_comments");
+	public EventMaterialReview eventMaterialReviewList() {
+		EventMaterialReview member = new EventMaterialReview();
+		member.setModelTypeName("event_material_review");
 		member.setName("change_request");
-		member.setMemberName("eventProjectMaterialCommentsList");
+		member.setMemberName("eventMaterialReviewList");
 		member.setRelationName("changeRequest");
 		member.setReferDirection(false);
 		append(member);
@@ -179,11 +190,22 @@ public class ChangeRequest extends BaseModelBean{
 		return member;
 	}
 
-	public EventContractComments eventContractCommentsList() {
-		EventContractComments member = new EventContractComments();
-		member.setModelTypeName("event_contract_comments");
+	public EventContractReview eventContractReviewList() {
+		EventContractReview member = new EventContractReview();
+		member.setModelTypeName("event_contract_review");
 		member.setName("change_request");
-		member.setMemberName("eventContractCommentsList");
+		member.setMemberName("eventContractReviewList");
+		member.setRelationName("changeRequest");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EventContractComment eventContractCommentList() {
+		EventContractComment member = new EventContractComment();
+		member.setModelTypeName("event_contract_comment");
+		member.setName("change_request");
+		member.setMemberName("eventContractCommentList");
 		member.setRelationName("changeRequest");
 		member.setReferDirection(false);
 		append(member);

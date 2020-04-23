@@ -47,7 +47,7 @@ public class ProjectHallPageFlowPiece extends PieceOfScript {
 		viewProjectElementIn3Levels(script, "违约处罚", "PENALTIES");
 		viewProjectOrgnization(script, "项目组织", "PROJECT_ORGNIZATION");
 		viewProject5Book(script, "五书详情", "YOURONG_5BOOK");
-		viewProjectContracts(script, "合同任务", "PROJECT_CONTRACT");
+		viewProjectElementIn3Levels(script, "合同任务", "PROJECT_CONTRACT");
 		viewProjectElementIn3Levels(script, "项目资料", "PROJECT_DOCS");
 
 		script.request("view project material review list").with_string("item id").with_last_record_id()
@@ -64,23 +64,6 @@ public class ProjectHallPageFlowPiece extends PieceOfScript {
 				.comments("查看合同的所有批注列表").need_login().no_footprint()
 				.got_page("contract comments record list").title("批注列表").list_of("card");
 		return script;
-	}
-
-	protected void viewProjectContracts(PageFlowScript script, String title, String code) {
-		String reqPannel = "view " + Utils.toWords(code) +" pannel";
-		String pagePannel = Utils.toWords(code) +" pannel";
-		String reqDetail = "view " + Utils.toWords(code) +" detail";
-		String pageDetail = Utils.toWords(code) +" detail";
-		// 一级页面: 列表
-		script.request(reqPannel).with_string("project id")
-			.comments("查看 " + title +" 面板").need_login().has_footprint()
-			.got_page(pagePannel).title(title+"列表").list_of(code+" pannel")
-				.may_request(reqDetail)
-		// 三级页面: 某个元素的详情页		
-		.request(reqDetail).with_string("project id").with_string("label").with_string("item id")
-			.comments("查看" + title +" 内容详情").need_login().has_footprint()
-			.got_page(pageDetail).title(title+"内容详情").as_class(code)
-		;
 	}
 
 	protected void viewProject5Book(PageFlowScript script, String title, String code) {

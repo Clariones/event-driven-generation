@@ -124,6 +124,28 @@ public class Merchant extends BaseModelBean{
 		return member;
 	}
 
+	public ContractViewRecord contractViewRecordList() {
+		ContractViewRecord member = new ContractViewRecord();
+		member.setModelTypeName("contract_view_record");
+		member.setName("merchant");
+		member.setMemberName("contractViewRecordList");
+		member.setRelationName("merchant");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ContractOperationLog contractOperationLogList() {
+		ContractOperationLog member = new ContractOperationLog();
+		member.setModelTypeName("contract_operation_log");
+		member.setName("operator_merchant");
+		member.setMemberName("contractOperationLogList");
+		member.setRelationName("operatorMerchant");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 	public Article articleList() {
 		Article member = new Article();
 		member.setModelTypeName("article");
@@ -251,6 +273,17 @@ public class Merchant extends BaseModelBean{
 		member.setName("merchant");
 		member.setMemberName("projectMaterialViewRecordList");
 		member.setRelationName("merchant");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ProjectMaterialOperationLog projectMaterialOperationLogList() {
+		ProjectMaterialOperationLog member = new ProjectMaterialOperationLog();
+		member.setModelTypeName("project_material_operation_log");
+		member.setName("operator_merchant");
+		member.setMemberName("projectMaterialOperationLogList");
+		member.setRelationName("operatorMerchant");
 		member.setReferDirection(false);
 		append(member);
 		return member;

@@ -113,6 +113,17 @@ public class ProjectMaterial extends BaseModelBean{
 		return member;
 	}
 
+	public ProjectMaterialOperationLog projectMaterialOperationLogList() {
+		ProjectMaterialOperationLog member = new ProjectMaterialOperationLog();
+		member.setModelTypeName("project_material_operation_log");
+		member.setName("project_material");
+		member.setMemberName("projectMaterialOperationLogList");
+		member.setRelationName("projectMaterial");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 
 	// 普通属性
 

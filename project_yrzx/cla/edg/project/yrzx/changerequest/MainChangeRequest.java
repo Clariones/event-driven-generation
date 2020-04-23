@@ -2,11 +2,8 @@ package cla.edg.project.yrzx.changerequest;
 
 import java.util.Map;
 
-import cla.edg.project.yrzx.gen.graphquery.ProjectMaterial;
 import com.terapico.changerequest.builder.ChangeRequestSpecBuilder;
 import com.terapico.changerequest.builder.ChangeRequestSpecFactory;
-import com.terapico.changerequest.builder.FieldType;
-import com.terapico.changerequest.builder.UIStyle;
 
 public class MainChangeRequest implements ChangeRequestSpecFactory {
 

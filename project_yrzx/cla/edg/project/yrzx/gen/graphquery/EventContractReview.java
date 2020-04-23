@@ -4,24 +4,13 @@ import java.util.Map;
 
 import cla.edg.modelbean.*;
 
-public class EventProjectMaterialComments extends BaseModelBean{
+public class EventContractReview extends BaseModelBean{
 	public String getFullClassName() {
-		return "com.yrdec.yrzx.eventprojectmaterialcomments.EventProjectMaterialComments";
+		return "com.yrdec.yrzx.eventcontractreview.EventContractReview";
 	}
 	// 枚举对象
 
 	// 引用的对象
-
-	public ProjectMaterialReviewStatus reviewResult() {
-		ProjectMaterialReviewStatus member = new ProjectMaterialReviewStatus();
-		member.setModelTypeName("project_material_review_status");
-		member.setName("review_result");
-		member.setMemberName("reviewResult");
-		member.setReferDirection(true);
-		member.setRelationName("reviewResult");
-		append(member);
-		return member;
-	}
 
 	public ChangeRequest changeRequest() {
 		ChangeRequest member = new ChangeRequest();
@@ -48,29 +37,29 @@ public class EventProjectMaterialComments extends BaseModelBean{
 		return member;
 	}
 
-	public StringAttribute projectMaterial(){
+	public StringAttribute contractId(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		// member.setName("projectMaterial");
-		member.setName("project_material");
+		// member.setName("contractId");
+		member.setName("contract_id");
 		useMember(member);
 		return member;
 	}
 
-	public StringAttribute approveResult(){
+	public StringAttribute sceneCode(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		// member.setName("approveResult");
-		member.setName("approve_result");
+		// member.setName("sceneCode");
+		member.setName("scene_code");
 		useMember(member);
 		return member;
 	}
 
-	public StringAttribute title(){
-		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
-		// member.setName("title");
-		member.setName("title");
+	public BooleanAttribute passed(){
+		BooleanAttribute member = new BooleanAttribute();
+		member.setModelTypeName("bool");
+		// member.setName("passed");
+		member.setName("passed");
 		useMember(member);
 		return member;
 	}

@@ -69,6 +69,28 @@ public class ProjectNomination extends BaseModelBean{
 
 	// 被引用的对象
 
+	public ContractReviewRecord contractReviewRecordList() {
+		ContractReviewRecord member = new ContractReviewRecord();
+		member.setModelTypeName("contract_review_record");
+		member.setName("reviewer");
+		member.setMemberName("contractReviewRecordList");
+		member.setRelationName("reviewer");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ContractCommentsRecord contractCommentsRecordList() {
+		ContractCommentsRecord member = new ContractCommentsRecord();
+		member.setModelTypeName("contract_comments_record");
+		member.setName("submitter");
+		member.setMemberName("contractCommentsRecordList");
+		member.setRelationName("submitter");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 	public ProjectMaterialReviewRecord projectMaterialReviewRecordList() {
 		ProjectMaterialReviewRecord member = new ProjectMaterialReviewRecord();
 		member.setModelTypeName("project_material_review_record");

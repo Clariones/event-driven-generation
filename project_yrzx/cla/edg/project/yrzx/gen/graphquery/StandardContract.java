@@ -34,6 +34,17 @@ public class StandardContract extends BaseModelBean{
 		return member;
 	}
 
+	public ContractStatus contractStatus() {
+		ContractStatus member = new ContractStatus();
+		member.setModelTypeName("contract_status");
+		member.setName("contract_status");
+		member.setMemberName("contractStatus");
+		member.setReferDirection(true);
+		member.setRelationName("contractStatus");
+		append(member);
+		return member;
+	}
+
 	public ContractType contractType() {
 		ContractType member = new ContractType();
 		member.setModelTypeName("contract_type");
@@ -129,6 +140,50 @@ public class StandardContract extends BaseModelBean{
 		member.setModelTypeName("commission_pay_item");
 		member.setName("contract");
 		member.setMemberName("commissionPayItemList");
+		member.setRelationName("contract");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ContractReviewRecord contractReviewRecordList() {
+		ContractReviewRecord member = new ContractReviewRecord();
+		member.setModelTypeName("contract_review_record");
+		member.setName("contract");
+		member.setMemberName("contractReviewRecordList");
+		member.setRelationName("contract");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ContractCommentsRecord contractCommentsRecordList() {
+		ContractCommentsRecord member = new ContractCommentsRecord();
+		member.setModelTypeName("contract_comments_record");
+		member.setName("contract");
+		member.setMemberName("contractCommentsRecordList");
+		member.setRelationName("contract");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ContractViewRecord contractViewRecordList() {
+		ContractViewRecord member = new ContractViewRecord();
+		member.setModelTypeName("contract_view_record");
+		member.setName("contract");
+		member.setMemberName("contractViewRecordList");
+		member.setRelationName("contract");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ContractOperationLog contractOperationLogList() {
+		ContractOperationLog member = new ContractOperationLog();
+		member.setModelTypeName("contract_operation_log");
+		member.setName("contract");
+		member.setMemberName("contractOperationLogList");
 		member.setRelationName("contract");
 		member.setReferDirection(false);
 		append(member);

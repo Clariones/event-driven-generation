@@ -4,15 +4,15 @@ import java.util.Map;
 
 import cla.edg.modelbean.*;
 
-public class RecommendationStatus extends BaseModelBean{
+public class ContractStatus extends BaseModelBean{
 	public String getFullClassName() {
-		return "com.yrdec.yrzx.recommendationstatus.RecommendationStatus";
+		return "com.yrdec.yrzx.contractstatus.ContractStatus";
 	}
 	// 枚举对象
-	public static EnumAttribute PENDING = new EnumAttribute("com.yrdec.yrzx.recommendationstatus.RecommendationStatus", "PENDING");
-	public static EnumAttribute PROCESSING = new EnumAttribute("com.yrdec.yrzx.recommendationstatus.RecommendationStatus", "PROCESSING");
-	public static EnumAttribute CANCELLED = new EnumAttribute("com.yrdec.yrzx.recommendationstatus.RecommendationStatus", "CANCELLED");
-	public static EnumAttribute CLOSED = new EnumAttribute("com.yrdec.yrzx.recommendationstatus.RecommendationStatus", "CLOSED");
+	public static EnumAttribute NEED_CONFIRM = new EnumAttribute("com.yrdec.yrzx.contractstatus.ContractStatus", "NEED_CONFIRM");
+	public static EnumAttribute FULFILLING = new EnumAttribute("com.yrdec.yrzx.contractstatus.ContractStatus", "FULFILLING");
+	public static EnumAttribute END_FULFILLED = new EnumAttribute("com.yrdec.yrzx.contractstatus.ContractStatus", "END_FULFILLED");
+	public static EnumAttribute CANCELLED = new EnumAttribute("com.yrdec.yrzx.contractstatus.ContractStatus", "CANCELLED");
 
 	// 引用的对象
 
@@ -22,23 +22,25 @@ public class RecommendationStatus extends BaseModelBean{
 		member.setName("platform");
 		member.setMemberName("platform");
 		member.setReferDirection(true);
+		member.setRelationName("platform");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
-	
-	public Recommendation recommendationList() {
-		Recommendation member = new Recommendation();
-		member.setModelTypeName("recommendation");
-		member.setName("recommendation_status");
-		member.setMemberName("recommendationList");
+
+	public StandardContract standardContractList() {
+		StandardContract member = new StandardContract();
+		member.setModelTypeName("standard_contract");
+		member.setName("contract_status");
+		member.setMemberName("standardContractList");
+		member.setRelationName("contractStatus");
 		member.setReferDirection(false);
 		append(member);
 		return member;
 	}
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
@@ -78,6 +80,6 @@ public class RecommendationStatus extends BaseModelBean{
 	}
 
 
-	
+
 }
 

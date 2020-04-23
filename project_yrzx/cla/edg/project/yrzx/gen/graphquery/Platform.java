@@ -47,6 +47,17 @@ public class Platform extends BaseModelBean{
 		return member;
 	}
 
+	public ContractStatus contractStatusList() {
+		ContractStatus member = new ContractStatus();
+		member.setModelTypeName("contract_status");
+		member.setName("platform");
+		member.setMemberName("contractStatusList");
+		member.setRelationName("platform");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 	public StandardContract standardContractList() {
 		StandardContract member = new StandardContract();
 		member.setModelTypeName("standard_contract");

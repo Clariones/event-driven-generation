@@ -71,6 +71,12 @@ public class MODEL{
 		return rst;
 	}
 
+	public static ContractStatus contractStatus() {
+		ContractStatus rst = new ContractStatus();
+		rst.setModelTypeName("contract_status");
+		return rst;
+	}
+
 	public static StandardContract standardContract() {
 		StandardContract rst = new StandardContract();
 		rst.setModelTypeName("standard_contract");
@@ -92,6 +98,30 @@ public class MODEL{
 	public static PayItemStatus payItemStatus() {
 		PayItemStatus rst = new PayItemStatus();
 		rst.setModelTypeName("pay_item_status");
+		return rst;
+	}
+
+	public static ContractReviewRecord contractReviewRecord() {
+		ContractReviewRecord rst = new ContractReviewRecord();
+		rst.setModelTypeName("contract_review_record");
+		return rst;
+	}
+
+	public static ContractCommentsRecord contractCommentsRecord() {
+		ContractCommentsRecord rst = new ContractCommentsRecord();
+		rst.setModelTypeName("contract_comments_record");
+		return rst;
+	}
+
+	public static ContractViewRecord contractViewRecord() {
+		ContractViewRecord rst = new ContractViewRecord();
+		rst.setModelTypeName("contract_view_record");
+		return rst;
+	}
+
+	public static ContractOperationLog contractOperationLog() {
+		ContractOperationLog rst = new ContractOperationLog();
+		rst.setModelTypeName("contract_operation_log");
 		return rst;
 	}
 
@@ -365,6 +395,12 @@ public class MODEL{
 		return rst;
 	}
 
+	public static ProjectMaterialOperationLog projectMaterialOperationLog() {
+		ProjectMaterialOperationLog rst = new ProjectMaterialOperationLog();
+		rst.setModelTypeName("project_material_operation_log");
+		return rst;
+	}
+
 	public static YourongProjectBook yourongProjectBook() {
 		YourongProjectBook rst = new YourongProjectBook();
 		rst.setModelTypeName("yourong_project_book");
@@ -533,6 +569,12 @@ public class MODEL{
 		return rst;
 	}
 
+	public static EventMaterialComment eventMaterialComment() {
+		EventMaterialComment rst = new EventMaterialComment();
+		rst.setModelTypeName("event_material_comment");
+		return rst;
+	}
+
 	public static EventCommonReport eventCommonReport() {
 		EventCommonReport rst = new EventCommonReport();
 		rst.setModelTypeName("event_common_report");
@@ -545,9 +587,9 @@ public class MODEL{
 		return rst;
 	}
 
-	public static EventProjectMaterialComments eventProjectMaterialComments() {
-		EventProjectMaterialComments rst = new EventProjectMaterialComments();
-		rst.setModelTypeName("event_project_material_comments");
+	public static EventMaterialReview eventMaterialReview() {
+		EventMaterialReview rst = new EventMaterialReview();
+		rst.setModelTypeName("event_material_review");
 		return rst;
 	}
 
@@ -557,9 +599,15 @@ public class MODEL{
 		return rst;
 	}
 
-	public static EventContractComments eventContractComments() {
-		EventContractComments rst = new EventContractComments();
-		rst.setModelTypeName("event_contract_comments");
+	public static EventContractReview eventContractReview() {
+		EventContractReview rst = new EventContractReview();
+		rst.setModelTypeName("event_contract_review");
+		return rst;
+	}
+
+	public static EventContractComment eventContractComment() {
+		EventContractComment rst = new EventContractComment();
+		rst.setModelTypeName("event_contract_comment");
 		return rst;
 	}
 

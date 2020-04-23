@@ -9,18 +9,20 @@ public class ChangeRequestType extends BaseModelBean{
 		return "com.yrdec.yrzx.changerequesttype.ChangeRequestType";
 	}
 	// 枚举对象
+	public static EnumAttribute COMMENTS_ON_CONTRACT = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "COMMENTS_ON_CONTRACT");
+	public static EnumAttribute REVIEW_CONTRACT = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "REVIEW_CONTRACT");
 	public static EnumAttribute APPLY_RECOMMENDATION = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "APPLY_RECOMMENDATION");
 	public static EnumAttribute SHOW_ALL_TYPE = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "SHOW_ALL_TYPE");
-	public static EnumAttribute PROJECT_MANAGER_DAILY_REPORT = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "PROJECT_MANAGER_DAILY_REPORT");
-	public static EnumAttribute APPLY_EMPLACEMENT = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "APPLY_EMPLACEMENT");
-	public static EnumAttribute ADD_CONTRACT_COMMENTS = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "ADD_CONTRACT_COMMENTS");
-	public static EnumAttribute TASK_DAILY_REPORT = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "TASK_DAILY_REPORT");
 	public static EnumAttribute PROJECT_SUPERVISION_DAILY_REPORT = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "PROJECT_SUPERVISION_DAILY_REPORT");
 	public static EnumAttribute PROJECT_COMMAND = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "PROJECT_COMMAND");
 	public static EnumAttribute ACCEPTANCE_APPLICATION = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "ACCEPTANCE_APPLICATION");
 	public static EnumAttribute AFTER_SALES = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "AFTER_SALES");
 	public static EnumAttribute APPLY_DECORATION = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "APPLY_DECORATION");
-	public static EnumAttribute ADD_PROJECT_MATERIAL_COMMENTS = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "ADD_PROJECT_MATERIAL_COMMENTS");
+	public static EnumAttribute REVIEW_MATERIALS = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "REVIEW_MATERIALS");
+	public static EnumAttribute PROJECT_MANAGER_DAILY_REPORT = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "PROJECT_MANAGER_DAILY_REPORT");
+	public static EnumAttribute APPLY_EMPLACEMENT = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "APPLY_EMPLACEMENT");
+	public static EnumAttribute TASK_DAILY_REPORT = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "TASK_DAILY_REPORT");
+	public static EnumAttribute COMMENTS_ON_MATERIALS = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "COMMENTS_ON_MATERIALS");
 
 	// 引用的对象
 

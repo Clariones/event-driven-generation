@@ -4,32 +4,32 @@ import java.util.Map;
 
 import cla.edg.modelbean.*;
 
-public class ProjectMaterialReviewRecord extends BaseModelBean{
+public class ContractViewRecord extends BaseModelBean{
 	public String getFullClassName() {
-		return "com.yrdec.yrzx.projectmaterialreviewrecord.ProjectMaterialReviewRecord";
+		return "com.yrdec.yrzx.contractviewrecord.ContractViewRecord";
 	}
 	// 枚举对象
 
 	// 引用的对象
 
-	public ProjectMaterial projectMaterial() {
-		ProjectMaterial member = new ProjectMaterial();
-		member.setModelTypeName("project_material");
-		member.setName("project_material");
-		member.setMemberName("projectMaterial");
+	public StandardContract contract() {
+		StandardContract member = new StandardContract();
+		member.setModelTypeName("standard_contract");
+		member.setName("contract");
+		member.setMemberName("contract");
 		member.setReferDirection(true);
-		member.setRelationName("projectMaterial");
+		member.setRelationName("contract");
 		append(member);
 		return member;
 	}
 
-	public ProjectNomination reviewer() {
-		ProjectNomination member = new ProjectNomination();
-		member.setModelTypeName("project_nomination");
-		member.setName("reviewer");
-		member.setMemberName("reviewer");
+	public Merchant merchant() {
+		Merchant member = new Merchant();
+		member.setModelTypeName("merchant");
+		member.setName("merchant");
+		member.setMemberName("merchant");
 		member.setReferDirection(true);
-		member.setRelationName("reviewer");
+		member.setRelationName("merchant");
 		append(member);
 		return member;
 	}
@@ -48,20 +48,11 @@ public class ProjectMaterialReviewRecord extends BaseModelBean{
 		return member;
 	}
 
-	public StringAttribute comments(){
-		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string_longtext");
-		// member.setName("comments");
-		member.setName("comments");
-		useMember(member);
-		return member;
-	}
-
-	public BooleanAttribute reviewPassed(){
-		BooleanAttribute member = new BooleanAttribute();
-		member.setModelTypeName("bool");
-		// member.setName("reviewPassed");
-		member.setName("review_passed");
+	public NumberAttribute viewCount(){
+		NumberAttribute member = new NumberAttribute();
+		member.setModelTypeName("int");
+		// member.setName("viewCount");
+		member.setName("view_count");
 		useMember(member);
 		return member;
 	}

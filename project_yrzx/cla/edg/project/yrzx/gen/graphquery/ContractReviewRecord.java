@@ -4,21 +4,21 @@ import java.util.Map;
 
 import cla.edg.modelbean.*;
 
-public class ProjectMaterialReviewRecord extends BaseModelBean{
+public class ContractReviewRecord extends BaseModelBean{
 	public String getFullClassName() {
-		return "com.yrdec.yrzx.projectmaterialreviewrecord.ProjectMaterialReviewRecord";
+		return "com.yrdec.yrzx.contractreviewrecord.ContractReviewRecord";
 	}
 	// 枚举对象
 
 	// 引用的对象
 
-	public ProjectMaterial projectMaterial() {
-		ProjectMaterial member = new ProjectMaterial();
-		member.setModelTypeName("project_material");
-		member.setName("project_material");
-		member.setMemberName("projectMaterial");
+	public StandardContract contract() {
+		StandardContract member = new StandardContract();
+		member.setModelTypeName("standard_contract");
+		member.setName("contract");
+		member.setMemberName("contract");
 		member.setReferDirection(true);
-		member.setRelationName("projectMaterial");
+		member.setRelationName("contract");
 		append(member);
 		return member;
 	}

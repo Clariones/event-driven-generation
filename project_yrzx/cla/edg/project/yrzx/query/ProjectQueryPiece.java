@@ -50,7 +50,7 @@ public class ProjectQueryPiece extends PieceOfScript {
 				.do_it_as()
 				.where(MODEL.projectMaterialReviewRecord().projectMaterial().eq("${material id}"))
 				.top("${number}")
-				.wants(MODEL.projectMaterialReviewRecord().reviewStatus(), MODEL.projectMaterialReviewRecord().reviewer().merchant())
+				.wants(MODEL.projectMaterialReviewRecord().reviewer().merchant())
 			.query(MODEL.projectMaterialCommentsRecord()).which("by project material").pagination().with_string("material id").with_integer("number")
 				.comments("查找某个项目资料所相关联的批注记录列表")
 				.do_it_as()

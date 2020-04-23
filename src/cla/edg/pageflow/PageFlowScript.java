@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import cla.edg.project.yrzx.gen.graphquery.ProjectPhase;
-import com.terapico.generator.Utils;
-
 import cla.edg.graphquery.terms.BaseGraphQueryDescriptor;
 import cla.edg.modelbean.BaseAttribute;
 import cla.edg.modelbean.BaseModelBean;
@@ -14,7 +11,6 @@ import cla.edg.modelbean.CorperationPathNode;
 import cla.edg.modelbean.LogicalOperator;
 import cla.edg.modelbean.ModelBeanRoute;
 import cla.edg.modelbean.NumberAttribute;
-import cla.edg.modelbean.StringAttribute;
 
 
 public class PageFlowScript extends BasePageFlowScript {

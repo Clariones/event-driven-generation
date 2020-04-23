@@ -4,9 +4,9 @@ import java.util.Map;
 
 import cla.edg.modelbean.*;
 
-public class EventContractComments extends BaseModelBean{
+public class EventMaterialComment extends BaseModelBean{
 	public String getFullClassName() {
-		return "com.yrdec.yrzx.eventcontractcomments.EventContractComments";
+		return "com.yrdec.yrzx.eventmaterialcomment.EventMaterialComment";
 	}
 	// 枚举对象
 
@@ -37,29 +37,20 @@ public class EventContractComments extends BaseModelBean{
 		return member;
 	}
 
-	public StringAttribute contractId(){
+	public StringAttribute materialId(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		// member.setName("contractId");
-		member.setName("contract_id");
+		// member.setName("materialId");
+		member.setName("material_id");
 		useMember(member);
 		return member;
 	}
 
-	public StringAttribute approveResult(){
+	public StringAttribute sceneCode(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		// member.setName("approveResult");
-		member.setName("approve_result");
-		useMember(member);
-		return member;
-	}
-
-	public StringAttribute contractName(){
-		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
-		// member.setName("contractName");
-		member.setName("contract_name");
+		// member.setName("sceneCode");
+		member.setName("scene_code");
 		useMember(member);
 		return member;
 	}
@@ -69,6 +60,15 @@ public class EventContractComments extends BaseModelBean{
 		member.setModelTypeName("string_longtext");
 		// member.setName("comments");
 		member.setName("comments");
+		useMember(member);
+		return member;
+	}
+
+	public StringAttribute images(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("images");
+		// member.setName("images");
+		member.setName("images");
 		useMember(member);
 		return member;
 	}
