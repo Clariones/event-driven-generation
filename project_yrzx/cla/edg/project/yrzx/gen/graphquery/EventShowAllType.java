@@ -95,7 +95,7 @@ public class EventShowAllType extends BaseModelBean{
 
 	public StringAttribute fieldSomeOf(){
 		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
+		member.setModelTypeName("string_longtext");
 		// member.setName("fieldSomeOf");
 		member.setName("field_some_of");
 		useMember(member);
@@ -188,6 +188,15 @@ public class EventShowAllType extends BaseModelBean{
 		member.setModelTypeName("money");
 		// member.setName("fieldMoney");
 		member.setName("field_money");
+		useMember(member);
+		return member;
+	}
+
+	public StringAttribute fieldMultiModel(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string_longtext");
+		// member.setName("fieldMultiModel");
+		member.setName("field_multi_model");
 		useMember(member);
 		return member;
 	}

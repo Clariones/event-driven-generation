@@ -258,6 +258,9 @@ public abstract class CRSBuildingServiceBaseLocalImpl implements ChangeRequestSp
 		if(fieldSpec.getSampleData() != null) {
 			return fieldSpec.getSampleData();
 		}
+		if (fieldSpec.getMultiSelection() != null && fieldSpec.getMultiSelection().booleanValue()) {
+			return "text()";
+		}
 		if (fieldSpec.getModelName() != null) {
 			return String.format("$(%s)", Utils.toModelName(fieldSpec.getModelName()));
 		}

@@ -506,8 +506,10 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 				<#if field.interactionMode == "display">
 					<#continue>
 				</#if>
-				<#if field.inputType == "baseEntity">
-				String ${helper.javaVar(field.name)} = getStringValue(fieldValue.get("${helper.javaVar(field.name)}"));
+				<#if field.selectable == "multi_selectable">
+				String ${helper.javaVar(field.name)} = toJsonString(getStringList(fieldValue.get("${helper.javaVar(field.name)}")));
+				<#elseif field.inputType == "baseEntity">
+                String ${helper.javaVar(field.name)} = getStringValue(fieldValue.get("${helper.javaVar(field.name)}"));
 				<#else>
 				${helper.getJavaType(field.inputType)} ${helper.javaVar(field.name)} = get${helper.CamelName(field.inputType)}Value(fieldValue.get("${helper.javaVar(field.name)}"));
 				</#if>
@@ -532,7 +534,9 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 				<#if field.interactionMode == "display">
 					<#continue>
 				</#if>
-				<#if field.inputType == "baseEntity">
+				<#if field.selectable == "multi_selectable">
+				event.update${helper.CamelName(field.name)}(toJsonString(getStringList(fieldValue.get("${helper.javaVar(field.name)}"))));
+				<#elseif field.inputType == "baseEntity">
 				event.update${helper.CamelName(field.name)}(${helper.CamelName(field.modelName)}.refById(getStringValue(fieldValue.get("${helper.javaVar(field.name)}"))));
 				<#else>
 				event.update${helper.CamelName(field.name)}(get${helper.CamelName(field.inputType)}Value(fieldValue.get("${helper.javaVar(field.name)}")));
@@ -551,6 +555,21 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 	}
 	
 	protected void doBaseEntityFieldChecking(ChangeRequestPostData postedData, CRFieldSpec fieldSpec, String fieldName, Object value) {
+	    if (CRFieldSpec.MULTI_SELECTABLE.equals(fieldSpec.getSelectable())) {
+            List<String> entityIds = getStringList(value);
+            if (entityIds == null || entityIds.isEmpty()) {
+                postedData.addVerifyErrorMessage(fieldName, fieldSpec.getLabel(), String.format("%s的输入不正确", fieldSpec.getLabel()));
+                return;
+            }
+            for(String id : entityIds){
+                BaseEntity obj = this.getUserContext().getDAOGroup().loadBasicData(TextUtil.toCamelCase(fieldSpec.getModelName()), id);
+                if(obj == null) {
+                    postedData.addVerifyErrorMessage(fieldName, fieldSpec.getLabel(), String.format("输入的%s:%s不存在", fieldSpec.getLabel(), id));
+                }
+            }
+            return;
+        }
+
 		String baseEntityId = getStringValue(value);
 		if (baseEntityId == null) {
 			postedData.addVerifyErrorMessage(fieldName, fieldSpec.getLabel(), String.format("%s的输入不正确", fieldSpec.getLabel()));

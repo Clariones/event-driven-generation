@@ -81,6 +81,13 @@ public class ProjectQueryPiece extends PieceOfScript {
 				.order_by(MODEL.projectMaterial().createTime()).desc()
 				.wants(MODEL.projectMaterial().projectMaterialType(),
 						MODEL.projectMaterial().materialSubmitter().employee())
+
+		// 五书
+			.query(MODEL.yourongProjectBook()).list_of("project").with_string("project id")
+				.comments("查询项目的五书")
+				.do_it_as()
+				.where(MODEL.yourongProjectBook().project().eq("${project id}"))
+				.wants(MODEL.yourongProjectBook().status(), MODEL.yourongProjectBook().type())
 			;
 		return script;
 	}

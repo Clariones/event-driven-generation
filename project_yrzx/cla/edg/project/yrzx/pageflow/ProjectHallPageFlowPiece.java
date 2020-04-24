@@ -69,13 +69,13 @@ public class ProjectHallPageFlowPiece extends PieceOfScript {
 	protected void viewProject5Book(PageFlowScript script, String title, String code) {
 		script.request("view " + Utils.toWords(code)).with_string("project id")
 		.comments("查看 " + title).need_login()
-		.got_page("project info").title(title).list_of(code);
+		.got_page("project book").title(title).list_of(code);
 	}
 
 	protected void viewProjectOrgnization(PageFlowScript script, String title, String code) {
 		script.request("view " + Utils.toWords(code)).with_string("project id")
 		.comments("查看 " + title).need_login()
-		.got_page("project info").title(title).list_of(code);
+		.got_page("project organization").title(title).list_of(code);
 	}
 	
 	protected void viewProjectLaborSupervision(PageFlowScript script, String title, String code) {

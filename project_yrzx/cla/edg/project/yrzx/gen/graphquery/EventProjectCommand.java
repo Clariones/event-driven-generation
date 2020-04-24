@@ -104,7 +104,7 @@ public class EventProjectCommand extends BaseModelBean{
 
 	public StringAttribute mainRecievers(){
 		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
+		member.setModelTypeName("string_longtext");
 		// member.setName("mainRecievers");
 		member.setName("main_recievers");
 		useMember(member);
@@ -113,7 +113,7 @@ public class EventProjectCommand extends BaseModelBean{
 
 	public StringAttribute copyToRecievers(){
 		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
+		member.setModelTypeName("string_longtext");
 		// member.setName("copyToRecievers");
 		member.setName("copy_to_recievers");
 		useMember(member);

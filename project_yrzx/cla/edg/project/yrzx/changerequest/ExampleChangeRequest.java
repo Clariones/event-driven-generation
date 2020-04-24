@@ -3,7 +3,7 @@ package cla.edg.project.yrzx.changerequest;
 import java.util.Map;
 
 
-
+import cla.edg.project.yrzx.gen.graphquery.MODEL;
 import com.terapico.changerequest.builder.ChangeRequestSpecBuilder;
 import com.terapico.changerequest.builder.ChangeRequestSpecFactory;
 import com.terapico.changerequest.builder.FieldType;
@@ -20,6 +20,8 @@ public class ExampleChangeRequest implements ChangeRequestSpecFactory {
 				.has_field("field_text").zh_CN("短文本").which_type_of(FieldType.TEXT).with_style(UIStyle.INPUT_TEXT)
 				.has_field("field_id_number").zh_CN("身份证").which_type_of(FieldType.TEXT)
 					.range(15,18)
+					.value("510922197812128876")
+					.disabled()
 				.has_field("field_email").zh_CN("电子邮件").with_style(UIStyle.INPUT_EMAIL)
 					.match("^(\\w)+(\\.\\w+)*@(\\w)+((\\.\\w+)+)$")
 				.has_field("field_url").zh_CN("链接").with_style(UIStyle.INPUT_URL)
@@ -39,6 +41,8 @@ public class ExampleChangeRequest implements ChangeRequestSpecFactory {
 				.has_field("field_money").zh_CN("金融").which_type_of(FieldType.MONEY).range(100,10000)
 				.has_field("field_biz_candidate").zh_CN("单选的对象").which_model_of("merchant")
 					.values_can_select_from_query_by("field_integer")
+				.has_field("field_multi_model").zh_CN("多选的对象").which_model_of(MODEL.employeeNomination().getModelTypeName())
+					.values_can_check_from_query_by(":field integer")
 			;
 	}
 }

@@ -72,7 +72,7 @@ public class Utils {
 		if (name.matches("^[a-z][a-zA-Z0-9]+$")) {
 			return Character.toUpperCase(name.charAt(0)) + name.substring(1);
 		}
-		if (name.matches("^[\\w_\\- /\\${}\\(\\)]+$")) {
+		if (name.matches("^[:\\w_\\- /\\${}\\(\\)]+$")) {
 			String[] segments = name.split("\\s*[ \\-_]\\s*");
 			StringBuilder sb = new StringBuilder();
 			for (String seg : segments) {
