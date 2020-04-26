@@ -1,6 +1,7 @@
 package cla.edg.project.yrzx;
 
 import java.io.File;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -22,6 +23,7 @@ public class YrzxMain {
 //		testV3EventService(new V3InkDeedService());
 //		testV3EventService(new V3AuctionService());
 		testChagneRequest(new MainChangeRequest().getSpec());
+		System.out.println("finished at " + LocalDateTime.now());
 	}
 
 	private static void testPageFlow(BasePageFlowDescriptionScript test) throws Exception {

@@ -62,7 +62,23 @@ public class ProjectHallPageFlowPiece extends PieceOfScript {
 				.got_page("contract review record list").title("审核记录").list_of("card")
 			.request("view contract comments list").with_string("item id").with_last_record_id()
 				.comments("查看合同的所有批注列表").need_login().no_footprint()
-				.got_page("contract comments record list").title("批注列表").list_of("card");
+				.got_page("contract comments record list").title("批注列表").list_of("card")
+
+			.request("view contract pay item list").with_string("contract id").with_string("filter").with_last_record_id()
+				.comments("查看合同的普通支付项").need_login().has_footprint()
+				.got_page("contract pay item list").title("支付项列表").list_of("card")
+					.may_request("view contract pay item detail")
+			.request("view contract pay item detail").with_string("item id")
+				.comments("合同支付项详情").need_login().has_footprint()
+				.got_page("contact pay item detail").title("合同支付项")
+			.request("view commission pay item list").with_string("contract id").with_string("filter").with_last_record_id()
+				.comments("查看合同的抽成支付项").need_login().has_footprint()
+				.got_page("commission pay item list").title("支付项列表").list_of("card")
+				.may_request("view commission pay item detail")
+			.request("view commission pay item detail").with_string("item id")
+				.comments("合同抽成支付项详情").need_login().has_footprint()
+				.got_page("commission pay item detail").title("合同提成")
+			;
 		return script;
 	}
 
