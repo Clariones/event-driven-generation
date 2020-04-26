@@ -157,6 +157,17 @@ public class EmployeeNomination extends BaseModelBean{
 		return member;
 	}
 
+	public AfterSales afterSalesList() {
+		AfterSales member = new AfterSales();
+		member.setModelTypeName("after_sales");
+		member.setName("creator");
+		member.setMemberName("afterSalesList");
+		member.setRelationName("creator");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 	public Recommendation recommendationList() {
 		Recommendation member = new Recommendation();
 		member.setModelTypeName("recommendation");

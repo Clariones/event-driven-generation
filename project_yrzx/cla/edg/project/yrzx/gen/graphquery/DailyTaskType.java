@@ -58,23 +58,34 @@ public class DailyTaskType extends BaseModelBean{
 		return member;
 	}
 
+	public ProjectAcceptance projectAcceptanceList() {
+		ProjectAcceptance member = new ProjectAcceptance();
+		member.setModelTypeName("project_acceptance");
+		member.setName("acceptance_type");
+		member.setMemberName("projectAcceptanceList");
+		member.setRelationName("acceptanceType");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public AfterSales afterSalesList() {
+		AfterSales member = new AfterSales();
+		member.setModelTypeName("after_sales");
+		member.setName("daily_task_type");
+		member.setMemberName("afterSalesList");
+		member.setRelationName("dailyTaskType");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 	public EventProjectCommand eventProjectCommandList() {
 		EventProjectCommand member = new EventProjectCommand();
 		member.setModelTypeName("event_project_command");
 		member.setName("directive_type");
 		member.setMemberName("eventProjectCommandList");
 		member.setRelationName("directiveType");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-
-	public EventAcceptanceApplication eventAcceptanceApplicationList() {
-		EventAcceptanceApplication member = new EventAcceptanceApplication();
-		member.setModelTypeName("event_acceptance_application");
-		member.setName("acceptance_type");
-		member.setMemberName("eventAcceptanceApplicationList");
-		member.setRelationName("acceptanceType");
 		member.setReferDirection(false);
 		append(member);
 		return member;

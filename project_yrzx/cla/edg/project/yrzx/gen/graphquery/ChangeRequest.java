@@ -179,6 +179,17 @@ public class ChangeRequest extends BaseModelBean{
 		return member;
 	}
 
+	public EventProjectPenalties eventProjectPenaltiesList() {
+		EventProjectPenalties member = new EventProjectPenalties();
+		member.setModelTypeName("event_project_penalties");
+		member.setName("change_request");
+		member.setMemberName("eventProjectPenaltiesList");
+		member.setRelationName("changeRequest");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 	public EventApplyEmplacement eventApplyEmplacementList() {
 		EventApplyEmplacement member = new EventApplyEmplacement();
 		member.setModelTypeName("event_apply_emplacement");

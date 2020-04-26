@@ -41,6 +41,18 @@ public class ClientCRPageFlowPiece extends PieceOfScript {
 					.comments("资料批注").need_login()
 					.got_page("project material detail")
 
+				.request_with_changerequest("acceptance application").with_string("item id").with_string("project id")
+					.comments("工程验收申请")
+					.got_page("project acceptance detail")
+
+				.request_with_changerequest("after sales").with_string("project id").with_string("item id")
+					.comments("售后单")
+					.got_page("after sales service detail")
+
+				.request_with_changerequest("project penalties").with_string("project id").with_string("item id")
+					.comments("违约处罚")
+					.got_page("penalties detail")
+
 			;
 	}
 }

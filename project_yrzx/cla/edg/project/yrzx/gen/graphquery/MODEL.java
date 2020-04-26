@@ -341,6 +341,12 @@ public class MODEL{
 		return rst;
 	}
 
+	public static ProjectAcceptanceRecord projectAcceptanceRecord() {
+		ProjectAcceptanceRecord rst = new ProjectAcceptanceRecord();
+		rst.setModelTypeName("project_acceptance_record");
+		return rst;
+	}
+
 	public static DailyTaskCategory dailyTaskCategory() {
 		DailyTaskCategory rst = new DailyTaskCategory();
 		rst.setModelTypeName("daily_task_category");
@@ -389,6 +395,12 @@ public class MODEL{
 		return rst;
 	}
 
+	public static ProjectMaterialReviewRecordStatus projectMaterialReviewRecordStatus() {
+		ProjectMaterialReviewRecordStatus rst = new ProjectMaterialReviewRecordStatus();
+		rst.setModelTypeName("project_material_review_record_status");
+		return rst;
+	}
+
 	public static ProjectMaterialCommentsRecord projectMaterialCommentsRecord() {
 		ProjectMaterialCommentsRecord rst = new ProjectMaterialCommentsRecord();
 		rst.setModelTypeName("project_material_comments_record");
@@ -422,6 +434,42 @@ public class MODEL{
 	public static YourongProjectBookType yourongProjectBookType() {
 		YourongProjectBookType rst = new YourongProjectBookType();
 		rst.setModelTypeName("yourong_project_book_type");
+		return rst;
+	}
+
+	public static ProjectAcceptance projectAcceptance() {
+		ProjectAcceptance rst = new ProjectAcceptance();
+		rst.setModelTypeName("project_acceptance");
+		return rst;
+	}
+
+	public static ProjectAcceptanceStatus projectAcceptanceStatus() {
+		ProjectAcceptanceStatus rst = new ProjectAcceptanceStatus();
+		rst.setModelTypeName("project_acceptance_status");
+		return rst;
+	}
+
+	public static AfterSales afterSales() {
+		AfterSales rst = new AfterSales();
+		rst.setModelTypeName("after_sales");
+		return rst;
+	}
+
+	public static AfterSalesStatus afterSalesStatus() {
+		AfterSalesStatus rst = new AfterSalesStatus();
+		rst.setModelTypeName("after_sales_status");
+		return rst;
+	}
+
+	public static ProjectPenalties projectPenalties() {
+		ProjectPenalties rst = new ProjectPenalties();
+		rst.setModelTypeName("project_penalties");
+		return rst;
+	}
+
+	public static ProjectPenaltiesStatus projectPenaltiesStatus() {
+		ProjectPenaltiesStatus rst = new ProjectPenaltiesStatus();
+		rst.setModelTypeName("project_penalties_status");
 		return rst;
 	}
 
@@ -596,6 +644,12 @@ public class MODEL{
 	public static EventMaterialReview eventMaterialReview() {
 		EventMaterialReview rst = new EventMaterialReview();
 		rst.setModelTypeName("event_material_review");
+		return rst;
+	}
+
+	public static EventProjectPenalties eventProjectPenalties() {
+		EventProjectPenalties rst = new EventProjectPenalties();
+		rst.setModelTypeName("event_project_penalties");
 		return rst;
 	}
 
