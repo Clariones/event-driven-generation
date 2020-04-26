@@ -3,6 +3,7 @@ package cla.edg.project.yrzx.pageflow;
 import cla.edg.pageflow.BasePageFlowDescriptionScript;
 import cla.edg.pageflow.PageFlowScript;
 import cla.edg.project.yrzx.query.ApplicationAndRecommendationQueryPiece;
+import cla.edg.project.yrzx.query.ContractQueryPiece;
 import cla.edg.project.yrzx.query.HomepageQueryPiece;
 import cla.edg.project.yrzx.query.ProjectQueryPiece;
 
@@ -32,6 +33,7 @@ public class MainPageFlow extends BasePageFlowDescriptionScript {
 				.import_from(new HomepageQueryPiece())
 				.import_from(new ProjectQueryPiece())
 				.import_from(new ApplicationAndRecommendationQueryPiece())
+				.import_from(new ContractQueryPiece())
 				;
 	}
 

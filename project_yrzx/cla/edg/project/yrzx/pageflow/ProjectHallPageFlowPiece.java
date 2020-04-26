@@ -70,7 +70,7 @@ public class ProjectHallPageFlowPiece extends PieceOfScript {
 					.may_request("view contract pay item detail")
 			.request("view contract pay item detail").with_string("item id")
 				.comments("合同支付项详情").need_login().has_footprint()
-				.got_page("contact pay item detail").title("合同支付项")
+				.got_page("contract pay item detail").title("合同支付项")
 			.request("view commission pay item list").with_string("contract id").with_string("filter").with_last_record_id()
 				.comments("查看合同的抽成支付项").need_login().has_footprint()
 				.got_page("commission pay item list").title("支付项列表").list_of("card")
@@ -91,23 +91,28 @@ public class ProjectHallPageFlowPiece extends PieceOfScript {
 	protected void viewProjectOrgnization(PageFlowScript script, String title, String code) {
 		script.request("view " + Utils.toWords(code)).with_string("project id")
 		.comments("查看 " + title).need_login()
-		.got_page("project organization").title(title).list_of(code);
+		.got_page("project organization").title(title).list_of(code)
+			.may_request("view project organization in work package")
+	.request("view project organization in work package").with_string("project id").with_string("work package id").with_last_record_id()
+		.comments("查看工作包 " + title).need_login()
+		.got_page("project organization in work package").title("项目组织").list_of("card")
+		;
 	}
 	
 	protected void viewProjectLaborSupervision(PageFlowScript script, String title, String code) {
 		script.request("view "+Utils.toWords(code)+" pannel").with_string("project id")
 			.comments("查看项目劳务监督面板").need_login().has_footprint()
-			.got_page(Utils.toWords(code) +" pannel").title(title)
+			.got_page(Utils.toWords(code) +" pannel").title(title).list_of("card")
 				.comments("项目劳务监督面板")
 			
 		.request("view labor supervision list").with_string("project id").with_last_record_id()
 			.comments("查看劳务监督管理").need_login().has_footprint()
-			.got_page("labor supervision").title("劳务监督管理")
+			.got_page("labor supervision").title("劳务监督管理").list_of("card")
 				.comments("平台台账. 与平台账户相关的所有往来台账明细")
 				
 		.request("view labor wages list").with_string("project id").with_last_record_id()
 			.comments("查看工资发放记录列表").need_login().has_footprint()
-			.got_page("labor wages list").title("劳务工资发放").list_of("labor-wages")
+			.got_page("labor wages list").title("劳务工资发放").list_of("card")
 				.comments("工资发放列表. 可查看. 无详情")
 				
 		;

@@ -13,7 +13,11 @@ public class HomepageQueryPiece extends PieceOfScript {
 				.where(MODEL.page().code().eq("${page code}"))
 				.wants(MODEL.page().sectionList().pageArticleList().article(),
 						MODEL.page().slideList())
-			
+		.query(MODEL.article()).which("category").pagination().with_string("category id")
+			.comments("查询分类中的文章")
+			.do_it_as()
+			.where(MODEL.article().category().eq("${category id}"))
+			.wants(MODEL.article().postByEmployee().employee(), MODEL.article().postByEmployee().job())
 			;
 		return script;
 	}

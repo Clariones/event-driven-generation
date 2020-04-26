@@ -16,6 +16,7 @@ public class IconConfiguration extends BaseModelBean{
 	public static EnumAttribute SY_GN_WYZX = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "SY_GN_WYZX");
 	public static EnumAttribute SY_GN_XMTJ = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "SY_GN_XMTJ");
 	public static EnumAttribute SY_GN_XMGL = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "SY_GN_XMGL");
+	public static EnumAttribute SY_GN_WXRZ = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "SY_GN_WXRZ");
 	public static EnumAttribute YM_XM_XMFM = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "YM_XM_XMFM");
 	public static EnumAttribute XM_DT_YRWS = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "XM_DT_YRWS");
 	public static EnumAttribute XM_DT_XMZZ = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "XM_DT_XMZZ");

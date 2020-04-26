@@ -69,7 +69,7 @@ public class ModelBeanRoute extends RouteMap<BaseModelBean, BeanRelation>{
 			}else {
 				if (sumAttribute.getName().equalsIgnoreCase("id")) {
 					sb.append("SELECT ").append(targetAlias).append(".").append(sumAttribute.getContainerBean().getName())
-							.append(" as id, COUNT(DISTINCT ").append(targetAlias).append(".").append(sumAttribute.getContainerBean().getName()).append(") as count from ");
+							.append(" as id, COUNT(DISTINCT ").append(targetAlias).append(".id) as count from ");
 				} else {
 					MeetingPoint<BaseModelBean, BeanRelation> mp = sumAttribute.getContainerBean().getLastMeetingPoint();
 					if (mp == null) {

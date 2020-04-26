@@ -11,7 +11,7 @@ public class PayItemStatus extends BaseModelBean{
 	// 枚举对象
 	public static EnumAttribute PENDING = new EnumAttribute("com.yrdec.yrzx.payitemstatus.PayItemStatus", "PENDING");
 	public static EnumAttribute NEED_APPROVE = new EnumAttribute("com.yrdec.yrzx.payitemstatus.PayItemStatus", "NEED_APPROVE");
-	public static EnumAttribute A________QUNPAID = new EnumAttribute("com.yrdec.yrzx.payitemstatus.PayItemStatus", "A________QUNPAID");
+	public static EnumAttribute UNPAID = new EnumAttribute("com.yrdec.yrzx.payitemstatus.PayItemStatus", "UNPAID");
 	public static EnumAttribute PAID = new EnumAttribute("com.yrdec.yrzx.payitemstatus.PayItemStatus", "PAID");
 
 	// 引用的对象

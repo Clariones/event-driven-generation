@@ -341,12 +341,6 @@ public class MODEL{
 		return rst;
 	}
 
-	public static ProjectAcceptanceRecord projectAcceptanceRecord() {
-		ProjectAcceptanceRecord rst = new ProjectAcceptanceRecord();
-		rst.setModelTypeName("project_acceptance_record");
-		return rst;
-	}
-
 	public static DailyTaskCategory dailyTaskCategory() {
 		DailyTaskCategory rst = new DailyTaskCategory();
 		rst.setModelTypeName("daily_task_category");

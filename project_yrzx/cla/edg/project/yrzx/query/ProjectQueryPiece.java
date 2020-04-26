@@ -70,7 +70,7 @@ public class ProjectQueryPiece extends PieceOfScript {
 				.do_it_as().count_by(MODEL.projectMaterial().projectMaterialType())
 				.where(MODEL.projectMaterial().project().eq("${project id}"))
 			.find(MODEL.projectMaterial()).which("by material type and status").with_string("project id").with_string("type")
-				.comments("按照项目资料类型统计资料数量")
+				.comments("按照状态统计某个项目资料类型下的资料数量")
 				.do_it_as().count_by(MODEL.projectMaterial().materialReviewResult())
 				.where(MODEL.projectMaterial().project().eq("${project id}"), MODEL.projectMaterial().projectMaterialType().eq("${type}"))
 			.query(MODEL.projectMaterial()).which("by status and type").pagination().with_string("project id").with_string("type").with_string("filter")
@@ -101,7 +101,8 @@ public class ProjectQueryPiece extends PieceOfScript {
 				.do_it_as()
 				.where(MODEL.projectNomination().project().eq("${project id}"),
 						MODEL.projectNomination().workPackage().eq("${work package id}"))
-				.wants(MODEL.projectNomination().worker().employee(), MODEL.projectNomination().projectRole(), MODEL.projectNomination().type())
+				.wants(MODEL.projectNomination().worker().employee(),MODEL.projectNomination().worker().job(),
+						MODEL.projectNomination().projectRole(), MODEL.projectNomination().type())
 			.query(MODEL.workPackage()).which("assigned in project organization").with_string("project id")
 				.comments("查询在项目组织中指定的，某个项目下的所有工作包")
 				.do_it_as()
@@ -113,60 +114,9 @@ public class ProjectQueryPiece extends PieceOfScript {
 				.do_it_as()
 				.where(MODEL.projectNomination().project().eq("${project id}"),
 						MODEL.projectNomination().worker().employee().eq("${merchant id}"))
-				.wants(MODEL.projectNomination().worker().employee(), MODEL.projectNomination().projectRole(), MODEL.projectNomination().type())
-
-		// 合同相关的查询
-			.find(MODEL.standardContract()).which("in project").with_string("project id")
-				.comments("按照项目统计各个类型的合同数量")
-				.do_it_as().count_by(MODEL.standardContract().contractType())
-				.where(MODEL.standardContract().project().eq("${project id}"))
-			.find(MODEL.standardContract()).which("in project with type").with_string("project id").with_string("type")
-				.comments("按照项目统计某个类型的各种状态的合同数量")
-				.do_it_as().count_by(MODEL.standardContract().contractStatus())
-				.where(MODEL.standardContract().project().eq("${project id}"), MODEL.standardContract().contractType().eq("${type}"))
-			.query(MODEL.standardContract()).list_of("project with type").pagination().with_string("project id").with_string("type").with_string("filter")
-				.comments("查询项目中的，某个类型的，指定状态的订单列表")
-				.do_it_as()
-				.where(MODEL.standardContract().project().eq("${project id}"),
-						MODEL.standardContract().contractType().eq("${type}"),
-						MODEL.standardContract().contractStatus().eq("${filter}"))
-				.order_by(MODEL.standardContract().lastUpdateTime()).asc()
-				.wants(MODEL.standardContract().contractStatus(), MODEL.standardContract().partyA())
-			.find(MODEL.standardContract()).which("by id").with_string("contract id")
-				.comments("按ID加载合同")
-				.do_it_as()
-				.where(MODEL.standardContract().id().eq("${contract id}"))
-				.wants(MODEL.standardContract().contractStatus(),
-						MODEL.standardContract().contractType(),
-						MODEL.standardContract().partyA())
-			.query(MODEL.commissionPayItem()).list_of("contract").pagination().with_string("contract id").with_integer("top n")
-				.comments("查询合同的 提成 类的支付款项")
-				.do_it_as()
-				.where(MODEL.commissionPayItem().contract().eq("${contract id}"))
-				.top("${top n}")
-				.order_by(MODEL.commissionPayItem().id()).asc()
-				.wants(MODEL.commissionPayItem().contractPayItem(), MODEL.commissionPayItem().payItemStatus(), MODEL.commissionPayItem().payer())
-			.query(MODEL.contractPayItem()).list_of("contract").pagination().with_string("contract id").with_integer("top n")
-				.comments("查询合同的 支付 类的支付款项")
-				.do_it_as()
-				.where(MODEL.contractPayItem().contract().eq("${contract id}"))
-				.top("${top n}")
-				.order_by(MODEL.contractPayItem().id()).asc()
-				.wants(MODEL.contractPayItem().payer(), MODEL.contractPayItem().payItemStatus())
-			.query(MODEL.contractReviewRecord()).list_of("contract").pagination().with_string("contract id").with_integer("number")
-				.comments("查询合同的审核记录")
-				.do_it_as()
-				.where(MODEL.contractReviewRecord().contract().eq("${contract id}"))
-				.top("${number}")
-				.wants(MODEL.contractReviewRecord().reviewer().type(), MODEL.projectNomination().projectRole(), MODEL.projectNomination().worker().employee())
-			.query(MODEL.contractCommentsRecord()).list_of("contract").pagination().with_string("contract id").with_integer("number")
-				.comments("查询合同的批注记录")
-				.do_it_as()
-				.where(MODEL.contractCommentsRecord().contract().eq("${contract id}"))
-				.top("${number}")
-				.wants(MODEL.contractCommentsRecord().submitter().type(), MODEL.projectNomination().projectRole(), MODEL.projectNomination().worker().employee())
-
-				/// 项目验收相关查询
+				.wants(MODEL.projectNomination().worker().employee(), MODEL.projectNomination().worker().job(),
+						MODEL.projectNomination().projectRole(), MODEL.projectNomination().type())
+/// 项目验收相关查询
 				.query(MODEL.projectAcceptance().getModelTypeName()).list_of("project by status").with_string("project id").with_string("filter").pagination()
 				.do_it_as()
 				.where(
