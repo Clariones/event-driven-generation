@@ -190,6 +190,17 @@ public class StandardContract extends BaseModelBean{
 		return member;
 	}
 
+	public ProjectPenalties projectPenaltiesList() {
+		ProjectPenalties member = new ProjectPenalties();
+		member.setModelTypeName("project_penalties");
+		member.setName("contract");
+		member.setMemberName("projectPenaltiesList");
+		member.setRelationName("contract");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 
 	// 普通属性
 

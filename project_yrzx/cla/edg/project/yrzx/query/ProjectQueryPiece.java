@@ -165,7 +165,91 @@ public class ProjectQueryPiece extends PieceOfScript {
 				.where(MODEL.contractCommentsRecord().contract().eq("${contract id}"))
 				.top("${number}")
 				.wants(MODEL.contractCommentsRecord().submitter().type(), MODEL.projectNomination().projectRole(), MODEL.projectNomination().worker().employee())
-			;
+
+				/// 项目验收相关查询
+				.query(MODEL.projectAcceptance().getModelTypeName()).list_of("project by status").with_string("project id").with_string("filter").pagination()
+				.do_it_as()
+				.where(
+						MODEL.projectAcceptance().project().eq("${project id}"),
+						MODEL.projectAcceptance().status().eq("${filter}")
+				)
+				.wants(
+						MODEL.projectAcceptance().acceptanceApplication().projectMaterialReviewRecordList().status(),
+						MODEL.projectAcceptance().acceptanceApplication().projectMaterialReviewRecordList().reviewer().type(),
+						MODEL.projectNomination().worker().employee(),
+						MODEL.projectAcceptance().acceptanceType(),
+						MODEL.projectAcceptance().applicationUnit(),
+						MODEL.projectAcceptance().project(),
+						MODEL.projectAcceptance().propertyOwner(),
+						MODEL.projectAcceptance().status()
+				)
+				.find(MODEL.projectAcceptance().getModelTypeName()).which("by id").with_string("project acceptance id")
+				.do_it_as()
+				.where(MODEL.projectAcceptance().id().eq("${project acceptance id}"))
+				.wants(
+						MODEL.projectAcceptance().acceptanceApplication().projectMaterialReviewRecordList().status(),
+						MODEL.projectAcceptance().acceptanceApplication().projectMaterialReviewRecordList().reviewer().type(),
+						MODEL.projectNomination().worker().employee(),
+						MODEL.projectAcceptance().acceptanceType(),
+						MODEL.projectAcceptance().applicationUnit(),
+						MODEL.projectAcceptance().project(),
+						MODEL.projectAcceptance().propertyOwner(),
+						MODEL.projectAcceptance().status()
+				)
+
+				// 售后服务
+				.query(MODEL.afterSales().getModelTypeName()).list_of("project by status").with_string("project id").with_string("filter").pagination()
+				.do_it_as()
+				.where(
+						MODEL.afterSales().project().eq("${project id}"),
+						MODEL.afterSales().status().eq("${filter}")
+				)
+				.wants(
+						MODEL.afterSales().status(),
+						MODEL.afterSales().project(),
+						MODEL.afterSales().creator()
+				)
+
+				.find(MODEL.afterSales().getModelTypeName()).which("id is").with_string("id")
+				.do_it_as()
+				.where(
+						MODEL.afterSales().id().eq("${id}")
+				)
+				.wants(
+						MODEL.afterSales().status(),
+						MODEL.afterSales().project(),
+						MODEL.afterSales().creator().employee()
+				)
+
+				// 违约处罚
+				.query(MODEL.projectPenalties().getModelTypeName()).list_of("project by status").with_string("project id").with_string("filter").pagination()
+				.do_it_as()
+				.where(
+						MODEL.projectPenalties().project().eq("${project id}"),
+						MODEL.projectPenalties().status().eq("${filter}")
+				)
+				.wants(
+						MODEL.projectPenalties().status(),
+						MODEL.projectPenalties().contract(),
+						MODEL.projectPenalties().punishmentMaterial().dailyTaskType()
+				)
+				.find(MODEL.projectPenalties().getModelTypeName()).which("id is").with_string("id")
+				.do_it_as()
+				.where(
+						MODEL.projectPenalties().id().eq("${id}")
+				)
+				.wants(
+						MODEL.projectPenalties().status(),
+						MODEL.projectPenalties().contract(),
+						MODEL.projectPenalties().punishmentMaterial().project(),
+						MODEL.projectPenalties().punishmentMaterial().dailyTaskType(),
+						MODEL.projectPenalties().punishmentMaterial().projectMaterialReviewRecordList().status(),
+						MODEL.projectPenalties().punishmentMaterial().projectMaterialReviewRecordList().reviewer().type(),
+						MODEL.projectNomination().worker().employee()
+				)
+
+
+		;
 
 		return script;
 	}

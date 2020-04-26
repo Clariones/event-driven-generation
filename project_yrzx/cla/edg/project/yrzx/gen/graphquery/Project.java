@@ -190,11 +190,33 @@ public class Project extends BaseModelBean{
 		return member;
 	}
 
-	public EventAfterSales eventAfterSalesList() {
-		EventAfterSales member = new EventAfterSales();
-		member.setModelTypeName("event_after_sales");
+	public ProjectAcceptance projectAcceptanceList() {
+		ProjectAcceptance member = new ProjectAcceptance();
+		member.setModelTypeName("project_acceptance");
 		member.setName("project");
-		member.setMemberName("eventAfterSalesList");
+		member.setMemberName("projectAcceptanceList");
+		member.setRelationName("project");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public AfterSales afterSalesList() {
+		AfterSales member = new AfterSales();
+		member.setModelTypeName("after_sales");
+		member.setName("project");
+		member.setMemberName("afterSalesList");
+		member.setRelationName("project");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ProjectPenalties projectPenaltiesList() {
+		ProjectPenalties member = new ProjectPenalties();
+		member.setModelTypeName("project_penalties");
+		member.setName("project");
+		member.setMemberName("projectPenaltiesList");
 		member.setRelationName("project");
 		member.setReferDirection(false);
 		append(member);

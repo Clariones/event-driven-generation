@@ -12,6 +12,17 @@ public class ProjectMaterialReviewRecord extends BaseModelBean{
 
 	// 引用的对象
 
+	public ProjectMaterialReviewRecordStatus status() {
+		ProjectMaterialReviewRecordStatus member = new ProjectMaterialReviewRecordStatus();
+		member.setModelTypeName("project_material_review_record_status");
+		member.setName("status");
+		member.setMemberName("status");
+		member.setReferDirection(true);
+		member.setRelationName("status");
+		append(member);
+		return member;
+	}
+
 	public ProjectMaterial projectMaterial() {
 		ProjectMaterial member = new ProjectMaterial();
 		member.setModelTypeName("project_material");
@@ -53,15 +64,6 @@ public class ProjectMaterialReviewRecord extends BaseModelBean{
 		member.setModelTypeName("string_longtext");
 		// member.setName("comments");
 		member.setName("comments");
-		useMember(member);
-		return member;
-	}
-
-	public BooleanAttribute reviewPassed(){
-		BooleanAttribute member = new BooleanAttribute();
-		member.setModelTypeName("bool");
-		// member.setName("reviewPassed");
-		member.setName("review_passed");
 		useMember(member);
 		return member;
 	}

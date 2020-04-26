@@ -4,9 +4,9 @@ import java.util.Map;
 
 import cla.edg.modelbean.*;
 
-public class EventAcceptanceApplication extends BaseModelBean{
+public class EventProjectPenalties extends BaseModelBean{
 	public String getFullClassName() {
-		return "com.yrdec.yrzx.eventacceptanceapplication.EventAcceptanceApplication";
+		return "com.yrdec.yrzx.eventprojectpenalties.EventProjectPenalties";
 	}
 	// 枚举对象
 
@@ -37,20 +37,11 @@ public class EventAcceptanceApplication extends BaseModelBean{
 		return member;
 	}
 
-	public StringAttribute title(){
+	public StringAttribute penaltiesId(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		// member.setName("title");
-		member.setName("title");
-		useMember(member);
-		return member;
-	}
-
-	public StringAttribute projectId(){
-		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
-		// member.setName("projectId");
-		member.setName("project_id");
+		// member.setName("penaltiesId");
+		member.setName("penalties_id");
 		useMember(member);
 		return member;
 	}
@@ -64,92 +55,56 @@ public class EventAcceptanceApplication extends BaseModelBean{
 		return member;
 	}
 
-	public StringAttribute propertyOwnerId(){
-		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
-		// member.setName("propertyOwnerId");
-		member.setName("property_owner_id");
-		useMember(member);
-		return member;
-	}
-
-	public StringAttribute propertyOwnerName(){
-		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
-		// member.setName("propertyOwnerName");
-		member.setName("property_owner_name");
-		useMember(member);
-		return member;
-	}
-
-	public StringAttribute epcManageCompany(){
-		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
-		// member.setName("epcManageCompany");
-		member.setName("epc_manage_company");
-		useMember(member);
-		return member;
-	}
-
-	public StringAttribute acceptors(){
+	public StringAttribute workPackageContractId(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_longtext");
-		// member.setName("acceptors");
-		member.setName("acceptors");
+		// member.setName("workPackageContractId");
+		member.setName("work_package_contract_id");
 		useMember(member);
 		return member;
 	}
 
-	public StringAttribute acceptanceTypeId(){
+	public StringAttribute penaltiesType(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		// member.setName("acceptanceTypeId");
-		member.setName("acceptance_type_id");
+		// member.setName("penaltiesType");
+		member.setName("penalties_type");
 		useMember(member);
 		return member;
 	}
 
-	public StringAttribute acceptanceType(){
+	public StringAttribute penaltiesExecutor(){
 		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
-		// member.setName("acceptanceType");
-		member.setName("acceptance_type");
+		member.setModelTypeName("string_longtext");
+		// member.setName("penaltiesExecutor");
+		member.setName("penalties_executor");
 		useMember(member);
 		return member;
 	}
 
-	public DateTimeAttribute acceptanceTime(){
-		DateTimeAttribute member = new DateTimeAttribute();
-		member.setModelTypeName("date_time");
-		// member.setName("acceptanceTime");
-		member.setName("acceptance_time");
+	public NumberAttribute forfeit(){
+		NumberAttribute member = new NumberAttribute();
+		member.setModelTypeName("money");
+		// member.setName("forfeit");
+		member.setName("forfeit");
 		useMember(member);
 		return member;
 	}
 
-	public StringAttribute applicationUnitId(){
+	public StringAttribute reason(){
 		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
-		// member.setName("applicationUnitId");
-		member.setName("application_unit_id");
+		member.setModelTypeName("string_longtext");
+		// member.setName("reason");
+		member.setName("reason");
 		useMember(member);
 		return member;
 	}
 
-	public StringAttribute applicationUnit(){
+	public StringAttribute images(){
 		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
-		// member.setName("applicationUnit");
-		member.setName("application_unit");
-		useMember(member);
-		return member;
-	}
-
-	public StringAttribute applicationTime(){
-		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
-		// member.setName("applicationTime");
-		member.setName("application_time");
+		member.setModelTypeName("images");
+		// member.setName("images");
+		member.setName("images");
 		useMember(member);
 		return member;
 	}

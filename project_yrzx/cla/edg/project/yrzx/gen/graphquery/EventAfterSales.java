@@ -12,17 +12,6 @@ public class EventAfterSales extends BaseModelBean{
 
 	// 引用的对象
 
-	public Project project() {
-		Project member = new Project();
-		member.setModelTypeName("project");
-		member.setName("project");
-		member.setMemberName("project");
-		member.setReferDirection(true);
-		member.setRelationName("project");
-		append(member);
-		return member;
-	}
-
 	public ChangeRequest changeRequest() {
 		ChangeRequest member = new ChangeRequest();
 		member.setModelTypeName("change_request");
@@ -44,6 +33,42 @@ public class EventAfterSales extends BaseModelBean{
 		member.setModelTypeName("string");
 		// member.setName("id");
 		member.setName("id");
+		useMember(member);
+		return member;
+	}
+
+	public StringAttribute projectId(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string");
+		// member.setName("projectId");
+		member.setName("project_id");
+		useMember(member);
+		return member;
+	}
+
+	public StringAttribute dailyTaskTypeId(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string");
+		// member.setName("dailyTaskTypeId");
+		member.setName("daily_task_type_id");
+		useMember(member);
+		return member;
+	}
+
+	public StringAttribute dailyTaskType(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string");
+		// member.setName("dailyTaskType");
+		member.setName("daily_task_type");
+		useMember(member);
+		return member;
+	}
+
+	public StringAttribute title(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string");
+		// member.setName("title");
+		member.setName("title");
 		useMember(member);
 		return member;
 	}

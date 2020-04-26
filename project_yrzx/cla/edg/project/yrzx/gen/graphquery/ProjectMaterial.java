@@ -124,6 +124,39 @@ public class ProjectMaterial extends BaseModelBean{
 		return member;
 	}
 
+	public ProjectAcceptance projectAcceptanceListAsAcceptanceApplication() {
+		ProjectAcceptance member = new ProjectAcceptance();
+		member.setModelTypeName("project_acceptance");
+		member.setName("acceptance_application");
+		member.setMemberName("projectAcceptanceListAsAcceptanceApplication");
+		member.setRelationName("acceptanceApplication");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ProjectAcceptance projectAcceptanceListAsAcceptance() {
+		ProjectAcceptance member = new ProjectAcceptance();
+		member.setModelTypeName("project_acceptance");
+		member.setName("acceptance");
+		member.setMemberName("projectAcceptanceListAsAcceptance");
+		member.setRelationName("acceptanceApplication");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ProjectPenalties projectPenaltiesList() {
+		ProjectPenalties member = new ProjectPenalties();
+		member.setModelTypeName("project_penalties");
+		member.setName("punishment_material");
+		member.setMemberName("projectPenaltiesList");
+		member.setRelationName("punishmentMaterial");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 
 	// 普通属性
 
