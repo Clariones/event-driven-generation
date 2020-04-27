@@ -4,26 +4,37 @@ import java.util.Map;
 
 import cla.edg.modelbean.*;
 
-public class Slide extends BaseModelBean{
+public class LicenseIndustryType extends BaseModelBean{
 	public String getFullClassName() {
-		return "com.yrdec.yrzx.slide.Slide";
+		return "com.yrdec.yrzx.licenseindustrytype.LicenseIndustryType";
 	}
 	// 枚举对象
 
 	// 引用的对象
 
-	public Page page() {
-		Page member = new Page();
-		member.setModelTypeName("page");
-		member.setName("page");
-		member.setMemberName("page");
+	public Platform platform() {
+		Platform member = new Platform();
+		member.setModelTypeName("platform");
+		member.setName("platform");
+		member.setMemberName("platform");
 		member.setReferDirection(true);
-		member.setRelationName("page");
+		member.setRelationName("platform");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
+
+	public License licenseList() {
+		License member = new License();
+		member.setModelTypeName("license");
+		member.setName("license_industry_type");
+		member.setMemberName("licenseList");
+		member.setRelationName("licenseIndustryType");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
 
 
 	// 普通属性
@@ -46,38 +57,11 @@ public class Slide extends BaseModelBean{
 		return member;
 	}
 
-	public NumberAttribute displayOrder(){
-		NumberAttribute member = new NumberAttribute();
-		member.setModelTypeName("int");
-		// member.setName("displayOrder");
-		member.setName("display_order");
-		useMember(member);
-		return member;
-	}
-
-	public StringAttribute imageUrl(){
-		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string_image");
-		// member.setName("imageUrl");
-		member.setName("image_url");
-		useMember(member);
-		return member;
-	}
-
-	public StringAttribute videoUrl(){
-		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string_image");
-		// member.setName("videoUrl");
-		member.setName("video_url");
-		useMember(member);
-		return member;
-	}
-
-	public StringAttribute linkToUrl(){
+	public StringAttribute code(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		// member.setName("linkToUrl");
-		member.setName("link_to_url");
+		// member.setName("code");
+		member.setName("code");
 		useMember(member);
 		return member;
 	}

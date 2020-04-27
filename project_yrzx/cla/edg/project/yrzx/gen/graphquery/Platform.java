@@ -102,11 +102,11 @@ public class Platform extends BaseModelBean{
 		return member;
 	}
 
-	public LicenseType licenseTypeList() {
-		LicenseType member = new LicenseType();
-		member.setModelTypeName("license_type");
+	public LicenseIndustryType licenseIndustryTypeList() {
+		LicenseIndustryType member = new LicenseIndustryType();
+		member.setModelTypeName("license_industry_type");
 		member.setName("platform");
-		member.setMemberName("licenseTypeList");
+		member.setMemberName("licenseIndustryTypeList");
 		member.setRelationName("platform");
 		member.setReferDirection(false);
 		append(member);

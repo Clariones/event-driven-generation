@@ -23,13 +23,13 @@ public class License extends BaseModelBean{
 		return member;
 	}
 
-	public LicenseType licenseType() {
-		LicenseType member = new LicenseType();
-		member.setModelTypeName("license_type");
-		member.setName("license_type");
-		member.setMemberName("licenseType");
+	public LicenseIndustryType licenseIndustryType() {
+		LicenseIndustryType member = new LicenseIndustryType();
+		member.setModelTypeName("license_industry_type");
+		member.setName("license_industry_type");
+		member.setMemberName("licenseIndustryType");
 		member.setReferDirection(true);
-		member.setRelationName("licenseType");
+		member.setRelationName("licenseIndustryType");
 		append(member);
 		return member;
 	}

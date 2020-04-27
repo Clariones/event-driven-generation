@@ -167,9 +167,9 @@ public class MODEL{
 		return rst;
 	}
 
-	public static LicenseType licenseType() {
-		LicenseType rst = new LicenseType();
-		rst.setModelTypeName("license_type");
+	public static LicenseIndustryType licenseIndustryType() {
+		LicenseIndustryType rst = new LicenseIndustryType();
+		rst.setModelTypeName("license_industry_type");
 		return rst;
 	}
 

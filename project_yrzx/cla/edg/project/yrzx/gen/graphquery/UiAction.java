@@ -64,6 +64,15 @@ public class UiAction extends BaseModelBean{
 		return member;
 	}
 
+	public NumberAttribute displayOrder(){
+		NumberAttribute member = new NumberAttribute();
+		member.setModelTypeName("int");
+		// member.setName("displayOrder");
+		member.setName("display_order");
+		useMember(member);
+		return member;
+	}
+
 	public StringAttribute brief(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");

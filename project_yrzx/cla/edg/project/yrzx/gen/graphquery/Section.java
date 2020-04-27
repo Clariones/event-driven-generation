@@ -79,9 +79,18 @@ public class Section extends BaseModelBean{
 
 	public StringAttribute icon(){
 		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
+		member.setModelTypeName("string_image");
 		// member.setName("icon");
 		member.setName("icon");
+		useMember(member);
+		return member;
+	}
+
+	public NumberAttribute displayOrder(){
+		NumberAttribute member = new NumberAttribute();
+		member.setModelTypeName("int");
+		// member.setName("displayOrder");
+		member.setName("display_order");
 		useMember(member);
 		return member;
 	}
