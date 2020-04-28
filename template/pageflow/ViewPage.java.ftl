@@ -41,7 +41,9 @@ public class ${class_name}Page extends CustomBaseViewPage{
 	@Override
 	protected void beforeDoRendering() {
 		super.beforeDoRendering();
-		this.set("displayMode", "${page.listOfTemplate}");
+		if (!hasDisplayMode()) {
+		    this.set("displayMode", "${page.listOfTemplate}");
+		}
 	}
 </#if>
 <#if page.listOfTemplate?has_content || page.renderClassName?has_content>

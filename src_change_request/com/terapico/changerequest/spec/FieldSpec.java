@@ -203,16 +203,16 @@ public class FieldSpec extends CommonSpec<FieldSpec> implements Cloneable{
 		if (this.getMultiSelection() == null) {
 			this.setMultiSelection(baseData.getMultiSelection());
 		}
-		if (this.getValuesMapping() == null) {
+		if (this.getValuesMapping() == null || this.getValuesMapping().isEmpty()) {
 			this.setValuesMapping(baseData.getValuesMapping());
 		}
-		if (baseData.getValuesMapping() != null) {
-			Map<String, Serializable> data = new HashMap<>(baseData.getValuesMapping());
-			if (this.getValuesMapping() != null) {
-				data.putAll(this.getValuesMapping());
-			}
-			this.setValuesMapping(data);
-		}
+//		if (baseData.getValuesMapping() != null) {
+//			Map<String, Serializable> data = new HashMap<>(baseData.getValuesMapping());
+//			if (this.getValuesMapping() != null) {
+//				data.putAll(this.getValuesMapping());
+//			}
+//			this.setValuesMapping(data);
+//		}
 		if (this.getDataRetrieveApiUrl() == null) {
 			this.setDataRetrieveApiUrl(baseData.getDataRetrieveApiUrl());
 		}

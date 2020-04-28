@@ -4,6 +4,7 @@ import cla.edg.pageflow.PageFlowScript;
 import cla.edg.pageflow.PieceOfScript;
 import cla.edg.project.yrzx.gen.graphquery.MODEL;
 
+
 public class ProjectQueryPiece extends PieceOfScript {
 	@Override
 	public PageFlowScript makeSequel(PageFlowScript script) {
@@ -21,6 +22,12 @@ public class ProjectQueryPiece extends PieceOfScript {
 						MODEL.project().projectPhase().eq("${phase code}"))
 				.wants(MODEL.project().projectPhase(), MODEL.project().projectOwner(), MODEL.project().projectImageList(), MODEL.project().projectServiceType(), MODEL.project().constructionStatus())
 				.order_by(MODEL.project().createTime()).desc()
+
+			.find(MODEL.project()).which("for info page by id").with_string("project id")
+				.comments("按照ID加载项目基本信息")
+				.do_it_as()
+				.where(MODEL.project().id().eq("${project id}"))
+				.wants(MODEL.project().projectType(), MODEL.project().projectOwner(), MODEL.project().constructionStatus(), MODEL.project().projectServiceType())
 
 		// 项目文档资料相关的查询
 			.find(MODEL.projectMaterial()).which("by daily task type").with_string("project id").with_string("type id")
