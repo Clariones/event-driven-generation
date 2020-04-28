@@ -454,6 +454,28 @@ public class Platform extends BaseModelBean{
 		return member;
 	}
 
+	public AccountBookType accountBookTypeList() {
+		AccountBookType member = new AccountBookType();
+		member.setModelTypeName("account_book_type");
+		member.setName("platform");
+		member.setMemberName("accountBookTypeList");
+		member.setRelationName("platform");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public AccountBookItemStatus accountBookItemStatusList() {
+		AccountBookItemStatus member = new AccountBookItemStatus();
+		member.setModelTypeName("account_book_item_status");
+		member.setName("platform");
+		member.setMemberName("accountBookItemStatusList");
+		member.setRelationName("platform");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 	public Recommendation recommendationList() {
 		Recommendation member = new Recommendation();
 		member.setModelTypeName("recommendation");

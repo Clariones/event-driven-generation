@@ -30,7 +30,7 @@ public class HighLevelMePageFlowPiece extends PieceOfScript {
 				// 账户
 				.request("view my account list").with_string("filter")
 					.comments("查看我的账户").need_login()
-					.got_page("account list").title("我的账户").list_of("account")
+					.got_page("account list").title("我的账户").list_of("card")
 						.may_request("view account detail")
 				// 订单
 				.request("view my order list").with_string("filter").with_last_record_id()
@@ -53,9 +53,13 @@ public class HighLevelMePageFlowPiece extends PieceOfScript {
 					.got_page("emplacement list").title("我的申请").list_of("emplacement_application")
 						
 			// 账户详情		
-			.request("view account detail").with_string("account id").with_last_record_id()
-				.comments("查看某个账户的详情,带明细").need_login().no_footprint().can_refresh()
-				.got_page("account detail").title("账户详情").list_of("account detail")
+			.request("view account detail").with_string("account id").with_string("filter").with_last_record_id()
+				.comments("查看某个账户的详情,带明细").need_login().no_footprint()
+				.got_page("account detail").title("账户详情")
+					.may_request("view account record list")
+			.request("view account record list").with_string("account id").with_last_record_id()
+				.comments("查看某个账户的流水").need_login().no_footprint()
+				.got_page("account record list").title("账户明细").list_of("card")
 				
 			// 订单详情
 			.request("view order detail").with_string("order id")

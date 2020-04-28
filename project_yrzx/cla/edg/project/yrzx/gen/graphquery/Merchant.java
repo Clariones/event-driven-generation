@@ -300,6 +300,17 @@ public class Merchant extends BaseModelBean{
 		return member;
 	}
 
+	public AccountBook accountBookList() {
+		AccountBook member = new AccountBook();
+		member.setModelTypeName("account_book");
+		member.setName("owner");
+		member.setMemberName("accountBookList");
+		member.setRelationName("owner");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 	public Recommendation recommendationList() {
 		Recommendation member = new Recommendation();
 		member.setModelTypeName("recommendation");

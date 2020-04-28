@@ -467,6 +467,36 @@ public class MODEL{
 		return rst;
 	}
 
+	public static AccountBookType accountBookType() {
+		AccountBookType rst = new AccountBookType();
+		rst.setModelTypeName("account_book_type");
+		return rst;
+	}
+
+	public static AccountBook accountBook() {
+		AccountBook rst = new AccountBook();
+		rst.setModelTypeName("account_book");
+		return rst;
+	}
+
+	public static AccountBookItemStatus accountBookItemStatus() {
+		AccountBookItemStatus rst = new AccountBookItemStatus();
+		rst.setModelTypeName("account_book_item_status");
+		return rst;
+	}
+
+	public static AccountBookItem accountBookItem() {
+		AccountBookItem rst = new AccountBookItem();
+		rst.setModelTypeName("account_book_item");
+		return rst;
+	}
+
+	public static AccountBookRecord accountBookRecord() {
+		AccountBookRecord rst = new AccountBookRecord();
+		rst.setModelTypeName("account_book_record");
+		return rst;
+	}
+
 	public static ApplicationStatus applicationStatus() {
 		ApplicationStatus rst = new ApplicationStatus();
 		rst.setModelTypeName("application_status");

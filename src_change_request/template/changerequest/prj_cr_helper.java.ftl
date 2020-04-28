@@ -121,6 +121,9 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 		// adjustChangeRequestResponse(cr, crSpec, sceneCode, groupSpecList);
 		return crData;
 	}
+	protected List<CRGroupSpec> ALL_GROUPS(CRSpec crSpec) {
+        return crSpec.getSceneList().stream().flatMap(scSpec->scSpec.getGroups().stream()).collect(Collectors.toList());
+    }
 	// 根据 group spec list, 把这个cr装满
 	protected GenericFormPage fulfillChangeRequestFields(ChangeRequest InputCR, CRSpec crSpec, String sceneCode,
 			List<CRGroupSpec> groupSpecList, Map<String, Integer> recordIndexInfo, String processUrl) throws Exception {
@@ -177,7 +180,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 				"select * from change_request_data CR where CR.request_type=? and commited is false and (");
 		params.add(crType);
 		final int paramsLen = params.size();
-		groupSpecList.forEach(group -> {
+		ALL_GROUPS(CR(crType)).forEach(group -> {
 			if (params.size() > paramsLen) {
 				// 不是循环第一次
 				sb.append(" or ");
