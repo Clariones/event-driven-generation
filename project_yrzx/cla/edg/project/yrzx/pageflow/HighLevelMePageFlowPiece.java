@@ -62,7 +62,7 @@ public class HighLevelMePageFlowPiece extends PieceOfScript {
 					.got_page("employee list")
 
 				// 角色切换
-				.request("view all employee nomination of me")
+				.request("view all employee nomination of me").with_last_record_id()
 					.comments("列出所有的任职岗位").need_login()
 					.got_page("employee nomination list").title("岗位列表").list_of("card")
 						.may_request("select employee nomination")

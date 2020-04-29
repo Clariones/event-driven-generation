@@ -21,10 +21,7 @@ public class ClientCRPageFlowPiece extends PieceOfScript {
 
 				.request_with_changerequest("review contract").with_string("item id").with_string("scene_code")
 					.comments("合同审核").need_login()
-					.when("return to list")
-						.got_page("project contract list")
-					.when_others()
-						.got_page("project contract detail")
+					.got_page("project contract detail")
 
 				.request_with_changerequest("comments on contract").with_string("item id").with_string("scene_code")
 					.comments("合同批注").need_login()
@@ -32,10 +29,7 @@ public class ClientCRPageFlowPiece extends PieceOfScript {
 
 				.request_with_changerequest("review materials").with_string("item id").with_string("scene_code")
 					.comments("资料审核").need_login()
-					.when("return to list")
-						.got_page("document list by daily task")
-					.when_others()
-						.got_page("project material detail")
+					.got_page("project material detail")
 
 				.request_with_changerequest("comments on materials").with_string("item id").with_string("scene_code")
 					.comments("资料批注").need_login()

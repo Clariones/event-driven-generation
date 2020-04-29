@@ -602,7 +602,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 			switch (modelType) {
 <#list helper.getAllModelNamesNeedCandidates(projectSpec) as modelType>
 			case ${helper.NameAsThis(modelType)}.INTERNAL_TYPE:
-				return this.convertToUiCandidateValues(fieldSpec, userContext.getManagerGroup().get${helper.NameAsThis(modelType)}Manager().queryCandidates(userContext, query));
+				return userContext.getManagerGroup().get${helper.NameAsThis(modelType)}Manager().queryCandidates(userContext, query);
 </#list>
 			default:
 				new Throwable("不支持自动填充"+modelType+"的候选值").printStackTrace();
