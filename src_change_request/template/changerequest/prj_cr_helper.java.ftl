@@ -75,7 +75,15 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 	protected Object toEventTableName(CRGroupSpec groupSpec) {
 		return "event_" + (groupSpec.getModelName().trim().replace(' ', '_').toLowerCase())+"_data";
 	}
-	
+
+	public void markAsCommited(ChangeRequest cr) {
+        cr.updateCommited(true);
+        try {
+            userContext.getManagerGroup().getChangeRequestManager().internalSaveChangeRequest(userContext, cr, EO);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 	public ChangeRequestProcessResult processChangeRequest(ChangeRequestPostData postedData, BaseEntity currentUserInfo) throws Exception {
 	    if (currentUserInfo == null) {
     		currentUserInfo = anonymousUser();

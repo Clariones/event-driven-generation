@@ -39,6 +39,17 @@ public class Role extends BaseModelBean{
 		return member;
 	}
 
+	public EventAddEmployee eventAddEmployeeList() {
+		EventAddEmployee member = new EventAddEmployee();
+		member.setModelTypeName("event_add_employee");
+		member.setName("role");
+		member.setMemberName("eventAddEmployeeList");
+		member.setRelationName("role");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 
 	// 普通属性
 

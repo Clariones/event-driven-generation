@@ -19,6 +19,7 @@ public class HomepageQueryPiece extends PieceOfScript {
 			.where(MODEL.article().category().eq("${category id}"))
 			.wants(MODEL.article().postByEmployee().employee(), MODEL.article().postByEmployee().job())
 			;
+		script.import_from(new MiscQueryPiece());
 		return script;
 	}
 

@@ -617,6 +617,12 @@ public class MODEL{
 		return rst;
 	}
 
+	public static EventAddEmployee eventAddEmployee() {
+		EventAddEmployee rst = new EventAddEmployee();
+		rst.setModelTypeName("event_add_employee");
+		return rst;
+	}
+
 	public static EventProjectManagerReportBasicInfo eventProjectManagerReportBasicInfo() {
 		EventProjectManagerReportBasicInfo rst = new EventProjectManagerReportBasicInfo();
 		rst.setModelTypeName("event_project_manager_report_basic_info");

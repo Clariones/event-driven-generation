@@ -47,6 +47,17 @@ public class Job extends BaseModelBean{
 		return member;
 	}
 
+	public EventAddEmployee eventAddEmployeeList() {
+		EventAddEmployee member = new EventAddEmployee();
+		member.setModelTypeName("event_add_employee");
+		member.setName("job");
+		member.setMemberName("eventAddEmployeeList");
+		member.setRelationName("job");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 
 	// 普通属性
 

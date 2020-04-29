@@ -80,6 +80,17 @@ public class ChangeRequest extends BaseModelBean{
 		return member;
 	}
 
+	public EventAddEmployee eventAddEmployeeList() {
+		EventAddEmployee member = new EventAddEmployee();
+		member.setModelTypeName("event_add_employee");
+		member.setName("change_request");
+		member.setMemberName("eventAddEmployeeList");
+		member.setRelationName("changeRequest");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 	public EventProjectManagerReportBasicInfo eventProjectManagerReportBasicInfoList() {
 		EventProjectManagerReportBasicInfo member = new EventProjectManagerReportBasicInfo();
 		member.setModelTypeName("event_project_manager_report_basic_info");

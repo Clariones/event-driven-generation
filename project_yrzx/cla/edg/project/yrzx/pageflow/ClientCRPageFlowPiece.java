@@ -53,6 +53,10 @@ public class ClientCRPageFlowPiece extends PieceOfScript {
 					.comments("违约处罚")
 					.got_page("penalties detail")
 
+				.request_with_changerequest("add employee")
+					.comments("添加员工")
+					.got_page("employee list")
+
 			;
 	}
 }

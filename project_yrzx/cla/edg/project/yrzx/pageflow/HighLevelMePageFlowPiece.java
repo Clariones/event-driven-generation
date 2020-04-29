@@ -51,20 +51,40 @@ public class HighLevelMePageFlowPiece extends PieceOfScript {
 				.request("view my emplacement list").with_string("filter").with_last_record_id()
 					.comments("查看我的入驻申请").need_login()
 					.got_page("emplacement list").title("我的申请").list_of("emplacement_application")
-						
-			// 账户详情		
-			.request("view account detail").with_string("account id").with_string("filter").with_last_record_id()
-				.comments("查看某个账户的详情,带明细").need_login().no_footprint()
-				.got_page("account detail").title("账户详情")
-					.may_request("view account record list")
-			.request("view account record list").with_string("account id").with_last_record_id()
-				.comments("查看某个账户的流水").need_login().no_footprint()
-				.got_page("account record list").title("账户明细").list_of("card")
-				
-			// 订单详情
-			.request("view order detail").with_string("order id")
-				.comments("查看订单详情")
-				.got_page("order detail").title("订单详情").as_class("")
+
+				// 公司人员管理
+				.request("view company organization").with_string("merchant id").with_last_record_id()
+					.comments("查看公司的员工").need_login().no_footprint()
+					.got_page("employee list").title("员工清单").list_of("user")
+						.may_request("remove employee")
+				.request("remove employee").with_string("employee nomination id")
+					.comments("删除员工").need_login().no_footprint()
+					.got_page("employee list")
+
+				// 角色切换
+				.request("view all employee nomination of me")
+					.comments("列出所有的任职岗位").need_login()
+					.got_page("employee nomination list").title("岗位列表").list_of("card")
+						.may_request("select employee nomination")
+				.request("select employee nomination").with_string("employee nomination id")
+					.comments("选择一个岗位作为当前岗位")
+					.got_page("employee nomination list")
+				.request("logout").comments("退出当前账号").no_login().no_footprint()
+					.got_page("me")
+
+				// 账户详情
+				.request("view account detail").with_string("account id").with_string("filter").with_last_record_id()
+					.comments("查看某个账户的详情,带明细").need_login().no_footprint()
+					.got_page("account detail").title("账户详情")
+						.may_request("view account record list")
+				.request("view account record list").with_string("account id").with_last_record_id()
+					.comments("查看某个账户的流水").need_login().no_footprint()
+					.got_page("account record list").title("账户明细").list_of("card")
+
+				// 订单详情
+				.request("view order detail").with_string("order id")
+					.comments("查看订单详情")
+					.got_page("order detail").title("订单详情").as_class("")
 				
 			;
 	}
