@@ -4,9 +4,9 @@ import java.util.Map;
 
 import cla.edg.modelbean.*;
 
-public class EventProjectSupervisorReportBasicInfo extends BaseModelBean{
+public class EventProjectProgress extends BaseModelBean{
 	public String getFullClassName() {
-		return "com.yrdec.yrzx.eventprojectsupervisorreportbasicinfo.EventProjectSupervisorReportBasicInfo";
+		return "com.yrdec.yrzx.eventprojectprogress.EventProjectProgress";
 	}
 	// 枚举对象
 
@@ -46,38 +46,65 @@ public class EventProjectSupervisorReportBasicInfo extends BaseModelBean{
 		return member;
 	}
 
-	public StringAttribute dailyTaskTypeId(){
+	public StringAttribute phaseId(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		// member.setName("dailyTaskTypeId");
-		member.setName("daily_task_type_id");
+		// member.setName("phaseId");
+		member.setName("phase_id");
 		useMember(member);
 		return member;
 	}
 
-	public StringAttribute projectName(){
+	public StringAttribute title(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		// member.setName("projectName");
-		member.setName("project_name");
+		// member.setName("title");
+		member.setName("title");
 		useMember(member);
 		return member;
 	}
 
-	public NumberAttribute temperature(){
-		NumberAttribute member = new NumberAttribute();
-		member.setModelTypeName("double");
-		// member.setName("temperature");
-		member.setName("temperature");
+	public StringAttribute brief(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string");
+		// member.setName("brief");
+		member.setName("brief");
 		useMember(member);
 		return member;
 	}
 
-	public StringAttribute weatherConditions(){
-		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
-		// member.setName("weatherConditions");
-		member.setName("weather_conditions");
+	public DateTimeAttribute planStartDate(){
+		DateTimeAttribute member = new DateTimeAttribute();
+		member.setModelTypeName("date");
+		// member.setName("planStartDate");
+		member.setName("plan_start_date");
+		useMember(member);
+		return member;
+	}
+
+	public DateTimeAttribute actualStartDate(){
+		DateTimeAttribute member = new DateTimeAttribute();
+		member.setModelTypeName("date");
+		// member.setName("actualStartDate");
+		member.setName("actual_start_date");
+		useMember(member);
+		return member;
+	}
+
+	public DateTimeAttribute planFinishDate(){
+		DateTimeAttribute member = new DateTimeAttribute();
+		member.setModelTypeName("date");
+		// member.setName("planFinishDate");
+		member.setName("plan_finish_date");
+		useMember(member);
+		return member;
+	}
+
+	public DateTimeAttribute actualFinishDate(){
+		DateTimeAttribute member = new DateTimeAttribute();
+		member.setModelTypeName("date");
+		// member.setName("actualFinishDate");
+		member.setName("actual_finish_date");
 		useMember(member);
 		return member;
 	}

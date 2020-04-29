@@ -56,6 +56,17 @@ public class ProjectPenalties extends BaseModelBean{
 		return member;
 	}
 
+	public DailyTaskType dailyTaskType() {
+		DailyTaskType member = new DailyTaskType();
+		member.setModelTypeName("daily_task_type");
+		member.setName("daily_task_type");
+		member.setMemberName("dailyTaskType");
+		member.setReferDirection(true);
+		member.setRelationName("dailyTaskType");
+		append(member);
+		return member;
+	}
+
 	// 被引用的对象
 
 

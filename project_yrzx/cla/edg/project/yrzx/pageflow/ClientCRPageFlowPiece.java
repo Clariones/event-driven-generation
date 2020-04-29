@@ -51,6 +51,23 @@ public class ClientCRPageFlowPiece extends PieceOfScript {
 					.comments("添加员工")
 					.got_page("employee list")
 
-			;
+				.request_with_changerequest("project progress").with_string("project id").with_string("item id")
+					.comments("创建项目进度")
+					.got_page("project progress list")
+
+				.request_with_changerequest("task report").with_string("project id").with_string("label")
+					.comments("创建施工日志")
+					.got_page("project report detail")
+
+				.request_with_changerequest("project supervision report").with_string("project id").with_string("label")
+					.comments("创建项目监理日志")
+					.got_page("project report detail")
+
+				.request_with_changerequest("project manager report").with_string("project id").with_string("label")
+					.comments("创建项目经理日志")
+					.got_page("project report detail")
+
+
+				;
 	}
 }

@@ -212,6 +212,17 @@ public class ChangeRequest extends BaseModelBean{
 		return member;
 	}
 
+	public EventProjectProgress eventProjectProgressList() {
+		EventProjectProgress member = new EventProjectProgress();
+		member.setModelTypeName("event_project_progress");
+		member.setName("change_request");
+		member.setMemberName("eventProjectProgressList");
+		member.setRelationName("changeRequest");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 	public EventContractReview eventContractReviewList() {
 		EventContractReview member = new EventContractReview();
 		member.setModelTypeName("event_contract_review");

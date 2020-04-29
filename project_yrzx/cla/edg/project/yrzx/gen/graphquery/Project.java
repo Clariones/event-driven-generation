@@ -223,6 +223,28 @@ public class Project extends BaseModelBean{
 		return member;
 	}
 
+	public LaborWageManagementSheet laborWageManagementSheetList() {
+		LaborWageManagementSheet member = new LaborWageManagementSheet();
+		member.setModelTypeName("labor_wage_management_sheet");
+		member.setName("project");
+		member.setMemberName("laborWageManagementSheetList");
+		member.setRelationName("project");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ProjectReport projectReportList() {
+		ProjectReport member = new ProjectReport();
+		member.setModelTypeName("project_report");
+		member.setName("project");
+		member.setMemberName("projectReportList");
+		member.setRelationName("project");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 
 	// 普通属性
 

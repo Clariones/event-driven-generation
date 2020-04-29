@@ -61,9 +61,9 @@ public class DailyTaskType extends BaseModelBean{
 	public ProjectAcceptance projectAcceptanceList() {
 		ProjectAcceptance member = new ProjectAcceptance();
 		member.setModelTypeName("project_acceptance");
-		member.setName("acceptance_type");
+		member.setName("daily_task_type");
 		member.setMemberName("projectAcceptanceList");
-		member.setRelationName("acceptanceType");
+		member.setRelationName("dailyTaskType");
 		member.setReferDirection(false);
 		append(member);
 		return member;
@@ -74,6 +74,39 @@ public class DailyTaskType extends BaseModelBean{
 		member.setModelTypeName("after_sales");
 		member.setName("daily_task_type");
 		member.setMemberName("afterSalesList");
+		member.setRelationName("dailyTaskType");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ProjectPenalties projectPenaltiesList() {
+		ProjectPenalties member = new ProjectPenalties();
+		member.setModelTypeName("project_penalties");
+		member.setName("daily_task_type");
+		member.setMemberName("projectPenaltiesList");
+		member.setRelationName("dailyTaskType");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public LaborWageManagementSheet laborWageManagementSheetList() {
+		LaborWageManagementSheet member = new LaborWageManagementSheet();
+		member.setModelTypeName("labor_wage_management_sheet");
+		member.setName("daily_task_type");
+		member.setMemberName("laborWageManagementSheetList");
+		member.setRelationName("dailyTaskType");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ProjectReport projectReportList() {
+		ProjectReport member = new ProjectReport();
+		member.setModelTypeName("project_report");
+		member.setName("daily_task_type");
+		member.setMemberName("projectReportList");
 		member.setRelationName("dailyTaskType");
 		member.setReferDirection(false);
 		append(member);

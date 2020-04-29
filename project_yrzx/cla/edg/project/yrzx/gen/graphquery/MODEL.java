@@ -341,6 +341,12 @@ public class MODEL{
 		return rst;
 	}
 
+	public static ProjectAcceptanceRecord projectAcceptanceRecord() {
+		ProjectAcceptanceRecord rst = new ProjectAcceptanceRecord();
+		rst.setModelTypeName("project_acceptance_record");
+		return rst;
+	}
+
 	public static DailyTaskCategory dailyTaskCategory() {
 		DailyTaskCategory rst = new DailyTaskCategory();
 		rst.setModelTypeName("daily_task_category");
@@ -464,6 +470,30 @@ public class MODEL{
 	public static ProjectPenaltiesStatus projectPenaltiesStatus() {
 		ProjectPenaltiesStatus rst = new ProjectPenaltiesStatus();
 		rst.setModelTypeName("project_penalties_status");
+		return rst;
+	}
+
+	public static LaborWageManagementSheet laborWageManagementSheet() {
+		LaborWageManagementSheet rst = new LaborWageManagementSheet();
+		rst.setModelTypeName("labor_wage_management_sheet");
+		return rst;
+	}
+
+	public static ProjectReport projectReport() {
+		ProjectReport rst = new ProjectReport();
+		rst.setModelTypeName("project_report");
+		return rst;
+	}
+
+	public static CommonReport commonReport() {
+		CommonReport rst = new CommonReport();
+		rst.setModelTypeName("common_report");
+		return rst;
+	}
+
+	public static ProjectReportCheckItem projectReportCheckItem() {
+		ProjectReportCheckItem rst = new ProjectReportCheckItem();
+		rst.setModelTypeName("project_report_check_item");
 		return rst;
 	}
 
@@ -686,6 +716,12 @@ public class MODEL{
 	public static EventApplyEmplacement eventApplyEmplacement() {
 		EventApplyEmplacement rst = new EventApplyEmplacement();
 		rst.setModelTypeName("event_apply_emplacement");
+		return rst;
+	}
+
+	public static EventProjectProgress eventProjectProgress() {
+		EventProjectProgress rst = new EventProjectProgress();
+		rst.setModelTypeName("event_project_progress");
 		return rst;
 	}
 

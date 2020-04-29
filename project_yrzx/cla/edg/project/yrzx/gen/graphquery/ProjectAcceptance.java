@@ -34,13 +34,13 @@ public class ProjectAcceptance extends BaseModelBean{
 		return member;
 	}
 
-	public DailyTaskType acceptanceType() {
+	public DailyTaskType dailyTaskType() {
 		DailyTaskType member = new DailyTaskType();
 		member.setModelTypeName("daily_task_type");
-		member.setName("acceptance_type");
-		member.setMemberName("acceptanceType");
+		member.setName("daily_task_type");
+		member.setMemberName("dailyTaskType");
 		member.setReferDirection(true);
-		member.setRelationName("acceptanceType");
+		member.setRelationName("dailyTaskType");
 		append(member);
 		return member;
 	}

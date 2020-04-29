@@ -37,11 +37,38 @@ public class EventTaskReportBasicInfo extends BaseModelBean{
 		return member;
 	}
 
-	public StringAttribute taskId(){
+	public StringAttribute projectId(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		// member.setName("taskId");
-		member.setName("task_id");
+		// member.setName("projectId");
+		member.setName("project_id");
+		useMember(member);
+		return member;
+	}
+
+	public StringAttribute dailyTaskTypeId(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string");
+		// member.setName("dailyTaskTypeId");
+		member.setName("daily_task_type_id");
+		useMember(member);
+		return member;
+	}
+
+	public StringAttribute projectName(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string");
+		// member.setName("projectName");
+		member.setName("project_name");
+		useMember(member);
+		return member;
+	}
+
+	public StringAttribute subcontractor(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string_longtext");
+		// member.setName("subcontractor");
+		member.setName("subcontractor");
 		useMember(member);
 		return member;
 	}
@@ -55,20 +82,20 @@ public class EventTaskReportBasicInfo extends BaseModelBean{
 		return member;
 	}
 
-	public StringAttribute subcontractorName(){
+	public StringAttribute submitterId(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		// member.setName("subcontractorName");
-		member.setName("subcontractor_name");
+		// member.setName("submitterId");
+		member.setName("submitter_id");
 		useMember(member);
 		return member;
 	}
 
-	public StringAttribute responsibleName(){
+	public StringAttribute submitter(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		// member.setName("responsibleName");
-		member.setName("responsible_name");
+		// member.setName("submitter");
+		member.setName("submitter");
 		useMember(member);
 		return member;
 	}

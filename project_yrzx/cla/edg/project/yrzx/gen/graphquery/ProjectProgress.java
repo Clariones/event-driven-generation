@@ -47,6 +47,17 @@ public class ProjectProgress extends BaseModelBean{
 
 	// 被引用的对象
 
+	public LaborWageManagementSheet laborWageManagementSheetList() {
+		LaborWageManagementSheet member = new LaborWageManagementSheet();
+		member.setModelTypeName("labor_wage_management_sheet");
+		member.setName("project_progress");
+		member.setMemberName("laborWageManagementSheetList");
+		member.setRelationName("projectProgress");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 
 	// 普通属性
 

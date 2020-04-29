@@ -4,21 +4,21 @@ import java.util.Map;
 
 import cla.edg.modelbean.*;
 
-public class EventReportCheckItem extends BaseModelBean{
+public class ProjectReportCheckItem extends BaseModelBean{
 	public String getFullClassName() {
-		return "com.yrdec.yrzx.eventreportcheckitem.EventReportCheckItem";
+		return "com.yrdec.yrzx.projectreportcheckitem.ProjectReportCheckItem";
 	}
 	// 枚举对象
 
 	// 引用的对象
 
-	public ChangeRequest changeRequest() {
-		ChangeRequest member = new ChangeRequest();
-		member.setModelTypeName("change_request");
-		member.setName("change_request");
-		member.setMemberName("changeRequest");
+	public ProjectReport projectReport() {
+		ProjectReport member = new ProjectReport();
+		member.setModelTypeName("project_report");
+		member.setName("project_report");
+		member.setMemberName("projectReport");
 		member.setReferDirection(true);
-		member.setRelationName("changeRequest");
+		member.setRelationName("projectReport");
 		append(member);
 		return member;
 	}
@@ -37,6 +37,15 @@ public class EventReportCheckItem extends BaseModelBean{
 		return member;
 	}
 
+	public StringAttribute title(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string_longtext");
+		// member.setName("title");
+		member.setName("title");
+		useMember(member);
+		return member;
+	}
+
 	public StringAttribute checkResult(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
@@ -51,33 +60,6 @@ public class EventReportCheckItem extends BaseModelBean{
 		member.setModelTypeName("string");
 		// member.setName("processResult");
 		member.setName("process_result");
-		useMember(member);
-		return member;
-	}
-
-	public StringAttribute fieldGroup(){
-		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
-		// member.setName("fieldGroup");
-		member.setName("field_group");
-		useMember(member);
-		return member;
-	}
-
-	public StringAttribute eventInitiatorType(){
-		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
-		// member.setName("eventInitiatorType");
-		member.setName("event_initiator_type");
-		useMember(member);
-		return member;
-	}
-
-	public StringAttribute eventInitiatorId(){
-		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
-		// member.setName("eventInitiatorId");
-		member.setName("event_initiator_id");
 		useMember(member);
 		return member;
 	}
