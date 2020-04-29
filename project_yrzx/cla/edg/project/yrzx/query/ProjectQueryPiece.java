@@ -4,6 +4,8 @@ import cla.edg.pageflow.PageFlowScript;
 import cla.edg.pageflow.PieceOfScript;
 import cla.edg.project.yrzx.gen.graphquery.MODEL;
 
+import java.util.stream.Stream;
+
 
 public class ProjectQueryPiece extends PieceOfScript {
 	@Override
@@ -123,43 +125,47 @@ public class ProjectQueryPiece extends PieceOfScript {
 						MODEL.projectNomination().worker().employee().eq("${merchant id}"))
 				.wants(MODEL.projectNomination().worker().employee(), MODEL.projectNomination().worker().job(),
 						MODEL.projectNomination().projectRole(), MODEL.projectNomination().type())
-/// 项目验收相关查询
-				.query(MODEL.projectAcceptance().getModelTypeName()).list_of("project by status").with_string("project id").with_string("filter").pagination()
+			/// 项目验收相关查询
+			.query(MODEL.projectAcceptance().getModelTypeName()).list_of("project by status and type").with_string("project id").with_string("filter").with_string("daily task type id").pagination()
 				.do_it_as()
 				.where(
 						MODEL.projectAcceptance().project().eq("${project id}"),
-						MODEL.projectAcceptance().status().eq("${filter}")
+						MODEL.projectAcceptance().status().eq("${filter}"),
+						MODEL.projectAcceptance().dailyTaskType().eq("${daily task type id}")
 				)
 				.wants(
 						MODEL.projectAcceptance().acceptanceApplication().projectMaterialReviewRecordList().status(),
 						MODEL.projectAcceptance().acceptanceApplication().projectMaterialReviewRecordList().reviewer().type(),
 						MODEL.projectNomination().worker().employee(),
-						MODEL.projectAcceptance().acceptanceType(),
-						MODEL.projectAcceptance().applicationUnit(),
-						MODEL.projectAcceptance().project(),
-						MODEL.projectAcceptance().propertyOwner(),
-						MODEL.projectAcceptance().status()
-				)
-				.find(MODEL.projectAcceptance().getModelTypeName()).which("by id").with_string("project acceptance id")
-				.do_it_as()
-				.where(MODEL.projectAcceptance().id().eq("${project acceptance id}"))
-				.wants(
-						MODEL.projectAcceptance().acceptanceApplication().projectMaterialReviewRecordList().status(),
-						MODEL.projectAcceptance().acceptanceApplication().projectMaterialReviewRecordList().reviewer().type(),
-						MODEL.projectNomination().worker().employee(),
-						MODEL.projectAcceptance().acceptanceType(),
+						MODEL.projectAcceptance().dailyTaskType(),
 						MODEL.projectAcceptance().applicationUnit(),
 						MODEL.projectAcceptance().project(),
 						MODEL.projectAcceptance().propertyOwner(),
 						MODEL.projectAcceptance().status()
 				)
 
+			.find(MODEL.projectAcceptance().getModelTypeName()).which("by id").with_string("project acceptance id")
+				.do_it_as()
+				.where(MODEL.projectAcceptance().id().eq("${project acceptance id}"))
+				.wants(
+						MODEL.projectAcceptance().acceptanceApplication().projectMaterialReviewRecordList().status(),
+						MODEL.projectAcceptance().acceptanceApplication().projectMaterialReviewRecordList().reviewer().type(),
+						MODEL.projectNomination().worker().employee(),
+						MODEL.projectAcceptance().dailyTaskType(),
+						MODEL.projectAcceptance().applicationUnit(),
+						MODEL.projectAcceptance().project(),
+						MODEL.projectAcceptance().propertyOwner(),
+						MODEL.projectAcceptance().status()
+				)
+
+
 				// 售后服务
-				.query(MODEL.afterSales().getModelTypeName()).list_of("project by status").with_string("project id").with_string("filter").pagination()
+			.query(MODEL.afterSales().getModelTypeName()).list_of("project by status and type").with_string("project id").with_string("filter").with_string("daily task type id").pagination()
 				.do_it_as()
 				.where(
 						MODEL.afterSales().project().eq("${project id}"),
-						MODEL.afterSales().status().eq("${filter}")
+						MODEL.afterSales().status().eq("${filter}"),
+						MODEL.afterSales().dailyTaskType().eq("${daily task type id}")
 				)
 				.wants(
 						MODEL.afterSales().status(),
@@ -167,7 +173,7 @@ public class ProjectQueryPiece extends PieceOfScript {
 						MODEL.afterSales().creator()
 				)
 
-				.find(MODEL.afterSales().getModelTypeName()).which("id is").with_string("id")
+			.find(MODEL.afterSales().getModelTypeName()).which("id is").with_string("id")
 				.do_it_as()
 				.where(
 						MODEL.afterSales().id().eq("${id}")
@@ -179,10 +185,11 @@ public class ProjectQueryPiece extends PieceOfScript {
 				)
 
 				// 违约处罚
-				.query(MODEL.projectPenalties().getModelTypeName()).list_of("project by status").with_string("project id").with_string("filter").pagination()
+			.query(MODEL.projectPenalties().getModelTypeName()).list_of("project by status and type").with_string("project id").with_string("filter").with_string("daily task type id").pagination()
 				.do_it_as()
 				.where(
 						MODEL.projectPenalties().project().eq("${project id}"),
+						MODEL.projectPenalties().dailyTaskType().eq("${daily task type id}"),
 						MODEL.projectPenalties().status().eq("${filter}")
 				)
 				.wants(
@@ -190,7 +197,7 @@ public class ProjectQueryPiece extends PieceOfScript {
 						MODEL.projectPenalties().contract(),
 						MODEL.projectPenalties().punishmentMaterial().dailyTaskType()
 				)
-				.find(MODEL.projectPenalties().getModelTypeName()).which("id is").with_string("id")
+			.find(MODEL.projectPenalties().getModelTypeName()).which("id is").with_string("id")
 				.do_it_as()
 				.where(
 						MODEL.projectPenalties().id().eq("${id}")
@@ -204,11 +211,83 @@ public class ProjectQueryPiece extends PieceOfScript {
 						MODEL.projectPenalties().punishmentMaterial().projectMaterialReviewRecordList().reviewer().type(),
 						MODEL.projectNomination().worker().employee()
 				)
+				// 项目进度
+
+			.query(MODEL.projectProgress().getModelTypeName()).list_of("project by status and phase").with_string("project id").with_string("phase id").with_string("filter")
+				.do_it_as()
+				.where(
+						MODEL.projectProgress().project().eq("${project id}"),
+						MODEL.projectProgress().projectPhase().eq("${phase id}"),
+						MODEL.projectProgress().status().eq("${filter}")
+				)
+				.wants(
+						MODEL.projectProgress().status()
+				)
+
+				//项目报告
+			.query(MODEL.projectReport().getModelTypeName()).list_of("project by type").with_string("project id").with_string("filter")
+				.do_it_as()
+				.where(
+						MODEL.projectReport().project().eq("${project id}"),
+						MODEL.projectReport().dailyTaskType().eq("${filter}")
+				)
+				.wants(
+						MODEL.projectReport().dailyTaskType(),
+						MODEL.projectReport().project()
+				)
+			.find(MODEL.projectReport().getModelTypeName()).which("id is").with_string("item id")
+				.do_it_as()
+				.where(
+						MODEL.projectReport().id().eq("${item id}")
+				)
+				.wants(
+						MODEL.projectReport().project(),
+						MODEL.projectReport().dailyTaskType(),
+						MODEL.projectReport().projectReportCheckItemList()
+				)
+
+			.query(MODEL.merchant().getModelTypeName()).list_of("project by role").with_string("project id").with_string("role")
+				.do_it_as()
+				.where(
+						MODEL.merchant().employeeNominationListAsEmployee().projectNominationList().projectRole().eq("${role}"),
+						MODEL.merchant().employeeNominationListAsEmployee().projectNominationList().project().eq("${project id}")
+				)
+
+			.query(MODEL.merchant().getModelTypeName()).list_of("partyB in project").with_string("project id")
+				.comments("查询项目中的乙方")
+				.do_it_as()
+				.where(
+						MODEL.merchant().standardContractListAsPartyB().project().eq("${project id}")
+				)
+
+				//劳务监督
+
+
+
+				//按二级页面分类 统计 项目下该分类下条目数量
+
+			.find(MODEL.afterSales()).which("in project by daily task type").with_string("project id")
+				.do_it_as().count_by(MODEL.afterSales().dailyTaskType())
+				.where(MODEL.afterSales().project().eq("${project id}"))
+
+			.find(MODEL.projectPenalties()).which("in project by daily task type").with_string("project id")
+				.do_it_as().count_by(MODEL.projectPenalties().dailyTaskType())
+				.where(MODEL.projectPenalties().project().eq("${project id}"))
+
+			.find(MODEL.projectAcceptance()).which("in project by daily task type").with_string("project id")
+				.do_it_as().count_by(MODEL.projectAcceptance().dailyTaskType())
+				.where(MODEL.projectAcceptance().project().eq("${project id}"))
+
+			.find(MODEL.projectProgress()).which("in project by project phase").with_string("project id")
+				.do_it_as().count_by(MODEL.projectProgress().projectPhase())
+				.where(MODEL.projectProgress().project().eq("${project id}"))
 
 
 		;
 
 		return script;
 	}
+
+
 
 }

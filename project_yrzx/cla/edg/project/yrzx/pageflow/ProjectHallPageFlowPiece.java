@@ -114,6 +114,14 @@ public class ProjectHallPageFlowPiece extends PieceOfScript {
 			.comments("查看工资发放记录列表").need_login().has_footprint()
 			.got_page("labor wages list").title("劳务工资发放").list_of("card")
 				.comments("工资发放列表. 可查看. 无详情")
+
+		.request("view labor wages detail").with_string("item id")
+			.comments("查看工资发放记录详情").need_login().has_footprint()
+			.got_page("labor wages detail")
+
+		.request("view labor dispute list").with_string("project id").with_last_record_id()
+			.comments("查看劳务纠纷列表").need_login().has_footprint()
+			.got_page("labor dispute list")
 				
 		;
 	}

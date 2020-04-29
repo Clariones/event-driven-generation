@@ -201,6 +201,17 @@ public class StandardContract extends BaseModelBean{
 		return member;
 	}
 
+	public LaborWageManagementSheet laborWageManagementSheetList() {
+		LaborWageManagementSheet member = new LaborWageManagementSheet();
+		member.setModelTypeName("labor_wage_management_sheet");
+		member.setName("contract");
+		member.setMemberName("laborWageManagementSheetList");
+		member.setRelationName("contract");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 
 	// 普通属性
 

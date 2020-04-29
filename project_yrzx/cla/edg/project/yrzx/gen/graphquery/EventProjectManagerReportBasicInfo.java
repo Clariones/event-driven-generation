@@ -37,6 +37,15 @@ public class EventProjectManagerReportBasicInfo extends BaseModelBean{
 		return member;
 	}
 
+	public StringAttribute dailyTaskTypeId(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string");
+		// member.setName("dailyTaskTypeId");
+		member.setName("daily_task_type_id");
+		useMember(member);
+		return member;
+	}
+
 	public StringAttribute projectId(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");

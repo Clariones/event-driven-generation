@@ -157,6 +157,28 @@ public class ProjectMaterial extends BaseModelBean{
 		return member;
 	}
 
+	public LaborWageManagementSheet laborWageManagementSheetListAsBidPriceList() {
+		LaborWageManagementSheet member = new LaborWageManagementSheet();
+		member.setModelTypeName("labor_wage_management_sheet");
+		member.setName("bid_price_list");
+		member.setMemberName("laborWageManagementSheetListAsBidPriceList");
+		member.setRelationName("bidPriceList");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public LaborWageManagementSheet laborWageManagementSheetListAsLaborWage() {
+		LaborWageManagementSheet member = new LaborWageManagementSheet();
+		member.setModelTypeName("labor_wage_management_sheet");
+		member.setName("labor_wage");
+		member.setMemberName("laborWageManagementSheetListAsLaborWage");
+		member.setRelationName("bidPriceList");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 
 	// 普通属性
 

@@ -113,6 +113,50 @@ public class ProjectNomination extends BaseModelBean{
 		return member;
 	}
 
+	public LaborWageManagementSheet laborWageManagementSheetListAsContractPaymentManager() {
+		LaborWageManagementSheet member = new LaborWageManagementSheet();
+		member.setModelTypeName("labor_wage_management_sheet");
+		member.setName("contract_payment_manager");
+		member.setMemberName("laborWageManagementSheetListAsContractPaymentManager");
+		member.setRelationName("contractPaymentManager");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public LaborWageManagementSheet laborWageManagementSheetListAsPlatformLaborManager() {
+		LaborWageManagementSheet member = new LaborWageManagementSheet();
+		member.setModelTypeName("labor_wage_management_sheet");
+		member.setName("platform_labor_manager");
+		member.setMemberName("laborWageManagementSheetListAsPlatformLaborManager");
+		member.setRelationName("contractPaymentManager");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public LaborWageManagementSheet laborWageManagementSheetListAsPaymentManager() {
+		LaborWageManagementSheet member = new LaborWageManagementSheet();
+		member.setModelTypeName("labor_wage_management_sheet");
+		member.setName("payment_manager");
+		member.setMemberName("laborWageManagementSheetListAsPaymentManager");
+		member.setRelationName("contractPaymentManager");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ProjectReport projectReportList() {
+		ProjectReport member = new ProjectReport();
+		member.setModelTypeName("project_report");
+		member.setName("submitter");
+		member.setMemberName("projectReportList");
+		member.setRelationName("submitter");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 
 	// 普通属性
 
