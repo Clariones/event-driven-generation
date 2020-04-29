@@ -341,12 +341,6 @@ public class MODEL{
 		return rst;
 	}
 
-	public static ProjectAcceptanceRecord projectAcceptanceRecord() {
-		ProjectAcceptanceRecord rst = new ProjectAcceptanceRecord();
-		rst.setModelTypeName("project_acceptance_record");
-		return rst;
-	}
-
 	public static DailyTaskCategory dailyTaskCategory() {
 		DailyTaskCategory rst = new DailyTaskCategory();
 		rst.setModelTypeName("daily_task_category");
@@ -653,6 +647,12 @@ public class MODEL{
 		return rst;
 	}
 
+	public static EventLaborDispute eventLaborDispute() {
+		EventLaborDispute rst = new EventLaborDispute();
+		rst.setModelTypeName("event_labor_dispute");
+		return rst;
+	}
+
 	public static EventProjectManagerReportBasicInfo eventProjectManagerReportBasicInfo() {
 		EventProjectManagerReportBasicInfo rst = new EventProjectManagerReportBasicInfo();
 		rst.setModelTypeName("event_project_manager_report_basic_info");
@@ -704,6 +704,12 @@ public class MODEL{
 	public static EventMaterialReview eventMaterialReview() {
 		EventMaterialReview rst = new EventMaterialReview();
 		rst.setModelTypeName("event_material_review");
+		return rst;
+	}
+
+	public static EventLaborSupervisor eventLaborSupervisor() {
+		EventLaborSupervisor rst = new EventLaborSupervisor();
+		rst.setModelTypeName("event_labor_supervisor");
 		return rst;
 	}
 

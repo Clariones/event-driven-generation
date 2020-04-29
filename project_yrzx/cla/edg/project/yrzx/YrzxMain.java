@@ -1,19 +1,18 @@
 package cla.edg.project.yrzx;
 
-import java.io.File;
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Map;
-
-import com.terapico.changerequest.generator.ChangeRequestGenerator;
-import com.terapico.generator.GenrationResult;
-import com.terapico.generator.Utils;
-
 import cla.edg.generator.PageFlowGenerator;
 import cla.edg.pageflow.BasePageFlowDescriptionScript;
 import cla.edg.pageflow.BasePageFlowScript;
 import cla.edg.project.yrzx.changerequest.MainChangeRequest;
 import cla.edg.project.yrzx.pageflow.MainPageFlow;
+import com.terapico.changerequest.generator.ChangeRequestGenerator;
+import com.terapico.generator.GenrationResult;
+import com.terapico.generator.Utils;
+
+import java.io.File;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Map;
 
 public class YrzxMain {
 	private static String OUTPUT_FOLDER = "/works/jobs/yrzx_v3/workspace/yrzx-biz-suite/bizcore/WEB-INF/yrzx_custom_src";

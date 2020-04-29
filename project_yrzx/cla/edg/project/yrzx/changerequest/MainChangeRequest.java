@@ -1,9 +1,9 @@
 package cla.edg.project.yrzx.changerequest;
 
-import java.util.Map;
-
 import com.terapico.changerequest.builder.ChangeRequestSpecBuilder;
 import com.terapico.changerequest.builder.ChangeRequestSpecFactory;
+
+import java.util.Map;
 
 public class MainChangeRequest implements ChangeRequestSpecFactory {
 
@@ -25,6 +25,7 @@ public class MainChangeRequest implements ChangeRequestSpecFactory {
 			.import_from(new ProjectMaterialChangeRequest())
 			.import_from(new ClaMiscChangeRequest())
 			.import_from(new ProjectProgressChangeRequest())
+			.import_from(new ProjectLaborChangeRequest())
 			
 			.getChangeRequestSpec();
 	}

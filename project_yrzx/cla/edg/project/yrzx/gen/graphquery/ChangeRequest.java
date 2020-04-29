@@ -91,6 +91,17 @@ public class ChangeRequest extends BaseModelBean{
 		return member;
 	}
 
+	public EventLaborDispute eventLaborDisputeList() {
+		EventLaborDispute member = new EventLaborDispute();
+		member.setModelTypeName("event_labor_dispute");
+		member.setName("change_request");
+		member.setMemberName("eventLaborDisputeList");
+		member.setRelationName("changeRequest");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 	public EventProjectManagerReportBasicInfo eventProjectManagerReportBasicInfoList() {
 		EventProjectManagerReportBasicInfo member = new EventProjectManagerReportBasicInfo();
 		member.setModelTypeName("event_project_manager_report_basic_info");
@@ -184,6 +195,17 @@ public class ChangeRequest extends BaseModelBean{
 		member.setModelTypeName("event_material_review");
 		member.setName("change_request");
 		member.setMemberName("eventMaterialReviewList");
+		member.setRelationName("changeRequest");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EventLaborSupervisor eventLaborSupervisorList() {
+		EventLaborSupervisor member = new EventLaborSupervisor();
+		member.setModelTypeName("event_labor_supervisor");
+		member.setName("change_request");
+		member.setMemberName("eventLaborSupervisorList");
 		member.setRelationName("changeRequest");
 		member.setReferDirection(false);
 		append(member);
