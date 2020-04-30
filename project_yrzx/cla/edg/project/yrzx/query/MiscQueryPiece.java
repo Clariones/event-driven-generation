@@ -43,6 +43,12 @@ public class MiscQueryPiece extends PieceOfScript {
 				.where_any(MODEL.merchant().standardContractListAsPartyB().project().eq("${project id}"),
 						MODEL.merchant().standardContractListAsPartyA().project().eq("${project id}")
 				)
+		//
+			.query(MODEL.workPackage()).list_of("project").with_string("project id")
+				.comments("查询项目下的工作包")
+				.do_it_as()
+				.where(MODEL.workPackage().project().eq("${project id}"))
+				.wants(MODEL.workPackage().vendor())
 			;
 
 		return script;
