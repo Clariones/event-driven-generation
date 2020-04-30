@@ -36,11 +36,6 @@ public class ProjectLaborChangeRequest implements ChangeRequestSpecFactory {
 				.has_field("create time").disabled()
 
 
-			.change_request("labor dispute").zh_CN("劳务纠纷")
-				.icon("form")
-				.has_field("title").zh_CN("标题")
-				.has_field("description").zh_CN("描述")
-				.has_field("create time").disabled()
 				;
 	}
 }

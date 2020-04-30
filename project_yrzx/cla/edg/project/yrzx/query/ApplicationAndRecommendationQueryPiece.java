@@ -40,7 +40,8 @@ public class ApplicationAndRecommendationQueryPiece extends PieceOfScript {
 				.wants(
 						MODEL.recommendation().applicantEmployee(),
 						MODEL.recommendation().status(),
-						MODEL.recommendation().applicantMerchant()
+						MODEL.recommendation().applicantMerchant(),
+						MODEL.recommendation().type()
 
 						)
 

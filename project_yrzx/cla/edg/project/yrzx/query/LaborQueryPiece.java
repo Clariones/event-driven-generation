@@ -22,7 +22,15 @@ public class LaborQueryPiece extends PieceOfScript {
 						MODEL.laborWageManagementSheet().id().eq("${item id}")
 				)
 				.wants(
-						MODEL.laborWageManagementSheet().contract()
+						MODEL.laborWageManagementSheet().contract(),
+						MODEL.laborWageManagementSheet().project(),
+						MODEL.laborWageManagementSheet().bidPriceList(),
+						MODEL.laborWageManagementSheet().contractPaymentManager(),
+						MODEL.laborWageManagementSheet().dailyTaskType(),
+						MODEL.laborWageManagementSheet().laborWage(),
+						MODEL.laborWageManagementSheet().paymentManager(),
+						MODEL.laborWageManagementSheet().platformLaborManager(),
+						MODEL.laborWageManagementSheet().projectProgress()
 				)
 
 		;
