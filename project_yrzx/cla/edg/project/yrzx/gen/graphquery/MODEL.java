@@ -617,6 +617,12 @@ public class MODEL{
 		return rst;
 	}
 
+	public static EventProjectWorkPosition eventProjectWorkPosition() {
+		EventProjectWorkPosition rst = new EventProjectWorkPosition();
+		rst.setModelTypeName("event_project_work_position");
+		return rst;
+	}
+
 	public static EventProjectSupervisorReportBasicInfo eventProjectSupervisorReportBasicInfo() {
 		EventProjectSupervisorReportBasicInfo rst = new EventProjectSupervisorReportBasicInfo();
 		rst.setModelTypeName("event_project_supervisor_report_basic_info");
@@ -698,6 +704,12 @@ public class MODEL{
 	public static EventReportCheckItem eventReportCheckItem() {
 		EventReportCheckItem rst = new EventReportCheckItem();
 		rst.setModelTypeName("event_report_check_item");
+		return rst;
+	}
+
+	public static EventProjectInfo eventProjectInfo() {
+		EventProjectInfo rst = new EventProjectInfo();
+		rst.setModelTypeName("event_project_info");
 		return rst;
 	}
 

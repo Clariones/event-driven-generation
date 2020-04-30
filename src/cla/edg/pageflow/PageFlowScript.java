@@ -474,6 +474,12 @@ public class PageFlowScript extends BasePageFlowScript {
 		return this;
 	}
 	public PageFlowScript where(LogicalOperator ... conditions) {
+		return where_with(true, conditions);
+	}
+	public PageFlowScript where_any(LogicalOperator ... conditions) {
+		return where_with(false, conditions);
+	}
+	protected PageFlowScript where_with(boolean doAnd, LogicalOperator ... conditions) {
 		if (currentWork instanceof QueryInfo) {
 			// 
 		}else {
@@ -486,7 +492,11 @@ public class PageFlowScript extends BasePageFlowScript {
 			beanRoute = c1.getBeanRoute();
 		}else {
 			for(int i=1;i<conditions.length;i++) {
-				c1.and(conditions[i]);
+				if (doAnd) {
+					c1.and(conditions[i]);
+				}else{
+					c1.or(conditions[i]);
+				}
 			}
 			beanRoute = c1.getBeanRoute();
 		}

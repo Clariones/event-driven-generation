@@ -36,6 +36,17 @@ public class ProjectOrganizationType extends BaseModelBean{
 		return member;
 	}
 
+	public EventProjectWorkPosition eventProjectWorkPositionList() {
+		EventProjectWorkPosition member = new EventProjectWorkPosition();
+		member.setModelTypeName("event_project_work_position");
+		member.setName("project_job");
+		member.setMemberName("eventProjectWorkPositionList");
+		member.setRelationName("projectJob");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 
 	// 普通属性
 

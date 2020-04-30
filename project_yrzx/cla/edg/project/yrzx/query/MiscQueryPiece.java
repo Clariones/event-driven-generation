@@ -26,6 +26,23 @@ public class MiscQueryPiece extends PieceOfScript {
 				.comments("统计指定员工在项目中的任职数量")
 				.do_it_as().count()
 				.where(MODEL.projectNomination().worker().eq("${employee id}"))
+
+		//
+			.query(MODEL.projectNomination()).list_of("current employee").with_string("project id").with_string("employee id")
+				.comments("查询当前emplyee在指定项目中的职务列表")
+				.do_it_as()
+				.where(MODEL.projectNomination().project().eq("${project id}"),
+						MODEL.projectNomination().worker().eq("${employee id}")
+				).wants(MODEL.projectNomination().worker().employee(),
+						MODEL.projectNomination().projectRole()
+				)
+		//
+			.query(MODEL.merchant()).list_of("has contract in project").with_string("project id")
+				.comments("查询在一个项目中,有签订合同的所有商家")
+				.do_it_as()
+				.where_any(MODEL.merchant().standardContractListAsPartyB().project().eq("${project id}"),
+						MODEL.merchant().standardContractListAsPartyA().project().eq("${project id}")
+				)
 			;
 
 		return script;

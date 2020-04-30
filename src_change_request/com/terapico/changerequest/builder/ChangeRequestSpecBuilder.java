@@ -1,10 +1,10 @@
 package com.terapico.changerequest.builder;
 
+import cla.edg.modelbean.BaseModelBean;
+
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
-
-import cla.edg.project.yrzx.changerequest.ProjectReportChangeRequest;
 
 public class ChangeRequestSpecBuilder extends ChangeRequestSpecBaseBuilder<ChangeRequestSpecBuilder>{
 	private static Map<String, ChangeRequestSpecBuilder> instances = new HashMap<>();
@@ -33,6 +33,9 @@ public class ChangeRequestSpecBuilder extends ChangeRequestSpecBaseBuilder<Chang
 
 	public ChangeRequestSpecBuilder has_field(String fieldName) {
 		return for_field(fieldName);
+	}
+	public ChangeRequestSpecBuilder which_model_of(BaseModelBean bean) {
+		return which_model_of(bean.getModelTypeName());
 	}
 
 	public ChangeRequestSpecBuilder optional() {

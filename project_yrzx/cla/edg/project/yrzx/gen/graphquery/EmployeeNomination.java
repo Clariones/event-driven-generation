@@ -201,6 +201,17 @@ public class EmployeeNomination extends BaseModelBean{
 		return member;
 	}
 
+	public EventProjectWorkPosition eventProjectWorkPositionList() {
+		EventProjectWorkPosition member = new EventProjectWorkPosition();
+		member.setModelTypeName("event_project_work_position");
+		member.setName("employee");
+		member.setMemberName("eventProjectWorkPositionList");
+		member.setRelationName("employee");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 
 	// 普通属性
 

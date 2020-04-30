@@ -4,7 +4,7 @@ import java.util.Map;
 
 public class AllSpec extends BaseSpec{
 	static {
-		with("action").$("code").$("title").$("image url").$("icon").$("disabled").booleanType().$("group");
+		with("action").$("code").$("title").$("image url").$("icon").$("disabled").booleanType().$("group").$("confirm");
 		with("user").$("name").$("brief").$("avatar");
 		with("slide").$("name").$("image url").$("video url");
 		with("section").$("title").$("brief").$("icon").$("view group").$("display mode");

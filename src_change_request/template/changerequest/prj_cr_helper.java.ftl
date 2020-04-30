@@ -137,34 +137,34 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 			List<CRGroupSpec> groupSpecList, Map<String, Integer> recordIndexInfo, String processUrl) throws Exception {
 		final ChangeRequest cr = ensureChangeRequest(InputCR, crSpec);
 		// 先建立一个CR
-		GenericFormPage reuestData = new GenericFormPage();
-		reuestData.setId(cr.getId());
-		reuestData.setTitle(crSpec.getTitle());
-		reuestData.setBrief(crSpec.getBrief());
-		reuestData.setType(crSpec.getChangeRequestType());
-		reuestData.setGroupList(new ArrayList<>(groupSpecList.size()+1));
+		GenericFormPage requestData = new GenericFormPage();
+		requestData.setId(cr.getId());
+		requestData.setTitle(crSpec.getTitle());
+		requestData.setBrief(crSpec.getBrief());
+		requestData.setType(crSpec.getChangeRequestType());
+		requestData.setGroupList(new ArrayList<>(groupSpecList.size()+1));
 		// 然后填 hidden 的基础信息 
 		{
 			CRGroupData hiddenGroup = new CRGroupData();
 			hiddenGroup.setName(CR.GROUP_HIDDEN);
 			hiddenGroup.setTitle("隐藏字段");
 			hiddenGroup.setHidden(true);
-			reuestData.getGroupList().add(hiddenGroup);
-			addHiddenField(reuestData, CR.FIELD_CR_ID, cr.getId());
-			addHiddenField(reuestData, CR.FIELD_SCENE_CODE, sceneCode);
+			requestData.getGroupList().add(hiddenGroup);
+			addHiddenField(requestData, CR.FIELD_CR_ID, cr.getId());
+			addHiddenField(requestData, CR.FIELD_SCENE_CODE, sceneCode);
 			for(CRGroupSpec groupSpec: groupSpecList) {
 				String gName = groupSpec.getName();
 				if (recordIndexInfo != null && recordIndexInfo.containsKey(groupSpec.getName())) {
-					addHiddenField(reuestData, "indexof_"+ gName, String.valueOf(recordIndexInfo.get(gName)));
+					addHiddenField(requestData, "indexof_"+ gName, String.valueOf(recordIndexInfo.get(gName)));
 				}else {
-					addHiddenField(reuestData, "indexof_"+ gName, "1");
+					addHiddenField(requestData, "indexof_"+ gName, "1");
 				}
 			}
 		}
 		// 接着填 scene 列表
 		{
 			List<CRSceneData> stepList = prepareSceneList(crSpec, sceneCode);
-			reuestData.setSceneList(stepList);
+			requestData.setSceneList(stepList);
 		}
 		// 然后填所有的字段
 		for(CRGroupSpec groupSpec: groupSpecList) {
@@ -172,14 +172,14 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 			groupData.setName(groupSpec.getName());
 			groupData.setTitle(groupSpec.getTitle());
 			groupData.setHidden(false);
-			reuestData.getGroupList().add(groupData);
+			requestData.getGroupList().add(groupData);
 			
-			int groupRecordIndex = getIndexOfGroup(reuestData, groupSpec);
-			fulfillChangeRequestField(reuestData, cr, crSpec, groupData, groupSpec, crSpec.getFieldList(), groupRecordIndex, processUrl);
+			int groupRecordIndex = getIndexOfGroup(requestData, groupSpec);
+			fulfillChangeRequestField(requestData, cr, crSpec, groupData, groupSpec, crSpec.getFieldList(), groupRecordIndex, processUrl);
 		}
 		// 最后是CR级别的actions
-		fulfillChangeRequestActions(reuestData, crSpec, sceneCode, processUrl);
-		return reuestData;
+		fulfillChangeRequestActions(requestData, crSpec, sceneCode, processUrl);
+		return requestData;
 	}
 	
 	protected ChangeRequest loadCrDataByGroups(String crType, BaseEntity currentUserInfo, List<CRGroupSpec> groupSpecList) throws Exception {
@@ -212,8 +212,8 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 		return cr;
 	}
 
-	protected void addHiddenField(GenericFormPage reuestData, String fieldShortName, String value) {
-		CRGroupData group = HIDDEN_GROUP(reuestData);
+	protected void addHiddenField(GenericFormPage requestData, String fieldShortName, String value) {
+		CRGroupData group = HIDDEN_GROUP(requestData);
 		CRFieldData fieldData = new CRFieldData();
 		fieldData.setName(CR.GROUP_HIDDEN+"_"+fieldShortName);
 		fieldData.setValue(value);
@@ -256,7 +256,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 			switch (group.getName()) {
 		<#list crSpec.stepList as scene>
 			<#list scene.eventList as group>
-			case CR.${helper.JAVA_CONST(crSpec.changeRequestType)}.SCENE_${helper.JAVA_CONST(scene.name)}.GROUP_${helper.JAVA_CONST(group.name)}: {
+			case CR.${helper.JAVA_CONST(crSpec.changeRequestType)}.SCENE_${helper.JAVA_CONST(scene.name)}.GROUP_${helper.JAVA_CONST(group.name)}.NAME: {
 				SmartList<Event${helper.CamelName(group.eventType)}> eventList = getUserContext().getDAOGroup().getEvent${helper.CamelName(group.eventType)}DAO().queryList(sql, params);
 				cr.addEvent${helper.CamelName(group.eventType)}List(eventList);
 				}
@@ -270,15 +270,15 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 	}
 	
 </#list>
-	protected void fulfillChangeRequestField(GenericFormPage reuestData, ChangeRequest dbCrData, CRSpec crSpec, CRGroupData groupData, CRGroupSpec groupSpec,
+	protected void fulfillChangeRequestField(GenericFormPage requestData, ChangeRequest dbCrData, CRSpec crSpec, CRGroupData groupData, CRGroupSpec groupSpec,
 			List<CRFieldSpec> fieldSpecList, int groupRecordIndex, String processUrl) throws Exception {
 		int curRecordIdx = groupRecordIndex;
 		switch (groupSpec.getName()) {
 <#list projectSpec.changeRequestList as crSpec>
 	<#list crSpec.stepList as scene>
 		<#list scene.eventList as group>
-		case CR.${helper.JAVA_CONST(crSpec.changeRequestType)}.SCENE_${helper.JAVA_CONST(scene.name)}.GROUP_${helper.JAVA_CONST(group.name)}: 
-			curRecordIdx = fulfillChangeRequestFieldByGroup(reuestData, dbCrData, groupData, fieldSpecList, dbCrData.getEvent${helper.CamelName(group.eventType)}List(), groupRecordIndex);
+		case CR.${helper.JAVA_CONST(crSpec.changeRequestType)}.SCENE_${helper.JAVA_CONST(scene.name)}.GROUP_${helper.JAVA_CONST(group.name)}.NAME:
+			curRecordIdx = fulfillChangeRequestFieldByGroup(requestData, dbCrData, groupData, fieldSpecList, dbCrData.getEvent${helper.CamelName(group.eventType)}List(), groupRecordIndex);
 			break;
 		</#list>
 	</#list>
@@ -292,13 +292,13 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 		fulfillGroupActions(crSpec, groupData, groupSpec, curRecordIdx, processUrl);
 	}
 	
-	protected int fulfillChangeRequestFieldByGroup(GenericFormPage reuestData, ChangeRequest dbCrData,
-			CRGroupData groupData, List<CRFieldSpec> fieldSpecList, SmartList<? extends BaseEntity> eventList, int groupRecordIndex) {
+	protected int fulfillChangeRequestFieldByGroup(GenericFormPage requestData, ChangeRequest dbCrData,
+			CRGroupData groupData, List<CRFieldSpec> fieldSpecList, SmartList<? extends BaseEntity> eventList, int groupRecordIndex) throws Exception {
 		String gName = CR.GROUP_HIDDEN+"_indexof_"+groupData.getName();
-		CRFieldData gidField = HIDDEN_GROUP(reuestData).getFieldList().stream().filter(it -> it.getName().equals(gName))
+		CRFieldData gidField = HIDDEN_GROUP(requestData).getFieldList().stream().filter(it -> it.getName().equals(gName))
 				.findFirst().orElse(null);
 		if (eventList == null || eventList.isEmpty()) {
-			fullFillNewFields(groupData, fieldSpecList);
+			fullFillNewFields(requestData, dbCrData, groupData, fieldSpecList);
 			if (gidField != null) {
 				gidField.setValue("1");
 			}
@@ -325,23 +325,23 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 				CRFieldData fieldData = new CRFieldData();
 				fieldData.setName(fieldSpec.getName()+"_"+evtData.getId());
 				if (fieldSpec.getInteractionMode().equals("display")) {
-					fieldData.setValue(TO_VALUE(fieldSpec.getValue()));
+					fieldData.setValue(TO_VALUE(getFieldValueWhenFillResponse(fieldSpec.getValue(),requestData, dbCrData, groupData, fieldSpec)));
 				}else {
 					String memberName = FIELD_NAME(fieldSpec);
 					KeyValuePair kv = kvList.stream().filter(entry->entry.getKey().equals(memberName)).findAny().orElse(null);
 					if (kv == null || kv.getValue() == null) {
-						fieldData.setValue(TO_VALUE(fieldSpec.getDefaultValue()));
+						fieldData.setValue(TO_VALUE(getFieldValueWhenFillResponse(fieldSpec.getDefaultValue(),requestData, dbCrData, groupData, fieldSpec)));
 					}else {
-						fieldData.setValue(TO_VALUE(kv.getValue()));
+						fieldData.setValue(TO_VALUE(getFieldValueWhenFillResponse(kv.getValue(),requestData, dbCrData, groupData, fieldSpec)));
 					}
 				}
-				setFieldSpecInfo(groupData, fieldData, fieldSpec);
+				setFieldSpecInfo(requestData, dbCrData, groupData, fieldData, fieldSpec);
 				groupData.addField(fieldData);
 				fillAny = true;
 			}
 		}
 		if (!fillAny) {
-			fullFillNewFields(groupData, fieldSpecList);
+			fullFillNewFields(requestData, dbCrData, groupData, fieldSpecList);
 			if (gidField != null) {
 				gidField.setValue(String.valueOf(foundAny+1));
 			}
@@ -351,7 +351,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 		}
 	}
 
-	protected void fullFillNewFields(CRGroupData groupData, List<CRFieldSpec> fieldSpecList) {
+	protected void fullFillNewFields(GenericFormPage requestData, ChangeRequest dbCrData, CRGroupData groupData, List<CRFieldSpec> fieldSpecList) throws Exception{
 		for(CRFieldSpec fieldSpec: fieldSpecList) {
 			if (!GROUP_NAME(fieldSpec).equals(groupData.getName())){
 				continue;
@@ -360,11 +360,11 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 			CRFieldData fieldData = new CRFieldData();
 			fieldData.setName(fieldSpec.getName()+"_new");
 			if (fieldSpec.getValue() != null) {
-				fieldData.setValue(TO_VALUE(fieldSpec.getValue()));
+				fieldData.setValue(TO_VALUE(getFieldValueWhenFillResponse(fieldSpec.getValue(),requestData, dbCrData, groupData, fieldSpec)));
 			}else {
-				fieldData.setValue(TO_VALUE(fieldSpec.getDefaultValue()));
+				fieldData.setValue(TO_VALUE(getFieldValueWhenFillResponse(fieldSpec.getDefaultValue(),requestData, dbCrData, groupData, fieldSpec)));
 			}
-			setFieldSpecInfo(groupData, fieldData, fieldSpec);
+			setFieldSpecInfo(requestData, dbCrData, groupData, fieldData, fieldSpec);
 			groupData.addField(fieldData);
 		}
 	}
@@ -466,7 +466,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 <#list projectSpec.changeRequestList as crSpec>
 	<#list crSpec.stepList as scene>
 		<#list scene.eventList as group>
-			case CR.${helper.JAVA_CONST(crSpec.changeRequestType)}.SCENE_${helper.JAVA_CONST(scene.name)}.GROUP_${helper.JAVA_CONST(group.name)}:
+			case CR.${helper.JAVA_CONST(crSpec.changeRequestType)}.SCENE_${helper.JAVA_CONST(scene.name)}.GROUP_${helper.JAVA_CONST(group.name)}.NAME:
 				save${helper.CamelName(crSpec.changeRequestType)}${helper.CamelName(scene.name)}${helper.CamelName(group.name)}(crId, fieldValues,currentUserInfo);
 				break;
 		</#list>
@@ -490,7 +490,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 <#list projectSpec.changeRequestList as crSpec>
 	<#list crSpec.stepList as scene>
 		<#list scene.eventList as group>
-			case CR.${helper.JAVA_CONST(crSpec.changeRequestType)}.SCENE_${helper.JAVA_CONST(scene.name)}.GROUP_${helper.JAVA_CONST(group.name)}:{
+			case CR.${helper.JAVA_CONST(crSpec.changeRequestType)}.SCENE_${helper.JAVA_CONST(scene.name)}.GROUP_${helper.JAVA_CONST(group.name)}.NAME:{
 				Event${helper.CamelName(group.eventType)} event = getUserContext().getDAOGroup().getEvent${helper.CamelName(group.eventType)}DAO().load(id, EO);
 				getUserContext().getManagerGroup().getChangeRequestManager().removeEvent${helper.CamelName(group.eventType)}(getUserContext(), crId, id, event.getVersion(), new String[]{});
 			}
@@ -525,7 +525,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 				${helper.getJavaType(field.inputType)} ${helper.javaVar(field.name)} = get${helper.CamelName(field.inputType)}Value(fieldValue.get("${helper.javaVar(field.name)}"));
 				</#if>
 			</#list>
-				String fieldGroup = CR.${helper.JAVA_CONST(crSpec.changeRequestType)}.SCENE_${helper.JAVA_CONST(scene.name)}.GROUP_${helper.JAVA_CONST(group.name)}; //"${helper.javaVar(scene.name)}_${helper.javaVar(group.name)}";
+				String fieldGroup = CR.${helper.JAVA_CONST(crSpec.changeRequestType)}.SCENE_${helper.JAVA_CONST(scene.name)}.GROUP_${helper.JAVA_CONST(group.name)}.NAME; //"${helper.javaVar(scene.name)}_${helper.javaVar(group.name)}";
 				String eventInitiatorType = currentUserInfo.getInternalType();
 				String eventInitiatorId = currentUserInfo.getId();
 				String changeRequestId = crId;
@@ -634,4 +634,5 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 		}
 		return null;
 	}
+
 }

@@ -102,6 +102,17 @@ public class WorkPackage extends BaseModelBean{
 		return member;
 	}
 
+	public EventProjectWorkPosition eventProjectWorkPositionList() {
+		EventProjectWorkPosition member = new EventProjectWorkPosition();
+		member.setModelTypeName("event_project_work_position");
+		member.setName("work_package");
+		member.setMemberName("eventProjectWorkPositionList");
+		member.setRelationName("workPackage");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 
 	// 普通属性
 

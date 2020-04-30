@@ -38,6 +38,17 @@ public class ProjectRole extends BaseModelBean{
 		return member;
 	}
 
+	public EventProjectWorkPosition eventProjectWorkPositionList() {
+		EventProjectWorkPosition member = new EventProjectWorkPosition();
+		member.setModelTypeName("event_project_work_position");
+		member.setName("project_role");
+		member.setMemberName("eventProjectWorkPositionList");
+		member.setRelationName("projectRole");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 
 	// 普通属性
 

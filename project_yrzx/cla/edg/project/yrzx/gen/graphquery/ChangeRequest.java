@@ -36,6 +36,17 @@ public class ChangeRequest extends BaseModelBean{
 
 	// 被引用的对象
 
+	public EventProjectWorkPosition eventProjectWorkPositionList() {
+		EventProjectWorkPosition member = new EventProjectWorkPosition();
+		member.setModelTypeName("event_project_work_position");
+		member.setName("change_request");
+		member.setMemberName("eventProjectWorkPositionList");
+		member.setRelationName("changeRequest");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 	public EventProjectSupervisorReportBasicInfo eventProjectSupervisorReportBasicInfoList() {
 		EventProjectSupervisorReportBasicInfo member = new EventProjectSupervisorReportBasicInfo();
 		member.setModelTypeName("event_project_supervisor_report_basic_info");
@@ -184,6 +195,17 @@ public class ChangeRequest extends BaseModelBean{
 		member.setModelTypeName("event_report_check_item");
 		member.setName("change_request");
 		member.setMemberName("eventReportCheckItemList");
+		member.setRelationName("changeRequest");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EventProjectInfo eventProjectInfoList() {
+		EventProjectInfo member = new EventProjectInfo();
+		member.setModelTypeName("event_project_info");
+		member.setName("change_request");
+		member.setMemberName("eventProjectInfoList");
 		member.setRelationName("changeRequest");
 		member.setReferDirection(false);
 		append(member);
