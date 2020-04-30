@@ -15,13 +15,14 @@ import java.util.List;
 import java.util.Map;
 
 public class YrzxMain {
-	private static String OUTPUT_FOLDER = "/works/jobs/yrzx_v3/workspace/yrzx-biz-suite/bizcore/WEB-INF/yrzx_custom_src";
-	
+//	private static String OUTPUT_FOLDER = "/works/jobs/yrzx_v3/workspace/yrzx-biz-suite/bizcore/WEB-INF/yrzx_custom_src";
+	private static String OUTPUT_FOLDER = "/Users/jarryzhou/codebase/yrzx-biz-suite/bizcore/WEB-INF/yrzx_custom_src";
 	public static void main(String[] args) throws Exception {
+		testChagneRequest(new MainChangeRequest().getSpec());
 		testPageFlow(new MainPageFlow());
 //		testV3EventService(new V3InkDeedService());
 //		testV3EventService(new V3AuctionService());
-		testChagneRequest(new MainChangeRequest().getSpec());
+
 		System.out.println("finished at " + LocalDateTime.now());
 	}
 
@@ -44,8 +45,8 @@ public class YrzxMain {
 		generator.setOrgName("yrdec");
 		List<GenrationResult> files = generator.runJob();
 		
-		String outputFolder = "/works/jobs/yrzx_v3/workspace/yrzx-biz-suite/bizcore/WEB-INF";
-		String crXmlOutputFolder = "/works/jobs/yrzx_v3/workspace/web-code-generator/sky";
+		String outputFolder = "/Users/jarryzhou/codebase/yrzx-biz-suite/bizcore/WEB-INF";
+		String crXmlOutputFolder = "/Users/jarryzhou/codebase/web-code-generator/sky";
 		generator.saveToFiles( Utils.put("ALL", new File(outputFolder))
 				.put("changeRequest.xml", new File(crXmlOutputFolder)).into_map(File.class), files); // "changeRequest.xml"
 	}

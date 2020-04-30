@@ -181,6 +181,7 @@ public class ProjectQueryPiece extends PieceOfScript {
 				.wants(
 						MODEL.afterSales().status(),
 						MODEL.afterSales().project(),
+						MODEL.afterSales().dailyTaskType(),
 						MODEL.afterSales().creator().employee()
 				)
 
