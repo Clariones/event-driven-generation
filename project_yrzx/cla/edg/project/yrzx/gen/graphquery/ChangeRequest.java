@@ -1,7 +1,5 @@
 package cla.edg.project.yrzx.gen.graphquery;
 
-import java.util.Map;
-
 import cla.edg.modelbean.*;
 
 public class ChangeRequest extends BaseModelBean{
@@ -96,17 +94,6 @@ public class ChangeRequest extends BaseModelBean{
 		member.setModelTypeName("event_add_employee");
 		member.setName("change_request");
 		member.setMemberName("eventAddEmployeeList");
-		member.setRelationName("changeRequest");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-
-	public EventLaborDispute eventLaborDisputeList() {
-		EventLaborDispute member = new EventLaborDispute();
-		member.setModelTypeName("event_labor_dispute");
-		member.setName("change_request");
-		member.setMemberName("eventLaborDisputeList");
 		member.setRelationName("changeRequest");
 		member.setReferDirection(false);
 		append(member);

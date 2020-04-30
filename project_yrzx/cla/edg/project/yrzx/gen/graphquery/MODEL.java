@@ -653,12 +653,6 @@ public class MODEL{
 		return rst;
 	}
 
-	public static EventLaborDispute eventLaborDispute() {
-		EventLaborDispute rst = new EventLaborDispute();
-		rst.setModelTypeName("event_labor_dispute");
-		return rst;
-	}
-
 	public static EventProjectManagerReportBasicInfo eventProjectManagerReportBasicInfo() {
 		EventProjectManagerReportBasicInfo rst = new EventProjectManagerReportBasicInfo();
 		rst.setModelTypeName("event_project_manager_report_basic_info");

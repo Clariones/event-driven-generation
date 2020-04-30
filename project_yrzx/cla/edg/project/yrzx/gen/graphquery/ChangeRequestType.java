@@ -17,7 +17,6 @@ public class ChangeRequestType extends BaseModelBean{
 	public static EnumAttribute PROJECT_COMMAND = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "PROJECT_COMMAND");
 	public static EnumAttribute TASK_REPORT = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "TASK_REPORT");
 	public static EnumAttribute ADD_EMPLOYEE = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "ADD_EMPLOYEE");
-	public static EnumAttribute LABOR_DISPUTE = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "LABOR_DISPUTE");
 	public static EnumAttribute ACCEPTANCE_APPLICATION = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "ACCEPTANCE_APPLICATION");
 	public static EnumAttribute AFTER_SALES = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "AFTER_SALES");
 	public static EnumAttribute APPLY_DECORATION = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "APPLY_DECORATION");
