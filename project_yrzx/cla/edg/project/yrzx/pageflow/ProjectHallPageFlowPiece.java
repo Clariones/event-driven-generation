@@ -143,7 +143,7 @@ public class ProjectHallPageFlowPiece extends PieceOfScript {
 			.got_page(pagePannel).title(title+"概况").list_of(code+" pannel")
 				.may_request(reqList)
 		// 二级页面: 某个子类的,带tab的列表页面
-		.request(reqList).with_string("project id").with_string("label").with_last_record_id()
+		.request(reqList).with_string("project id").with_string("label").with_string("filter").with_last_record_id()
 			.comments("查看" + title +" 各阶段进度").need_login().has_footprint()
 			.got_page(pageList).title(title).list_of(code)
 		;
