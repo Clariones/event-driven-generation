@@ -146,17 +146,6 @@ public class ProjectMaterial extends BaseModelBean{
 		return member;
 	}
 
-	public ProjectPenalties projectPenaltiesList() {
-		ProjectPenalties member = new ProjectPenalties();
-		member.setModelTypeName("project_penalties");
-		member.setName("punishment_material");
-		member.setMemberName("projectPenaltiesList");
-		member.setRelationName("punishmentMaterial");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-
 	public LaborWageManagementSheet laborWageManagementSheetListAsBidPriceList() {
 		LaborWageManagementSheet member = new LaborWageManagementSheet();
 		member.setModelTypeName("labor_wage_management_sheet");

@@ -212,6 +212,17 @@ public class EmployeeNomination extends BaseModelBean{
 		return member;
 	}
 
+	public EventProjectPenalties eventProjectPenaltiesList() {
+		EventProjectPenalties member = new EventProjectPenalties();
+		member.setModelTypeName("event_project_penalties");
+		member.setName("penalties_executor");
+		member.setMemberName("eventProjectPenaltiesList");
+		member.setRelationName("penaltiesExecutor");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 
 	// 普通属性
 

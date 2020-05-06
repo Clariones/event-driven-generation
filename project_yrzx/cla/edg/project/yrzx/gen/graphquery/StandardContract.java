@@ -212,6 +212,17 @@ public class StandardContract extends BaseModelBean{
 		return member;
 	}
 
+	public EventProjectPenalties eventProjectPenaltiesList() {
+		EventProjectPenalties member = new EventProjectPenalties();
+		member.setModelTypeName("event_project_penalties");
+		member.setName("work_package_contract");
+		member.setMemberName("eventProjectPenaltiesList");
+		member.setRelationName("workPackageContract");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 
 	// 普通属性
 

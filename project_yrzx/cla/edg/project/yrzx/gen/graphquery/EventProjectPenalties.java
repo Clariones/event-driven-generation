@@ -12,6 +12,28 @@ public class EventProjectPenalties extends BaseModelBean{
 
 	// 引用的对象
 
+	public StandardContract workPackageContract() {
+		StandardContract member = new StandardContract();
+		member.setModelTypeName("standard_contract");
+		member.setName("work_package_contract");
+		member.setMemberName("workPackageContract");
+		member.setReferDirection(true);
+		member.setRelationName("workPackageContract");
+		append(member);
+		return member;
+	}
+
+	public EmployeeNomination penaltiesExecutor() {
+		EmployeeNomination member = new EmployeeNomination();
+		member.setModelTypeName("employee_nomination");
+		member.setName("penalties_executor");
+		member.setMemberName("penaltiesExecutor");
+		member.setReferDirection(true);
+		member.setRelationName("penaltiesExecutor");
+		append(member);
+		return member;
+	}
+
 	public ChangeRequest changeRequest() {
 		ChangeRequest member = new ChangeRequest();
 		member.setModelTypeName("change_request");
@@ -46,20 +68,20 @@ public class EventProjectPenalties extends BaseModelBean{
 		return member;
 	}
 
+	public StringAttribute projectId(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string");
+		// member.setName("projectId");
+		member.setName("project_id");
+		useMember(member);
+		return member;
+	}
+
 	public StringAttribute projectName(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
 		// member.setName("projectName");
 		member.setName("project_name");
-		useMember(member);
-		return member;
-	}
-
-	public StringAttribute workPackageContractId(){
-		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string_longtext");
-		// member.setName("workPackageContractId");
-		member.setName("work_package_contract_id");
 		useMember(member);
 		return member;
 	}
@@ -78,15 +100,6 @@ public class EventProjectPenalties extends BaseModelBean{
 		member.setModelTypeName("string");
 		// member.setName("penaltiesType");
 		member.setName("penalties_type");
-		useMember(member);
-		return member;
-	}
-
-	public StringAttribute penaltiesExecutor(){
-		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string_longtext");
-		// member.setName("penaltiesExecutor");
-		member.setName("penalties_executor");
 		useMember(member);
 		return member;
 	}

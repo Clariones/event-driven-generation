@@ -12,17 +12,6 @@ public class ProjectPenalties extends BaseModelBean{
 
 	// 引用的对象
 
-	public ProjectMaterial punishmentMaterial() {
-		ProjectMaterial member = new ProjectMaterial();
-		member.setModelTypeName("project_material");
-		member.setName("punishment_material");
-		member.setMemberName("punishmentMaterial");
-		member.setReferDirection(true);
-		member.setRelationName("punishmentMaterial");
-		append(member);
-		return member;
-	}
-
 	public Project project() {
 		Project member = new Project();
 		member.setModelTypeName("project");

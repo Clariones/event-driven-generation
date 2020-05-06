@@ -195,8 +195,7 @@ public class ProjectQueryPiece extends PieceOfScript {
 				)
 				.wants(
 						MODEL.projectPenalties().status(),
-						MODEL.projectPenalties().contract(),
-						MODEL.projectPenalties().punishmentMaterial().dailyTaskType()
+						MODEL.projectPenalties().contract()
 				)
 			.find(MODEL.projectPenalties().getModelTypeName()).which("id is").with_string("id")
 				.do_it_as()
@@ -205,12 +204,7 @@ public class ProjectQueryPiece extends PieceOfScript {
 				)
 				.wants(
 						MODEL.projectPenalties().status(),
-						MODEL.projectPenalties().contract(),
-						MODEL.projectPenalties().punishmentMaterial().project(),
-						MODEL.projectPenalties().punishmentMaterial().dailyTaskType(),
-						MODEL.projectPenalties().punishmentMaterial().projectMaterialReviewRecordList().status(),
-						MODEL.projectPenalties().punishmentMaterial().projectMaterialReviewRecordList().reviewer().type(),
-						MODEL.projectNomination().worker().employee()
+						MODEL.projectPenalties().contract()
 				)
 				// 项目进度
 
@@ -282,6 +276,10 @@ public class ProjectQueryPiece extends PieceOfScript {
 			.find(MODEL.projectProgress()).which("in project by project phase").with_string("project id")
 				.do_it_as().count_by(MODEL.projectProgress().projectPhase())
 				.where(MODEL.projectProgress().project().eq("${project id}"))
+
+			.find(MODEL.projectReport()).which("in project by by daily task type").with_string("project id")
+				.do_it_as().count_by(MODEL.projectReport().dailyTaskType())
+				.where(MODEL.projectReport().project().eq("${project id}"))
 
 
 		;

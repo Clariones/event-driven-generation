@@ -1,5 +1,7 @@
 package cla.edg.project.yrzx.gen.graphquery;
 
+import java.util.Map;
+
 import cla.edg.modelbean.*;
 
 public class ChangeRequest extends BaseModelBean{
