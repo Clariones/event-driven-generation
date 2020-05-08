@@ -48,9 +48,18 @@ public class Notification extends BaseModelBean{
 		return member;
 	}
 
-	public StringAttribute content(){
+	public StringAttribute title(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("title");
+		member.setName("title");
+		useMember(member);
+		return member;
+	}
+
+	public StringAttribute content(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string_longtext");
 		// member.setName("content");
 		member.setName("content");
 		useMember(member);

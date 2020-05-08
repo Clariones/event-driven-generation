@@ -51,13 +51,13 @@ public class MiscQueryPiece extends PieceOfScript {
 				.wants(MODEL.workPackage().vendor())
 
 
-			.query(MODEL.notification()).list_of("merchant").with_string("merchant id").with_integer("limit")
+			.query(MODEL.notification()).pagination().list_of("merchant").with_string("merchant id")
 				.comments("查询发给当前merchant的消息")
 				.do_it_as()
 				.where(MODEL.notification().receiver().eq("${merchant id}"))
-				.order_by(MODEL.notification().createTime()).desc().top("${limit}")
+				.order_by(MODEL.notification().createTime()).desc()
 
-			.query(MODEL.article()).list_of("category name").with_string("article category name")
+			.query(MODEL.article()).list_of("category name").with_string("article category name").pagination()
 				.comments("根据文章分类查询文章")
 				.do_it_as()
 				.where(MODEL.article().category().name().eq("${article category name}"))

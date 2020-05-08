@@ -10,6 +10,8 @@ public class MiscPageFlowPiece extends PieceOfScript {
 		script.request("test")
 			.got_page("simple toast").title("提示")
 
+		.request("view notification center").with_string("merchant id").comments("查看所有消息")
+				.got_page("notification center")
 			;
 		return script;
 	}
