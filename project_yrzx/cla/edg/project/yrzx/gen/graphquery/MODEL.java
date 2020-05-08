@@ -605,6 +605,12 @@ public class MODEL{
 		return rst;
 	}
 
+	public static Notification notification() {
+		Notification rst = new Notification();
+		rst.setModelTypeName("notification");
+		return rst;
+	}
+
 	public static ChangeRequestType changeRequestType() {
 		ChangeRequestType rst = new ChangeRequestType();
 		rst.setModelTypeName("change_request_type");
@@ -752,6 +758,486 @@ public class MODEL{
 	public static BusinessType businessType() {
 		BusinessType rst = new BusinessType();
 		rst.setModelTypeName("business_type");
+		return rst;
+	}
+
+	public static ContractTemplateFile contractTemplateFile() {
+		ContractTemplateFile rst = new ContractTemplateFile();
+		rst.setModelTypeName("contract_template_file");
+		return rst;
+	}
+
+	public static FinanceTemplate financeTemplate() {
+		FinanceTemplate rst = new FinanceTemplate();
+		rst.setModelTypeName("finance_template");
+		return rst;
+	}
+
+	public static FiveBookTemplate fiveBookTemplate() {
+		FiveBookTemplate rst = new FiveBookTemplate();
+		rst.setModelTypeName("five_book_template");
+		return rst;
+	}
+
+	public static ProjectEngineeringTemplate projectEngineeringTemplate() {
+		ProjectEngineeringTemplate rst = new ProjectEngineeringTemplate();
+		rst.setModelTypeName("project_engineering_template");
+		return rst;
+	}
+
+	public static LoanFund loanFund() {
+		LoanFund rst = new LoanFund();
+		rst.setModelTypeName("loan_fund");
+		return rst;
+	}
+
+	public static LoanApplication loanApplication() {
+		LoanApplication rst = new LoanApplication();
+		rst.setModelTypeName("loan_application");
+		return rst;
+	}
+
+	public static LoanContract loanContract() {
+		LoanContract rst = new LoanContract();
+		rst.setModelTypeName("loan_contract");
+		return rst;
+	}
+
+	public static ProcessMap processMap() {
+		ProcessMap rst = new ProcessMap();
+		rst.setModelTypeName("process_map");
+		return rst;
+	}
+
+	public static Process process() {
+		Process rst = new Process();
+		rst.setModelTypeName("process");
+		return rst;
+	}
+
+	public static TodoList todoList() {
+		TodoList rst = new TodoList();
+		rst.setModelTypeName("todo_list");
+		return rst;
+	}
+
+	public static TodoListStatus todoListStatus() {
+		TodoListStatus rst = new TodoListStatus();
+		rst.setModelTypeName("todo_list_status");
+		return rst;
+	}
+
+	public static ProcessAudit processAudit() {
+		ProcessAudit rst = new ProcessAudit();
+		rst.setModelTypeName("process_audit");
+		return rst;
+	}
+
+	public static ProcessApplication processApplication() {
+		ProcessApplication rst = new ProcessApplication();
+		rst.setModelTypeName("process_application");
+		return rst;
+	}
+
+	public static ContractLedger contractLedger() {
+		ContractLedger rst = new ContractLedger();
+		rst.setModelTypeName("contract_ledger");
+		return rst;
+	}
+
+	public static ContractRisk contractRisk() {
+		ContractRisk rst = new ContractRisk();
+		rst.setModelTypeName("contract_risk");
+		return rst;
+	}
+
+	public static ContractReport contractReport() {
+		ContractReport rst = new ContractReport();
+		rst.setModelTypeName("contract_report");
+		return rst;
+	}
+
+	public static ContractStatisticReport contractStatisticReport() {
+		ContractStatisticReport rst = new ContractStatisticReport();
+		rst.setModelTypeName("contract_statistic_report");
+		return rst;
+	}
+
+	public static ProjectStatisticReport projectStatisticReport() {
+		ProjectStatisticReport rst = new ProjectStatisticReport();
+		rst.setModelTypeName("project_statistic_report");
+		return rst;
+	}
+
+	public static ServiceVendorStatisticReport serviceVendorStatisticReport() {
+		ServiceVendorStatisticReport rst = new ServiceVendorStatisticReport();
+		rst.setModelTypeName("service_vendor_statistic_report");
+		return rst;
+	}
+
+	public static FinancialServiceStatisticReport financialServiceStatisticReport() {
+		FinancialServiceStatisticReport rst = new FinancialServiceStatisticReport();
+		rst.setModelTypeName("financial_service_statistic_report");
+		return rst;
+	}
+
+	public static RecruitmentRequirement recruitmentRequirement() {
+		RecruitmentRequirement rst = new RecruitmentRequirement();
+		rst.setModelTypeName("recruitment_requirement");
+		return rst;
+	}
+
+	public static JobPosition jobPosition() {
+		JobPosition rst = new JobPosition();
+		rst.setModelTypeName("job_position");
+		return rst;
+	}
+
+	public static CandidateTalent candidateTalent() {
+		CandidateTalent rst = new CandidateTalent();
+		rst.setModelTypeName("candidate_talent");
+		return rst;
+	}
+
+	public static StaffFiles staffFiles() {
+		StaffFiles rst = new StaffFiles();
+		rst.setModelTypeName("staff_files");
+		return rst;
+	}
+
+	public static EmployeeRelation employeeRelation() {
+		EmployeeRelation rst = new EmployeeRelation();
+		rst.setModelTypeName("employee_relation");
+		return rst;
+	}
+
+	public static EmployeeSalary employeeSalary() {
+		EmployeeSalary rst = new EmployeeSalary();
+		rst.setModelTypeName("employee_salary");
+		return rst;
+	}
+
+	public static EmployeePerformance employeePerformance() {
+		EmployeePerformance rst = new EmployeePerformance();
+		rst.setModelTypeName("employee_performance");
+		return rst;
+	}
+
+	public static MerchantSeal merchantSeal() {
+		MerchantSeal rst = new MerchantSeal();
+		rst.setModelTypeName("merchant_seal");
+		return rst;
+	}
+
+	public static CooperateApplication cooperateApplication() {
+		CooperateApplication rst = new CooperateApplication();
+		rst.setModelTypeName("cooperate_application");
+		return rst;
+	}
+
+	public static ProjectApplication projectApplication() {
+		ProjectApplication rst = new ProjectApplication();
+		rst.setModelTypeName("project_application");
+		return rst;
+	}
+
+	public static ProjectAttractInvestment projectAttractInvestment() {
+		ProjectAttractInvestment rst = new ProjectAttractInvestment();
+		rst.setModelTypeName("project_attract_investment");
+		return rst;
+	}
+
+	public static SerivceVendorAttractInvestment serivceVendorAttractInvestment() {
+		SerivceVendorAttractInvestment rst = new SerivceVendorAttractInvestment();
+		rst.setModelTypeName("serivce_vendor_attract_investment");
+		return rst;
+	}
+
+	public static BrandAttractInvestment brandAttractInvestment() {
+		BrandAttractInvestment rst = new BrandAttractInvestment();
+		rst.setModelTypeName("brand_attract_investment");
+		return rst;
+	}
+
+	public static ProjectSettlement projectSettlement() {
+		ProjectSettlement rst = new ProjectSettlement();
+		rst.setModelTypeName("project_settlement");
+		return rst;
+	}
+
+	public static ServiceVendorSettlement serviceVendorSettlement() {
+		ServiceVendorSettlement rst = new ServiceVendorSettlement();
+		rst.setModelTypeName("service_vendor_settlement");
+		return rst;
+	}
+
+	public static BrandPartnerSettlement brandPartnerSettlement() {
+		BrandPartnerSettlement rst = new BrandPartnerSettlement();
+		rst.setModelTypeName("brand_partner_settlement");
+		return rst;
+	}
+
+	public static MerchantVerification merchantVerification() {
+		MerchantVerification rst = new MerchantVerification();
+		rst.setModelTypeName("merchant_verification");
+		return rst;
+	}
+
+	public static QualificationExamination qualificationExamination() {
+		QualificationExamination rst = new QualificationExamination();
+		rst.setModelTypeName("qualification_examination");
+		return rst;
+	}
+
+	public static QualificationResearch qualificationResearch() {
+		QualificationResearch rst = new QualificationResearch();
+		rst.setModelTypeName("qualification_research");
+		return rst;
+	}
+
+	public static PartnerRecommendation partnerRecommendation() {
+		PartnerRecommendation rst = new PartnerRecommendation();
+		rst.setModelTypeName("partner_recommendation");
+		return rst;
+	}
+
+	public static ProjectDirective projectDirective() {
+		ProjectDirective rst = new ProjectDirective();
+		rst.setModelTypeName("project_directive");
+		return rst;
+	}
+
+	public static ProjectDailyReport projectDailyReport() {
+		ProjectDailyReport rst = new ProjectDailyReport();
+		rst.setModelTypeName("project_daily_report");
+		return rst;
+	}
+
+	public static ProjectProgressReport projectProgressReport() {
+		ProjectProgressReport rst = new ProjectProgressReport();
+		rst.setModelTypeName("project_progress_report");
+		return rst;
+	}
+
+	public static ProjectNotification projectNotification() {
+		ProjectNotification rst = new ProjectNotification();
+		rst.setModelTypeName("project_notification");
+		return rst;
+	}
+
+	public static Design design() {
+		Design rst = new Design();
+		rst.setModelTypeName("design");
+		return rst;
+	}
+
+	public static ConstructionSchema constructionSchema() {
+		ConstructionSchema rst = new ConstructionSchema();
+		rst.setModelTypeName("construction_schema");
+		return rst;
+	}
+
+	public static ProjectBid projectBid() {
+		ProjectBid rst = new ProjectBid();
+		rst.setModelTypeName("project_bid");
+		return rst;
+	}
+
+	public static LaborSupervision laborSupervision() {
+		LaborSupervision rst = new LaborSupervision();
+		rst.setModelTypeName("labor_supervision");
+		return rst;
+	}
+
+	public static SafetyInstruction safetyInstruction() {
+		SafetyInstruction rst = new SafetyInstruction();
+		rst.setModelTypeName("safety_instruction");
+		return rst;
+	}
+
+	public static DesignChange designChange() {
+		DesignChange rst = new DesignChange();
+		rst.setModelTypeName("design_change");
+		return rst;
+	}
+
+	public static Violation violation() {
+		Violation rst = new Violation();
+		rst.setModelTypeName("violation");
+		return rst;
+	}
+
+	public static Material material() {
+		Material rst = new Material();
+		rst.setModelTypeName("material");
+		return rst;
+	}
+
+	public static Measurement measurement() {
+		Measurement rst = new Measurement();
+		rst.setModelTypeName("measurement");
+		return rst;
+	}
+
+	public static ProjectFunding projectFunding() {
+		ProjectFunding rst = new ProjectFunding();
+		rst.setModelTypeName("project_funding");
+		return rst;
+	}
+
+	public static ConstructionStartWorkingFiles constructionStartWorkingFiles() {
+		ConstructionStartWorkingFiles rst = new ConstructionStartWorkingFiles();
+		rst.setModelTypeName("construction_start_working_files");
+		return rst;
+	}
+
+	public static QualitiyAcceptanceFiles qualitiyAcceptanceFiles() {
+		QualitiyAcceptanceFiles rst = new QualitiyAcceptanceFiles();
+		rst.setModelTypeName("qualitiy_acceptance_files");
+		return rst;
+	}
+
+	public static EngineeringExperimentFiles engineeringExperimentFiles() {
+		EngineeringExperimentFiles rst = new EngineeringExperimentFiles();
+		rst.setModelTypeName("engineering_experiment_files");
+		return rst;
+	}
+
+	public static ConstructionProcessFiles constructionProcessFiles() {
+		ConstructionProcessFiles rst = new ConstructionProcessFiles();
+		rst.setModelTypeName("construction_process_files");
+		return rst;
+	}
+
+	public static NecessarySupplementFiles necessarySupplementFiles() {
+		NecessarySupplementFiles rst = new NecessarySupplementFiles();
+		rst.setModelTypeName("necessary_supplement_files");
+		return rst;
+	}
+
+	public static ConstructionCompletionFiles constructionCompletionFiles() {
+		ConstructionCompletionFiles rst = new ConstructionCompletionFiles();
+		rst.setModelTypeName("construction_completion_files");
+		return rst;
+	}
+
+	public static EngineeringQualitySupervisionFiles engineeringQualitySupervisionFiles() {
+		EngineeringQualitySupervisionFiles rst = new EngineeringQualitySupervisionFiles();
+		rst.setModelTypeName("engineering_quality_supervision_files");
+		return rst;
+	}
+
+	public static ProjectFilesArchive projectFilesArchive() {
+		ProjectFilesArchive rst = new ProjectFilesArchive();
+		rst.setModelTypeName("project_files_archive");
+		return rst;
+	}
+
+	public static EngineeringQualitySupervisionArchive engineeringQualitySupervisionArchive() {
+		EngineeringQualitySupervisionArchive rst = new EngineeringQualitySupervisionArchive();
+		rst.setModelTypeName("engineering_quality_supervision_archive");
+		return rst;
+	}
+
+	public static ContractCollection contractCollection() {
+		ContractCollection rst = new ContractCollection();
+		rst.setModelTypeName("contract_collection");
+		return rst;
+	}
+
+	public static ContractPayment contractPayment() {
+		ContractPayment rst = new ContractPayment();
+		rst.setModelTypeName("contract_payment");
+		return rst;
+	}
+
+	public static ContractSettlement contractSettlement() {
+		ContractSettlement rst = new ContractSettlement();
+		rst.setModelTypeName("contract_settlement");
+		return rst;
+	}
+
+	public static EconomicVerificationForm economicVerificationForm() {
+		EconomicVerificationForm rst = new EconomicVerificationForm();
+		rst.setModelTypeName("economic_verification_form");
+		return rst;
+	}
+
+	public static ProjectObjective projectObjective() {
+		ProjectObjective rst = new ProjectObjective();
+		rst.setModelTypeName("project_objective");
+		return rst;
+	}
+
+	public static ProjectProgressFundingTrusteeshipPlan projectProgressFundingTrusteeshipPlan() {
+		ProjectProgressFundingTrusteeshipPlan rst = new ProjectProgressFundingTrusteeshipPlan();
+		rst.setModelTypeName("project_progress_funding_trusteeship_plan");
+		return rst;
+	}
+
+	public static ContractExamine contractExamine() {
+		ContractExamine rst = new ContractExamine();
+		rst.setModelTypeName("contract_examine");
+		return rst;
+	}
+
+	public static FundingCloseTrusteeshipContract fundingCloseTrusteeshipContract() {
+		FundingCloseTrusteeshipContract rst = new FundingCloseTrusteeshipContract();
+		rst.setModelTypeName("funding_close_trusteeship_contract");
+		return rst;
+	}
+
+	public static ProjectCloseTrusteeshipContract projectCloseTrusteeshipContract() {
+		ProjectCloseTrusteeshipContract rst = new ProjectCloseTrusteeshipContract();
+		rst.setModelTypeName("project_close_trusteeship_contract");
+		return rst;
+	}
+
+	public static FundingCloseOrganization fundingCloseOrganization() {
+		FundingCloseOrganization rst = new FundingCloseOrganization();
+		rst.setModelTypeName("funding_close_organization");
+		return rst;
+	}
+
+	public static FundingCloseOrganizationType fundingCloseOrganizationType() {
+		FundingCloseOrganizationType rst = new FundingCloseOrganizationType();
+		rst.setModelTypeName("funding_close_organization_type");
+		return rst;
+	}
+
+	public static TaskOrder taskOrder() {
+		TaskOrder rst = new TaskOrder();
+		rst.setModelTypeName("task_order");
+		return rst;
+	}
+
+	public static TaskOrderStatus taskOrderStatus() {
+		TaskOrderStatus rst = new TaskOrderStatus();
+		rst.setModelTypeName("task_order_status");
+		return rst;
+	}
+
+	public static WorkPackageAcceptanceSettlement workPackageAcceptanceSettlement() {
+		WorkPackageAcceptanceSettlement rst = new WorkPackageAcceptanceSettlement();
+		rst.setModelTypeName("work_package_acceptance_settlement");
+		return rst;
+	}
+
+	public static ProjectAcceptanceSettlement projectAcceptanceSettlement() {
+		ProjectAcceptanceSettlement rst = new ProjectAcceptanceSettlement();
+		rst.setModelTypeName("project_acceptance_settlement");
+		return rst;
+	}
+
+	public static YourongDocument yourongDocument() {
+		YourongDocument rst = new YourongDocument();
+		rst.setModelTypeName("yourong_document");
+		return rst;
+	}
+
+	public static UserGuide userGuide() {
+		UserGuide rst = new UserGuide();
+		rst.setModelTypeName("user_guide");
 		return rst;
 	}
 

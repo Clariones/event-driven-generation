@@ -47,6 +47,50 @@ public class ContractType extends BaseModelBean{
 		return member;
 	}
 
+	public ContractLedger contractLedgerList() {
+		ContractLedger member = new ContractLedger();
+		member.setModelTypeName("contract_ledger");
+		member.setName("contract_type");
+		member.setMemberName("contractLedgerList");
+		member.setRelationName("contractType");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ContractRisk contractRiskList() {
+		ContractRisk member = new ContractRisk();
+		member.setModelTypeName("contract_risk");
+		member.setName("contract_type");
+		member.setMemberName("contractRiskList");
+		member.setRelationName("contractType");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ContractReport contractReportList() {
+		ContractReport member = new ContractReport();
+		member.setModelTypeName("contract_report");
+		member.setName("contract_type");
+		member.setMemberName("contractReportList");
+		member.setRelationName("contractType");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ContractStatisticReport contractStatisticReportList() {
+		ContractStatisticReport member = new ContractStatisticReport();
+		member.setModelTypeName("contract_statistic_report");
+		member.setName("contract_type");
+		member.setMemberName("contractStatisticReportList");
+		member.setRelationName("contractType");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 
 	// 普通属性
 

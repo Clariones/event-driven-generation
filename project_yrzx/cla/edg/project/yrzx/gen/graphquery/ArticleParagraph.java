@@ -55,6 +55,15 @@ public class ArticleParagraph extends BaseModelBean{
 		return member;
 	}
 
+	public StringAttribute videoUrl(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string_url");
+		// member.setName("videoUrl");
+		member.setName("video_url");
+		useMember(member);
+		return member;
+	}
+
 	public DateTimeAttribute createTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_create");
