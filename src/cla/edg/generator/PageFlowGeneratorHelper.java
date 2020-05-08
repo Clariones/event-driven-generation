@@ -26,6 +26,7 @@ import cla.edg.pageflow.Page;
 import cla.edg.pageflow.Request;
 
 public class PageFlowGeneratorHelper extends BaseHelper{
+	protected BasePageFlowScript script;
 	public boolean isRequestHasBranch(Request req) {
 		if (req.getBranches() == null || req.getBranches().size() <= 1) {
 			return false;
@@ -519,5 +520,26 @@ public class PageFlowGeneratorHelper extends BaseHelper{
 	
 	public boolean record(String groupName, Object data) {
 		return Utils.record(groupName, data);
+	}
+	
+	// 原则: 除非特别声明,否则默认都支持
+	public boolean support(String featureName) {
+		if (script == null) {
+			return true;
+		}
+		if (script.getConfiguration().isEmpty()) {
+			return true;
+		}
+		String value = (String) script.getConfiguration().get(featureName);
+		if (value == null) {
+			return true;
+		}
+		if (value.toLowerCase().equals("true")) {
+			return true;
+		}
+		return false;
+	}
+	public void setScript(BasePageFlowScript script) {
+		this.script = script;
 	}
 }

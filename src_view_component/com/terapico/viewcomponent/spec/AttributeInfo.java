@@ -3,6 +3,7 @@ package com.terapico.viewcomponent.spec;
 public class AttributeInfo {
 	protected String name;
 	protected String type;
+	protected String itemType;
 	protected String initialValue;
 	protected String comments;
 	public String getName() {
@@ -29,6 +30,10 @@ public class AttributeInfo {
 	public void setComments(String comments) {
 		this.comments = comments;
 	}
-	
-	
+	public String getItemType() {
+		return itemType;
+	}
+	public void setItemType(String itemType) {
+		this.itemType = itemType;
+	}
 }

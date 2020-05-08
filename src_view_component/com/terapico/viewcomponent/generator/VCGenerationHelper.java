@@ -1,13 +1,13 @@
 package com.terapico.viewcomponent.generator;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import com.terapico.generator.BaseHelper;
 import com.terapico.generator.Utils;
 import com.terapico.viewcomponent.spec.AttributeInfo;
 import com.terapico.viewcomponent.spec.ComponentInfo;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 @SuppressWarnings("unchecked")
 public class VCGenerationHelper extends BaseHelper {
@@ -23,7 +23,8 @@ public class VCGenerationHelper extends BaseHelper {
 			if (name.matches("^List<.*>$")) {
 				return name;
 			}
-			throw new RuntimeException("还没处理"+name+"转成java类型");
+			// throw new RuntimeException("还没处理"+name+"转成java类型");
+			return name;
 		}
 	}
 	

@@ -64,7 +64,10 @@ public class PageFlowGenerator extends BasicGenerator {
 		data.put("parent_class_package", getParentClassPackage());
 		data.put("project_name", getProjectName());
 		data.put("bean_name", script.bean_name());
-		data.put("helper", new PageFlowGeneratorHelper());
+		PageFlowGeneratorHelper helper = new PageFlowGeneratorHelper();
+		helper.setScript(script);
+		data.put("helper", helper);
+		
 		
 		// 第一个文件, BaseXXXViewService
 		String className = String.format("Base%sViewService", fileNameEtyma);

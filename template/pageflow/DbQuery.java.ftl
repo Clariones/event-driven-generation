@@ -94,7 +94,7 @@ public abstract class ${class_name}DBQueryHelper{
 		
 		SmartList<${typeClass}> list = executeQuery${typeClass}ListOf${NAMING.toCamelCase(query.name)}(ctx, sql, params);
 		if (list == null || list.isEmpty()){
-        	return list;
+			return list;
        	}
 	<#if query.pagination>
 		list.setRowsPerPage(pageSize);

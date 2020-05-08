@@ -53,16 +53,18 @@ import com.terapico.utils.TextUtil;
 
 import com.terapico.uccaf.BaseUserContext;
 import com.terapico.caf.baseelement.LoginParam;
+<#if helper.support("change_request")>
 import com.terapico.caf.appview.ChangeRequestPostData;
 import com.terapico.caf.appview.ChangeRequestProcessResult;
 import com.terapico.caf.viewcomponent.GenericFormPage;
 import ${base_package}.ChangeRequestHelper;
 import ${base_package}.CR;
 import ${base_package}.ChangeRequestHelper;
-<#if has_cr_need_process>
+	<#if has_cr_need_process>
 import com.terapico.uccaf.CafEntity;
 import ${base_package}.changerequest.ChangeRequest;
 import ${base_package}.changerequest.ChangeRequestService;
+	</#if>
 </#if>
 /**
  * 此类负责：声明所有${class_name}ViewService中所使用的方法和常量。 单独列出的目的是便于维护。

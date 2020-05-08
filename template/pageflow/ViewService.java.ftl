@@ -4,16 +4,19 @@ package ${package};
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Map;
+<#if helper.support("change_request")>
 import com.terapico.caf.appview.ChangeRequestPostData;
 import com.terapico.caf.appview.ChangeRequestProcessResult;
 import com.terapico.caf.viewcomponent.GenericFormPage;
+</#if>
 
 import ${base_package}.${context_name};
 import ${base_package}.${custom_context_name};
 import ${base_package}.BaseViewPage;
+<#if helper.support("change_request")>
 import ${base_package}.CR;
 import ${base_package}.ChangeRequestHelper;
-
+</#if>
 
 
 <#list helper.getAllForms(script) as form>

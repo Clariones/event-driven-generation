@@ -1,6 +1,7 @@
 package com.terapico.caf.viewcomponent;
 
 import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 public class VComponent${helper.NameAsThis(component.name)} extends BaseVC{
@@ -33,6 +34,19 @@ public class VComponent${helper.NameAsThis(component.name)} extends BaseVC{
     	this.${helper.nameAsThis(attribute.name)} =  value;
     	return this;
     }
+    <#if helper.isListType(attribute.type) >
+    public VComponent${helper.NameAsThis(component.name)} ${helper.nameAsThis(attribute.name)}(${helper.JavaType(attribute.itemType)} value) {
+        ensure${helper.NameAsThis(attribute.name)}().add(value);
+        return this;
+    }
+    protected ${helper.JavaType(attribute.type)} ensure${helper.NameAsThis(attribute.name)}(){
+        if (this.${helper.nameAsThis(attribute.name)} != null) {
+            return this.${helper.nameAsThis(attribute.name)};
+        }
+        this.${helper.nameAsThis(attribute.name)} = new ArrayList<>();
+        return this.${helper.nameAsThis(attribute.name)};
+    }
+    </#if>
 </#list>
 
 	public VComponent${helper.NameAsThis(component.name)} setAttribute(String attrName, Object value) {

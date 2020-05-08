@@ -1,11 +1,11 @@
 package com.terapico.viewcomponent.spec;
 
+import com.terapico.generator.Utils;
+
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
-
-import com.terapico.generator.Utils;
 
 public class ComponentInfo {
 	protected static Set<String> attrInBaseComponentInfo = new HashSet<>();
@@ -80,6 +80,7 @@ public class ComponentInfo {
 
 	public ComponentInfo listType(String typeName) {
 		currentAttr.setType("List<"+typeName+">");
+		currentAttr.setItemType(typeName);
 		return this;
 	}
 }

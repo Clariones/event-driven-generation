@@ -2,9 +2,11 @@ package cla.edg.pageflow;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
 import cla.edg.graphquery.terms.BaseGraphQueryDescriptor;
 import cla.edg.modelbean.CorperationPathNode;
@@ -205,6 +207,10 @@ public class BasePageFlowScript extends BasePageFlowElement{
 	public PageFlowScript parent_class_package(String value) {
 		return addConfiuration("parent_class_package", value);
 	}
+	public PageFlowScript addTag(String key, String value) {
+		return addConfiuration(key, value);
+	}
+	
 	public String parent_class_package() {
 		return getConfigureValue("parent_class_package");
 	}
