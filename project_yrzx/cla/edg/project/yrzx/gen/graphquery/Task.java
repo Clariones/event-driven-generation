@@ -47,6 +47,28 @@ public class Task extends BaseModelBean{
 		return member;
 	}
 
+	public LaborSupervision laborSupervisionList() {
+		LaborSupervision member = new LaborSupervision();
+		member.setModelTypeName("labor_supervision");
+		member.setName("work_task");
+		member.setMemberName("laborSupervisionList");
+		member.setRelationName("workTask");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public TaskOrder taskOrderList() {
+		TaskOrder member = new TaskOrder();
+		member.setModelTypeName("task_order");
+		member.setName("task");
+		member.setMemberName("taskOrderList");
+		member.setRelationName("task");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 
 	// 普通属性
 

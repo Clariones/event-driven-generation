@@ -283,12 +283,13 @@ public class ProjectQueryPiece extends PieceOfScript {
 				.do_it_as().count_by(MODEL.projectReport().dailyTaskType())
 				.where(MODEL.projectReport().project().eq("${project id}"))
 
-			.query(MODEL.project()).which("by user").pagination().with_string("employee")
-				.comments("查询在我当前的岗位，需要查看的项目")
+			.query(MODEL.project()).which("by user").with_string("employee").with_string("limit")
+				.comments("查询在我当前的岗位，需要查看的前几个项目")
 				.do_it_as()
 				.where(MODEL.project().projectNominationList().worker().employee().eq("${employee}"))
 				.wants(MODEL.project().projectPhase(), MODEL.project().projectOwner(), MODEL.project().projectImageList(), MODEL.project().projectServiceType(), MODEL.project().constructionStatus())
 				.order_by(MODEL.project().createTime()).desc()
+				.top("${limit}")
 		;
 
 		return script;

@@ -223,6 +223,138 @@ public class StandardContract extends BaseModelBean{
 		return member;
 	}
 
+	public ContractLedger contractLedgerListAsProjectParticipatorContract() {
+		ContractLedger member = new ContractLedger();
+		member.setModelTypeName("contract_ledger");
+		member.setName("project_participator_contract");
+		member.setMemberName("contractLedgerListAsProjectParticipatorContract");
+		member.setRelationName("projectParticipatorContract");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ContractLedger contractLedgerListAsProjectRunningContract() {
+		ContractLedger member = new ContractLedger();
+		member.setModelTypeName("contract_ledger");
+		member.setName("project_running_contract");
+		member.setMemberName("contractLedgerListAsProjectRunningContract");
+		member.setRelationName("projectParticipatorContract");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ContractLedger contractLedgerListAsWorkPackageParticipatorContract() {
+		ContractLedger member = new ContractLedger();
+		member.setModelTypeName("contract_ledger");
+		member.setName("work_package_participator_contract");
+		member.setMemberName("contractLedgerListAsWorkPackageParticipatorContract");
+		member.setRelationName("projectParticipatorContract");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ContractRisk contractRiskListAsProjectParticipatorContract() {
+		ContractRisk member = new ContractRisk();
+		member.setModelTypeName("contract_risk");
+		member.setName("project_participator_contract");
+		member.setMemberName("contractRiskListAsProjectParticipatorContract");
+		member.setRelationName("projectParticipatorContract");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ContractRisk contractRiskListAsProjectRunningContract() {
+		ContractRisk member = new ContractRisk();
+		member.setModelTypeName("contract_risk");
+		member.setName("project_running_contract");
+		member.setMemberName("contractRiskListAsProjectRunningContract");
+		member.setRelationName("projectParticipatorContract");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ContractRisk contractRiskListAsWorkPackageParticipatorContract() {
+		ContractRisk member = new ContractRisk();
+		member.setModelTypeName("contract_risk");
+		member.setName("work_package_participator_contract");
+		member.setMemberName("contractRiskListAsWorkPackageParticipatorContract");
+		member.setRelationName("projectParticipatorContract");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ContractReport contractReportListAsProjectParticipatorContract() {
+		ContractReport member = new ContractReport();
+		member.setModelTypeName("contract_report");
+		member.setName("project_participator_contract");
+		member.setMemberName("contractReportListAsProjectParticipatorContract");
+		member.setRelationName("projectParticipatorContract");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ContractReport contractReportListAsProjectRunningContract() {
+		ContractReport member = new ContractReport();
+		member.setModelTypeName("contract_report");
+		member.setName("project_running_contract");
+		member.setMemberName("contractReportListAsProjectRunningContract");
+		member.setRelationName("projectParticipatorContract");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ContractReport contractReportListAsWorkPackageParticipatorContract() {
+		ContractReport member = new ContractReport();
+		member.setModelTypeName("contract_report");
+		member.setName("work_package_participator_contract");
+		member.setMemberName("contractReportListAsWorkPackageParticipatorContract");
+		member.setRelationName("projectParticipatorContract");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ContractStatisticReport contractStatisticReportListAsProjectParticipatorContract() {
+		ContractStatisticReport member = new ContractStatisticReport();
+		member.setModelTypeName("contract_statistic_report");
+		member.setName("project_participator_contract");
+		member.setMemberName("contractStatisticReportListAsProjectParticipatorContract");
+		member.setRelationName("projectParticipatorContract");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ContractStatisticReport contractStatisticReportListAsProjectRunningContract() {
+		ContractStatisticReport member = new ContractStatisticReport();
+		member.setModelTypeName("contract_statistic_report");
+		member.setName("project_running_contract");
+		member.setMemberName("contractStatisticReportListAsProjectRunningContract");
+		member.setRelationName("projectParticipatorContract");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ContractStatisticReport contractStatisticReportListAsWorkPackageParticipatorContract() {
+		ContractStatisticReport member = new ContractStatisticReport();
+		member.setModelTypeName("contract_statistic_report");
+		member.setName("work_package_participator_contract");
+		member.setMemberName("contractStatisticReportListAsWorkPackageParticipatorContract");
+		member.setRelationName("projectParticipatorContract");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 
 	// 普通属性
 

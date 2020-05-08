@@ -54,6 +54,17 @@ public class WorkingStatus extends BaseModelBean{
 		return member;
 	}
 
+	public Design designList() {
+		Design member = new Design();
+		member.setModelTypeName("design");
+		member.setName("design_status");
+		member.setMemberName("designList");
+		member.setRelationName("designStatus");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 
 	// 普通属性
 

@@ -355,6 +355,28 @@ public class Merchant extends BaseModelBean{
 		return member;
 	}
 
+	public Notification notificationListAsReceiver() {
+		Notification member = new Notification();
+		member.setModelTypeName("notification");
+		member.setName("receiver");
+		member.setMemberName("notificationListAsReceiver");
+		member.setRelationName("receiver");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public Notification notificationListAsSender() {
+		Notification member = new Notification();
+		member.setModelTypeName("notification");
+		member.setName("sender");
+		member.setMemberName("notificationListAsSender");
+		member.setRelationName("receiver");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 	public EventShowAllType eventShowAllTypeList() {
 		EventShowAllType member = new EventShowAllType();
 		member.setModelTypeName("event_show_all_type");
@@ -372,6 +394,842 @@ public class Merchant extends BaseModelBean{
 		member.setName("merchant");
 		member.setMemberName("eventProjectInfoList");
 		member.setRelationName("merchant");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public LoanFund loanFundList() {
+		LoanFund member = new LoanFund();
+		member.setModelTypeName("loan_fund");
+		member.setName("fund_vendor");
+		member.setMemberName("loanFundList");
+		member.setRelationName("fundVendor");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public LoanApplication loanApplicationList() {
+		LoanApplication member = new LoanApplication();
+		member.setModelTypeName("loan_application");
+		member.setName("applicant");
+		member.setMemberName("loanApplicationList");
+		member.setRelationName("applicant");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public LoanContract loanContractListAsBorrower() {
+		LoanContract member = new LoanContract();
+		member.setModelTypeName("loan_contract");
+		member.setName("borrower");
+		member.setMemberName("loanContractListAsBorrower");
+		member.setRelationName("borrower");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public LoanContract loanContractListAsLender() {
+		LoanContract member = new LoanContract();
+		member.setModelTypeName("loan_contract");
+		member.setName("lender");
+		member.setMemberName("loanContractListAsLender");
+		member.setRelationName("borrower");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public TodoList todoListList() {
+		TodoList member = new TodoList();
+		member.setModelTypeName("todo_list");
+		member.setName("owner");
+		member.setMemberName("todoListList");
+		member.setRelationName("owner");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ProcessAudit processAuditList() {
+		ProcessAudit member = new ProcessAudit();
+		member.setModelTypeName("process_audit");
+		member.setName("auditor");
+		member.setMemberName("processAuditList");
+		member.setRelationName("auditor");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ProcessApplication processApplicationList() {
+		ProcessApplication member = new ProcessApplication();
+		member.setModelTypeName("process_application");
+		member.setName("owner");
+		member.setMemberName("processApplicationList");
+		member.setRelationName("owner");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ContractLedger contractLedgerListAsFirstPartMerchant() {
+		ContractLedger member = new ContractLedger();
+		member.setModelTypeName("contract_ledger");
+		member.setName("first_part_merchant");
+		member.setMemberName("contractLedgerListAsFirstPartMerchant");
+		member.setRelationName("firstPartMerchant");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ContractLedger contractLedgerListAsSecondPartMerchant() {
+		ContractLedger member = new ContractLedger();
+		member.setModelTypeName("contract_ledger");
+		member.setName("second_part_merchant");
+		member.setMemberName("contractLedgerListAsSecondPartMerchant");
+		member.setRelationName("firstPartMerchant");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ContractRisk contractRiskList() {
+		ContractRisk member = new ContractRisk();
+		member.setModelTypeName("contract_risk");
+		member.setName("owner");
+		member.setMemberName("contractRiskList");
+		member.setRelationName("owner");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ContractReport contractReportList() {
+		ContractReport member = new ContractReport();
+		member.setModelTypeName("contract_report");
+		member.setName("owner");
+		member.setMemberName("contractReportList");
+		member.setRelationName("owner");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ContractStatisticReport contractStatisticReportList() {
+		ContractStatisticReport member = new ContractStatisticReport();
+		member.setModelTypeName("contract_statistic_report");
+		member.setName("owner");
+		member.setMemberName("contractStatisticReportList");
+		member.setRelationName("owner");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ProjectStatisticReport projectStatisticReportList() {
+		ProjectStatisticReport member = new ProjectStatisticReport();
+		member.setModelTypeName("project_statistic_report");
+		member.setName("owner");
+		member.setMemberName("projectStatisticReportList");
+		member.setRelationName("owner");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ServiceVendorStatisticReport serviceVendorStatisticReportListAsVendor() {
+		ServiceVendorStatisticReport member = new ServiceVendorStatisticReport();
+		member.setModelTypeName("service_vendor_statistic_report");
+		member.setName("vendor");
+		member.setMemberName("serviceVendorStatisticReportListAsVendor");
+		member.setRelationName("vendor");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ServiceVendorStatisticReport serviceVendorStatisticReportListAsOwner() {
+		ServiceVendorStatisticReport member = new ServiceVendorStatisticReport();
+		member.setModelTypeName("service_vendor_statistic_report");
+		member.setName("owner");
+		member.setMemberName("serviceVendorStatisticReportListAsOwner");
+		member.setRelationName("vendor");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public FinancialServiceStatisticReport financialServiceStatisticReportList() {
+		FinancialServiceStatisticReport member = new FinancialServiceStatisticReport();
+		member.setModelTypeName("financial_service_statistic_report");
+		member.setName("owner");
+		member.setMemberName("financialServiceStatisticReportList");
+		member.setRelationName("owner");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public RecruitmentRequirement recruitmentRequirementList() {
+		RecruitmentRequirement member = new RecruitmentRequirement();
+		member.setModelTypeName("recruitment_requirement");
+		member.setName("employee");
+		member.setMemberName("recruitmentRequirementList");
+		member.setRelationName("employee");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public CandidateTalent candidateTalentList() {
+		CandidateTalent member = new CandidateTalent();
+		member.setModelTypeName("candidate_talent");
+		member.setName("candidate");
+		member.setMemberName("candidateTalentList");
+		member.setRelationName("candidate");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public StaffFiles staffFilesListAsEmployer() {
+		StaffFiles member = new StaffFiles();
+		member.setModelTypeName("staff_files");
+		member.setName("employer");
+		member.setMemberName("staffFilesListAsEmployer");
+		member.setRelationName("employer");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public StaffFiles staffFilesListAsEmployee() {
+		StaffFiles member = new StaffFiles();
+		member.setModelTypeName("staff_files");
+		member.setName("employee");
+		member.setMemberName("staffFilesListAsEmployee");
+		member.setRelationName("employer");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EmployeeRelation employeeRelationListAsEmployer() {
+		EmployeeRelation member = new EmployeeRelation();
+		member.setModelTypeName("employee_relation");
+		member.setName("employer");
+		member.setMemberName("employeeRelationListAsEmployer");
+		member.setRelationName("employer");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EmployeeRelation employeeRelationListAsEmployee() {
+		EmployeeRelation member = new EmployeeRelation();
+		member.setModelTypeName("employee_relation");
+		member.setName("employee");
+		member.setMemberName("employeeRelationListAsEmployee");
+		member.setRelationName("employer");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EmployeeSalary employeeSalaryList() {
+		EmployeeSalary member = new EmployeeSalary();
+		member.setModelTypeName("employee_salary");
+		member.setName("employer");
+		member.setMemberName("employeeSalaryList");
+		member.setRelationName("employer");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EmployeePerformance employeePerformanceListAsEmployee() {
+		EmployeePerformance member = new EmployeePerformance();
+		member.setModelTypeName("employee_performance");
+		member.setName("employee");
+		member.setMemberName("employeePerformanceListAsEmployee");
+		member.setRelationName("employee");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EmployeePerformance employeePerformanceListAsEmployer() {
+		EmployeePerformance member = new EmployeePerformance();
+		member.setModelTypeName("employee_performance");
+		member.setName("employer");
+		member.setMemberName("employeePerformanceListAsEmployer");
+		member.setRelationName("employee");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public MerchantSeal merchantSealList() {
+		MerchantSeal member = new MerchantSeal();
+		member.setModelTypeName("merchant_seal");
+		member.setName("owner");
+		member.setMemberName("merchantSealList");
+		member.setRelationName("owner");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ProjectAttractInvestment projectAttractInvestmentList() {
+		ProjectAttractInvestment member = new ProjectAttractInvestment();
+		member.setModelTypeName("project_attract_investment");
+		member.setName("post_by");
+		member.setMemberName("projectAttractInvestmentList");
+		member.setRelationName("postBy");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public SerivceVendorAttractInvestment serivceVendorAttractInvestmentList() {
+		SerivceVendorAttractInvestment member = new SerivceVendorAttractInvestment();
+		member.setModelTypeName("serivce_vendor_attract_investment");
+		member.setName("post_by");
+		member.setMemberName("serivceVendorAttractInvestmentList");
+		member.setRelationName("postBy");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public BrandAttractInvestment brandAttractInvestmentList() {
+		BrandAttractInvestment member = new BrandAttractInvestment();
+		member.setModelTypeName("brand_attract_investment");
+		member.setName("post_by");
+		member.setMemberName("brandAttractInvestmentList");
+		member.setRelationName("postBy");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ProjectSettlement projectSettlementList() {
+		ProjectSettlement member = new ProjectSettlement();
+		member.setModelTypeName("project_settlement");
+		member.setName("responsible_merchant");
+		member.setMemberName("projectSettlementList");
+		member.setRelationName("responsibleMerchant");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ServiceVendorSettlement serviceVendorSettlementList() {
+		ServiceVendorSettlement member = new ServiceVendorSettlement();
+		member.setModelTypeName("service_vendor_settlement");
+		member.setName("vendor");
+		member.setMemberName("serviceVendorSettlementList");
+		member.setRelationName("vendor");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public BrandPartnerSettlement brandPartnerSettlementList() {
+		BrandPartnerSettlement member = new BrandPartnerSettlement();
+		member.setModelTypeName("brand_partner_settlement");
+		member.setName("partner");
+		member.setMemberName("brandPartnerSettlementList");
+		member.setRelationName("partner");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public MerchantVerification merchantVerificationList() {
+		MerchantVerification member = new MerchantVerification();
+		member.setModelTypeName("merchant_verification");
+		member.setName("merchant");
+		member.setMemberName("merchantVerificationList");
+		member.setRelationName("merchant");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public PartnerRecommendation partnerRecommendationList() {
+		PartnerRecommendation member = new PartnerRecommendation();
+		member.setModelTypeName("partner_recommendation");
+		member.setName("partner");
+		member.setMemberName("partnerRecommendationList");
+		member.setRelationName("partner");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ProjectDirective projectDirectiveListAsResponsibleMerchant() {
+		ProjectDirective member = new ProjectDirective();
+		member.setModelTypeName("project_directive");
+		member.setName("responsible_merchant");
+		member.setMemberName("projectDirectiveListAsResponsibleMerchant");
+		member.setRelationName("responsibleMerchant");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ProjectDirective projectDirectiveListAsPostBy() {
+		ProjectDirective member = new ProjectDirective();
+		member.setModelTypeName("project_directive");
+		member.setName("post_by");
+		member.setMemberName("projectDirectiveListAsPostBy");
+		member.setRelationName("responsibleMerchant");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ProjectDailyReport projectDailyReportList() {
+		ProjectDailyReport member = new ProjectDailyReport();
+		member.setModelTypeName("project_daily_report");
+		member.setName("reporter");
+		member.setMemberName("projectDailyReportList");
+		member.setRelationName("reporter");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ProjectProgressReport projectProgressReportList() {
+		ProjectProgressReport member = new ProjectProgressReport();
+		member.setModelTypeName("project_progress_report");
+		member.setName("reporter");
+		member.setMemberName("projectProgressReportList");
+		member.setRelationName("reporter");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ProjectNotification projectNotificationListAsRecipientMerchant() {
+		ProjectNotification member = new ProjectNotification();
+		member.setModelTypeName("project_notification");
+		member.setName("recipient_merchant");
+		member.setMemberName("projectNotificationListAsRecipientMerchant");
+		member.setRelationName("recipientMerchant");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ProjectNotification projectNotificationListAsPostBy() {
+		ProjectNotification member = new ProjectNotification();
+		member.setModelTypeName("project_notification");
+		member.setName("post_by");
+		member.setMemberName("projectNotificationListAsPostBy");
+		member.setRelationName("recipientMerchant");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public Design designListAsDesigner() {
+		Design member = new Design();
+		member.setModelTypeName("design");
+		member.setName("designer");
+		member.setMemberName("designListAsDesigner");
+		member.setRelationName("designer");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public Design designListAsReviewer() {
+		Design member = new Design();
+		member.setModelTypeName("design");
+		member.setName("reviewer");
+		member.setMemberName("designListAsReviewer");
+		member.setRelationName("designer");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ConstructionSchema constructionSchemaList() {
+		ConstructionSchema member = new ConstructionSchema();
+		member.setModelTypeName("construction_schema");
+		member.setName("post_by");
+		member.setMemberName("constructionSchemaList");
+		member.setRelationName("postBy");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ProjectBid projectBidListAsProjectOwner() {
+		ProjectBid member = new ProjectBid();
+		member.setModelTypeName("project_bid");
+		member.setName("project_owner");
+		member.setMemberName("projectBidListAsProjectOwner");
+		member.setRelationName("projectOwner");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ProjectBid projectBidListAsResponsibleMerchant() {
+		ProjectBid member = new ProjectBid();
+		member.setModelTypeName("project_bid");
+		member.setName("responsible_merchant");
+		member.setMemberName("projectBidListAsResponsibleMerchant");
+		member.setRelationName("projectOwner");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public LaborSupervision laborSupervisionListAsEmployee() {
+		LaborSupervision member = new LaborSupervision();
+		member.setModelTypeName("labor_supervision");
+		member.setName("employee");
+		member.setMemberName("laborSupervisionListAsEmployee");
+		member.setRelationName("employee");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public LaborSupervision laborSupervisionListAsEmployer() {
+		LaborSupervision member = new LaborSupervision();
+		member.setModelTypeName("labor_supervision");
+		member.setName("employer");
+		member.setMemberName("laborSupervisionListAsEmployer");
+		member.setRelationName("employee");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public SafetyInstruction safetyInstructionList() {
+		SafetyInstruction member = new SafetyInstruction();
+		member.setModelTypeName("safety_instruction");
+		member.setName("post_by");
+		member.setMemberName("safetyInstructionList");
+		member.setRelationName("postBy");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public DesignChange designChangeListAsDesigner() {
+		DesignChange member = new DesignChange();
+		member.setModelTypeName("design_change");
+		member.setName("designer");
+		member.setMemberName("designChangeListAsDesigner");
+		member.setRelationName("designer");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public DesignChange designChangeListAsSponsor() {
+		DesignChange member = new DesignChange();
+		member.setModelTypeName("design_change");
+		member.setName("sponsor");
+		member.setMemberName("designChangeListAsSponsor");
+		member.setRelationName("designer");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public Violation violationListAsResponsibleMerchant() {
+		Violation member = new Violation();
+		member.setModelTypeName("violation");
+		member.setName("responsible_merchant");
+		member.setMemberName("violationListAsResponsibleMerchant");
+		member.setRelationName("responsibleMerchant");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public Violation violationListAsImpactMerchant() {
+		Violation member = new Violation();
+		member.setModelTypeName("violation");
+		member.setName("impact_merchant");
+		member.setMemberName("violationListAsImpactMerchant");
+		member.setRelationName("responsibleMerchant");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public Material materialList() {
+		Material member = new Material();
+		member.setModelTypeName("material");
+		member.setName("vendor");
+		member.setMemberName("materialList");
+		member.setRelationName("vendor");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ConstructionStartWorkingFiles constructionStartWorkingFilesList() {
+		ConstructionStartWorkingFiles member = new ConstructionStartWorkingFiles();
+		member.setModelTypeName("construction_start_working_files");
+		member.setName("upload_user");
+		member.setMemberName("constructionStartWorkingFilesList");
+		member.setRelationName("uploadUser");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public QualitiyAcceptanceFiles qualitiyAcceptanceFilesList() {
+		QualitiyAcceptanceFiles member = new QualitiyAcceptanceFiles();
+		member.setModelTypeName("qualitiy_acceptance_files");
+		member.setName("upload_user");
+		member.setMemberName("qualitiyAcceptanceFilesList");
+		member.setRelationName("uploadUser");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EngineeringExperimentFiles engineeringExperimentFilesList() {
+		EngineeringExperimentFiles member = new EngineeringExperimentFiles();
+		member.setModelTypeName("engineering_experiment_files");
+		member.setName("upload_user");
+		member.setMemberName("engineeringExperimentFilesList");
+		member.setRelationName("uploadUser");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ConstructionProcessFiles constructionProcessFilesList() {
+		ConstructionProcessFiles member = new ConstructionProcessFiles();
+		member.setModelTypeName("construction_process_files");
+		member.setName("upload_user");
+		member.setMemberName("constructionProcessFilesList");
+		member.setRelationName("uploadUser");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public NecessarySupplementFiles necessarySupplementFilesList() {
+		NecessarySupplementFiles member = new NecessarySupplementFiles();
+		member.setModelTypeName("necessary_supplement_files");
+		member.setName("upload_user");
+		member.setMemberName("necessarySupplementFilesList");
+		member.setRelationName("uploadUser");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ConstructionCompletionFiles constructionCompletionFilesList() {
+		ConstructionCompletionFiles member = new ConstructionCompletionFiles();
+		member.setModelTypeName("construction_completion_files");
+		member.setName("upload_user");
+		member.setMemberName("constructionCompletionFilesList");
+		member.setRelationName("uploadUser");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EngineeringQualitySupervisionFiles engineeringQualitySupervisionFilesList() {
+		EngineeringQualitySupervisionFiles member = new EngineeringQualitySupervisionFiles();
+		member.setModelTypeName("engineering_quality_supervision_files");
+		member.setName("upload_user");
+		member.setMemberName("engineeringQualitySupervisionFilesList");
+		member.setRelationName("uploadUser");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ProjectFilesArchive projectFilesArchiveList() {
+		ProjectFilesArchive member = new ProjectFilesArchive();
+		member.setModelTypeName("project_files_archive");
+		member.setName("upload_user");
+		member.setMemberName("projectFilesArchiveList");
+		member.setRelationName("uploadUser");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EngineeringQualitySupervisionArchive engineeringQualitySupervisionArchiveList() {
+		EngineeringQualitySupervisionArchive member = new EngineeringQualitySupervisionArchive();
+		member.setModelTypeName("engineering_quality_supervision_archive");
+		member.setName("upload_user");
+		member.setMemberName("engineeringQualitySupervisionArchiveList");
+		member.setRelationName("uploadUser");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EconomicVerificationForm economicVerificationFormList() {
+		EconomicVerificationForm member = new EconomicVerificationForm();
+		member.setModelTypeName("economic_verification_form");
+		member.setName("service_vendor");
+		member.setMemberName("economicVerificationFormList");
+		member.setRelationName("serviceVendor");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ProjectObjective projectObjectiveList() {
+		ProjectObjective member = new ProjectObjective();
+		member.setModelTypeName("project_objective");
+		member.setName("service_store");
+		member.setMemberName("projectObjectiveList");
+		member.setRelationName("serviceStore");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ProjectProgressFundingTrusteeshipPlan projectProgressFundingTrusteeshipPlanListAsOwner() {
+		ProjectProgressFundingTrusteeshipPlan member = new ProjectProgressFundingTrusteeshipPlan();
+		member.setModelTypeName("project_progress_funding_trusteeship_plan");
+		member.setName("owner");
+		member.setMemberName("projectProgressFundingTrusteeshipPlanListAsOwner");
+		member.setRelationName("owner");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ProjectProgressFundingTrusteeshipPlan projectProgressFundingTrusteeshipPlanListAsServiceStore() {
+		ProjectProgressFundingTrusteeshipPlan member = new ProjectProgressFundingTrusteeshipPlan();
+		member.setModelTypeName("project_progress_funding_trusteeship_plan");
+		member.setName("service_store");
+		member.setMemberName("projectProgressFundingTrusteeshipPlanListAsServiceStore");
+		member.setRelationName("owner");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public FundingCloseTrusteeshipContract fundingCloseTrusteeshipContractListAsFundingVendor() {
+		FundingCloseTrusteeshipContract member = new FundingCloseTrusteeshipContract();
+		member.setModelTypeName("funding_close_trusteeship_contract");
+		member.setName("funding_vendor");
+		member.setMemberName("fundingCloseTrusteeshipContractListAsFundingVendor");
+		member.setRelationName("fundingVendor");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public FundingCloseTrusteeshipContract fundingCloseTrusteeshipContractListAsFundingConsumer() {
+		FundingCloseTrusteeshipContract member = new FundingCloseTrusteeshipContract();
+		member.setModelTypeName("funding_close_trusteeship_contract");
+		member.setName("funding_consumer");
+		member.setMemberName("fundingCloseTrusteeshipContractListAsFundingConsumer");
+		member.setRelationName("fundingVendor");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ProjectCloseTrusteeshipContract projectCloseTrusteeshipContractListAsOwner() {
+		ProjectCloseTrusteeshipContract member = new ProjectCloseTrusteeshipContract();
+		member.setModelTypeName("project_close_trusteeship_contract");
+		member.setName("owner");
+		member.setMemberName("projectCloseTrusteeshipContractListAsOwner");
+		member.setRelationName("owner");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ProjectCloseTrusteeshipContract projectCloseTrusteeshipContractListAsStore() {
+		ProjectCloseTrusteeshipContract member = new ProjectCloseTrusteeshipContract();
+		member.setModelTypeName("project_close_trusteeship_contract");
+		member.setName("store");
+		member.setMemberName("projectCloseTrusteeshipContractListAsStore");
+		member.setRelationName("owner");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public FundingCloseOrganization fundingCloseOrganizationList() {
+		FundingCloseOrganization member = new FundingCloseOrganization();
+		member.setModelTypeName("funding_close_organization");
+		member.setName("merchant");
+		member.setMemberName("fundingCloseOrganizationList");
+		member.setRelationName("merchant");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public TaskOrder taskOrderListAsBuyerMerchant() {
+		TaskOrder member = new TaskOrder();
+		member.setModelTypeName("task_order");
+		member.setName("buyer_merchant");
+		member.setMemberName("taskOrderListAsBuyerMerchant");
+		member.setRelationName("buyerMerchant");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public TaskOrder taskOrderListAsServiceMerchant() {
+		TaskOrder member = new TaskOrder();
+		member.setModelTypeName("task_order");
+		member.setName("service_merchant");
+		member.setMemberName("taskOrderListAsServiceMerchant");
+		member.setRelationName("buyerMerchant");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public TaskOrder taskOrderListAsStoreMerchant() {
+		TaskOrder member = new TaskOrder();
+		member.setModelTypeName("task_order");
+		member.setName("store_merchant");
+		member.setMemberName("taskOrderListAsStoreMerchant");
+		member.setRelationName("buyerMerchant");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public WorkPackageAcceptanceSettlement workPackageAcceptanceSettlementList() {
+		WorkPackageAcceptanceSettlement member = new WorkPackageAcceptanceSettlement();
+		member.setModelTypeName("work_package_acceptance_settlement");
+		member.setName("service_vendor");
+		member.setMemberName("workPackageAcceptanceSettlementList");
+		member.setRelationName("serviceVendor");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ProjectAcceptanceSettlement projectAcceptanceSettlementList() {
+		ProjectAcceptanceSettlement member = new ProjectAcceptanceSettlement();
+		member.setModelTypeName("project_acceptance_settlement");
+		member.setName("owner");
+		member.setMemberName("projectAcceptanceSettlementList");
+		member.setRelationName("owner");
 		member.setReferDirection(false);
 		append(member);
 		return member;

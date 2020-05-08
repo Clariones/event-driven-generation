@@ -113,6 +113,39 @@ public class WorkPackage extends BaseModelBean{
 		return member;
 	}
 
+	public Design designList() {
+		Design member = new Design();
+		member.setModelTypeName("design");
+		member.setName("work_package");
+		member.setMemberName("designList");
+		member.setRelationName("workPackage");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public Violation violationList() {
+		Violation member = new Violation();
+		member.setModelTypeName("violation");
+		member.setName("related_work_package");
+		member.setMemberName("violationList");
+		member.setRelationName("relatedWorkPackage");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public WorkPackageAcceptanceSettlement workPackageAcceptanceSettlementList() {
+		WorkPackageAcceptanceSettlement member = new WorkPackageAcceptanceSettlement();
+		member.setModelTypeName("work_package_acceptance_settlement");
+		member.setName("work_package");
+		member.setMemberName("workPackageAcceptanceSettlementList");
+		member.setRelationName("workPackage");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 
 	// 普通属性
 

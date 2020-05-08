@@ -49,7 +49,7 @@ public class ProjectHallPageFlowPiece extends PieceOfScript {
 		viewProject5Book(script, "五书详情", "YOURONG_5BOOK");
 		viewProjectElementIn3Levels(script, "合同任务", "PROJECT_CONTRACT");
 		viewProjectElementIn3Levels(script, "项目资料", "PROJECT_DOCS");
-
+		viewUserGuide(script);
 		script.request("view project material review list").with_string("item id").with_last_record_id()
 				.comments("查看项目资料的所有审批记录列表").need_login().no_footprint()
 				.got_page("review record list").title("审核记录").list_of("card")
@@ -80,6 +80,10 @@ public class ProjectHallPageFlowPiece extends PieceOfScript {
 				.got_page("commission pay item detail").title("合同提成")
 			;
 		return script;
+	}
+
+	protected void viewUserGuide(PageFlowScript script) {
+		script.request("view user guide list").comments("查看使用指南列表").got_page("user guide list");
 	}
 
 	protected void viewProject5Book(PageFlowScript script, String title, String code) {

@@ -245,6 +245,270 @@ public class Project extends BaseModelBean{
 		return member;
 	}
 
+	public LoanApplication loanApplicationList() {
+		LoanApplication member = new LoanApplication();
+		member.setModelTypeName("loan_application");
+		member.setName("loan_project");
+		member.setMemberName("loanApplicationList");
+		member.setRelationName("loanProject");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ProjectStatisticReport projectStatisticReportList() {
+		ProjectStatisticReport member = new ProjectStatisticReport();
+		member.setModelTypeName("project_statistic_report");
+		member.setName("project");
+		member.setMemberName("projectStatisticReportList");
+		member.setRelationName("project");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ProjectAttractInvestment projectAttractInvestmentList() {
+		ProjectAttractInvestment member = new ProjectAttractInvestment();
+		member.setModelTypeName("project_attract_investment");
+		member.setName("project");
+		member.setMemberName("projectAttractInvestmentList");
+		member.setRelationName("project");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ProjectSettlement projectSettlementList() {
+		ProjectSettlement member = new ProjectSettlement();
+		member.setModelTypeName("project_settlement");
+		member.setName("project");
+		member.setMemberName("projectSettlementList");
+		member.setRelationName("project");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ProjectDailyReport projectDailyReportList() {
+		ProjectDailyReport member = new ProjectDailyReport();
+		member.setModelTypeName("project_daily_report");
+		member.setName("project");
+		member.setMemberName("projectDailyReportList");
+		member.setRelationName("project");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ProjectProgressReport projectProgressReportList() {
+		ProjectProgressReport member = new ProjectProgressReport();
+		member.setModelTypeName("project_progress_report");
+		member.setName("project");
+		member.setMemberName("projectProgressReportList");
+		member.setRelationName("project");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public Design designList() {
+		Design member = new Design();
+		member.setModelTypeName("design");
+		member.setName("project");
+		member.setMemberName("designList");
+		member.setRelationName("project");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ConstructionSchema constructionSchemaList() {
+		ConstructionSchema member = new ConstructionSchema();
+		member.setModelTypeName("construction_schema");
+		member.setName("project");
+		member.setMemberName("constructionSchemaList");
+		member.setRelationName("project");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public DesignChange designChangeList() {
+		DesignChange member = new DesignChange();
+		member.setModelTypeName("design_change");
+		member.setName("project");
+		member.setMemberName("designChangeList");
+		member.setRelationName("project");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public Violation violationList() {
+		Violation member = new Violation();
+		member.setModelTypeName("violation");
+		member.setName("project");
+		member.setMemberName("violationList");
+		member.setRelationName("project");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ProjectFunding projectFundingList() {
+		ProjectFunding member = new ProjectFunding();
+		member.setModelTypeName("project_funding");
+		member.setName("project");
+		member.setMemberName("projectFundingList");
+		member.setRelationName("project");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ConstructionStartWorkingFiles constructionStartWorkingFilesList() {
+		ConstructionStartWorkingFiles member = new ConstructionStartWorkingFiles();
+		member.setModelTypeName("construction_start_working_files");
+		member.setName("project");
+		member.setMemberName("constructionStartWorkingFilesList");
+		member.setRelationName("project");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public QualitiyAcceptanceFiles qualitiyAcceptanceFilesList() {
+		QualitiyAcceptanceFiles member = new QualitiyAcceptanceFiles();
+		member.setModelTypeName("qualitiy_acceptance_files");
+		member.setName("project");
+		member.setMemberName("qualitiyAcceptanceFilesList");
+		member.setRelationName("project");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EngineeringExperimentFiles engineeringExperimentFilesList() {
+		EngineeringExperimentFiles member = new EngineeringExperimentFiles();
+		member.setModelTypeName("engineering_experiment_files");
+		member.setName("project");
+		member.setMemberName("engineeringExperimentFilesList");
+		member.setRelationName("project");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ConstructionProcessFiles constructionProcessFilesList() {
+		ConstructionProcessFiles member = new ConstructionProcessFiles();
+		member.setModelTypeName("construction_process_files");
+		member.setName("project");
+		member.setMemberName("constructionProcessFilesList");
+		member.setRelationName("project");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public NecessarySupplementFiles necessarySupplementFilesList() {
+		NecessarySupplementFiles member = new NecessarySupplementFiles();
+		member.setModelTypeName("necessary_supplement_files");
+		member.setName("project");
+		member.setMemberName("necessarySupplementFilesList");
+		member.setRelationName("project");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ConstructionCompletionFiles constructionCompletionFilesList() {
+		ConstructionCompletionFiles member = new ConstructionCompletionFiles();
+		member.setModelTypeName("construction_completion_files");
+		member.setName("project");
+		member.setMemberName("constructionCompletionFilesList");
+		member.setRelationName("project");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EngineeringQualitySupervisionFiles engineeringQualitySupervisionFilesList() {
+		EngineeringQualitySupervisionFiles member = new EngineeringQualitySupervisionFiles();
+		member.setModelTypeName("engineering_quality_supervision_files");
+		member.setName("project");
+		member.setMemberName("engineeringQualitySupervisionFilesList");
+		member.setRelationName("project");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ProjectFilesArchive projectFilesArchiveList() {
+		ProjectFilesArchive member = new ProjectFilesArchive();
+		member.setModelTypeName("project_files_archive");
+		member.setName("project");
+		member.setMemberName("projectFilesArchiveList");
+		member.setRelationName("project");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EngineeringQualitySupervisionArchive engineeringQualitySupervisionArchiveList() {
+		EngineeringQualitySupervisionArchive member = new EngineeringQualitySupervisionArchive();
+		member.setModelTypeName("engineering_quality_supervision_archive");
+		member.setName("project");
+		member.setMemberName("engineeringQualitySupervisionArchiveList");
+		member.setRelationName("project");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ProjectObjective projectObjectiveList() {
+		ProjectObjective member = new ProjectObjective();
+		member.setModelTypeName("project_objective");
+		member.setName("project");
+		member.setMemberName("projectObjectiveList");
+		member.setRelationName("project");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ProjectProgressFundingTrusteeshipPlan projectProgressFundingTrusteeshipPlanList() {
+		ProjectProgressFundingTrusteeshipPlan member = new ProjectProgressFundingTrusteeshipPlan();
+		member.setModelTypeName("project_progress_funding_trusteeship_plan");
+		member.setName("project");
+		member.setMemberName("projectProgressFundingTrusteeshipPlanList");
+		member.setRelationName("project");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ProjectCloseTrusteeshipContract projectCloseTrusteeshipContractList() {
+		ProjectCloseTrusteeshipContract member = new ProjectCloseTrusteeshipContract();
+		member.setModelTypeName("project_close_trusteeship_contract");
+		member.setName("project");
+		member.setMemberName("projectCloseTrusteeshipContractList");
+		member.setRelationName("project");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ProjectAcceptanceSettlement projectAcceptanceSettlementList() {
+		ProjectAcceptanceSettlement member = new ProjectAcceptanceSettlement();
+		member.setModelTypeName("project_acceptance_settlement");
+		member.setName("project");
+		member.setMemberName("projectAcceptanceSettlementList");
+		member.setRelationName("project");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 
 	// 普通属性
 

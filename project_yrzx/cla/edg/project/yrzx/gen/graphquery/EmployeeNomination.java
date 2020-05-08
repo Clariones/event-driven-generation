@@ -223,6 +223,72 @@ public class EmployeeNomination extends BaseModelBean{
 		return member;
 	}
 
+	public Process processList() {
+		Process member = new Process();
+		member.setModelTypeName("process");
+		member.setName("creator");
+		member.setMemberName("processList");
+		member.setRelationName("creator");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public TodoList todoListList() {
+		TodoList member = new TodoList();
+		member.setModelTypeName("todo_list");
+		member.setName("creator");
+		member.setMemberName("todoListList");
+		member.setRelationName("creator");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ProcessApplication processApplicationList() {
+		ProcessApplication member = new ProcessApplication();
+		member.setModelTypeName("process_application");
+		member.setName("creator");
+		member.setMemberName("processApplicationList");
+		member.setRelationName("creator");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public StaffFiles staffFilesList() {
+		StaffFiles member = new StaffFiles();
+		member.setModelTypeName("staff_files");
+		member.setName("employment");
+		member.setMemberName("staffFilesList");
+		member.setRelationName("employment");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EmployeeRelation employeeRelationList() {
+		EmployeeRelation member = new EmployeeRelation();
+		member.setModelTypeName("employee_relation");
+		member.setName("employment");
+		member.setMemberName("employeeRelationList");
+		member.setRelationName("employment");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EconomicVerificationForm economicVerificationFormList() {
+		EconomicVerificationForm member = new EconomicVerificationForm();
+		member.setModelTypeName("economic_verification_form");
+		member.setName("responsible_employee");
+		member.setMemberName("economicVerificationFormList");
+		member.setRelationName("responsibleEmployee");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 
 	// 普通属性
 

@@ -49,6 +49,18 @@ public class MiscQueryPiece extends PieceOfScript {
 				.do_it_as()
 				.where(MODEL.workPackage().project().eq("${project id}"))
 				.wants(MODEL.workPackage().vendor())
+
+
+			.query(MODEL.notification()).list_of("merchant").with_string("merchant id").with_integer("limit")
+				.comments("查询发给当前merchant的消息")
+				.do_it_as()
+				.where(MODEL.notification().receiver().eq("${merchant id}"))
+				.order_by(MODEL.notification().createTime()).desc().top("${limit}")
+
+			.query(MODEL.article()).list_of("category name").with_string("article category name")
+				.comments("根据文章分类查询文章")
+				.do_it_as()
+				.where(MODEL.article().category().name().eq("${article category name}"))
 			;
 
 		return script;
