@@ -31,6 +31,7 @@ public class ContractQueryPiece extends PieceOfScript {
 				.where(MODEL.standardContract().id().eq("${contract id}"))
 				.wants(MODEL.standardContract().contractStatus(),
 						MODEL.standardContract().contractType(),
+						MODEL.standardContract().project(),
 						MODEL.standardContract().partyA())
 			// pay item
 			.find(MODEL.contractPayItem()).which("in contract by pay status").with_string("contract id")

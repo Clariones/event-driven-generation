@@ -3,7 +3,7 @@ package cla.edg.project.yrzx.changerequest;
 import java.util.Map;
 
 
-
+import cla.edg.project.yrzx.gen.graphquery.MODEL;
 import com.terapico.changerequest.builder.ChangeRequestSpecBuilder;
 import com.terapico.changerequest.builder.ChangeRequestSpecFactory;
 import com.terapico.changerequest.builder.FieldType;
@@ -40,8 +40,8 @@ public class ProjectCommandChangeRequest implements ChangeRequestSpecFactory {
 				.has_field("content").zh_CN("具体内容").which_type_of(FieldType.MULTI_TEXT)
 					.place_holder("详细内容")
 				.has_field("images").zh_CN("图片").which_type_of(FieldType.IMAGES)
-				.has_field("main recievers").zh_CN("主送单位").do_multiple_select()
-				.has_field("copy to recievers").zh_CN("抄送单位").optional().do_multiple_select()
+				.has_field("main recievers").zh_CN("主送单位").which_model_of(MODEL.projectNomination()).values_can_select_from_query_by(null)
+				.has_field("copy to recievers").zh_CN("抄送单位").optional().which_model_of(MODEL.projectNomination()).values_can_select_from_query_by(null)
 				;
 	}
 }

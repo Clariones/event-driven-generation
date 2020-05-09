@@ -57,7 +57,7 @@ public class ArticleParagraph extends BaseModelBean{
 
 	public StringAttribute videoUrl(){
 		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string_url");
+		member.setModelTypeName("string");
 		// member.setName("videoUrl");
 		member.setName("video_url");
 		useMember(member);

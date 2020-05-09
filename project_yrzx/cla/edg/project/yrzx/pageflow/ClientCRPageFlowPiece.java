@@ -70,6 +70,10 @@ public class ClientCRPageFlowPiece extends PieceOfScript {
 				.request_with_changerequest("add project nomination").with_string("project id")
 					.comments("添加项目岗位")
 					.got_page("project organization")
+
+				.request_with_changerequest("project command").with_string("project id")
+					.comments("创建项目指令")
+					.got_page("project command detail")
 				;
 	}
 }

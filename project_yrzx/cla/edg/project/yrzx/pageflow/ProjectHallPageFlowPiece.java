@@ -83,7 +83,7 @@ public class ProjectHallPageFlowPiece extends PieceOfScript {
 	}
 
 	protected void viewUserGuide(PageFlowScript script) {
-		script.request("view user guide list").comments("查看使用指南列表").got_page("user guide list");
+		script.request("view user guide list").can_refresh().with_string("project id").comments("查看使用指南列表").got_page("user guide list");
 	}
 
 	protected void viewProject5Book(PageFlowScript script, String title, String code) {
