@@ -18,6 +18,7 @@ import cla.edg.modelbean.LogicalOperator;
 import cla.edg.modelbean.ModelBeanRoute;
 import cla.edg.modelbean.NumberAttribute;
 import cla.edg.routemap.Edge;
+import cla.edg.routemap.MeetingPoint;
 import cla.edg.routemap.Node;
 import cla.edg.routemap.RouteUtil;
 
@@ -219,7 +220,15 @@ public class QueryActionInfo {
 		String whereClause = RouteUtil.getWhereClause(params, this.getSearchWhere());
 		sb.append(whereClause);
 		if (this.isCounting() && this.getSumAttribute() != null) {
-			sb.append("\r\n    GROUP by ").append(beanRoute.getTargetModelAlias()).append(".").append(this.getSumAttribute().getContainerBean().getName());
+			
+			if (getSumAttribute().getName().equals("id")) {
+				MeetingPoint<BaseModelBean, BeanRelation> lastMP = sumAttribute.getContainerBean().getBeanRoute().getCurrentMeetingPoint().getEdgesToMe().iterator().next().getFromNode();
+				String countByAlias = lastMP.getAlias();
+				sb.append("\r\n    GROUP by ").append(countByAlias).append(".").append(this.getSumAttribute().getContainerBean().getName());
+			}else {
+				String countByAlias = sumAttribute.getContainerBean().getBeanRoute().getCurrentMeetingPoint().getAlias();
+				sb.append("\r\n    GROUP by ").append(countByAlias).append(".").append(this.getSumAttribute().getName());
+			}
 		}
 		return makeOutputString(sb.toString());
 	}

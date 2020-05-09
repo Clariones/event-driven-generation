@@ -68,7 +68,9 @@ public class ModelBeanRoute extends RouteMap<BaseModelBean, BeanRelation>{
 				sb.append("SELECT COUNT(DISTINCT ").append(targetAlias).append(".id) from ");
 			}else {
 				if (sumAttribute.getName().equalsIgnoreCase("id")) {
-					sb.append("SELECT ").append(targetAlias).append(".").append(sumAttribute.getContainerBean().getName())
+					MeetingPoint<BaseModelBean, BeanRelation> lastMP = sumAttribute.getContainerBean().getBeanRoute().getCurrentMeetingPoint().getEdgesToMe().iterator().next().getFromNode();
+					String countByAlias = lastMP.getAlias();
+					sb.append("SELECT ").append(countByAlias).append(".").append(sumAttribute.getContainerBean().getName())
 							.append(" as id, COUNT(DISTINCT ").append(targetAlias).append(".id) as count from ");
 				} else {
 					MeetingPoint<BaseModelBean, BeanRelation> mp = sumAttribute.getContainerBean().getLastMeetingPoint();
