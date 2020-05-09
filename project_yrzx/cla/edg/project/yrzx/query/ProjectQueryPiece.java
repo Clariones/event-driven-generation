@@ -38,6 +38,13 @@ public class ProjectQueryPiece extends PieceOfScript {
 				.where(MODEL.projectMaterial().project().eq("${project id}"),
 						MODEL.projectMaterial().dailyTaskType().eq("${type id}"))
 
+			.find(MODEL.projectMaterial()).which("by type and review result").with_string("project id").with_string("type id")
+				.comments("按审核状态统计某个分类下项目资料个数")
+				.do_it_as().count_by(MODEL.projectMaterial().materialReviewResult())
+				.where(
+						MODEL.projectMaterial().project().eq("${project id}"),
+						MODEL.projectMaterial().dailyTaskType().eq("${type id}")
+				)
 			.query(MODEL.projectMaterial()).which("by result with daily task type").pagination().with_string("project id").with_string("type id").with_string("result")
 				.comments("查找项目下的，某个daily task type 内的，review result为指定状态的文档")
 				.do_it_as()
@@ -88,6 +95,15 @@ public class ProjectQueryPiece extends PieceOfScript {
 				.where(MODEL.projectMaterial().project().eq("${project id}"),
 						MODEL.projectMaterial().projectMaterialType().eq("${type}"),
 						MODEL.projectMaterial().materialReviewResult().eq("${filter}"))
+				.order_by(MODEL.projectMaterial().createTime()).desc()
+				.wants(MODEL.projectMaterial().projectMaterialType(),
+						MODEL.projectMaterial().materialSubmitter().employee())
+
+			.query(MODEL.projectMaterial()).which("by material type").pagination().with_string("project id").with_string("type")
+				.comments("查询指定项目中某个类型的资料档案")
+				.do_it_as()
+				.where(MODEL.projectMaterial().project().eq("${project id}"),
+						MODEL.projectMaterial().projectMaterialType().eq("${type}"))
 				.order_by(MODEL.projectMaterial().createTime()).desc()
 				.wants(MODEL.projectMaterial().projectMaterialType(),
 						MODEL.projectMaterial().materialSubmitter().employee())
