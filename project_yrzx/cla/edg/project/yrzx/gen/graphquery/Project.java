@@ -245,6 +245,17 @@ public class Project extends BaseModelBean{
 		return member;
 	}
 
+	public ProjectCommand projectCommandList() {
+		ProjectCommand member = new ProjectCommand();
+		member.setModelTypeName("project_command");
+		member.setName("project");
+		member.setMemberName("projectCommandList");
+		member.setRelationName("project");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 	public LoanApplication loanApplicationList() {
 		LoanApplication member = new LoanApplication();
 		member.setModelTypeName("loan_application");

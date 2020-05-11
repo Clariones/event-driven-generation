@@ -25,11 +25,11 @@ public class PublicKeyType extends BaseModelBean{
 
 	// 被引用的对象
 
-	public KeypairIdentify keypairIdentifyList() {
-		KeypairIdentify member = new KeypairIdentify();
-		member.setModelTypeName("keypair_identify");
+	public KeypairIdentity keypairIdentityList() {
+		KeypairIdentity member = new KeypairIdentity();
+		member.setModelTypeName("keypair_identity");
 		member.setName("key_type");
-		member.setMemberName("keypairIdentifyList");
+		member.setMemberName("keypairIdentityList");
 		member.setRelationName("keyType");
 		member.setReferDirection(false);
 		append(member);

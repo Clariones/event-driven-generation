@@ -22,6 +22,12 @@ public class IconConfiguration extends BaseModelBean{
 	public static EnumAttribute XM_DT_XMZZ = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "XM_DT_XMZZ");
 	public static EnumAttribute XM_DT_HTRW = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "XM_DT_HTRW");
 	public static EnumAttribute XM_DT_ZLDA = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "XM_DT_ZLDA");
+	public static EnumAttribute ME_GLYG = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "ME_GLYG");
+	public static EnumAttribute ME_WDXM = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "ME_WDXM");
+	public static EnumAttribute ME_WDZH = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "ME_WDZH");
+	public static EnumAttribute ME_WDDD = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "ME_WDDD");
+	public static EnumAttribute ME_QHZH = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "ME_QHZH");
+	public static EnumAttribute ME_TCDL = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "ME_TCDL");
 	public static EnumAttribute TEST_FOR_YR = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "TEST_FOR_YR");
 
 	// 引用的对象

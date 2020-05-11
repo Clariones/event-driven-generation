@@ -491,6 +491,18 @@ public class MODEL{
 		return rst;
 	}
 
+	public static ProjectCommand projectCommand() {
+		ProjectCommand rst = new ProjectCommand();
+		rst.setModelTypeName("project_command");
+		return rst;
+	}
+
+	public static ProjectCommandAssiment projectCommandAssiment() {
+		ProjectCommandAssiment rst = new ProjectCommandAssiment();
+		rst.setModelTypeName("project_command_assiment");
+		return rst;
+	}
+
 	public static AccountBookType accountBookType() {
 		AccountBookType rst = new AccountBookType();
 		rst.setModelTypeName("account_book_type");
@@ -1295,21 +1307,21 @@ public class MODEL{
 		return rst;
 	}
 
-	public static WechatWorkappIdentify wechatWorkappIdentify() {
-		WechatWorkappIdentify rst = new WechatWorkappIdentify();
-		rst.setModelTypeName("wechat_workapp_identify");
+	public static WechatWorkappIdentity wechatWorkappIdentity() {
+		WechatWorkappIdentity rst = new WechatWorkappIdentity();
+		rst.setModelTypeName("wechat_workapp_identity");
 		return rst;
 	}
 
-	public static WechatMiniappIdentify wechatMiniappIdentify() {
-		WechatMiniappIdentify rst = new WechatMiniappIdentify();
-		rst.setModelTypeName("wechat_miniapp_identify");
+	public static WechatMiniappIdentity wechatMiniappIdentity() {
+		WechatMiniappIdentity rst = new WechatMiniappIdentity();
+		rst.setModelTypeName("wechat_miniapp_identity");
 		return rst;
 	}
 
-	public static KeypairIdentify keypairIdentify() {
-		KeypairIdentify rst = new KeypairIdentify();
-		rst.setModelTypeName("keypair_identify");
+	public static KeypairIdentity keypairIdentity() {
+		KeypairIdentity rst = new KeypairIdentity();
+		rst.setModelTypeName("keypair_identity");
 		return rst;
 	}
 

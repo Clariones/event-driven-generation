@@ -66,6 +66,15 @@ public class ProjectMaterialType extends BaseModelBean{
 		return member;
 	}
 
+	public StringAttribute icon(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string_image");
+		// member.setName("icon");
+		member.setName("icon");
+		useMember(member);
+		return member;
+	}
+
 	public NumberAttribute version(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
