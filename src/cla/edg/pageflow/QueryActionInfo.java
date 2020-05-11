@@ -274,14 +274,14 @@ public class QueryActionInfo {
 		
 		sb.append("\r\n      AND (");
 		for(int i=0;i<sortingFields.size();i++) {
-			makePaginationCondition(sb, i);
+			makePaginationCondition(sb, i, i==sortingFields.size()-1);
 		}
 		
 		sb.append(") ");
 		sb.append(END_OF_LAST_RECORD);
 		return;
 	}
-	private void makePaginationCondition(StringBuilder sb, int pos) {
+	private void makePaginationCondition(StringBuilder sb, int pos, boolean isLast) {
 		
 		if (pos > 0) {
 			sb.append(" OR (");
@@ -299,9 +299,9 @@ public class QueryActionInfo {
 		}
 		sb.append(fd.getMeetingPoint().getAlias()).append(".").append(fd.getSortingFieldName());
 		if (fd.isAscDirection()) {
-			sb.append(">=?");
+			sb.append(isLast?">=?":">?");
 		}else {
-			sb.append("<=?");
+			sb.append(isLast?"<=?":"<?");
 		}
 		if (pos > 0) {
 			sb.append(")");
