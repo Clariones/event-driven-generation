@@ -57,6 +57,24 @@ public class EventProjectCommand extends BaseModelBean{
 		return member;
 	}
 
+	public StringAttribute projectName(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string");
+		// member.setName("projectName");
+		member.setName("project_name");
+		useMember(member);
+		return member;
+	}
+
+	public StringAttribute commandNumber(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string");
+		// member.setName("commandNumber");
+		member.setName("command_number");
+		useMember(member);
+		return member;
+	}
+
 	public StringAttribute directiveBrief(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
@@ -116,6 +134,24 @@ public class EventProjectCommand extends BaseModelBean{
 		member.setModelTypeName("string_longtext");
 		// member.setName("copyToRecievers");
 		member.setName("copy_to_recievers");
+		useMember(member);
+		return member;
+	}
+
+	public StringAttribute creator(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string");
+		// member.setName("creator");
+		member.setName("creator");
+		useMember(member);
+		return member;
+	}
+
+	public StringAttribute createTime(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string");
+		// member.setName("createTime");
+		member.setName("create_time");
 		useMember(member);
 		return member;
 	}

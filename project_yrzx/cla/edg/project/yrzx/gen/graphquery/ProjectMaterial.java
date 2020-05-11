@@ -168,6 +168,17 @@ public class ProjectMaterial extends BaseModelBean{
 		return member;
 	}
 
+	public ProjectCommand projectCommandList() {
+		ProjectCommand member = new ProjectCommand();
+		member.setModelTypeName("project_command");
+		member.setName("project_material");
+		member.setMemberName("projectCommandList");
+		member.setRelationName("projectMaterial");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 
 	// 普通属性
 
