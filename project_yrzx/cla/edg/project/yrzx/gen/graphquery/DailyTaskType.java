@@ -135,6 +135,17 @@ public class DailyTaskType extends BaseModelBean{
 		return member;
 	}
 
+	public EventAcceptanceApplication eventAcceptanceApplicationList() {
+		EventAcceptanceApplication member = new EventAcceptanceApplication();
+		member.setModelTypeName("event_acceptance_application");
+		member.setName("acceptance_type");
+		member.setMemberName("eventAcceptanceApplicationList");
+		member.setRelationName("acceptanceType");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 
 	// 普通属性
 

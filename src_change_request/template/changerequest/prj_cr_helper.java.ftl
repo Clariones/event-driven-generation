@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
+import com.terapico.utils.DataTypeUtil;
 import com.${orgName?lower_case}.${projectName?lower_case}.changerequest.ChangeRequest;
 import com.${orgName?lower_case}.${projectName?lower_case}.changerequest.ChangeRequestTokens;
 import com.terapico.caf.appview.CRFieldData;
@@ -634,5 +635,82 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 		}
 		return null;
 	}
+
+	protected Object getFieldValueWhenFillResponse(
+          Object suggestValue,
+          GenericFormPage requestData,
+          ChangeRequest changeRequest,
+          CRGroupData groupData,
+          CRFieldSpec fieldSpec)
+          throws Exception {
+        return suggestValue;
+      }
+
+      protected Object getFieldCandidatesWhenFillResponse(
+          GenericFormPage requestData,
+          ChangeRequest changeRequest,
+          CRGroupData groupData,
+          CRFieldSpec fieldSpec,
+          CRFieldData fieldData)
+          throws Exception {
+        return makeFieldCandidateValues(groupData, fieldData, fieldSpec);
+      }
+
+      protected void setFieldSpecInfo(
+            GenericFormPage requestData,
+            ChangeRequest dbCrData,
+            CRGroupData groupData,
+            CRFieldData fieldData,
+            CRFieldSpec fieldSpec)
+            throws Exception {
+          fieldData.setRequired(fieldSpec.getRequired());
+          fieldData.setDisabled(!fieldSpec.getInteractionMode().equals("input"));
+          if (fieldData.isDisabled()) {
+            fieldData.setRequired(false);
+          }
+          if (fieldSpec.getInteractionMode().equals("display")) {
+            fieldData.setType("prompt_message");
+            fieldData.setRequired(false);
+          } else if (fieldSpec.getInteractionMode().equals("hidden")) {
+            fieldData.setHidden(true);
+            fieldData.setType("hidden");
+          } else {
+            if (!isFieldNeedQueryForCandidates(fieldSpec)) {
+              if (fieldSpec.getUiStyle().equals("text")
+                  && DataTypeUtil.getInt(fieldSpec.getMaximum(), 40) > 100) {
+                fieldData.setType("longtext");
+              } else {
+                fieldData.setType(fieldSpec.getUiStyle());
+              }
+            } else {
+              if (CRFieldSpec.MULTI_SELECTABLE.equals(fieldSpec.getSelectable())) {
+                fieldData.setType("multi-select");
+              } else {
+                fieldData.setType("single-select");
+              }
+            }
+          }
+
+          fieldData.setCandidateValues(
+              convertToUiCandidateValues(
+                  fieldSpec,
+                  getFieldCandidatesWhenFillResponse(
+                      requestData, dbCrData, groupData, fieldSpec, fieldData)));
+          fieldData.setLabel(fieldSpec.getLabel());
+          fieldData.setPlaceholder(
+              fieldSpec.getPlaceholder() == null ? "请输入" : fieldSpec.getPlaceholder());
+          fieldData.setTipsTitle(fieldSpec.getTipsTitle());
+          fieldData.setTipsContent(fieldSpec.getTipsContent());
+          fieldData.setIcon(fieldSpec.getIcon());
+
+          fieldData.setMultiple(CRFieldSpec.MULTI_SELECTABLE.equals(fieldSpec.getSelectable()));
+          fieldData.setCandidateValuesApi(fieldSpec.getValuesRetrieveApi());
+          fieldData.setMinimum(fieldSpec.getMinimum());
+          fieldData.setMaximum(fieldSpec.getMaximum());
+          fieldData.setRules(getFiledRules(fieldSpec));
+
+          //		所有数据填充完毕后的一些处理
+          updateFieldCandidateValueSelected(fieldData, fieldSpec);
+        }
 
 }

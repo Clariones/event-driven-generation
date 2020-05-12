@@ -42,7 +42,7 @@ public class ProjectCommandQueryPiece extends PieceOfScript {
 				.wants(
 						MODEL.projectCommand().project(),
 						MODEL.projectCommand().dailyTaskType(),
-						MODEL.projectCommand().projectCommandAssignmentList().reciever()
+						MODEL.projectCommand().projectCommandAssignmentList().reciever().worker().employee()
 
 				)
 		;

@@ -113,6 +113,17 @@ public class ProjectNomination extends BaseModelBean{
 		return member;
 	}
 
+	public ProjectAcceptance projectAcceptanceList() {
+		ProjectAcceptance member = new ProjectAcceptance();
+		member.setModelTypeName("project_acceptance");
+		member.setName("application_unit");
+		member.setMemberName("projectAcceptanceList");
+		member.setRelationName("applicationUnit");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 	public LaborWageManagementSheet laborWageManagementSheetListAsContractPaymentManager() {
 		LaborWageManagementSheet member = new LaborWageManagementSheet();
 		member.setModelTypeName("labor_wage_management_sheet");

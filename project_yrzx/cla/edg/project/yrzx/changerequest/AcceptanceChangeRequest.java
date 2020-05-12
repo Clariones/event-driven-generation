@@ -42,7 +42,7 @@ public class AcceptanceChangeRequest implements ChangeRequestSpecFactory {
 				.has_field("project_id").hidden()
 				.has_field("project_name").zh_CN("工程名称").disabled()
 				.has_field("acceptance type").zh_CN("验收类型").which_model_of(MODEL.dailyTaskType().getModelTypeName())
-					.values_can_check_from_query_by(null)
+					.values_can_select_from_query_by(null)
 				.has_field("property_owner_id").hidden()
 				.has_field("property_owner_name").zh_CN("业主单位").disabled()
 				

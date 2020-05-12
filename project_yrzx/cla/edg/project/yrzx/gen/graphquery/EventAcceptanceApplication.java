@@ -12,6 +12,17 @@ public class EventAcceptanceApplication extends BaseModelBean{
 
 	// 引用的对象
 
+	public DailyTaskType acceptanceType() {
+		DailyTaskType member = new DailyTaskType();
+		member.setModelTypeName("daily_task_type");
+		member.setName("acceptance_type");
+		member.setMemberName("acceptanceType");
+		member.setReferDirection(true);
+		member.setRelationName("acceptanceType");
+		append(member);
+		return member;
+	}
+
 	public ChangeRequest changeRequest() {
 		ChangeRequest member = new ChangeRequest();
 		member.setModelTypeName("change_request");
@@ -60,15 +71,6 @@ public class EventAcceptanceApplication extends BaseModelBean{
 		member.setModelTypeName("string");
 		// member.setName("projectName");
 		member.setName("project_name");
-		useMember(member);
-		return member;
-	}
-
-	public StringAttribute acceptanceType(){
-		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string_longtext");
-		// member.setName("acceptanceType");
-		member.setName("acceptance_type");
 		useMember(member);
 		return member;
 	}
