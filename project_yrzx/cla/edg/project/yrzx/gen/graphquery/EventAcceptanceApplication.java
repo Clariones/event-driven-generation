@@ -64,6 +64,15 @@ public class EventAcceptanceApplication extends BaseModelBean{
 		return member;
 	}
 
+	public StringAttribute acceptanceType(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string_longtext");
+		// member.setName("acceptanceType");
+		member.setName("acceptance_type");
+		useMember(member);
+		return member;
+	}
+
 	public StringAttribute propertyOwnerId(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
@@ -96,24 +105,6 @@ public class EventAcceptanceApplication extends BaseModelBean{
 		member.setModelTypeName("string_longtext");
 		// member.setName("acceptors");
 		member.setName("acceptors");
-		useMember(member);
-		return member;
-	}
-
-	public StringAttribute acceptanceTypeId(){
-		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
-		// member.setName("acceptanceTypeId");
-		member.setName("acceptance_type_id");
-		useMember(member);
-		return member;
-	}
-
-	public StringAttribute acceptanceType(){
-		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
-		// member.setName("acceptanceType");
-		member.setName("acceptance_type");
 		useMember(member);
 		return member;
 	}

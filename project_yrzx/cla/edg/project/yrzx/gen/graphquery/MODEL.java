@@ -497,9 +497,9 @@ public class MODEL{
 		return rst;
 	}
 
-	public static ProjectCommandAssiment projectCommandAssiment() {
-		ProjectCommandAssiment rst = new ProjectCommandAssiment();
-		rst.setModelTypeName("project_command_assiment");
+	public static ProjectCommandAssignment projectCommandAssignment() {
+		ProjectCommandAssignment rst = new ProjectCommandAssignment();
+		rst.setModelTypeName("project_command_assignment");
 		return rst;
 	}
 

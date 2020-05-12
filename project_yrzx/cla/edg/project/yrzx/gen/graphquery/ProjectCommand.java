@@ -47,11 +47,11 @@ public class ProjectCommand extends BaseModelBean{
 
 	// 被引用的对象
 
-	public ProjectCommandAssiment projectCommandAssimentList() {
-		ProjectCommandAssiment member = new ProjectCommandAssiment();
-		member.setModelTypeName("project_command_assiment");
+	public ProjectCommandAssignment projectCommandAssignmentList() {
+		ProjectCommandAssignment member = new ProjectCommandAssignment();
+		member.setModelTypeName("project_command_assignment");
 		member.setName("project_command");
-		member.setMemberName("projectCommandAssimentList");
+		member.setMemberName("projectCommandAssignmentList");
 		member.setRelationName("projectCommand");
 		member.setReferDirection(false);
 		append(member);

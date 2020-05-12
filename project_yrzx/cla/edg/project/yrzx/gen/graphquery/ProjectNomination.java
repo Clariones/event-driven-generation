@@ -157,11 +157,11 @@ public class ProjectNomination extends BaseModelBean{
 		return member;
 	}
 
-	public ProjectCommandAssiment projectCommandAssimentList() {
-		ProjectCommandAssiment member = new ProjectCommandAssiment();
-		member.setModelTypeName("project_command_assiment");
+	public ProjectCommandAssignment projectCommandAssignmentList() {
+		ProjectCommandAssignment member = new ProjectCommandAssignment();
+		member.setModelTypeName("project_command_assignment");
 		member.setName("reciever");
-		member.setMemberName("projectCommandAssimentList");
+		member.setMemberName("projectCommandAssignmentList");
 		member.setRelationName("reciever");
 		member.setReferDirection(false);
 		append(member);
