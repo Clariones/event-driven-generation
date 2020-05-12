@@ -19,7 +19,7 @@ public class ProjectCommandQueryPiece extends PieceOfScript {
 				.wants(
 						MODEL.projectCommand().project(),
 						MODEL.projectCommand().dailyTaskType(),
-						MODEL.projectCommand().projectCommandAssimentList().reciever(),
+						MODEL.projectCommand().projectCommandAssignmentList().reciever(),
 						MODEL.projectCommand().projectMaterial().projectMaterialReviewRecordList()
 				)
 			.find(MODEL.projectCommand()).which("in project by type").with_string("project id")
@@ -42,7 +42,7 @@ public class ProjectCommandQueryPiece extends PieceOfScript {
 				.wants(
 						MODEL.projectCommand().project(),
 						MODEL.projectCommand().dailyTaskType(),
-						MODEL.projectCommand().projectCommandAssimentList().reciever()
+						MODEL.projectCommand().projectCommandAssignmentList().reciever().worker().employee()
 
 				)
 		;

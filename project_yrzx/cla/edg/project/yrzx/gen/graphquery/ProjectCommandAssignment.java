@@ -4,9 +4,9 @@ import java.util.Map;
 
 import cla.edg.modelbean.*;
 
-public class ProjectCommandAssiment extends BaseModelBean{
+public class ProjectCommandAssignment extends BaseModelBean{
 	public String getFullClassName() {
-		return "com.yrdec.yrzx.projectcommandassiment.ProjectCommandAssiment";
+		return "com.yrdec.yrzx.projectcommandassignment.ProjectCommandAssignment";
 	}
 	// 枚举对象
 

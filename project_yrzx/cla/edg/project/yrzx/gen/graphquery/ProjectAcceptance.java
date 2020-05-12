@@ -45,9 +45,9 @@ public class ProjectAcceptance extends BaseModelBean{
 		return member;
 	}
 
-	public Merchant applicationUnit() {
-		Merchant member = new Merchant();
-		member.setModelTypeName("merchant");
+	public ProjectNomination applicationUnit() {
+		ProjectNomination member = new ProjectNomination();
+		member.setModelTypeName("project_nomination");
 		member.setName("application_unit");
 		member.setMemberName("applicationUnit");
 		member.setReferDirection(true);

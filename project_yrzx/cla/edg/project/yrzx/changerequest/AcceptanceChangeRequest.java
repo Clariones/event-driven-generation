@@ -41,7 +41,8 @@ public class AcceptanceChangeRequest implements ChangeRequestSpecFactory {
 
 				.has_field("project_id").hidden()
 				.has_field("project_name").zh_CN("工程名称").disabled()
-
+				.has_field("acceptance type").zh_CN("验收类型").which_model_of(MODEL.dailyTaskType().getModelTypeName())
+					.values_can_select_from_query_by(null)
 				.has_field("property_owner_id").hidden()
 				.has_field("property_owner_name").zh_CN("业主单位").disabled()
 				
@@ -54,8 +55,6 @@ public class AcceptanceChangeRequest implements ChangeRequestSpecFactory {
 //				.has_field("supervisor").zh_CN("监理单位").disabled()
 //				.has_field("supervisor id").zh_CN("监理单位id").hidden()
 
-				.has_field("acceptance_type_id").hidden()
-				.has_field("acceptance_type").zh_CN("申请验收类型").disabled()
 				.has_field("acceptance_time").zh_CN("申请验收时间").which_type_of(FieldType.DATE_TIME)
 
 				.has_field("application_unit_id").hidden()
