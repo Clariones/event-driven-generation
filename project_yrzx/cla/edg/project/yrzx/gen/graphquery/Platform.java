@@ -322,17 +322,6 @@ public class Platform extends BaseModelBean{
 		return member;
 	}
 
-	public ProjectPhaseType projectPhaseTypeList() {
-		ProjectPhaseType member = new ProjectPhaseType();
-		member.setModelTypeName("project_phase_type");
-		member.setName("platform");
-		member.setMemberName("projectPhaseTypeList");
-		member.setRelationName("platform");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-
 	public ProjectOrganizationType projectOrganizationTypeList() {
 		ProjectOrganizationType member = new ProjectOrganizationType();
 		member.setModelTypeName("project_organization_type");

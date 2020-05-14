@@ -12,11 +12,12 @@ public class ProjectPhase extends BaseModelBean{
 	public static EnumAttribute INTENTION = new EnumAttribute("com.yrdec.yrzx.projectphase.ProjectPhase", "INTENTION");
 	public static EnumAttribute EPC_HOSTING = new EnumAttribute("com.yrdec.yrzx.projectphase.ProjectPhase", "EPC_HOSTING");
 	public static EnumAttribute DESIGN_PREPARATION = new EnumAttribute("com.yrdec.yrzx.projectphase.ProjectPhase", "DESIGN_PREPARATION");
-	public static EnumAttribute DESGIN_RFP = new EnumAttribute("com.yrdec.yrzx.projectphase.ProjectPhase", "DESGIN_RFP");
+	public static EnumAttribute DESIGN_RFP = new EnumAttribute("com.yrdec.yrzx.projectphase.ProjectPhase", "DESIGN_RFP");
 	public static EnumAttribute DESIGN_EXECUTING = new EnumAttribute("com.yrdec.yrzx.projectphase.ProjectPhase", "DESIGN_EXECUTING");
 	public static EnumAttribute CONSTRUCTING_PREPARATION = new EnumAttribute("com.yrdec.yrzx.projectphase.ProjectPhase", "CONSTRUCTING_PREPARATION");
 	public static EnumAttribute CONSTRUCTION_RFP = new EnumAttribute("com.yrdec.yrzx.projectphase.ProjectPhase", "CONSTRUCTION_RFP");
 	public static EnumAttribute CONSTRUCTING = new EnumAttribute("com.yrdec.yrzx.projectphase.ProjectPhase", "CONSTRUCTING");
+	public static EnumAttribute ACCEPTANCE = new EnumAttribute("com.yrdec.yrzx.projectphase.ProjectPhase", "ACCEPTANCE");
 	public static EnumAttribute MAINTENANCE = new EnumAttribute("com.yrdec.yrzx.projectphase.ProjectPhase", "MAINTENANCE");
 
 	// 引用的对象
@@ -82,6 +83,15 @@ public class ProjectPhase extends BaseModelBean{
 		member.setModelTypeName("string");
 		// member.setName("code");
 		member.setName("code");
+		useMember(member);
+		return member;
+	}
+
+	public StringAttribute icon(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string_image");
+		// member.setName("icon");
+		member.setName("icon");
 		useMember(member);
 		return member;
 	}
