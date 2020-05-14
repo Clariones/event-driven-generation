@@ -12,6 +12,17 @@ public class EventProjectProgress extends BaseModelBean{
 
 	// 引用的对象
 
+	public ProjectProgressStatus projectProgressStatus() {
+		ProjectProgressStatus member = new ProjectProgressStatus();
+		member.setModelTypeName("project_progress_status");
+		member.setName("project_progress_status");
+		member.setMemberName("projectProgressStatus");
+		member.setReferDirection(true);
+		member.setRelationName("projectProgressStatus");
+		append(member);
+		return member;
+	}
+
 	public ChangeRequest changeRequest() {
 		ChangeRequest member = new ChangeRequest();
 		member.setModelTypeName("change_request");
@@ -42,6 +53,24 @@ public class EventProjectProgress extends BaseModelBean{
 		member.setModelTypeName("string");
 		// member.setName("projectId");
 		member.setName("project_id");
+		useMember(member);
+		return member;
+	}
+
+	public StringAttribute projectName(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string");
+		// member.setName("projectName");
+		member.setName("project_name");
+		useMember(member);
+		return member;
+	}
+
+	public StringAttribute phaseName(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string");
+		// member.setName("phaseName");
+		member.setName("phase_name");
 		useMember(member);
 		return member;
 	}

@@ -305,12 +305,6 @@ public class MODEL{
 		return rst;
 	}
 
-	public static ProjectPhaseType projectPhaseType() {
-		ProjectPhaseType rst = new ProjectPhaseType();
-		rst.setModelTypeName("project_phase_type");
-		return rst;
-	}
-
 	public static ProjectOrganizationType projectOrganizationType() {
 		ProjectOrganizationType rst = new ProjectOrganizationType();
 		rst.setModelTypeName("project_organization_type");

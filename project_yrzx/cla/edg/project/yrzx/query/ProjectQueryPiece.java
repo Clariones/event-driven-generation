@@ -31,6 +31,11 @@ public class ProjectQueryPiece extends PieceOfScript {
 				.where(MODEL.project().id().eq("${project id}"))
 				.wants(MODEL.project().projectType(), MODEL.project().projectOwner(), MODEL.project().constructionStatus(), MODEL.project().projectServiceType())
 
+			.find(MODEL.projectNomination()).which("by work package").with_string("project id")
+				.comments("统计项目下每个工作包的人数")
+				.do_it_as().count_by(MODEL.projectNomination().workPackage())
+				.where(MODEL.projectNomination().project().eq("${project id}"))
+
 		// 项目文档资料相关的查询
 			.find(MODEL.projectMaterial()).which("by daily task type").with_string("project id").with_string("type id")
 				.comments("统计项目下的，某个daily task type 的文档")

@@ -42,6 +42,17 @@ public class ProjectProgressStatus extends BaseModelBean{
 		return member;
 	}
 
+	public EventProjectProgress eventProjectProgressList() {
+		EventProjectProgress member = new EventProjectProgress();
+		member.setModelTypeName("event_project_progress");
+		member.setName("project_progress_status");
+		member.setMemberName("eventProjectProgressList");
+		member.setRelationName("projectProgressStatus");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 
 	// 普通属性
 
