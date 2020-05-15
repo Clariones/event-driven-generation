@@ -278,22 +278,11 @@ public class Merchant extends BaseModelBean{
 		return member;
 	}
 
-	public ProjectAcceptance projectAcceptanceListAsPropertyOwner() {
+	public ProjectAcceptance projectAcceptanceList() {
 		ProjectAcceptance member = new ProjectAcceptance();
 		member.setModelTypeName("project_acceptance");
 		member.setName("property_owner");
-		member.setMemberName("projectAcceptanceListAsPropertyOwner");
-		member.setRelationName("propertyOwner");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-
-	public ProjectAcceptance projectAcceptanceListAsApplicationUnit() {
-		ProjectAcceptance member = new ProjectAcceptance();
-		member.setModelTypeName("project_acceptance");
-		member.setName("application_unit");
-		member.setMemberName("projectAcceptanceListAsApplicationUnit");
+		member.setMemberName("projectAcceptanceList");
 		member.setRelationName("propertyOwner");
 		member.setReferDirection(false);
 		append(member);

@@ -13,7 +13,6 @@ public class ProjectHallPageFlowPiece extends PieceOfScript {
 			.got_page("project hall").title("项目大厅")
 			;
 		// 纯文本类的page flow
-		viewPureDocumentPages(script, "项目指令", "PROJECT_INSTRUMENT");
 		viewPureDocumentPages(script, "项目通知", "PROJECT_NOTIFICATION");
 		viewPureDocumentPages(script, "质量管理", "QUALITY_MANAGEMENT");
 		viewPureDocumentPages(script, "业务往来", "BUSINESS_DEALINGS");
@@ -37,6 +36,7 @@ public class ProjectHallPageFlowPiece extends PieceOfScript {
                 .got_page("project material detail").comments("项目资料的详情")
                 ;
 		// 需要case by case写的
+		viewProjectElementIn3Levels(script,"项目指令","PROJECT_COMMAND");
 		viewProjectInfo(script, "项目信息", "PROJECT_INFO");
 		viewProjectElementIn3Levels(script, "项目报告", "PROJECT_REPORT");
 		viewProjectProgress(script, "项目进度", "PROJECT_PROGRESS");
@@ -78,9 +78,11 @@ public class ProjectHallPageFlowPiece extends PieceOfScript {
 			.request("view commission pay item detail").with_string("item id")
 				.comments("合同抽成支付项详情").need_login().has_footprint()
 				.got_page("commission pay item detail").title("合同提成")
+
 			;
 		return script;
 	}
+
 
 	protected void viewUserGuide(PageFlowScript script) {
 		script.request("view user guide list").can_refresh().with_string("project id").comments("查看使用指南列表").got_page("user guide list");

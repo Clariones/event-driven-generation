@@ -305,12 +305,6 @@ public class MODEL{
 		return rst;
 	}
 
-	public static ProjectPhaseType projectPhaseType() {
-		ProjectPhaseType rst = new ProjectPhaseType();
-		rst.setModelTypeName("project_phase_type");
-		return rst;
-	}
-
 	public static ProjectOrganizationType projectOrganizationType() {
 		ProjectOrganizationType rst = new ProjectOrganizationType();
 		rst.setModelTypeName("project_organization_type");
@@ -488,6 +482,18 @@ public class MODEL{
 	public static ProjectReportCheckItem projectReportCheckItem() {
 		ProjectReportCheckItem rst = new ProjectReportCheckItem();
 		rst.setModelTypeName("project_report_check_item");
+		return rst;
+	}
+
+	public static ProjectCommand projectCommand() {
+		ProjectCommand rst = new ProjectCommand();
+		rst.setModelTypeName("project_command");
+		return rst;
+	}
+
+	public static ProjectCommandAssignment projectCommandAssignment() {
+		ProjectCommandAssignment rst = new ProjectCommandAssignment();
+		rst.setModelTypeName("project_command_assignment");
 		return rst;
 	}
 
@@ -1295,21 +1301,21 @@ public class MODEL{
 		return rst;
 	}
 
-	public static WechatWorkappIdentify wechatWorkappIdentify() {
-		WechatWorkappIdentify rst = new WechatWorkappIdentify();
-		rst.setModelTypeName("wechat_workapp_identify");
+	public static WechatWorkappIdentity wechatWorkappIdentity() {
+		WechatWorkappIdentity rst = new WechatWorkappIdentity();
+		rst.setModelTypeName("wechat_workapp_identity");
 		return rst;
 	}
 
-	public static WechatMiniappIdentify wechatMiniappIdentify() {
-		WechatMiniappIdentify rst = new WechatMiniappIdentify();
-		rst.setModelTypeName("wechat_miniapp_identify");
+	public static WechatMiniappIdentity wechatMiniappIdentity() {
+		WechatMiniappIdentity rst = new WechatMiniappIdentity();
+		rst.setModelTypeName("wechat_miniapp_identity");
 		return rst;
 	}
 
-	public static KeypairIdentify keypairIdentify() {
-		KeypairIdentify rst = new KeypairIdentify();
-		rst.setModelTypeName("keypair_identify");
+	public static KeypairIdentity keypairIdentity() {
+		KeypairIdentity rst = new KeypairIdentity();
+		rst.setModelTypeName("keypair_identity");
 		return rst;
 	}
 
