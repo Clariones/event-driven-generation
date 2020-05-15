@@ -85,6 +85,8 @@ public class ProjectQueryPiece extends PieceOfScript {
 						MODEL.projectMaterialCommentsRecord().submitter().type())
 
 
+
+
 		/// 查询 项目资料 | 资料档案 相关的数据
 			.find(MODEL.projectMaterial()).which("by material type").with_string("project id")
 				.comments("按照项目资料类型统计资料数量")
@@ -166,12 +168,14 @@ public class ProjectQueryPiece extends PieceOfScript {
 				)
 
 			.find(MODEL.projectAcceptance().getModelTypeName()).which("by id").with_string("project acceptance id")
+				.comments("按ID查找项目验收")
 				.do_it_as()
 				.where(MODEL.projectAcceptance().id().eq("${project acceptance id}"))
 				.wants(
 						MODEL.projectAcceptance().acceptanceApplication().projectMaterialReviewRecordList().status(),
 						MODEL.projectAcceptance().acceptanceApplication().projectMaterialReviewRecordList().reviewer().type(),
-						MODEL.projectNomination().worker().employee(),
+						MODEL.projectAcceptance().acceptanceApplication().projectMaterialReviewRecordList().reviewer().worker().employee(),
+						MODEL.projectAcceptance().acceptanceApplication().projectMaterialReviewRecordList().reviewer().worker().job(),
 						MODEL.projectAcceptance().dailyTaskType(),
 						MODEL.projectAcceptance().applicationUnit(),
 						MODEL.projectAcceptance().project(),
