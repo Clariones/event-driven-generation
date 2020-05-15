@@ -1,8 +1,6 @@
 package cla.edg.project.moyi.gen.graphquery;
 
 import java.util.Map;
-
-import cla.edg.Utils;
 import cla.edg.modelbean.*;
 
 public class Artist extends BaseModelBean{
@@ -70,6 +68,26 @@ public class Artist extends BaseModelBean{
 		member.setModelTypeName("recommend_artist");
 		member.setName("artist");
 		member.setMemberName("recommendArtistList");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+	
+	public PageSlide pageSlideList() {
+		PageSlide member = new PageSlide();
+		member.setModelTypeName("page_slide");
+		member.setName("artist");
+		member.setMemberName("pageSlideList");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+	
+	public HotArtistRank hotArtistRankList() {
+		HotArtistRank member = new HotArtistRank();
+		member.setModelTypeName("hot_artist_rank");
+		member.setName("artist");
+		member.setMemberName("hotArtistRankList");
 		member.setReferDirection(false);
 		append(member);
 		return member;

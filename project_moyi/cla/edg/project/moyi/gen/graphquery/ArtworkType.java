@@ -1,8 +1,6 @@
 package cla.edg.project.moyi.gen.graphquery;
 
 import java.util.Map;
-
-import cla.edg.Utils;
 import cla.edg.modelbean.*;
 
 public class ArtworkType extends BaseModelBean{
@@ -80,6 +78,16 @@ public class ArtworkType extends BaseModelBean{
 		member.setModelTypeName("deliver_artwork");
 		member.setName("artwork_type");
 		member.setMemberName("deliverArtworkList");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+	
+	public ArtworkTypeRank artworkTypeRankList() {
+		ArtworkTypeRank member = new ArtworkTypeRank();
+		member.setModelTypeName("artwork_type_rank");
+		member.setName("artwork_type");
+		member.setMemberName("artworkTypeRankList");
 		member.setReferDirection(false);
 		append(member);
 		return member;

@@ -1,8 +1,6 @@
 package cla.edg.project.moyi.gen.graphquery;
 
 import java.util.Map;
-
-import cla.edg.Utils;
 import cla.edg.modelbean.*;
 
 public class RewardValueOption extends BaseModelBean{
@@ -44,9 +42,9 @@ public class RewardValueOption extends BaseModelBean{
 		return member;
 	}
 
-	public StringAttribute value(){
-		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
+	public NumberAttribute value(){
+		NumberAttribute member = new NumberAttribute();
+		member.setModelTypeName("double");
 		member.setName("value");
 		useMember(member);
 		return member;

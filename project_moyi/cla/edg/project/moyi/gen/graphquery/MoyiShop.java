@@ -1,8 +1,6 @@
 package cla.edg.project.moyi.gen.graphquery;
 
 import java.util.Map;
-
-import cla.edg.Utils;
 import cla.edg.modelbean.*;
 
 public class MoyiShop extends BaseModelBean{
@@ -120,6 +118,26 @@ public class MoyiShop extends BaseModelBean{
 		member.setModelTypeName("favorite_shop_of_user");
 		member.setName("target_moyi_shop");
 		member.setMemberName("favoriteShopOfUserList");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+	
+	public PageSlide pageSlideList() {
+		PageSlide member = new PageSlide();
+		member.setModelTypeName("page_slide");
+		member.setName("moyi_shop");
+		member.setMemberName("pageSlideList");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+	
+	public HotShopRank hotShopRankList() {
+		HotShopRank member = new HotShopRank();
+		member.setModelTypeName("hot_shop_rank");
+		member.setName("moyi_shop");
+		member.setMemberName("hotShopRankList");
 		member.setReferDirection(false);
 		append(member);
 		return member;

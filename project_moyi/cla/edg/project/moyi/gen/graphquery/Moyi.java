@@ -1,8 +1,6 @@
 package cla.edg.project.moyi.gen.graphquery;
 
 import java.util.Map;
-
-import cla.edg.Utils;
 import cla.edg.modelbean.*;
 
 public class Moyi extends BaseModelBean{
@@ -980,6 +978,66 @@ public class Moyi extends BaseModelBean{
 		member.setModelTypeName("asset_status");
 		member.setName("moyi");
 		member.setMemberName("assetStatusList");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+	
+	public PageType pageTypeList() {
+		PageType member = new PageType();
+		member.setModelTypeName("page_type");
+		member.setName("moyi");
+		member.setMemberName("pageTypeList");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+	
+	public PageSlideType pageSlideTypeList() {
+		PageSlideType member = new PageSlideType();
+		member.setModelTypeName("page_slide_type");
+		member.setName("moyi");
+		member.setMemberName("pageSlideTypeList");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+	
+	public PageSlide pageSlideList() {
+		PageSlide member = new PageSlide();
+		member.setModelTypeName("page_slide");
+		member.setName("moyi");
+		member.setMemberName("pageSlideList");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+	
+	public HotShopRank hotShopRankList() {
+		HotShopRank member = new HotShopRank();
+		member.setModelTypeName("hot_shop_rank");
+		member.setName("moyi");
+		member.setMemberName("hotShopRankList");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+	
+	public ArtworkTypeRank artworkTypeRankList() {
+		ArtworkTypeRank member = new ArtworkTypeRank();
+		member.setModelTypeName("artwork_type_rank");
+		member.setName("moyi");
+		member.setMemberName("artworkTypeRankList");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+	
+	public HotArtistRank hotArtistRankList() {
+		HotArtistRank member = new HotArtistRank();
+		member.setModelTypeName("hot_artist_rank");
+		member.setName("moyi");
+		member.setMemberName("hotArtistRankList");
 		member.setReferDirection(false);
 		append(member);
 		return member;

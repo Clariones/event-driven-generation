@@ -368,6 +368,9 @@ public class PageFlowScript extends BasePageFlowScript {
 	public PageFlowScript got_popup_page() {
 		return got_page("simple popup");
 	}
+	public PageFlowScript got_toast_page() {
+		return got_page("simple toast");
+	}
 	public PageFlowScript login_as(String modelName) {
 		UserLoginInfo ulInfo = new UserLoginInfo();
 		ulInfo.setUserModelName(modelName);
@@ -601,6 +604,15 @@ public class PageFlowScript extends BasePageFlowScript {
 			queryActionInfo.setSumAttribute(attribute);
 		} else {
 			throw new RuntimeException("当前任务是" + currentWork.getClass().getSimpleName() + ", 不能指定求和条件");
+		}
+		return this;
+	}
+	public PageFlowScript order_by(String expr) {
+		if (currentWork instanceof QueryInfo && queryActionInfo != null) {
+			// 目前只支持这种场景
+			queryActionInfo.addSortingPath(expr, false);
+		} else {
+			throw new RuntimeException("当前任务是" + currentWork.getClass().getSimpleName() + ", 不能指定排序表达式");
 		}
 		return this;
 	}

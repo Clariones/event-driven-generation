@@ -1,8 +1,6 @@
 package cla.edg.project.moyi.gen.graphquery;
 
 import java.util.Map;
-
-import cla.edg.Utils;
 import cla.edg.modelbean.*;
 
 public class Artwork extends BaseModelBean{
@@ -400,6 +398,16 @@ public class Artwork extends BaseModelBean{
 		member.setModelTypeName("ink_deed_cash_record");
 		member.setName("artwork");
 		member.setMemberName("inkDeedCashRecordList");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+	
+	public PageSlide pageSlideList() {
+		PageSlide member = new PageSlide();
+		member.setModelTypeName("page_slide");
+		member.setName("artwork");
+		member.setMemberName("pageSlideList");
 		member.setReferDirection(false);
 		append(member);
 		return member;
