@@ -1013,6 +1013,42 @@ public class MODEL{
 		return rst;
 	}
 
+	public static PageType pageType() {
+		PageType rst = new PageType();
+		rst.setModelTypeName("page_type");
+		return rst;
+	}
+
+	public static PageSlideType pageSlideType() {
+		PageSlideType rst = new PageSlideType();
+		rst.setModelTypeName("page_slide_type");
+		return rst;
+	}
+
+	public static PageSlide pageSlide() {
+		PageSlide rst = new PageSlide();
+		rst.setModelTypeName("page_slide");
+		return rst;
+	}
+
+	public static HotShopRank hotShopRank() {
+		HotShopRank rst = new HotShopRank();
+		rst.setModelTypeName("hot_shop_rank");
+		return rst;
+	}
+
+	public static ArtworkTypeRank artworkTypeRank() {
+		ArtworkTypeRank rst = new ArtworkTypeRank();
+		rst.setModelTypeName("artwork_type_rank");
+		return rst;
+	}
+
+	public static HotArtistRank hotArtistRank() {
+		HotArtistRank rst = new HotArtistRank();
+		rst.setModelTypeName("hot_artist_rank");
+		return rst;
+	}
+
 	public static UserDomain userDomain() {
 		UserDomain rst = new UserDomain();
 		rst.setModelTypeName("user_domain");

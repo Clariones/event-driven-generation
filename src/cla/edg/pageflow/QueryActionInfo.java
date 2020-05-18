@@ -37,6 +37,15 @@ public class QueryActionInfo {
 	public BaseAttribute sumAttribute;
 	protected boolean notGeneratePaginationParams = false;
 	protected String limitExp = null;
+	protected String orderByExpr = null;
+
+	public String getOrderByExpr() {
+		return orderByExpr;
+	}
+
+	public void setOrderByExpr(String orderByExpr) {
+		this.orderByExpr = orderByExpr;
+	}
 
 	public String getCountByAttrName() {
 		return countByAttrName;
@@ -320,7 +329,11 @@ public class QueryActionInfo {
 			if (!first) {
 				sb.append(", ");
 			}
-			sb.append(field.getMeetingPoint().getAlias()).append(".").append(field.getSortingFieldName()).append(field.isAscDirection()?" asc":" desc");
+			if (field.isUserExpr()) {
+				sb.append(field.getSortField());
+			}else {
+				sb.append(field.getMeetingPoint().getAlias()).append(".").append(field.getSortingFieldName()).append(field.isAscDirection()?" asc":" desc");
+			}
 			if (first) {
 				first = false;
 			}
@@ -361,6 +374,13 @@ public class QueryActionInfo {
 			return;
 		}
 		sortingMap = (ModelBeanRoute) sortingMap.mergeWith(inputBeanRoute);
+	}
+	public void addSortingPath(String expr, boolean asc) {
+		currentSortingPath = new SortingInfo();
+		currentSortingPath.setUserExpr(true);
+		currentSortingPath.setAscDirection(asc);
+		currentSortingPath.setSortField(expr);
+		sortingFields.add(currentSortingPath);
 	}
 	private void ensureSortingMap() {
 		if (sortingMap == null) {

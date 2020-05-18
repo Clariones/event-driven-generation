@@ -9,7 +9,14 @@ public class SortingInfo {
 	protected MeetingPoint<BaseModelBean, BeanRelation> meetingPoint;
 	protected boolean ascDirection;
 	protected Object sortField;
+	protected boolean userExpr = false;
 	
+	public boolean isUserExpr() {
+		return userExpr;
+	}
+	public void setUserExpr(boolean userExpr) {
+		this.userExpr = userExpr;
+	}
 	public Object getSortField() {
 		return sortField;
 	}

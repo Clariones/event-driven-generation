@@ -11,6 +11,7 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 				.project_name("moyi")
 				.parent_class_name("NativeAppService")
 				.parent_class_package("com.terapico.moyi.appservice")
+				.addTag("change_request", "false")
 			/**
 			 * 店铺入驻
 			 */
@@ -775,6 +776,8 @@ public class NativeAppServiceV2 extends BasePageFlowDescriptionScript {
 	public PageFlowScript getScript() {
 		return SCRIPT.import_from(new V3PageFlowScript())
 				.import_from(new V3FindScript())
+				.import_from(new V4PageFlow())
+				.import_from(new V4FindScript())
 				;
 	}
 

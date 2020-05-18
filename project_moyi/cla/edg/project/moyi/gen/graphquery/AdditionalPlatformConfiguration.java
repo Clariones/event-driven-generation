@@ -1,9 +1,7 @@
 package cla.edg.project.moyi.gen.graphquery;
 
-import cla.edg.modelbean.BaseModelBean;
-import cla.edg.modelbean.EnumAttribute;
-import cla.edg.modelbean.NumberAttribute;
-import cla.edg.modelbean.StringAttribute;
+import java.util.Map;
+import cla.edg.modelbean.*;
 
 public class AdditionalPlatformConfiguration extends BaseModelBean{
 	public String getFullClassName() {
@@ -12,6 +10,13 @@ public class AdditionalPlatformConfiguration extends BaseModelBean{
 	// 枚举对象
 	public static EnumAttribute PRIVACY_DECLARATION_LINK = new EnumAttribute("com.terapico.moyi.additionalplatformconfiguration.AdditionalPlatformConfiguration", "PRIVACY_DECLARATION_LINK");
 	public static EnumAttribute TRADING_DECLARATION_LINK = new EnumAttribute("com.terapico.moyi.additionalplatformconfiguration.AdditionalPlatformConfiguration", "TRADING_DECLARATION_LINK");
+	public static EnumAttribute BUTTON_TITLE_V4HOMEPAGE_LEAD = new EnumAttribute("com.terapico.moyi.additionalplatformconfiguration.AdditionalPlatformConfiguration", "BUTTON_TITLE_V4HOMEPAGE_LEAD");
+	public static EnumAttribute MESSAGE_V4HOMEPAGE_LEAD = new EnumAttribute("com.terapico.moyi.additionalplatformconfiguration.AdditionalPlatformConfiguration", "MESSAGE_V4HOMEPAGE_LEAD");
+	public static EnumAttribute CONTACT_PHONE = new EnumAttribute("com.terapico.moyi.additionalplatformconfiguration.AdditionalPlatformConfiguration", "CONTACT_PHONE");
+	public static EnumAttribute CONTACT_EMAIL = new EnumAttribute("com.terapico.moyi.additionalplatformconfiguration.AdditionalPlatformConfiguration", "CONTACT_EMAIL");
+	public static EnumAttribute CONTACT_WECHAT = new EnumAttribute("com.terapico.moyi.additionalplatformconfiguration.AdditionalPlatformConfiguration", "CONTACT_WECHAT");
+	public static EnumAttribute MESSAGE_BUY_INKDEED_IN_PDP = new EnumAttribute("com.terapico.moyi.additionalplatformconfiguration.AdditionalPlatformConfiguration", "MESSAGE_BUY_INKDEED_IN_PDP");
+	public static EnumAttribute COLORS_FOR_SECTIONS = new EnumAttribute("com.terapico.moyi.additionalplatformconfiguration.AdditionalPlatformConfiguration", "COLORS_FOR_SECTIONS");
 
 	// 引用的对象
 
@@ -64,7 +69,7 @@ public class AdditionalPlatformConfiguration extends BaseModelBean{
 
 	public StringAttribute value(){
 		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string_url");
+		member.setModelTypeName("string");
 		member.setName("value");
 		useMember(member);
 		return member;

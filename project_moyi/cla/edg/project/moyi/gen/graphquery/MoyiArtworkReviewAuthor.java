@@ -1,8 +1,6 @@
 package cla.edg.project.moyi.gen.graphquery;
 
 import java.util.Map;
-
-import cla.edg.Utils;
 import cla.edg.modelbean.*;
 
 public class MoyiArtworkReviewAuthor extends BaseModelBean{

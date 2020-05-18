@@ -1,8 +1,7 @@
 package cla.edg.project.moyi.gen.graphquery;
 
-import cla.edg.modelbean.BaseModelBean;
-import cla.edg.modelbean.NumberAttribute;
-import cla.edg.modelbean.StringAttribute;
+import java.util.Map;
+import cla.edg.modelbean.*;
 
 public class AffiliateBanner extends BaseModelBean{
 	public String getFullClassName() {
