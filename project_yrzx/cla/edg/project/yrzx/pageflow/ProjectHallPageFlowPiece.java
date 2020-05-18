@@ -113,7 +113,7 @@ public class ProjectHallPageFlowPiece extends PieceOfScript {
 			
 		.request("view labor supervision list").with_string("project id").with_last_record_id()
 			.comments("查看劳务监督管理").need_login().has_footprint()
-			.got_page("labor supervision").title("劳务监督管理").list_of("card")
+			.got_page("labor supervision list").title("劳务监督管理").list_of("card")
 				.comments("平台台账. 与平台账户相关的所有往来台账明细")
 				
 		.request("view labor wages list").with_string("project id").with_last_record_id()
@@ -125,9 +125,9 @@ public class ProjectHallPageFlowPiece extends PieceOfScript {
 			.comments("查看工资发放记录详情").need_login().has_footprint()
 			.got_page("labor wages detail")
 
-		.request("view labor dispute list").with_string("project id").with_last_record_id()
-			.comments("查看劳务纠纷列表").need_login().has_footprint()
-			.got_page("labor dispute list")
+//		.request("view labor dispute list").with_string("project id").with_last_record_id()
+//			.comments("查看劳务纠纷列表").need_login().has_footprint()
+//			.got_page("labor dispute list")
 				
 		;
 	}
