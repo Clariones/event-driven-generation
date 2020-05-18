@@ -27,6 +27,8 @@ public class AfterSalesAndDisputeChangeRequest implements ChangeRequestSpecFacto
 			.change_request("after sales").zh_CN("售后单")
 				.icon("form")
 				.has_field("project id").hidden()
+				//project name只做显示
+				.has_field("project name").zh_CN("项目名称").disabled()
 				.has_field("daily task type id").hidden()
 				.has_field("daily task type").zh_CN("售后类型").disabled()
 				.has_field("title").zh_CN("标题").range(1,50)

@@ -9,6 +9,8 @@ public class ProjectMaterialChangeRequest implements ChangeRequestSpecFactory {
     public ChangeRequestSpecBuilder makeSequel(ChangeRequestSpecBuilder builder) {
         return builder.change_request("review contract").zh_CN("审核合同").icon("edit")
                 .contains_event("contract review").zh_CN("审核意见")
+                //project name只做显示
+                .has_field("project name").zh_CN("项目名称").disabled()
                 .has_field("contract id").zh_CN("ID").hidden()
                 .has_field("scene code").zh_CN("场景").hidden()
                 .has_field("contract name").zh_CN("合同名称").display().value("合同名称")
@@ -18,6 +20,8 @@ public class ProjectMaterialChangeRequest implements ChangeRequestSpecFactory {
 
             .change_request("comments on contract").zh_CN("合同批注").icon("edit")
                 .contains_event("contract comment").zh_CN("合同批注")
+                //project name只做显示
+                .has_field("project name").zh_CN("项目名称").disabled()
                 .has_field("contract id").zh_CN("ID").hidden()
                 .has_field("scene code").zh_CN("场景").hidden()
                 .has_field("contract name").zh_CN("合同名称").display().value("合同名称")
@@ -28,6 +32,8 @@ public class ProjectMaterialChangeRequest implements ChangeRequestSpecFactory {
 
             .change_request("review materials").zh_CN("资料审核").icon("edit")
                 .contains_event("material review").zh_CN("审核意见")
+                //project name只做显示
+                .has_field("project name").zh_CN("项目名称").disabled()
                 .has_field("material id").zh_CN("ID").hidden()
                 .has_field("scene code").zh_CN("场景").hidden()
                 .has_field("material name").zh_CN("资料名称").display().value("资料名称")
@@ -36,6 +42,8 @@ public class ProjectMaterialChangeRequest implements ChangeRequestSpecFactory {
 
             .change_request("comments on materials").zh_CN("资料批注").icon("edit")
                 .contains_event("material comment").zh_CN("资料批注")
+                //project name只做显示
+                .has_field("project name").zh_CN("项目名称").disabled()
                 .has_field("material id").zh_CN("ID").hidden()
                 .has_field("scene code").zh_CN("场景").hidden()
                 .has_field("material name").zh_CN("资料名称").display().value("资料名称")

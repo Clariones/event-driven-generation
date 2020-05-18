@@ -115,6 +115,14 @@ public class ProjectQueryPiece extends PieceOfScript {
 				.wants(MODEL.projectMaterial().projectMaterialType(),
 						MODEL.projectMaterial().materialSubmitter().employee())
 
+			.find(MODEL.projectMaterial()).which("by id").with_string("project material id")
+				.comments("按ID查询项目资料")
+				.do_it_as()
+				.where(MODEL.projectMaterial().id().eq("${project material id}"))
+				.wants(
+						MODEL.projectMaterial().project()
+				)
+
 		// 五书
 			.query(MODEL.yourongProjectBook()).list_of("project").with_string("project id")
 				.comments("查询项目的五书")

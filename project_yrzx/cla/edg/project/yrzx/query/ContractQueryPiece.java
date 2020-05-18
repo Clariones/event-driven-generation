@@ -57,6 +57,20 @@ public class ContractQueryPiece extends PieceOfScript {
 				.where(MODEL.contractPayItem().id().eq("${item id}"))
 				.wants(MODEL.contractPayItem().payItemStatus(), MODEL.contractPayItem().payer())
 
+			.query(MODEL.contractPayItem()).list_of("project").with_string("project id").pagination()
+				.comments("查询项目下的所有合同支付项")
+				.do_it_as()
+				.where(
+						MODEL.contractPayItem().contract().project().eq("${project id}")
+				)
+				.wants(
+						MODEL.contractPayItem().contract(),
+						MODEL.contractPayItem().payItemStatus(),
+						MODEL.contractPayItem().payee().employeeNominationListAsEmployee().projectNominationList().project()
+				)
+
+
+
 			// commission pay item
 			.find(MODEL.commissionPayItem()).which("in contract by pay status").with_string("contract id")
 				.comments("统计一个合同下，每种状态的支付款项有多少个")
