@@ -1,19 +1,17 @@
 package cla.edg.routemap;
 
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import com.google.gson.Gson;
-import com.terapico.generator.Utils;
-
 import cla.edg.modelbean.BaseAttribute;
 import cla.edg.modelbean.BaseModelBean;
 import cla.edg.modelbean.EnumAttribute;
 import cla.edg.modelbean.LogicalOperator;
 import cla.edg.modelbean.LogicalOperator.Operator;
+import com.google.gson.Gson;
+import com.terapico.generator.Utils;
+
+import java.lang.reflect.Method;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class RouteUtil {
 	public static String getKey(Object data) {
@@ -73,8 +71,15 @@ public class RouteUtil {
 		if (where.hasMore()) {
 			sb.append(" (");
 		}
-		sb.append("(").append(alias).append(".").append(op1.getName());
+		sb.append("(");
+		if (where.isOptional()) {
+			sb.append("<IF_OPTIONAL>").append(wrapString((String) where.getOp2())).append("==null?\"1==1 or \":\"\")+\"");
+		}
+		sb.append(alias).append(".").append(op1.getName());
 		sb.append(makeOperatorExp(where.getOperator())).append(makeParamExp(paramValueExpList, where));
+//		if (where.isOptional()) {
+//			sb.append("<END_OF_BRACKET>");
+//		}
 		sb.append(")");
 		if (!where.hasMore()) {
 			return;

@@ -17,6 +17,7 @@ public class V4FindScript extends PieceOfScript {
 					.where(MODEL.pageSlide().pageType().eq("${page type}"))
 					.top("${top n}")
 					.order_by(MODEL.pageSlide().displayOrder()).asc()
+					.wants(MODEL.pageSlide().slideType())
 				
 		// 2020新首页所需的查询
 			.query(MODEL.artworkAuction()).list_of("opening").pagination()
@@ -81,6 +82,7 @@ public class V4FindScript extends PieceOfScript {
 				.comments("统计店铺的被收藏数量")
 				.do_it_as().count()
 				.where(MODEL.favoriteShopOfUser().targetMoyiShop().eq("${shop id}"))
+
 				
 			.query(MODEL.artworkAuction()).list_of("hot in shop").with_string("shop id")
 				.comments("查询店铺中最 hot 的几个作品")
@@ -160,7 +162,7 @@ public class V4FindScript extends PieceOfScript {
 				.comments("查找艺术家开的店铺")
 				.do_it_as()
 					.where(MODEL.moyiShop().shopkeeper().artistListAsMoyiUser().id().eq("${artist}"))
-					
+					.wants(MODEL.moyiShop().certificate().moyiShopType())
 					
 		;
 	}

@@ -35,7 +35,7 @@ public class V4PageFlow extends PieceOfScript {
 			.request("like on artwork auction").with_string("artwork auction id")
 				.comments("在拍品详情页上点赞").need_login()
 				.got_ajax_page()
-			.request("reward on artwork auction").with_string("artwork auction id").with_float("reward value").variable().with_string("comments").variable()
+			.request("reward on artwork auction").with_string("artwork auction id").with_float("reward value").with_string("comments")
 				.comments("在拍品详情页上进行打赏").need_login()
 				.got_ajax_page()
 				
@@ -46,7 +46,7 @@ public class V4PageFlow extends PieceOfScript {
 				.got_ajax_page()
 				
 		// H5上的艺术家履历页面
-			.request("view artist resume in h5").with_string("artist id")
+			.request("view artist resume in h5").with_string("artist id").with_string("invite code")
 				.comments("从分享中打开艺术家履历H5页面").no_login().can_refresh()
 				.got_page("artist resume h5").title("艺术家")
 		;

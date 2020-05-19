@@ -1,30 +1,23 @@
 package cla.edg.pageflow;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
-import java.util.regex.Pattern;
-
-import com.google.gson.Gson;
-import com.terapico.generator.Utils;
-
-import cla.edg.modelbean.BaseAttribute;
-import cla.edg.modelbean.BaseModelBean;
-import cla.edg.modelbean.BeanRelation;
-import cla.edg.modelbean.CorperationPathNode;
-import cla.edg.modelbean.LogicalOperator;
-import cla.edg.modelbean.ModelBeanRoute;
-import cla.edg.modelbean.NumberAttribute;
+import cla.edg.modelbean.*;
 import cla.edg.routemap.Edge;
 import cla.edg.routemap.MeetingPoint;
 import cla.edg.routemap.Node;
 import cla.edg.routemap.RouteUtil;
+import com.google.gson.Gson;
+import com.terapico.generator.Utils;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.regex.Pattern;
 
 public class QueryActionInfo {
 	private static final String IF_LAST_RECORD = "<IF_LAST_RECORD>";
 	private static final String END_OF_BRACKET = "<END_OF_BRACKET>";
+	private static final String IF_OPTIONAL = "<IF_OPTIONAL>";
 	private static final String END_OF_LAST_RECORD = END_OF_BRACKET;
 	// ========================== 公共部分 ===========================
 	protected Set<String> externTypesNeedKnown;
@@ -248,6 +241,7 @@ public class QueryActionInfo {
 				.replaceAll("[\r\n]+", "\" +\r\n\t\t\t\"")
 				.replace(IF_LAST_RECORD, "\" +\r\n\t\t    (lastRecord == null ? \"\": \"")
 				.replace(END_OF_BRACKET, "\") +\r\n\t\t\t\"")
+				.replace(IF_OPTIONAL,"\" + (")
 				;
 	}
 	public String getSqlFromSearchClause() {

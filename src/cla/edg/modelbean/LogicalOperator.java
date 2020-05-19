@@ -1,17 +1,9 @@
 package cla.edg.modelbean;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
-
+import cla.edg.routemap.MeetingPoint;
 import com.terapico.generator.Utils;
 
-import cla.edg.routemap.MeetingPoint;
-import cla.edg.routemap.Node;
-import cla.edg.routemap.RouteMap;
+import java.util.*;
 
 public class LogicalOperator {
 	public static Set<String> needKnownClasses = new HashSet<>();
@@ -21,8 +13,21 @@ public class LogicalOperator {
 	public enum CollectionType {
 		and, or
 	}
-	
-	
+	protected boolean optional = false;
+
+	public boolean isOptional() {
+		return optional;
+	}
+
+	public void setOptional(boolean optional) {
+		this.optional = optional;
+	}
+
+	public LogicalOperator optional() {
+		this.setOptional(true);
+		return this;
+	}
+
 	protected CollectionType collectionType = CollectionType.and;
 	protected List<LogicalOperator> operations = new ArrayList<>();
 	protected MeetingPoint<BaseModelBean, BeanRelation> delareAtPoint;

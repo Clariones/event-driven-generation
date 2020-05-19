@@ -60,7 +60,7 @@ public class MoyiPlatformConfigurationV2 extends BaseModelBean{
 
 	public NumberAttribute publicNoticePeriodMinHour(){
 		NumberAttribute member = new NumberAttribute();
-		member.setModelTypeName("int");
+		member.setModelTypeName("double");
 		member.setName("public_notice_period_min_hour");
 		useMember(member);
 		return member;
@@ -68,7 +68,7 @@ public class MoyiPlatformConfigurationV2 extends BaseModelBean{
 
 	public NumberAttribute publicNoticePeriodMaxHour(){
 		NumberAttribute member = new NumberAttribute();
-		member.setModelTypeName("int");
+		member.setModelTypeName("double");
 		member.setName("public_notice_period_max_hour");
 		useMember(member);
 		return member;

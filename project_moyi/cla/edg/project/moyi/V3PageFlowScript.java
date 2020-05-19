@@ -117,7 +117,7 @@ public class V3PageFlowScript extends PieceOfScript {
 				.comments("用户按照订单状态分页查看他自己的默契订单")
 				.got_page("ink deed order list v3").title("墨契订单")
 					
-		.request("view ink deed ids v3").with_string("scene code").with_string("artwork auction id").with_string("user id").with_float("price").with_string("filter")
+		.request("view ink deed ids v3").with_string("scene code").with_string("artwork auction id").with_string("user id").with_string("price").with_string("filter")
 			.comments("查看墨契ID列表")
 			.got_page("ink deed id set")
 				

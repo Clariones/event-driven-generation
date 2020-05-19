@@ -33,7 +33,7 @@ public class V3AuctionService extends BaseMoyiEventScript {
 				.rule_comments("从平台费用中支付给荐宝人")
 				.rule_comments("从平台费用中支付给店铺推荐人")
 				.event_ripple("reward for first deal").comments("对首单成交者发放奖励")
-				.event_ripple("reward for refferral").comments("对店铺推荐者发放奖励")
+				// .event_ripple("reward for refferral").comments("对店铺推荐者发放奖励")
 
 			.on_event("reshelf artwork with auction").with("artwork id").with("artwork auction")
 				.comments("处理快速重新二次上架的事情")
@@ -43,7 +43,7 @@ public class V3AuctionService extends BaseMoyiEventScript {
 				.rule_comments("有效荐宝全部保留")
 				.rule_comments("竞拍保证金全部已经退回,所以要保证所有竞拍保证金全部无效")
 
-
+			.on_event("reward for refferral").comments("对店铺推荐者发放奖励")
 			// //////////////////
 			// 以下为内部消息
 			// //////////////////
@@ -54,7 +54,7 @@ public class V3AuctionService extends BaseMoyiEventScript {
 
 			.on_event("return buyer money")
 			.on_event("reward for first deal").comments("对首单成交者发放奖励")
-			.on_event("reward for refferral").comments("对店铺推荐者发放奖励")
+			
 			;
 
 	@Override
