@@ -21,7 +21,7 @@ public class ProjectQueryPiece extends PieceOfScript {
 				.comments("查询指定项目阶段的，在我当前的岗位，需要查看的项目")
 				.do_it_as()
 				.where(MODEL.project().projectNominationList().worker().employee().eq("${employee}"),
-						MODEL.project().projectPhase().eq("${phase code}"))
+						MODEL.project().projectPhase().eq("${phase code}").optional())
 				.wants(MODEL.project().projectPhase(), MODEL.project().projectOwner(), MODEL.project().projectImageList(), MODEL.project().projectServiceType(), MODEL.project().constructionStatus())
 				.order_by(MODEL.project().createTime()).desc()
 
@@ -55,7 +55,7 @@ public class ProjectQueryPiece extends PieceOfScript {
 				.do_it_as()
 				.where(MODEL.projectMaterial().project().eq("${project id}"),
 						MODEL.projectMaterial().dailyTaskType().eq("${type id}"),
-						MODEL.projectMaterial().materialReviewResult().eq("${result}"))
+						MODEL.projectMaterial().materialReviewResult().eq("${result}").optional())
 				.wants(MODEL.projectMaterial().dailyTaskType(),
 						MODEL.projectMaterial().materialReviewResult(),
 						MODEL.projectMaterial().materialSubmitter().employee())
@@ -104,6 +104,7 @@ public class ProjectQueryPiece extends PieceOfScript {
 						MODEL.projectMaterial().materialReviewResult().eq("${filter}"))
 				.order_by(MODEL.projectMaterial().createTime()).desc()
 				.wants(MODEL.projectMaterial().projectMaterialType(),
+						MODEL.projectMaterial().materialReviewResult(),
 						MODEL.projectMaterial().materialSubmitter().employee())
 
 			.query(MODEL.projectMaterial()).which("by material type").pagination().with_string("project id").with_string("type")
@@ -113,6 +114,7 @@ public class ProjectQueryPiece extends PieceOfScript {
 						MODEL.projectMaterial().projectMaterialType().eq("${type}"))
 				.order_by(MODEL.projectMaterial().createTime()).desc()
 				.wants(MODEL.projectMaterial().projectMaterialType(),
+						MODEL.projectMaterial().materialReviewResult(),
 						MODEL.projectMaterial().materialSubmitter().employee())
 
 			.find(MODEL.projectMaterial()).which("by id").with_string("project material id")
@@ -158,10 +160,11 @@ public class ProjectQueryPiece extends PieceOfScript {
 						MODEL.projectNomination().projectRole(), MODEL.projectNomination().type())
 			/// 项目验收相关查询
 			.query(MODEL.projectAcceptance().getModelTypeName()).list_of("project by status and type").with_string("project id").with_string("filter").with_string("daily task type id").pagination()
+				.comments("按状态查询项目验收项.")
 				.do_it_as()
 				.where(
 						MODEL.projectAcceptance().project().eq("${project id}"),
-						MODEL.projectAcceptance().status().eq("${filter}"),
+						MODEL.projectAcceptance().status().eq("${filter}").optional(),
 						MODEL.projectAcceptance().dailyTaskType().eq("${daily task type id}")
 				)
 				.wants(
@@ -194,10 +197,11 @@ public class ProjectQueryPiece extends PieceOfScript {
 
 				// 售后服务
 			.query(MODEL.afterSales().getModelTypeName()).list_of("project by status and type").with_string("project id").with_string("filter").with_string("daily task type id").pagination()
+				.comments("按状态查询售后服务项.")
 				.do_it_as()
 				.where(
 						MODEL.afterSales().project().eq("${project id}"),
-						MODEL.afterSales().status().eq("${filter}"),
+						MODEL.afterSales().status().eq("${filter}").optional(),
 						MODEL.afterSales().dailyTaskType().eq("${daily task type id}")
 				)
 				.wants(
@@ -224,7 +228,7 @@ public class ProjectQueryPiece extends PieceOfScript {
 				.where(
 						MODEL.projectPenalties().project().eq("${project id}"),
 						MODEL.projectPenalties().dailyTaskType().eq("${daily task type id}"),
-						MODEL.projectPenalties().status().eq("${filter}")
+						MODEL.projectPenalties().status().eq("${filter}").optional()
 				)
 				.wants(
 						MODEL.projectPenalties().status(),
@@ -244,11 +248,12 @@ public class ProjectQueryPiece extends PieceOfScript {
 				// 项目进度
 
 			.query(MODEL.projectProgress().getModelTypeName()).list_of("project by status and phase").with_string("project id").with_string("phase id").with_string("filter")
+				.comments("按状态查询某个项目的某个阶段下的项目进度")
 				.do_it_as()
 				.where(
 						MODEL.projectProgress().project().eq("${project id}"),
 						MODEL.projectProgress().projectPhase().eq("${phase id}"),
-						MODEL.projectProgress().status().eq("${filter}")
+						MODEL.projectProgress().status().eq("${filter}").optional()
 				)
 				.wants(
 						MODEL.projectProgress().status()

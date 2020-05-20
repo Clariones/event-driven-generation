@@ -11,10 +11,11 @@ public class ProjectCommandQueryPiece extends PieceOfScript {
 	@Override
 	public PageFlowScript makeSequel(PageFlowScript script) {
 		script
-			.query(MODEL.projectCommand()).pagination().list_of("project").with_string("project id")
+			.query(MODEL.projectCommand()).pagination().list_of("project by type").with_string("project id").with_string("type id")
 				.do_it_as()
 				.where(
-						MODEL.projectCommand().project().eq("${project id}")
+						MODEL.projectCommand().project().eq("${project id}"),
+						MODEL.projectCommand().dailyTaskType().eq("${type id}")
 				)
 				.wants(
 						MODEL.projectCommand().project(),
