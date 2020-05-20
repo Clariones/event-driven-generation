@@ -19,7 +19,7 @@ public class MoneyRelatedQueryPiece extends PieceOfScript {
 				.comments("查询当前账户的条目")
 				.do_it_as()
 				.where(MODEL.accountBookItem().accountBook().eq("${account book id}"),
-						MODEL.accountBookItem().status().eq("${status}")
+						MODEL.accountBookItem().status().eq("${status}").optional()
 				)
 			.query(MODEL.accountBookRecord()).which("account book").pagination().with_string("account book id")
 				.comments("查询当前账户的流水记录")

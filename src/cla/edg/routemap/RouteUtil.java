@@ -73,7 +73,7 @@ public class RouteUtil {
 		}
 		sb.append("(");
 		if (where.isOptional()) {
-			sb.append("<IF_OPTIONAL>").append(wrapString((String) where.getOp2())).append("==null?\"1==1 or \":\"\")+\"");
+			sb.append("<IF_OPTIONAL>").append(wrapString((String) where.getOp2())).append("==null?\"1=1 or \":\"\")+\"");
 		}
 		sb.append(alias).append(".").append(op1.getName());
 		sb.append(makeOperatorExp(where.getOperator())).append(makeParamExp(paramValueExpList, where));

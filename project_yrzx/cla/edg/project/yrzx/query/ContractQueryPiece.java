@@ -22,7 +22,7 @@ public class ContractQueryPiece extends PieceOfScript {
 				.do_it_as()
 				.where(MODEL.standardContract().project().eq("${project id}"),
 						MODEL.standardContract().contractType().eq("${type}"),
-						MODEL.standardContract().contractStatus().eq("${filter}"))
+						MODEL.standardContract().contractStatus().eq("${filter}").optional())
 				.order_by(MODEL.standardContract().lastUpdateTime()).asc()
 				.wants(MODEL.standardContract().contractStatus(), MODEL.standardContract().partyA())
 			.find(MODEL.standardContract()).which("by id").with_string("contract id")
@@ -48,7 +48,8 @@ public class ContractQueryPiece extends PieceOfScript {
 			.query(MODEL.contractPayItem()).list_of("contract by pay status").pagination().with_string("contract id").with_string("filter")
 				.comments("查询合同的 支付 类的支付款项")
 				.do_it_as()
-				.where(MODEL.contractPayItem().contract().eq("${contract id}"))
+				.where(MODEL.contractPayItem().contract().eq("${contract id}"),
+						MODEL.contractPayItem().payItemStatus().eq("${filter}").optional())
 				.order_by(MODEL.contractPayItem().id()).asc()
 				.wants(MODEL.contractPayItem().payer(), MODEL.contractPayItem().payItemStatus())
 			.find(MODEL.contractPayItem()).which("by id").with_string("item id")
@@ -86,7 +87,8 @@ public class ContractQueryPiece extends PieceOfScript {
 			.query(MODEL.commissionPayItem()).list_of("contract by pay status").pagination().with_string("contract id").with_string("filter")
 				.comments("查询合同的 提成 类的支付款项")
 				.do_it_as()
-				.where(MODEL.commissionPayItem().contract().eq("${contract id}"))
+				.where(MODEL.commissionPayItem().contract().eq("${contract id}"),
+						MODEL.commissionPayItem().payItemStatus().eq("${filter}").optional())
 				.order_by(MODEL.commissionPayItem().id()).asc()
 				.wants(MODEL.commissionPayItem().contractPayItem(), MODEL.commissionPayItem().payItemStatus(), MODEL.commissionPayItem().payer())
 			.find(MODEL.commissionPayItem()).which("by id").with_string("item id")
