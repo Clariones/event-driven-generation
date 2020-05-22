@@ -34,6 +34,9 @@ public class MainPageFlow extends BasePageFlowDescriptionScript {
 				.import_from(new MoneyRelatedQueryPiece())
 				.import_from(new LaborQueryPiece())
 				.import_from(new ProjectCommandQueryPiece())
+				.import_from(new FinanceServiceQueryPiece())
+				.import_from(new NominationQueryPiece())
+				.import_from(new CompensationQueryPiece())
 				;
 	}
 

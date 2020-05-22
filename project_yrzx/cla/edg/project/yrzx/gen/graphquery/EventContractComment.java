@@ -37,6 +37,15 @@ public class EventContractComment extends BaseModelBean{
 		return member;
 	}
 
+	public StringAttribute projectName(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string");
+		// member.setName("projectName");
+		member.setName("project_name");
+		useMember(member);
+		return member;
+	}
+
 	public StringAttribute contractId(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");

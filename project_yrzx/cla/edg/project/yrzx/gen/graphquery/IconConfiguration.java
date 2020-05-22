@@ -29,6 +29,9 @@ public class IconConfiguration extends BaseModelBean{
 	public static EnumAttribute ME_QHZH = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "ME_QHZH");
 	public static EnumAttribute ME_TCDL = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "ME_TCDL");
 	public static EnumAttribute TEST_FOR_YR = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "TEST_FOR_YR");
+	public static EnumAttribute COMMENT_BTN = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "COMMENT_BTN");
+	public static EnumAttribute REVIEW_BTN = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "REVIEW_BTN");
+	public static EnumAttribute CANCEL_BTN = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "CANCEL_BTN");
 
 	// 引用的对象
 

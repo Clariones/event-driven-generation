@@ -46,6 +46,15 @@ public class EventAfterSales extends BaseModelBean{
 		return member;
 	}
 
+	public StringAttribute projectName(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string");
+		// member.setName("projectName");
+		member.setName("project_name");
+		useMember(member);
+		return member;
+	}
+
 	public StringAttribute dailyTaskTypeId(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");

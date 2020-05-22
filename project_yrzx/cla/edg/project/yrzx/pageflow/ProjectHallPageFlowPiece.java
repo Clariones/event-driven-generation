@@ -24,6 +24,7 @@ public class ProjectHallPageFlowPiece extends PieceOfScript {
 		viewPureDocumentPages(script, "设计变更", "DESIGN_CHANGES");
 		viewPureDocumentPages(script, "设计管理", "DESIGN_MANAGMENT");
 		viewPureDocumentPages(script, "材料管理", "MATERIALS_MANAGEMENT");
+
 		// 纯文档的2级页面
 //		viewList(script, "document list by category", "按照文档的类目查看当前项目的文档列表",
 //				new String[] { "string:project id", "string:document category id" },
@@ -49,7 +50,7 @@ public class ProjectHallPageFlowPiece extends PieceOfScript {
 		viewProject5Book(script, "五书详情", "YOURONG_5BOOK");
 		viewProjectElementIn3Levels(script, "合同任务", "PROJECT_CONTRACT");
 		viewProjectElementIn3Levels(script, "项目资料", "PROJECT_DOCS");
-		viewUserGuide(script);
+		viewFinancialService(script, "金融服务", "FINANCIAL_SERVICE");
 		script.request("view project material review list").with_string("item id").with_last_record_id()
 				.comments("查看项目资料的所有审批记录列表").need_login().no_footprint()
 				.got_page("review record list").title("审核记录").list_of("card")
@@ -83,10 +84,22 @@ public class ProjectHallPageFlowPiece extends PieceOfScript {
 		return script;
 	}
 
+	private void viewFinancialService(PageFlowScript script, String 金融服务, String financial_service) {
+		script
+				//一级
+				.request("view financial service pannel").comments("查看金融服务分类").with_string("project id").need_login().has_footprint().got_page("financial service pannel")
 
-	protected void viewUserGuide(PageFlowScript script) {
-		script.request("view user guide list").can_refresh().with_string("project id").comments("查看使用指南列表").got_page("user guide list");
+				//二级
+				.request("view loan fund list").comments("查看贷款资金列表").with_string("project id").need_login().has_footprint().with_last_record_id().got_page("loan fund list")
+				.request("view loan application list").comments("查看贷款申请列表").with_string("project id").with_string("filter").need_login().has_footprint().with_last_record_id().got_page("loan application list")
+				.request("view loan contract list").comments("查看贷款合同列表").with_string("project id").with_string("filter").need_login().has_footprint().with_last_record_id().got_page("loan contract list")
+
+				//三级
+				.request("view loan application detail").comments("查看贷款申请详情").with_string("item id").need_login().has_footprint().got_page("loan application detail")
+				.request("view loan contract detail").comments("查看贷款合同详情").with_string("item id").need_login().has_footprint().got_page("loan contract detail");
+
 	}
+
 
 	protected void viewProject5Book(PageFlowScript script, String title, String code) {
 		script.request("view " + Utils.toWords(code)).with_string("project id")

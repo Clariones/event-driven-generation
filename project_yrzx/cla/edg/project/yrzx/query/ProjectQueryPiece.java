@@ -29,7 +29,9 @@ public class ProjectQueryPiece extends PieceOfScript {
 				.comments("按照ID加载项目基本信息")
 				.do_it_as()
 				.where(MODEL.project().id().eq("${project id}"))
-				.wants(MODEL.project().projectType(), MODEL.project().projectOwner(), MODEL.project().constructionStatus(), MODEL.project().projectServiceType())
+				.wants(MODEL.project().projectType(), MODEL.project().projectOwner(), MODEL.project().constructionStatus(), MODEL.project().projectServiceType(),
+						MODEL.project().projectMaterialList().dailyTaskType()
+				)
 
 			.find(MODEL.projectNomination()).which("by work package").with_string("project id")
 				.comments("统计项目下每个工作包的人数")

@@ -34,6 +34,17 @@ public class LoanApplication extends BaseModelBean{
 		return member;
 	}
 
+	public LoanApplicationStatus status() {
+		LoanApplicationStatus member = new LoanApplicationStatus();
+		member.setModelTypeName("loan_application_status");
+		member.setName("status");
+		member.setMemberName("status");
+		member.setReferDirection(true);
+		member.setRelationName("status");
+		append(member);
+		return member;
+	}
+
 	public Platform platform() {
 		Platform member = new Platform();
 		member.setModelTypeName("platform");

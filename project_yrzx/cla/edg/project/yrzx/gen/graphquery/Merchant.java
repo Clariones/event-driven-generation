@@ -289,6 +289,72 @@ public class Merchant extends BaseModelBean{
 		return member;
 	}
 
+	public LoanFund loanFundList() {
+		LoanFund member = new LoanFund();
+		member.setModelTypeName("loan_fund");
+		member.setName("fund_vendor");
+		member.setMemberName("loanFundList");
+		member.setRelationName("fundVendor");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public LoanApplication loanApplicationList() {
+		LoanApplication member = new LoanApplication();
+		member.setModelTypeName("loan_application");
+		member.setName("applicant");
+		member.setMemberName("loanApplicationList");
+		member.setRelationName("applicant");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public LoanContract loanContractListAsBorrower() {
+		LoanContract member = new LoanContract();
+		member.setModelTypeName("loan_contract");
+		member.setName("borrower");
+		member.setMemberName("loanContractListAsBorrower");
+		member.setRelationName("borrower");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public LoanContract loanContractListAsLender() {
+		LoanContract member = new LoanContract();
+		member.setModelTypeName("loan_contract");
+		member.setName("lender");
+		member.setMemberName("loanContractListAsLender");
+		member.setRelationName("borrower");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public CompensationInvestigation compensationInvestigationList() {
+		CompensationInvestigation member = new CompensationInvestigation();
+		member.setModelTypeName("compensation_investigation");
+		member.setName("submitter");
+		member.setMemberName("compensationInvestigationList");
+		member.setRelationName("submitter");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public CompensationResult compensationResultList() {
+		CompensationResult member = new CompensationResult();
+		member.setModelTypeName("compensation_result");
+		member.setName("submitter");
+		member.setMemberName("compensationResultList");
+		member.setRelationName("submitter");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 	public AccountBook accountBookList() {
 		AccountBook member = new AccountBook();
 		member.setModelTypeName("account_book");
@@ -383,50 +449,6 @@ public class Merchant extends BaseModelBean{
 		member.setName("merchant");
 		member.setMemberName("eventProjectInfoList");
 		member.setRelationName("merchant");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-
-	public LoanFund loanFundList() {
-		LoanFund member = new LoanFund();
-		member.setModelTypeName("loan_fund");
-		member.setName("fund_vendor");
-		member.setMemberName("loanFundList");
-		member.setRelationName("fundVendor");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-
-	public LoanApplication loanApplicationList() {
-		LoanApplication member = new LoanApplication();
-		member.setModelTypeName("loan_application");
-		member.setName("applicant");
-		member.setMemberName("loanApplicationList");
-		member.setRelationName("applicant");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-
-	public LoanContract loanContractListAsBorrower() {
-		LoanContract member = new LoanContract();
-		member.setModelTypeName("loan_contract");
-		member.setName("borrower");
-		member.setMemberName("loanContractListAsBorrower");
-		member.setRelationName("borrower");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-
-	public LoanContract loanContractListAsLender() {
-		LoanContract member = new LoanContract();
-		member.setModelTypeName("loan_contract");
-		member.setName("lender");
-		member.setMemberName("loanContractListAsLender");
-		member.setRelationName("borrower");
 		member.setReferDirection(false);
 		append(member);
 		return member;
