@@ -443,6 +443,39 @@ public class Platform extends BaseModelBean{
 		return member;
 	}
 
+	public LoanFund loanFundList() {
+		LoanFund member = new LoanFund();
+		member.setModelTypeName("loan_fund");
+		member.setName("platform");
+		member.setMemberName("loanFundList");
+		member.setRelationName("platform");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public LoanApplication loanApplicationList() {
+		LoanApplication member = new LoanApplication();
+		member.setModelTypeName("loan_application");
+		member.setName("platform");
+		member.setMemberName("loanApplicationList");
+		member.setRelationName("platform");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public LoanContract loanContractList() {
+		LoanContract member = new LoanContract();
+		member.setModelTypeName("loan_contract");
+		member.setName("platform");
+		member.setMemberName("loanContractList");
+		member.setRelationName("platform");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 	public AccountBookType accountBookTypeList() {
 		AccountBookType member = new AccountBookType();
 		member.setModelTypeName("account_book_type");
@@ -580,39 +613,6 @@ public class Platform extends BaseModelBean{
 		member.setModelTypeName("project_engineering_template");
 		member.setName("platform");
 		member.setMemberName("projectEngineeringTemplateList");
-		member.setRelationName("platform");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-
-	public LoanFund loanFundList() {
-		LoanFund member = new LoanFund();
-		member.setModelTypeName("loan_fund");
-		member.setName("platform");
-		member.setMemberName("loanFundList");
-		member.setRelationName("platform");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-
-	public LoanApplication loanApplicationList() {
-		LoanApplication member = new LoanApplication();
-		member.setModelTypeName("loan_application");
-		member.setName("platform");
-		member.setMemberName("loanApplicationList");
-		member.setRelationName("platform");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-
-	public LoanContract loanContractList() {
-		LoanContract member = new LoanContract();
-		member.setModelTypeName("loan_contract");
-		member.setName("platform");
-		member.setMemberName("loanContractList");
 		member.setRelationName("platform");
 		member.setReferDirection(false);
 		append(member);

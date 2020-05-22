@@ -56,6 +56,17 @@ public class LoanContract extends BaseModelBean{
 		return member;
 	}
 
+	public LoanContractStatus status() {
+		LoanContractStatus member = new LoanContractStatus();
+		member.setModelTypeName("loan_contract_status");
+		member.setName("status");
+		member.setMemberName("status");
+		member.setReferDirection(true);
+		member.setRelationName("status");
+		append(member);
+		return member;
+	}
+
 	// 被引用的对象
 
 	public FinancialServiceStatisticReport financialServiceStatisticReportList() {

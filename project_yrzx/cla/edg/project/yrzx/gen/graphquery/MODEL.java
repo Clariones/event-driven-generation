@@ -497,6 +497,66 @@ public class MODEL{
 		return rst;
 	}
 
+	public static LoanFund loanFund() {
+		LoanFund rst = new LoanFund();
+		rst.setModelTypeName("loan_fund");
+		return rst;
+	}
+
+	public static LoanApplication loanApplication() {
+		LoanApplication rst = new LoanApplication();
+		rst.setModelTypeName("loan_application");
+		return rst;
+	}
+
+	public static LoanApplicationStatus loanApplicationStatus() {
+		LoanApplicationStatus rst = new LoanApplicationStatus();
+		rst.setModelTypeName("loan_application_status");
+		return rst;
+	}
+
+	public static LoanContract loanContract() {
+		LoanContract rst = new LoanContract();
+		rst.setModelTypeName("loan_contract");
+		return rst;
+	}
+
+	public static LoanContractStatus loanContractStatus() {
+		LoanContractStatus rst = new LoanContractStatus();
+		rst.setModelTypeName("loan_contract_status");
+		return rst;
+	}
+
+	public static CompensationApplication compensationApplication() {
+		CompensationApplication rst = new CompensationApplication();
+		rst.setModelTypeName("compensation_application");
+		return rst;
+	}
+
+	public static CompensationApplicationStatus compensationApplicationStatus() {
+		CompensationApplicationStatus rst = new CompensationApplicationStatus();
+		rst.setModelTypeName("compensation_application_status");
+		return rst;
+	}
+
+	public static CompensationInvestigation compensationInvestigation() {
+		CompensationInvestigation rst = new CompensationInvestigation();
+		rst.setModelTypeName("compensation_investigation");
+		return rst;
+	}
+
+	public static CompensationResult compensationResult() {
+		CompensationResult rst = new CompensationResult();
+		rst.setModelTypeName("compensation_result");
+		return rst;
+	}
+
+	public static CompensationResultStatus compensationResultStatus() {
+		CompensationResultStatus rst = new CompensationResultStatus();
+		rst.setModelTypeName("compensation_result_status");
+		return rst;
+	}
+
 	public static AccountBookType accountBookType() {
 		AccountBookType rst = new AccountBookType();
 		rst.setModelTypeName("account_book_type");
@@ -788,24 +848,6 @@ public class MODEL{
 	public static ProjectEngineeringTemplate projectEngineeringTemplate() {
 		ProjectEngineeringTemplate rst = new ProjectEngineeringTemplate();
 		rst.setModelTypeName("project_engineering_template");
-		return rst;
-	}
-
-	public static LoanFund loanFund() {
-		LoanFund rst = new LoanFund();
-		rst.setModelTypeName("loan_fund");
-		return rst;
-	}
-
-	public static LoanApplication loanApplication() {
-		LoanApplication rst = new LoanApplication();
-		rst.setModelTypeName("loan_application");
-		return rst;
-	}
-
-	public static LoanContract loanContract() {
-		LoanContract rst = new LoanContract();
-		rst.setModelTypeName("loan_contract");
 		return rst;
 	}
 

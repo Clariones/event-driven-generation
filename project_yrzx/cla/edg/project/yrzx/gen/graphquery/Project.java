@@ -256,12 +256,56 @@ public class Project extends BaseModelBean{
 		return member;
 	}
 
+	public LoanFund loanFundList() {
+		LoanFund member = new LoanFund();
+		member.setModelTypeName("loan_fund");
+		member.setName("project");
+		member.setMemberName("loanFundList");
+		member.setRelationName("project");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 	public LoanApplication loanApplicationList() {
 		LoanApplication member = new LoanApplication();
 		member.setModelTypeName("loan_application");
 		member.setName("loan_project");
 		member.setMemberName("loanApplicationList");
 		member.setRelationName("loanProject");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public CompensationApplication compensationApplicationList() {
+		CompensationApplication member = new CompensationApplication();
+		member.setModelTypeName("compensation_application");
+		member.setName("project");
+		member.setMemberName("compensationApplicationList");
+		member.setRelationName("project");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public CompensationInvestigation compensationInvestigationList() {
+		CompensationInvestigation member = new CompensationInvestigation();
+		member.setModelTypeName("compensation_investigation");
+		member.setName("project");
+		member.setMemberName("compensationInvestigationList");
+		member.setRelationName("project");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public CompensationResult compensationResultList() {
+		CompensationResult member = new CompensationResult();
+		member.setModelTypeName("compensation_result");
+		member.setName("project");
+		member.setMemberName("compensationResultList");
+		member.setRelationName("project");
 		member.setReferDirection(false);
 		append(member);
 		return member;

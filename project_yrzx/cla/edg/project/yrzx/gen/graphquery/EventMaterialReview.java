@@ -37,6 +37,15 @@ public class EventMaterialReview extends BaseModelBean{
 		return member;
 	}
 
+	public StringAttribute projectName(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string");
+		// member.setName("projectName");
+		member.setName("project_name");
+		useMember(member);
+		return member;
+	}
+
 	public StringAttribute materialId(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");

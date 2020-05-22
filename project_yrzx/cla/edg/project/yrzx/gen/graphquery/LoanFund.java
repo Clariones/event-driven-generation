@@ -23,6 +23,17 @@ public class LoanFund extends BaseModelBean{
 		return member;
 	}
 
+	public Project project() {
+		Project member = new Project();
+		member.setModelTypeName("project");
+		member.setName("project");
+		member.setMemberName("project");
+		member.setReferDirection(true);
+		member.setRelationName("project");
+		append(member);
+		return member;
+	}
+
 	public Platform platform() {
 		Platform member = new Platform();
 		member.setModelTypeName("platform");
