@@ -38,6 +38,10 @@ public class ProjectQueryPiece extends PieceOfScript {
 				.do_it_as().count_by(MODEL.projectNomination().workPackage())
 				.where(MODEL.projectNomination().project().eq("${project id}"))
 
+			.query(MODEL.project()).list_of("employee").with_string("employee id")
+				.do_it_as()
+				.where(MODEL.project().projectNominationList().worker().employee().eq("${employee id}"))
+
 		// 项目文档资料相关的查询
 			.find(MODEL.projectMaterial()).which("by daily task type").with_string("project id").with_string("type id")
 				.comments("统计项目下的，某个daily task type 的文档")

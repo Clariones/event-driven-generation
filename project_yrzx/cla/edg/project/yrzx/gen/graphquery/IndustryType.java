@@ -4,44 +4,33 @@ import java.util.Map;
 
 import cla.edg.modelbean.*;
 
-public class ProjectMaterialType extends BaseModelBean{
+public class IndustryType extends BaseModelBean{
 	public String getFullClassName() {
-		return "com.yrdec.yrzx.projectmaterialtype.ProjectMaterialType";
+		return "com.yrdec.yrzx.industrytype.IndustryType";
 	}
 	// 枚举对象
 
 	// 引用的对象
 
-	public ProjectMaterialParentType parent() {
-		ProjectMaterialParentType member = new ProjectMaterialParentType();
-		member.setModelTypeName("project_material_parent_type");
-		member.setName("parent");
-		member.setMemberName("parent");
-		member.setReferDirection(true);
-		member.setRelationName("parent");
-		append(member);
-		return member;
-	}
-
-	public Platform platform() {
-		Platform member = new Platform();
-		member.setModelTypeName("platform");
-		member.setName("platform");
-		member.setMemberName("platform");
-		member.setReferDirection(true);
-		member.setRelationName("platform");
-		append(member);
-		return member;
-	}
-
 	// 被引用的对象
 
-	public ProjectMaterial projectMaterialList() {
-		ProjectMaterial member = new ProjectMaterial();
-		member.setModelTypeName("project_material");
-		member.setName("project_material_type");
-		member.setMemberName("projectMaterialList");
-		member.setRelationName("projectMaterialType");
+	public MerchantDetail merchantDetailList() {
+		MerchantDetail member = new MerchantDetail();
+		member.setModelTypeName("merchant_detail");
+		member.setName("industry_type");
+		member.setMemberName("merchantDetailList");
+		member.setRelationName("industryType");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EventFillPersonalDetail eventFillPersonalDetailList() {
+		EventFillPersonalDetail member = new EventFillPersonalDetail();
+		member.setModelTypeName("event_fill_personal_detail");
+		member.setName("industry_type");
+		member.setMemberName("eventFillPersonalDetailList");
+		member.setRelationName("industryType");
 		member.setReferDirection(false);
 		append(member);
 		return member;
@@ -77,11 +66,11 @@ public class ProjectMaterialType extends BaseModelBean{
 		return member;
 	}
 
-	public StringAttribute icon(){
+	public StringAttribute platform(){
 		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string_image");
-		// member.setName("icon");
-		member.setName("icon");
+		member.setModelTypeName("string");
+		// member.setName("platform");
+		member.setName("platform");
 		useMember(member);
 		return member;
 	}

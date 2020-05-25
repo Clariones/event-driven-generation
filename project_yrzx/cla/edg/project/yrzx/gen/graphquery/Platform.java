@@ -190,6 +190,17 @@ public class Platform extends BaseModelBean{
 		return member;
 	}
 
+	public EngineeringType engineeringTypeList() {
+		EngineeringType member = new EngineeringType();
+		member.setModelTypeName("engineering_type");
+		member.setName("platform");
+		member.setMemberName("engineeringTypeList");
+		member.setRelationName("platform");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 	public Role roleList() {
 		Role member = new Role();
 		member.setModelTypeName("role");
@@ -250,17 +261,6 @@ public class Platform extends BaseModelBean{
 		member.setModelTypeName("work_package_type");
 		member.setName("platform");
 		member.setMemberName("workPackageTypeList");
-		member.setRelationName("platform");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-
-	public EngineeringType engineeringTypeList() {
-		EngineeringType member = new EngineeringType();
-		member.setModelTypeName("engineering_type");
-		member.setName("platform");
-		member.setMemberName("engineeringTypeList");
 		member.setRelationName("platform");
 		member.setReferDirection(false);
 		append(member);
@@ -393,6 +393,17 @@ public class Platform extends BaseModelBean{
 		member.setModelTypeName("project_material_type");
 		member.setName("platform");
 		member.setMemberName("projectMaterialTypeList");
+		member.setRelationName("platform");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ProjectMaterialParentType projectMaterialParentTypeList() {
+		ProjectMaterialParentType member = new ProjectMaterialParentType();
+		member.setModelTypeName("project_material_parent_type");
+		member.setName("platform");
+		member.setMemberName("projectMaterialParentTypeList");
 		member.setRelationName("platform");
 		member.setReferDirection(false);
 		append(member);

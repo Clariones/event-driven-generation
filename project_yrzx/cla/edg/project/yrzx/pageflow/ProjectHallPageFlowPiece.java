@@ -49,7 +49,7 @@ public class ProjectHallPageFlowPiece extends PieceOfScript {
 		viewProjectOrgnization(script, "项目组织", "PROJECT_ORGNIZATION");
 		viewProject5Book(script, "五书详情", "YOURONG_5BOOK");
 		viewProjectElementIn3Levels(script, "合同任务", "PROJECT_CONTRACT");
-		viewProjectElementIn3Levels(script, "项目资料", "PROJECT_DOCS");
+		viewProjectElementIn4Levels(script, "项目资料", "PROJECT_DOCS");
 		viewFinancialService(script, "金融服务", "FINANCIAL_SERVICE");
 		script.request("view project material review list").with_string("item id").with_last_record_id()
 				.comments("查看项目资料的所有审批记录列表").need_login().no_footprint()
@@ -84,6 +84,16 @@ public class ProjectHallPageFlowPiece extends PieceOfScript {
 		return script;
 	}
 
+	private void viewProjectElementIn4Levels(PageFlowScript script, String title, String code) {
+		viewProjectElementIn3Levels(script,title,code);
+
+		String reqSubList = "view " + Utils.toWords(code) +" sub list";
+		String pageSubList = Utils.toWords(code) +" sub list";
+		script.request(reqSubList).with_string("project id").with_string("label").with_string("filter").with_last_record_id()
+				.comments("查看" + title +"三级子类目的分状态列表").need_login().has_footprint()
+				.got_page(pageSubList).title(title+"列表").list_of(code);
+	}
+
 	private void viewFinancialService(PageFlowScript script, String 金融服务, String financial_service) {
 		script
 				//一级
@@ -112,6 +122,12 @@ public class ProjectHallPageFlowPiece extends PieceOfScript {
 		.comments("查看 " + title).need_login()
 		.got_page("project organization").title(title).list_of(code)
 			.may_request("view project organization in work package")
+
+	.request("view project organization employee list").with_string("project id").with_string("merchant id").with_string("type id")
+				.with_last_record_id()
+				.comments("查看项目组织分类中的该项目员工列表")
+				.got_page("project organization employee list")
+
 	.request("view project organization in work package").with_string("project id").with_string("work package id").with_last_record_id()
 		.comments("查看工作包 " + title).need_login()
 		.got_page("project organization in work package").title("项目组织").list_of("card")

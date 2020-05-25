@@ -278,6 +278,17 @@ public class ChangeRequest extends BaseModelBean{
 		return member;
 	}
 
+	public EventFillPersonalDetail eventFillPersonalDetailList() {
+		EventFillPersonalDetail member = new EventFillPersonalDetail();
+		member.setModelTypeName("event_fill_personal_detail");
+		member.setName("change_request");
+		member.setMemberName("eventFillPersonalDetailList");
+		member.setRelationName("changeRequest");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 
 	// 普通属性
 

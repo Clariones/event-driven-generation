@@ -25,11 +25,33 @@ public class EngineeringType extends BaseModelBean{
 
 	// 被引用的对象
 
+	public MerchantDetail merchantDetailList() {
+		MerchantDetail member = new MerchantDetail();
+		member.setModelTypeName("merchant_detail");
+		member.setName("engineering_type");
+		member.setMemberName("merchantDetailList");
+		member.setRelationName("engineeringType");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 	public WorkPackage workPackageList() {
 		WorkPackage member = new WorkPackage();
 		member.setModelTypeName("work_package");
 		member.setName("engineering_type");
 		member.setMemberName("workPackageList");
+		member.setRelationName("engineeringType");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EventFillPersonalDetail eventFillPersonalDetailList() {
+		EventFillPersonalDetail member = new EventFillPersonalDetail();
+		member.setModelTypeName("event_fill_personal_detail");
+		member.setName("engineering_type");
+		member.setMemberName("eventFillPersonalDetailList");
 		member.setRelationName("engineeringType");
 		member.setReferDirection(false);
 		append(member);

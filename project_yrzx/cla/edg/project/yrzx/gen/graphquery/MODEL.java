@@ -215,6 +215,30 @@ public class MODEL{
 		return rst;
 	}
 
+	public static MerchantDetail merchantDetail() {
+		MerchantDetail rst = new MerchantDetail();
+		rst.setModelTypeName("merchant_detail");
+		return rst;
+	}
+
+	public static IndustryType industryType() {
+		IndustryType rst = new IndustryType();
+		rst.setModelTypeName("industry_type");
+		return rst;
+	}
+
+	public static EngineeringType engineeringType() {
+		EngineeringType rst = new EngineeringType();
+		rst.setModelTypeName("engineering_type");
+		return rst;
+	}
+
+	public static CareerType careerType() {
+		CareerType rst = new CareerType();
+		rst.setModelTypeName("career_type");
+		return rst;
+	}
+
 	public static Role role() {
 		Role rst = new Role();
 		rst.setModelTypeName("role");
@@ -260,12 +284,6 @@ public class MODEL{
 	public static WorkPackageType workPackageType() {
 		WorkPackageType rst = new WorkPackageType();
 		rst.setModelTypeName("work_package_type");
-		return rst;
-	}
-
-	public static EngineeringType engineeringType() {
-		EngineeringType rst = new EngineeringType();
-		rst.setModelTypeName("engineering_type");
 		return rst;
 	}
 
@@ -356,6 +374,12 @@ public class MODEL{
 	public static ProjectMaterialType projectMaterialType() {
 		ProjectMaterialType rst = new ProjectMaterialType();
 		rst.setModelTypeName("project_material_type");
+		return rst;
+	}
+
+	public static ProjectMaterialParentType projectMaterialParentType() {
+		ProjectMaterialParentType rst = new ProjectMaterialParentType();
+		rst.setModelTypeName("project_material_parent_type");
 		return rst;
 	}
 
@@ -818,6 +842,12 @@ public class MODEL{
 	public static EventContractComment eventContractComment() {
 		EventContractComment rst = new EventContractComment();
 		rst.setModelTypeName("event_contract_comment");
+		return rst;
+	}
+
+	public static EventFillPersonalDetail eventFillPersonalDetail() {
+		EventFillPersonalDetail rst = new EventFillPersonalDetail();
+		rst.setModelTypeName("event_fill_personal_detail");
 		return rst;
 	}
 

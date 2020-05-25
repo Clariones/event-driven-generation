@@ -18,6 +18,23 @@ public class NominationQueryPiece extends PieceOfScript {
 				.wants(
 						MODEL.employeeNomination().employee()
 				)
+
+		.query(MODEL.projectNomination()).which("in project by merchant and type").with_string("project id").with_string("merchant id").with_string("type id")
+			.do_it_as()
+			.where(
+					MODEL.projectNomination().project().eq("${project id}")
+					,
+					MODEL.projectNomination().worker().employer().eq("${merchant id}")
+					,
+					MODEL.projectNomination().type().eq("${type id}")
+			)
+			.wants(
+					MODEL.projectNomination().project(),
+					MODEL.projectNomination().type(),
+					MODEL.projectNomination().worker().employee(),
+					MODEL.projectNomination().worker().job()
+
+			)
 ;
 
 		return script;
