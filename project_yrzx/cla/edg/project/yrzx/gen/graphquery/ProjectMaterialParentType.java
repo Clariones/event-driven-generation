@@ -4,24 +4,13 @@ import java.util.Map;
 
 import cla.edg.modelbean.*;
 
-public class ProjectMaterialType extends BaseModelBean{
+public class ProjectMaterialParentType extends BaseModelBean{
 	public String getFullClassName() {
-		return "com.yrdec.yrzx.projectmaterialtype.ProjectMaterialType";
+		return "com.yrdec.yrzx.projectmaterialparenttype.ProjectMaterialParentType";
 	}
 	// 枚举对象
 
 	// 引用的对象
-
-	public ProjectMaterialParentType parent() {
-		ProjectMaterialParentType member = new ProjectMaterialParentType();
-		member.setModelTypeName("project_material_parent_type");
-		member.setName("parent");
-		member.setMemberName("parent");
-		member.setReferDirection(true);
-		member.setRelationName("parent");
-		append(member);
-		return member;
-	}
 
 	public Platform platform() {
 		Platform member = new Platform();
@@ -36,12 +25,12 @@ public class ProjectMaterialType extends BaseModelBean{
 
 	// 被引用的对象
 
-	public ProjectMaterial projectMaterialList() {
-		ProjectMaterial member = new ProjectMaterial();
-		member.setModelTypeName("project_material");
-		member.setName("project_material_type");
-		member.setMemberName("projectMaterialList");
-		member.setRelationName("projectMaterialType");
+	public ProjectMaterialType projectMaterialTypeList() {
+		ProjectMaterialType member = new ProjectMaterialType();
+		member.setModelTypeName("project_material_type");
+		member.setName("parent");
+		member.setMemberName("projectMaterialTypeList");
+		member.setRelationName("parent");
 		member.setReferDirection(false);
 		append(member);
 		return member;
@@ -73,6 +62,15 @@ public class ProjectMaterialType extends BaseModelBean{
 		member.setModelTypeName("string");
 		// member.setName("code");
 		member.setName("code");
+		useMember(member);
+		return member;
+	}
+
+	public NumberAttribute displayOrder(){
+		NumberAttribute member = new NumberAttribute();
+		member.setModelTypeName("int");
+		// member.setName("displayOrder");
+		member.setName("display_order");
 		useMember(member);
 		return member;
 	}

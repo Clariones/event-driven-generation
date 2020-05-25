@@ -27,6 +27,7 @@ public class ChangeRequestType extends BaseModelBean{
 	public static EnumAttribute PROJECT_PROGRESS = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "PROJECT_PROGRESS");
 	public static EnumAttribute COMMENTS_ON_MATERIALS = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "COMMENTS_ON_MATERIALS");
 	public static EnumAttribute PROJECT_MANAGER_REPORT = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "PROJECT_MANAGER_REPORT");
+	public static EnumAttribute FILL_PERSONAL_DETAIL = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "FILL_PERSONAL_DETAIL");
 	public static EnumAttribute PROJECT_SUPERVISION_REPORT = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "PROJECT_SUPERVISION_REPORT");
 
 	// 引用的对象

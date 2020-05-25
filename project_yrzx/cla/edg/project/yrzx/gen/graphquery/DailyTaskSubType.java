@@ -4,21 +4,21 @@ import java.util.Map;
 
 import cla.edg.modelbean.*;
 
-public class ProjectMaterialType extends BaseModelBean{
+public class DailyTaskSubType extends BaseModelBean{
 	public String getFullClassName() {
-		return "com.yrdec.yrzx.projectmaterialtype.ProjectMaterialType";
+		return "com.yrdec.yrzx.dailytasksubtype.DailyTaskSubType";
 	}
 	// 枚举对象
 
 	// 引用的对象
 
-	public ProjectMaterialParentType parent() {
-		ProjectMaterialParentType member = new ProjectMaterialParentType();
-		member.setModelTypeName("project_material_parent_type");
-		member.setName("parent");
-		member.setMemberName("parent");
+	public DailyTaskType type() {
+		DailyTaskType member = new DailyTaskType();
+		member.setModelTypeName("daily_task_type");
+		member.setName("type");
+		member.setMemberName("type");
 		member.setReferDirection(true);
-		member.setRelationName("parent");
+		member.setRelationName("type");
 		append(member);
 		return member;
 	}
@@ -39,9 +39,9 @@ public class ProjectMaterialType extends BaseModelBean{
 	public ProjectMaterial projectMaterialList() {
 		ProjectMaterial member = new ProjectMaterial();
 		member.setModelTypeName("project_material");
-		member.setName("project_material_type");
+		member.setName("daily_task_sub_type");
 		member.setMemberName("projectMaterialList");
-		member.setRelationName("projectMaterialType");
+		member.setRelationName("dailyTaskSubType");
 		member.setReferDirection(false);
 		append(member);
 		return member;
@@ -73,6 +73,15 @@ public class ProjectMaterialType extends BaseModelBean{
 		member.setModelTypeName("string");
 		// member.setName("code");
 		member.setName("code");
+		useMember(member);
+		return member;
+	}
+
+	public NumberAttribute displayOrder(){
+		NumberAttribute member = new NumberAttribute();
+		member.setModelTypeName("int");
+		// member.setName("displayOrder");
+		member.setName("display_order");
 		useMember(member);
 		return member;
 	}

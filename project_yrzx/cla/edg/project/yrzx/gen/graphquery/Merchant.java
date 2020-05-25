@@ -56,6 +56,17 @@ public class Merchant extends BaseModelBean{
 		return member;
 	}
 
+	public MerchantDetail merchantDetail() {
+		MerchantDetail member = new MerchantDetail();
+		member.setModelTypeName("merchant_detail");
+		member.setName("merchant_detail");
+		member.setMemberName("merchantDetail");
+		member.setReferDirection(true);
+		member.setRelationName("merchantDetail");
+		append(member);
+		return member;
+	}
+
 	// 被引用的对象
 
 	public StandardContract standardContractListAsPartyA() {
