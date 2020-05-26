@@ -61,6 +61,7 @@ public class MiscQueryPiece extends PieceOfScript {
 				.comments("根据文章分类查询文章")
 				.do_it_as()
 				.where(MODEL.article().category().name().eq("${article category name}"))
+
 			;
 
 		return script;

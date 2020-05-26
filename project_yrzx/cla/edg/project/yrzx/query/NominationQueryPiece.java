@@ -16,7 +16,8 @@ public class NominationQueryPiece extends PieceOfScript {
 				.do_it_as()
 				.where(MODEL.employeeNomination().id().eq("${employee nomination id}"))
 				.wants(
-						MODEL.employeeNomination().employee()
+//						MODEL.employeeNomination().employee(),
+						MODEL.employeeNomination().employer()
 				)
 
 		.query(MODEL.projectNomination()).which("in project by merchant and type").with_string("project id").with_string("merchant id").with_string("type id")

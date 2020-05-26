@@ -4,9 +4,9 @@ import java.util.Map;
 
 import cla.edg.modelbean.*;
 
-public class IndustryType extends BaseModelBean{
+public class ProjectMaterialCategory extends BaseModelBean{
 	public String getFullClassName() {
-		return "com.yrdec.yrzx.industrytype.IndustryType";
+		return "com.yrdec.yrzx.projectmaterialcategory.ProjectMaterialCategory";
 	}
 	// 枚举对象
 
@@ -24,28 +24,6 @@ public class IndustryType extends BaseModelBean{
 	}
 
 	// 被引用的对象
-
-	public MerchantDetail merchantDetailList() {
-		MerchantDetail member = new MerchantDetail();
-		member.setModelTypeName("merchant_detail");
-		member.setName("industry_type");
-		member.setMemberName("merchantDetailList");
-		member.setRelationName("industryType");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-
-	public EventFillPersonalDetail eventFillPersonalDetailList() {
-		EventFillPersonalDetail member = new EventFillPersonalDetail();
-		member.setModelTypeName("event_fill_personal_detail");
-		member.setName("industry_type");
-		member.setMemberName("eventFillPersonalDetailList");
-		member.setRelationName("industryType");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
 
 
 	// 普通属性
@@ -73,6 +51,24 @@ public class IndustryType extends BaseModelBean{
 		member.setModelTypeName("string");
 		// member.setName("code");
 		member.setName("code");
+		useMember(member);
+		return member;
+	}
+
+	public NumberAttribute displayOrder(){
+		NumberAttribute member = new NumberAttribute();
+		member.setModelTypeName("int");
+		// member.setName("displayOrder");
+		member.setName("display_order");
+		useMember(member);
+		return member;
+	}
+
+	public StringAttribute icon(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string_image");
+		// member.setName("icon");
+		member.setName("icon");
 		useMember(member);
 		return member;
 	}

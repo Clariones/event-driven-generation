@@ -56,6 +56,17 @@ public class AfterSales extends BaseModelBean{
 		return member;
 	}
 
+	public ProjectNomination solver() {
+		ProjectNomination member = new ProjectNomination();
+		member.setModelTypeName("project_nomination");
+		member.setName("solver");
+		member.setMemberName("solver");
+		member.setReferDirection(true);
+		member.setRelationName("solver");
+		append(member);
+		return member;
+	}
+
 	// 被引用的对象
 
 
@@ -102,6 +113,33 @@ public class AfterSales extends BaseModelBean{
 		member.setModelTypeName("date_time_create");
 		// member.setName("createTime");
 		member.setName("create_time");
+		useMember(member);
+		return member;
+	}
+
+	public StringAttribute resolveComments(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string");
+		// member.setName("resolveComments");
+		member.setName("resolve_comments");
+		useMember(member);
+		return member;
+	}
+
+	public DateTimeAttribute solveTime(){
+		DateTimeAttribute member = new DateTimeAttribute();
+		member.setModelTypeName("date");
+		// member.setName("solveTime");
+		member.setName("solve_time");
+		useMember(member);
+		return member;
+	}
+
+	public StringAttribute solveImages(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("images");
+		// member.setName("solveImages");
+		member.setName("solve_images");
 		useMember(member);
 		return member;
 	}

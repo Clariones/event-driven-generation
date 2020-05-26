@@ -86,15 +86,11 @@ public class HighLevelMePageFlowPiece extends PieceOfScript {
 					.comments("查看订单详情")
 					.got_page("order detail").title("订单详情").as_class("")
 
-				//管理员工-->员工详情
-				.request("view employee detail").with_string("employee nomination id")
+				//管理员工-->员工详情 和 我的-->个人资料
+				.request("view employee detail").need_login().with_string("employee nomination id")
 					.comments("查看员工详情")
-					.got_page("employee detail")
-
-				//补充个人信息
-				.request("view personal detail").need_login()
-					.comments("查看个人信息")
 					.got_page("personal detail")
+
 				
 			;
 	}

@@ -22,6 +22,7 @@ public class EmployeeChangeRequest implements ChangeRequestSpecFactory {
 			.change_request("fill personal detail").zh_CN("完善个人资料")
 				.icon("form")
 				.has_field("merchant id").hidden()
+				.has_field("merchant name").zh_CN("姓名").disabled()
 				.has_field("gender").zh_CN("性别")
 					.values_canbe("male","男").or("female","女")
 				.has_field("address").zh_CN("家庭住址")
@@ -34,7 +35,7 @@ public class EmployeeChangeRequest implements ChangeRequestSpecFactory {
 				.has_field("career type").zh_CN("职业分类")
 					.which_model_of(MODEL.careerType())
 					.values_can_select_from_query_by("project id")
-				.has_field("working years").zh_CN("工作年限");
+				.has_field("working years").zh_CN("工作年限").which_type_of(FieldType.INTEGER).range(0,100);
 
 
 	}

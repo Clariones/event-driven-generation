@@ -70,6 +70,15 @@ public class ProjectCommand extends BaseModelBean{
 		return member;
 	}
 
+	public StringAttribute name(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string");
+		// member.setName("name");
+		member.setName("name");
+		useMember(member);
+		return member;
+	}
+
 	public StringAttribute directiveBrief(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
