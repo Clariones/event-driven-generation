@@ -190,11 +190,33 @@ public class Platform extends BaseModelBean{
 		return member;
 	}
 
+	public IndustryType industryTypeList() {
+		IndustryType member = new IndustryType();
+		member.setModelTypeName("industry_type");
+		member.setName("platform");
+		member.setMemberName("industryTypeList");
+		member.setRelationName("platform");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 	public EngineeringType engineeringTypeList() {
 		EngineeringType member = new EngineeringType();
 		member.setModelTypeName("engineering_type");
 		member.setName("platform");
 		member.setMemberName("engineeringTypeList");
+		member.setRelationName("platform");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public CareerType careerTypeList() {
+		CareerType member = new CareerType();
+		member.setModelTypeName("career_type");
+		member.setName("platform");
+		member.setMemberName("careerTypeList");
 		member.setRelationName("platform");
 		member.setReferDirection(false);
 		append(member);

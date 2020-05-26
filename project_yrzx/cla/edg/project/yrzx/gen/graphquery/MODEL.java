@@ -713,6 +713,12 @@ public class MODEL{
 		return rst;
 	}
 
+	public static EventResolveAfterSales eventResolveAfterSales() {
+		EventResolveAfterSales rst = new EventResolveAfterSales();
+		rst.setModelTypeName("event_resolve_after_sales");
+		return rst;
+	}
+
 	public static EventProjectWorkPosition eventProjectWorkPosition() {
 		EventProjectWorkPosition rst = new EventProjectWorkPosition();
 		rst.setModelTypeName("event_project_work_position");

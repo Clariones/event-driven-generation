@@ -112,9 +112,13 @@ public class ProjectHallPageFlowPiece extends PieceOfScript {
 
 
 	protected void viewProject5Book(PageFlowScript script, String title, String code) {
-		script.request("view " + Utils.toWords(code)).with_string("project id")
+		script.request("view " + Utils.toWords(code)+" pannel").with_string("project id")
+				.comments("查看 " + title).need_login()
+				.got_page("project book pannel").title(title).list_of(code)
+
+		.request("view " + Utils.toWords(code)+ " list").with_string("project id").with_string("type id")
 		.comments("查看 " + title).need_login()
-		.got_page("project book").title(title).list_of(code);
+		.got_page("project book list").title(title).list_of(code);
 	}
 
 	protected void viewProjectOrgnization(PageFlowScript script, String title, String code) {

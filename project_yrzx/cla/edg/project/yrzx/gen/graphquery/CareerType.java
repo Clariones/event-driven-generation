@@ -12,6 +12,17 @@ public class CareerType extends BaseModelBean{
 
 	// 引用的对象
 
+	public Platform platform() {
+		Platform member = new Platform();
+		member.setModelTypeName("platform");
+		member.setName("platform");
+		member.setMemberName("platform");
+		member.setReferDirection(true);
+		member.setRelationName("platform");
+		append(member);
+		return member;
+	}
+
 	// 被引用的对象
 
 	public MerchantDetail merchantDetailList() {
@@ -62,15 +73,6 @@ public class CareerType extends BaseModelBean{
 		member.setModelTypeName("string");
 		// member.setName("code");
 		member.setName("code");
-		useMember(member);
-		return member;
-	}
-
-	public StringAttribute platform(){
-		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
-		// member.setName("platform");
-		member.setName("platform");
 		useMember(member);
 		return member;
 	}

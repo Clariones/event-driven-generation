@@ -36,6 +36,17 @@ public class ChangeRequest extends BaseModelBean{
 
 	// 被引用的对象
 
+	public EventResolveAfterSales eventResolveAfterSalesList() {
+		EventResolveAfterSales member = new EventResolveAfterSales();
+		member.setModelTypeName("event_resolve_after_sales");
+		member.setName("change_request");
+		member.setMemberName("eventResolveAfterSalesList");
+		member.setRelationName("changeRequest");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 	public EventProjectWorkPosition eventProjectWorkPositionList() {
 		EventProjectWorkPosition member = new EventProjectWorkPosition();
 		member.setModelTypeName("event_project_work_position");

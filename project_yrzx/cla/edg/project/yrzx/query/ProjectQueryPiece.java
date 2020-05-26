@@ -137,6 +137,21 @@ public class ProjectQueryPiece extends PieceOfScript {
 				.do_it_as()
 				.where(MODEL.yourongProjectBook().project().eq("${project id}"))
 				.wants(MODEL.yourongProjectBook().status(), MODEL.yourongProjectBook().type())
+
+			.query(MODEL.yourongProjectBook()).list_of("project by type").with_string("project id").with_string("type id")
+				.comments("按类型查询项目的五书")
+				.do_it_as()
+				.where(MODEL.yourongProjectBook().project().eq("${project id}"),
+					MODEL.yourongProjectBook().type().eq("${type id}")
+				)
+				.wants(MODEL.yourongProjectBook().status(), MODEL.yourongProjectBook().type())
+
+			.find(MODEL.yourongProjectBook()).list_of("in project by type").with_string("project id")
+				.comments("按类型统计项目的五书")
+				.do_it_as().count_by(MODEL.yourongProjectBook().type())
+				.where(MODEL.yourongProjectBook().project().eq("${project id}")
+
+				)
 		// 项目组织
 			.query(MODEL.projectNomination()).which("project level").with_string("project id")
 				.comments("查询项目的所有 项目岗位, 不包括 分包商 级别")
@@ -225,7 +240,8 @@ public class ProjectQueryPiece extends PieceOfScript {
 						MODEL.afterSales().status(),
 						MODEL.afterSales().project(),
 						MODEL.afterSales().dailyTaskType(),
-						MODEL.afterSales().creator().employee()
+						MODEL.afterSales().creator().employee(),
+						MODEL.afterSales().solver()
 				)
 
 				// 违约处罚

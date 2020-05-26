@@ -79,6 +79,15 @@ public class EventFillPersonalDetail extends BaseModelBean{
 		return member;
 	}
 
+	public StringAttribute merchantName(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string");
+		// member.setName("merchantName");
+		member.setName("merchant_name");
+		useMember(member);
+		return member;
+	}
+
 	public StringAttribute gender(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
@@ -97,9 +106,9 @@ public class EventFillPersonalDetail extends BaseModelBean{
 		return member;
 	}
 
-	public StringAttribute workingYears(){
-		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
+	public NumberAttribute workingYears(){
+		NumberAttribute member = new NumberAttribute();
+		member.setModelTypeName("int");
 		// member.setName("workingYears");
 		member.setName("working_years");
 		useMember(member);

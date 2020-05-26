@@ -66,6 +66,15 @@ public class EventProjectCommand extends BaseModelBean{
 		return member;
 	}
 
+	public StringAttribute commandName(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string");
+		// member.setName("commandName");
+		member.setName("command_name");
+		useMember(member);
+		return member;
+	}
+
 	public StringAttribute commandNumber(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");

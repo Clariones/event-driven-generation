@@ -4,9 +4,9 @@ import java.util.Map;
 
 import cla.edg.modelbean.*;
 
-public class EventAfterSales extends BaseModelBean{
+public class EventResolveAfterSales extends BaseModelBean{
 	public String getFullClassName() {
-		return "com.yrdec.yrzx.eventaftersales.EventAfterSales";
+		return "com.yrdec.yrzx.eventresolveaftersales.EventResolveAfterSales";
 	}
 	// 枚举对象
 
@@ -37,11 +37,20 @@ public class EventAfterSales extends BaseModelBean{
 		return member;
 	}
 
-	public StringAttribute projectId(){
+	public StringAttribute afterSalesId(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		// member.setName("projectId");
-		member.setName("project_id");
+		// member.setName("afterSalesId");
+		member.setName("after_sales_id");
+		useMember(member);
+		return member;
+	}
+
+	public StringAttribute afterSalesTitle(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string");
+		// member.setName("afterSalesTitle");
+		member.setName("after_sales_title");
 		useMember(member);
 		return member;
 	}
@@ -55,47 +64,20 @@ public class EventAfterSales extends BaseModelBean{
 		return member;
 	}
 
-	public StringAttribute dailyTaskTypeId(){
+	public StringAttribute afterSalesDescription(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		// member.setName("dailyTaskTypeId");
-		member.setName("daily_task_type_id");
+		// member.setName("afterSalesDescription");
+		member.setName("after_sales_description");
 		useMember(member);
 		return member;
 	}
 
-	public StringAttribute dailyTaskType(){
+	public StringAttribute comments(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		// member.setName("dailyTaskType");
-		member.setName("daily_task_type");
-		useMember(member);
-		return member;
-	}
-
-	public BooleanAttribute underWarranty(){
-		BooleanAttribute member = new BooleanAttribute();
-		member.setModelTypeName("bool");
-		// member.setName("underWarranty");
-		member.setName("under_warranty");
-		useMember(member);
-		return member;
-	}
-
-	public StringAttribute title(){
-		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
-		// member.setName("title");
-		member.setName("title");
-		useMember(member);
-		return member;
-	}
-
-	public StringAttribute questionDescription(){
-		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
-		// member.setName("questionDescription");
-		member.setName("question_description");
+		// member.setName("comments");
+		member.setName("comments");
 		useMember(member);
 		return member;
 	}
@@ -114,15 +96,6 @@ public class EventAfterSales extends BaseModelBean{
 		member.setModelTypeName("string");
 		// member.setName("creator");
 		member.setName("creator");
-		useMember(member);
-		return member;
-	}
-
-	public DateTimeAttribute time(){
-		DateTimeAttribute member = new DateTimeAttribute();
-		member.setModelTypeName("date_time");
-		// member.setName("time");
-		member.setName("time");
 		useMember(member);
 		return member;
 	}

@@ -9,6 +9,7 @@ public class ChangeRequestType extends BaseModelBean{
 		return "com.yrdec.yrzx.changerequesttype.ChangeRequestType";
 	}
 	// 枚举对象
+	public static EnumAttribute RESOLVE_AFTER_SALES = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "RESOLVE_AFTER_SALES");
 	public static EnumAttribute COMMENTS_ON_CONTRACT = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "COMMENTS_ON_CONTRACT");
 	public static EnumAttribute REVIEW_CONTRACT = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "REVIEW_CONTRACT");
 	public static EnumAttribute APPLY_RECOMMENDATION = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "APPLY_RECOMMENDATION");

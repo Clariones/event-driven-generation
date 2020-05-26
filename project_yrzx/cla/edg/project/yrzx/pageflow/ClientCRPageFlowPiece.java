@@ -74,6 +74,14 @@ public class ClientCRPageFlowPiece extends PieceOfScript {
 				.request_with_changerequest("project command").with_string("project id")
 					.comments("创建项目指令")
 					.got_page("project command detail")
+
+				.request_with_changerequest("fill personal detail")
+					.comments("修改个人资料")
+					.got_page("personal detail")
+
+				.request_with_changerequest("resolve after sales").with_string("item id")
+					.comments("解决售后问题")
+					.got_page("after sales service detail")
 				;
 	}
 }
