@@ -12,6 +12,7 @@ public class ProjectProgressStatus extends BaseModelBean{
 	public static EnumAttribute PLANNED = new EnumAttribute("com.yrdec.yrzx.projectprogressstatus.ProjectProgressStatus", "PLANNED");
 	public static EnumAttribute EXECUTING = new EnumAttribute("com.yrdec.yrzx.projectprogressstatus.ProjectProgressStatus", "EXECUTING");
 	public static EnumAttribute ACCEPTED = new EnumAttribute("com.yrdec.yrzx.projectprogressstatus.ProjectProgressStatus", "ACCEPTED");
+	public static EnumAttribute PENDING_ON_SETTLEMENT = new EnumAttribute("com.yrdec.yrzx.projectprogressstatus.ProjectProgressStatus", "PENDING_ON_SETTLEMENT");
 	public static EnumAttribute SETTLEMENT = new EnumAttribute("com.yrdec.yrzx.projectprogressstatus.ProjectProgressStatus", "SETTLEMENT");
 	public static EnumAttribute DELAYED = new EnumAttribute("com.yrdec.yrzx.projectprogressstatus.ProjectProgressStatus", "DELAYED");
 	public static EnumAttribute WARNNING = new EnumAttribute("com.yrdec.yrzx.projectprogressstatus.ProjectProgressStatus", "WARNNING");

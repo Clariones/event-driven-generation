@@ -719,18 +719,6 @@ public class MODEL{
 		return rst;
 	}
 
-	public static EventProjectWorkPosition eventProjectWorkPosition() {
-		EventProjectWorkPosition rst = new EventProjectWorkPosition();
-		rst.setModelTypeName("event_project_work_position");
-		return rst;
-	}
-
-	public static EventProjectSupervisorReportBasicInfo eventProjectSupervisorReportBasicInfo() {
-		EventProjectSupervisorReportBasicInfo rst = new EventProjectSupervisorReportBasicInfo();
-		rst.setModelTypeName("event_project_supervisor_report_basic_info");
-		return rst;
-	}
-
 	public static EventApplyRecommendation eventApplyRecommendation() {
 		EventApplyRecommendation rst = new EventApplyRecommendation();
 		rst.setModelTypeName("event_apply_recommendation");
@@ -755,15 +743,51 @@ public class MODEL{
 		return rst;
 	}
 
-	public static EventProjectManagerReportBasicInfo eventProjectManagerReportBasicInfo() {
-		EventProjectManagerReportBasicInfo rst = new EventProjectManagerReportBasicInfo();
-		rst.setModelTypeName("event_project_manager_report_basic_info");
-		return rst;
-	}
-
 	public static EventAcceptanceApplication eventAcceptanceApplication() {
 		EventAcceptanceApplication rst = new EventAcceptanceApplication();
 		rst.setModelTypeName("event_acceptance_application");
+		return rst;
+	}
+
+	public static EventCommonReport eventCommonReport() {
+		EventCommonReport rst = new EventCommonReport();
+		rst.setModelTypeName("event_common_report");
+		return rst;
+	}
+
+	public static EventProjectInfo eventProjectInfo() {
+		EventProjectInfo rst = new EventProjectInfo();
+		rst.setModelTypeName("event_project_info");
+		return rst;
+	}
+
+	public static EventMaterialReview eventMaterialReview() {
+		EventMaterialReview rst = new EventMaterialReview();
+		rst.setModelTypeName("event_material_review");
+		return rst;
+	}
+
+	public static EventFillPersonalDetail eventFillPersonalDetail() {
+		EventFillPersonalDetail rst = new EventFillPersonalDetail();
+		rst.setModelTypeName("event_fill_personal_detail");
+		return rst;
+	}
+
+	public static EventProjectWorkPosition eventProjectWorkPosition() {
+		EventProjectWorkPosition rst = new EventProjectWorkPosition();
+		rst.setModelTypeName("event_project_work_position");
+		return rst;
+	}
+
+	public static EventProjectSupervisorReportBasicInfo eventProjectSupervisorReportBasicInfo() {
+		EventProjectSupervisorReportBasicInfo rst = new EventProjectSupervisorReportBasicInfo();
+		rst.setModelTypeName("event_project_supervisor_report_basic_info");
+		return rst;
+	}
+
+	public static EventProjectManagerReportBasicInfo eventProjectManagerReportBasicInfo() {
+		EventProjectManagerReportBasicInfo rst = new EventProjectManagerReportBasicInfo();
+		rst.setModelTypeName("event_project_manager_report_basic_info");
 		return rst;
 	}
 
@@ -791,27 +815,9 @@ public class MODEL{
 		return rst;
 	}
 
-	public static EventCommonReport eventCommonReport() {
-		EventCommonReport rst = new EventCommonReport();
-		rst.setModelTypeName("event_common_report");
-		return rst;
-	}
-
 	public static EventReportCheckItem eventReportCheckItem() {
 		EventReportCheckItem rst = new EventReportCheckItem();
 		rst.setModelTypeName("event_report_check_item");
-		return rst;
-	}
-
-	public static EventProjectInfo eventProjectInfo() {
-		EventProjectInfo rst = new EventProjectInfo();
-		rst.setModelTypeName("event_project_info");
-		return rst;
-	}
-
-	public static EventMaterialReview eventMaterialReview() {
-		EventMaterialReview rst = new EventMaterialReview();
-		rst.setModelTypeName("event_material_review");
 		return rst;
 	}
 
@@ -845,15 +851,15 @@ public class MODEL{
 		return rst;
 	}
 
-	public static EventContractComment eventContractComment() {
-		EventContractComment rst = new EventContractComment();
-		rst.setModelTypeName("event_contract_comment");
+	public static EventApplyForAdvanceCompensation eventApplyForAdvanceCompensation() {
+		EventApplyForAdvanceCompensation rst = new EventApplyForAdvanceCompensation();
+		rst.setModelTypeName("event_apply_for_advance_compensation");
 		return rst;
 	}
 
-	public static EventFillPersonalDetail eventFillPersonalDetail() {
-		EventFillPersonalDetail rst = new EventFillPersonalDetail();
-		rst.setModelTypeName("event_fill_personal_detail");
+	public static EventContractComment eventContractComment() {
+		EventContractComment rst = new EventContractComment();
+		rst.setModelTypeName("event_contract_comment");
 		return rst;
 	}
 

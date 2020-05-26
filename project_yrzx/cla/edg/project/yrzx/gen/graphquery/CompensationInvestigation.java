@@ -79,6 +79,15 @@ public class CompensationInvestigation extends BaseModelBean{
 		return member;
 	}
 
+	public StringAttribute document(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string_document");
+		// member.setName("document");
+		member.setName("document");
+		useMember(member);
+		return member;
+	}
+
 	public DateTimeAttribute createTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_create");

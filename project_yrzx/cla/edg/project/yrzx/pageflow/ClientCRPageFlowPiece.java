@@ -82,6 +82,10 @@ public class ClientCRPageFlowPiece extends PieceOfScript {
 				.request_with_changerequest("resolve after sales").with_string("item id")
 					.comments("解决售后问题")
 					.got_page("after sales service detail")
+
+				.request_with_changerequest("apply for advance compensation").with_string("project id")
+					.comments("发起赔付申请")
+					.got_page("compensation in advance detail")
 				;
 	}
 }
