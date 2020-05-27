@@ -1,0 +1,1114 @@
+
+
+@warning change_request.commited: word 'commited' seems not found in library
+@warning event_update_profile.avantar: word 'avantar' seems not found in library
+@warning connection_to_request.params: word 'params' seems not found in library
+@warning object definition: wechat_workapp_identity: word 'workapp' seems not found in library
+@warning object definition: wechat_miniapp_identity: word 'miniapp' seems not found in library
+@warning object definition: keypair_identity: word 'keypair' seems not found in library
+
+
+
+=================Execute Report (Model Time 200522T1440) @Fri May 22 14:40:52 CST 2020, 38 objects and 264 fields===========================
+from file "/works/jobs/sds/workspace/web-code-generator/sky/modeling/microservice/sds.xml"
+
+
+ processing: platform
+
+
+ processing: company
+
+
+ processing: company.platform.platform
+
+Info: Add virtual field [companys(es)] to <platform>
+	company.platform
+
+
+ processing: user
+
+
+ processing: user.company.company
+
+Info: Add virtual field [users(es)] to <company>
+	user.company
+
+
+ processing: user_project
+
+
+ processing: user_project.user.user
+
+Info: Add virtual field [user_projects(es)] to <user>
+	user_project.user
+
+
+ processing: user_project.project.project
+
+Info: Add virtual field [user_projects(es)] to <project>
+	user_project.project
+
+
+ processing: change_request_type
+
+
+ processing: change_request_type.platform.platform
+
+Info: Add virtual field [change_request_types(es)] to <platform>
+	change_request_type.platform
+
+
+ processing: change_request
+
+
+ processing: change_request.change_request_type.request_type
+
+Info: Add virtual field [change_requests(es)] to <change_request_type>
+	change_request.request_type
+
+
+ processing: change_request.platform.platform
+
+Info: Add virtual field [change_requests(es)] to <platform>
+	change_request.platform
+
+
+ processing: event_update_profile
+
+
+ processing: event_update_profile.change_request.change_request
+
+Info: Add virtual field [event_update_profiles(es)] to <change_request>
+	event_update_profile.change_request
+
+
+ processing: project
+
+
+ processing: project.company.company
+
+Info: Add virtual field [projects(es)] to <company>
+	project.company
+
+
+ processing: page_flow_spec
+
+
+ processing: page_flow_spec.user.owner
+
+Info: Add virtual field [page_flow_specs(es)] to <user>
+	page_flow_spec.owner
+
+
+ processing: page_flow_spec.project.project
+
+Info: Add virtual field [page_flow_specs(es)] to <project>
+	page_flow_spec.project
+
+
+ processing: start_way_element
+
+
+ processing: start_way_element.page_flow_spec.spec
+
+Info: Add virtual field [start_way_elements(es)] to <page_flow_spec>
+	start_way_element.spec
+
+
+ processing: request_element
+
+
+ processing: request_element.page_flow_spec.spec
+
+Info: Add virtual field [request_elements(es)] to <page_flow_spec>
+	request_element.spec
+
+
+ processing: page_element
+
+
+ processing: page_element.page_flow_spec.spec
+
+Info: Add virtual field [page_elements(es)] to <page_flow_spec>
+	page_element.spec
+
+
+ processing: connection_to_request
+
+
+ processing: connection_to_request.request_element.request
+
+Info: Add virtual field [connection_to_requests(es)] to <request_element>
+	connection_to_request.request
+
+
+ processing: branch_from_request
+
+
+ processing: branch_from_request.request_element.request
+
+Info: Add virtual field [branch_from_requests(es)] to <request_element>
+	branch_from_request.request
+
+
+ processing: request_parameter
+
+
+ processing: request_parameter.request_element.request
+
+Info: Add virtual field [request_parameters(es)] to <request_element>
+	request_parameter.request
+
+
+ processing: work_flow_spec
+
+
+ processing: work_flow_spec.user.owner
+
+Info: Add virtual field [work_flow_specs(es)] to <user>
+	work_flow_spec.owner
+
+
+ processing: work_flow_spec.project.project
+
+Info: Add virtual field [work_flow_specs(es)] to <project>
+	work_flow_spec.project
+
+
+ processing: change_request_spec
+
+
+ processing: change_request_spec.user.owner
+
+Info: Add virtual field [change_request_specs(es)] to <user>
+	change_request_spec.owner
+
+
+ processing: change_request_spec.project.project
+
+Info: Add virtual field [change_request_specs(es)] to <project>
+	change_request_spec.project
+
+
+ processing: page_content_spec
+
+
+ processing: page_content_spec.user.owner
+
+Info: Add virtual field [page_content_specs(es)] to <user>
+	page_content_spec.owner
+
+
+ processing: page_content_spec.project.project
+
+Info: Add virtual field [page_content_specs(es)] to <project>
+	page_content_spec.project
+
+
+**************************************************
+
+meta{name=platform}
+platform{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('规规格管理平台'), verb: false, required: true,type:string;
+		date_time_create	create_time('createTime()'), verb: false, required: true,type:date_time_create;
+		date_time_update	last_update_time('updateTime()'), verb: false, required: true,type:date_time_update;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(3){
+		companyList	platform(__no_group)--platform;
+		changeRequestTypeList	platform(__no_group)--platform;
+		changeRequestList	platform(__no_group)--platform;
+	}
+} depth=0; isRoot = true
+
+meta{name=company}
+company{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('XX公司'), verb: false, required: true,type:string;
+		date_time_create	create_time('createTime()'), verb: false, required: true,type:date_time_create;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: companyList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(2){
+		userList	company(__no_group)--company;
+		projectList	company(__no_group)--company;
+	}
+} depth=1; isRoot = false
+
+meta{name=user, features=merchant}
+user{
+	fields(6){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('X先生'), verb: false, required: true,type:string;
+		date	join_time('2199-01-01'), verb: false, required: true,type:date;
+		company	company('$(object)'), verb: false, required: true, referenceBy: userList,type:company;
+		string	title('BA|Leader|Coder'), verb: false, required: true,type:string;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(5){
+		userProjectList	user(__no_group)--user;
+		pageFlowSpecList	owner(__no_group)--owner;
+		workFlowSpecList	owner(__no_group)--owner;
+		changeRequestSpecList	owner(__no_group)--owner;
+		pageContentSpecList	owner(__no_group)--owner;
+	}
+} depth=2; isRoot = false
+
+meta{name=user_project}
+user_project{
+	fields(6){
+		string	id('AB'), verb: false, required: true,type:id;
+		user	user('$(object)'), verb: false, required: true, referenceBy: userProjectList,type:user;
+		project	project('$(object)'), verb: false, required: true, referenceBy: userProjectList,type:project;
+		date_time_create	create_time('createTime()'), verb: false, required: true,type:date_time_create;
+		date_time_update	last_update_time('updateTime()'), verb: false, required: true,type:date_time_update;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=3; isRoot = false
+
+meta{name=change_request_type, identified_by=code, features=cr_type}
+change_request_type{
+	fields(9){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('更新个人信息'), verb: false, required: true,type:string;
+		string	code('UPDATE_PROFILE'), verb: false, required: true,type:string;
+		string	icon('bars'), verb: false, required: true,type:string;
+		int	display_order('1|2|3|4|5|6'), verb: false, required: true,type:int;
+		string_longtext	bind_types('text()'), verb: false, required: true,type:string_longtext;
+		string_longtext	step_configuration('text()'), verb: false, required: true,type:string_longtext;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: changeRequestTypeList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		changeRequestList	request_type(__no_group)--request_type;
+	}
+} depth=1; isRoot = false
+
+meta{name=change_request, features=change_request}
+change_request{
+	fields(8){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('注册|开始考试|答题'), verb: false, required: true,type:string;
+		date_time_create	create_time('createTime()'), verb: false, required: true,type:date_time_create;
+		string_client_ip	remote_ip('remoteIp()'), verb: false, required: true,type:string_client_ip;
+		change_request_type	request_type('$(object)'), verb: false, required: true, referenceBy: changeRequestList,type:change_request_type;
+		bool	commited('false'), verb: false, required: true,type:bool;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: changeRequestList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		eventUpdateProfileList	change_request(__no_group)--change_request;
+	}
+} depth=2; isRoot = false
+
+meta{bind_with_cr_type=UPDATE_PROFILE, name=event_update_profile, features=event}
+event_update_profile{
+	fields(8){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('name|用户名'), verb: false, required: true,type:string;
+		string_image	avantar('avantar.jpg'), verb: false, required: true,type:string_image;
+		string	field_group('cr_type/step_name/event_name/event_index'), verb: false, required: true,type:string;
+		string	event_initiator_type('SecUser|Merchant'), verb: false, required: true,type:string;
+		string	event_initiator_id('SU000001|M0000001'), verb: false, required: true,type:string;
+		change_request	change_request('$(object)'), verb: false, required: true, referenceBy: eventUpdateProfileList,type:change_request;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=3; isRoot = false
+
+meta{name=project}
+project{
+	fields(4){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('X项目'), verb: false, required: true,type:string;
+		company	company('$(object)'), verb: false, required: true, referenceBy: projectList,type:company;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(5){
+		userProjectList	project(__no_group)--project;
+		pageFlowSpecList	project(__no_group)--project;
+		workFlowSpecList	project(__no_group)--project;
+		changeRequestSpecList	project(__no_group)--project;
+		pageContentSpecList	project(__no_group)--project;
+	}
+} depth=2; isRoot = false
+
+meta{name=page_flow_spec}
+page_flow_spec{
+	fields(6){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	scene('登录'), verb: false, required: true,type:string;
+		string_longtext	brief('text()'), verb: false, required: true,type:string_longtext;
+		user	owner('$(object)'), verb: false, required: true, referenceBy: pageFlowSpecList,type:user;
+		project	project('$(object)'), verb: false, required: true, referenceBy: pageFlowSpecList,type:project;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(3){
+		startWayElementList	spec(__no_group)--spec;
+		requestElementList	spec(__no_group)--spec;
+		pageElementList	spec(__no_group)--spec;
+	}
+} depth=3; isRoot = false
+
+meta{name=start_way_element}
+start_way_element{
+	fields(9){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	chinese_name('查看用户dashboard'), verb: false, required: true,type:string;
+		string	english_name('view user profile'), verb: false, required: true,type:string;
+		int	position_x('100'), verb: false, required: true,type:int;
+		int	position_y('300'), verb: false, required: true,type:int;
+		string_longtext	description('text()'), verb: false, required: true,type:string_longtext;
+		string	actor('终端用户|管理员|'), verb: false, required: true,type:string;
+		page_flow_spec	spec('$(object)'), verb: false, required: true, referenceBy: startWayElementList,type:page_flow_spec;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=4; isRoot = false
+
+meta{name=request_element}
+request_element{
+	fields(11){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	chinese_name('查看用户dashboard'), verb: false, required: true,type:string;
+		string	english_name('view user profile'), verb: false, required: true,type:string;
+		int	position_x('100'), verb: false, required: true,type:int;
+		int	position_y('300'), verb: false, required: true,type:int;
+		string_longtext	description('text()'), verb: false, required: true,type:string_longtext;
+		bool	need_login('true|false'), verb: false, required: true,type:bool;
+		string	foot_print_scope('GLOBAL|NONE|TRANSACTION'), verb: false, required: true,type:string;
+		string	request_data_type('GET|CHANGE_REQUEST'), verb: false, required: true,type:string;
+		page_flow_spec	spec('$(object)'), verb: false, required: true, referenceBy: requestElementList,type:page_flow_spec;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(3){
+		connectionToRequestList	request(__no_group)--request;
+		branchFromRequestList	request(__no_group)--request;
+		requestParameterList	request(__no_group)--request;
+	}
+} depth=4; isRoot = false
+
+meta{name=page_element}
+page_element{
+	fields(9){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	chinese_name('查看用户dashboard'), verb: false, required: true,type:string;
+		string	english_name('view user profile'), verb: false, required: true,type:string;
+		int	position_x('100'), verb: false, required: true,type:int;
+		int	position_y('300'), verb: false, required: true,type:int;
+		string_longtext	description('text()'), verb: false, required: true,type:string_longtext;
+		int	cache_seconds('0|10'), verb: false, required: true,type:int;
+		page_flow_spec	spec('$(object)'), verb: false, required: true, referenceBy: pageElementList,type:page_flow_spec;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=4; isRoot = false
+
+meta{name=connection_to_request}
+connection_to_request{
+	fields(6){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	from_type('START_WAY|PAGE'), verb: false, required: true,type:string;
+		string	from_element('SWE000001|PE0000001'), verb: false, required: true,type:string;
+		request_element	request('$(object)'), verb: false, required: true, referenceBy: connectionToRequestList,type:request_element;
+		string_longtext	params('text()'), verb: false, required: true,type:string_longtext;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=5; isRoot = false
+
+meta{name=branch_from_request}
+branch_from_request{
+	fields(8){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	chinese_name('用户未登陆|用户被禁言'), verb: false, required: true,type:string;
+		string	english_name('User not login|User Banned'), verb: false, required: true,type:string;
+		request_element	request('$(object)'), verb: false, required: true, referenceBy: branchFromRequestList,type:request_element;
+		string_longtext	params('text()'), verb: false, required: true,type:string_longtext;
+		string	to_type('START_WAY|PAGE'), verb: false, required: true,type:string;
+		string	to_element('SWE000001|PE0000001'), verb: false, required: true,type:string;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=5; isRoot = false
+
+meta{name=request_parameter}
+request_parameter{
+	fields(7){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	chinese_name('用户标识|密码'), verb: false, required: true,type:string;
+		string	english_name('login|password'), verb: false, required: true,type:string;
+		request_element	request('$(object)'), verb: false, required: true, referenceBy: requestParameterList,type:request_element;
+		string	data_type('字符串|数字|布尔|对象|列表|表单'), verb: false, required: true,type:string;
+		int	display_order('0|1|2'), verb: false, required: true,type:int;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=5; isRoot = false
+
+meta{name=work_flow_spec}
+work_flow_spec{
+	fields(6){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	scene('登录'), verb: false, required: true,type:string;
+		string_longtext	brief('text()'), verb: false, required: true,type:string_longtext;
+		user	owner('$(object)'), verb: false, required: true, referenceBy: workFlowSpecList,type:user;
+		project	project('$(object)'), verb: false, required: true, referenceBy: workFlowSpecList,type:project;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=3; isRoot = false
+
+meta{name=change_request_spec}
+change_request_spec{
+	fields(6){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	scene('登录'), verb: false, required: true,type:string;
+		string_longtext	brief('text()'), verb: false, required: true,type:string_longtext;
+		user	owner('$(object)'), verb: false, required: true, referenceBy: changeRequestSpecList,type:user;
+		project	project('$(object)'), verb: false, required: true, referenceBy: changeRequestSpecList,type:project;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=3; isRoot = false
+
+meta{name=page_content_spec}
+page_content_spec{
+	fields(6){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	scene('登录'), verb: false, required: true,type:string;
+		string_longtext	brief('text()'), verb: false, required: true,type:string_longtext;
+		user	owner('$(object)'), verb: false, required: true, referenceBy: pageContentSpecList,type:user;
+		project	project('$(object)'), verb: false, required: true, referenceBy: pageContentSpecList,type:project;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=3; isRoot = false
+
+meta{name=platform}
+platform{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('规规格管理平台'), verb: false, required: true,type:string;
+		date_time_create	create_time('createTime()'), verb: false, required: true,type:date_time_create;
+		date_time_update	last_update_time('updateTime()'), verb: false, required: true,type:date_time_update;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(3){
+		companyList	platform(__no_group)--platform;
+		changeRequestTypeList	platform(__no_group)--platform;
+		changeRequestList	platform(__no_group)--platform;
+	}
+} depth=0; isRoot = true
+
+meta{name=company}
+company{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('XX公司'), verb: false, required: true,type:string;
+		date_time_create	create_time('createTime()'), verb: false, required: true,type:date_time_create;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: companyList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(2){
+		userList	company(__no_group)--company;
+		projectList	company(__no_group)--company;
+	}
+} depth=1; isRoot = false
+
+meta{name=user, features=merchant}
+user{
+	fields(6){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('X先生'), verb: false, required: true,type:string;
+		date	join_time('2199-01-01'), verb: false, required: true,type:date;
+		company	company('$(object)'), verb: false, required: true, referenceBy: userList,type:company;
+		string	title('BA|Leader|Coder'), verb: false, required: true,type:string;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(5){
+		userProjectList	user(__no_group)--user;
+		pageFlowSpecList	owner(__no_group)--owner;
+		workFlowSpecList	owner(__no_group)--owner;
+		changeRequestSpecList	owner(__no_group)--owner;
+		pageContentSpecList	owner(__no_group)--owner;
+	}
+} depth=2; isRoot = false
+
+meta{name=user_project}
+user_project{
+	fields(6){
+		string	id('AB'), verb: false, required: true,type:id;
+		user	user('$(object)'), verb: false, required: true, referenceBy: userProjectList,type:user;
+		project	project('$(object)'), verb: false, required: true, referenceBy: userProjectList,type:project;
+		date_time_create	create_time('createTime()'), verb: false, required: true,type:date_time_create;
+		date_time_update	last_update_time('updateTime()'), verb: false, required: true,type:date_time_update;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=3; isRoot = false
+
+meta{name=change_request_type, identified_by=code, features=cr_type}
+change_request_type{
+	fields(9){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('更新个人信息'), verb: false, required: true,type:string;
+		string	code('UPDATE_PROFILE'), verb: false, required: true,type:string;
+		string	icon('bars'), verb: false, required: true,type:string;
+		int	display_order('1|2|3|4|5|6'), verb: false, required: true,type:int;
+		string_longtext	bind_types('text()'), verb: false, required: true,type:string_longtext;
+		string_longtext	step_configuration('text()'), verb: false, required: true,type:string_longtext;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: changeRequestTypeList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		changeRequestList	request_type(__no_group)--request_type;
+	}
+} depth=1; isRoot = false
+
+meta{name=change_request, features=change_request}
+change_request{
+	fields(8){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('注册|开始考试|答题'), verb: false, required: true,type:string;
+		date_time_create	create_time('createTime()'), verb: false, required: true,type:date_time_create;
+		string_client_ip	remote_ip('remoteIp()'), verb: false, required: true,type:string_client_ip;
+		change_request_type	request_type('$(object)'), verb: false, required: true, referenceBy: changeRequestList,type:change_request_type;
+		bool	commited('false'), verb: false, required: true,type:bool;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: changeRequestList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		eventUpdateProfileList	change_request(__no_group)--change_request;
+	}
+} depth=2; isRoot = false
+
+meta{bind_with_cr_type=UPDATE_PROFILE, name=event_update_profile, features=event}
+event_update_profile{
+	fields(8){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('name|用户名'), verb: false, required: true,type:string;
+		string_image	avantar('avantar.jpg'), verb: false, required: true,type:string_image;
+		string	field_group('cr_type/step_name/event_name/event_index'), verb: false, required: true,type:string;
+		string	event_initiator_type('SecUser|Merchant'), verb: false, required: true,type:string;
+		string	event_initiator_id('SU000001|M0000001'), verb: false, required: true,type:string;
+		change_request	change_request('$(object)'), verb: false, required: true, referenceBy: eventUpdateProfileList,type:change_request;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=3; isRoot = false
+
+meta{name=project}
+project{
+	fields(4){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('X项目'), verb: false, required: true,type:string;
+		company	company('$(object)'), verb: false, required: true, referenceBy: projectList,type:company;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(5){
+		userProjectList	project(__no_group)--project;
+		pageFlowSpecList	project(__no_group)--project;
+		workFlowSpecList	project(__no_group)--project;
+		changeRequestSpecList	project(__no_group)--project;
+		pageContentSpecList	project(__no_group)--project;
+	}
+} depth=2; isRoot = false
+
+meta{name=page_flow_spec}
+page_flow_spec{
+	fields(6){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	scene('登录'), verb: false, required: true,type:string;
+		string_longtext	brief('text()'), verb: false, required: true,type:string_longtext;
+		user	owner('$(object)'), verb: false, required: true, referenceBy: pageFlowSpecList,type:user;
+		project	project('$(object)'), verb: false, required: true, referenceBy: pageFlowSpecList,type:project;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(3){
+		startWayElementList	spec(__no_group)--spec;
+		requestElementList	spec(__no_group)--spec;
+		pageElementList	spec(__no_group)--spec;
+	}
+} depth=3; isRoot = false
+
+meta{name=start_way_element}
+start_way_element{
+	fields(9){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	chinese_name('查看用户dashboard'), verb: false, required: true,type:string;
+		string	english_name('view user profile'), verb: false, required: true,type:string;
+		int	position_x('100'), verb: false, required: true,type:int;
+		int	position_y('300'), verb: false, required: true,type:int;
+		string_longtext	description('text()'), verb: false, required: true,type:string_longtext;
+		string	actor('终端用户|管理员|'), verb: false, required: true,type:string;
+		page_flow_spec	spec('$(object)'), verb: false, required: true, referenceBy: startWayElementList,type:page_flow_spec;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=4; isRoot = false
+
+meta{name=request_element}
+request_element{
+	fields(11){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	chinese_name('查看用户dashboard'), verb: false, required: true,type:string;
+		string	english_name('view user profile'), verb: false, required: true,type:string;
+		int	position_x('100'), verb: false, required: true,type:int;
+		int	position_y('300'), verb: false, required: true,type:int;
+		string_longtext	description('text()'), verb: false, required: true,type:string_longtext;
+		bool	need_login('true|false'), verb: false, required: true,type:bool;
+		string	foot_print_scope('GLOBAL|NONE|TRANSACTION'), verb: false, required: true,type:string;
+		string	request_data_type('GET|CHANGE_REQUEST'), verb: false, required: true,type:string;
+		page_flow_spec	spec('$(object)'), verb: false, required: true, referenceBy: requestElementList,type:page_flow_spec;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(3){
+		connectionToRequestList	request(__no_group)--request;
+		branchFromRequestList	request(__no_group)--request;
+		requestParameterList	request(__no_group)--request;
+	}
+} depth=4; isRoot = false
+
+meta{name=page_element}
+page_element{
+	fields(9){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	chinese_name('查看用户dashboard'), verb: false, required: true,type:string;
+		string	english_name('view user profile'), verb: false, required: true,type:string;
+		int	position_x('100'), verb: false, required: true,type:int;
+		int	position_y('300'), verb: false, required: true,type:int;
+		string_longtext	description('text()'), verb: false, required: true,type:string_longtext;
+		int	cache_seconds('0|10'), verb: false, required: true,type:int;
+		page_flow_spec	spec('$(object)'), verb: false, required: true, referenceBy: pageElementList,type:page_flow_spec;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=4; isRoot = false
+
+meta{name=connection_to_request}
+connection_to_request{
+	fields(6){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	from_type('START_WAY|PAGE'), verb: false, required: true,type:string;
+		string	from_element('SWE000001|PE0000001'), verb: false, required: true,type:string;
+		request_element	request('$(object)'), verb: false, required: true, referenceBy: connectionToRequestList,type:request_element;
+		string_longtext	params('text()'), verb: false, required: true,type:string_longtext;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=5; isRoot = false
+
+meta{name=branch_from_request}
+branch_from_request{
+	fields(8){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	chinese_name('用户未登陆|用户被禁言'), verb: false, required: true,type:string;
+		string	english_name('User not login|User Banned'), verb: false, required: true,type:string;
+		request_element	request('$(object)'), verb: false, required: true, referenceBy: branchFromRequestList,type:request_element;
+		string_longtext	params('text()'), verb: false, required: true,type:string_longtext;
+		string	to_type('START_WAY|PAGE'), verb: false, required: true,type:string;
+		string	to_element('SWE000001|PE0000001'), verb: false, required: true,type:string;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=5; isRoot = false
+
+meta{name=request_parameter}
+request_parameter{
+	fields(7){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	chinese_name('用户标识|密码'), verb: false, required: true,type:string;
+		string	english_name('login|password'), verb: false, required: true,type:string;
+		request_element	request('$(object)'), verb: false, required: true, referenceBy: requestParameterList,type:request_element;
+		string	data_type('字符串|数字|布尔|对象|列表|表单'), verb: false, required: true,type:string;
+		int	display_order('0|1|2'), verb: false, required: true,type:int;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=5; isRoot = false
+
+meta{name=work_flow_spec}
+work_flow_spec{
+	fields(6){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	scene('登录'), verb: false, required: true,type:string;
+		string_longtext	brief('text()'), verb: false, required: true,type:string_longtext;
+		user	owner('$(object)'), verb: false, required: true, referenceBy: workFlowSpecList,type:user;
+		project	project('$(object)'), verb: false, required: true, referenceBy: workFlowSpecList,type:project;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=3; isRoot = false
+
+meta{name=change_request_spec}
+change_request_spec{
+	fields(6){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	scene('登录'), verb: false, required: true,type:string;
+		string_longtext	brief('text()'), verb: false, required: true,type:string_longtext;
+		user	owner('$(object)'), verb: false, required: true, referenceBy: changeRequestSpecList,type:user;
+		project	project('$(object)'), verb: false, required: true, referenceBy: changeRequestSpecList,type:project;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=3; isRoot = false
+
+meta{name=page_content_spec}
+page_content_spec{
+	fields(6){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	scene('登录'), verb: false, required: true,type:string;
+		string_longtext	brief('text()'), verb: false, required: true,type:string_longtext;
+		user	owner('$(object)'), verb: false, required: true, referenceBy: pageContentSpecList,type:user;
+		project	project('$(object)'), verb: false, required: true, referenceBy: pageContentSpecList,type:project;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=3; isRoot = false
+
+meta{name=mobile_app}
+mobile_app{
+	fields(3){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('移动端配置'), verb: false, required: true,type:string;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(2){
+		pageList	mobile_app(__no_group)--mobile_app;
+		pageTypeList	mobile_app(__no_group)--mobile_app;
+	}
+} depth=0; isRoot = true
+
+meta{name=page}
+page{
+	fields(7){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	page_title('首页'), verb: false, required: true,type:string;
+		string	link_to_url('首页'), verb: false, required: true,type:string;
+		page_type	page_type('$(object)'), verb: false, required: true, referenceBy: pageList,type:page_type;
+		int	display_order('1|2|3'), verb: false, required: true,type:int;
+		mobile_app	mobile_app('$(object)'), verb: false, required: true, referenceBy: pageList,type:mobile_app;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(3){
+		slideList	page(__no_group)--page;
+		uiActionList	page(__no_group)--page;
+		sectionList	page(__no_group)--page;
+	}
+} depth=2; isRoot = false
+
+meta{name=page_type, features=status, identified_by=code}
+page_type{
+	fields(6){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('首页|我的|Generic Page|Listof Page|功能大厅|普通'), verb: false, required: true,type:string;
+		string	code('home|me|generic-page|listof-page|service-center|simple'), verb: false, required: true,type:string;
+		mobile_app	mobile_app('$(object)'), verb: false, required: true, referenceBy: pageTypeList,type:mobile_app;
+		bool	footer_tab('true|false'), verb: false, required: true,type:bool;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		pageList	page_type(__no_group)--page_type;
+	}
+} depth=1; isRoot = false
+
+meta{name=slide}
+slide{
+	fields(8){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('首页Focus的内容'), verb: false, required: true,type:string;
+		int	display_order('1|2|3'), verb: false, required: true,type:int;
+		string_image	image_url('https://xubai-test.oss-cn-beijing.aliyuncs.com/app/test/slide_1.jpg|https://xubai-test.oss-cn-beijing.aliyuncs.com/app/test/slide_2.jpg|https://xubai-test.oss-cn-beijing.aliyuncs.com/app/test/slide_3.jpg|https://xubai-test.oss-cn-beijing.aliyuncs.com/app/test/slide_4.jpg'), verb: false, required: true,type:string_image;
+		string_image	video_url('https://xubai-test.oss-cn-beijing.aliyuncs.com/app/test/slide_1.jpg|https://xubai-test.oss-cn-beijing.aliyuncs.com/app/test/slide_2.jpg|https://xubai-test.oss-cn-beijing.aliyuncs.com/app/test/slide_3.jpg|https://xubai-test.oss-cn-beijing.aliyuncs.com/app/test/slide_4.jpg'), verb: false, required: true,type:string_image;
+		string	link_to_url('|/section/article/'), verb: false, required: false,type:string;
+		page	page('$(object)'), verb: false, required: true, referenceBy: slideList,type:page;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=3; isRoot = false
+
+meta{name=ui_action}
+ui_action{
+	fields(11){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	code('submit|share|view|more'), verb: false, required: true,type:string;
+		string	icon('icon_edit|icon_share|icon_eye|icon_more'), verb: false, required: true,type:string;
+		string	title('提交|分享|查看|更多'), verb: false, required: true,type:string;
+		int	display_order('1|2|3'), verb: false, required: true,type:int;
+		string	brief('Submit|Share|View|View More'), verb: false, required: true,type:string;
+		string_image	image_url('https://xubai-test.oss-cn-beijing.aliyuncs.com/app/test/slide_1.jpg|https://xubai-test.oss-cn-beijing.aliyuncs.com/app/test/slide_2.jpg|https://xubai-test.oss-cn-beijing.aliyuncs.com/app/test/slide_3.jpg|https://xubai-test.oss-cn-beijing.aliyuncs.com/app/test/slide_4.jpg'), verb: false, required: true,type:string_image;
+		string	link_to_url('wxappService/section/article/'), verb: false, required: true,type:string;
+		string_longtext	extra_data('text()'), verb: false, required: true,type:string_longtext;
+		page	page('$(object)'), verb: false, required: true, referenceBy: uiActionList,type:page;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=3; isRoot = false
+
+meta{name=section}
+section{
+	fields(9){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	title('文章|作品'), verb: false, required: true,type:string;
+		string	brief('Article|Artwork'), verb: false, required: true,type:string;
+		string_image	icon('icon.jpg'), verb: false, required: true,type:string_image;
+		int	display_order('1|2|3'), verb: false, required: true,type:int;
+		string	view_group('icon_edit|icon_share|icon_eye|icon_more'), verb: false, required: true,type:string;
+		string	link_to_url('wxappService/section/article/'), verb: false, required: true,type:string;
+		page	page('$(object)'), verb: false, required: true, referenceBy: sectionList,type:page;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=3; isRoot = false
+
+meta{name=user_domain, features=ootb}
+user_domain{
+	fields(3){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('用户区域'), verb: false, required: true,type:string;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(3){
+		userWhiteListList	domain(__no_group)--domain;
+		secUserList	domain(__no_group)--domain;
+		publicKeyTypeList	domain(__no_group)--domain;
+	}
+} depth=0; isRoot = true
+
+meta{name=user_white_list, features=syssetting}
+user_white_list{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	user_identity('clariones|13808188512'), verb: false, required: true,type:string;
+		string	user_special_functions('tester;ios-spokesperson'), verb: false, required: true,type:string;
+		user_domain	domain('$(object)'), verb: false, required: true, referenceBy: userWhiteListList,type:user_domain;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=1; isRoot = false
+
+meta{name=sec_user, features=ootb, identified_by=login,email,mobile}
+sec_user{
+	fields(13){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	login('login'), verb: false, required: true,type:string;
+		string_china_mobile_phone	mobile('13900000001'), verb: false, required: true,type:string_china_mobile_phone;
+		string_email	email('suddy_chang@163.com'), verb: false, required: true,type:string_email;
+		string_password	pwd('*******'), verb: false, required: true,type:string_password;
+		string	weixin_openid('wx123456789abcdefghijklmn'), verb: false, required: true,type:string;
+		string	weixin_appid('wxapp12098410239840'), verb: false, required: true,type:string;
+		string	access_token('jwt_token_12345678'), verb: false, required: true,type:string;
+		int	verification_code('0|9999999'), verb: false, required: true,type:int;
+		date_time	verification_code_expire('2099-12-31T09:09:09'), verb: false, required: true,type:date_time;
+		date_time	last_login_time('2099-12-31T09:09:09'), verb: false, required: false,type:date_time;
+		user_domain	domain('$(object)'), verb: false, required: true, referenceBy: secUserList,type:user_domain;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(5){
+		userAppList	sec_user(__no_group)--sec_user;
+		loginHistoryList	sec_user(__no_group)--sec_user;
+		wechatWorkappIdentityList	sec_user(__no_group)--sec_user;
+		wechatMiniappIdentityList	sec_user(__no_group)--sec_user;
+		keypairIdentityList	sec_user(__no_group)--sec_user;
+	}
+} depth=1; isRoot = false
+
+meta{name=user_app, features=ootb}
+user_app{
+	fields(10){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	title('审车平台|账户管理|接车公司|审车公司|维修公司|顾客'), verb: false, required: true,type:string;
+		sec_user	sec_user('$(object)'), verb: false, required: true, referenceBy: userAppList,type:sec_user;
+		string	app_icon('users|bank|wechat|bar-chart|user|users'), verb: false, required: true,type:string;
+		bool	full_access('true'), verb: false, required: true,type:bool;
+		string	permission('MXWR|MXWR'), verb: false, required: true,type:string;
+		string	object_type('CarInspectionPlatform|UserDomain|CarReceivingServiceCompany|CarInspectionServiceCompany|CarRepairingServiceCompany|CustomerInfo'), verb: false, required: true,type:string;
+		string	object_id('CIP000001|UD000001|CRSC000001|CISC000001|CRSC000001|CI000001'), verb: false, required: true,type:string;
+		string	location('/link/to/app'), verb: false, required: true,type:string;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(2){
+		quickLinkList	app(__no_group)--app;
+		listAccessList	app(__no_group)--app;
+	}
+} depth=2; isRoot = false
+
+meta{name=quick_link, features=ootb}
+quick_link{
+	fields(8){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('列表'), verb: false, required: true,type:string;
+		string	icon('facebook|google'), verb: false, required: true,type:string;
+		string_image	image_path('y-200-200-red.jpg'), verb: false, required: true,type:string_image;
+		string	link_target('列表'), verb: false, required: true,type:string;
+		date_time_create	create_time('createTime()'), verb: false, required: true,type:date_time_create;
+		user_app	app('$(object)'), verb: false, required: true, referenceBy: quickLinkList,type:user_app;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=3; isRoot = false
+
+meta{name=list_access, features=ootb}
+list_access{
+	fields(10){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('列表'), verb: false, required: true,type:string;
+		string	internal_name('levelOneCategoryList'), verb: false, required: true,type:string;
+		bool	read_permission('true'), verb: false, required: true,type:bool;
+		bool	create_permission('true'), verb: false, required: true,type:bool;
+		bool	delete_permission('true'), verb: false, required: true,type:bool;
+		bool	update_permission('true'), verb: false, required: true,type:bool;
+		bool	execution_permission('true'), verb: false, required: true,type:bool;
+		user_app	app('$(object)'), verb: false, required: true, referenceBy: listAccessList,type:user_app;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=3; isRoot = false
+
+meta{name=login_history, features=syslog}
+login_history{
+	fields(6){
+		string	id('AB'), verb: false, required: true,type:id;
+		date_time_create	login_time('createTime()'), verb: false, required: true,type:date_time_create;
+		string	from_ip('192.168.1.1|192.168.1.2'), verb: false, required: true,type:string;
+		string	description('登陆成功'), verb: false, required: true,type:string;
+		sec_user	sec_user('$(object)'), verb: false, required: true, referenceBy: loginHistoryList,type:sec_user;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=2; isRoot = false
+
+meta{name=candidate_container, features=internal,ootb}
+candidate_container{
+	fields(3){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('我只是一个容器'), verb: false, required: true,type:string;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		candidateElementList	container(__no_group)--container;
+	}
+} depth=0; isRoot = true
+
+meta{name=candidate_element, features=internal,ootb}
+candidate_element{
+	fields(6){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('搜索到的匹配字段'), verb: false, required: true,type:string;
+		string	type('类型描述'), verb: false, required: true,type:string;
+		string_image	image('1.jpg'), verb: false, required: true,type:string_image;
+		candidate_container	container('$(object)'), verb: false, required: true, referenceBy: candidateElementList,type:candidate_container;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=1; isRoot = false
+
+meta{name=wechat_workapp_identity}
+wechat_workapp_identity{
+	fields(7){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	corp_id('corporation123'), verb: false, required: true,type:string;
+		string	user_id('user123'), verb: false, required: true,type:string;
+		sec_user	sec_user('$(object)'), verb: false, required: true, referenceBy: wechatWorkappIdentityList,type:sec_user;
+		date_time_create	create_time('createTime()'), verb: false, required: true,type:date_time_create;
+		date_time	last_login_time('2100-01-01T00:00:00'), verb: false, required: false,type:date_time;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=2; isRoot = false
+
+meta{name=wechat_miniapp_identity}
+wechat_miniapp_identity{
+	fields(7){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	open_id('wechat_open_id_1234567890'), verb: false, required: true,type:string;
+		string	app_id('wechat_miniapp_id_1234567890'), verb: false, required: true,type:string;
+		sec_user	sec_user('$(object)'), verb: false, required: true, referenceBy: wechatMiniappIdentityList,type:sec_user;
+		date_time_create	create_time('createTime()'), verb: false, required: true,type:date_time_create;
+		date_time	last_login_time('2100-01-01T00:00:00'), verb: false, required: false,type:date_time;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=2; isRoot = false
+
+meta{name=keypair_identity}
+keypair_identity{
+	fields(6){
+		string	id('AB'), verb: false, required: true,type:id;
+		string_longtext	public_key('text()'), verb: false, required: true,type:string_longtext;
+		public_key_type	key_type('$(object)'), verb: false, required: true, referenceBy: keypairIdentityList,type:public_key_type;
+		sec_user	sec_user('$(object)'), verb: false, required: true, referenceBy: keypairIdentityList,type:sec_user;
+		date_time_create	create_time('createTime()'), verb: false, required: true,type:date_time_create;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=2; isRoot = false
+
+meta{name=public_key_type}
+public_key_type{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('rsa|ecc'), verb: false, required: true,type:string;
+		string	code('rsa|ecc'), verb: false, required: true,type:string;
+		user_domain	domain('$(object)'), verb: false, required: true, referenceBy: publicKeyTypeList,type:user_domain;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		keypairIdentityList	key_type(__no_group)--key_type;
+	}
+} depth=1; isRoot = false
+
+meta{name=tree_node}
+tree_node{
+	fields(6){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	node_id('node000001'), verb: false, required: true,type:string;
+		string	node_type('nodetype'), verb: false, required: true,type:string;
+		int	left_value('1'), verb: false, required: true,type:int;
+		int	right_value('10'), verb: false, required: true,type:int;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=0; isRoot = true
+
+
+
+
+=================================End Report=================================

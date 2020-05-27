@@ -369,7 +369,7 @@ public class PageFlowScript extends BasePageFlowScript {
 		return got_page("simple popup");
 	}
 	public PageFlowScript got_toast_page() {
-		return got_page("simple toast");
+		return got_page("simple toast").comments("提示信息");
 	}
 	public PageFlowScript login_as(String modelName) {
 		UserLoginInfo ulInfo = new UserLoginInfo();
@@ -415,7 +415,7 @@ public class PageFlowScript extends BasePageFlowScript {
 		return got_page("me").as_class("com.terapico.appview.MePage");
 	}
 	public PageFlowScript got_home_page() {
-		return got_page("home").as_class("com.terapico.appview.HomePage");
+		return got_page("home").comments("首页").as_class("com.terapico.appview.HomePage");
 	}
 	
 	public PageFlowScript find(String tgtName) {
@@ -681,5 +681,7 @@ public class PageFlowScript extends BasePageFlowScript {
 	}
 
 
-
+    public PageFlowScript request_homepage() {
+		return this.request("view home page").comments("打开首页").no_login();
+    }
 }

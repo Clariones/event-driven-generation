@@ -69,12 +69,14 @@ public class BasicGenerator {
 
 	protected Template getTemplate(String tmplFileName)
 			throws IOException, TemplateNotFoundException, MalformedTemplateNameException, ParseException {
-				Configuration cfg = new Configuration(Configuration.VERSION_2_3_25);
-				cfg.setDefaultEncoding("utf-8");
-				cfg.setDirectoryForTemplateLoading(new File(baseTempalteFolder));
-				Template template = cfg.getTemplate(tmplFileName);
-				return template;
-			}
+		Configuration cfg = new Configuration(Configuration.VERSION_2_3_25);
+		cfg.setDefaultEncoding("utf-8");
+		File tmpFolder = new File(baseTempalteFolder);
+		System.out.println("try to load template from " + tmpFolder.getCanonicalPath());
+		cfg.setDirectoryForTemplateLoading(tmpFolder);
+		Template template = cfg.getTemplate(tmplFileName);
+		return template;
+	}
 
 	protected Map<String, Object> prepareData(Object script, String packageName, String className) {
 		Map<String, Object> data = new HashMap<>();

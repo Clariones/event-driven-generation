@@ -1,0 +1,4508 @@
+
+
+@warning object definition: user_3d_try_on_video: word '3d' seems not found in library
+@warning lens.lens_idx: word 'idx' seems not found in library
+@warning object definition: wechat_workapp_identity: word 'workapp' seems not found in library
+@warning object definition: wechat_miniapp_identity: word 'miniapp' seems not found in library
+@warning object definition: keypair_identity: word 'keypair' seems not found in library
+
+
+
+=================Execute Report (Model Time 200526T1827) @Tue May 26 18:30:18 CST 2020, 105 objects and 741 fields===========================
+from file "/works/jobs/optical_v1/workspace/web-code-generator/sky/modeling/microservice/optical.xml"
+
+
+ processing: platform
+
+
+ processing: demo_product
+
+
+ processing: demo_product.category.category
+
+Info: Add virtual field [demo_products(es)] to <category>
+	demo_product.category
+
+
+ processing: demo_product.platform.platform
+
+Info: Add virtual field [demo_products(es)] to <platform>
+	demo_product.platform
+
+
+ processing: demo_sku
+
+
+ processing: demo_sku.frame_color.color
+
+Info: Add virtual field [demo_skus(es)] to <frame_color>
+	demo_sku.color
+
+
+ processing: demo_sku.demo_product.demo_product
+
+Info: Add virtual field [demo_skus(es)] to <demo_product>
+	demo_sku.demo_product
+
+
+ processing: demo_sku.platform.platform
+
+Info: Add virtual field [demo_skus(es)] to <platform>
+	demo_sku.platform
+
+
+ processing: user
+
+
+ processing: user.platform.platform
+
+Info: Add virtual field [users(es)] to <platform>
+	user.platform
+
+
+ processing: province
+
+
+ processing: province.platform.platform
+
+Info: Add virtual field [provinces(es)] to <platform>
+	province.platform
+
+
+ processing: city
+
+
+ processing: city.province.province
+
+Info: Add virtual field [citys(es)] to <province>
+	city.province
+
+
+ processing: district
+
+
+ processing: district.city.city
+
+Info: Add virtual field [districts(es)] to <city>
+	district.city
+
+
+ processing: shipping_address
+
+
+ processing: shipping_address.province.province
+
+Info: Add virtual field [shipping_addresss(es)] to <province>
+	shipping_address.province
+
+
+ processing: shipping_address.city.city
+
+Info: Add virtual field [shipping_addresss(es)] to <city>
+	shipping_address.city
+
+
+ processing: shipping_address.district.district
+
+Info: Add virtual field [shipping_addresss(es)] to <district>
+	shipping_address.district
+
+
+ processing: shipping_address.user.user
+
+Info: Add virtual field [shipping_addresss(es)] to <user>
+	shipping_address.user
+
+
+ processing: user_try_on_avatar
+
+
+ processing: user_try_on_avatar.sku.try_on_glasses
+
+Info: Add virtual field [user_try_on_avatars(es)] to <sku>
+	user_try_on_avatar.try_on_glasses
+
+
+ processing: user_try_on_avatar.user.user
+
+Info: Add virtual field [user_try_on_avatars(es)] to <user>
+	user_try_on_avatar.user
+
+
+ processing: user_try_on_avatar.platform.platform
+
+Info: Add virtual field [user_try_on_avatars(es)] to <platform>
+	user_try_on_avatar.platform
+
+
+ processing: user_3d_try_on_video
+
+
+ processing: user_3d_try_on_video.sku.try_on_glasses
+
+Info: Add virtual field [user_3d_try_on_videos(es)] to <sku>
+	user_3d_try_on_video.try_on_glasses
+
+
+ processing: user_3d_try_on_video.user.user
+
+Info: Add virtual field [user_3d_try_on_videos(es)] to <user>
+	user_3d_try_on_video.user
+
+
+ processing: user_3d_try_on_video.platform.platform
+
+Info: Add virtual field [user_3d_try_on_videos(es)] to <platform>
+	user_3d_try_on_video.platform
+
+
+ processing: merchant
+
+
+ processing: merchant.platform.platform
+
+Info: Add virtual field [merchants(es)] to <platform>
+	merchant.platform
+
+
+ processing: lens
+
+
+ processing: lens.lens_brand.brand
+
+Info: Add virtual field [lenss(es)] to <lens_brand>
+	lens.brand
+
+
+ processing: lens.lens_idx.lens_idx
+
+Info: Add virtual field [lenss(es)] to <lens_idx>
+	lens.lens_idx
+
+
+ processing: lens.lens_prescription_type.lens_prescription_type
+
+Info: Add virtual field [lenss(es)] to <lens_prescription_type>
+	lens.lens_prescription_type
+
+
+ processing: lens.sphere_range.sphere_range
+
+Info: Add virtual field [lenss(es)] to <sphere_range>
+	lens.sphere_range
+
+
+ processing: lens.cylinder_range.cylinder_range
+
+Info: Add virtual field [lenss(es)] to <cylinder_range>
+	lens.cylinder_range
+
+
+ processing: lens.prism_range_and_direction.prism_range_and_direction
+
+Info: Add virtual field [lenss(es)] to <prism_range_and_direction>
+	lens.prism_range_and_direction
+
+
+ processing: lens.near_vision_addition_range.near_vision_addition_range
+
+Info: Add virtual field [lenss(es)] to <near_vision_addition_range>
+	lens.near_vision_addition_range
+
+
+ processing: lens.lens_process_type.lens_process_type
+
+Info: Add virtual field [lenss(es)] to <lens_process_type>
+	lens.lens_process_type
+
+
+ processing: lens.lens_material_type.lens_material_type
+
+Info: Add virtual field [lenss(es)] to <lens_material_type>
+	lens.lens_material_type
+
+
+ processing: lens.platform.platform
+
+Info: Add virtual field [lenss(es)] to <platform>
+	lens.platform
+
+
+ processing: lens_inventory
+
+
+ processing: lens_inventory.lens.lens
+
+Info: Add virtual field [lens_inventorys(es)] to <lens>
+	lens_inventory.lens
+
+
+ processing: lens_inventory.platform.platform
+
+Info: Add virtual field [lens_inventorys(es)] to <platform>
+	lens_inventory.platform
+
+
+ processing: lens_brand
+
+
+ processing: lens_brand.platform.platform
+
+Info: Add virtual field [lens_brands(es)] to <platform>
+	lens_brand.platform
+
+
+ processing: lens_material_type
+
+
+ processing: lens_material_type.platform.platform
+
+Info: Add virtual field [lens_material_types(es)] to <platform>
+	lens_material_type.platform
+
+
+ processing: lens_process_type
+
+
+ processing: lens_process_type.platform.platform
+
+Info: Add virtual field [lens_process_types(es)] to <platform>
+	lens_process_type.platform
+
+
+ processing: lens_available_standard_tint
+
+
+ processing: lens_available_standard_tint.lens.lens
+
+Info: Add virtual field [lens_available_standard_tints(es)] to <lens>
+	lens_available_standard_tint.lens
+
+
+ processing: lens_available_standard_tint.standard_lens_tint.standard_lens_tint
+
+Info: Add virtual field [lens_available_standard_tints(es)] to <standard_lens_tint>
+	lens_available_standard_tint.standard_lens_tint
+
+
+ processing: lens_available_standard_tint.platform.platform
+
+Info: Add virtual field [lens_available_standard_tints(es)] to <platform>
+	lens_available_standard_tint.platform
+
+
+ processing: lens_available_gradient_tint
+
+
+ processing: lens_available_gradient_tint.lens.lens
+
+Info: Add virtual field [lens_available_gradient_tints(es)] to <lens>
+	lens_available_gradient_tint.lens
+
+
+ processing: lens_available_gradient_tint.gradient_lens_tint.tint
+
+Info: Add virtual field [lens_available_gradient_tints(es)] to <gradient_lens_tint>
+	lens_available_gradient_tint.tint
+
+
+ processing: lens_available_gradient_tint.platform.platform
+
+Info: Add virtual field [lens_available_gradient_tints(es)] to <platform>
+	lens_available_gradient_tint.platform
+
+
+ processing: lens_available_coating
+
+
+ processing: lens_available_coating.lens.lens
+
+Info: Add virtual field [lens_available_coatings(es)] to <lens>
+	lens_available_coating.lens
+
+
+ processing: lens_available_coating.lens_ar_coating.coating
+
+Info: Add virtual field [lens_available_coatings(es)] to <lens_ar_coating>
+	lens_available_coating.coating
+
+
+ processing: lens_available_coating.platform.platform
+
+Info: Add virtual field [lens_available_coatings(es)] to <platform>
+	lens_available_coating.platform
+
+
+ processing: lens_ar_coating
+
+
+ processing: lens_ar_coating.coating_type.coating_type
+
+Info: Add virtual field [lens_ar_coatings(es)] to <coating_type>
+	lens_ar_coating.coating_type
+
+
+ processing: lens_ar_coating.platform.platform
+
+Info: Add virtual field [lens_ar_coatings(es)] to <platform>
+	lens_ar_coating.platform
+
+
+ processing: standard_lens_tint
+
+
+ processing: standard_lens_tint.standard_tint_color.color
+
+Info: Add virtual field [standard_lens_tints(es)] to <standard_tint_color>
+	standard_lens_tint.color
+
+
+ processing: standard_lens_tint.platform.platform
+
+Info: Add virtual field [standard_lens_tints(es)] to <platform>
+	standard_lens_tint.platform
+
+
+ processing: gradient_lens_tint
+
+
+ processing: gradient_lens_tint.gradient_tint_color.color
+
+Info: Add virtual field [gradient_lens_tints(es)] to <gradient_tint_color>
+	gradient_lens_tint.color
+
+
+ processing: gradient_lens_tint.platform.platform
+
+Info: Add virtual field [gradient_lens_tints(es)] to <platform>
+	gradient_lens_tint.platform
+
+
+ processing: standard_tint_color
+
+
+ processing: standard_tint_color.platform.platform
+
+Info: Add virtual field [standard_tint_colors(es)] to <platform>
+	standard_tint_color.platform
+
+
+ processing: coating_type
+
+
+ processing: coating_type.platform.platform
+
+Info: Add virtual field [coating_types(es)] to <platform>
+	coating_type.platform
+
+
+ processing: gradient_tint_color
+
+
+ processing: gradient_tint_color.platform.platform
+
+Info: Add virtual field [gradient_tint_colors(es)] to <platform>
+	gradient_tint_color.platform
+
+
+ processing: lens_prescription_type
+
+
+ processing: lens_prescription_type.platform.platform
+
+Info: Add virtual field [lens_prescription_types(es)] to <platform>
+	lens_prescription_type.platform
+
+
+ processing: lens_color
+
+
+ processing: lens_color.platform.platform
+
+Info: Add virtual field [lens_colors(es)] to <platform>
+	lens_color.platform
+
+
+ processing: lens_base_type
+
+
+ processing: lens_base_type.platform.platform
+
+Info: Add virtual field [lens_base_types(es)] to <platform>
+	lens_base_type.platform
+
+
+ processing: lens_restrict_clip_on
+
+
+ processing: lens_restrict_clip_on.lens.lens
+
+Info: Add virtual field [lens_restrict_clip_ons(es)] to <lens>
+	lens_restrict_clip_on.lens
+
+
+ processing: lens_restrict_clip_on.clip_on.clip_on
+
+Info: Add virtual field [lens_restrict_clip_ons(es)] to <clip_on>
+	lens_restrict_clip_on.clip_on
+
+
+ processing: lens_restrict_clip_on.platform.platform
+
+Info: Add virtual field [lens_restrict_clip_ons(es)] to <platform>
+	lens_restrict_clip_on.platform
+
+
+ processing: frame
+
+
+ processing: frame.frame_color.frame_color
+
+Info: Add virtual field [frames(es)] to <frame_color>
+	frame.frame_color
+
+
+ processing: frame.pupil_distance_range.pupil_distance_range
+
+Info: Add virtual field [frames(es)] to <pupil_distance_range>
+	frame.pupil_distance_range
+
+
+ processing: frame.prescription_range.prescription_range
+
+Info: Add virtual field [frames(es)] to <prescription_range>
+	frame.prescription_range
+
+
+ processing: frame.frame_style.frame_style
+
+Info: Add virtual field [frames(es)] to <frame_style>
+	frame.frame_style
+
+
+ processing: frame.rim_type.rim_type
+
+Info: Add virtual field [frames(es)] to <rim_type>
+	frame.rim_type
+
+
+ processing: frame.frame_material_type.frame_material_type
+
+Info: Add virtual field [frames(es)] to <frame_material_type>
+	frame.frame_material_type
+
+
+ processing: frame.clip_on_type.clip_on_type
+
+Info: Add virtual field [frames(es)] to <clip_on_type>
+	frame.clip_on_type
+
+
+ processing: frame.audience.audience
+
+Info: Add virtual field [frames(es)] to <audience>
+	frame.audience
+
+
+ processing: frame.frame_gender.frame_gender
+
+Info: Add virtual field [frames(es)] to <frame_gender>
+	frame.frame_gender
+
+
+ processing: frame.frame_brand.frame_brand
+
+Info: Add virtual field [frames(es)] to <frame_brand>
+	frame.frame_brand
+
+
+ processing: frame_related_replacement
+
+
+ processing: frame_related_replacement.frame.frame
+
+Info: Add virtual field [frame_related_replacements(es)] to <frame>
+	frame_related_replacement.frame
+
+
+ processing: frame_related_replacement.frame.replacement_frame
+
+Info: Add virtual field [frame_related_replacements(es)] to <frame>
+	frame_related_replacement.replacement_frame
+
+
+ processing: frame_related_replacement.platform.platform
+
+Info: Add virtual field [frame_related_replacements(es)] to <platform>
+	frame_related_replacement.platform
+
+
+ processing: frame_inside_engraving_text
+
+
+ processing: frame_inside_engraving_text.platform.platform
+
+Info: Add virtual field [frame_inside_engraving_texts(es)] to <platform>
+	frame_inside_engraving_text.platform
+
+
+ processing: frame_outside_engraving_text
+
+
+ processing: frame_outside_engraving_text.platform.platform
+
+Info: Add virtual field [frame_outside_engraving_texts(es)] to <platform>
+	frame_outside_engraving_text.platform
+
+
+ processing: frame_engraving_image
+
+
+ processing: frame_engraving_image.personalization_image.image
+
+Info: Add virtual field [frame_engraving_images(es)] to <personalization_image>
+	frame_engraving_image.image
+
+
+ processing: frame_engraving_image.platform.platform
+
+Info: Add virtual field [frame_engraving_images(es)] to <platform>
+	frame_engraving_image.platform
+
+
+ processing: personalization_image
+
+
+ processing: personalization_image.platform.platform
+
+Info: Add virtual field [personalization_images(es)] to <platform>
+	personalization_image.platform
+
+
+ processing: frame_available_engraving_personalization
+
+
+ processing: frame_available_engraving_personalization.frame.frame
+
+Info: Add virtual field [frame_available_engraving_personalizations(es)] to <frame>
+	frame_available_engraving_personalization.frame
+
+
+ processing: frame_available_engraving_personalization.frame_inside_engraving_text.frame_inside_engraving_text
+
+Info: Add virtual field [frame_available_engraving_personalizations(es)] to <frame_inside_engraving_text>
+	frame_available_engraving_personalization.frame_inside_engraving_text
+
+
+ processing: frame_available_engraving_personalization.frame_outside_engraving_text.frame_outside_engraving_text
+
+Info: Add virtual field [frame_available_engraving_personalizations(es)] to <frame_outside_engraving_text>
+	frame_available_engraving_personalization.frame_outside_engraving_text
+
+
+ processing: frame_available_engraving_personalization.frame_engraving_image.frame_engraving_image
+
+Info: Add virtual field [frame_available_engraving_personalizations(es)] to <frame_engraving_image>
+	frame_available_engraving_personalization.frame_engraving_image
+
+
+ processing: frame_style
+
+
+ processing: frame_style.platform.platform
+
+Info: Add virtual field [frame_styles(es)] to <platform>
+	frame_style.platform
+
+
+ processing: audience
+
+
+ processing: audience.platform.platform
+
+Info: Add virtual field [audiences(es)] to <platform>
+	audience.platform
+
+
+ processing: frame_brand
+
+
+ processing: frame_brand.platform.platform
+
+Info: Add virtual field [frame_brands(es)] to <platform>
+	frame_brand.platform
+
+
+ processing: frame_inventory
+
+
+ processing: frame_inventory.frame.frame
+
+Info: Add virtual field [frame_inventorys(es)] to <frame>
+	frame_inventory.frame
+
+
+ processing: frame_inventory.platform.platform
+
+Info: Add virtual field [frame_inventorys(es)] to <platform>
+	frame_inventory.platform
+
+
+ processing: face_shape
+
+
+ processing: face_shape.platform.platform
+
+Info: Add virtual field [face_shapes(es)] to <platform>
+	face_shape.platform
+
+
+ processing: frame_gender
+
+
+ processing: frame_gender.platform.platform
+
+Info: Add virtual field [frame_genders(es)] to <platform>
+	frame_gender.platform
+
+
+ processing: frame_color
+
+
+ processing: frame_color.platform.platform
+
+Info: Add virtual field [frame_colors(es)] to <platform>
+	frame_color.platform
+
+
+ processing: rim_type
+
+
+ processing: rim_type.platform.platform
+
+Info: Add virtual field [rim_types(es)] to <platform>
+	rim_type.platform
+
+
+ processing: frame_material_type
+
+
+ processing: frame_material_type.platform.platform
+
+Info: Add virtual field [frame_material_types(es)] to <platform>
+	frame_material_type.platform
+
+
+ processing: rimless_frame_available_lens_shape
+
+
+ processing: rimless_frame_available_lens_shape.frame.frame
+
+Info: Add virtual field [rimless_frame_available_lens_shapes(es)] to <frame>
+	rimless_frame_available_lens_shape.frame
+
+
+ processing: rimless_frame_available_lens_shape.rimless_lens_shape.rimless_lens_shape
+
+Info: Add virtual field [rimless_frame_available_lens_shapes(es)] to <rimless_lens_shape>
+	rimless_frame_available_lens_shape.rimless_lens_shape
+
+
+ processing: rimless_frame_available_lens_shape.platform.platform
+
+Info: Add virtual field [rimless_frame_available_lens_shapes(es)] to <platform>
+	rimless_frame_available_lens_shape.platform
+
+
+ processing: rimless_lens_shape
+
+
+ processing: rimless_lens_shape.pupil_distance_range.pupil_distance_range
+
+Info: Add virtual field [rimless_lens_shapes(es)] to <pupil_distance_range>
+	rimless_lens_shape.pupil_distance_range
+
+
+ processing: rimless_lens_shape.platform.platform
+
+Info: Add virtual field [rimless_lens_shapes(es)] to <platform>
+	rimless_lens_shape.platform
+
+
+ processing: frame_available_clip_on
+
+
+ processing: frame_available_clip_on.frame.frame
+
+Info: Add virtual field [frame_available_clip_ons(es)] to <frame>
+	frame_available_clip_on.frame
+
+
+ processing: frame_available_clip_on.clip_on.clip_on
+
+Info: Add virtual field [frame_available_clip_ons(es)] to <clip_on>
+	frame_available_clip_on.clip_on
+
+
+ processing: frame_available_clip_on.platform.platform
+
+Info: Add virtual field [frame_available_clip_ons(es)] to <platform>
+	frame_available_clip_on.platform
+
+
+ processing: frame_available_clip_on_type
+
+
+ processing: frame_available_clip_on_type.frame.frame
+
+Info: Add virtual field [frame_available_clip_on_types(es)] to <frame>
+	frame_available_clip_on_type.frame
+
+
+ processing: frame_available_clip_on_type.clip_on_type.clip_on_type
+
+Info: Add virtual field [frame_available_clip_on_types(es)] to <clip_on_type>
+	frame_available_clip_on_type.clip_on_type
+
+
+ processing: frame_available_clip_on_type.platform.platform
+
+Info: Add virtual field [frame_available_clip_on_types(es)] to <platform>
+	frame_available_clip_on_type.platform
+
+
+ processing: prescription_glasses
+
+
+ processing: line_item
+
+
+ processing: line_item.line_item_type.line_item_type
+
+Info: Add virtual field [line_items(es)] to <line_item_type>
+	line_item.line_item_type
+
+
+ processing: line_item.prescription_glasses.prescription_glasses
+
+Info: Add virtual field [line_items(es)] to <prescription_glasses>
+	line_item.prescription_glasses
+
+
+ processing: line_item.prescription.prescription
+
+Info: Add virtual field [line_items(es)] to <prescription>
+	line_item.prescription
+
+
+ processing: line_item_type
+
+
+ processing: line_item_type.platform.platform
+
+Info: Add virtual field [line_item_types(es)] to <platform>
+	line_item_type.platform
+
+
+ processing: sphere_range
+
+
+ processing: sphere_range.platform.platform
+
+Info: Add virtual field [sphere_ranges(es)] to <platform>
+	sphere_range.platform
+
+
+ processing: cylinder_range
+
+
+ processing: cylinder_range.platform.platform
+
+Info: Add virtual field [cylinder_ranges(es)] to <platform>
+	cylinder_range.platform
+
+
+ processing: pupil_distance_range
+
+
+ processing: pupil_distance_range.platform.platform
+
+Info: Add virtual field [pupil_distance_ranges(es)] to <platform>
+	pupil_distance_range.platform
+
+
+ processing: near_vision_addition_range
+
+
+ processing: near_vision_addition_range.platform.platform
+
+Info: Add virtual field [near_vision_addition_ranges(es)] to <platform>
+	near_vision_addition_range.platform
+
+
+ processing: prescription_range
+
+
+ processing: prescription_range.platform.platform
+
+Info: Add virtual field [prescription_ranges(es)] to <platform>
+	prescription_range.platform
+
+
+ processing: prism_range_and_direction
+
+
+ processing: prism_range_and_direction.platform.platform
+
+Info: Add virtual field [prism_range_and_directions(es)] to <platform>
+	prism_range_and_direction.platform
+
+
+ processing: lens_idx
+
+
+ processing: lens_idx.platform.platform
+
+Info: Add virtual field [lens_idxs(es)] to <platform>
+	lens_idx.platform
+
+
+ processing: prescription
+
+
+ processing: prescription.age_range.age_range
+
+Info: Add virtual field [prescriptions(es)] to <age_range>
+	prescription.age_range
+
+
+ processing: prescription.reminder_frequency_type.reminder_frequency_type
+
+Info: Add virtual field [prescriptions(es)] to <reminder_frequency_type>
+	prescription.reminder_frequency_type
+
+
+ processing: prescription.prescription_pd_type.prescription_pd_type
+
+Info: Add virtual field [prescriptions(es)] to <prescription_pd_type>
+	prescription.prescription_pd_type
+
+
+ processing: prescription.horizontal_base_direction.right_prism_horizontal_base_direction
+
+Info: Add virtual field [prescriptions(es)] to <horizontal_base_direction>
+	prescription.right_prism_horizontal_base_direction
+
+
+ processing: prescription.vertical_base_direction.right_prism_vertical_base_direction
+
+Info: Add virtual field [prescriptions(es)] to <vertical_base_direction>
+	prescription.right_prism_vertical_base_direction
+
+
+ processing: prescription.horizontal_base_direction.left_prism_horizontal_base_direction
+
+Info: Add virtual field [prescriptions(es)] to <horizontal_base_direction>
+	prescription.left_prism_horizontal_base_direction
+
+
+ processing: prescription.vertical_base_direction.left_prism_vertical_base_direction
+
+Info: Add virtual field [prescriptions(es)] to <vertical_base_direction>
+	prescription.left_prism_vertical_base_direction
+
+
+ processing: horizontal_base_direction
+
+
+ processing: horizontal_base_direction.platform.platform
+
+Info: Add virtual field [horizontal_base_directions(es)] to <platform>
+	horizontal_base_direction.platform
+
+
+ processing: vertical_base_direction
+
+
+ processing: vertical_base_direction.platform.platform
+
+Info: Add virtual field [vertical_base_directions(es)] to <platform>
+	vertical_base_direction.platform
+
+
+ processing: prescription_pd_type
+
+
+ processing: prescription_pd_type.platform.platform
+
+Info: Add virtual field [prescription_pd_types(es)] to <platform>
+	prescription_pd_type.platform
+
+
+ processing: reminder_frequency_type
+
+
+ processing: reminder_frequency_type.platform.platform
+
+Info: Add virtual field [reminder_frequency_types(es)] to <platform>
+	reminder_frequency_type.platform
+
+
+ processing: age_range
+
+
+ processing: age_range.platform.platform
+
+Info: Add virtual field [age_ranges(es)] to <platform>
+	age_range.platform
+
+
+ processing: main_order
+
+
+ processing: main_order.user.buyer
+
+Info: Add virtual field [main_orders(es)] to <user>
+	main_order.buyer
+
+
+ processing: main_order.merchant.seller
+
+Info: Add virtual field [main_orders(es)] to <merchant>
+	main_order.seller
+
+
+ processing: main_order.order_status.status
+
+Info: Add virtual field [main_orders(es)] to <order_status>
+	main_order.status
+
+
+ processing: main_order.platform.platform
+
+Info: Add virtual field [main_orders(es)] to <platform>
+	main_order.platform
+
+
+ processing: order_item
+
+
+ processing: order_item.main_order.main_order
+
+Info: Add virtual field [order_items(es)] to <main_order>
+	order_item.main_order
+
+
+ processing: order_item.line_item.line_item
+
+Info: Add virtual field [order_items(es)] to <line_item>
+	order_item.line_item
+
+
+ processing: shipping
+
+
+ processing: shipping.main_order.main_order
+
+Info: Add virtual field [shippings(es)] to <main_order>
+	shipping.main_order
+
+
+ processing: shipping.shipping_address.shipping_address
+
+Info: Add virtual field [shippings(es)] to <shipping_address>
+	shipping.shipping_address
+
+
+ processing: payment_detail
+
+
+ processing: payment_detail.payment_option.payment_option
+
+Info: Add virtual field [payment_details(es)] to <payment_option>
+	payment_detail.payment_option
+
+
+ processing: payment_detail.payment_status.payment_status
+
+Info: Add virtual field [payment_details(es)] to <payment_status>
+	payment_detail.payment_status
+
+
+ processing: payment_detail.user.payer
+
+Info: Add virtual field [payment_details(es)] to <user>
+	payment_detail.payer
+
+
+ processing: payment_detail.main_order.main_order
+
+Info: Add virtual field [payment_details(es)] to <main_order>
+	payment_detail.main_order
+
+
+ processing: payment_status
+
+
+ processing: payment_status.platform.platform
+
+Info: Add virtual field [payment_statuss(es)] to <platform>
+	payment_status.platform
+
+
+ processing: payment_option
+
+
+ processing: payment_option.platform.platform
+
+Info: Add virtual field [payment_options(es)] to <platform>
+	payment_option.platform
+
+
+ processing: order_status
+
+
+ processing: order_status.platform.platform
+
+Info: Add virtual field [order_statuss(es)] to <platform>
+	order_status.platform
+
+
+ processing: shopping_cart
+
+
+ processing: shopping_cart.user.owner
+
+Info: Add virtual field [shopping_carts(es)] to <user>
+	shopping_cart.owner
+
+
+ processing: shopping_cart.platform.platform
+
+Info: Add virtual field [shopping_carts(es)] to <platform>
+	shopping_cart.platform
+
+
+ processing: shopping_cart_item
+
+
+ processing: shopping_cart_item.shopping_cart.shopping_cart
+
+Info: Add virtual field [shopping_cart_items(es)] to <shopping_cart>
+	shopping_cart_item.shopping_cart
+
+
+ processing: shopping_cart_item.line_item.line_item
+
+Info: Add virtual field [shopping_cart_items(es)] to <line_item>
+	shopping_cart_item.line_item
+
+
+ processing: catalog
+
+
+ processing: catalog.platform.platform
+
+Info: Add virtual field [catalogs(es)] to <platform>
+	catalog.platform
+
+
+ processing: category
+
+
+ processing: category.catalog.catalog
+
+Info: Add virtual field [categorys(es)] to <catalog>
+	category.catalog
+
+
+ processing: category.platform.platform
+
+Info: Add virtual field [categorys(es)] to <platform>
+	category.platform
+
+
+ processing: product
+
+
+ processing: product.product_type.product_type
+
+Info: Add virtual field [products(es)] to <product_type>
+	product.product_type
+
+
+ processing: product.category.category
+
+Info: Add virtual field [products(es)] to <category>
+	product.category
+
+
+ processing: product.platform.platform
+
+Info: Add virtual field [products(es)] to <platform>
+	product.platform
+
+
+ processing: sku
+
+
+ processing: sku.frame_color.color
+
+Info: Add virtual field [skus(es)] to <frame_color>
+	sku.color
+
+
+ processing: sku.product_type.product_type
+
+Info: Add virtual field [skus(es)] to <product_type>
+	sku.product_type
+
+
+ processing: sku.prescription_sku.prescription_sku
+
+Info: Add virtual field [skus(es)] to <prescription_sku>
+	sku.prescription_sku
+
+
+ processing: sku.standard_sku.standard_sku
+
+Info: Add virtual field [skus(es)] to <standard_sku>
+	sku.standard_sku
+
+
+ processing: sku.clip_on.clip_on_sku
+
+Info: Add virtual field [skus(es)] to <clip_on>
+	sku.clip_on_sku
+
+
+ processing: sku.product.product
+
+Info: Add virtual field [skus(es)] to <product>
+	sku.product
+
+
+ processing: sku.platform.platform
+
+Info: Add virtual field [skus(es)] to <platform>
+	sku.platform
+
+
+ processing: prescription_sku
+
+
+ processing: prescription_sku.frame.frame
+
+Info: Add virtual field [prescription_skus(es)] to <frame>
+	prescription_sku.frame
+
+
+ processing: prescription_sku.lens.lens
+
+Info: Add virtual field [prescription_skus(es)] to <lens>
+	prescription_sku.lens
+
+
+ processing: prescription_sku.platform.platform
+
+Info: Add virtual field [prescription_skus(es)] to <platform>
+	prescription_sku.platform
+
+
+ processing: standard_sku
+
+
+ processing: standard_sku.platform.platform
+
+Info: Add virtual field [standard_skus(es)] to <platform>
+	standard_sku.platform
+
+
+ processing: clip_on
+
+
+ processing: clip_on.clip_on_type.clip_on_type
+
+Info: Add virtual field [clip_ons(es)] to <clip_on_type>
+	clip_on.clip_on_type
+
+
+ processing: clip_on.platform.platform
+
+Info: Add virtual field [clip_ons(es)] to <platform>
+	clip_on.platform
+
+
+ processing: product_category
+
+
+ processing: product_category.platform.platform
+
+Info: Add virtual field [product_categorys(es)] to <platform>
+	product_category.platform
+
+
+ processing: product_type
+
+
+ processing: product_type.product_category.category
+
+Info: Add virtual field [product_types(es)] to <product_category>
+	product_type.category
+
+
+ processing: product_type.platform.platform
+
+Info: Add virtual field [product_types(es)] to <platform>
+	product_type.platform
+
+
+ processing: clip_on_type
+
+
+ processing: clip_on_type.platform.platform
+
+Info: Add virtual field [clip_on_types(es)] to <platform>
+	clip_on_type.platform
+
+
+ processing: sku_inventory
+
+
+ processing: sku_inventory.sku.sku
+
+Info: Add virtual field [sku_inventorys(es)] to <sku>
+	sku_inventory.sku
+
+
+ processing: sku_inventory.platform.platform
+
+Info: Add virtual field [sku_inventorys(es)] to <platform>
+	sku_inventory.platform
+
+
+**************************************************
+
+meta{name=platform}
+platform{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('眼镜商城'), verb: false, required: true,type:string;
+		date_time_create	create_time('createTime()'), verb: false, required: true,type:date_time_create;
+		date_time_update	last_update_time('updateTime()'), verb: false, required: true,type:date_time_update;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(72){
+		demoProductList	platform(商品管理)--platform;
+		demoSkuList	platform(商品管理)--platform;
+		userList	platform(用户管理)--platform;
+		provinceList	platform(__no_group)--platform;
+		userTryOnAvatarList	platform(用户试戴记录)--platform;
+		user3dTryOnVideoList	platform(用户试戴记录)--platform;
+		merchantList	platform(商户管理)--platform;
+		lensList	platform(处方眼镜管理)--platform;
+		lensInventoryList	platform(处方眼镜管理)--platform;
+		lensBrandList	platform(处方眼镜管理)--platform;
+		lensMaterialTypeList	platform(处方眼镜管理)--platform;
+		lensProcessTypeList	platform(处方眼镜管理)--platform;
+		lensAvailableStandardTintList	platform(处方眼镜管理)--platform;
+		lensAvailableGradientTintList	platform(处方眼镜管理)--platform;
+		lensAvailableCoatingList	platform(处方眼镜管理)--platform;
+		lensArCoatingList	platform(处方眼镜管理)--platform;
+		standardLensTintList	platform(处方眼镜管理)--platform;
+		gradientLensTintList	platform(处方眼镜管理)--platform;
+		standardTintColorList	platform(__no_group)--platform;
+		coatingTypeList	platform(__no_group)--platform;
+		gradientTintColorList	platform(处方眼镜管理)--platform;
+		lensPrescriptionTypeList	platform(处方眼镜管理)--platform;
+		lensColorList	platform(处方眼镜管理)--platform;
+		lensBaseTypeList	platform(处方眼镜管理)--platform;
+		lensRestrictClipOnList	platform(处方眼镜管理)--platform;
+		frameRelatedReplacementList	platform(处方眼镜管理)--platform;
+		frameInsideEngravingTextList	platform(处方眼镜管理)--platform;
+		frameOutsideEngravingTextList	platform(处方眼镜管理)--platform;
+		frameEngravingImageList	platform(处方眼镜管理)--platform;
+		personalizationImageList	platform(处方眼镜管理)--platform;
+		frameStyleList	platform(处方眼镜管理)--platform;
+		audienceList	platform(处方眼镜管理)--platform;
+		frameBrandList	platform(处方眼镜管理)--platform;
+		frameInventoryList	platform(处方眼镜管理)--platform;
+		faceShapeList	platform(处方眼镜管理)--platform;
+		frameGenderList	platform(处方眼镜管理)--platform;
+		frameColorList	platform(__no_group)--platform;
+		rimTypeList	platform(__no_group)--platform;
+		frameMaterialTypeList	platform(__no_group)--platform;
+		rimlessFrameAvailableLensShapeList	platform(商品管理)--platform;
+		rimlessLensShapeList	platform(商品管理)--platform;
+		frameAvailableClipOnList	platform(商品管理)--platform;
+		frameAvailableClipOnTypeList	platform(商品管理)--platform;
+		lineItemTypeList	platform(__no_group)--platform;
+		sphereRangeList	platform(处方信息管理)--platform;
+		cylinderRangeList	platform(处方信息管理)--platform;
+		pupilDistanceRangeList	platform(处方信息管理)--platform;
+		nearVisionAdditionRangeList	platform(处方信息管理)--platform;
+		prescriptionRangeList	platform(处方信息管理)--platform;
+		prismRangeAndDirectionList	platform(处方信息管理)--platform;
+		lensIdxList	platform(处方信息管理)--platform;
+		horizontalBaseDirectionList	platform(处方信息管理)--platform;
+		verticalBaseDirectionList	platform(处方信息管理)--platform;
+		prescriptionPdTypeList	platform(处方信息管理)--platform;
+		reminderFrequencyTypeList	platform(处方信息管理)--platform;
+		ageRangeList	platform(处方信息管理)--platform;
+		mainOrderList	platform(订单管理)--platform;
+		paymentStatusList	platform(__no_group)--platform;
+		paymentOptionList	platform(__no_group)--platform;
+		orderStatusList	platform(__no_group)--platform;
+		shoppingCartList	platform(购物车)--platform;
+		catalogList	platform(商品管理)--platform;
+		categoryList	platform(商品管理)--platform;
+		productList	platform(商品管理)--platform;
+		skuList	platform(商品管理)--platform;
+		prescriptionSkuList	platform(商品管理)--platform;
+		standardSkuList	platform(商品管理)--platform;
+		clipOnList	platform(商品管理)--platform;
+		productCategoryList	platform(商品管理)--platform;
+		productTypeList	platform(商品管理)--platform;
+		clipOnTypeList	platform(商品管理)--platform;
+		skuInventoryList	platform(商品管理)--platform;
+	}
+} depth=0; isRoot = true
+
+meta{vg4platform=商品管理, name=demo_product}
+demo_product{
+	fields(6){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('猫眼边框眼镜'), verb: false, required: true,type:string;
+		string_image	hero_image('glasses.jpg'), verb: false, required: true,type:string_image;
+		category	category('$(object)'), verb: false, required: true, referenceBy: demoProductList,type:category;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: demoProductList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		demoSkuList	demo_product(__no_group)--demo_product;
+	}
+} depth=3; isRoot = false
+
+meta{vg4platform=商品管理, name=demo_sku}
+demo_sku{
+	fields(29){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('猫眼眼镜'), verb: false, required: true,type:string;
+		string	sub_title('Zenni 惊喜价'), verb: false, required: true,type:string;
+		string	description('眼镜描述'), verb: false, required: true,type:string;
+		money	price('$200.99'), verb: false, required: true,type:money;
+		string	external_code('T44444615'), verb: false, required: true,type:string;
+		frame_color	color('$(object)'), verb: false, required: true, referenceBy: demoSkuList,type:frame_color;
+		string	pupil_distance_range('65~77'), verb: false, required: true,type:string;
+		string	prescription_range('-20.00 ~ + 12.00'), verb: false, required: true,type:string;
+		bool	progressive_available('true|false'), verb: false, required: true,type:bool;
+		bool	bifocal_available('true|false'), verb: false, required: true,type:bool;
+		string	rim('全框'), verb: false, required: true,type:string;
+		string	shape('猫眼形状'), verb: false, required: true,type:string;
+		string	material('树脂'), verb: false, required: true,type:string;
+		string	feature('有弹性，支持刻字'), verb: false, required: true,type:string;
+		string	tags('中性眼镜'), verb: false, required: true,type:string;
+		string	frame_width('144mm'), verb: false, required: true,type:string;
+		string	temple_length('147mm'), verb: false, required: true,type:string;
+		string	lens_width('54mm'), verb: false, required: true,type:string;
+		string	lens_height('48mm'), verb: false, required: true,type:string;
+		string	bridge('20mm'), verb: false, required: true,type:string;
+		string	frame_weight('24克'), verb: false, required: true,type:string;
+		string_image	image1('image.jpg'), verb: false, required: true,type:string_image;
+		string_image	image2('image.jpg'), verb: false, required: true,type:string_image;
+		string_image	image3('image.jpg'), verb: false, required: true,type:string_image;
+		string_image	image4('image.jpg'), verb: false, required: true,type:string_image;
+		demo_product	demo_product('$(object)'), verb: false, required: true, referenceBy: demoSkuList,type:demo_product;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: demoSkuList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=4; isRoot = false
+
+meta{vg4platform=用户管理, name=user, features=merchant}
+user{
+	fields(8){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('王晶晶'), verb: false, required: true,type:string;
+		string_china_mobile_phone	mobile('18012341234'), verb: false, required: true,type:string_china_mobile_phone;
+		string_image	avatar('avatar.jpg'), verb: false, required: true,type:string_image;
+		date_time_create	create_time('createTime()'), verb: false, required: true,type:date_time_create;
+		date_time_update	last_update_time('updateTime()'), verb: false, required: true,type:date_time_update;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: userList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(6){
+		shippingAddressList	user(__no_group)--user;
+		userTryOnAvatarList	user(__no_group)--user;
+		user3dTryOnVideoList	user(__no_group)--user;
+		mainOrderList	buyer(__no_group)--buyer;
+		paymentDetailList	payer(__no_group)--payer;
+		shoppingCartList	owner(__no_group)--owner;
+	}
+} depth=1; isRoot = false
+
+meta{name=province, features=setting}
+province{
+	fields(4){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('四川|上海'), verb: false, required: true,type:string;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: provinceList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(2){
+		cityList	province(__no_group)--province;
+		shippingAddressList	province(__no_group)--province;
+	}
+} depth=1; isRoot = false
+
+meta{name=city}
+city{
+	fields(4){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('成都|北京'), verb: false, required: true,type:string;
+		province	province('$(object)'), verb: false, required: true, referenceBy: cityList,type:province;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(2){
+		districtList	city(__no_group)--city;
+		shippingAddressList	city(__no_group)--city;
+	}
+} depth=2; isRoot = false
+
+meta{name=district}
+district{
+	fields(4){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('高新区|武侯区'), verb: false, required: true,type:string;
+		city	city('$(object)'), verb: false, required: true, referenceBy: districtList,type:city;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		shippingAddressList	district(__no_group)--district;
+	}
+} depth=3; isRoot = false
+
+meta{name=shipping_address}
+shipping_address{
+	fields(9){
+		string	id('AB'), verb: false, required: true,type:id;
+		province	province('$(object)'), verb: false, required: true, referenceBy: shippingAddressList,type:province;
+		city	city('$(object)'), verb: false, required: true, referenceBy: shippingAddressList,type:city;
+		district	district('$(object)'), verb: false, required: true, referenceBy: shippingAddressList,type:district;
+		string	detail('成都市武侯区天府二街新希望天祥广场A座2511室'), verb: false, required: true,type:string;
+		string_china_mobile_phone	mobile('13677778888'), verb: false, required: true,type:string_china_mobile_phone;
+		string	name('李丹丹'), verb: false, required: true,type:string;
+		user	user('$(object)'), verb: false, required: true, referenceBy: shippingAddressList,type:user;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		shippingList	shipping_address(__no_group)--shipping_address;
+	}
+} depth=4; isRoot = false
+
+meta{vg4platform=用户试戴记录, name=user_try_on_avatar}
+user_try_on_avatar{
+	fields(9){
+		string	id('AB'), verb: false, required: true,type:id;
+		string_image	avatar('avatar.jpg'), verb: false, required: true,type:string_image;
+		string_image	try_on_avatar('try_on_avatar.jpg'), verb: false, required: true,type:string_image;
+		sku	try_on_glasses('$(object)'), verb: false, required: true, referenceBy: userTryOnAvatarList,type:sku;
+		user	user('$(object)'), verb: false, required: true, referenceBy: userTryOnAvatarList,type:user;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: userTryOnAvatarList,type:platform;
+		date_time_create	create_time('createTime()'), verb: false, required: true,type:date_time_create;
+		date_time_update	last_update_time('updateTime()'), verb: false, required: true,type:date_time_update;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=5; isRoot = false
+
+meta{vg4platform=用户试戴记录, name=user_3d_try_on_video}
+user_3d_try_on_video{
+	fields(9){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	video('video.mp4'), verb: false, required: true,type:string;
+		string	try_on_video('try_on_video.mp4'), verb: false, required: true,type:string;
+		sku	try_on_glasses('$(object)'), verb: false, required: true, referenceBy: user3dTryOnVideoList,type:sku;
+		user	user('$(object)'), verb: false, required: true, referenceBy: user3dTryOnVideoList,type:user;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: user3dTryOnVideoList,type:platform;
+		date_time_create	create_time('createTime()'), verb: false, required: true,type:date_time_create;
+		date_time_update	last_update_time('updateTime()'), verb: false, required: true,type:date_time_update;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=5; isRoot = false
+
+meta{vg4platform=商户管理, name=merchant, features=merchant}
+merchant{
+	fields(4){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('商户'), verb: false, required: true,type:string;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: merchantList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		mainOrderList	seller(__no_group)--seller;
+	}
+} depth=1; isRoot = false
+
+meta{vg4platform=处方眼镜管理, name=lens}
+lens{
+	fields(15){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('1.49单光|1.50单光可染色|1.51变色单光(灰色)|1.61全视线®️变色单光灰色'), verb: false, required: true,type:string;
+		lens_brand	brand('$(object)'), verb: false, required: true, referenceBy: lensList,type:lens_brand;
+		string	external_code('429|171|151|141|111|121|422|429|T12'), verb: false, required: true,type:string;
+		string	description('关于镜片的基础描述信息'), verb: false, required: true,type:string;
+		lens_idx	lens_idx('$(object)'), verb: false, required: true, referenceBy: lensList,type:lens_idx;
+		lens_prescription_type	lens_prescription_type('$(object)'), verb: false, required: true, referenceBy: lensList,type:lens_prescription_type;
+		sphere_range	sphere_range('$(object)'), verb: false, required: true, referenceBy: lensList,type:sphere_range;
+		cylinder_range	cylinder_range('$(object)'), verb: false, required: false, referenceBy: lensList,type:cylinder_range;
+		prism_range_and_direction	prism_range_and_direction('$(object)'), verb: false, required: false, referenceBy: lensList,type:prism_range_and_direction;
+		near_vision_addition_range	near_vision_addition_range('$(object)'), verb: false, required: false, referenceBy: lensList,type:near_vision_addition_range;
+		lens_process_type	lens_process_type('$(object)'), verb: false, required: true, referenceBy: lensList,type:lens_process_type;
+		lens_material_type	lens_material_type('$(object)'), verb: false, required: true, referenceBy: lensList,type:lens_material_type;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: lensList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(6){
+		lensInventoryList	lens(__no_group)--lens;
+		lensAvailableStandardTintList	lens(__no_group)--lens;
+		lensAvailableGradientTintList	lens(__no_group)--lens;
+		lensAvailableCoatingList	lens(__no_group)--lens;
+		lensRestrictClipOnList	lens(__no_group)--lens;
+		prescriptionSkuList	lens(__no_group)--lens;
+	}
+} depth=2; isRoot = false
+
+meta{vg4platform=处方眼镜管理, name=lens_inventory}
+lens_inventory{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		lens	lens('$(object)'), verb: false, required: true, referenceBy: lensInventoryList,type:lens;
+		int	in_stock('20000'), verb: false, required: true,type:int;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: lensInventoryList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=3; isRoot = false
+
+meta{vg4platform=处方眼镜管理, name=lens_brand}
+lens_brand{
+	fields(6){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('Blokz lens prevent FryEye'), verb: false, required: true,type:string;
+		string	description('镜片品牌介绍信息'), verb: false, required: true,type:string;
+		string_image	image('brand.png'), verb: false, required: true,type:string_image;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: lensBrandList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		lensList	brand(__no_group)--brand;
+	}
+} depth=1; isRoot = false
+
+meta{vg4platform=处方眼镜管理, name=lens_material_type, features=status, identified_by=code}
+lens_material_type{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('树脂|玻璃'), verb: false, required: true,type:string;
+		string	code('PLASTIC|GLASSES'), verb: false, required: true,type:string;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: lensMaterialTypeList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		lensList	lens_material_type(__no_group)--lens_material_type;
+	}
+} depth=1; isRoot = false
+
+meta{vg4platform=处方眼镜管理, name=lens_process_type, features=status, identified_by=code}
+lens_process_type{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('镜片加增透膜涂层|镜片染色|染色+涂层|不支持'), verb: false, required: true,type:string;
+		string	code('COATING|TINT|AR_TINT|NONE'), verb: false, required: true,type:string;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: lensProcessTypeList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		lensList	lens_process_type(__no_group)--lens_process_type;
+	}
+} depth=1; isRoot = false
+
+meta{vg4platform=处方眼镜管理, name=lens_available_standard_tint}
+lens_available_standard_tint{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		lens	lens('$(object)'), verb: false, required: true, referenceBy: lensAvailableStandardTintList,type:lens;
+		standard_lens_tint	standard_lens_tint('$(object)'), verb: false, required: true, referenceBy: lensAvailableStandardTintList,type:standard_lens_tint;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: lensAvailableStandardTintList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=3; isRoot = false
+
+meta{vg4platform=处方眼镜管理, name=lens_available_gradient_tint}
+lens_available_gradient_tint{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		lens	lens('$(object)'), verb: false, required: true, referenceBy: lensAvailableGradientTintList,type:lens;
+		gradient_lens_tint	tint('$(object)'), verb: false, required: true, referenceBy: lensAvailableGradientTintList,type:gradient_lens_tint;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: lensAvailableGradientTintList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=3; isRoot = false
+
+meta{vg4platform=处方眼镜管理, name=lens_available_coating}
+lens_available_coating{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		lens	lens('$(object)'), verb: false, required: true, referenceBy: lensAvailableCoatingList,type:lens;
+		lens_ar_coating	coating('$(object)'), verb: false, required: true, referenceBy: lensAvailableCoatingList,type:lens_ar_coating;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: lensAvailableCoatingList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=3; isRoot = false
+
+meta{vg4platform=处方眼镜管理, name=lens_ar_coating}
+lens_ar_coating{
+	fields(9){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('普通加硬|普通绿膜|防水防油防指纹膜|超级防水防油防指纹膜|镜面防水防油防指纹膜'), verb: false, required: true,type:string;
+		int	external_code('0|1|2|3|4|5'), verb: false, required: true,type:int;
+		coating_type	coating_type('$(object)'), verb: false, required: true, referenceBy: lensArCoatingList,type:coating_type;
+		money	price('$0.00|$4.95|$8.95|$14.95|$19.95'), verb: false, required: true,type:money;
+		string_image	image('coating.png'), verb: false, required: true,type:string_image;
+		string	description('增透膜涂层可以改进透光...'), verb: false, required: true,type:string;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: lensArCoatingList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		lensAvailableCoatingList	coating(__no_group)--coating;
+	}
+} depth=2; isRoot = false
+
+meta{vg4platform=处方眼镜管理, name=standard_lens_tint}
+standard_lens_tint{
+	fields(10){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('灰色 10%'), verb: false, required: true,type:string;
+		standard_tint_color	color('$(object)'), verb: false, required: true, referenceBy: standardLensTintList,type:standard_tint_color;
+		string	external_code('101|501|801|102|502|802|103|503|803|T12'), verb: false, required: true,type:string;
+		string	percentage('10%|50%|80%'), verb: false, required: true,type:string;
+		money	price('$7.95|$4.95'), verb: false, required: true,type:money;
+		string_image	image('tint.png'), verb: false, required: true,type:string_image;
+		string	description('镜片染色介绍...'), verb: false, required: true,type:string;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: standardLensTintList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		lensAvailableStandardTintList	standard_lens_tint(__no_group)--standard_lens_tint;
+	}
+} depth=2; isRoot = false
+
+meta{vg4platform=处方眼镜管理, name=gradient_lens_tint}
+gradient_lens_tint{
+	fields(9){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('灰色'), verb: false, required: true,type:string;
+		gradient_tint_color	color('$(object)'), verb: false, required: true, referenceBy: gradientLensTintList,type:gradient_tint_color;
+		string	external_code('901|902|903|904|T12'), verb: false, required: true,type:string;
+		money	price('$7.95|$4.95'), verb: false, required: true,type:money;
+		string_image	image('tint.png'), verb: false, required: true,type:string_image;
+		string	description('镜片染色介绍...'), verb: false, required: true,type:string;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: gradientLensTintList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		lensAvailableGradientTintList	tint(__no_group)--tint;
+	}
+} depth=2; isRoot = false
+
+meta{name=standard_tint_color, features=status, identified_by=code}
+standard_tint_color{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('灰色|绿色|琥珀色|蓝色|紫色|粉色|黄色'), verb: false, required: true,type:string;
+		string	code('GRAY|GREEN|AMBER|BLUE|PURPLE|PINK|YELLOW'), verb: false, required: true,type:string;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: standardTintColorList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		standardLensTintList	color(__no_group)--color;
+	}
+} depth=1; isRoot = false
+
+meta{name=coating_type, features=status, identified_by=code}
+coating_type{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('标准增透膜|防水增透膜|防油防指纹增透膜|镜面涂层防指纹防油增透膜'), verb: false, required: true,type:string;
+		string	code('STANDARD_AR_COATING|SUPER_HYDROPHOBIC_WATER_RESISTANT_AR_COATING|OLEOPHOBIC_AR_COATING|MIRROR_FINISH_OLEOPHOBIC_COATING'), verb: false, required: true,type:string;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: coatingTypeList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		lensArCoatingList	coating_type(__no_group)--coating_type;
+	}
+} depth=1; isRoot = false
+
+meta{vg4platform=处方眼镜管理, name=gradient_tint_color, features=status, identified_by=code}
+gradient_tint_color{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('灰色|深灰色|绿色|琥珀色|棕色|蓝色|紫色|粉色|黄色|深黄色'), verb: false, required: true,type:string;
+		string	code('GRAY|DARK_GRAY|GREEN|AMBER|BROWN|BLUE|PURPLE|PINK|YELLOW|DARK_YELLOW'), verb: false, required: true,type:string;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: gradientTintColorList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		gradientLensTintList	color(__no_group)--color;
+	}
+} depth=1; isRoot = false
+
+meta{vg4platform=处方眼镜管理, name=lens_prescription_type, features=status, identified_by=code}
+lens_prescription_type{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('平光|单光|双光|渐进'), verb: false, required: true,type:string;
+		string	code('NONE_PRESCRIPTION|SINGLE_VISION|BIFOCAL|PROGRESSIVE'), verb: false, required: true,type:string;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: lensPrescriptionTypeList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		lensList	lens_prescription_type(__no_group)--lens_prescription_type;
+	}
+} depth=1; isRoot = false
+
+meta{vg4platform=处方眼镜管理, name=lens_color, features=status, identified_by=code}
+lens_color{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('灰色|茶色|紫色|蓝色|粉色'), verb: false, required: true,type:string;
+		string	code('GRAY|DARK_BROWN|PURPLE|BLUE|PINK'), verb: false, required: true,type:string;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: lensColorList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=1; isRoot = false
+
+meta{vg4platform=处方眼镜管理, name=lens_base_type, features=status, identified_by=code}
+lens_base_type{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('标准片|偏振片|光反应变色片'), verb: false, required: true,type:string;
+		string	code('STANDARD|POLARIZED|PHOTOCHROMIC'), verb: false, required: true,type:string;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: lensBaseTypeList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=1; isRoot = false
+
+meta{vg4platform=处方眼镜管理, name=lens_restrict_clip_on}
+lens_restrict_clip_on{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		lens	lens('$(object)'), verb: false, required: true, referenceBy: lensRestrictClipOnList,type:lens;
+		clip_on	clip_on('$(object)'), verb: false, required: true, referenceBy: lensRestrictClipOnList,type:clip_on;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: lensRestrictClipOnList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=3; isRoot = false
+
+meta{name=frame}
+frame{
+	fields(22){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('钛合金全框银色镜框'), verb: false, required: true,type:string;
+		string	external_code('5767|7174|3700|4706|T1234'), verb: false, required: true,type:string;
+		frame_color	frame_color('$(object)'), verb: false, required: true, referenceBy: frameList,type:frame_color;
+		pupil_distance_range	pupil_distance_range('$(object)'), verb: false, required: true, referenceBy: frameList,type:pupil_distance_range;
+		prescription_range	prescription_range('$(object)'), verb: false, required: true, referenceBy: frameList,type:prescription_range;
+		frame_style	frame_style('$(object)'), verb: false, required: true, referenceBy: frameList,type:frame_style;
+		rim_type	rim_type('$(object)'), verb: false, required: true, referenceBy: frameList,type:rim_type;
+		frame_material_type	frame_material_type('$(object)'), verb: false, required: true, referenceBy: frameList,type:frame_material_type;
+		int	frame_width('141'), verb: false, required: true,type:int;
+		int	temple_length('133'), verb: false, required: true,type:int;
+		int	lens_width('54'), verb: false, required: true,type:int;
+		int	lens_height('29'), verb: false, required: true,type:int;
+		int	bridge('19'), verb: false, required: true,type:int;
+		int	frame_weight('22'), verb: false, required: true,type:int;
+		bool	progressive_available('true|false'), verb: false, required: true,type:bool;
+		bool	bifocal_available('true|false'), verb: false, required: true,type:bool;
+		clip_on_type	clip_on_type('$(object)'), verb: false, required: false, referenceBy: frameList,type:clip_on_type;
+		audience	audience('$(object)'), verb: false, required: true, referenceBy: frameList,type:audience;
+		frame_gender	frame_gender('$(object)'), verb: false, required: true, referenceBy: frameList,type:frame_gender;
+		frame_brand	frame_brand('$(object)'), verb: false, required: true, referenceBy: frameList,type:frame_brand;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(8){
+		frameRelatedReplacementListAsFrame	frame(__no_group)--frame;
+		frameRelatedReplacementListAsReplacementFrame	replacement_frame(__no_group)--frame;
+		frameAvailableEngravingPersonalizationList	frame(__no_group)--frame;
+		frameInventoryList	frame(__no_group)--frame;
+		rimlessFrameAvailableLensShapeList	frame(__no_group)--frame;
+		frameAvailableClipOnList	frame(__no_group)--frame;
+		frameAvailableClipOnTypeList	frame(__no_group)--frame;
+		prescriptionSkuList	frame(__no_group)--frame;
+	}
+} depth=2; isRoot = false
+
+meta{vg4platform=处方眼镜管理, name=frame_related_replacement}
+frame_related_replacement{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		frame	frame('$(object)'), verb: false, required: true, referenceBy: frameRelatedReplacementListAsFrame,type:frame;
+		frame	replacement_frame('$(object)'), verb: false, required: true, referenceBy: frameRelatedReplacementListAsReplacementFrame,type:frame;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: frameRelatedReplacementList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=3; isRoot = false
+
+meta{vg4platform=处方眼镜管理, name=frame_inside_engraving_text}
+frame_inside_engraving_text{
+	fields(6){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('镜架内侧刻字'), verb: false, required: true,type:string;
+		money	price('$4.99'), verb: false, required: true,type:money;
+		int	max_length('20'), verb: false, required: true,type:int;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: frameInsideEngravingTextList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		frameAvailableEngravingPersonalizationList	frame_inside_engraving_text(__no_group)--frame_inside_engraving_text;
+	}
+} depth=1; isRoot = false
+
+meta{vg4platform=处方眼镜管理, name=frame_outside_engraving_text}
+frame_outside_engraving_text{
+	fields(6){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('镜腿外侧刻字'), verb: false, required: true,type:string;
+		money	price('$4.99'), verb: false, required: true,type:money;
+		int	max_length('20'), verb: false, required: true,type:int;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: frameOutsideEngravingTextList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		frameAvailableEngravingPersonalizationList	frame_outside_engraving_text(__no_group)--frame_outside_engraving_text;
+	}
+} depth=1; isRoot = false
+
+meta{vg4platform=处方眼镜管理, name=frame_engraving_image}
+frame_engraving_image{
+	fields(6){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('镜腿刻图'), verb: false, required: true,type:string;
+		money	price('$4.99'), verb: false, required: true,type:money;
+		personalization_image	image('$(object)'), verb: false, required: true, referenceBy: frameEngravingImageList,type:personalization_image;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: frameEngravingImageList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		frameAvailableEngravingPersonalizationList	frame_engraving_image(__no_group)--frame_engraving_image;
+	}
+} depth=2; isRoot = false
+
+meta{vg4platform=处方眼镜管理, name=personalization_image}
+personalization_image{
+	fields(4){
+		string	id('AB'), verb: false, required: true,type:id;
+		string_image	image('arm.png'), verb: false, required: true,type:string_image;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: personalizationImageList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		frameEngravingImageList	image(__no_group)--image;
+	}
+} depth=1; isRoot = false
+
+meta{name=frame_available_engraving_personalization}
+frame_available_engraving_personalization{
+	fields(6){
+		string	id('AB'), verb: false, required: true,type:id;
+		frame	frame('$(object)'), verb: false, required: true, referenceBy: frameAvailableEngravingPersonalizationList,type:frame;
+		frame_inside_engraving_text	frame_inside_engraving_text('$(object)'), verb: false, required: true, referenceBy: frameAvailableEngravingPersonalizationList,type:frame_inside_engraving_text;
+		frame_outside_engraving_text	frame_outside_engraving_text('$(object)'), verb: false, required: true, referenceBy: frameAvailableEngravingPersonalizationList,type:frame_outside_engraving_text;
+		frame_engraving_image	frame_engraving_image('$(object)'), verb: false, required: true, referenceBy: frameAvailableEngravingPersonalizationList,type:frame_engraving_image;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=3; isRoot = false
+
+meta{vg4platform=处方眼镜管理, name=frame_style, features=status, identified_by=code}
+frame_style{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('眉线款|猫眼款|正方形|圆形|无框款|半框款|钛合金款|金属款|飞行员款'), verb: false, required: true,type:string;
+		string	code('BROWLINE|CATEYE|SQUARE|RECTANGLE|ROUND|RIMLESS|HALFRIM|TITANIUM|METAL|AVIATOR'), verb: false, required: true,type:string;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: frameStyleList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		frameList	frame_style(__no_group)--frame_style;
+	}
+} depth=1; isRoot = false
+
+meta{vg4platform=处方眼镜管理, name=audience, features=status, identified_by=code}
+audience{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('男士|女士|儿童'), verb: false, required: true,type:string;
+		string	code('MALE|FEMALE|CHILDREN'), verb: false, required: true,type:string;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: audienceList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		frameList	audience(__no_group)--audience;
+	}
+} depth=1; isRoot = false
+
+meta{vg4platform=处方眼镜管理, name=frame_brand}
+frame_brand{
+	fields(4){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('镜框的生产品牌厂家'), verb: false, required: true,type:string;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: frameBrandList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		frameList	frame_brand(__no_group)--frame_brand;
+	}
+} depth=1; isRoot = false
+
+meta{vg4platform=处方眼镜管理, name=frame_inventory}
+frame_inventory{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		frame	frame('$(object)'), verb: false, required: true, referenceBy: frameInventoryList,type:frame;
+		int	in_stock('20000'), verb: false, required: true,type:int;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: frameInventoryList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=3; isRoot = false
+
+meta{vg4platform=处方眼镜管理, name=face_shape, features=status, identified_by=code}
+face_shape{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('椭圆形|圆形|方形|菱形|梨形|心型'), verb: false, required: true,type:string;
+		string	code('OVAL|ROUND|SQUARE|DIAMOND|PEAR|HEART'), verb: false, required: true,type:string;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: faceShapeList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=1; isRoot = false
+
+meta{vg4platform=处方眼镜管理, name=frame_gender, features=status, identified_by=code}
+frame_gender{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('男性|女性|中性'), verb: false, required: true,type:string;
+		string	code('MALE|FEMALE|NEUTRALITY'), verb: false, required: true,type:string;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: frameGenderList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		frameList	frame_gender(__no_group)--frame_gender;
+	}
+} depth=1; isRoot = false
+
+meta{name=frame_color, features=status, identified_by=code}
+frame_color{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('黑色|蓝色|棕色|米黄色|灰色|绿色|彩色|橙色|图形色|粉色|紫色|红色|银色|龟甲色|透明色|白色|木纹色|黄色'), verb: false, required: true,type:string;
+		string	code('BLACK|BLUE|BROWN|CREAM|GRAY|GREEN|MULTIPCOLOR|ORANGE|PATTERN|PINK|PURPLE|RED|SILVER|TORTOISESHELL|TRANSLUCENT|WHITE|WOOD_TEXTURE|YELLOW'), verb: false, required: true,type:string;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: frameColorList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(3){
+		demoSkuList	color(__no_group)--color;
+		frameList	frame_color(__no_group)--frame_color;
+		skuList	color(__no_group)--color;
+	}
+} depth=1; isRoot = false
+
+meta{name=rim_type, features=status, identified_by=code}
+rim_type{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('全框|半框|无框'), verb: false, required: true,type:string;
+		string	code('FULL_RIM|HALF_RIM|RIMLESS'), verb: false, required: true,type:string;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: rimTypeList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		frameList	rim_type(__no_group)--rim_type;
+	}
+} depth=1; isRoot = false
+
+meta{name=frame_material_type, features=status, identified_by=code}
+frame_material_type{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('纯钛|记忆钛|不锈钢|其他金属|混合材料|塑料架'), verb: false, required: true,type:string;
+		string	code('TITANIUM|MEMORY_TITANIUM|STAINLESS_STEEL|OTHER_METAL|MIXED_MATERIAL|PLASTIC|'), verb: false, required: true,type:string;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: frameMaterialTypeList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		frameList	frame_material_type(__no_group)--frame_material_type;
+	}
+} depth=1; isRoot = false
+
+meta{vg4platform=商品管理, name=rimless_frame_available_lens_shape}
+rimless_frame_available_lens_shape{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		frame	frame('$(object)'), verb: false, required: true, referenceBy: rimlessFrameAvailableLensShapeList,type:frame;
+		rimless_lens_shape	rimless_lens_shape('$(object)'), verb: false, required: true, referenceBy: rimlessFrameAvailableLensShapeList,type:rimless_lens_shape;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: rimlessFrameAvailableLensShapeList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=3; isRoot = false
+
+meta{vg4platform=商品管理, name=rimless_lens_shape}
+rimless_lens_shape{
+	fields(11){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	external_code('221|222|223|224|225|226|227|228|229|230|231|232|233|234|235|236|237|238|239|240|241|242|243|244|245|T123'), verb: false, required: true,type:string;
+		string	width('W46'), verb: false, required: true,type:string;
+		string	height('H26'), verb: false, required: true,type:string;
+		double	horizontal_width('46.8'), verb: false, required: true,type:double;
+		double	vertical_height('26.3'), verb: false, required: true,type:double;
+		double	diagonal_length('45.0'), verb: false, required: true,type:double;
+		string_image	shape_image('lens_shape.png'), verb: false, required: true,type:string_image;
+		pupil_distance_range	pupil_distance_range('$(object)'), verb: false, required: true, referenceBy: rimlessLensShapeList,type:pupil_distance_range;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: rimlessLensShapeList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		rimlessFrameAvailableLensShapeList	rimless_lens_shape(__no_group)--rimless_lens_shape;
+	}
+} depth=2; isRoot = false
+
+meta{vg4platform=商品管理, name=frame_available_clip_on}
+frame_available_clip_on{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		frame	frame('$(object)'), verb: false, required: true, referenceBy: frameAvailableClipOnList,type:frame;
+		clip_on	clip_on('$(object)'), verb: false, required: true, referenceBy: frameAvailableClipOnList,type:clip_on;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: frameAvailableClipOnList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=3; isRoot = false
+
+meta{vg4platform=商品管理, name=frame_available_clip_on_type}
+frame_available_clip_on_type{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		frame	frame('$(object)'), verb: false, required: true, referenceBy: frameAvailableClipOnTypeList,type:frame;
+		clip_on_type	clip_on_type('$(object)'), verb: false, required: true, referenceBy: frameAvailableClipOnTypeList,type:clip_on_type;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: frameAvailableClipOnTypeList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=3; isRoot = false
+
+meta{name=prescription_glasses}
+prescription_glasses{
+	fields(30){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	frame_name('方形黑框'), verb: false, required: true,type:string;
+		string	frame_id('F0000001'), verb: false, required: true,type:string;
+		money	frame_price('$0.00|$99.99'), verb: false, required: true,type:money;
+		int	frame_external_code('1234567890'), verb: false, required: true,type:int;
+		string	lens_name('1.50标准镜片'), verb: false, required: true,type:string;
+		string	lens_id('L0000001'), verb: false, required: true,type:string;
+		money	lens_price('$0.99|$19.99'), verb: false, required: true,type:money;
+		string	lens_external_code('1111|T122'), verb: false, required: true,type:string;
+		int	lens_shape_code('222'), verb: false, required: true,type:int;
+		money	lens_prism_price('$9.95'), verb: false, required: true,type:money;
+		money	lens_extra_price('$9.95'), verb: false, required: true,type:money;
+		double	frame_extra_price('9.95'), verb: false, required: true,type:double;
+		bool	frame_temple_engraving_inside_arm('true|false'), verb: false, required: true,type:bool;
+		string	frame_temple_engraving_inside_arm_text('ABC'), verb: false, required: true,type:string;
+		money	frame_temple_engraving_inside_arm_price('$1.95'), verb: false, required: true,type:money;
+		bool	frame_temple_engraving_outside_arm('true|false'), verb: false, required: true,type:bool;
+		string	frame_temple_engraving_outside_text('ABC'), verb: false, required: true,type:string;
+		string	frame_temple_engraving_outside_text_font_style('Arial'), verb: false, required: true,type:string;
+		string	frame_temple_engraving_outside_text_font_color('Purple'), verb: false, required: true,type:string;
+		money	frame_temple_engraving_outside_arm_price('$3.95'), verb: false, required: true,type:money;
+		bool	frame_temple_image('true|false'), verb: false, required: true,type:bool;
+		string_image	frame_temple_image_url('image.png'), verb: false, required: true,type:string_image;
+		string	frame_temple_image_asset_id('I000001'), verb: false, required: true,type:string;
+		money	frame_temple_image_price('$3.99'), verb: false, required: true,type:money;
+		string	clip_on_name('太阳镜磁夹片'), verb: false, required: true,type:string;
+		string	clip_on_id('C111'), verb: false, required: true,type:string;
+		string	clip_on_external_code('C111'), verb: false, required: true,type:string;
+		int	clip_on_quantity('1'), verb: false, required: true,type:int;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		lineItemList	prescription_glasses(__no_group)--prescription_glasses;
+	}
+} depth=0; isRoot = true
+
+meta{name=line_item}
+line_item{
+	fields(15){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('猫眼超薄金色近视处方眼镜|劳保护目镜|眼镜布|眼镜盒|磁夹片'), verb: false, required: true,type:string;
+		string_image	cover_image('glasses.jpg'), verb: false, required: true,type:string_image;
+		line_item_type	line_item_type('$(object)'), verb: false, required: true, referenceBy: lineItemList,type:line_item_type;
+		string	sku_id('S00000001'), verb: false, required: true,type:string;
+		int	quantity('1|99'), verb: false, required: true,type:int;
+		money	unit_price('$4.99'), verb: false, required: true,type:money;
+		prescription_glasses	prescription_glasses('$(object)'), verb: false, required: false, referenceBy: lineItemList,type:prescription_glasses;
+		prescription	prescription('$(object)'), verb: false, required: false, referenceBy: lineItemList,type:prescription;
+		string_image	prescription_image('prescription.jpg'), verb: false, required: true,type:string_image;
+		money	sub_total_price('$4.99'), verb: false, required: true,type:money;
+		string	user_comments('用户购买备注'), verb: false, required: true,type:string;
+		date_time_create	create_time('createTime()'), verb: false, required: true,type:date_time_create;
+		date_time_update	last_update_time('updateTime()'), verb: false, required: true,type:date_time_update;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(2){
+		orderItemList	line_item(__no_group)--line_item;
+		shoppingCartItemList	line_item(__no_group)--line_item;
+	}
+} depth=3; isRoot = false
+
+meta{name=line_item_type, identified_by=code, features=status}
+line_item_type{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('待加工品|成品'), verb: false, required: true,type:string;
+		string	code('PRODUCE_PRODUCT|PRODUCT'), verb: false, required: true,type:string;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: lineItemTypeList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		lineItemList	line_item_type(__no_group)--line_item_type;
+	}
+} depth=1; isRoot = false
+
+meta{vg4platform=处方信息管理, name=sphere_range}
+sphere_range{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		double	max_value('+20.00|+0.00|+0.25'), verb: false, required: true,type:double;
+		double	min_value('-20.00|-19.75|-19.50|-0.25'), verb: false, required: true,type:double;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: sphereRangeList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		lensList	sphere_range(__no_group)--sphere_range;
+	}
+} depth=1; isRoot = false
+
+meta{vg4platform=处方信息管理, name=cylinder_range}
+cylinder_range{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		double	max_value('6.00|2.25|0.00'), verb: false, required: true,type:double;
+		double	min_value('6.00|2.25|0.00'), verb: false, required: true,type:double;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: cylinderRangeList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		lensList	cylinder_range(__no_group)--cylinder_range;
+	}
+} depth=1; isRoot = false
+
+meta{vg4platform=处方信息管理, name=pupil_distance_range}
+pupil_distance_range{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		int	max_value('30|46|47|48'), verb: false, required: true,type:int;
+		int	min_value('82|75|81|80|79|78'), verb: false, required: true,type:int;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: pupilDistanceRangeList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(2){
+		frameList	pupil_distance_range(__no_group)--pupil_distance_range;
+		rimlessLensShapeList	pupil_distance_range(__no_group)--pupil_distance_range;
+	}
+} depth=1; isRoot = false
+
+meta{vg4platform=处方信息管理, name=near_vision_addition_range}
+near_vision_addition_range{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		double	max_value('1.00|2.00|1.25|3.50|3.00'), verb: false, required: true,type:double;
+		double	min_value('1.00|2.00|1.25|3.50|3.00'), verb: false, required: true,type:double;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: nearVisionAdditionRangeList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		lensList	near_vision_addition_range(__no_group)--near_vision_addition_range;
+	}
+} depth=1; isRoot = false
+
+meta{vg4platform=处方信息管理, name=prescription_range}
+prescription_range{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		double	max_value('+20.00|+0.00|+0.25'), verb: false, required: true,type:double;
+		double	min_value('-20.00|-19.75|-19.50|-0.25'), verb: false, required: true,type:double;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: prescriptionRangeList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		frameList	prescription_range(__no_group)--prescription_range;
+	}
+} depth=1; isRoot = false
+
+meta{vg4platform=处方信息管理, name=prism_range_and_direction}
+prism_range_and_direction{
+	fields(9){
+		string	id('AB'), verb: false, required: true,type:id;
+		double	max_value('6.00|2.25|0.00'), verb: false, required: true,type:double;
+		double	min_value('6.00|2.25|0.00'), verb: false, required: true,type:double;
+		bool	prism_base_direction_up('true|false'), verb: false, required: true,type:bool;
+		bool	prism_base_direction_down('true|false'), verb: false, required: true,type:bool;
+		bool	prism_base_direction_in('true|false'), verb: false, required: true,type:bool;
+		bool	prism_base_direction_out('true|false'), verb: false, required: true,type:bool;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: prismRangeAndDirectionList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		lensList	prism_range_and_direction(__no_group)--prism_range_and_direction;
+	}
+} depth=1; isRoot = false
+
+meta{vg4platform=处方信息管理, name=lens_idx}
+lens_idx{
+	fields(4){
+		string	id('AB'), verb: false, required: true,type:id;
+		double	value('1.50|1.57|1.61|1.67|1.74'), verb: false, required: true,type:double;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: lensIdxList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		lensList	lens_idx(__no_group)--lens_idx;
+	}
+} depth=1; isRoot = false
+
+meta{name=prescription}
+prescription{
+	fields(27){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('处方名称'), verb: false, required: true,type:string;
+		age_range	age_range('$(object)'), verb: false, required: true, referenceBy: prescriptionList,type:age_range;
+		date	diagnosis_date('2099-12-31'), verb: false, required: true,type:date;
+		reminder_frequency_type	reminder_frequency_type('$(object)'), verb: false, required: true, referenceBy: prescriptionList,type:reminder_frequency_type;
+		prescription_pd_type	prescription_pd_type('$(object)'), verb: false, required: true, referenceBy: prescriptionList,type:prescription_pd_type;
+		int	single_pupillary_distance_value('35|79'), verb: false, required: true,type:int;
+		double	left_pupillary_distance_value('17.5|40.0'), verb: false, required: true,type:double;
+		double	right_pupillary_distance_value('17.5|40.0'), verb: false, required: true,type:double;
+		double	right_sphere('-20.00|+20.00|+0.00|+0.25|-0.25'), verb: false, required: true,type:double;
+		double	right_cylinder('-6.00|+6.00|+0.00|+0.25|-0.25'), verb: false, required: true,type:double;
+		int	right_axis('0|1|2|180'), verb: false, required: true,type:int;
+		double	left_sphere('-20.00|+20.00|+0.00|+0.25|-0.25'), verb: false, required: true,type:double;
+		double	left_cylinder('-6.00|+6.00|+0.00|+0.25|-0.25'), verb: false, required: true,type:double;
+		int	left_axis('0|1|2|180'), verb: false, required: true,type:int;
+		bool	is_prism('true|false'), verb: false, required: true,type:bool;
+		double	right_prism_horizontal_value('0.00|0.25|4.75|5.00'), verb: false, required: true,type:double;
+		horizontal_base_direction	right_prism_horizontal_base_direction('$(object)'), verb: false, required: false, referenceBy: prescriptionListAsRightPrismHorizontalBaseDirection,type:horizontal_base_direction;
+		double	right_prism_vertical_value('0.00|0.25|4.75|5.00'), verb: false, required: true,type:double;
+		vertical_base_direction	right_prism_vertical_base_direction('$(object)'), verb: false, required: false, referenceBy: prescriptionListAsRightPrismVerticalBaseDirection,type:vertical_base_direction;
+		double	left_prism_horizontal_value('0.00|0.25|4.75|5.00'), verb: false, required: true,type:double;
+		horizontal_base_direction	left_prism_horizontal_base_direction('$(object)'), verb: false, required: false, referenceBy: prescriptionListAsLeftPrismHorizontalBaseDirection,type:horizontal_base_direction;
+		double	left_prism_vertical_value('0.00|0.25|4.75|5.00'), verb: false, required: true,type:double;
+		vertical_base_direction	left_prism_vertical_base_direction('$(object)'), verb: false, required: false, referenceBy: prescriptionListAsLeftPrismVerticalBaseDirection,type:vertical_base_direction;
+		date_time_create	create_time('createTime()'), verb: false, required: true,type:date_time_create;
+		date_time_update	last_update_time('updateTime()'), verb: false, required: true,type:date_time_update;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		lineItemList	prescription(__no_group)--prescription;
+	}
+} depth=2; isRoot = false
+
+meta{vg4platform=处方信息管理, name=horizontal_base_direction, features=status, identified_by=code}
+horizontal_base_direction{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('朝内|朝外'), verb: false, required: true,type:string;
+		string	code('IN|OUT'), verb: false, required: true,type:string;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: horizontalBaseDirectionList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(2){
+		prescriptionListAsRightPrismHorizontalBaseDirection	right_prism_horizontal_base_direction(__no_group)--right_prism_horizontal_base_direction;
+		prescriptionListAsLeftPrismHorizontalBaseDirection	left_prism_horizontal_base_direction(__no_group)--right_prism_horizontal_base_direction;
+	}
+} depth=1; isRoot = false
+
+meta{vg4platform=处方信息管理, name=vertical_base_direction, features=status, identified_by=code}
+vertical_base_direction{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('朝上|朝下'), verb: false, required: true,type:string;
+		string	code('UP|DOWN'), verb: false, required: true,type:string;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: verticalBaseDirectionList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(2){
+		prescriptionListAsRightPrismVerticalBaseDirection	right_prism_vertical_base_direction(__no_group)--right_prism_vertical_base_direction;
+		prescriptionListAsLeftPrismVerticalBaseDirection	left_prism_vertical_base_direction(__no_group)--right_prism_vertical_base_direction;
+	}
+} depth=1; isRoot = false
+
+meta{vg4platform=处方信息管理, name=prescription_pd_type, features=status, identified_by=code}
+prescription_pd_type{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('单瞳距|双眼瞳距'), verb: false, required: true,type:string;
+		string	code('SINGLE_PD|DUAL_PD'), verb: false, required: true,type:string;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: prescriptionPdTypeList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		prescriptionList	prescription_pd_type(__no_group)--prescription_pd_type;
+	}
+} depth=1; isRoot = false
+
+meta{vg4platform=处方信息管理, name=reminder_frequency_type, features=status, identified_by=code}
+reminder_frequency_type{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('每半年|每年|每两年|不提醒'), verb: false, required: true,type:string;
+		string	code('HALF_YEAR|YEARLY|TWO_YEAR|NO_REMINDER'), verb: false, required: true,type:string;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: reminderFrequencyTypeList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		prescriptionList	reminder_frequency_type(__no_group)--reminder_frequency_type;
+	}
+} depth=1; isRoot = false
+
+meta{vg4platform=处方信息管理, name=age_range}
+age_range{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		int	age_from('0|5|10|15|20|25|30|35|40|50|60|70|80|90|100'), verb: false, required: true,type:int;
+		int	age_to('0|5|10|15|20|25|30|35|40|50|60|70|80|90|100'), verb: false, required: true,type:int;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: ageRangeList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		prescriptionList	age_range(__no_group)--age_range;
+	}
+} depth=1; isRoot = false
+
+meta{vg4platform=订单管理, name=main_order}
+main_order{
+	fields(12){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	title('订单标题'), verb: false, required: true,type:string;
+		user	buyer('$(object)'), verb: false, required: true, referenceBy: mainOrderList,type:user;
+		merchant	seller('$(object)'), verb: false, required: true, referenceBy: mainOrderList,type:merchant;
+		order_status	status('$(object)'), verb: false, required: true, referenceBy: mainOrderList,type:order_status;
+		money	total_amount('$9.99|$999.999'), verb: false, required: true,type:money;
+		date_time	paid_time('2099-12-31T23:59:59'), verb: false, required: true,type:date_time;
+		date_time	order_place_time('2099-12-31T23:59:59'), verb: false, required: true,type:date_time;
+		date_time_create	create_time('createTime()'), verb: false, required: true,type:date_time_create;
+		date_time_update	last_update_time('updateTime()'), verb: false, required: true,type:date_time_update;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: mainOrderList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(3){
+		orderItemList	main_order(__no_group)--main_order;
+		shippingList	main_order(__no_group)--main_order;
+		paymentDetailList	main_order(__no_group)--main_order;
+	}
+} depth=2; isRoot = false
+
+meta{name=order_item}
+order_item{
+	fields(6){
+		string	id('AB'), verb: false, required: true,type:id;
+		main_order	main_order('$(object)'), verb: false, required: true, referenceBy: orderItemList,type:main_order;
+		line_item	line_item('$(object)'), verb: false, required: true, referenceBy: orderItemList,type:line_item;
+		date_time_create	create_time('createTime()'), verb: false, required: true,type:date_time_create;
+		date_time_update	last_update_time('updateTime()'), verb: false, required: true,type:date_time_update;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=4; isRoot = false
+
+meta{name=shipping}
+shipping{
+	fields(4){
+		string	id('AB'), verb: false, required: true,type:id;
+		main_order	main_order('$(object)'), verb: false, required: true, referenceBy: shippingList,type:main_order;
+		shipping_address	shipping_address('$(object)'), verb: false, required: true, referenceBy: shippingList,type:shipping_address;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=5; isRoot = false
+
+meta{name=payment_detail}
+payment_detail{
+	fields(11){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('订单支付详情'), verb: false, required: true,type:string;
+		payment_option	payment_option('$(object)'), verb: false, required: true, referenceBy: paymentDetailList,type:payment_option;
+		payment_status	payment_status('$(object)'), verb: false, required: true, referenceBy: paymentDetailList,type:payment_status;
+		date_time	paid_time('2100-01-01T00:00:00'), verb: false, required: true,type:date_time;
+		date_time	cancel_time('2100-01-01T00:00:00'), verb: false, required: true,type:date_time;
+		user	payer('$(object)'), verb: false, required: true, referenceBy: paymentDetailList,type:user;
+		main_order	main_order('$(object)'), verb: false, required: true, referenceBy: paymentDetailList,type:main_order;
+		date_time_create	create_time('createTime()'), verb: false, required: true,type:date_time_create;
+		date_time_update	last_update_time('updateTime()'), verb: false, required: true,type:date_time_update;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=3; isRoot = false
+
+meta{name=payment_status, identified_by=code, features=status}
+payment_status{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('待支付|支付中|已支付|已取消|已失败'), verb: false, required: true,type:string;
+		string	code('UNPAID|PAYING|PAID|CANCELLED|FAILED'), verb: false, required: true,type:string;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: paymentStatusList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		paymentDetailList	payment_status(__no_group)--payment_status;
+	}
+} depth=1; isRoot = false
+
+meta{name=payment_option, identified_by=code, features=status}
+payment_option{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('余额|微信APP|微信WEB|微信扫码|支付宝|银联'), verb: false, required: true,type:string;
+		string	code('BALANCE|WECHAT_APP|WECHAT_JSAPI|WECHAT_NATIVE|ALIPAY|UNION_PAY'), verb: false, required: true,type:string;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: paymentOptionList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		paymentDetailList	payment_option(__no_group)--payment_option;
+	}
+} depth=1; isRoot = false
+
+meta{name=order_status, identified_by=code, features=status}
+order_status{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('未就绪|待支付|待上传处方|待确认|已取消|已完成|处理中'), verb: false, required: true,type:string;
+		string	code('INCOMPLETE|NEED_PAY|NEED_UPLOAD_PRESCRIPTION|NEED_CONFIRM|CANCELLED|FINSIHED|PROCESSING'), verb: false, required: true,type:string;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: orderStatusList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		mainOrderList	status(__no_group)--status;
+	}
+} depth=1; isRoot = false
+
+meta{vg4platform=购物车, name=shopping_cart}
+shopping_cart{
+	fields(7){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('购物车'), verb: false, required: true,type:string;
+		user	owner('$(object)'), verb: false, required: true, referenceBy: shoppingCartList,type:user;
+		money	total_amount('$9.99|$999.999'), verb: false, required: true,type:money;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: shoppingCartList,type:platform;
+		date_time_update	last_update_time('updateTime()'), verb: false, required: true,type:date_time_update;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		shoppingCartItemList	shopping_cart(__no_group)--shopping_cart;
+	}
+} depth=2; isRoot = false
+
+meta{name=shopping_cart_item}
+shopping_cart_item{
+	fields(6){
+		string	id('AB'), verb: false, required: true,type:id;
+		shopping_cart	shopping_cart('$(object)'), verb: false, required: true, referenceBy: shoppingCartItemList,type:shopping_cart;
+		line_item	line_item('$(object)'), verb: false, required: true, referenceBy: shoppingCartItemList,type:line_item;
+		date_time_create	create_time('createTime()'), verb: false, required: true,type:date_time_create;
+		date_time_update	last_update_time('updateTime()'), verb: false, required: true,type:date_time_update;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=4; isRoot = false
+
+meta{vg4platform=商品管理, name=catalog}
+catalog{
+	fields(4){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('眼镜产品目录'), verb: false, required: true,type:string;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: catalogList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		categoryList	catalog(__no_group)--catalog;
+	}
+} depth=1; isRoot = false
+
+meta{vg4platform=商品管理, name=category}
+category{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('处方眼镜|附件|非处方太阳镜|普通劳保护目镜|处方劳保护目镜|处方护目镜|运动处方镜|夹片套镜|双光镜|渐进太阳镜|渐进眼镜'), verb: false, required: true,type:string;
+		catalog	catalog('$(object)'), verb: false, required: true, referenceBy: categoryList,type:catalog;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: categoryList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(2){
+		demoProductList	category(__no_group)--category;
+		productList	category(__no_group)--category;
+	}
+} depth=2; isRoot = false
+
+meta{vg4platform=商品管理, name=product}
+product{
+	fields(7){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('金丝钛合金眼镜|近视护目镜|劳保护目镜|眼镜盒|眼镜布'), verb: false, required: true,type:string;
+		string_image	hero_image('glasses.jpg'), verb: false, required: true,type:string_image;
+		product_type	product_type('$(object)'), verb: false, required: true, referenceBy: productList,type:product_type;
+		category	category('$(object)'), verb: false, required: true, referenceBy: productList,type:category;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: productList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		skuList	product(__no_group)--product;
+	}
+} depth=3; isRoot = false
+
+meta{vg4platform=商品管理, name=sku}
+sku{
+	fields(16){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('眼镜|眼镜布|护目镜'), verb: false, required: true,type:string;
+		frame_color	color('$(object)'), verb: false, required: true, referenceBy: skuList,type:frame_color;
+		string	description('商品描述信息'), verb: false, required: true,type:string;
+		string_image	image1('glasses.jpg'), verb: false, required: true,type:string_image;
+		string_image	image2('glasses.jpg'), verb: false, required: true,type:string_image;
+		string_image	image3('glasses.jpg'), verb: false, required: true,type:string_image;
+		string_image	image4('glasses.jpg'), verb: false, required: true,type:string_image;
+		string_image	image5('glasses.jpg'), verb: false, required: true,type:string_image;
+		product_type	product_type('$(object)'), verb: false, required: true, referenceBy: skuList,type:product_type;
+		prescription_sku	prescription_sku('$(object)'), verb: false, required: true, referenceBy: skuList,type:prescription_sku;
+		standard_sku	standard_sku('$(object)'), verb: false, required: true, referenceBy: skuList,type:standard_sku;
+		clip_on	clip_on_sku('$(object)'), verb: false, required: true, referenceBy: skuList,type:clip_on;
+		product	product('$(object)'), verb: false, required: true, referenceBy: skuList,type:product;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: skuList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(3){
+		userTryOnAvatarList	try_on_glasses(__no_group)--try_on_glasses;
+		user3dTryOnVideoList	try_on_glasses(__no_group)--try_on_glasses;
+		skuInventoryList	sku(__no_group)--sku;
+	}
+} depth=4; isRoot = false
+
+meta{vg4platform=商品管理, name=prescription_sku}
+prescription_sku{
+	fields(6){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('1.67银色纯钛变光'), verb: false, required: true,type:string;
+		frame	frame('$(object)'), verb: false, required: false, referenceBy: prescriptionSkuList,type:frame;
+		lens	lens('$(object)'), verb: false, required: false, referenceBy: prescriptionSkuList,type:lens;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: prescriptionSkuList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		skuList	prescription_sku(__no_group)--prescription_sku;
+	}
+} depth=3; isRoot = false
+
+meta{vg4platform=商品管理, name=standard_sku}
+standard_sku{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('成品眼镜|眼镜盒'), verb: false, required: true,type:string;
+		int	external_code('12345'), verb: false, required: true,type:int;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: standardSkuList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		skuList	standard_sku(__no_group)--standard_sku;
+	}
+} depth=1; isRoot = false
+
+meta{vg4platform=商品管理, name=clip_on}
+clip_on{
+	fields(7){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('灰色太阳镜偏振夹片|琥珀色太阳镜偏振夹片|渐变绿色太阳镜夹片|渐变灰色太阳镜夹片|渐变琥珀色太阳镜夹片'), verb: false, required: true,type:string;
+		string	external_code('111|333|222|T12'), verb: false, required: true,type:string;
+		money	price('$10.00'), verb: false, required: true,type:money;
+		clip_on_type	clip_on_type('$(object)'), verb: false, required: true, referenceBy: clipOnList,type:clip_on_type;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: clipOnList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(3){
+		lensRestrictClipOnList	clip_on(__no_group)--clip_on;
+		frameAvailableClipOnList	clip_on(__no_group)--clip_on;
+		skuList	clip_on_sku(__no_group)--clip_on_sku;
+	}
+} depth=2; isRoot = false
+
+meta{vg4platform=商品管理, name=product_category, identified_by=code, features=status}
+product_category{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('眼镜|附件'), verb: false, required: true,type:string;
+		string	code('GLASSES|ACCESSORY'), verb: false, required: true,type:string;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: productCategoryList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		productTypeList	category(__no_group)--category;
+	}
+} depth=1; isRoot = false
+
+meta{vg4platform=商品管理, name=product_type, identified_by=code, features=status}
+product_type{
+	fields(6){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('处方镜|成品镜|附件|眼镜配件'), verb: false, required: true,type:string;
+		string	code('PRESCRIPTION_GLASSES|STANDARD_GLASSES|STANDARD_ACCESSORY|CLIP_ON'), verb: false, required: true,type:string;
+		product_category	category('$(object)'), verb: false, required: true, referenceBy: productTypeList,type:product_category;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: productTypeList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(2){
+		productList	product_type(__no_group)--product_type;
+		skuList	product_type(__no_group)--product_type;
+	}
+} depth=2; isRoot = false
+
+meta{vg4platform=商品管理, name=clip_on_type, features=status, identified_by=code}
+clip_on_type{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('磁夹片|普通夹片'), verb: false, required: true,type:string;
+		string	code('MAG_CLIP_ON|NORMAL_CLIP_ON'), verb: false, required: true,type:string;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: clipOnTypeList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(3){
+		frameList	clip_on_type(__no_group)--clip_on_type;
+		frameAvailableClipOnTypeList	clip_on_type(__no_group)--clip_on_type;
+		clipOnList	clip_on_type(__no_group)--clip_on_type;
+	}
+} depth=1; isRoot = false
+
+meta{vg4platform=商品管理, name=sku_inventory}
+sku_inventory{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		sku	sku('$(object)'), verb: false, required: true, referenceBy: skuInventoryList,type:sku;
+		int	quantity('1|99999'), verb: false, required: true,type:int;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: skuInventoryList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=5; isRoot = false
+
+meta{name=platform}
+platform{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('眼镜商城'), verb: false, required: true,type:string;
+		date_time_create	create_time('createTime()'), verb: false, required: true,type:date_time_create;
+		date_time_update	last_update_time('updateTime()'), verb: false, required: true,type:date_time_update;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(72){
+		demoProductList	platform(商品管理)--platform;
+		demoSkuList	platform(商品管理)--platform;
+		userList	platform(用户管理)--platform;
+		provinceList	platform(__no_group)--platform;
+		userTryOnAvatarList	platform(用户试戴记录)--platform;
+		user3dTryOnVideoList	platform(用户试戴记录)--platform;
+		merchantList	platform(商户管理)--platform;
+		lensList	platform(处方眼镜管理)--platform;
+		lensInventoryList	platform(处方眼镜管理)--platform;
+		lensBrandList	platform(处方眼镜管理)--platform;
+		lensMaterialTypeList	platform(处方眼镜管理)--platform;
+		lensProcessTypeList	platform(处方眼镜管理)--platform;
+		lensAvailableStandardTintList	platform(处方眼镜管理)--platform;
+		lensAvailableGradientTintList	platform(处方眼镜管理)--platform;
+		lensAvailableCoatingList	platform(处方眼镜管理)--platform;
+		lensArCoatingList	platform(处方眼镜管理)--platform;
+		standardLensTintList	platform(处方眼镜管理)--platform;
+		gradientLensTintList	platform(处方眼镜管理)--platform;
+		standardTintColorList	platform(__no_group)--platform;
+		coatingTypeList	platform(__no_group)--platform;
+		gradientTintColorList	platform(处方眼镜管理)--platform;
+		lensPrescriptionTypeList	platform(处方眼镜管理)--platform;
+		lensColorList	platform(处方眼镜管理)--platform;
+		lensBaseTypeList	platform(处方眼镜管理)--platform;
+		lensRestrictClipOnList	platform(处方眼镜管理)--platform;
+		frameRelatedReplacementList	platform(处方眼镜管理)--platform;
+		frameInsideEngravingTextList	platform(处方眼镜管理)--platform;
+		frameOutsideEngravingTextList	platform(处方眼镜管理)--platform;
+		frameEngravingImageList	platform(处方眼镜管理)--platform;
+		personalizationImageList	platform(处方眼镜管理)--platform;
+		frameStyleList	platform(处方眼镜管理)--platform;
+		audienceList	platform(处方眼镜管理)--platform;
+		frameBrandList	platform(处方眼镜管理)--platform;
+		frameInventoryList	platform(处方眼镜管理)--platform;
+		faceShapeList	platform(处方眼镜管理)--platform;
+		frameGenderList	platform(处方眼镜管理)--platform;
+		frameColorList	platform(__no_group)--platform;
+		rimTypeList	platform(__no_group)--platform;
+		frameMaterialTypeList	platform(__no_group)--platform;
+		rimlessFrameAvailableLensShapeList	platform(商品管理)--platform;
+		rimlessLensShapeList	platform(商品管理)--platform;
+		frameAvailableClipOnList	platform(商品管理)--platform;
+		frameAvailableClipOnTypeList	platform(商品管理)--platform;
+		lineItemTypeList	platform(__no_group)--platform;
+		sphereRangeList	platform(处方信息管理)--platform;
+		cylinderRangeList	platform(处方信息管理)--platform;
+		pupilDistanceRangeList	platform(处方信息管理)--platform;
+		nearVisionAdditionRangeList	platform(处方信息管理)--platform;
+		prescriptionRangeList	platform(处方信息管理)--platform;
+		prismRangeAndDirectionList	platform(处方信息管理)--platform;
+		lensIdxList	platform(处方信息管理)--platform;
+		horizontalBaseDirectionList	platform(处方信息管理)--platform;
+		verticalBaseDirectionList	platform(处方信息管理)--platform;
+		prescriptionPdTypeList	platform(处方信息管理)--platform;
+		reminderFrequencyTypeList	platform(处方信息管理)--platform;
+		ageRangeList	platform(处方信息管理)--platform;
+		mainOrderList	platform(订单管理)--platform;
+		paymentStatusList	platform(__no_group)--platform;
+		paymentOptionList	platform(__no_group)--platform;
+		orderStatusList	platform(__no_group)--platform;
+		shoppingCartList	platform(购物车)--platform;
+		catalogList	platform(商品管理)--platform;
+		categoryList	platform(商品管理)--platform;
+		productList	platform(商品管理)--platform;
+		skuList	platform(商品管理)--platform;
+		prescriptionSkuList	platform(商品管理)--platform;
+		standardSkuList	platform(商品管理)--platform;
+		clipOnList	platform(商品管理)--platform;
+		productCategoryList	platform(商品管理)--platform;
+		productTypeList	platform(商品管理)--platform;
+		clipOnTypeList	platform(商品管理)--platform;
+		skuInventoryList	platform(商品管理)--platform;
+	}
+} depth=0; isRoot = true
+
+meta{vg4platform=商品管理, name=demo_product}
+demo_product{
+	fields(6){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('猫眼边框眼镜'), verb: false, required: true,type:string;
+		string_image	hero_image('glasses.jpg'), verb: false, required: true,type:string_image;
+		category	category('$(object)'), verb: false, required: true, referenceBy: demoProductList,type:category;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: demoProductList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		demoSkuList	demo_product(__no_group)--demo_product;
+	}
+} depth=3; isRoot = false
+
+meta{vg4platform=商品管理, name=demo_sku}
+demo_sku{
+	fields(29){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('猫眼眼镜'), verb: false, required: true,type:string;
+		string	sub_title('Zenni 惊喜价'), verb: false, required: true,type:string;
+		string	description('眼镜描述'), verb: false, required: true,type:string;
+		money	price('$200.99'), verb: false, required: true,type:money;
+		string	external_code('T44444615'), verb: false, required: true,type:string;
+		frame_color	color('$(object)'), verb: false, required: true, referenceBy: demoSkuList,type:frame_color;
+		string	pupil_distance_range('65~77'), verb: false, required: true,type:string;
+		string	prescription_range('-20.00 ~ + 12.00'), verb: false, required: true,type:string;
+		bool	progressive_available('true|false'), verb: false, required: true,type:bool;
+		bool	bifocal_available('true|false'), verb: false, required: true,type:bool;
+		string	rim('全框'), verb: false, required: true,type:string;
+		string	shape('猫眼形状'), verb: false, required: true,type:string;
+		string	material('树脂'), verb: false, required: true,type:string;
+		string	feature('有弹性，支持刻字'), verb: false, required: true,type:string;
+		string	tags('中性眼镜'), verb: false, required: true,type:string;
+		string	frame_width('144mm'), verb: false, required: true,type:string;
+		string	temple_length('147mm'), verb: false, required: true,type:string;
+		string	lens_width('54mm'), verb: false, required: true,type:string;
+		string	lens_height('48mm'), verb: false, required: true,type:string;
+		string	bridge('20mm'), verb: false, required: true,type:string;
+		string	frame_weight('24克'), verb: false, required: true,type:string;
+		string_image	image1('image.jpg'), verb: false, required: true,type:string_image;
+		string_image	image2('image.jpg'), verb: false, required: true,type:string_image;
+		string_image	image3('image.jpg'), verb: false, required: true,type:string_image;
+		string_image	image4('image.jpg'), verb: false, required: true,type:string_image;
+		demo_product	demo_product('$(object)'), verb: false, required: true, referenceBy: demoSkuList,type:demo_product;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: demoSkuList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=4; isRoot = false
+
+meta{vg4platform=用户管理, name=user, features=merchant}
+user{
+	fields(8){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('王晶晶'), verb: false, required: true,type:string;
+		string_china_mobile_phone	mobile('18012341234'), verb: false, required: true,type:string_china_mobile_phone;
+		string_image	avatar('avatar.jpg'), verb: false, required: true,type:string_image;
+		date_time_create	create_time('createTime()'), verb: false, required: true,type:date_time_create;
+		date_time_update	last_update_time('updateTime()'), verb: false, required: true,type:date_time_update;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: userList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(6){
+		shippingAddressList	user(__no_group)--user;
+		userTryOnAvatarList	user(__no_group)--user;
+		user3dTryOnVideoList	user(__no_group)--user;
+		mainOrderList	buyer(__no_group)--buyer;
+		paymentDetailList	payer(__no_group)--payer;
+		shoppingCartList	owner(__no_group)--owner;
+	}
+} depth=1; isRoot = false
+
+meta{name=province, features=setting}
+province{
+	fields(4){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('四川|上海'), verb: false, required: true,type:string;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: provinceList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(2){
+		cityList	province(__no_group)--province;
+		shippingAddressList	province(__no_group)--province;
+	}
+} depth=1; isRoot = false
+
+meta{name=city}
+city{
+	fields(4){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('成都|北京'), verb: false, required: true,type:string;
+		province	province('$(object)'), verb: false, required: true, referenceBy: cityList,type:province;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(2){
+		districtList	city(__no_group)--city;
+		shippingAddressList	city(__no_group)--city;
+	}
+} depth=2; isRoot = false
+
+meta{name=district}
+district{
+	fields(4){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('高新区|武侯区'), verb: false, required: true,type:string;
+		city	city('$(object)'), verb: false, required: true, referenceBy: districtList,type:city;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		shippingAddressList	district(__no_group)--district;
+	}
+} depth=3; isRoot = false
+
+meta{name=shipping_address}
+shipping_address{
+	fields(9){
+		string	id('AB'), verb: false, required: true,type:id;
+		province	province('$(object)'), verb: false, required: true, referenceBy: shippingAddressList,type:province;
+		city	city('$(object)'), verb: false, required: true, referenceBy: shippingAddressList,type:city;
+		district	district('$(object)'), verb: false, required: true, referenceBy: shippingAddressList,type:district;
+		string	detail('成都市武侯区天府二街新希望天祥广场A座2511室'), verb: false, required: true,type:string;
+		string_china_mobile_phone	mobile('13677778888'), verb: false, required: true,type:string_china_mobile_phone;
+		string	name('李丹丹'), verb: false, required: true,type:string;
+		user	user('$(object)'), verb: false, required: true, referenceBy: shippingAddressList,type:user;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		shippingList	shipping_address(__no_group)--shipping_address;
+	}
+} depth=4; isRoot = false
+
+meta{vg4platform=用户试戴记录, name=user_try_on_avatar}
+user_try_on_avatar{
+	fields(9){
+		string	id('AB'), verb: false, required: true,type:id;
+		string_image	avatar('avatar.jpg'), verb: false, required: true,type:string_image;
+		string_image	try_on_avatar('try_on_avatar.jpg'), verb: false, required: true,type:string_image;
+		sku	try_on_glasses('$(object)'), verb: false, required: true, referenceBy: userTryOnAvatarList,type:sku;
+		user	user('$(object)'), verb: false, required: true, referenceBy: userTryOnAvatarList,type:user;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: userTryOnAvatarList,type:platform;
+		date_time_create	create_time('createTime()'), verb: false, required: true,type:date_time_create;
+		date_time_update	last_update_time('updateTime()'), verb: false, required: true,type:date_time_update;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=5; isRoot = false
+
+meta{vg4platform=用户试戴记录, name=user_3d_try_on_video}
+user_3d_try_on_video{
+	fields(9){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	video('video.mp4'), verb: false, required: true,type:string;
+		string	try_on_video('try_on_video.mp4'), verb: false, required: true,type:string;
+		sku	try_on_glasses('$(object)'), verb: false, required: true, referenceBy: user3dTryOnVideoList,type:sku;
+		user	user('$(object)'), verb: false, required: true, referenceBy: user3dTryOnVideoList,type:user;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: user3dTryOnVideoList,type:platform;
+		date_time_create	create_time('createTime()'), verb: false, required: true,type:date_time_create;
+		date_time_update	last_update_time('updateTime()'), verb: false, required: true,type:date_time_update;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=5; isRoot = false
+
+meta{vg4platform=商户管理, name=merchant, features=merchant}
+merchant{
+	fields(4){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('商户'), verb: false, required: true,type:string;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: merchantList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		mainOrderList	seller(__no_group)--seller;
+	}
+} depth=1; isRoot = false
+
+meta{vg4platform=处方眼镜管理, name=lens}
+lens{
+	fields(15){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('1.49单光|1.50单光可染色|1.51变色单光(灰色)|1.61全视线®️变色单光灰色'), verb: false, required: true,type:string;
+		lens_brand	brand('$(object)'), verb: false, required: true, referenceBy: lensList,type:lens_brand;
+		string	external_code('429|171|151|141|111|121|422|429|T12'), verb: false, required: true,type:string;
+		string	description('关于镜片的基础描述信息'), verb: false, required: true,type:string;
+		lens_idx	lens_idx('$(object)'), verb: false, required: true, referenceBy: lensList,type:lens_idx;
+		lens_prescription_type	lens_prescription_type('$(object)'), verb: false, required: true, referenceBy: lensList,type:lens_prescription_type;
+		sphere_range	sphere_range('$(object)'), verb: false, required: true, referenceBy: lensList,type:sphere_range;
+		cylinder_range	cylinder_range('$(object)'), verb: false, required: false, referenceBy: lensList,type:cylinder_range;
+		prism_range_and_direction	prism_range_and_direction('$(object)'), verb: false, required: false, referenceBy: lensList,type:prism_range_and_direction;
+		near_vision_addition_range	near_vision_addition_range('$(object)'), verb: false, required: false, referenceBy: lensList,type:near_vision_addition_range;
+		lens_process_type	lens_process_type('$(object)'), verb: false, required: true, referenceBy: lensList,type:lens_process_type;
+		lens_material_type	lens_material_type('$(object)'), verb: false, required: true, referenceBy: lensList,type:lens_material_type;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: lensList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(6){
+		lensInventoryList	lens(__no_group)--lens;
+		lensAvailableStandardTintList	lens(__no_group)--lens;
+		lensAvailableGradientTintList	lens(__no_group)--lens;
+		lensAvailableCoatingList	lens(__no_group)--lens;
+		lensRestrictClipOnList	lens(__no_group)--lens;
+		prescriptionSkuList	lens(__no_group)--lens;
+	}
+} depth=2; isRoot = false
+
+meta{vg4platform=处方眼镜管理, name=lens_inventory}
+lens_inventory{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		lens	lens('$(object)'), verb: false, required: true, referenceBy: lensInventoryList,type:lens;
+		int	in_stock('20000'), verb: false, required: true,type:int;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: lensInventoryList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=3; isRoot = false
+
+meta{vg4platform=处方眼镜管理, name=lens_brand}
+lens_brand{
+	fields(6){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('Blokz lens prevent FryEye'), verb: false, required: true,type:string;
+		string	description('镜片品牌介绍信息'), verb: false, required: true,type:string;
+		string_image	image('brand.png'), verb: false, required: true,type:string_image;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: lensBrandList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		lensList	brand(__no_group)--brand;
+	}
+} depth=1; isRoot = false
+
+meta{vg4platform=处方眼镜管理, name=lens_material_type, features=status, identified_by=code}
+lens_material_type{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('树脂|玻璃'), verb: false, required: true,type:string;
+		string	code('PLASTIC|GLASSES'), verb: false, required: true,type:string;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: lensMaterialTypeList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		lensList	lens_material_type(__no_group)--lens_material_type;
+	}
+} depth=1; isRoot = false
+
+meta{vg4platform=处方眼镜管理, name=lens_process_type, features=status, identified_by=code}
+lens_process_type{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('镜片加增透膜涂层|镜片染色|染色+涂层|不支持'), verb: false, required: true,type:string;
+		string	code('COATING|TINT|AR_TINT|NONE'), verb: false, required: true,type:string;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: lensProcessTypeList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		lensList	lens_process_type(__no_group)--lens_process_type;
+	}
+} depth=1; isRoot = false
+
+meta{vg4platform=处方眼镜管理, name=lens_available_standard_tint}
+lens_available_standard_tint{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		lens	lens('$(object)'), verb: false, required: true, referenceBy: lensAvailableStandardTintList,type:lens;
+		standard_lens_tint	standard_lens_tint('$(object)'), verb: false, required: true, referenceBy: lensAvailableStandardTintList,type:standard_lens_tint;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: lensAvailableStandardTintList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=3; isRoot = false
+
+meta{vg4platform=处方眼镜管理, name=lens_available_gradient_tint}
+lens_available_gradient_tint{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		lens	lens('$(object)'), verb: false, required: true, referenceBy: lensAvailableGradientTintList,type:lens;
+		gradient_lens_tint	tint('$(object)'), verb: false, required: true, referenceBy: lensAvailableGradientTintList,type:gradient_lens_tint;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: lensAvailableGradientTintList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=3; isRoot = false
+
+meta{vg4platform=处方眼镜管理, name=lens_available_coating}
+lens_available_coating{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		lens	lens('$(object)'), verb: false, required: true, referenceBy: lensAvailableCoatingList,type:lens;
+		lens_ar_coating	coating('$(object)'), verb: false, required: true, referenceBy: lensAvailableCoatingList,type:lens_ar_coating;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: lensAvailableCoatingList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=3; isRoot = false
+
+meta{vg4platform=处方眼镜管理, name=lens_ar_coating}
+lens_ar_coating{
+	fields(9){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('普通加硬|普通绿膜|防水防油防指纹膜|超级防水防油防指纹膜|镜面防水防油防指纹膜'), verb: false, required: true,type:string;
+		int	external_code('0|1|2|3|4|5'), verb: false, required: true,type:int;
+		coating_type	coating_type('$(object)'), verb: false, required: true, referenceBy: lensArCoatingList,type:coating_type;
+		money	price('$0.00|$4.95|$8.95|$14.95|$19.95'), verb: false, required: true,type:money;
+		string_image	image('coating.png'), verb: false, required: true,type:string_image;
+		string	description('增透膜涂层可以改进透光...'), verb: false, required: true,type:string;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: lensArCoatingList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		lensAvailableCoatingList	coating(__no_group)--coating;
+	}
+} depth=2; isRoot = false
+
+meta{vg4platform=处方眼镜管理, name=standard_lens_tint}
+standard_lens_tint{
+	fields(10){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('灰色 10%'), verb: false, required: true,type:string;
+		standard_tint_color	color('$(object)'), verb: false, required: true, referenceBy: standardLensTintList,type:standard_tint_color;
+		string	external_code('101|501|801|102|502|802|103|503|803|T12'), verb: false, required: true,type:string;
+		string	percentage('10%|50%|80%'), verb: false, required: true,type:string;
+		money	price('$7.95|$4.95'), verb: false, required: true,type:money;
+		string_image	image('tint.png'), verb: false, required: true,type:string_image;
+		string	description('镜片染色介绍...'), verb: false, required: true,type:string;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: standardLensTintList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		lensAvailableStandardTintList	standard_lens_tint(__no_group)--standard_lens_tint;
+	}
+} depth=2; isRoot = false
+
+meta{vg4platform=处方眼镜管理, name=gradient_lens_tint}
+gradient_lens_tint{
+	fields(9){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('灰色'), verb: false, required: true,type:string;
+		gradient_tint_color	color('$(object)'), verb: false, required: true, referenceBy: gradientLensTintList,type:gradient_tint_color;
+		string	external_code('901|902|903|904|T12'), verb: false, required: true,type:string;
+		money	price('$7.95|$4.95'), verb: false, required: true,type:money;
+		string_image	image('tint.png'), verb: false, required: true,type:string_image;
+		string	description('镜片染色介绍...'), verb: false, required: true,type:string;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: gradientLensTintList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		lensAvailableGradientTintList	tint(__no_group)--tint;
+	}
+} depth=2; isRoot = false
+
+meta{name=standard_tint_color, features=status, identified_by=code}
+standard_tint_color{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('灰色|绿色|琥珀色|蓝色|紫色|粉色|黄色'), verb: false, required: true,type:string;
+		string	code('GRAY|GREEN|AMBER|BLUE|PURPLE|PINK|YELLOW'), verb: false, required: true,type:string;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: standardTintColorList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		standardLensTintList	color(__no_group)--color;
+	}
+} depth=1; isRoot = false
+
+meta{name=coating_type, features=status, identified_by=code}
+coating_type{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('标准增透膜|防水增透膜|防油防指纹增透膜|镜面涂层防指纹防油增透膜'), verb: false, required: true,type:string;
+		string	code('STANDARD_AR_COATING|SUPER_HYDROPHOBIC_WATER_RESISTANT_AR_COATING|OLEOPHOBIC_AR_COATING|MIRROR_FINISH_OLEOPHOBIC_COATING'), verb: false, required: true,type:string;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: coatingTypeList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		lensArCoatingList	coating_type(__no_group)--coating_type;
+	}
+} depth=1; isRoot = false
+
+meta{vg4platform=处方眼镜管理, name=gradient_tint_color, features=status, identified_by=code}
+gradient_tint_color{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('灰色|深灰色|绿色|琥珀色|棕色|蓝色|紫色|粉色|黄色|深黄色'), verb: false, required: true,type:string;
+		string	code('GRAY|DARK_GRAY|GREEN|AMBER|BROWN|BLUE|PURPLE|PINK|YELLOW|DARK_YELLOW'), verb: false, required: true,type:string;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: gradientTintColorList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		gradientLensTintList	color(__no_group)--color;
+	}
+} depth=1; isRoot = false
+
+meta{vg4platform=处方眼镜管理, name=lens_prescription_type, features=status, identified_by=code}
+lens_prescription_type{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('平光|单光|双光|渐进'), verb: false, required: true,type:string;
+		string	code('NONE_PRESCRIPTION|SINGLE_VISION|BIFOCAL|PROGRESSIVE'), verb: false, required: true,type:string;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: lensPrescriptionTypeList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		lensList	lens_prescription_type(__no_group)--lens_prescription_type;
+	}
+} depth=1; isRoot = false
+
+meta{vg4platform=处方眼镜管理, name=lens_color, features=status, identified_by=code}
+lens_color{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('灰色|茶色|紫色|蓝色|粉色'), verb: false, required: true,type:string;
+		string	code('GRAY|DARK_BROWN|PURPLE|BLUE|PINK'), verb: false, required: true,type:string;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: lensColorList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=1; isRoot = false
+
+meta{vg4platform=处方眼镜管理, name=lens_base_type, features=status, identified_by=code}
+lens_base_type{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('标准片|偏振片|光反应变色片'), verb: false, required: true,type:string;
+		string	code('STANDARD|POLARIZED|PHOTOCHROMIC'), verb: false, required: true,type:string;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: lensBaseTypeList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=1; isRoot = false
+
+meta{vg4platform=处方眼镜管理, name=lens_restrict_clip_on}
+lens_restrict_clip_on{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		lens	lens('$(object)'), verb: false, required: true, referenceBy: lensRestrictClipOnList,type:lens;
+		clip_on	clip_on('$(object)'), verb: false, required: true, referenceBy: lensRestrictClipOnList,type:clip_on;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: lensRestrictClipOnList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=3; isRoot = false
+
+meta{name=frame}
+frame{
+	fields(22){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('钛合金全框银色镜框'), verb: false, required: true,type:string;
+		string	external_code('5767|7174|3700|4706|T1234'), verb: false, required: true,type:string;
+		frame_color	frame_color('$(object)'), verb: false, required: true, referenceBy: frameList,type:frame_color;
+		pupil_distance_range	pupil_distance_range('$(object)'), verb: false, required: true, referenceBy: frameList,type:pupil_distance_range;
+		prescription_range	prescription_range('$(object)'), verb: false, required: true, referenceBy: frameList,type:prescription_range;
+		frame_style	frame_style('$(object)'), verb: false, required: true, referenceBy: frameList,type:frame_style;
+		rim_type	rim_type('$(object)'), verb: false, required: true, referenceBy: frameList,type:rim_type;
+		frame_material_type	frame_material_type('$(object)'), verb: false, required: true, referenceBy: frameList,type:frame_material_type;
+		int	frame_width('141'), verb: false, required: true,type:int;
+		int	temple_length('133'), verb: false, required: true,type:int;
+		int	lens_width('54'), verb: false, required: true,type:int;
+		int	lens_height('29'), verb: false, required: true,type:int;
+		int	bridge('19'), verb: false, required: true,type:int;
+		int	frame_weight('22'), verb: false, required: true,type:int;
+		bool	progressive_available('true|false'), verb: false, required: true,type:bool;
+		bool	bifocal_available('true|false'), verb: false, required: true,type:bool;
+		clip_on_type	clip_on_type('$(object)'), verb: false, required: false, referenceBy: frameList,type:clip_on_type;
+		audience	audience('$(object)'), verb: false, required: true, referenceBy: frameList,type:audience;
+		frame_gender	frame_gender('$(object)'), verb: false, required: true, referenceBy: frameList,type:frame_gender;
+		frame_brand	frame_brand('$(object)'), verb: false, required: true, referenceBy: frameList,type:frame_brand;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(8){
+		frameRelatedReplacementListAsFrame	frame(__no_group)--frame;
+		frameRelatedReplacementListAsReplacementFrame	replacement_frame(__no_group)--frame;
+		frameAvailableEngravingPersonalizationList	frame(__no_group)--frame;
+		frameInventoryList	frame(__no_group)--frame;
+		rimlessFrameAvailableLensShapeList	frame(__no_group)--frame;
+		frameAvailableClipOnList	frame(__no_group)--frame;
+		frameAvailableClipOnTypeList	frame(__no_group)--frame;
+		prescriptionSkuList	frame(__no_group)--frame;
+	}
+} depth=2; isRoot = false
+
+meta{vg4platform=处方眼镜管理, name=frame_related_replacement}
+frame_related_replacement{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		frame	frame('$(object)'), verb: false, required: true, referenceBy: frameRelatedReplacementListAsFrame,type:frame;
+		frame	replacement_frame('$(object)'), verb: false, required: true, referenceBy: frameRelatedReplacementListAsReplacementFrame,type:frame;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: frameRelatedReplacementList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=3; isRoot = false
+
+meta{vg4platform=处方眼镜管理, name=frame_inside_engraving_text}
+frame_inside_engraving_text{
+	fields(6){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('镜架内侧刻字'), verb: false, required: true,type:string;
+		money	price('$4.99'), verb: false, required: true,type:money;
+		int	max_length('20'), verb: false, required: true,type:int;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: frameInsideEngravingTextList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		frameAvailableEngravingPersonalizationList	frame_inside_engraving_text(__no_group)--frame_inside_engraving_text;
+	}
+} depth=1; isRoot = false
+
+meta{vg4platform=处方眼镜管理, name=frame_outside_engraving_text}
+frame_outside_engraving_text{
+	fields(6){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('镜腿外侧刻字'), verb: false, required: true,type:string;
+		money	price('$4.99'), verb: false, required: true,type:money;
+		int	max_length('20'), verb: false, required: true,type:int;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: frameOutsideEngravingTextList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		frameAvailableEngravingPersonalizationList	frame_outside_engraving_text(__no_group)--frame_outside_engraving_text;
+	}
+} depth=1; isRoot = false
+
+meta{vg4platform=处方眼镜管理, name=frame_engraving_image}
+frame_engraving_image{
+	fields(6){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('镜腿刻图'), verb: false, required: true,type:string;
+		money	price('$4.99'), verb: false, required: true,type:money;
+		personalization_image	image('$(object)'), verb: false, required: true, referenceBy: frameEngravingImageList,type:personalization_image;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: frameEngravingImageList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		frameAvailableEngravingPersonalizationList	frame_engraving_image(__no_group)--frame_engraving_image;
+	}
+} depth=2; isRoot = false
+
+meta{vg4platform=处方眼镜管理, name=personalization_image}
+personalization_image{
+	fields(4){
+		string	id('AB'), verb: false, required: true,type:id;
+		string_image	image('arm.png'), verb: false, required: true,type:string_image;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: personalizationImageList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		frameEngravingImageList	image(__no_group)--image;
+	}
+} depth=1; isRoot = false
+
+meta{name=frame_available_engraving_personalization}
+frame_available_engraving_personalization{
+	fields(6){
+		string	id('AB'), verb: false, required: true,type:id;
+		frame	frame('$(object)'), verb: false, required: true, referenceBy: frameAvailableEngravingPersonalizationList,type:frame;
+		frame_inside_engraving_text	frame_inside_engraving_text('$(object)'), verb: false, required: true, referenceBy: frameAvailableEngravingPersonalizationList,type:frame_inside_engraving_text;
+		frame_outside_engraving_text	frame_outside_engraving_text('$(object)'), verb: false, required: true, referenceBy: frameAvailableEngravingPersonalizationList,type:frame_outside_engraving_text;
+		frame_engraving_image	frame_engraving_image('$(object)'), verb: false, required: true, referenceBy: frameAvailableEngravingPersonalizationList,type:frame_engraving_image;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=3; isRoot = false
+
+meta{vg4platform=处方眼镜管理, name=frame_style, features=status, identified_by=code}
+frame_style{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('眉线款|猫眼款|正方形|圆形|无框款|半框款|钛合金款|金属款|飞行员款'), verb: false, required: true,type:string;
+		string	code('BROWLINE|CATEYE|SQUARE|RECTANGLE|ROUND|RIMLESS|HALFRIM|TITANIUM|METAL|AVIATOR'), verb: false, required: true,type:string;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: frameStyleList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		frameList	frame_style(__no_group)--frame_style;
+	}
+} depth=1; isRoot = false
+
+meta{vg4platform=处方眼镜管理, name=audience, features=status, identified_by=code}
+audience{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('男士|女士|儿童'), verb: false, required: true,type:string;
+		string	code('MALE|FEMALE|CHILDREN'), verb: false, required: true,type:string;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: audienceList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		frameList	audience(__no_group)--audience;
+	}
+} depth=1; isRoot = false
+
+meta{vg4platform=处方眼镜管理, name=frame_brand}
+frame_brand{
+	fields(4){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('镜框的生产品牌厂家'), verb: false, required: true,type:string;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: frameBrandList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		frameList	frame_brand(__no_group)--frame_brand;
+	}
+} depth=1; isRoot = false
+
+meta{vg4platform=处方眼镜管理, name=frame_inventory}
+frame_inventory{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		frame	frame('$(object)'), verb: false, required: true, referenceBy: frameInventoryList,type:frame;
+		int	in_stock('20000'), verb: false, required: true,type:int;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: frameInventoryList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=3; isRoot = false
+
+meta{vg4platform=处方眼镜管理, name=face_shape, features=status, identified_by=code}
+face_shape{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('椭圆形|圆形|方形|菱形|梨形|心型'), verb: false, required: true,type:string;
+		string	code('OVAL|ROUND|SQUARE|DIAMOND|PEAR|HEART'), verb: false, required: true,type:string;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: faceShapeList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=1; isRoot = false
+
+meta{vg4platform=处方眼镜管理, name=frame_gender, features=status, identified_by=code}
+frame_gender{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('男性|女性|中性'), verb: false, required: true,type:string;
+		string	code('MALE|FEMALE|NEUTRALITY'), verb: false, required: true,type:string;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: frameGenderList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		frameList	frame_gender(__no_group)--frame_gender;
+	}
+} depth=1; isRoot = false
+
+meta{name=frame_color, features=status, identified_by=code}
+frame_color{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('黑色|蓝色|棕色|米黄色|灰色|绿色|彩色|橙色|图形色|粉色|紫色|红色|银色|龟甲色|透明色|白色|木纹色|黄色'), verb: false, required: true,type:string;
+		string	code('BLACK|BLUE|BROWN|CREAM|GRAY|GREEN|MULTIPCOLOR|ORANGE|PATTERN|PINK|PURPLE|RED|SILVER|TORTOISESHELL|TRANSLUCENT|WHITE|WOOD_TEXTURE|YELLOW'), verb: false, required: true,type:string;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: frameColorList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(3){
+		demoSkuList	color(__no_group)--color;
+		frameList	frame_color(__no_group)--frame_color;
+		skuList	color(__no_group)--color;
+	}
+} depth=1; isRoot = false
+
+meta{name=rim_type, features=status, identified_by=code}
+rim_type{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('全框|半框|无框'), verb: false, required: true,type:string;
+		string	code('FULL_RIM|HALF_RIM|RIMLESS'), verb: false, required: true,type:string;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: rimTypeList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		frameList	rim_type(__no_group)--rim_type;
+	}
+} depth=1; isRoot = false
+
+meta{name=frame_material_type, features=status, identified_by=code}
+frame_material_type{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('纯钛|记忆钛|不锈钢|其他金属|混合材料|塑料架'), verb: false, required: true,type:string;
+		string	code('TITANIUM|MEMORY_TITANIUM|STAINLESS_STEEL|OTHER_METAL|MIXED_MATERIAL|PLASTIC|'), verb: false, required: true,type:string;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: frameMaterialTypeList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		frameList	frame_material_type(__no_group)--frame_material_type;
+	}
+} depth=1; isRoot = false
+
+meta{vg4platform=商品管理, name=rimless_frame_available_lens_shape}
+rimless_frame_available_lens_shape{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		frame	frame('$(object)'), verb: false, required: true, referenceBy: rimlessFrameAvailableLensShapeList,type:frame;
+		rimless_lens_shape	rimless_lens_shape('$(object)'), verb: false, required: true, referenceBy: rimlessFrameAvailableLensShapeList,type:rimless_lens_shape;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: rimlessFrameAvailableLensShapeList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=3; isRoot = false
+
+meta{vg4platform=商品管理, name=rimless_lens_shape}
+rimless_lens_shape{
+	fields(11){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	external_code('221|222|223|224|225|226|227|228|229|230|231|232|233|234|235|236|237|238|239|240|241|242|243|244|245|T123'), verb: false, required: true,type:string;
+		string	width('W46'), verb: false, required: true,type:string;
+		string	height('H26'), verb: false, required: true,type:string;
+		double	horizontal_width('46.8'), verb: false, required: true,type:double;
+		double	vertical_height('26.3'), verb: false, required: true,type:double;
+		double	diagonal_length('45.0'), verb: false, required: true,type:double;
+		string_image	shape_image('lens_shape.png'), verb: false, required: true,type:string_image;
+		pupil_distance_range	pupil_distance_range('$(object)'), verb: false, required: true, referenceBy: rimlessLensShapeList,type:pupil_distance_range;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: rimlessLensShapeList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		rimlessFrameAvailableLensShapeList	rimless_lens_shape(__no_group)--rimless_lens_shape;
+	}
+} depth=2; isRoot = false
+
+meta{vg4platform=商品管理, name=frame_available_clip_on}
+frame_available_clip_on{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		frame	frame('$(object)'), verb: false, required: true, referenceBy: frameAvailableClipOnList,type:frame;
+		clip_on	clip_on('$(object)'), verb: false, required: true, referenceBy: frameAvailableClipOnList,type:clip_on;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: frameAvailableClipOnList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=3; isRoot = false
+
+meta{vg4platform=商品管理, name=frame_available_clip_on_type}
+frame_available_clip_on_type{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		frame	frame('$(object)'), verb: false, required: true, referenceBy: frameAvailableClipOnTypeList,type:frame;
+		clip_on_type	clip_on_type('$(object)'), verb: false, required: true, referenceBy: frameAvailableClipOnTypeList,type:clip_on_type;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: frameAvailableClipOnTypeList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=3; isRoot = false
+
+meta{name=prescription_glasses}
+prescription_glasses{
+	fields(30){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	frame_name('方形黑框'), verb: false, required: true,type:string;
+		string	frame_id('F0000001'), verb: false, required: true,type:string;
+		money	frame_price('$0.00|$99.99'), verb: false, required: true,type:money;
+		int	frame_external_code('1234567890'), verb: false, required: true,type:int;
+		string	lens_name('1.50标准镜片'), verb: false, required: true,type:string;
+		string	lens_id('L0000001'), verb: false, required: true,type:string;
+		money	lens_price('$0.99|$19.99'), verb: false, required: true,type:money;
+		string	lens_external_code('1111|T122'), verb: false, required: true,type:string;
+		int	lens_shape_code('222'), verb: false, required: true,type:int;
+		money	lens_prism_price('$9.95'), verb: false, required: true,type:money;
+		money	lens_extra_price('$9.95'), verb: false, required: true,type:money;
+		double	frame_extra_price('9.95'), verb: false, required: true,type:double;
+		bool	frame_temple_engraving_inside_arm('true|false'), verb: false, required: true,type:bool;
+		string	frame_temple_engraving_inside_arm_text('ABC'), verb: false, required: true,type:string;
+		money	frame_temple_engraving_inside_arm_price('$1.95'), verb: false, required: true,type:money;
+		bool	frame_temple_engraving_outside_arm('true|false'), verb: false, required: true,type:bool;
+		string	frame_temple_engraving_outside_text('ABC'), verb: false, required: true,type:string;
+		string	frame_temple_engraving_outside_text_font_style('Arial'), verb: false, required: true,type:string;
+		string	frame_temple_engraving_outside_text_font_color('Purple'), verb: false, required: true,type:string;
+		money	frame_temple_engraving_outside_arm_price('$3.95'), verb: false, required: true,type:money;
+		bool	frame_temple_image('true|false'), verb: false, required: true,type:bool;
+		string_image	frame_temple_image_url('image.png'), verb: false, required: true,type:string_image;
+		string	frame_temple_image_asset_id('I000001'), verb: false, required: true,type:string;
+		money	frame_temple_image_price('$3.99'), verb: false, required: true,type:money;
+		string	clip_on_name('太阳镜磁夹片'), verb: false, required: true,type:string;
+		string	clip_on_id('C111'), verb: false, required: true,type:string;
+		string	clip_on_external_code('C111'), verb: false, required: true,type:string;
+		int	clip_on_quantity('1'), verb: false, required: true,type:int;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		lineItemList	prescription_glasses(__no_group)--prescription_glasses;
+	}
+} depth=0; isRoot = true
+
+meta{name=line_item}
+line_item{
+	fields(15){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('猫眼超薄金色近视处方眼镜|劳保护目镜|眼镜布|眼镜盒|磁夹片'), verb: false, required: true,type:string;
+		string_image	cover_image('glasses.jpg'), verb: false, required: true,type:string_image;
+		line_item_type	line_item_type('$(object)'), verb: false, required: true, referenceBy: lineItemList,type:line_item_type;
+		string	sku_id('S00000001'), verb: false, required: true,type:string;
+		int	quantity('1|99'), verb: false, required: true,type:int;
+		money	unit_price('$4.99'), verb: false, required: true,type:money;
+		prescription_glasses	prescription_glasses('$(object)'), verb: false, required: false, referenceBy: lineItemList,type:prescription_glasses;
+		prescription	prescription('$(object)'), verb: false, required: false, referenceBy: lineItemList,type:prescription;
+		string_image	prescription_image('prescription.jpg'), verb: false, required: true,type:string_image;
+		money	sub_total_price('$4.99'), verb: false, required: true,type:money;
+		string	user_comments('用户购买备注'), verb: false, required: true,type:string;
+		date_time_create	create_time('createTime()'), verb: false, required: true,type:date_time_create;
+		date_time_update	last_update_time('updateTime()'), verb: false, required: true,type:date_time_update;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(2){
+		orderItemList	line_item(__no_group)--line_item;
+		shoppingCartItemList	line_item(__no_group)--line_item;
+	}
+} depth=3; isRoot = false
+
+meta{name=line_item_type, identified_by=code, features=status}
+line_item_type{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('待加工品|成品'), verb: false, required: true,type:string;
+		string	code('PRODUCE_PRODUCT|PRODUCT'), verb: false, required: true,type:string;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: lineItemTypeList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		lineItemList	line_item_type(__no_group)--line_item_type;
+	}
+} depth=1; isRoot = false
+
+meta{vg4platform=处方信息管理, name=sphere_range}
+sphere_range{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		double	max_value('+20.00|+0.00|+0.25'), verb: false, required: true,type:double;
+		double	min_value('-20.00|-19.75|-19.50|-0.25'), verb: false, required: true,type:double;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: sphereRangeList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		lensList	sphere_range(__no_group)--sphere_range;
+	}
+} depth=1; isRoot = false
+
+meta{vg4platform=处方信息管理, name=cylinder_range}
+cylinder_range{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		double	max_value('6.00|2.25|0.00'), verb: false, required: true,type:double;
+		double	min_value('6.00|2.25|0.00'), verb: false, required: true,type:double;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: cylinderRangeList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		lensList	cylinder_range(__no_group)--cylinder_range;
+	}
+} depth=1; isRoot = false
+
+meta{vg4platform=处方信息管理, name=pupil_distance_range}
+pupil_distance_range{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		int	max_value('30|46|47|48'), verb: false, required: true,type:int;
+		int	min_value('82|75|81|80|79|78'), verb: false, required: true,type:int;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: pupilDistanceRangeList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(2){
+		frameList	pupil_distance_range(__no_group)--pupil_distance_range;
+		rimlessLensShapeList	pupil_distance_range(__no_group)--pupil_distance_range;
+	}
+} depth=1; isRoot = false
+
+meta{vg4platform=处方信息管理, name=near_vision_addition_range}
+near_vision_addition_range{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		double	max_value('1.00|2.00|1.25|3.50|3.00'), verb: false, required: true,type:double;
+		double	min_value('1.00|2.00|1.25|3.50|3.00'), verb: false, required: true,type:double;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: nearVisionAdditionRangeList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		lensList	near_vision_addition_range(__no_group)--near_vision_addition_range;
+	}
+} depth=1; isRoot = false
+
+meta{vg4platform=处方信息管理, name=prescription_range}
+prescription_range{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		double	max_value('+20.00|+0.00|+0.25'), verb: false, required: true,type:double;
+		double	min_value('-20.00|-19.75|-19.50|-0.25'), verb: false, required: true,type:double;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: prescriptionRangeList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		frameList	prescription_range(__no_group)--prescription_range;
+	}
+} depth=1; isRoot = false
+
+meta{vg4platform=处方信息管理, name=prism_range_and_direction}
+prism_range_and_direction{
+	fields(9){
+		string	id('AB'), verb: false, required: true,type:id;
+		double	max_value('6.00|2.25|0.00'), verb: false, required: true,type:double;
+		double	min_value('6.00|2.25|0.00'), verb: false, required: true,type:double;
+		bool	prism_base_direction_up('true|false'), verb: false, required: true,type:bool;
+		bool	prism_base_direction_down('true|false'), verb: false, required: true,type:bool;
+		bool	prism_base_direction_in('true|false'), verb: false, required: true,type:bool;
+		bool	prism_base_direction_out('true|false'), verb: false, required: true,type:bool;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: prismRangeAndDirectionList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		lensList	prism_range_and_direction(__no_group)--prism_range_and_direction;
+	}
+} depth=1; isRoot = false
+
+meta{vg4platform=处方信息管理, name=lens_idx}
+lens_idx{
+	fields(4){
+		string	id('AB'), verb: false, required: true,type:id;
+		double	value('1.50|1.57|1.61|1.67|1.74'), verb: false, required: true,type:double;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: lensIdxList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		lensList	lens_idx(__no_group)--lens_idx;
+	}
+} depth=1; isRoot = false
+
+meta{name=prescription}
+prescription{
+	fields(27){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('处方名称'), verb: false, required: true,type:string;
+		age_range	age_range('$(object)'), verb: false, required: true, referenceBy: prescriptionList,type:age_range;
+		date	diagnosis_date('2099-12-31'), verb: false, required: true,type:date;
+		reminder_frequency_type	reminder_frequency_type('$(object)'), verb: false, required: true, referenceBy: prescriptionList,type:reminder_frequency_type;
+		prescription_pd_type	prescription_pd_type('$(object)'), verb: false, required: true, referenceBy: prescriptionList,type:prescription_pd_type;
+		int	single_pupillary_distance_value('35|79'), verb: false, required: true,type:int;
+		double	left_pupillary_distance_value('17.5|40.0'), verb: false, required: true,type:double;
+		double	right_pupillary_distance_value('17.5|40.0'), verb: false, required: true,type:double;
+		double	right_sphere('-20.00|+20.00|+0.00|+0.25|-0.25'), verb: false, required: true,type:double;
+		double	right_cylinder('-6.00|+6.00|+0.00|+0.25|-0.25'), verb: false, required: true,type:double;
+		int	right_axis('0|1|2|180'), verb: false, required: true,type:int;
+		double	left_sphere('-20.00|+20.00|+0.00|+0.25|-0.25'), verb: false, required: true,type:double;
+		double	left_cylinder('-6.00|+6.00|+0.00|+0.25|-0.25'), verb: false, required: true,type:double;
+		int	left_axis('0|1|2|180'), verb: false, required: true,type:int;
+		bool	is_prism('true|false'), verb: false, required: true,type:bool;
+		double	right_prism_horizontal_value('0.00|0.25|4.75|5.00'), verb: false, required: true,type:double;
+		horizontal_base_direction	right_prism_horizontal_base_direction('$(object)'), verb: false, required: false, referenceBy: prescriptionListAsRightPrismHorizontalBaseDirection,type:horizontal_base_direction;
+		double	right_prism_vertical_value('0.00|0.25|4.75|5.00'), verb: false, required: true,type:double;
+		vertical_base_direction	right_prism_vertical_base_direction('$(object)'), verb: false, required: false, referenceBy: prescriptionListAsRightPrismVerticalBaseDirection,type:vertical_base_direction;
+		double	left_prism_horizontal_value('0.00|0.25|4.75|5.00'), verb: false, required: true,type:double;
+		horizontal_base_direction	left_prism_horizontal_base_direction('$(object)'), verb: false, required: false, referenceBy: prescriptionListAsLeftPrismHorizontalBaseDirection,type:horizontal_base_direction;
+		double	left_prism_vertical_value('0.00|0.25|4.75|5.00'), verb: false, required: true,type:double;
+		vertical_base_direction	left_prism_vertical_base_direction('$(object)'), verb: false, required: false, referenceBy: prescriptionListAsLeftPrismVerticalBaseDirection,type:vertical_base_direction;
+		date_time_create	create_time('createTime()'), verb: false, required: true,type:date_time_create;
+		date_time_update	last_update_time('updateTime()'), verb: false, required: true,type:date_time_update;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		lineItemList	prescription(__no_group)--prescription;
+	}
+} depth=2; isRoot = false
+
+meta{vg4platform=处方信息管理, name=horizontal_base_direction, features=status, identified_by=code}
+horizontal_base_direction{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('朝内|朝外'), verb: false, required: true,type:string;
+		string	code('IN|OUT'), verb: false, required: true,type:string;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: horizontalBaseDirectionList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(2){
+		prescriptionListAsRightPrismHorizontalBaseDirection	right_prism_horizontal_base_direction(__no_group)--right_prism_horizontal_base_direction;
+		prescriptionListAsLeftPrismHorizontalBaseDirection	left_prism_horizontal_base_direction(__no_group)--right_prism_horizontal_base_direction;
+	}
+} depth=1; isRoot = false
+
+meta{vg4platform=处方信息管理, name=vertical_base_direction, features=status, identified_by=code}
+vertical_base_direction{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('朝上|朝下'), verb: false, required: true,type:string;
+		string	code('UP|DOWN'), verb: false, required: true,type:string;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: verticalBaseDirectionList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(2){
+		prescriptionListAsRightPrismVerticalBaseDirection	right_prism_vertical_base_direction(__no_group)--right_prism_vertical_base_direction;
+		prescriptionListAsLeftPrismVerticalBaseDirection	left_prism_vertical_base_direction(__no_group)--right_prism_vertical_base_direction;
+	}
+} depth=1; isRoot = false
+
+meta{vg4platform=处方信息管理, name=prescription_pd_type, features=status, identified_by=code}
+prescription_pd_type{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('单瞳距|双眼瞳距'), verb: false, required: true,type:string;
+		string	code('SINGLE_PD|DUAL_PD'), verb: false, required: true,type:string;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: prescriptionPdTypeList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		prescriptionList	prescription_pd_type(__no_group)--prescription_pd_type;
+	}
+} depth=1; isRoot = false
+
+meta{vg4platform=处方信息管理, name=reminder_frequency_type, features=status, identified_by=code}
+reminder_frequency_type{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('每半年|每年|每两年|不提醒'), verb: false, required: true,type:string;
+		string	code('HALF_YEAR|YEARLY|TWO_YEAR|NO_REMINDER'), verb: false, required: true,type:string;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: reminderFrequencyTypeList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		prescriptionList	reminder_frequency_type(__no_group)--reminder_frequency_type;
+	}
+} depth=1; isRoot = false
+
+meta{vg4platform=处方信息管理, name=age_range}
+age_range{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		int	age_from('0|5|10|15|20|25|30|35|40|50|60|70|80|90|100'), verb: false, required: true,type:int;
+		int	age_to('0|5|10|15|20|25|30|35|40|50|60|70|80|90|100'), verb: false, required: true,type:int;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: ageRangeList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		prescriptionList	age_range(__no_group)--age_range;
+	}
+} depth=1; isRoot = false
+
+meta{vg4platform=订单管理, name=main_order}
+main_order{
+	fields(12){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	title('订单标题'), verb: false, required: true,type:string;
+		user	buyer('$(object)'), verb: false, required: true, referenceBy: mainOrderList,type:user;
+		merchant	seller('$(object)'), verb: false, required: true, referenceBy: mainOrderList,type:merchant;
+		order_status	status('$(object)'), verb: false, required: true, referenceBy: mainOrderList,type:order_status;
+		money	total_amount('$9.99|$999.999'), verb: false, required: true,type:money;
+		date_time	paid_time('2099-12-31T23:59:59'), verb: false, required: true,type:date_time;
+		date_time	order_place_time('2099-12-31T23:59:59'), verb: false, required: true,type:date_time;
+		date_time_create	create_time('createTime()'), verb: false, required: true,type:date_time_create;
+		date_time_update	last_update_time('updateTime()'), verb: false, required: true,type:date_time_update;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: mainOrderList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(3){
+		orderItemList	main_order(__no_group)--main_order;
+		shippingList	main_order(__no_group)--main_order;
+		paymentDetailList	main_order(__no_group)--main_order;
+	}
+} depth=2; isRoot = false
+
+meta{name=order_item}
+order_item{
+	fields(6){
+		string	id('AB'), verb: false, required: true,type:id;
+		main_order	main_order('$(object)'), verb: false, required: true, referenceBy: orderItemList,type:main_order;
+		line_item	line_item('$(object)'), verb: false, required: true, referenceBy: orderItemList,type:line_item;
+		date_time_create	create_time('createTime()'), verb: false, required: true,type:date_time_create;
+		date_time_update	last_update_time('updateTime()'), verb: false, required: true,type:date_time_update;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=4; isRoot = false
+
+meta{name=shipping}
+shipping{
+	fields(4){
+		string	id('AB'), verb: false, required: true,type:id;
+		main_order	main_order('$(object)'), verb: false, required: true, referenceBy: shippingList,type:main_order;
+		shipping_address	shipping_address('$(object)'), verb: false, required: true, referenceBy: shippingList,type:shipping_address;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=5; isRoot = false
+
+meta{name=payment_detail}
+payment_detail{
+	fields(11){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('订单支付详情'), verb: false, required: true,type:string;
+		payment_option	payment_option('$(object)'), verb: false, required: true, referenceBy: paymentDetailList,type:payment_option;
+		payment_status	payment_status('$(object)'), verb: false, required: true, referenceBy: paymentDetailList,type:payment_status;
+		date_time	paid_time('2100-01-01T00:00:00'), verb: false, required: true,type:date_time;
+		date_time	cancel_time('2100-01-01T00:00:00'), verb: false, required: true,type:date_time;
+		user	payer('$(object)'), verb: false, required: true, referenceBy: paymentDetailList,type:user;
+		main_order	main_order('$(object)'), verb: false, required: true, referenceBy: paymentDetailList,type:main_order;
+		date_time_create	create_time('createTime()'), verb: false, required: true,type:date_time_create;
+		date_time_update	last_update_time('updateTime()'), verb: false, required: true,type:date_time_update;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=3; isRoot = false
+
+meta{name=payment_status, identified_by=code, features=status}
+payment_status{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('待支付|支付中|已支付|已取消|已失败'), verb: false, required: true,type:string;
+		string	code('UNPAID|PAYING|PAID|CANCELLED|FAILED'), verb: false, required: true,type:string;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: paymentStatusList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		paymentDetailList	payment_status(__no_group)--payment_status;
+	}
+} depth=1; isRoot = false
+
+meta{name=payment_option, identified_by=code, features=status}
+payment_option{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('余额|微信APP|微信WEB|微信扫码|支付宝|银联'), verb: false, required: true,type:string;
+		string	code('BALANCE|WECHAT_APP|WECHAT_JSAPI|WECHAT_NATIVE|ALIPAY|UNION_PAY'), verb: false, required: true,type:string;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: paymentOptionList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		paymentDetailList	payment_option(__no_group)--payment_option;
+	}
+} depth=1; isRoot = false
+
+meta{name=order_status, identified_by=code, features=status}
+order_status{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('未就绪|待支付|待上传处方|待确认|已取消|已完成|处理中'), verb: false, required: true,type:string;
+		string	code('INCOMPLETE|NEED_PAY|NEED_UPLOAD_PRESCRIPTION|NEED_CONFIRM|CANCELLED|FINSIHED|PROCESSING'), verb: false, required: true,type:string;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: orderStatusList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		mainOrderList	status(__no_group)--status;
+	}
+} depth=1; isRoot = false
+
+meta{vg4platform=购物车, name=shopping_cart}
+shopping_cart{
+	fields(7){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('购物车'), verb: false, required: true,type:string;
+		user	owner('$(object)'), verb: false, required: true, referenceBy: shoppingCartList,type:user;
+		money	total_amount('$9.99|$999.999'), verb: false, required: true,type:money;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: shoppingCartList,type:platform;
+		date_time_update	last_update_time('updateTime()'), verb: false, required: true,type:date_time_update;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		shoppingCartItemList	shopping_cart(__no_group)--shopping_cart;
+	}
+} depth=2; isRoot = false
+
+meta{name=shopping_cart_item}
+shopping_cart_item{
+	fields(6){
+		string	id('AB'), verb: false, required: true,type:id;
+		shopping_cart	shopping_cart('$(object)'), verb: false, required: true, referenceBy: shoppingCartItemList,type:shopping_cart;
+		line_item	line_item('$(object)'), verb: false, required: true, referenceBy: shoppingCartItemList,type:line_item;
+		date_time_create	create_time('createTime()'), verb: false, required: true,type:date_time_create;
+		date_time_update	last_update_time('updateTime()'), verb: false, required: true,type:date_time_update;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=4; isRoot = false
+
+meta{vg4platform=商品管理, name=catalog}
+catalog{
+	fields(4){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('眼镜产品目录'), verb: false, required: true,type:string;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: catalogList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		categoryList	catalog(__no_group)--catalog;
+	}
+} depth=1; isRoot = false
+
+meta{vg4platform=商品管理, name=category}
+category{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('处方眼镜|附件|非处方太阳镜|普通劳保护目镜|处方劳保护目镜|处方护目镜|运动处方镜|夹片套镜|双光镜|渐进太阳镜|渐进眼镜'), verb: false, required: true,type:string;
+		catalog	catalog('$(object)'), verb: false, required: true, referenceBy: categoryList,type:catalog;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: categoryList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(2){
+		demoProductList	category(__no_group)--category;
+		productList	category(__no_group)--category;
+	}
+} depth=2; isRoot = false
+
+meta{vg4platform=商品管理, name=product}
+product{
+	fields(7){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('金丝钛合金眼镜|近视护目镜|劳保护目镜|眼镜盒|眼镜布'), verb: false, required: true,type:string;
+		string_image	hero_image('glasses.jpg'), verb: false, required: true,type:string_image;
+		product_type	product_type('$(object)'), verb: false, required: true, referenceBy: productList,type:product_type;
+		category	category('$(object)'), verb: false, required: true, referenceBy: productList,type:category;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: productList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		skuList	product(__no_group)--product;
+	}
+} depth=3; isRoot = false
+
+meta{vg4platform=商品管理, name=sku}
+sku{
+	fields(16){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('眼镜|眼镜布|护目镜'), verb: false, required: true,type:string;
+		frame_color	color('$(object)'), verb: false, required: true, referenceBy: skuList,type:frame_color;
+		string	description('商品描述信息'), verb: false, required: true,type:string;
+		string_image	image1('glasses.jpg'), verb: false, required: true,type:string_image;
+		string_image	image2('glasses.jpg'), verb: false, required: true,type:string_image;
+		string_image	image3('glasses.jpg'), verb: false, required: true,type:string_image;
+		string_image	image4('glasses.jpg'), verb: false, required: true,type:string_image;
+		string_image	image5('glasses.jpg'), verb: false, required: true,type:string_image;
+		product_type	product_type('$(object)'), verb: false, required: true, referenceBy: skuList,type:product_type;
+		prescription_sku	prescription_sku('$(object)'), verb: false, required: true, referenceBy: skuList,type:prescription_sku;
+		standard_sku	standard_sku('$(object)'), verb: false, required: true, referenceBy: skuList,type:standard_sku;
+		clip_on	clip_on_sku('$(object)'), verb: false, required: true, referenceBy: skuList,type:clip_on;
+		product	product('$(object)'), verb: false, required: true, referenceBy: skuList,type:product;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: skuList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(3){
+		userTryOnAvatarList	try_on_glasses(__no_group)--try_on_glasses;
+		user3dTryOnVideoList	try_on_glasses(__no_group)--try_on_glasses;
+		skuInventoryList	sku(__no_group)--sku;
+	}
+} depth=4; isRoot = false
+
+meta{vg4platform=商品管理, name=prescription_sku}
+prescription_sku{
+	fields(6){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('1.67银色纯钛变光'), verb: false, required: true,type:string;
+		frame	frame('$(object)'), verb: false, required: false, referenceBy: prescriptionSkuList,type:frame;
+		lens	lens('$(object)'), verb: false, required: false, referenceBy: prescriptionSkuList,type:lens;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: prescriptionSkuList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		skuList	prescription_sku(__no_group)--prescription_sku;
+	}
+} depth=3; isRoot = false
+
+meta{vg4platform=商品管理, name=standard_sku}
+standard_sku{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('成品眼镜|眼镜盒'), verb: false, required: true,type:string;
+		int	external_code('12345'), verb: false, required: true,type:int;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: standardSkuList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		skuList	standard_sku(__no_group)--standard_sku;
+	}
+} depth=1; isRoot = false
+
+meta{vg4platform=商品管理, name=clip_on}
+clip_on{
+	fields(7){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('灰色太阳镜偏振夹片|琥珀色太阳镜偏振夹片|渐变绿色太阳镜夹片|渐变灰色太阳镜夹片|渐变琥珀色太阳镜夹片'), verb: false, required: true,type:string;
+		string	external_code('111|333|222|T12'), verb: false, required: true,type:string;
+		money	price('$10.00'), verb: false, required: true,type:money;
+		clip_on_type	clip_on_type('$(object)'), verb: false, required: true, referenceBy: clipOnList,type:clip_on_type;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: clipOnList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(3){
+		lensRestrictClipOnList	clip_on(__no_group)--clip_on;
+		frameAvailableClipOnList	clip_on(__no_group)--clip_on;
+		skuList	clip_on_sku(__no_group)--clip_on_sku;
+	}
+} depth=2; isRoot = false
+
+meta{vg4platform=商品管理, name=product_category, identified_by=code, features=status}
+product_category{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('眼镜|附件'), verb: false, required: true,type:string;
+		string	code('GLASSES|ACCESSORY'), verb: false, required: true,type:string;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: productCategoryList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		productTypeList	category(__no_group)--category;
+	}
+} depth=1; isRoot = false
+
+meta{vg4platform=商品管理, name=product_type, identified_by=code, features=status}
+product_type{
+	fields(6){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('处方镜|成品镜|附件|眼镜配件'), verb: false, required: true,type:string;
+		string	code('PRESCRIPTION_GLASSES|STANDARD_GLASSES|STANDARD_ACCESSORY|CLIP_ON'), verb: false, required: true,type:string;
+		product_category	category('$(object)'), verb: false, required: true, referenceBy: productTypeList,type:product_category;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: productTypeList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(2){
+		productList	product_type(__no_group)--product_type;
+		skuList	product_type(__no_group)--product_type;
+	}
+} depth=2; isRoot = false
+
+meta{vg4platform=商品管理, name=clip_on_type, features=status, identified_by=code}
+clip_on_type{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('磁夹片|普通夹片'), verb: false, required: true,type:string;
+		string	code('MAG_CLIP_ON|NORMAL_CLIP_ON'), verb: false, required: true,type:string;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: clipOnTypeList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(3){
+		frameList	clip_on_type(__no_group)--clip_on_type;
+		frameAvailableClipOnTypeList	clip_on_type(__no_group)--clip_on_type;
+		clipOnList	clip_on_type(__no_group)--clip_on_type;
+	}
+} depth=1; isRoot = false
+
+meta{vg4platform=商品管理, name=sku_inventory}
+sku_inventory{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		sku	sku('$(object)'), verb: false, required: true, referenceBy: skuInventoryList,type:sku;
+		int	quantity('1|99999'), verb: false, required: true,type:int;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: skuInventoryList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=5; isRoot = false
+
+meta{name=mobile_app}
+mobile_app{
+	fields(3){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('移动端配置'), verb: false, required: true,type:string;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(2){
+		pageList	mobile_app(__no_group)--mobile_app;
+		pageTypeList	mobile_app(__no_group)--mobile_app;
+	}
+} depth=0; isRoot = true
+
+meta{name=page}
+page{
+	fields(7){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	page_title('首页'), verb: false, required: true,type:string;
+		string	link_to_url('首页'), verb: false, required: true,type:string;
+		page_type	page_type('$(object)'), verb: false, required: true, referenceBy: pageList,type:page_type;
+		int	display_order('1|2|3'), verb: false, required: true,type:int;
+		mobile_app	mobile_app('$(object)'), verb: false, required: true, referenceBy: pageList,type:mobile_app;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(3){
+		slideList	page(__no_group)--page;
+		uiActionList	page(__no_group)--page;
+		sectionList	page(__no_group)--page;
+	}
+} depth=2; isRoot = false
+
+meta{name=page_type, features=status, identified_by=code}
+page_type{
+	fields(6){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('首页|我的|Generic Page|Listof Page|功能大厅|普通'), verb: false, required: true,type:string;
+		string	code('home|me|generic-page|listof-page|service-center|simple'), verb: false, required: true,type:string;
+		mobile_app	mobile_app('$(object)'), verb: false, required: true, referenceBy: pageTypeList,type:mobile_app;
+		bool	footer_tab('true|false'), verb: false, required: true,type:bool;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		pageList	page_type(__no_group)--page_type;
+	}
+} depth=1; isRoot = false
+
+meta{name=slide}
+slide{
+	fields(8){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('首页Focus的内容'), verb: false, required: true,type:string;
+		int	display_order('1|2|3'), verb: false, required: true,type:int;
+		string_image	image_url('https://xubai-test.oss-cn-beijing.aliyuncs.com/app/test/slide_1.jpg|https://xubai-test.oss-cn-beijing.aliyuncs.com/app/test/slide_2.jpg|https://xubai-test.oss-cn-beijing.aliyuncs.com/app/test/slide_3.jpg|https://xubai-test.oss-cn-beijing.aliyuncs.com/app/test/slide_4.jpg'), verb: false, required: true,type:string_image;
+		string_image	video_url('https://xubai-test.oss-cn-beijing.aliyuncs.com/app/test/slide_1.jpg|https://xubai-test.oss-cn-beijing.aliyuncs.com/app/test/slide_2.jpg|https://xubai-test.oss-cn-beijing.aliyuncs.com/app/test/slide_3.jpg|https://xubai-test.oss-cn-beijing.aliyuncs.com/app/test/slide_4.jpg'), verb: false, required: true,type:string_image;
+		string	link_to_url('|/section/article/'), verb: false, required: false,type:string;
+		page	page('$(object)'), verb: false, required: true, referenceBy: slideList,type:page;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=3; isRoot = false
+
+meta{name=ui_action}
+ui_action{
+	fields(11){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	code('submit|share|view|more'), verb: false, required: true,type:string;
+		string	icon('icon_edit|icon_share|icon_eye|icon_more'), verb: false, required: true,type:string;
+		string	title('提交|分享|查看|更多'), verb: false, required: true,type:string;
+		int	display_order('1|2|3'), verb: false, required: true,type:int;
+		string	brief('Submit|Share|View|View More'), verb: false, required: true,type:string;
+		string_image	image_url('https://xubai-test.oss-cn-beijing.aliyuncs.com/app/test/slide_1.jpg|https://xubai-test.oss-cn-beijing.aliyuncs.com/app/test/slide_2.jpg|https://xubai-test.oss-cn-beijing.aliyuncs.com/app/test/slide_3.jpg|https://xubai-test.oss-cn-beijing.aliyuncs.com/app/test/slide_4.jpg'), verb: false, required: true,type:string_image;
+		string	link_to_url('wxappService/section/article/'), verb: false, required: true,type:string;
+		string_longtext	extra_data('text()'), verb: false, required: true,type:string_longtext;
+		page	page('$(object)'), verb: false, required: true, referenceBy: uiActionList,type:page;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=3; isRoot = false
+
+meta{name=section}
+section{
+	fields(9){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	title('文章|作品'), verb: false, required: true,type:string;
+		string	brief('Article|Artwork'), verb: false, required: true,type:string;
+		string_image	icon('icon.jpg'), verb: false, required: true,type:string_image;
+		int	display_order('1|2|3'), verb: false, required: true,type:int;
+		string	view_group('icon_edit|icon_share|icon_eye|icon_more'), verb: false, required: true,type:string;
+		string	link_to_url('wxappService/section/article/'), verb: false, required: true,type:string;
+		page	page('$(object)'), verb: false, required: true, referenceBy: sectionList,type:page;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=3; isRoot = false
+
+meta{name=user_domain, features=ootb}
+user_domain{
+	fields(3){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('用户区域'), verb: false, required: true,type:string;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(3){
+		userWhiteListList	domain(__no_group)--domain;
+		secUserList	domain(__no_group)--domain;
+		publicKeyTypeList	domain(__no_group)--domain;
+	}
+} depth=0; isRoot = true
+
+meta{name=user_white_list, features=syssetting}
+user_white_list{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	user_identity('clariones|13808188512'), verb: false, required: true,type:string;
+		string	user_special_functions('tester;ios-spokesperson'), verb: false, required: true,type:string;
+		user_domain	domain('$(object)'), verb: false, required: true, referenceBy: userWhiteListList,type:user_domain;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=1; isRoot = false
+
+meta{name=sec_user, features=ootb, identified_by=login,email,mobile}
+sec_user{
+	fields(13){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	login('login'), verb: false, required: true,type:string;
+		string_china_mobile_phone	mobile('13900000001'), verb: false, required: true,type:string_china_mobile_phone;
+		string_email	email('suddy_chang@163.com'), verb: false, required: true,type:string_email;
+		string_password	pwd('*******'), verb: false, required: true,type:string_password;
+		string	weixin_openid('wx123456789abcdefghijklmn'), verb: false, required: true,type:string;
+		string	weixin_appid('wxapp12098410239840'), verb: false, required: true,type:string;
+		string	access_token('jwt_token_12345678'), verb: false, required: true,type:string;
+		int	verification_code('0|9999999'), verb: false, required: true,type:int;
+		date_time	verification_code_expire('2099-12-31T09:09:09'), verb: false, required: true,type:date_time;
+		date_time	last_login_time('2099-12-31T09:09:09'), verb: false, required: false,type:date_time;
+		user_domain	domain('$(object)'), verb: false, required: true, referenceBy: secUserList,type:user_domain;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(5){
+		userAppList	sec_user(__no_group)--sec_user;
+		loginHistoryList	sec_user(__no_group)--sec_user;
+		wechatWorkappIdentityList	sec_user(__no_group)--sec_user;
+		wechatMiniappIdentityList	sec_user(__no_group)--sec_user;
+		keypairIdentityList	sec_user(__no_group)--sec_user;
+	}
+} depth=1; isRoot = false
+
+meta{name=user_app, features=ootb}
+user_app{
+	fields(10){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	title('审车平台|账户管理|接车公司|审车公司|维修公司|顾客'), verb: false, required: true,type:string;
+		sec_user	sec_user('$(object)'), verb: false, required: true, referenceBy: userAppList,type:sec_user;
+		string	app_icon('users|bank|wechat|bar-chart|user|users'), verb: false, required: true,type:string;
+		bool	full_access('true'), verb: false, required: true,type:bool;
+		string	permission('MXWR|MXWR'), verb: false, required: true,type:string;
+		string	object_type('CarInspectionPlatform|UserDomain|CarReceivingServiceCompany|CarInspectionServiceCompany|CarRepairingServiceCompany|CustomerInfo'), verb: false, required: true,type:string;
+		string	object_id('CIP000001|UD000001|CRSC000001|CISC000001|CRSC000001|CI000001'), verb: false, required: true,type:string;
+		string	location('/link/to/app'), verb: false, required: true,type:string;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(2){
+		quickLinkList	app(__no_group)--app;
+		listAccessList	app(__no_group)--app;
+	}
+} depth=2; isRoot = false
+
+meta{name=quick_link, features=ootb}
+quick_link{
+	fields(8){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('列表'), verb: false, required: true,type:string;
+		string	icon('facebook|google'), verb: false, required: true,type:string;
+		string_image	image_path('y-200-200-red.jpg'), verb: false, required: true,type:string_image;
+		string	link_target('列表'), verb: false, required: true,type:string;
+		date_time_create	create_time('createTime()'), verb: false, required: true,type:date_time_create;
+		user_app	app('$(object)'), verb: false, required: true, referenceBy: quickLinkList,type:user_app;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=3; isRoot = false
+
+meta{name=list_access, features=ootb}
+list_access{
+	fields(10){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('列表'), verb: false, required: true,type:string;
+		string	internal_name('levelOneCategoryList'), verb: false, required: true,type:string;
+		bool	read_permission('true'), verb: false, required: true,type:bool;
+		bool	create_permission('true'), verb: false, required: true,type:bool;
+		bool	delete_permission('true'), verb: false, required: true,type:bool;
+		bool	update_permission('true'), verb: false, required: true,type:bool;
+		bool	execution_permission('true'), verb: false, required: true,type:bool;
+		user_app	app('$(object)'), verb: false, required: true, referenceBy: listAccessList,type:user_app;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=3; isRoot = false
+
+meta{name=login_history, features=syslog}
+login_history{
+	fields(6){
+		string	id('AB'), verb: false, required: true,type:id;
+		date_time_create	login_time('createTime()'), verb: false, required: true,type:date_time_create;
+		string	from_ip('192.168.1.1|192.168.1.2'), verb: false, required: true,type:string;
+		string	description('登陆成功'), verb: false, required: true,type:string;
+		sec_user	sec_user('$(object)'), verb: false, required: true, referenceBy: loginHistoryList,type:sec_user;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=2; isRoot = false
+
+meta{name=candidate_container, features=internal,ootb}
+candidate_container{
+	fields(3){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('我只是一个容器'), verb: false, required: true,type:string;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		candidateElementList	container(__no_group)--container;
+	}
+} depth=0; isRoot = true
+
+meta{name=candidate_element, features=internal,ootb}
+candidate_element{
+	fields(6){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('搜索到的匹配字段'), verb: false, required: true,type:string;
+		string	type('类型描述'), verb: false, required: true,type:string;
+		string_image	image('1.jpg'), verb: false, required: true,type:string_image;
+		candidate_container	container('$(object)'), verb: false, required: true, referenceBy: candidateElementList,type:candidate_container;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=1; isRoot = false
+
+meta{name=wechat_workapp_identity}
+wechat_workapp_identity{
+	fields(7){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	corp_id('corporation123'), verb: false, required: true,type:string;
+		string	user_id('user123'), verb: false, required: true,type:string;
+		sec_user	sec_user('$(object)'), verb: false, required: true, referenceBy: wechatWorkappIdentityList,type:sec_user;
+		date_time_create	create_time('createTime()'), verb: false, required: true,type:date_time_create;
+		date_time	last_login_time('2100-01-01T00:00:00'), verb: false, required: false,type:date_time;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=2; isRoot = false
+
+meta{name=wechat_miniapp_identity}
+wechat_miniapp_identity{
+	fields(7){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	open_id('wechat_open_id_1234567890'), verb: false, required: true,type:string;
+		string	app_id('wechat_miniapp_id_1234567890'), verb: false, required: true,type:string;
+		sec_user	sec_user('$(object)'), verb: false, required: true, referenceBy: wechatMiniappIdentityList,type:sec_user;
+		date_time_create	create_time('createTime()'), verb: false, required: true,type:date_time_create;
+		date_time	last_login_time('2100-01-01T00:00:00'), verb: false, required: false,type:date_time;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=2; isRoot = false
+
+meta{name=keypair_identity}
+keypair_identity{
+	fields(6){
+		string	id('AB'), verb: false, required: true,type:id;
+		string_longtext	public_key('text()'), verb: false, required: true,type:string_longtext;
+		public_key_type	key_type('$(object)'), verb: false, required: true, referenceBy: keypairIdentityList,type:public_key_type;
+		sec_user	sec_user('$(object)'), verb: false, required: true, referenceBy: keypairIdentityList,type:sec_user;
+		date_time_create	create_time('createTime()'), verb: false, required: true,type:date_time_create;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=2; isRoot = false
+
+meta{name=public_key_type}
+public_key_type{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('rsa|ecc'), verb: false, required: true,type:string;
+		string	code('rsa|ecc'), verb: false, required: true,type:string;
+		user_domain	domain('$(object)'), verb: false, required: true, referenceBy: publicKeyTypeList,type:user_domain;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		keypairIdentityList	key_type(__no_group)--key_type;
+	}
+} depth=1; isRoot = false
+
+meta{name=tree_node}
+tree_node{
+	fields(6){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	node_id('node000001'), verb: false, required: true,type:string;
+		string	node_type('nodetype'), verb: false, required: true,type:string;
+		int	left_value('1'), verb: false, required: true,type:int;
+		int	right_value('10'), verb: false, required: true,type:int;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=0; isRoot = true
+
+
+
+
+=================================End Report=================================
