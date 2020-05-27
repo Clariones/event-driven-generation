@@ -13,6 +13,7 @@ public class ChangeRequestType extends BaseModelBean{
 	public static EnumAttribute COMMENTS_ON_CONTRACT = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "COMMENTS_ON_CONTRACT");
 	public static EnumAttribute REVIEW_CONTRACT = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "REVIEW_CONTRACT");
 	public static EnumAttribute APPLY_RECOMMENDATION = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "APPLY_RECOMMENDATION");
+	public static EnumAttribute ADD_DEBIT_CARD = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "ADD_DEBIT_CARD");
 	public static EnumAttribute SHOW_ALL_TYPE = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "SHOW_ALL_TYPE");
 	public static EnumAttribute ADD_PROJECT_NOMINATION = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "ADD_PROJECT_NOMINATION");
 	public static EnumAttribute PROJECT_COMMAND = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "PROJECT_COMMAND");

@@ -168,6 +168,17 @@ public class Project extends BaseModelBean{
 		return member;
 	}
 
+	public ProjectMaterialTypeConfiguration projectMaterialTypeConfigurationList() {
+		ProjectMaterialTypeConfiguration member = new ProjectMaterialTypeConfiguration();
+		member.setModelTypeName("project_material_type_configuration");
+		member.setName("project");
+		member.setMemberName("projectMaterialTypeConfigurationList");
+		member.setRelationName("project");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 	public ProjectMaterial projectMaterialList() {
 		ProjectMaterial member = new ProjectMaterial();
 		member.setModelTypeName("project_material");

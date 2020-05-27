@@ -33,6 +33,8 @@ public class IconConfiguration extends BaseModelBean{
 	public static EnumAttribute REVIEW_BTN = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "REVIEW_BTN");
 	public static EnumAttribute CANCEL_BTN = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "CANCEL_BTN");
 	public static EnumAttribute EDIT_BTN = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "EDIT_BTN");
+	public static EnumAttribute ADD_BTN = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "ADD_BTN");
+	public static EnumAttribute DEBIT_CARD = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "DEBIT_CARD");
 
 	// 引用的对象
 

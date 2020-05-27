@@ -79,6 +79,15 @@ public class EventFillPersonalDetail extends BaseModelBean{
 		return member;
 	}
 
+	public StringAttribute avatar(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string_image");
+		// member.setName("avatar");
+		member.setName("avatar");
+		useMember(member);
+		return member;
+	}
+
 	public StringAttribute merchantName(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
@@ -93,6 +102,15 @@ public class EventFillPersonalDetail extends BaseModelBean{
 		member.setModelTypeName("string");
 		// member.setName("gender");
 		member.setName("gender");
+		useMember(member);
+		return member;
+	}
+
+	public StringAttribute idNumber(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string");
+		// member.setName("idNumber");
+		member.setName("id_number");
 		useMember(member);
 		return member;
 	}

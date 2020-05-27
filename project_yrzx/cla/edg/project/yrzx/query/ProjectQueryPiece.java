@@ -138,11 +138,12 @@ public class ProjectQueryPiece extends PieceOfScript {
 				.where(MODEL.yourongProjectBook().project().eq("${project id}"))
 				.wants(MODEL.yourongProjectBook().status(), MODEL.yourongProjectBook().type())
 
-			.query(MODEL.yourongProjectBook()).list_of("project by type").with_string("project id").with_string("type id")
-				.comments("按类型查询项目的五书")
+			.query(MODEL.yourongProjectBook()).list_of("project by type and status").with_string("project id").with_string("type id").with_string("filter")
+				.comments("按类型和状态查询项目的五书")
 				.do_it_as()
 				.where(MODEL.yourongProjectBook().project().eq("${project id}"),
-					MODEL.yourongProjectBook().type().eq("${type id}")
+					MODEL.yourongProjectBook().type().eq("${type id}"),
+						MODEL.yourongProjectBook().status().eq("${filter}").optional()
 				)
 				.wants(MODEL.yourongProjectBook().status(), MODEL.yourongProjectBook().type())
 
