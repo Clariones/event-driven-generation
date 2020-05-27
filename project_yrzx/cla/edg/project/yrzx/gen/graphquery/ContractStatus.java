@@ -12,6 +12,7 @@ public class ContractStatus extends BaseModelBean{
 	public static EnumAttribute NEED_CONFIRM = new EnumAttribute("com.yrdec.yrzx.contractstatus.ContractStatus", "NEED_CONFIRM");
 	public static EnumAttribute FULFILLING = new EnumAttribute("com.yrdec.yrzx.contractstatus.ContractStatus", "FULFILLING");
 	public static EnumAttribute END_FULFILLED = new EnumAttribute("com.yrdec.yrzx.contractstatus.ContractStatus", "END_FULFILLED");
+	public static EnumAttribute RISK = new EnumAttribute("com.yrdec.yrzx.contractstatus.ContractStatus", "RISK");
 	public static EnumAttribute CANCELLED = new EnumAttribute("com.yrdec.yrzx.contractstatus.ContractStatus", "CANCELLED");
 
 	// 引用的对象

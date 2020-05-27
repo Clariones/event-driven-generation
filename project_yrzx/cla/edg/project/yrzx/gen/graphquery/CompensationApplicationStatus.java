@@ -9,6 +9,8 @@ public class CompensationApplicationStatus extends BaseModelBean{
 		return "com.yrdec.yrzx.compensationapplicationstatus.CompensationApplicationStatus";
 	}
 	// 枚举对象
+	public static EnumAttribute ACCEPTING = new EnumAttribute("com.yrdec.yrzx.compensationapplicationstatus.CompensationApplicationStatus", "ACCEPTING");
+	public static EnumAttribute ACCEPTED = new EnumAttribute("com.yrdec.yrzx.compensationapplicationstatus.CompensationApplicationStatus", "ACCEPTED");
 
 	// 引用的对象
 

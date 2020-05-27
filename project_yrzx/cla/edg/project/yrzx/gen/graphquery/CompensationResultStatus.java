@@ -9,6 +9,8 @@ public class CompensationResultStatus extends BaseModelBean{
 		return "com.yrdec.yrzx.compensationresultstatus.CompensationResultStatus";
 	}
 	// 枚举对象
+	public static EnumAttribute UNPAID = new EnumAttribute("com.yrdec.yrzx.compensationresultstatus.CompensationResultStatus", "UNPAID");
+	public static EnumAttribute PAID = new EnumAttribute("com.yrdec.yrzx.compensationresultstatus.CompensationResultStatus", "PAID");
 
 	// 引用的对象
 

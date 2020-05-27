@@ -90,7 +90,7 @@ public class CompensationApplication extends BaseModelBean{
 
 	public StringAttribute images(){
 		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
+		member.setModelTypeName("images");
 		// member.setName("images");
 		member.setName("images");
 		useMember(member);

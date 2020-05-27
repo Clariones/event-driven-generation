@@ -27,6 +27,7 @@ public class ChangeRequestType extends BaseModelBean{
 	public static EnumAttribute APPLY_EMPLACEMENT = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "APPLY_EMPLACEMENT");
 	public static EnumAttribute PROJECT_PROGRESS = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "PROJECT_PROGRESS");
 	public static EnumAttribute COMMENTS_ON_MATERIALS = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "COMMENTS_ON_MATERIALS");
+	public static EnumAttribute APPLY_FOR_ADVANCE_COMPENSATION = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "APPLY_FOR_ADVANCE_COMPENSATION");
 	public static EnumAttribute PROJECT_MANAGER_REPORT = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "PROJECT_MANAGER_REPORT");
 	public static EnumAttribute FILL_PERSONAL_DETAIL = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "FILL_PERSONAL_DETAIL");
 	public static EnumAttribute PROJECT_SUPERVISION_REPORT = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "PROJECT_SUPERVISION_REPORT");
