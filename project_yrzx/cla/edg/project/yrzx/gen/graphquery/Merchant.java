@@ -190,6 +190,17 @@ public class Merchant extends BaseModelBean{
 		return member;
 	}
 
+	public DebitCard debitCardList() {
+		DebitCard member = new DebitCard();
+		member.setModelTypeName("debit_card");
+		member.setName("merchant");
+		member.setMemberName("debitCardList");
+		member.setRelationName("merchant");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 	public Job jobList() {
 		Job member = new Job();
 		member.setModelTypeName("job");

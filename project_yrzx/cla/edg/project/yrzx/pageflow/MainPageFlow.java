@@ -38,6 +38,8 @@ public class MainPageFlow extends BasePageFlowDescriptionScript {
 				.import_from(new NominationQueryPiece())
 				.import_from(new CompensationQueryPiece())
 				.import_from(new ProjectMaterialQueryPiece())
+				.import_from(new MerchantQueryPiece())
+				.import_from(new LicenseQueryPiece())
 				;
 	}
 

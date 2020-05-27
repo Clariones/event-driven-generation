@@ -215,6 +215,12 @@ public class MODEL{
 		return rst;
 	}
 
+	public static DebitCard debitCard() {
+		DebitCard rst = new DebitCard();
+		rst.setModelTypeName("debit_card");
+		return rst;
+	}
+
 	public static MerchantDetail merchantDetail() {
 		MerchantDetail rst = new MerchantDetail();
 		rst.setModelTypeName("merchant_detail");
@@ -368,6 +374,12 @@ public class MODEL{
 	public static DailyTaskTemplate dailyTaskTemplate() {
 		DailyTaskTemplate rst = new DailyTaskTemplate();
 		rst.setModelTypeName("daily_task_template");
+		return rst;
+	}
+
+	public static ProjectMaterialTypeConfiguration projectMaterialTypeConfiguration() {
+		ProjectMaterialTypeConfiguration rst = new ProjectMaterialTypeConfiguration();
+		rst.setModelTypeName("project_material_type_configuration");
 		return rst;
 	}
 
@@ -722,6 +734,12 @@ public class MODEL{
 	public static EventApplyRecommendation eventApplyRecommendation() {
 		EventApplyRecommendation rst = new EventApplyRecommendation();
 		rst.setModelTypeName("event_apply_recommendation");
+		return rst;
+	}
+
+	public static EventAddDebitCard eventAddDebitCard() {
+		EventAddDebitCard rst = new EventAddDebitCard();
+		rst.setModelTypeName("event_add_debit_card");
 		return rst;
 	}
 

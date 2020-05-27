@@ -58,6 +58,17 @@ public class ChangeRequest extends BaseModelBean{
 		return member;
 	}
 
+	public EventAddDebitCard eventAddDebitCardList() {
+		EventAddDebitCard member = new EventAddDebitCard();
+		member.setModelTypeName("event_add_debit_card");
+		member.setName("change_request");
+		member.setMemberName("eventAddDebitCardList");
+		member.setRelationName("changeRequest");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 	public EventShowAllType eventShowAllTypeList() {
 		EventShowAllType member = new EventShowAllType();
 		member.setModelTypeName("event_show_all_type");

@@ -23,6 +23,8 @@ public class MerchantQueryPiece extends PieceOfScript {
 					MODEL.merchant().merchantDetail().industryType()
 			)
 
+
+
 ;
 
 		return script;

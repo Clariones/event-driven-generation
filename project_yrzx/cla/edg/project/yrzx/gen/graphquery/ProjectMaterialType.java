@@ -36,6 +36,17 @@ public class ProjectMaterialType extends BaseModelBean{
 
 	// 被引用的对象
 
+	public ProjectMaterialTypeConfiguration projectMaterialTypeConfigurationList() {
+		ProjectMaterialTypeConfiguration member = new ProjectMaterialTypeConfiguration();
+		member.setModelTypeName("project_material_type_configuration");
+		member.setName("type");
+		member.setMemberName("projectMaterialTypeConfigurationList");
+		member.setRelationName("type");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 	public ProjectMaterial projectMaterialList() {
 		ProjectMaterial member = new ProjectMaterial();
 		member.setModelTypeName("project_material");
