@@ -21,6 +21,11 @@ public class MiscPageFlowPiece extends PieceOfScript {
 		.request("view employee nomination detail").need_login().with_string("employee nomination id")
 			.comments("查看员工详情")
 			.got_page("employee nomination detail")
+
+		.request("popup page").with_string("message").with_string("next url")
+			.got_page("popup")
+
+
 			;
 		return script;
 	}

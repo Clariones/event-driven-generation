@@ -18,9 +18,9 @@ public class MerchantQueryPiece extends PieceOfScript {
 					MODEL.merchant().id().eq("${merchant id}")
 			)
 			.wants(
-					MODEL.merchant().merchantDetail().engineeringType(),
-					MODEL.merchant().merchantDetail().careerType(),
-					MODEL.merchant().merchantDetail().industryType()
+					MODEL.merchant().merchantDetailList().engineeringType(),
+					MODEL.merchant().merchantDetailList().careerType(),
+					MODEL.merchant().merchantDetailList().industryType()
 			)
 
 

@@ -32,7 +32,8 @@ public class FinanceServiceQueryPiece extends PieceOfScript {
 			.comments("按状态查看项目中的贷款合同")
 			.do_it_as()
 			.where(
-					MODEL.loanContract().status().eq("${filter}").optional()
+					MODEL.loanContract().status().eq("${filter}").optional(),
+					MODEL.loanContract().project().eq("${project id}")
 			)
 			.wants(
 					MODEL.loanContract().borrower(),
@@ -77,6 +78,23 @@ public class FinanceServiceQueryPiece extends PieceOfScript {
 					MODEL.loanContract().lender(),
 					MODEL.loanContract().loanApplication().loanProject()
 			)
+
+
+		.find(MODEL.loanContract()).which("by project").with_string("project id")
+			.comments("统计项目下的贷款合同")
+			.do_it_as().count()
+			.where(MODEL.loanContract().project().eq("${project id}"))
+
+
+		.find(MODEL.loanFund()).which("by project").with_string("project id")
+			.comments("统计项目下的委贷资金")
+			.do_it_as().count()
+			.where(MODEL.loanFund().project().eq("${project id}"))
+
+		.find(MODEL.loanApplication()).which("by project").with_string("project id")
+				.comments("统计项目下的贷款申请")
+				.do_it_as().count()
+				.where(MODEL.loanApplication().loanProject().eq("${project id}"))
 
 		;
 

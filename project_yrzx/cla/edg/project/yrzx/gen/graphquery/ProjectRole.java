@@ -9,6 +9,7 @@ public class ProjectRole extends BaseModelBean{
 		return "com.yrdec.yrzx.projectrole.ProjectRole";
 	}
 	// 枚举对象
+	public static EnumAttribute PERSON_IN_CHARGE = new EnumAttribute("com.yrdec.yrzx.projectrole.ProjectRole", "PERSON_IN_CHARGE");
 	public static EnumAttribute ADMIN = new EnumAttribute("com.yrdec.yrzx.projectrole.ProjectRole", "ADMIN");
 	public static EnumAttribute WORKER = new EnumAttribute("com.yrdec.yrzx.projectrole.ProjectRole", "WORKER");
 

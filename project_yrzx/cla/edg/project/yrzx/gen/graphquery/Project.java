@@ -289,6 +289,17 @@ public class Project extends BaseModelBean{
 		return member;
 	}
 
+	public LoanContract loanContractList() {
+		LoanContract member = new LoanContract();
+		member.setModelTypeName("loan_contract");
+		member.setName("project");
+		member.setMemberName("loanContractList");
+		member.setRelationName("project");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 	public CompensationApplication compensationApplicationList() {
 		CompensationApplication member = new CompensationApplication();
 		member.setModelTypeName("compensation_application");
