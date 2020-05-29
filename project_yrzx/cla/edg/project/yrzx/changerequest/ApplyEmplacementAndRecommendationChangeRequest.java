@@ -1,5 +1,6 @@
 package cla.edg.project.yrzx.changerequest;
 
+import cla.edg.project.yrzx.gen.graphquery.MODEL;
 import com.terapico.changerequest.builder.ChangeRequestSpecBuilder;
 import com.terapico.changerequest.builder.ChangeRequestSpecFactory;
 import com.terapico.changerequest.builder.FieldType;
@@ -45,7 +46,7 @@ public class ApplyEmplacementAndRecommendationChangeRequest implements ChangeReq
 					.place_holder("请输入联系人手机")
 					.which_type_of(FieldType.MOBILE)
 
-			.change_request("apply emplacement").zh_CN("我要入驻").need_login()
+			.change_request("apply emplacement").zh_CN("企业入驻").need_login()
 				.icon("form")
 				.has_field("merchant_name").zh_CN("公司名称")
 					.place_holder("请输入公司名称")
@@ -55,7 +56,7 @@ public class ApplyEmplacementAndRecommendationChangeRequest implements ChangeReq
 					.place_holder("请选择类型")
 					.which_model_of("partner_type").values_can_select_from_query_by(null)
 				.has_field("service_location").zh_CN("地区")
-					.place_holder("请选择地区")
+					.place_holder("请选择服务区域")
 					.which_model_of("available_service_location").values_can_select_from_query_by(null)
 				.has_field("merchant_website").zh_CN("公司首页")
 					.place_holder("请输入公司名称").optional().with_style(UIStyle.INPUT_URL)
@@ -69,6 +70,31 @@ public class ApplyEmplacementAndRecommendationChangeRequest implements ChangeReq
 				.has_field("contact mobile").zh_CN("联系电话")
 					.place_holder("请输入联系人手机")
 					.which_type_of(FieldType.MOBILE)
-				;
+
+			.change_request("apply personal emplacement").zh_CN("个人入驻")
+				.icon("form")
+					.has_field("name").zh_CN("姓名")
+					.has_field("gender").zh_CN("性别").values_canbe("male","男").or("female","女")
+					.has_field("address").zh_CN("住址")
+					.has_field("career type").zh_CN("职业类型")
+						.which_model_of(MODEL.careerType())
+						.values_can_select_from_query_by("project id")
+					.has_field("business type").zh_CN("业务类型")
+						.which_model_of(MODEL.businessType())
+						.values_can_select_from_query_by("project id")
+					.has_field("service location").zh_CN("服务区域")
+						.place_holder("请选择服务区域")
+						.which_model_of("available_service_location").values_can_select_from_query_by(null)
+					.has_field("home page").zh_CN("个人首页")
+						.place_holder("请输入公司名称").optional().with_style(UIStyle.INPUT_URL)
+					.has_field("description").zh_CN("个人描述")
+					.has_field("phone").zh_CN("联系电话").which_type_of(FieldType.MOBILE)
+					.has_field("avatar").zh_CN("个人头像").which_type_of(FieldType.IMAGE)
+
+
+
+
+
+		;
 	}
 }

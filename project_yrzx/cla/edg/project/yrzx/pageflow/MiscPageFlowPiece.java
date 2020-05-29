@@ -22,10 +22,14 @@ public class MiscPageFlowPiece extends PieceOfScript {
 			.comments("查看员工详情")
 			.got_page("employee nomination detail")
 
-		.request("popup page").with_string("message").with_string("next url")
+		.request("popup page").with_string("title").with_string("message").with_string("next url")
 			.got_page("popup")
 
+		.request("view terms").with_string("title").with_string("message").with_string("next url")
+			.got_page("terms")
 
+		.request("remove project nomination").with_string("project nomination id").with_string("project id").with_string("merchant id").with_string("type id")
+			.got_page("project organization employee list")
 			;
 		return script;
 	}

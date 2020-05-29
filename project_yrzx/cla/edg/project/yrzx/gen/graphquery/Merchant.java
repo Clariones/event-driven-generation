@@ -465,17 +465,6 @@ public class Merchant extends BaseModelBean{
 		return member;
 	}
 
-	public EventProjectInfo eventProjectInfoList() {
-		EventProjectInfo member = new EventProjectInfo();
-		member.setModelTypeName("event_project_info");
-		member.setName("merchant");
-		member.setMemberName("eventProjectInfoList");
-		member.setRelationName("merchant");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-
 	public TodoList todoListList() {
 		TodoList member = new TodoList();
 		member.setModelTypeName("todo_list");

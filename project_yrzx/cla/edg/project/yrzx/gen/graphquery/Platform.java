@@ -553,6 +553,17 @@ public class Platform extends BaseModelBean{
 		return member;
 	}
 
+	public PersonalEmplacementApplication personalEmplacementApplicationList() {
+		PersonalEmplacementApplication member = new PersonalEmplacementApplication();
+		member.setModelTypeName("personal_emplacement_application");
+		member.setName("platform");
+		member.setMemberName("personalEmplacementApplicationList");
+		member.setRelationName("platform");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 	public CustomerProjectApplication customerProjectApplicationList() {
 		CustomerProjectApplication member = new CustomerProjectApplication();
 		member.setModelTypeName("customer_project_application");
@@ -602,6 +613,17 @@ public class Platform extends BaseModelBean{
 		member.setModelTypeName("business_type");
 		member.setName("platform");
 		member.setMemberName("businessTypeList");
+		member.setRelationName("platform");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public AuditStatus auditStatusList() {
+		AuditStatus member = new AuditStatus();
+		member.setModelTypeName("audit_status");
+		member.setName("platform");
+		member.setMemberName("auditStatusList");
 		member.setRelationName("platform");
 		member.setReferDirection(false);
 		append(member);

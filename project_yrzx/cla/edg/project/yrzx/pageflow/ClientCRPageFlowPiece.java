@@ -67,7 +67,7 @@ public class ClientCRPageFlowPiece extends PieceOfScript {
 					.comments("创建项目经理日志")
 					.got_page("project report detail")
 
-				.request_with_changerequest("add project nomination").with_string("project id")
+				.request_with_changerequest("add project nomination").with_string("project id").with_string("merchant id")
 					.comments("添加项目岗位")
 					.got_page("project organization")
 
@@ -90,6 +90,13 @@ public class ClientCRPageFlowPiece extends PieceOfScript {
 				.request_with_changerequest("add debit card")
 					.comments("添加劳务资料(银行卡)")
 					.got_page("personal detail")
+
+
+				.request_with_changerequest("apply personal emplacement").no_login()
+					.comments("申请个人入驻")
+					.got_page("popup")
+
+
 				;
 	}
 }

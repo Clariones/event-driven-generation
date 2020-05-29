@@ -647,6 +647,12 @@ public class MODEL{
 		return rst;
 	}
 
+	public static PersonalEmplacementApplication personalEmplacementApplication() {
+		PersonalEmplacementApplication rst = new PersonalEmplacementApplication();
+		rst.setModelTypeName("personal_emplacement_application");
+		return rst;
+	}
+
 	public static EstatePropertyType estatePropertyType() {
 		EstatePropertyType rst = new EstatePropertyType();
 		rst.setModelTypeName("estate_property_type");
@@ -773,9 +779,9 @@ public class MODEL{
 		return rst;
 	}
 
-	public static EventProjectInfo eventProjectInfo() {
-		EventProjectInfo rst = new EventProjectInfo();
-		rst.setModelTypeName("event_project_info");
+	public static EventApplyPersonalEmplacement eventApplyPersonalEmplacement() {
+		EventApplyPersonalEmplacement rst = new EventApplyPersonalEmplacement();
+		rst.setModelTypeName("event_apply_personal_emplacement");
 		return rst;
 	}
 
@@ -884,6 +890,12 @@ public class MODEL{
 	public static BusinessType businessType() {
 		BusinessType rst = new BusinessType();
 		rst.setModelTypeName("business_type");
+		return rst;
+	}
+
+	public static AuditStatus auditStatus() {
+		AuditStatus rst = new AuditStatus();
+		rst.setModelTypeName("audit_status");
 		return rst;
 	}
 
