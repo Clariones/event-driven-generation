@@ -124,6 +124,50 @@ public class DailyTaskType extends BaseModelBean{
 		return member;
 	}
 
+	public MaterialPreservedSample materialPreservedSampleList() {
+		MaterialPreservedSample member = new MaterialPreservedSample();
+		member.setModelTypeName("material_preserved_sample");
+		member.setName("daili_task_type");
+		member.setMemberName("materialPreservedSampleList");
+		member.setRelationName("dailiTaskType");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public MaterialBidSample materialBidSampleList() {
+		MaterialBidSample member = new MaterialBidSample();
+		member.setModelTypeName("material_bid_sample");
+		member.setName("daili_task_type");
+		member.setMemberName("materialBidSampleList");
+		member.setRelationName("dailiTaskType");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public MaterialRecord materialRecordList() {
+		MaterialRecord member = new MaterialRecord();
+		member.setModelTypeName("material_record");
+		member.setName("daili_task_type");
+		member.setMemberName("materialRecordList");
+		member.setRelationName("dailiTaskType");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public MaterialChange materialChangeList() {
+		MaterialChange member = new MaterialChange();
+		member.setModelTypeName("material_change");
+		member.setName("daili_task_type");
+		member.setMemberName("materialChangeList");
+		member.setRelationName("dailiTaskType");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 	public EventProjectCommand eventProjectCommandList() {
 		EventProjectCommand member = new EventProjectCommand();
 		member.setModelTypeName("event_project_command");

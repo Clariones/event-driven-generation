@@ -110,7 +110,7 @@ public class PersonalEmplacementApplication extends BaseModelBean{
 
 	public StringAttribute homePage(){
 		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string_url");
+		member.setModelTypeName("string");
 		// member.setName("homePage");
 		member.setName("home_page");
 		useMember(member);

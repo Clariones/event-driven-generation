@@ -110,7 +110,7 @@ public class EmplacementApplication extends BaseModelBean{
 
 	public StringAttribute companyWebsite(){
 		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string_url");
+		member.setModelTypeName("string");
 		// member.setName("companyWebsite");
 		member.setName("company_website");
 		useMember(member);

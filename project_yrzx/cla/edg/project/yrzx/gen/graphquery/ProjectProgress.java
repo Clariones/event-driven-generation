@@ -58,6 +58,17 @@ public class ProjectProgress extends BaseModelBean{
 		return member;
 	}
 
+	public MaterialRecord materialRecordList() {
+		MaterialRecord member = new MaterialRecord();
+		member.setModelTypeName("material_record");
+		member.setName("planned_approach_phase");
+		member.setMemberName("materialRecordList");
+		member.setRelationName("plannedApproachPhase");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 
 	// 普通属性
 

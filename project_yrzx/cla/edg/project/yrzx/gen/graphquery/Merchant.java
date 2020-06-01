@@ -377,6 +377,17 @@ public class Merchant extends BaseModelBean{
 		return member;
 	}
 
+	public MaterialRecord materialRecordList() {
+		MaterialRecord member = new MaterialRecord();
+		member.setModelTypeName("material_record");
+		member.setName("platform_information_manager");
+		member.setMemberName("materialRecordList");
+		member.setRelationName("platformInformationManager");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 	public AccountBook accountBookList() {
 		AccountBook member = new AccountBook();
 		member.setModelTypeName("account_book");
@@ -449,17 +460,6 @@ public class Merchant extends BaseModelBean{
 		member.setName("sender");
 		member.setMemberName("notificationListAsSender");
 		member.setRelationName("receiver");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-
-	public EventShowAllType eventShowAllTypeList() {
-		EventShowAllType member = new EventShowAllType();
-		member.setModelTypeName("event_show_all_type");
-		member.setName("field_biz_candidate");
-		member.setMemberName("eventShowAllTypeList");
-		member.setRelationName("fieldBizCandidate");
 		member.setReferDirection(false);
 		append(member);
 		return member;
@@ -988,17 +988,6 @@ public class Merchant extends BaseModelBean{
 		member.setName("impact_merchant");
 		member.setMemberName("violationListAsImpactMerchant");
 		member.setRelationName("responsibleMerchant");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-
-	public Material materialList() {
-		Material member = new Material();
-		member.setModelTypeName("material");
-		member.setName("vendor");
-		member.setMemberName("materialList");
-		member.setRelationName("vendor");
 		member.setReferDirection(false);
 		append(member);
 		return member;

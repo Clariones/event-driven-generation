@@ -112,7 +112,7 @@ public class PartnerSettlementApplication extends BaseModelBean{
 
 	public StringAttribute merchantWebsite(){
 		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string_url");
+		member.setModelTypeName("string");
 		// member.setName("merchantWebsite");
 		member.setName("merchant_website");
 		useMember(member);

@@ -69,17 +69,6 @@ public class ChangeRequest extends BaseModelBean{
 		return member;
 	}
 
-	public EventShowAllType eventShowAllTypeList() {
-		EventShowAllType member = new EventShowAllType();
-		member.setModelTypeName("event_show_all_type");
-		member.setName("change_request");
-		member.setMemberName("eventShowAllTypeList");
-		member.setRelationName("changeRequest");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-
 	public EventProjectCommand eventProjectCommandList() {
 		EventProjectCommand member = new EventProjectCommand();
 		member.setModelTypeName("event_project_command");

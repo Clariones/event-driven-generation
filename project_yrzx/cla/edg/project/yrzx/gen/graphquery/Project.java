@@ -333,6 +333,50 @@ public class Project extends BaseModelBean{
 		return member;
 	}
 
+	public MaterialPreservedSample materialPreservedSampleList() {
+		MaterialPreservedSample member = new MaterialPreservedSample();
+		member.setModelTypeName("material_preserved_sample");
+		member.setName("project");
+		member.setMemberName("materialPreservedSampleList");
+		member.setRelationName("project");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public MaterialBidSample materialBidSampleList() {
+		MaterialBidSample member = new MaterialBidSample();
+		member.setModelTypeName("material_bid_sample");
+		member.setName("project");
+		member.setMemberName("materialBidSampleList");
+		member.setRelationName("project");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public MaterialRecord materialRecordList() {
+		MaterialRecord member = new MaterialRecord();
+		member.setModelTypeName("material_record");
+		member.setName("project");
+		member.setMemberName("materialRecordList");
+		member.setRelationName("project");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public MaterialChange materialChangeList() {
+		MaterialChange member = new MaterialChange();
+		member.setModelTypeName("material_change");
+		member.setName("project");
+		member.setMemberName("materialChangeList");
+		member.setRelationName("project");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 	public ProjectStatisticReport projectStatisticReportList() {
 		ProjectStatisticReport member = new ProjectStatisticReport();
 		member.setModelTypeName("project_statistic_report");

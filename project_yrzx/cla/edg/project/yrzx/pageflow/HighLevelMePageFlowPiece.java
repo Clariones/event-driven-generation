@@ -73,6 +73,9 @@ public class HighLevelMePageFlowPiece extends PieceOfScript {
 					.got_page("me")
 
 				// 账户详情
+				.request("view my account")
+					.comments("我的账户")
+					.got_page("my account")
 				.request("view account detail").with_string("account id").with_string("filter").with_last_record_id()
 					.comments("查看某个账户的详情,带明细").need_login().no_footprint()
 					.got_page("account detail").title("账户详情")
@@ -80,6 +83,10 @@ public class HighLevelMePageFlowPiece extends PieceOfScript {
 				.request("view account record list").with_string("account id").with_last_record_id()
 					.comments("查看某个账户的流水").need_login().no_footprint()
 					.got_page("account record list").title("账户明细").list_of("card")
+				.request("card detail")
+					.comments("我的账户->绑定银行卡->查看")
+					.got_page("card detail")
+
 
 				// 订单详情
 				.request("view order detail").with_string("order id")
@@ -87,7 +94,7 @@ public class HighLevelMePageFlowPiece extends PieceOfScript {
 					.got_page("order detail").title("订单详情").as_class("")
 
 				//管理员工-->员工详情 和 我的-->个人资料
-				.request("view employee detail").need_login().with_string("employee nomination id")
+				.request("view employee detail").need_login().with_string("merchant id")
 					.comments("查看员工详情")
 					.got_page("personal detail")
 

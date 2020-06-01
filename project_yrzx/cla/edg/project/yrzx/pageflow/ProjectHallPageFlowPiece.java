@@ -23,7 +23,7 @@ public class ProjectHallPageFlowPiece extends PieceOfScript {
 		viewPureDocumentPages(script, "安全文明", "SAFE_AND_CIVILISE");
 		viewPureDocumentPages(script, "设计变更", "DESIGN_CHANGES");
 		viewPureDocumentPages(script, "设计管理", "DESIGN_MANAGMENT");
-		viewPureDocumentPages(script, "材料管理", "MATERIALS_MANAGEMENT");
+
 
 		// 纯文档的2级页面
 //		viewList(script, "document list by category", "按照文档的类目查看当前项目的文档列表",
@@ -51,6 +51,7 @@ public class ProjectHallPageFlowPiece extends PieceOfScript {
 		viewProjectElementIn3Levels(script, "合同任务", "PROJECT_CONTRACT");
 		viewProjectElementIn4Levels(script, "项目资料", "PROJECT_DOCS");
 		viewFinancialService(script, "金融服务", "FINANCIAL_SERVICE");
+		viewMaterialManagement(script, "材料管理", "MATERIALS_MANAGEMENT");
 		script.request("view project material review list").with_string("item id").with_last_record_id()
 				.comments("查看项目资料的所有审批记录列表").need_login().no_footprint()
 				.got_page("review record list").title("审核记录").list_of("card")
@@ -82,6 +83,42 @@ public class ProjectHallPageFlowPiece extends PieceOfScript {
 
 			;
 		return script;
+	}
+
+	private void viewMaterialManagement(PageFlowScript script, String title, String code) {
+		script.request("view material pannel").with_string("project id")
+				.comments("材料管理")
+				.got_page("material pannel")
+//					.may_request("material_preserved_sample")
+//					.may_request("material_bid_sample")
+//					.may_request("material change")
+
+
+
+				// 材料管理台账
+				.request("view material record type list").with_string("project id").with_string("filter").with_last_record_id()
+					.comments("材料台账一级菜单")
+					.got_page("material record type list")
+				.request("view material record list").with_string("project id").with_string("type id").with_last_record_id()
+					.comments("材料管理台账")
+					.got_page("material record list")
+					.may_request("view material record detail")
+
+						.request("view material record detail").with_string("item id")
+							.comments("材料管理台账详情")
+							.got_page("material record detail")
+
+//				.request("material_preserved_sample")
+//					.comments("进场材料存样")
+//
+//				.request("material_bid_sample")
+//					.comments("投标材料存样")
+//
+//				.request("material change")
+//					.comments("材料变更")
+
+
+				;
 	}
 
 	private void viewProjectElementIn4Levels(PageFlowScript script, String title, String code) {
