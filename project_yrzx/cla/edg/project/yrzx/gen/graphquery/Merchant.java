@@ -56,17 +56,6 @@ public class Merchant extends BaseModelBean{
 		return member;
 	}
 
-	public MerchantDetail merchantDetail() {
-		MerchantDetail member = new MerchantDetail();
-		member.setModelTypeName("merchant_detail");
-		member.setName("merchant_detail");
-		member.setMemberName("merchantDetail");
-		member.setReferDirection(true);
-		member.setRelationName("merchantDetail");
-		append(member);
-		return member;
-	}
-
 	// 被引用的对象
 
 	public StandardContract standardContractListAsPartyA() {
@@ -195,6 +184,17 @@ public class Merchant extends BaseModelBean{
 		member.setModelTypeName("debit_card");
 		member.setName("merchant");
 		member.setMemberName("debitCardList");
+		member.setRelationName("merchant");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public MerchantDetail merchantDetailList() {
+		MerchantDetail member = new MerchantDetail();
+		member.setModelTypeName("merchant_detail");
+		member.setName("merchant");
+		member.setMemberName("merchantDetailList");
 		member.setRelationName("merchant");
 		member.setReferDirection(false);
 		append(member);
@@ -377,6 +377,17 @@ public class Merchant extends BaseModelBean{
 		return member;
 	}
 
+	public MaterialRecord materialRecordList() {
+		MaterialRecord member = new MaterialRecord();
+		member.setModelTypeName("material_record");
+		member.setName("platform_information_manager");
+		member.setMemberName("materialRecordList");
+		member.setRelationName("platformInformationManager");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 	public AccountBook accountBookList() {
 		AccountBook member = new AccountBook();
 		member.setModelTypeName("account_book");
@@ -449,28 +460,6 @@ public class Merchant extends BaseModelBean{
 		member.setName("sender");
 		member.setMemberName("notificationListAsSender");
 		member.setRelationName("receiver");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-
-	public EventShowAllType eventShowAllTypeList() {
-		EventShowAllType member = new EventShowAllType();
-		member.setModelTypeName("event_show_all_type");
-		member.setName("field_biz_candidate");
-		member.setMemberName("eventShowAllTypeList");
-		member.setRelationName("fieldBizCandidate");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-
-	public EventProjectInfo eventProjectInfoList() {
-		EventProjectInfo member = new EventProjectInfo();
-		member.setModelTypeName("event_project_info");
-		member.setName("merchant");
-		member.setMemberName("eventProjectInfoList");
-		member.setRelationName("merchant");
 		member.setReferDirection(false);
 		append(member);
 		return member;
@@ -999,17 +988,6 @@ public class Merchant extends BaseModelBean{
 		member.setName("impact_merchant");
 		member.setMemberName("violationListAsImpactMerchant");
 		member.setRelationName("responsibleMerchant");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-
-	public Material materialList() {
-		Material member = new Material();
-		member.setModelTypeName("material");
-		member.setName("vendor");
-		member.setMemberName("materialList");
-		member.setRelationName("vendor");
 		member.setReferDirection(false);
 		append(member);
 		return member;

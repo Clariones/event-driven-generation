@@ -509,6 +509,39 @@ public class Platform extends BaseModelBean{
 		return member;
 	}
 
+	public MaterialCategory materialCategoryList() {
+		MaterialCategory member = new MaterialCategory();
+		member.setModelTypeName("material_category");
+		member.setName("platform");
+		member.setMemberName("materialCategoryList");
+		member.setRelationName("platform");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public MaterialType materialTypeList() {
+		MaterialType member = new MaterialType();
+		member.setModelTypeName("material_type");
+		member.setName("platform");
+		member.setMemberName("materialTypeList");
+		member.setRelationName("platform");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public MaterialUnitOfMeasurement materialUnitOfMeasurementList() {
+		MaterialUnitOfMeasurement member = new MaterialUnitOfMeasurement();
+		member.setModelTypeName("material_unit_of_measurement");
+		member.setName("platform");
+		member.setMemberName("materialUnitOfMeasurementList");
+		member.setRelationName("platform");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 	public AccountBookType accountBookTypeList() {
 		AccountBookType member = new AccountBookType();
 		member.setModelTypeName("account_book_type");
@@ -547,6 +580,17 @@ public class Platform extends BaseModelBean{
 		member.setModelTypeName("emplacement_application");
 		member.setName("platform");
 		member.setMemberName("emplacementApplicationList");
+		member.setRelationName("platform");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public PersonalEmplacementApplication personalEmplacementApplicationList() {
+		PersonalEmplacementApplication member = new PersonalEmplacementApplication();
+		member.setModelTypeName("personal_emplacement_application");
+		member.setName("platform");
+		member.setMemberName("personalEmplacementApplicationList");
 		member.setRelationName("platform");
 		member.setReferDirection(false);
 		append(member);
@@ -602,6 +646,17 @@ public class Platform extends BaseModelBean{
 		member.setModelTypeName("business_type");
 		member.setName("platform");
 		member.setMemberName("businessTypeList");
+		member.setRelationName("platform");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public AuditStatus auditStatusList() {
+		AuditStatus member = new AuditStatus();
+		member.setModelTypeName("audit_status");
+		member.setName("platform");
+		member.setMemberName("auditStatusList");
 		member.setRelationName("platform");
 		member.setReferDirection(false);
 		append(member);
@@ -1130,28 +1185,6 @@ public class Platform extends BaseModelBean{
 		member.setModelTypeName("violation");
 		member.setName("platform");
 		member.setMemberName("violationList");
-		member.setRelationName("platform");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-
-	public Material materialList() {
-		Material member = new Material();
-		member.setModelTypeName("material");
-		member.setName("platform");
-		member.setMemberName("materialList");
-		member.setRelationName("platform");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-
-	public Measurement measurementList() {
-		Measurement member = new Measurement();
-		member.setModelTypeName("measurement");
-		member.setName("platform");
-		member.setMemberName("measurementList");
 		member.setRelationName("platform");
 		member.setReferDirection(false);
 		append(member);

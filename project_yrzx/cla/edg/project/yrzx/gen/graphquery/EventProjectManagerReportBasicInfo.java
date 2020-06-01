@@ -64,6 +64,15 @@ public class EventProjectManagerReportBasicInfo extends BaseModelBean{
 		return member;
 	}
 
+	public StringAttribute title(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string");
+		// member.setName("title");
+		member.setName("title");
+		useMember(member);
+		return member;
+	}
+
 	public NumberAttribute temperature(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("double");

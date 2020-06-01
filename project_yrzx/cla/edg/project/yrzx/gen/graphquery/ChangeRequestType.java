@@ -14,7 +14,6 @@ public class ChangeRequestType extends BaseModelBean{
 	public static EnumAttribute REVIEW_CONTRACT = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "REVIEW_CONTRACT");
 	public static EnumAttribute APPLY_RECOMMENDATION = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "APPLY_RECOMMENDATION");
 	public static EnumAttribute ADD_DEBIT_CARD = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "ADD_DEBIT_CARD");
-	public static EnumAttribute SHOW_ALL_TYPE = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "SHOW_ALL_TYPE");
 	public static EnumAttribute ADD_PROJECT_NOMINATION = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "ADD_PROJECT_NOMINATION");
 	public static EnumAttribute PROJECT_COMMAND = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "PROJECT_COMMAND");
 	public static EnumAttribute TASK_REPORT = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "TASK_REPORT");
@@ -23,6 +22,7 @@ public class ChangeRequestType extends BaseModelBean{
 	public static EnumAttribute AFTER_SALES = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "AFTER_SALES");
 	public static EnumAttribute APPLY_DECORATION = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "APPLY_DECORATION");
 	public static EnumAttribute REVIEW_MATERIALS = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "REVIEW_MATERIALS");
+	public static EnumAttribute APPLY_PERSONAL_EMPLACEMENT = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "APPLY_PERSONAL_EMPLACEMENT");
 	public static EnumAttribute LABOR_SUPERVISOR = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "LABOR_SUPERVISOR");
 	public static EnumAttribute PROJECT_PENALTIES = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "PROJECT_PENALTIES");
 	public static EnumAttribute APPLY_EMPLACEMENT = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "APPLY_EMPLACEMENT");

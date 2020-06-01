@@ -289,6 +289,17 @@ public class Project extends BaseModelBean{
 		return member;
 	}
 
+	public LoanContract loanContractList() {
+		LoanContract member = new LoanContract();
+		member.setModelTypeName("loan_contract");
+		member.setName("project");
+		member.setMemberName("loanContractList");
+		member.setRelationName("project");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 	public CompensationApplication compensationApplicationList() {
 		CompensationApplication member = new CompensationApplication();
 		member.setModelTypeName("compensation_application");
@@ -316,6 +327,50 @@ public class Project extends BaseModelBean{
 		member.setModelTypeName("compensation_result");
 		member.setName("project");
 		member.setMemberName("compensationResultList");
+		member.setRelationName("project");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public MaterialPreservedSample materialPreservedSampleList() {
+		MaterialPreservedSample member = new MaterialPreservedSample();
+		member.setModelTypeName("material_preserved_sample");
+		member.setName("project");
+		member.setMemberName("materialPreservedSampleList");
+		member.setRelationName("project");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public MaterialBidSample materialBidSampleList() {
+		MaterialBidSample member = new MaterialBidSample();
+		member.setModelTypeName("material_bid_sample");
+		member.setName("project");
+		member.setMemberName("materialBidSampleList");
+		member.setRelationName("project");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public MaterialRecord materialRecordList() {
+		MaterialRecord member = new MaterialRecord();
+		member.setModelTypeName("material_record");
+		member.setName("project");
+		member.setMemberName("materialRecordList");
+		member.setRelationName("project");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public MaterialChange materialChangeList() {
+		MaterialChange member = new MaterialChange();
+		member.setModelTypeName("material_change");
+		member.setName("project");
+		member.setMemberName("materialChangeList");
 		member.setRelationName("project");
 		member.setReferDirection(false);
 		append(member);

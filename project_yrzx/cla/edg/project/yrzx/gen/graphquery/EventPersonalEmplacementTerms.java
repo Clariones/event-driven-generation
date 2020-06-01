@@ -4,9 +4,9 @@ import java.util.Map;
 
 import cla.edg.modelbean.*;
 
-public class EventProjectSupervisorReportBasicInfo extends BaseModelBean{
+public class EventPersonalEmplacementTerms extends BaseModelBean{
 	public String getFullClassName() {
-		return "com.yrdec.yrzx.eventprojectsupervisorreportbasicinfo.EventProjectSupervisorReportBasicInfo";
+		return "com.yrdec.yrzx.eventpersonalemplacementterms.EventPersonalEmplacementTerms";
 	}
 	// 枚举对象
 
@@ -37,56 +37,11 @@ public class EventProjectSupervisorReportBasicInfo extends BaseModelBean{
 		return member;
 	}
 
-	public StringAttribute projectId(){
-		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
-		// member.setName("projectId");
-		member.setName("project_id");
-		useMember(member);
-		return member;
-	}
-
-	public StringAttribute dailyTaskTypeId(){
-		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
-		// member.setName("dailyTaskTypeId");
-		member.setName("daily_task_type_id");
-		useMember(member);
-		return member;
-	}
-
-	public StringAttribute projectName(){
-		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
-		// member.setName("projectName");
-		member.setName("project_name");
-		useMember(member);
-		return member;
-	}
-
-	public StringAttribute title(){
-		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
-		// member.setName("title");
-		member.setName("title");
-		useMember(member);
-		return member;
-	}
-
-	public NumberAttribute temperature(){
-		NumberAttribute member = new NumberAttribute();
-		member.setModelTypeName("double");
-		// member.setName("temperature");
-		member.setName("temperature");
-		useMember(member);
-		return member;
-	}
-
-	public StringAttribute weatherConditions(){
-		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
-		// member.setName("weatherConditions");
-		member.setName("weather_conditions");
+	public BooleanAttribute agree(){
+		BooleanAttribute member = new BooleanAttribute();
+		member.setModelTypeName("bool");
+		// member.setName("agree");
+		member.setName("agree");
 		useMember(member);
 		return member;
 	}

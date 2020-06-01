@@ -19,9 +19,9 @@ public class NominationQueryPiece extends PieceOfScript {
 
 						MODEL.employeeNomination().employee().licenseList().licenseCategory(),
 						MODEL.employeeNomination().employer(),
-						MODEL.employeeNomination().employee().merchantDetail().industryType(),
-						MODEL.employeeNomination().employee().merchantDetail().careerType(),
-						MODEL.employeeNomination().employee().merchantDetail().engineeringType(),
+						MODEL.employeeNomination().employee().merchantDetailList().industryType(),
+						MODEL.employeeNomination().employee().merchantDetailList().careerType(),
+						MODEL.employeeNomination().employee().merchantDetailList().engineeringType(),
 						MODEL.employeeNomination().employee().debitCardList()
 
 				)

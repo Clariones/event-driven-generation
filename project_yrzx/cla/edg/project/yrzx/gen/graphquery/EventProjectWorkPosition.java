@@ -81,6 +81,24 @@ public class EventProjectWorkPosition extends BaseModelBean{
 		return member;
 	}
 
+	public StringAttribute projectId(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string");
+		// member.setName("projectId");
+		member.setName("project_id");
+		useMember(member);
+		return member;
+	}
+
+	public StringAttribute merchantId(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string");
+		// member.setName("merchantId");
+		member.setName("merchant_id");
+		useMember(member);
+		return member;
+	}
+
 	public StringAttribute fieldGroup(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");

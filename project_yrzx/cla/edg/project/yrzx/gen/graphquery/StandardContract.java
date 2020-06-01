@@ -212,6 +212,50 @@ public class StandardContract extends BaseModelBean{
 		return member;
 	}
 
+	public MaterialPreservedSample materialPreservedSampleList() {
+		MaterialPreservedSample member = new MaterialPreservedSample();
+		member.setModelTypeName("material_preserved_sample");
+		member.setName("contract");
+		member.setMemberName("materialPreservedSampleList");
+		member.setRelationName("contract");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public MaterialBidSample materialBidSampleList() {
+		MaterialBidSample member = new MaterialBidSample();
+		member.setModelTypeName("material_bid_sample");
+		member.setName("contract");
+		member.setMemberName("materialBidSampleList");
+		member.setRelationName("contract");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public MaterialRecord materialRecordList() {
+		MaterialRecord member = new MaterialRecord();
+		member.setModelTypeName("material_record");
+		member.setName("contract");
+		member.setMemberName("materialRecordList");
+		member.setRelationName("contract");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public MaterialChange materialChangeList() {
+		MaterialChange member = new MaterialChange();
+		member.setModelTypeName("material_change");
+		member.setName("contract");
+		member.setMemberName("materialChangeList");
+		member.setRelationName("contract");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 	public EventProjectPenalties eventProjectPenaltiesList() {
 		EventProjectPenalties member = new EventProjectPenalties();
 		member.setModelTypeName("event_project_penalties");

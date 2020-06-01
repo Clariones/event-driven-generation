@@ -36,6 +36,28 @@ public class CareerType extends BaseModelBean{
 		return member;
 	}
 
+	public PersonalEmplacementApplication personalEmplacementApplicationList() {
+		PersonalEmplacementApplication member = new PersonalEmplacementApplication();
+		member.setModelTypeName("personal_emplacement_application");
+		member.setName("career_type");
+		member.setMemberName("personalEmplacementApplicationList");
+		member.setRelationName("careerType");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EventApplyPersonalEmplacement eventApplyPersonalEmplacementList() {
+		EventApplyPersonalEmplacement member = new EventApplyPersonalEmplacement();
+		member.setModelTypeName("event_apply_personal_emplacement");
+		member.setName("career_type");
+		member.setMemberName("eventApplyPersonalEmplacementList");
+		member.setRelationName("careerType");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 	public EventFillPersonalDetail eventFillPersonalDetailList() {
 		EventFillPersonalDetail member = new EventFillPersonalDetail();
 		member.setModelTypeName("event_fill_personal_detail");

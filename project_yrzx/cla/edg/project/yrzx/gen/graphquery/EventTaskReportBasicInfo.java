@@ -64,6 +64,15 @@ public class EventTaskReportBasicInfo extends BaseModelBean{
 		return member;
 	}
 
+	public StringAttribute title(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string");
+		// member.setName("title");
+		member.setName("title");
+		useMember(member);
+		return member;
+	}
+
 	public StringAttribute subcontractor(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_longtext");

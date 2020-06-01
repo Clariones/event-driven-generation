@@ -25,7 +25,7 @@ public class ClaMiscChangeRequest implements ChangeRequestSpecFactory {
 	@Override
 	public ChangeRequestSpecBuilder makeSequel(ChangeRequestSpecBuilder builder) {
 		return builder
-				// 添加公司员工
+				// 添加公司员工 (employee nomination)
 				.change_request("add employee").zh_CN("添加员工")
 					.has_field("mobile").zh_CN("手机号").which_type_of(FieldType.MOBILE)
 						.place_holder("请输入要添加的员工的手机号")
@@ -34,17 +34,20 @@ public class ClaMiscChangeRequest implements ChangeRequestSpecFactory {
 					.has_field("job").zh_CN("职位").which_model_of(MODEL.job())
 						.values_can_select_from_query_by(null)
 
-				// 添加项目职位
+				// 添加项目职位 (project nomination)
 				.change_request("add project nomination").zh_CN("添加岗位")
-					.step("project nomination base info").zh_CN("基本信息")
-						.contains_event("project info").zh_CN("基本信息")
-							.has_field("project name").zh_CN("项目名称").display()
-							.has_field("project id").zh_CN("项目ID").hidden()
-							.has_field("merchant").zh_CN("服务商公司").which_model_of(MODEL.merchant())
-								.place_holder("请选择任职人员所在的公司")
-								.values_can_select_from_query_by(null)
+//					.step("project nomination base info").zh_CN("基本信息")
+//						.contains_event("project info").zh_CN("基本信息")
+//							.has_field("project name").zh_CN("项目名称").display()
+//							.has_field("project id").zh_CN("项目ID").hidden()
+//							.has_field("merchant").zh_CN("服务商公司").which_model_of(MODEL.merchant())
+//								.place_holder("请选择任职人员所在的公司")
+//								.values_can_select_from_query_by(null)
 					.step("project nomination job info").zh_CN("职务")
 						.contains_event("project work position").zh_CN("职务信息")
+							.has_field("project name").zh_CN("项目名称").display()
+							.has_field("project id").zh_CN("项目ID").hidden()
+							.has_field("merchant id").zh_CN("服务商id").hidden()
 							.has_field("company name").zh_CN("公司名称").display()
 							.has_field("project job").zh_CN("职位").which_model_of(MODEL.projectOrganizationType())
 								.place_holder("请选择职务类型")
@@ -59,6 +62,7 @@ public class ClaMiscChangeRequest implements ChangeRequestSpecFactory {
 							.has_field("employee").zh_CN("员工").which_model_of(MODEL.employeeNomination())
 								.place_holder("请选择担任此岗位的员工")
 								.values_can_select_from_query_by(null)
+
 					;
 		
 	}

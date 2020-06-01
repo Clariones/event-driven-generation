@@ -190,6 +190,39 @@ public class ProjectNomination extends BaseModelBean{
 		return member;
 	}
 
+	public MaterialPreservedSample materialPreservedSampleList() {
+		MaterialPreservedSample member = new MaterialPreservedSample();
+		member.setModelTypeName("material_preserved_sample");
+		member.setName("material_manager");
+		member.setMemberName("materialPreservedSampleList");
+		member.setRelationName("materialManager");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public MaterialBidSample materialBidSampleList() {
+		MaterialBidSample member = new MaterialBidSample();
+		member.setModelTypeName("material_bid_sample");
+		member.setName("material_manager");
+		member.setMemberName("materialBidSampleList");
+		member.setRelationName("materialManager");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public MaterialChange materialChangeList() {
+		MaterialChange member = new MaterialChange();
+		member.setModelTypeName("material_change");
+		member.setName("applicant");
+		member.setMemberName("materialChangeList");
+		member.setRelationName("applicant");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 
 	// 普通属性
 

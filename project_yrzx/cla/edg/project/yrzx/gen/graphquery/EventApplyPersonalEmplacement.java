@@ -4,13 +4,46 @@ import java.util.Map;
 
 import cla.edg.modelbean.*;
 
-public class EventProjectSupervisorReportBasicInfo extends BaseModelBean{
+public class EventApplyPersonalEmplacement extends BaseModelBean{
 	public String getFullClassName() {
-		return "com.yrdec.yrzx.eventprojectsupervisorreportbasicinfo.EventProjectSupervisorReportBasicInfo";
+		return "com.yrdec.yrzx.eventapplypersonalemplacement.EventApplyPersonalEmplacement";
 	}
 	// 枚举对象
 
 	// 引用的对象
+
+	public CareerType careerType() {
+		CareerType member = new CareerType();
+		member.setModelTypeName("career_type");
+		member.setName("career_type");
+		member.setMemberName("careerType");
+		member.setReferDirection(true);
+		member.setRelationName("careerType");
+		append(member);
+		return member;
+	}
+
+	public BusinessType businessType() {
+		BusinessType member = new BusinessType();
+		member.setModelTypeName("business_type");
+		member.setName("business_type");
+		member.setMemberName("businessType");
+		member.setReferDirection(true);
+		member.setRelationName("businessType");
+		append(member);
+		return member;
+	}
+
+	public AvailableServiceLocation serviceLocation() {
+		AvailableServiceLocation member = new AvailableServiceLocation();
+		member.setModelTypeName("available_service_location");
+		member.setName("service_location");
+		member.setMemberName("serviceLocation");
+		member.setReferDirection(true);
+		member.setRelationName("serviceLocation");
+		append(member);
+		return member;
+	}
 
 	public ChangeRequest changeRequest() {
 		ChangeRequest member = new ChangeRequest();
@@ -37,56 +70,65 @@ public class EventProjectSupervisorReportBasicInfo extends BaseModelBean{
 		return member;
 	}
 
-	public StringAttribute projectId(){
+	public StringAttribute name(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		// member.setName("projectId");
-		member.setName("project_id");
+		// member.setName("name");
+		member.setName("name");
 		useMember(member);
 		return member;
 	}
 
-	public StringAttribute dailyTaskTypeId(){
+	public StringAttribute gender(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		// member.setName("dailyTaskTypeId");
-		member.setName("daily_task_type_id");
+		// member.setName("gender");
+		member.setName("gender");
 		useMember(member);
 		return member;
 	}
 
-	public StringAttribute projectName(){
+	public StringAttribute address(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		// member.setName("projectName");
-		member.setName("project_name");
+		// member.setName("address");
+		member.setName("address");
 		useMember(member);
 		return member;
 	}
 
-	public StringAttribute title(){
+	public StringAttribute homePage(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		// member.setName("title");
-		member.setName("title");
+		// member.setName("homePage");
+		member.setName("home_page");
 		useMember(member);
 		return member;
 	}
 
-	public NumberAttribute temperature(){
-		NumberAttribute member = new NumberAttribute();
-		member.setModelTypeName("double");
-		// member.setName("temperature");
-		member.setName("temperature");
+	public StringAttribute description(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string");
+		// member.setName("description");
+		member.setName("description");
 		useMember(member);
 		return member;
 	}
 
-	public StringAttribute weatherConditions(){
+	public StringAttribute phone(){
 		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
-		// member.setName("weatherConditions");
-		member.setName("weather_conditions");
+		member.setModelTypeName("string_china_mobile_phone");
+		// member.setName("phone");
+		member.setName("phone");
+		useMember(member);
+		return member;
+	}
+
+	public StringAttribute avatar(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string_image");
+		// member.setName("avatar");
+		member.setName("avatar");
 		useMember(member);
 		return member;
 	}

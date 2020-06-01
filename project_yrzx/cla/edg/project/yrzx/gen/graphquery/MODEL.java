@@ -593,6 +593,48 @@ public class MODEL{
 		return rst;
 	}
 
+	public static MaterialPreservedSample materialPreservedSample() {
+		MaterialPreservedSample rst = new MaterialPreservedSample();
+		rst.setModelTypeName("material_preserved_sample");
+		return rst;
+	}
+
+	public static MaterialBidSample materialBidSample() {
+		MaterialBidSample rst = new MaterialBidSample();
+		rst.setModelTypeName("material_bid_sample");
+		return rst;
+	}
+
+	public static MaterialCategory materialCategory() {
+		MaterialCategory rst = new MaterialCategory();
+		rst.setModelTypeName("material_category");
+		return rst;
+	}
+
+	public static MaterialType materialType() {
+		MaterialType rst = new MaterialType();
+		rst.setModelTypeName("material_type");
+		return rst;
+	}
+
+	public static MaterialRecord materialRecord() {
+		MaterialRecord rst = new MaterialRecord();
+		rst.setModelTypeName("material_record");
+		return rst;
+	}
+
+	public static MaterialUnitOfMeasurement materialUnitOfMeasurement() {
+		MaterialUnitOfMeasurement rst = new MaterialUnitOfMeasurement();
+		rst.setModelTypeName("material_unit_of_measurement");
+		return rst;
+	}
+
+	public static MaterialChange materialChange() {
+		MaterialChange rst = new MaterialChange();
+		rst.setModelTypeName("material_change");
+		return rst;
+	}
+
 	public static AccountBookType accountBookType() {
 		AccountBookType rst = new AccountBookType();
 		rst.setModelTypeName("account_book_type");
@@ -644,6 +686,12 @@ public class MODEL{
 	public static EmplacementApplication emplacementApplication() {
 		EmplacementApplication rst = new EmplacementApplication();
 		rst.setModelTypeName("emplacement_application");
+		return rst;
+	}
+
+	public static PersonalEmplacementApplication personalEmplacementApplication() {
+		PersonalEmplacementApplication rst = new PersonalEmplacementApplication();
+		rst.setModelTypeName("personal_emplacement_application");
 		return rst;
 	}
 
@@ -743,12 +791,6 @@ public class MODEL{
 		return rst;
 	}
 
-	public static EventShowAllType eventShowAllType() {
-		EventShowAllType rst = new EventShowAllType();
-		rst.setModelTypeName("event_show_all_type");
-		return rst;
-	}
-
 	public static EventProjectCommand eventProjectCommand() {
 		EventProjectCommand rst = new EventProjectCommand();
 		rst.setModelTypeName("event_project_command");
@@ -773,9 +815,9 @@ public class MODEL{
 		return rst;
 	}
 
-	public static EventProjectInfo eventProjectInfo() {
-		EventProjectInfo rst = new EventProjectInfo();
-		rst.setModelTypeName("event_project_info");
+	public static EventApplyPersonalEmplacement eventApplyPersonalEmplacement() {
+		EventApplyPersonalEmplacement rst = new EventApplyPersonalEmplacement();
+		rst.setModelTypeName("event_apply_personal_emplacement");
 		return rst;
 	}
 
@@ -884,6 +926,12 @@ public class MODEL{
 	public static BusinessType businessType() {
 		BusinessType rst = new BusinessType();
 		rst.setModelTypeName("business_type");
+		return rst;
+	}
+
+	public static AuditStatus auditStatus() {
+		AuditStatus rst = new AuditStatus();
+		rst.setModelTypeName("audit_status");
 		return rst;
 	}
 
@@ -1172,18 +1220,6 @@ public class MODEL{
 	public static Violation violation() {
 		Violation rst = new Violation();
 		rst.setModelTypeName("violation");
-		return rst;
-	}
-
-	public static Material material() {
-		Material rst = new Material();
-		rst.setModelTypeName("material");
-		return rst;
-	}
-
-	public static Measurement measurement() {
-		Measurement rst = new Measurement();
-		rst.setModelTypeName("measurement");
 		return rst;
 	}
 

@@ -12,6 +12,17 @@ public class MerchantDetail extends BaseModelBean{
 
 	// 引用的对象
 
+	public Merchant merchant() {
+		Merchant member = new Merchant();
+		member.setModelTypeName("merchant");
+		member.setName("merchant");
+		member.setMemberName("merchant");
+		member.setReferDirection(true);
+		member.setRelationName("merchant");
+		append(member);
+		return member;
+	}
+
 	public IndustryType industryType() {
 		IndustryType member = new IndustryType();
 		member.setModelTypeName("industry_type");
@@ -46,17 +57,6 @@ public class MerchantDetail extends BaseModelBean{
 	}
 
 	// 被引用的对象
-
-	public Merchant merchantList() {
-		Merchant member = new Merchant();
-		member.setModelTypeName("merchant");
-		member.setName("merchant_detail");
-		member.setMemberName("merchantList");
-		member.setRelationName("merchantDetail");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
 
 
 	// 普通属性

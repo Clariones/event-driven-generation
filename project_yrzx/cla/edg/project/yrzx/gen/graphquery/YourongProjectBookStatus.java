@@ -9,16 +9,10 @@ public class YourongProjectBookStatus extends BaseModelBean{
 		return "com.yrdec.yrzx.yourongprojectbookstatus.YourongProjectBookStatus";
 	}
 	// 枚举对象
-	public static EnumAttribute NONE = new EnumAttribute("com.yrdec.yrzx.yourongprojectbookstatus.YourongProjectBookStatus", "NONE");
+	public static EnumAttribute SUBMITTED = new EnumAttribute("com.yrdec.yrzx.yourongprojectbookstatus.YourongProjectBookStatus", "SUBMITTED");
 	public static EnumAttribute PROCESSING = new EnumAttribute("com.yrdec.yrzx.yourongprojectbookstatus.YourongProjectBookStatus", "PROCESSING");
-	public static EnumAttribute NEED_CONFIRM = new EnumAttribute("com.yrdec.yrzx.yourongprojectbookstatus.YourongProjectBookStatus", "NEED_CONFIRM");
 	public static EnumAttribute CONFIRMED = new EnumAttribute("com.yrdec.yrzx.yourongprojectbookstatus.YourongProjectBookStatus", "CONFIRMED");
-	public static EnumAttribute BIDDING = new EnumAttribute("com.yrdec.yrzx.yourongprojectbookstatus.YourongProjectBookStatus", "BIDDING");
-	public static EnumAttribute BID_WIN = new EnumAttribute("com.yrdec.yrzx.yourongprojectbookstatus.YourongProjectBookStatus", "BID_WIN");
-	public static EnumAttribute COMPLETED = new EnumAttribute("com.yrdec.yrzx.yourongprojectbookstatus.YourongProjectBookStatus", "COMPLETED");
-	public static EnumAttribute INVALID = new EnumAttribute("com.yrdec.yrzx.yourongprojectbookstatus.YourongProjectBookStatus", "INVALID");
-	public static EnumAttribute REJECTED = new EnumAttribute("com.yrdec.yrzx.yourongprojectbookstatus.YourongProjectBookStatus", "REJECTED");
-	public static EnumAttribute UNNECESSARY = new EnumAttribute("com.yrdec.yrzx.yourongprojectbookstatus.YourongProjectBookStatus", "UNNECESSARY");
+	public static EnumAttribute TO_BE_ADJUSTED = new EnumAttribute("com.yrdec.yrzx.yourongprojectbookstatus.YourongProjectBookStatus", "TO_BE_ADJUSTED");
 
 	// 引用的对象
 

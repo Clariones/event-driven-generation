@@ -4,9 +4,9 @@ import java.util.Map;
 
 import cla.edg.modelbean.*;
 
-public class BusinessType extends BaseModelBean{
+public class MaterialCategory extends BaseModelBean{
 	public String getFullClassName() {
-		return "com.yrdec.yrzx.businesstype.BusinessType";
+		return "com.yrdec.yrzx.materialcategory.MaterialCategory";
 	}
 	// 枚举对象
 
@@ -25,23 +25,45 @@ public class BusinessType extends BaseModelBean{
 
 	// 被引用的对象
 
-	public PersonalEmplacementApplication personalEmplacementApplicationList() {
-		PersonalEmplacementApplication member = new PersonalEmplacementApplication();
-		member.setModelTypeName("personal_emplacement_application");
-		member.setName("business_type");
-		member.setMemberName("personalEmplacementApplicationList");
-		member.setRelationName("businessType");
+	public MaterialPreservedSample materialPreservedSampleList() {
+		MaterialPreservedSample member = new MaterialPreservedSample();
+		member.setModelTypeName("material_preserved_sample");
+		member.setName("material_category");
+		member.setMemberName("materialPreservedSampleList");
+		member.setRelationName("materialCategory");
 		member.setReferDirection(false);
 		append(member);
 		return member;
 	}
 
-	public EventApplyPersonalEmplacement eventApplyPersonalEmplacementList() {
-		EventApplyPersonalEmplacement member = new EventApplyPersonalEmplacement();
-		member.setModelTypeName("event_apply_personal_emplacement");
-		member.setName("business_type");
-		member.setMemberName("eventApplyPersonalEmplacementList");
-		member.setRelationName("businessType");
+	public MaterialBidSample materialBidSampleList() {
+		MaterialBidSample member = new MaterialBidSample();
+		member.setModelTypeName("material_bid_sample");
+		member.setName("material_category");
+		member.setMemberName("materialBidSampleList");
+		member.setRelationName("materialCategory");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public MaterialType materialTypeList() {
+		MaterialType member = new MaterialType();
+		member.setModelTypeName("material_type");
+		member.setName("category");
+		member.setMemberName("materialTypeList");
+		member.setRelationName("category");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public MaterialChange materialChangeList() {
+		MaterialChange member = new MaterialChange();
+		member.setModelTypeName("material_change");
+		member.setName("contract_material_category");
+		member.setMemberName("materialChangeList");
+		member.setRelationName("contractMaterialCategory");
 		member.setReferDirection(false);
 		append(member);
 		return member;
@@ -77,11 +99,11 @@ public class BusinessType extends BaseModelBean{
 		return member;
 	}
 
-	public StringAttribute category(){
+	public StringAttribute icon(){
 		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
-		// member.setName("category");
-		member.setName("category");
+		member.setModelTypeName("string_image");
+		// member.setName("icon");
+		member.setName("icon");
 		useMember(member);
 		return member;
 	}

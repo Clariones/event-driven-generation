@@ -4,35 +4,16 @@ import java.util.Map;
 
 import cla.edg.modelbean.*;
 
-public class Material extends BaseModelBean{
+public class AuditStatus extends BaseModelBean{
 	public String getFullClassName() {
-		return "com.yrdec.yrzx.material.Material";
+		return "com.yrdec.yrzx.auditstatus.AuditStatus";
 	}
 	// 枚举对象
+	public static EnumAttribute PENDING = new EnumAttribute("com.yrdec.yrzx.auditstatus.AuditStatus", "PENDING");
+	public static EnumAttribute APPROVED = new EnumAttribute("com.yrdec.yrzx.auditstatus.AuditStatus", "APPROVED");
+	public static EnumAttribute UNAPPROVED = new EnumAttribute("com.yrdec.yrzx.auditstatus.AuditStatus", "UNAPPROVED");
 
 	// 引用的对象
-
-	public Merchant vendor() {
-		Merchant member = new Merchant();
-		member.setModelTypeName("merchant");
-		member.setName("vendor");
-		member.setMemberName("vendor");
-		member.setReferDirection(true);
-		member.setRelationName("vendor");
-		append(member);
-		return member;
-	}
-
-	public Measurement measurement() {
-		Measurement member = new Measurement();
-		member.setModelTypeName("measurement");
-		member.setName("measurement");
-		member.setMemberName("measurement");
-		member.setReferDirection(true);
-		member.setRelationName("measurement");
-		append(member);
-		return member;
-	}
 
 	public Platform platform() {
 		Platform member = new Platform();
@@ -46,6 +27,17 @@ public class Material extends BaseModelBean{
 	}
 
 	// 被引用的对象
+
+	public PersonalEmplacementApplication personalEmplacementApplicationList() {
+		PersonalEmplacementApplication member = new PersonalEmplacementApplication();
+		member.setModelTypeName("personal_emplacement_application");
+		member.setName("status");
+		member.setMemberName("personalEmplacementApplicationList");
+		member.setRelationName("status");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
 
 
 	// 普通属性
@@ -68,11 +60,11 @@ public class Material extends BaseModelBean{
 		return member;
 	}
 
-	public NumberAttribute quantity(){
-		NumberAttribute member = new NumberAttribute();
-		member.setModelTypeName("int");
-		// member.setName("quantity");
-		member.setName("quantity");
+	public StringAttribute code(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string");
+		// member.setName("code");
+		member.setName("code");
 		useMember(member);
 		return member;
 	}

@@ -4,13 +4,24 @@ import java.util.Map;
 
 import cla.edg.modelbean.*;
 
-public class Measurement extends BaseModelBean{
+public class MaterialType extends BaseModelBean{
 	public String getFullClassName() {
-		return "com.yrdec.yrzx.measurement.Measurement";
+		return "com.yrdec.yrzx.materialtype.MaterialType";
 	}
 	// 枚举对象
 
 	// 引用的对象
+
+	public MaterialCategory category() {
+		MaterialCategory member = new MaterialCategory();
+		member.setModelTypeName("material_category");
+		member.setName("category");
+		member.setMemberName("category");
+		member.setReferDirection(true);
+		member.setRelationName("category");
+		append(member);
+		return member;
+	}
 
 	public Platform platform() {
 		Platform member = new Platform();
@@ -25,12 +36,12 @@ public class Measurement extends BaseModelBean{
 
 	// 被引用的对象
 
-	public Material materialList() {
-		Material member = new Material();
-		member.setModelTypeName("material");
-		member.setName("measurement");
-		member.setMemberName("materialList");
-		member.setRelationName("measurement");
+	public MaterialRecord materialRecordList() {
+		MaterialRecord member = new MaterialRecord();
+		member.setModelTypeName("material_record");
+		member.setName("type");
+		member.setMemberName("materialRecordList");
+		member.setRelationName("type");
 		member.setReferDirection(false);
 		append(member);
 		return member;
@@ -62,6 +73,15 @@ public class Measurement extends BaseModelBean{
 		member.setModelTypeName("string");
 		// member.setName("code");
 		member.setName("code");
+		useMember(member);
+		return member;
+	}
+
+	public StringAttribute icon(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string_image");
+		// member.setName("icon");
+		member.setName("icon");
 		useMember(member);
 		return member;
 	}

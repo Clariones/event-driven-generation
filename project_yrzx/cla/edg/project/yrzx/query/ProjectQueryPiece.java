@@ -38,6 +38,11 @@ public class ProjectQueryPiece extends PieceOfScript {
 				.do_it_as().count_by(MODEL.projectNomination().workPackage())
 				.where(MODEL.projectNomination().project().eq("${project id}"))
 
+			.find(MODEL.projectNomination()).which("by type").with_string("project id")
+				.comments("按组织类型统计项目下的人数")
+				.do_it_as().count_by(MODEL.projectNomination().type())
+				.where(MODEL.projectNomination().project().eq("${project id}"))
+
 			.query(MODEL.project()).list_of("employee").with_string("employee id")
 				.do_it_as()
 				.where(MODEL.project().projectNominationList().worker().employee().eq("${employee id}"))
@@ -153,6 +158,13 @@ public class ProjectQueryPiece extends PieceOfScript {
 				.where(MODEL.yourongProjectBook().project().eq("${project id}")
 
 				)
+
+			.find(MODEL.yourongProjectBook()).which("latest update by type").with_string("type id").with_string("project id")
+				.comments("查询项目中某种类型最近更新的5书")
+				.do_it_as()
+				.where(MODEL.yourongProjectBook().type().eq("${type id}"),
+						MODEL.yourongProjectBook().project().eq("${project id}"))
+				.wants(MODEL.yourongProjectBook().status())
 		// 项目组织
 			.query(MODEL.projectNomination()).which("project level").with_string("project id")
 				.comments("查询项目的所有 项目岗位, 不包括 分包商 级别")

@@ -4,21 +4,21 @@ import java.util.Map;
 
 import cla.edg.modelbean.*;
 
-public class EventProjectInfo extends BaseModelBean{
+public class EventSelectPersonalEmplacement extends BaseModelBean{
 	public String getFullClassName() {
-		return "com.yrdec.yrzx.eventprojectinfo.EventProjectInfo";
+		return "com.yrdec.yrzx.eventselectpersonalemplacement.EventSelectPersonalEmplacement";
 	}
 	// 枚举对象
 
 	// 引用的对象
 
-	public Merchant merchant() {
-		Merchant member = new Merchant();
-		member.setModelTypeName("merchant");
-		member.setName("merchant");
-		member.setMemberName("merchant");
+	public PersonalEmplacementApplication personalEmplacement() {
+		PersonalEmplacementApplication member = new PersonalEmplacementApplication();
+		member.setModelTypeName("personal_emplacement_application");
+		member.setName("personal_emplacement");
+		member.setMemberName("personalEmplacement");
 		member.setReferDirection(true);
-		member.setRelationName("merchant");
+		member.setRelationName("personalEmplacement");
 		append(member);
 		return member;
 	}
@@ -44,15 +44,6 @@ public class EventProjectInfo extends BaseModelBean{
 		member.setModelTypeName("string");
 		// member.setName("id");
 		member.setName("id");
-		useMember(member);
-		return member;
-	}
-
-	public StringAttribute projectId(){
-		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
-		// member.setName("projectId");
-		member.setName("project_id");
 		useMember(member);
 		return member;
 	}
