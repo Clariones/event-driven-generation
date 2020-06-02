@@ -6,6 +6,8 @@ import com.terapico.changerequest.builder.ChangeRequestSpecFactory;
 import com.terapico.changerequest.builder.FieldType;
 import com.terapico.changerequest.builder.UIStyle;
 
+import java.util.HashMap;
+
 public class ApplyEmplacementAndRecommendationChangeRequest implements ChangeRequestSpecFactory {
 	@Override
 	public ChangeRequestSpecBuilder makeSequel(ChangeRequestSpecBuilder builder) {
@@ -93,8 +95,15 @@ public class ApplyEmplacementAndRecommendationChangeRequest implements ChangeReq
 
 
 
-
-
-		;
-	}
+				.change_request("subcontract application").zh_CN("分包申请").need_login()
+					.icon("form")
+						.has_field("project").zh_CN("参与项目").which_model_of(MODEL.project()).values_can_select_from_query_by(null)
+						.has_field("application type").zh_CN("参与类型").which_model_of(MODEL.careerType()).values_can_select_from_query_by("project id")
+						.has_field("merchant type").zh_CN("商户类型").which_model_of(MODEL.merchantType()).values_can_select_from_query_by("project id")
+						.has_field("application unit").zh_CN("申请单位").disabled()
+						.has_field("applicant").zh_CN("申请个人").disabled()
+						.has_field("work package type").zh_CN("分包申请").which_model_of(MODEL.workPackageType()).values_can_select_from_query_by("project id")
+						.has_field("application reason").zh_CN("申请理由").which_type_of(FieldType.MULTI_TEXT)
+						.has_field("phone").zh_CN("联系电话")
+	;}
 }

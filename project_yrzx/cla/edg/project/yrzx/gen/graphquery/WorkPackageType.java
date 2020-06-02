@@ -36,6 +36,28 @@ public class WorkPackageType extends BaseModelBean{
 		return member;
 	}
 
+	public SubcontractApplication subcontractApplicationList() {
+		SubcontractApplication member = new SubcontractApplication();
+		member.setModelTypeName("subcontract_application");
+		member.setName("work_package_type");
+		member.setMemberName("subcontractApplicationList");
+		member.setRelationName("workPackageType");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EventSubcontractApplication eventSubcontractApplicationList() {
+		EventSubcontractApplication member = new EventSubcontractApplication();
+		member.setModelTypeName("event_subcontract_application");
+		member.setName("work_package_type");
+		member.setMemberName("eventSubcontractApplicationList");
+		member.setRelationName("workPackageType");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 
 	// 普通属性
 

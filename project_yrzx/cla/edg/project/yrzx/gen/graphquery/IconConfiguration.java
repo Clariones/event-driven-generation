@@ -16,7 +16,7 @@ public class IconConfiguration extends BaseModelBean{
 	public static EnumAttribute SY_GN_WYZX = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "SY_GN_WYZX");
 	public static EnumAttribute SY_GN_XMTJ = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "SY_GN_XMTJ");
 	public static EnumAttribute SY_GN_XMGL = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "SY_GN_XMGL");
-	public static EnumAttribute SY_GN_WXRZ = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "SY_GN_WXRZ");
+	public static EnumAttribute SY_GN_QYRZ = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "SY_GN_QYRZ");
 	public static EnumAttribute YM_XM_XMFM = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "YM_XM_XMFM");
 	public static EnumAttribute XM_DT_YRWS = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "XM_DT_YRWS");
 	public static EnumAttribute XM_DT_XMZZ = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "XM_DT_XMZZ");
@@ -35,6 +35,12 @@ public class IconConfiguration extends BaseModelBean{
 	public static EnumAttribute EDIT_BTN = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "EDIT_BTN");
 	public static EnumAttribute ADD_BTN = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "ADD_BTN");
 	public static EnumAttribute DEBIT_CARD = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "DEBIT_CARD");
+	public static EnumAttribute SY_GN_GRRZ = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "SY_GN_GRRZ");
+	public static EnumAttribute SY_GN_FBSQ = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "SY_GN_FBSQ");
+	public static EnumAttribute SY_RK_JXSJ = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "SY_RK_JXSJ");
+	public static EnumAttribute SY_RK_JPFW = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "SY_RK_JPFW");
+	public static EnumAttribute SY_RK_YZPP = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "SY_RK_YZPP");
+	public static EnumAttribute SY_RK_JGDT = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "SY_RK_JGDT");
 
 	// 引用的对象
 

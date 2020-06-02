@@ -68,7 +68,7 @@ public class HighLevelMePageFlowPiece extends PieceOfScript {
 						.may_request("select employee nomination")
 				.request("select employee nomination").with_string("employee nomination id")
 					.comments("选择一个岗位作为当前岗位")
-					.got_page("employee nomination list")
+					.got_page("me")
 				.request("logout").comments("退出当前账号").no_login().no_footprint()
 					.got_page("me")
 
@@ -76,16 +76,29 @@ public class HighLevelMePageFlowPiece extends PieceOfScript {
 				.request("view my account")
 					.comments("我的账户")
 					.got_page("my account")
-				.request("view account detail").with_string("account id").with_string("filter").with_last_record_id()
-					.comments("查看某个账户的详情,带明细").need_login().no_footprint()
-					.got_page("account detail").title("账户详情")
-						.may_request("view account record list")
-				.request("view account record list").with_string("account id").with_last_record_id()
-					.comments("查看某个账户的流水").need_login().no_footprint()
-					.got_page("account record list").title("账户明细").list_of("card")
-				.request("card detail")
-					.comments("我的账户->绑定银行卡->查看")
-					.got_page("card detail")
+
+					//我的账单
+					.request("view account detail").with_string("account id").with_string("filter").with_last_record_id()
+						.comments("查看某个账户的详情,带明细").need_login().no_footprint()
+						.got_page("account detail").title("账户详情")
+							.may_request("view account record list")
+					.request("view account record list").with_string("account id").with_last_record_id()
+						.comments("查看某个账户的流水").need_login().no_footprint()
+						.got_page("account record list").title("账户明细").list_of("card")
+
+					//绑定银行卡
+					.request("card detail")
+						.comments("我的账户->绑定银行卡->查看")
+						.got_page("card detail")
+
+					//我的总资产
+					.request("view my total assets")
+						.comments("我的总资产")
+						.got_page("total assets")
+
+					.request("view my salary")
+						.comments("我的工资")
+						.got_page("my salary")
 
 
 				// 订单详情

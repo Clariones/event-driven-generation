@@ -127,9 +127,9 @@ public class DailyTaskType extends BaseModelBean{
 	public MaterialPreservedSample materialPreservedSampleList() {
 		MaterialPreservedSample member = new MaterialPreservedSample();
 		member.setModelTypeName("material_preserved_sample");
-		member.setName("daili_task_type");
+		member.setName("daily_task_type");
 		member.setMemberName("materialPreservedSampleList");
-		member.setRelationName("dailiTaskType");
+		member.setRelationName("dailyTaskType");
 		member.setReferDirection(false);
 		append(member);
 		return member;
@@ -138,9 +138,9 @@ public class DailyTaskType extends BaseModelBean{
 	public MaterialBidSample materialBidSampleList() {
 		MaterialBidSample member = new MaterialBidSample();
 		member.setModelTypeName("material_bid_sample");
-		member.setName("daili_task_type");
+		member.setName("daily_task_type");
 		member.setMemberName("materialBidSampleList");
-		member.setRelationName("dailiTaskType");
+		member.setRelationName("dailyTaskType");
 		member.setReferDirection(false);
 		append(member);
 		return member;

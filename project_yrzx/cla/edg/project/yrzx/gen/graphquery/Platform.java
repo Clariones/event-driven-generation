@@ -476,6 +476,28 @@ public class Platform extends BaseModelBean{
 		return member;
 	}
 
+	public LaborDisputeStatus laborDisputeStatusList() {
+		LaborDisputeStatus member = new LaborDisputeStatus();
+		member.setModelTypeName("labor_dispute_status");
+		member.setName("platform");
+		member.setMemberName("laborDisputeStatusList");
+		member.setRelationName("platform");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public LaborDisputeType laborDisputeTypeList() {
+		LaborDisputeType member = new LaborDisputeType();
+		member.setModelTypeName("labor_dispute_type");
+		member.setName("platform");
+		member.setMemberName("laborDisputeTypeList");
+		member.setRelationName("platform");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 	public LoanFund loanFundList() {
 		LoanFund member = new LoanFund();
 		member.setModelTypeName("loan_fund");

@@ -80,6 +80,61 @@ public class MaterialUnitOfMeasurement extends BaseModelBean{
 		return member;
 	}
 
+	public MaterialAcceptanceApplication materialAcceptanceApplicationList() {
+		MaterialAcceptanceApplication member = new MaterialAcceptanceApplication();
+		member.setModelTypeName("material_acceptance_application");
+		member.setName("material_unit_of_measurement");
+		member.setMemberName("materialAcceptanceApplicationList");
+		member.setRelationName("materialUnitOfMeasurement");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EventMaterialChangeInfo eventMaterialChangeInfoList() {
+		EventMaterialChangeInfo member = new EventMaterialChangeInfo();
+		member.setModelTypeName("event_material_change_info");
+		member.setName("uom");
+		member.setMemberName("eventMaterialChangeInfoList");
+		member.setRelationName("uom");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EventMaterialAcceptanceBasicInfo eventMaterialAcceptanceBasicInfoList() {
+		EventMaterialAcceptanceBasicInfo member = new EventMaterialAcceptanceBasicInfo();
+		member.setModelTypeName("event_material_acceptance_basic_info");
+		member.setName("uom");
+		member.setMemberName("eventMaterialAcceptanceBasicInfoList");
+		member.setRelationName("uom");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EventMaterialChangeContractInfo eventMaterialChangeContractInfoList() {
+		EventMaterialChangeContractInfo member = new EventMaterialChangeContractInfo();
+		member.setModelTypeName("event_material_change_contract_info");
+		member.setName("uom");
+		member.setMemberName("eventMaterialChangeContractInfoList");
+		member.setRelationName("uom");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EventMaterialPreservedBasicInfo eventMaterialPreservedBasicInfoList() {
+		EventMaterialPreservedBasicInfo member = new EventMaterialPreservedBasicInfo();
+		member.setModelTypeName("event_material_preserved_basic_info");
+		member.setName("uom");
+		member.setMemberName("eventMaterialPreservedBasicInfoList");
+		member.setRelationName("uom");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 
 	// 普通属性
 

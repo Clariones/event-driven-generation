@@ -67,13 +67,13 @@ public class MaterialPreservedSample extends BaseModelBean{
 		return member;
 	}
 
-	public DailyTaskType dailiTaskType() {
+	public DailyTaskType dailyTaskType() {
 		DailyTaskType member = new DailyTaskType();
 		member.setModelTypeName("daily_task_type");
-		member.setName("daili_task_type");
-		member.setMemberName("dailiTaskType");
+		member.setName("daily_task_type");
+		member.setMemberName("dailyTaskType");
 		member.setReferDirection(true);
-		member.setRelationName("dailiTaskType");
+		member.setRelationName("dailyTaskType");
 		append(member);
 		return member;
 	}

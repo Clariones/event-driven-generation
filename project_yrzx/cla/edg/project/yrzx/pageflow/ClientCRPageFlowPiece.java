@@ -96,6 +96,27 @@ public class ClientCRPageFlowPiece extends PieceOfScript {
 					.comments("申请个人入驻")
 					.got_page("popup")
 
+				.request_with_changerequest("labor dispute").need_login().with_string("project id")
+					.comments("提出劳务纠纷申请")
+					.got_page("labor dispute detail")
+
+				.request_with_changerequest("create material preserved sample").need_login().with_string("project id")
+					.comments("创建进场材料存样单")
+					.got_page("material preserved sample detail")
+
+				.request_with_changerequest("create material bid sample").need_login().with_string("project id")
+					.comments("创建投标材料存样单")
+					.got_page("material bid sample detail")
+
+				.request_with_changerequest("subcontract application").need_login()
+					.comments("分包申请")
+					.got_page("home page")
+
+				.request_with_changerequest("apply for material change").need_login().with_string("project id").with_string("type id")
+					.comments("材料变更申请")
+					.got_page("material change detail")
+
+
 
 				;
 	}

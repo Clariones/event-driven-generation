@@ -33,6 +33,17 @@ public class LaborQueryPiece extends PieceOfScript {
 						MODEL.laborWageManagementSheet().projectProgress()
 				)
 
+			.query(MODEL.laborDispute()).which("by project id").with_string("project id").pagination()
+				.comments("查询项目中的劳务纠纷")
+				.do_it_as()
+				.where(MODEL.laborDispute().project().eq("${project id}"))
+				.wants(
+						MODEL.laborDispute().project(),
+						MODEL.laborDispute().workPackage(),
+						MODEL.laborDispute().type(),
+						MODEL.laborDispute().status()
+				)
+
 		;
 
 		return script;

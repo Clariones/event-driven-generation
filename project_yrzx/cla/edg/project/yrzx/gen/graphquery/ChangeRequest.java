@@ -69,6 +69,28 @@ public class ChangeRequest extends BaseModelBean{
 		return member;
 	}
 
+	public EventMaterialAcceptanceImage eventMaterialAcceptanceImageList() {
+		EventMaterialAcceptanceImage member = new EventMaterialAcceptanceImage();
+		member.setModelTypeName("event_material_acceptance_image");
+		member.setName("change_request");
+		member.setMemberName("eventMaterialAcceptanceImageList");
+		member.setRelationName("changeRequest");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EventMaterialCheck eventMaterialCheckList() {
+		EventMaterialCheck member = new EventMaterialCheck();
+		member.setModelTypeName("event_material_check");
+		member.setName("change_request");
+		member.setMemberName("eventMaterialCheckList");
+		member.setRelationName("changeRequest");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 	public EventProjectCommand eventProjectCommandList() {
 		EventProjectCommand member = new EventProjectCommand();
 		member.setModelTypeName("event_project_command");
@@ -124,11 +146,66 @@ public class ChangeRequest extends BaseModelBean{
 		return member;
 	}
 
+	public EventMaterialChangeInfo eventMaterialChangeInfoList() {
+		EventMaterialChangeInfo member = new EventMaterialChangeInfo();
+		member.setModelTypeName("event_material_change_info");
+		member.setName("change_request");
+		member.setMemberName("eventMaterialChangeInfoList");
+		member.setRelationName("changeRequest");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EventMaterialAcceptanceBasicInfo eventMaterialAcceptanceBasicInfoList() {
+		EventMaterialAcceptanceBasicInfo member = new EventMaterialAcceptanceBasicInfo();
+		member.setModelTypeName("event_material_acceptance_basic_info");
+		member.setName("change_request");
+		member.setMemberName("eventMaterialAcceptanceBasicInfoList");
+		member.setRelationName("changeRequest");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 	public EventMaterialReview eventMaterialReviewList() {
 		EventMaterialReview member = new EventMaterialReview();
 		member.setModelTypeName("event_material_review");
 		member.setName("change_request");
 		member.setMemberName("eventMaterialReviewList");
+		member.setRelationName("changeRequest");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EventMaterialPreservedInfo eventMaterialPreservedInfoList() {
+		EventMaterialPreservedInfo member = new EventMaterialPreservedInfo();
+		member.setModelTypeName("event_material_preserved_info");
+		member.setName("change_request");
+		member.setMemberName("eventMaterialPreservedInfoList");
+		member.setRelationName("changeRequest");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EventMaterialChangeContractInfo eventMaterialChangeContractInfoList() {
+		EventMaterialChangeContractInfo member = new EventMaterialChangeContractInfo();
+		member.setModelTypeName("event_material_change_contract_info");
+		member.setName("change_request");
+		member.setMemberName("eventMaterialChangeContractInfoList");
+		member.setRelationName("changeRequest");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EventMaterialChangeDataUpload eventMaterialChangeDataUploadList() {
+		EventMaterialChangeDataUpload member = new EventMaterialChangeDataUpload();
+		member.setModelTypeName("event_material_change_data_upload");
+		member.setName("change_request");
+		member.setMemberName("eventMaterialChangeDataUploadList");
 		member.setRelationName("changeRequest");
 		member.setReferDirection(false);
 		append(member);
@@ -162,6 +239,39 @@ public class ChangeRequest extends BaseModelBean{
 		member.setModelTypeName("event_project_supervisor_report_basic_info");
 		member.setName("change_request");
 		member.setMemberName("eventProjectSupervisorReportBasicInfoList");
+		member.setRelationName("changeRequest");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EventSubcontractApplication eventSubcontractApplicationList() {
+		EventSubcontractApplication member = new EventSubcontractApplication();
+		member.setModelTypeName("event_subcontract_application");
+		member.setName("change_request");
+		member.setMemberName("eventSubcontractApplicationList");
+		member.setRelationName("changeRequest");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EventMaterialPreservedBasicInfo eventMaterialPreservedBasicInfoList() {
+		EventMaterialPreservedBasicInfo member = new EventMaterialPreservedBasicInfo();
+		member.setModelTypeName("event_material_preserved_basic_info");
+		member.setName("change_request");
+		member.setMemberName("eventMaterialPreservedBasicInfoList");
+		member.setRelationName("changeRequest");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EventLaborDispute eventLaborDisputeList() {
+		EventLaborDispute member = new EventLaborDispute();
+		member.setModelTypeName("event_labor_dispute");
+		member.setName("change_request");
+		member.setMemberName("eventLaborDisputeList");
 		member.setRelationName("changeRequest");
 		member.setReferDirection(false);
 		append(member);
@@ -261,6 +371,17 @@ public class ChangeRequest extends BaseModelBean{
 		member.setModelTypeName("event_apply_emplacement");
 		member.setName("change_request");
 		member.setMemberName("eventApplyEmplacementList");
+		member.setRelationName("changeRequest");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EventMaterialChangeAudit eventMaterialChangeAuditList() {
+		EventMaterialChangeAudit member = new EventMaterialChangeAudit();
+		member.setModelTypeName("event_material_change_audit");
+		member.setName("change_request");
+		member.setMemberName("eventMaterialChangeAuditList");
 		member.setRelationName("changeRequest");
 		member.setReferDirection(false);
 		append(member);

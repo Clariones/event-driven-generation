@@ -121,9 +121,9 @@ public class MaterialRecord extends BaseModelBean{
 		return member;
 	}
 
-	public StringAttribute bidUnitPrice(){
-		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
+	public NumberAttribute bidUnitPrice(){
+		NumberAttribute member = new NumberAttribute();
+		member.setModelTypeName("double");
 		// member.setName("bidUnitPrice");
 		member.setName("bid_unit_price");
 		useMember(member);
@@ -153,6 +153,15 @@ public class MaterialRecord extends BaseModelBean{
 		member.setModelTypeName("date");
 		// member.setName("plannedApproachTime");
 		member.setName("planned_approach_time");
+		useMember(member);
+		return member;
+	}
+
+	public DateTimeAttribute updateTime(){
+		DateTimeAttribute member = new DateTimeAttribute();
+		member.setModelTypeName("date_time_update");
+		// member.setName("updateTime");
+		member.setName("update_time");
 		useMember(member);
 		return member;
 	}

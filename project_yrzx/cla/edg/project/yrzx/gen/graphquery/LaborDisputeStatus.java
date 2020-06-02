@@ -4,13 +4,14 @@ import java.util.Map;
 
 import cla.edg.modelbean.*;
 
-public class MerchantType extends BaseModelBean{
+public class LaborDisputeStatus extends BaseModelBean{
 	public String getFullClassName() {
-		return "com.yrdec.yrzx.merchanttype.MerchantType";
+		return "com.yrdec.yrzx.labordisputestatus.LaborDisputeStatus";
 	}
 	// 枚举对象
-	public static EnumAttribute PERSONAL = new EnumAttribute("com.yrdec.yrzx.merchanttype.MerchantType", "PERSONAL");
-	public static EnumAttribute ORGANIZATION = new EnumAttribute("com.yrdec.yrzx.merchanttype.MerchantType", "ORGANIZATION");
+	public static EnumAttribute ACCEPTED = new EnumAttribute("com.yrdec.yrzx.labordisputestatus.LaborDisputeStatus", "ACCEPTED");
+	public static EnumAttribute PROCESSING = new EnumAttribute("com.yrdec.yrzx.labordisputestatus.LaborDisputeStatus", "PROCESSING");
+	public static EnumAttribute SOLVED = new EnumAttribute("com.yrdec.yrzx.labordisputestatus.LaborDisputeStatus", "SOLVED");
 
 	// 引用的对象
 
@@ -27,34 +28,12 @@ public class MerchantType extends BaseModelBean{
 
 	// 被引用的对象
 
-	public Merchant merchantList() {
-		Merchant member = new Merchant();
-		member.setModelTypeName("merchant");
-		member.setName("merchant_type");
-		member.setMemberName("merchantList");
-		member.setRelationName("merchantType");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-
-	public SubcontractApplication subcontractApplicationList() {
-		SubcontractApplication member = new SubcontractApplication();
-		member.setModelTypeName("subcontract_application");
-		member.setName("merchant_type");
-		member.setMemberName("subcontractApplicationList");
-		member.setRelationName("merchantType");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-
-	public EventSubcontractApplication eventSubcontractApplicationList() {
-		EventSubcontractApplication member = new EventSubcontractApplication();
-		member.setModelTypeName("event_subcontract_application");
-		member.setName("merchant_type");
-		member.setMemberName("eventSubcontractApplicationList");
-		member.setRelationName("merchantType");
+	public LaborDispute laborDisputeList() {
+		LaborDispute member = new LaborDispute();
+		member.setModelTypeName("labor_dispute");
+		member.setName("status");
+		member.setMemberName("laborDisputeList");
+		member.setRelationName("status");
 		member.setReferDirection(false);
 		append(member);
 		return member;

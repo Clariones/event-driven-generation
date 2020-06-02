@@ -69,6 +69,28 @@ public class MaterialCategory extends BaseModelBean{
 		return member;
 	}
 
+	public MaterialAcceptanceApplication materialAcceptanceApplicationList() {
+		MaterialAcceptanceApplication member = new MaterialAcceptanceApplication();
+		member.setModelTypeName("material_acceptance_application");
+		member.setName("material_category");
+		member.setMemberName("materialAcceptanceApplicationList");
+		member.setRelationName("materialCategory");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EventMaterialPreservedBasicInfo eventMaterialPreservedBasicInfoList() {
+		EventMaterialPreservedBasicInfo member = new EventMaterialPreservedBasicInfo();
+		member.setModelTypeName("event_material_preserved_basic_info");
+		member.setName("material_category");
+		member.setMemberName("eventMaterialPreservedBasicInfoList");
+		member.setRelationName("materialCategory");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 
 	// 普通属性
 

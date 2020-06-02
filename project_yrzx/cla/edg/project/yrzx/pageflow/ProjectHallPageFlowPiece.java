@@ -108,15 +108,36 @@ public class ProjectHallPageFlowPiece extends PieceOfScript {
 							.comments("材料管理台账详情")
 							.got_page("material record detail")
 
-//				.request("material_preserved_sample")
-//					.comments("进场材料存样")
-//
-//				.request("material_bid_sample")
-//					.comments("投标材料存样")
-//
-//				.request("material change")
-//					.comments("材料变更")
 
+				//进场材料存样
+				.request("view material preserved sample list").with_string("project id").with_last_record_id()
+					.comments("进场材料存样")
+					.got_page("material preserved sample list")
+//
+				.request("view material preserved sample detail").with_string("item id")
+					.comments("进场材料存样详情")
+					.got_page("material preserved sample detail")
+
+				//投标材料存样
+				.request("view material bid sample list").with_string("project id").with_last_record_id()
+					.comments("投标材料存样")
+					.got_page("material bid sample list")
+//
+				.request("view material bid sample detail").with_string("item id")
+					.comments("投标材料存样详情")
+					.got_page("material bid sample detail")
+
+
+				//材料变更
+				.request("view material change type list").with_string("project id").with_last_record_id()
+					.comments("材料变更类型列表")
+					.got_page("material change type list")
+				.request("view material change list").with_string("project id").with_string("type id").with_string("filter").with_last_record_id()
+					.comments("材料变更列表")
+					.got_page("material change list")
+				.request("view material change detail").with_string("item id")
+					.comments("材料变更详情")
+					.got_page("material change detail")
 
 				;
 	}
@@ -195,9 +216,13 @@ public class ProjectHallPageFlowPiece extends PieceOfScript {
 			.comments("查看工资发放记录详情").need_login().has_footprint()
 			.got_page("labor wages detail")
 
-//		.request("view labor dispute list").with_string("project id").with_last_record_id()
-//			.comments("查看劳务纠纷列表").need_login().has_footprint()
-//			.got_page("labor dispute list")
+		.request("view labor dispute list").with_string("project id").with_last_record_id()
+			.comments("查看劳务纠纷列表").need_login().has_footprint()
+			.got_page("labor dispute list")
+
+		.request("view labor dispute detail").with_string("item id")
+			.comments("查看劳务纠纷详情").need_login()
+			.got_page("labor dispute detail")
 				
 		;
 	}
