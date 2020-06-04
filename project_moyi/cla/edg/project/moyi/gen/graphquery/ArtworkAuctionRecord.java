@@ -1,6 +1,7 @@
 package cla.edg.project.moyi.gen.graphquery;
 
 import java.util.Map;
+
 import cla.edg.modelbean.*;
 
 public class ArtworkAuctionRecord extends BaseModelBean{
@@ -17,6 +18,7 @@ public class ArtworkAuctionRecord extends BaseModelBean{
 		member.setName("artwork_auction_status");
 		member.setMemberName("artworkAuctionStatus");
 		member.setReferDirection(true);
+		member.setRelationName("artworkAuctionStatus");
 		append(member);
 		return member;
 	}
@@ -27,18 +29,20 @@ public class ArtworkAuctionRecord extends BaseModelBean{
 		member.setName("artwork_auction");
 		member.setMemberName("artworkAuction");
 		member.setReferDirection(true);
+		member.setRelationName("artworkAuction");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("id");
 		member.setName("id");
 		useMember(member);
 		return member;
@@ -47,6 +51,7 @@ public class ArtworkAuctionRecord extends BaseModelBean{
 	public StringAttribute title(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("title");
 		member.setName("title");
 		useMember(member);
 		return member;
@@ -55,6 +60,7 @@ public class ArtworkAuctionRecord extends BaseModelBean{
 	public StringAttribute description(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_longtext");
+		// member.setName("description");
 		member.setName("description");
 		useMember(member);
 		return member;
@@ -63,6 +69,7 @@ public class ArtworkAuctionRecord extends BaseModelBean{
 	public DateTimeAttribute createTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_create");
+		// member.setName("createTime");
 		member.setName("create_time");
 		useMember(member);
 		return member;
@@ -71,12 +78,13 @@ public class ArtworkAuctionRecord extends BaseModelBean{
 	public NumberAttribute version(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
+		// member.setName("version");
 		member.setName("version");
 		useMember(member);
 		return member;
 	}
 
 
-	
+
 }
 

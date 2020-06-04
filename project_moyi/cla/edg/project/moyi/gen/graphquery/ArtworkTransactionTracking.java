@@ -1,6 +1,7 @@
 package cla.edg.project.moyi.gen.graphquery;
 
 import java.util.Map;
+
 import cla.edg.modelbean.*;
 
 public class ArtworkTransactionTracking extends BaseModelBean{
@@ -17,6 +18,7 @@ public class ArtworkTransactionTracking extends BaseModelBean{
 		member.setName("artwork");
 		member.setMemberName("artwork");
 		member.setReferDirection(true);
+		member.setRelationName("artwork");
 		append(member);
 		return member;
 	}
@@ -27,6 +29,7 @@ public class ArtworkTransactionTracking extends BaseModelBean{
 		member.setName("certificate");
 		member.setMemberName("certificate");
 		member.setReferDirection(true);
+		member.setRelationName("certificate");
 		append(member);
 		return member;
 	}
@@ -37,6 +40,7 @@ public class ArtworkTransactionTracking extends BaseModelBean{
 		member.setName("main_order");
 		member.setMemberName("mainOrder");
 		member.setReferDirection(true);
+		member.setRelationName("mainOrder");
 		append(member);
 		return member;
 	}
@@ -47,6 +51,7 @@ public class ArtworkTransactionTracking extends BaseModelBean{
 		member.setName("original_owner");
 		member.setMemberName("originalOwner");
 		member.setReferDirection(true);
+		member.setRelationName("originalOwner");
 		append(member);
 		return member;
 	}
@@ -57,18 +62,20 @@ public class ArtworkTransactionTracking extends BaseModelBean{
 		member.setName("new_owner");
 		member.setMemberName("newOwner");
 		member.setReferDirection(true);
+		member.setRelationName("newOwner");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("id");
 		member.setName("id");
 		useMember(member);
 		return member;
@@ -77,6 +84,7 @@ public class ArtworkTransactionTracking extends BaseModelBean{
 	public StringAttribute title(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("title");
 		member.setName("title");
 		useMember(member);
 		return member;
@@ -85,6 +93,7 @@ public class ArtworkTransactionTracking extends BaseModelBean{
 	public StringAttribute detail(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_longtext");
+		// member.setName("detail");
 		member.setName("detail");
 		useMember(member);
 		return member;
@@ -93,6 +102,7 @@ public class ArtworkTransactionTracking extends BaseModelBean{
 	public DateTimeAttribute createTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_create");
+		// member.setName("createTime");
 		member.setName("create_time");
 		useMember(member);
 		return member;
@@ -101,12 +111,13 @@ public class ArtworkTransactionTracking extends BaseModelBean{
 	public NumberAttribute version(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
+		// member.setName("version");
 		member.setName("version");
 		useMember(member);
 		return member;
 	}
 
 
-	
+
 }
 

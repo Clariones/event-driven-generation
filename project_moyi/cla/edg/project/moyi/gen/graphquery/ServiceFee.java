@@ -1,6 +1,7 @@
 package cla.edg.project.moyi.gen.graphquery;
 
 import java.util.Map;
+
 import cla.edg.modelbean.*;
 
 public class ServiceFee extends BaseModelBean{
@@ -29,18 +30,20 @@ public class ServiceFee extends BaseModelBean{
 		member.setName("moyi");
 		member.setMemberName("moyi");
 		member.setReferDirection(true);
+		member.setRelationName("moyi");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("id");
 		member.setName("id");
 		useMember(member);
 		return member;
@@ -49,6 +52,7 @@ public class ServiceFee extends BaseModelBean{
 	public StringAttribute name(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("name");
 		member.setName("name");
 		useMember(member);
 		return member;
@@ -57,6 +61,7 @@ public class ServiceFee extends BaseModelBean{
 	public StringAttribute code(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("code");
 		member.setName("code");
 		useMember(member);
 		return member;
@@ -65,6 +70,7 @@ public class ServiceFee extends BaseModelBean{
 	public NumberAttribute ibPrice(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("double");
+		// member.setName("ibPrice");
 		member.setName("ib_price");
 		useMember(member);
 		return member;
@@ -73,6 +79,7 @@ public class ServiceFee extends BaseModelBean{
 	public NumberAttribute rmbPrice(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("double");
+		// member.setName("rmbPrice");
 		member.setName("rmb_price");
 		useMember(member);
 		return member;
@@ -81,6 +88,7 @@ public class ServiceFee extends BaseModelBean{
 	public NumberAttribute ibSalePrice(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("double");
+		// member.setName("ibSalePrice");
 		member.setName("ib_sale_price");
 		useMember(member);
 		return member;
@@ -89,6 +97,7 @@ public class ServiceFee extends BaseModelBean{
 	public NumberAttribute rmbSalePrice(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("double");
+		// member.setName("rmbSalePrice");
 		member.setName("rmb_sale_price");
 		useMember(member);
 		return member;
@@ -97,12 +106,13 @@ public class ServiceFee extends BaseModelBean{
 	public NumberAttribute version(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
+		// member.setName("version");
 		member.setName("version");
 		useMember(member);
 		return member;
 	}
 
 
-	
+
 }
 

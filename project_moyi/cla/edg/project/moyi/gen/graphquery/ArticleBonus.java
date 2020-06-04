@@ -1,6 +1,7 @@
 package cla.edg.project.moyi.gen.graphquery;
 
 import java.util.Map;
+
 import cla.edg.modelbean.*;
 
 public class ArticleBonus extends BaseModelBean{
@@ -17,6 +18,7 @@ public class ArticleBonus extends BaseModelBean{
 		member.setName("article");
 		member.setMemberName("article");
 		member.setReferDirection(true);
+		member.setRelationName("article");
 		append(member);
 		return member;
 	}
@@ -27,6 +29,7 @@ public class ArticleBonus extends BaseModelBean{
 		member.setName("moderator");
 		member.setMemberName("moderator");
 		member.setReferDirection(true);
+		member.setRelationName("moderator");
 		append(member);
 		return member;
 	}
@@ -37,6 +40,7 @@ public class ArticleBonus extends BaseModelBean{
 		member.setName("bonus_type");
 		member.setMemberName("bonusType");
 		member.setReferDirection(true);
+		member.setRelationName("bonusType");
 		append(member);
 		return member;
 	}
@@ -47,18 +51,20 @@ public class ArticleBonus extends BaseModelBean{
 		member.setName("moyi");
 		member.setMemberName("moyi");
 		member.setReferDirection(true);
+		member.setRelationName("moyi");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("id");
 		member.setName("id");
 		useMember(member);
 		return member;
@@ -67,6 +73,7 @@ public class ArticleBonus extends BaseModelBean{
 	public NumberAttribute bonusValue(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("double");
+		// member.setName("bonusValue");
 		member.setName("bonus_value");
 		useMember(member);
 		return member;
@@ -75,6 +82,7 @@ public class ArticleBonus extends BaseModelBean{
 	public StringAttribute bonusComment(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("bonusComment");
 		member.setName("bonus_comment");
 		useMember(member);
 		return member;
@@ -83,6 +91,7 @@ public class ArticleBonus extends BaseModelBean{
 	public DateTimeAttribute bonusDatetime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_create");
+		// member.setName("bonusDatetime");
 		member.setName("bonus_datetime");
 		useMember(member);
 		return member;
@@ -91,12 +100,13 @@ public class ArticleBonus extends BaseModelBean{
 	public NumberAttribute version(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
+		// member.setName("version");
 		member.setName("version");
 		useMember(member);
 		return member;
 	}
 
 
-	
+
 }
 

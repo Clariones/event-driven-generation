@@ -1,6 +1,7 @@
 package cla.edg.project.moyi.gen.graphquery;
 
 import java.util.Map;
+
 import cla.edg.modelbean.*;
 
 public class MoyiShopAnnualInfo extends BaseModelBean{
@@ -17,18 +18,20 @@ public class MoyiShopAnnualInfo extends BaseModelBean{
 		member.setName("shop");
 		member.setMemberName("shop");
 		member.setReferDirection(true);
+		member.setRelationName("shop");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("id");
 		member.setName("id");
 		useMember(member);
 		return member;
@@ -37,6 +40,7 @@ public class MoyiShopAnnualInfo extends BaseModelBean{
 	public StringAttribute name(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("name");
 		member.setName("name");
 		useMember(member);
 		return member;
@@ -45,6 +49,7 @@ public class MoyiShopAnnualInfo extends BaseModelBean{
 	public StringAttribute details(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_longtext");
+		// member.setName("details");
 		member.setName("details");
 		useMember(member);
 		return member;
@@ -53,6 +58,7 @@ public class MoyiShopAnnualInfo extends BaseModelBean{
 	public DateTimeAttribute startDate(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date");
+		// member.setName("startDate");
 		member.setName("start_date");
 		useMember(member);
 		return member;
@@ -61,6 +67,7 @@ public class MoyiShopAnnualInfo extends BaseModelBean{
 	public DateTimeAttribute expiryDate(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date");
+		// member.setName("expiryDate");
 		member.setName("expiry_date");
 		useMember(member);
 		return member;
@@ -69,6 +76,7 @@ public class MoyiShopAnnualInfo extends BaseModelBean{
 	public DateTimeAttribute createTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_create");
+		// member.setName("createTime");
 		member.setName("create_time");
 		useMember(member);
 		return member;
@@ -77,6 +85,7 @@ public class MoyiShopAnnualInfo extends BaseModelBean{
 	public DateTimeAttribute lastUpdateTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_update");
+		// member.setName("lastUpdateTime");
 		member.setName("last_update_time");
 		useMember(member);
 		return member;
@@ -85,12 +94,13 @@ public class MoyiShopAnnualInfo extends BaseModelBean{
 	public NumberAttribute version(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
+		// member.setName("version");
 		member.setName("version");
 		useMember(member);
 		return member;
 	}
 
 
-	
+
 }
 

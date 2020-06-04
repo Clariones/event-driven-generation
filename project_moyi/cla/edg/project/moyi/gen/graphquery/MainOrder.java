@@ -1,6 +1,7 @@
 package cla.edg.project.moyi.gen.graphquery;
 
 import java.util.Map;
+
 import cla.edg.modelbean.*;
 
 public class MainOrder extends BaseModelBean{
@@ -17,6 +18,7 @@ public class MainOrder extends BaseModelBean{
 		member.setName("order_status");
 		member.setMemberName("orderStatus");
 		member.setReferDirection(true);
+		member.setRelationName("orderStatus");
 		append(member);
 		return member;
 	}
@@ -27,138 +29,152 @@ public class MainOrder extends BaseModelBean{
 		member.setName("moyi");
 		member.setMemberName("moyi");
 		member.setReferDirection(true);
+		member.setRelationName("moyi");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
-	
+
 	public PricingItem pricingItemList() {
 		PricingItem member = new PricingItem();
 		member.setModelTypeName("pricing_item");
 		member.setName("main_order");
 		member.setMemberName("pricingItemList");
+		member.setRelationName("mainOrder");
 		member.setReferDirection(false);
 		append(member);
 		return member;
 	}
-	
+
 	public PaymentDetail paymentDetailList() {
 		PaymentDetail member = new PaymentDetail();
 		member.setModelTypeName("payment_detail");
 		member.setName("main_order");
 		member.setMemberName("paymentDetailList");
+		member.setRelationName("mainOrder");
 		member.setReferDirection(false);
 		append(member);
 		return member;
 	}
-	
+
 	public MoyiShopDepositBill moyiShopDepositBillList() {
 		MoyiShopDepositBill member = new MoyiShopDepositBill();
 		member.setModelTypeName("moyi_shop_deposit_bill");
 		member.setName("main_order");
 		member.setMemberName("moyiShopDepositBillList");
+		member.setRelationName("mainOrder");
 		member.setReferDirection(false);
 		append(member);
 		return member;
 	}
-	
+
 	public MoyiUserAccountRechargeOrder moyiUserAccountRechargeOrderList() {
 		MoyiUserAccountRechargeOrder member = new MoyiUserAccountRechargeOrder();
 		member.setModelTypeName("moyi_user_account_recharge_order");
 		member.setName("main_order");
 		member.setMemberName("moyiUserAccountRechargeOrderList");
+		member.setRelationName("mainOrder");
 		member.setReferDirection(false);
 		append(member);
 		return member;
 	}
-	
+
 	public MoyiUserIbOrder moyiUserIbOrderList() {
 		MoyiUserIbOrder member = new MoyiUserIbOrder();
 		member.setModelTypeName("moyi_user_ib_order");
 		member.setName("main_order");
 		member.setMemberName("moyiUserIbOrderList");
+		member.setRelationName("mainOrder");
 		member.setReferDirection(false);
 		append(member);
 		return member;
 	}
-	
+
 	public ArtworkOwnershipCertificateBill artworkOwnershipCertificateBillList() {
 		ArtworkOwnershipCertificateBill member = new ArtworkOwnershipCertificateBill();
 		member.setModelTypeName("artwork_ownership_certificate_bill");
 		member.setName("main_order");
 		member.setMemberName("artworkOwnershipCertificateBillList");
+		member.setRelationName("mainOrder");
 		member.setReferDirection(false);
 		append(member);
 		return member;
 	}
-	
+
 	public ArtworkAuctionOrder artworkAuctionOrderList() {
 		ArtworkAuctionOrder member = new ArtworkAuctionOrder();
 		member.setModelTypeName("artwork_auction_order");
 		member.setName("main_order");
 		member.setMemberName("artworkAuctionOrderList");
+		member.setRelationName("mainOrder");
 		member.setReferDirection(false);
 		append(member);
 		return member;
 	}
-	
+
 	public ArtworkTransactionTracking artworkTransactionTrackingList() {
 		ArtworkTransactionTracking member = new ArtworkTransactionTracking();
 		member.setModelTypeName("artwork_transaction_tracking");
 		member.setName("main_order");
 		member.setMemberName("artworkTransactionTrackingList");
+		member.setRelationName("mainOrder");
 		member.setReferDirection(false);
 		append(member);
 		return member;
 	}
-	
+
 	public AuctionBiddingDepositBill auctionBiddingDepositBillList() {
 		AuctionBiddingDepositBill member = new AuctionBiddingDepositBill();
 		member.setModelTypeName("auction_bidding_deposit_bill");
 		member.setName("main_order");
 		member.setMemberName("auctionBiddingDepositBillList");
+		member.setRelationName("mainOrder");
 		member.setReferDirection(false);
 		append(member);
 		return member;
 	}
-	
+
 	public InkDeedIssueBill inkDeedIssueBillList() {
 		InkDeedIssueBill member = new InkDeedIssueBill();
 		member.setModelTypeName("ink_deed_issue_bill");
 		member.setName("main_order");
 		member.setMemberName("inkDeedIssueBillList");
+		member.setRelationName("mainOrder");
 		member.setReferDirection(false);
 		append(member);
 		return member;
 	}
-	
+
 	public InkDeedOrder inkDeedOrderList() {
 		InkDeedOrder member = new InkDeedOrder();
 		member.setModelTypeName("ink_deed_order");
 		member.setName("main_order");
 		member.setMemberName("inkDeedOrderList");
+		member.setRelationName("mainOrder");
 		member.setReferDirection(false);
 		append(member);
 		return member;
 	}
-	
+
 	public UserFrozenAccountRecord userFrozenAccountRecordList() {
 		UserFrozenAccountRecord member = new UserFrozenAccountRecord();
 		member.setModelTypeName("user_frozen_account_record");
 		member.setName("main_order");
 		member.setMemberName("userFrozenAccountRecordList");
+		member.setRelationName("mainOrder");
 		member.setReferDirection(false);
 		append(member);
 		return member;
 	}
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("id");
 		member.setName("id");
 		useMember(member);
 		return member;
@@ -167,6 +183,7 @@ public class MainOrder extends BaseModelBean{
 	public StringAttribute summary(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("summary");
 		member.setName("summary");
 		useMember(member);
 		return member;
@@ -175,6 +192,7 @@ public class MainOrder extends BaseModelBean{
 	public StringAttribute sceneCode(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("sceneCode");
 		member.setName("scene_code");
 		useMember(member);
 		return member;
@@ -183,6 +201,7 @@ public class MainOrder extends BaseModelBean{
 	public NumberAttribute listCashPrice(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
+		// member.setName("listCashPrice");
 		member.setName("list_cash_price");
 		useMember(member);
 		return member;
@@ -191,6 +210,7 @@ public class MainOrder extends BaseModelBean{
 	public NumberAttribute listIbPrice(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
+		// member.setName("listIbPrice");
 		member.setName("list_ib_price");
 		useMember(member);
 		return member;
@@ -199,6 +219,7 @@ public class MainOrder extends BaseModelBean{
 	public NumberAttribute salesCashPrice(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
+		// member.setName("salesCashPrice");
 		member.setName("sales_cash_price");
 		useMember(member);
 		return member;
@@ -207,6 +228,7 @@ public class MainOrder extends BaseModelBean{
 	public NumberAttribute salesIbPrice(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
+		// member.setName("salesIbPrice");
 		member.setName("sales_ib_price");
 		useMember(member);
 		return member;
@@ -215,6 +237,7 @@ public class MainOrder extends BaseModelBean{
 	public NumberAttribute payCashPrice(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
+		// member.setName("payCashPrice");
 		member.setName("pay_cash_price");
 		useMember(member);
 		return member;
@@ -223,6 +246,7 @@ public class MainOrder extends BaseModelBean{
 	public NumberAttribute payIbPrice(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
+		// member.setName("payIbPrice");
 		member.setName("pay_ib_price");
 		useMember(member);
 		return member;
@@ -231,6 +255,7 @@ public class MainOrder extends BaseModelBean{
 	public BooleanAttribute useIbBalance(){
 		BooleanAttribute member = new BooleanAttribute();
 		member.setModelTypeName("bool");
+		// member.setName("useIbBalance");
 		member.setName("use_ib_balance");
 		useMember(member);
 		return member;
@@ -239,6 +264,7 @@ public class MainOrder extends BaseModelBean{
 	public BooleanAttribute useCashBalance(){
 		BooleanAttribute member = new BooleanAttribute();
 		member.setModelTypeName("bool");
+		// member.setName("useCashBalance");
 		member.setName("use_cash_balance");
 		useMember(member);
 		return member;
@@ -247,6 +273,7 @@ public class MainOrder extends BaseModelBean{
 	public BooleanAttribute useWechat(){
 		BooleanAttribute member = new BooleanAttribute();
 		member.setModelTypeName("bool");
+		// member.setName("useWechat");
 		member.setName("use_wechat");
 		useMember(member);
 		return member;
@@ -255,6 +282,7 @@ public class MainOrder extends BaseModelBean{
 	public StringAttribute details(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_longtext");
+		// member.setName("details");
 		member.setName("details");
 		useMember(member);
 		return member;
@@ -263,6 +291,7 @@ public class MainOrder extends BaseModelBean{
 	public DateTimeAttribute createTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_create");
+		// member.setName("createTime");
 		member.setName("create_time");
 		useMember(member);
 		return member;
@@ -271,6 +300,7 @@ public class MainOrder extends BaseModelBean{
 	public DateTimeAttribute lastUpdateTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_update");
+		// member.setName("lastUpdateTime");
 		member.setName("last_update_time");
 		useMember(member);
 		return member;
@@ -279,12 +309,13 @@ public class MainOrder extends BaseModelBean{
 	public NumberAttribute version(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
+		// member.setName("version");
 		member.setName("version");
 		useMember(member);
 		return member;
 	}
 
 
-	
+
 }
 

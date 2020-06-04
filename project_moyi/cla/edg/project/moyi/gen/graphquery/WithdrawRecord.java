@@ -1,6 +1,7 @@
 package cla.edg.project.moyi.gen.graphquery;
 
 import java.util.Map;
+
 import cla.edg.modelbean.*;
 
 public class WithdrawRecord extends BaseModelBean{
@@ -17,6 +18,7 @@ public class WithdrawRecord extends BaseModelBean{
 		member.setName("status");
 		member.setMemberName("status");
 		member.setReferDirection(true);
+		member.setRelationName("status");
 		append(member);
 		return member;
 	}
@@ -27,6 +29,7 @@ public class WithdrawRecord extends BaseModelBean{
 		member.setName("moyi_user");
 		member.setMemberName("moyiUser");
 		member.setReferDirection(true);
+		member.setRelationName("moyiUser");
 		append(member);
 		return member;
 	}
@@ -37,6 +40,7 @@ public class WithdrawRecord extends BaseModelBean{
 		member.setName("moyi_user_account");
 		member.setMemberName("moyiUserAccount");
 		member.setReferDirection(true);
+		member.setRelationName("moyiUserAccount");
 		append(member);
 		return member;
 	}
@@ -47,18 +51,20 @@ public class WithdrawRecord extends BaseModelBean{
 		member.setName("moyi");
 		member.setMemberName("moyi");
 		member.setReferDirection(true);
+		member.setRelationName("moyi");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("id");
 		member.setName("id");
 		useMember(member);
 		return member;
@@ -67,6 +73,7 @@ public class WithdrawRecord extends BaseModelBean{
 	public NumberAttribute amount(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
+		// member.setName("amount");
 		member.setName("amount");
 		useMember(member);
 		return member;
@@ -75,6 +82,7 @@ public class WithdrawRecord extends BaseModelBean{
 	public NumberAttribute estimateFee(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
+		// member.setName("estimateFee");
 		member.setName("estimate_fee");
 		useMember(member);
 		return member;
@@ -83,6 +91,7 @@ public class WithdrawRecord extends BaseModelBean{
 	public NumberAttribute estimatePaidAmount(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
+		// member.setName("estimatePaidAmount");
 		member.setName("estimate_paid_amount");
 		useMember(member);
 		return member;
@@ -91,6 +100,7 @@ public class WithdrawRecord extends BaseModelBean{
 	public StringAttribute receivingAccount(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("receivingAccount");
 		member.setName("receiving_account");
 		useMember(member);
 		return member;
@@ -99,6 +109,7 @@ public class WithdrawRecord extends BaseModelBean{
 	public StringAttribute receivingBankSiteName(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("receivingBankSiteName");
 		member.setName("receiving_bank_site_name");
 		useMember(member);
 		return member;
@@ -107,6 +118,7 @@ public class WithdrawRecord extends BaseModelBean{
 	public StringAttribute receivingAccountName(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("receivingAccountName");
 		member.setName("receiving_account_name");
 		useMember(member);
 		return member;
@@ -115,6 +127,7 @@ public class WithdrawRecord extends BaseModelBean{
 	public StringAttribute receivingAccountMobile(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_china_mobile_phone");
+		// member.setName("receivingAccountMobile");
 		member.setName("receiving_account_mobile");
 		useMember(member);
 		return member;
@@ -123,6 +136,7 @@ public class WithdrawRecord extends BaseModelBean{
 	public StringAttribute postscript(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("postscript");
 		member.setName("postscript");
 		useMember(member);
 		return member;
@@ -131,6 +145,7 @@ public class WithdrawRecord extends BaseModelBean{
 	public StringAttribute comments(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("comments");
 		member.setName("comments");
 		useMember(member);
 		return member;
@@ -139,6 +154,7 @@ public class WithdrawRecord extends BaseModelBean{
 	public StringAttribute paymentMethod(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("paymentMethod");
 		member.setName("payment_method");
 		useMember(member);
 		return member;
@@ -147,6 +163,7 @@ public class WithdrawRecord extends BaseModelBean{
 	public DateTimeAttribute createTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_create");
+		// member.setName("createTime");
 		member.setName("create_time");
 		useMember(member);
 		return member;
@@ -155,6 +172,7 @@ public class WithdrawRecord extends BaseModelBean{
 	public DateTimeAttribute acceptTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time");
+		// member.setName("acceptTime");
 		member.setName("accept_time");
 		useMember(member);
 		return member;
@@ -163,6 +181,7 @@ public class WithdrawRecord extends BaseModelBean{
 	public DateTimeAttribute finishTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time");
+		// member.setName("finishTime");
 		member.setName("finish_time");
 		useMember(member);
 		return member;
@@ -171,6 +190,7 @@ public class WithdrawRecord extends BaseModelBean{
 	public DateTimeAttribute lastUpdateTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_update");
+		// member.setName("lastUpdateTime");
 		member.setName("last_update_time");
 		useMember(member);
 		return member;
@@ -179,12 +199,13 @@ public class WithdrawRecord extends BaseModelBean{
 	public NumberAttribute version(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
+		// member.setName("version");
 		member.setName("version");
 		useMember(member);
 		return member;
 	}
 
 
-	
+
 }
 

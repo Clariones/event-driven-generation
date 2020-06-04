@@ -1,6 +1,7 @@
 package cla.edg.project.moyi.gen.graphquery;
 
 import java.util.Map;
+
 import cla.edg.modelbean.*;
 
 public class InkDeedHoldingStatistic extends BaseModelBean{
@@ -17,6 +18,7 @@ public class InkDeedHoldingStatistic extends BaseModelBean{
 		member.setName("artwork");
 		member.setMemberName("artwork");
 		member.setReferDirection(true);
+		member.setRelationName("artwork");
 		append(member);
 		return member;
 	}
@@ -27,6 +29,7 @@ public class InkDeedHoldingStatistic extends BaseModelBean{
 		member.setName("auction");
 		member.setMemberName("auction");
 		member.setReferDirection(true);
+		member.setRelationName("auction");
 		append(member);
 		return member;
 	}
@@ -37,18 +40,20 @@ public class InkDeedHoldingStatistic extends BaseModelBean{
 		member.setName("holder");
 		member.setMemberName("holder");
 		member.setReferDirection(true);
+		member.setRelationName("holder");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("id");
 		member.setName("id");
 		useMember(member);
 		return member;
@@ -57,6 +62,7 @@ public class InkDeedHoldingStatistic extends BaseModelBean{
 	public NumberAttribute holdingQuantity(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
+		// member.setName("holdingQuantity");
 		member.setName("holding_quantity");
 		useMember(member);
 		return member;
@@ -65,6 +71,7 @@ public class InkDeedHoldingStatistic extends BaseModelBean{
 	public NumberAttribute sellingQuantity(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
+		// member.setName("sellingQuantity");
 		member.setName("selling_quantity");
 		useMember(member);
 		return member;
@@ -73,6 +80,7 @@ public class InkDeedHoldingStatistic extends BaseModelBean{
 	public NumberAttribute totalQuantity(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
+		// member.setName("totalQuantity");
 		member.setName("total_quantity");
 		useMember(member);
 		return member;
@@ -81,6 +89,7 @@ public class InkDeedHoldingStatistic extends BaseModelBean{
 	public DateTimeAttribute createTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_create");
+		// member.setName("createTime");
 		member.setName("create_time");
 		useMember(member);
 		return member;
@@ -89,6 +98,7 @@ public class InkDeedHoldingStatistic extends BaseModelBean{
 	public DateTimeAttribute lastUpdateTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_update");
+		// member.setName("lastUpdateTime");
 		member.setName("last_update_time");
 		useMember(member);
 		return member;
@@ -97,12 +107,13 @@ public class InkDeedHoldingStatistic extends BaseModelBean{
 	public NumberAttribute version(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
+		// member.setName("version");
 		member.setName("version");
 		useMember(member);
 		return member;
 	}
 
 
-	
+
 }
 

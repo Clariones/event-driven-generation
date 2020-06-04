@@ -1,6 +1,7 @@
 package cla.edg.project.moyi.gen.graphquery;
 
 import java.util.Map;
+
 import cla.edg.modelbean.*;
 
 public class Organization extends BaseModelBean{
@@ -17,6 +18,7 @@ public class Organization extends BaseModelBean{
 		member.setName("moyi_user");
 		member.setMemberName("moyiUser");
 		member.setReferDirection(true);
+		member.setRelationName("moyiUser");
 		append(member);
 		return member;
 	}
@@ -27,6 +29,7 @@ public class Organization extends BaseModelBean{
 		member.setName("organization_type");
 		member.setMemberName("organizationType");
 		member.setReferDirection(true);
+		member.setRelationName("organizationType");
 		append(member);
 		return member;
 	}
@@ -37,18 +40,20 @@ public class Organization extends BaseModelBean{
 		member.setName("moyi");
 		member.setMemberName("moyi");
 		member.setReferDirection(true);
+		member.setRelationName("moyi");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("id");
 		member.setName("id");
 		useMember(member);
 		return member;
@@ -57,6 +62,7 @@ public class Organization extends BaseModelBean{
 	public StringAttribute organizationName(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("organizationName");
 		member.setName("organization_name");
 		useMember(member);
 		return member;
@@ -65,6 +71,7 @@ public class Organization extends BaseModelBean{
 	public StringAttribute businessLicenseNumber(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_taxpayerid");
+		// member.setName("businessLicenseNumber");
 		member.setName("business_license_number");
 		useMember(member);
 		return member;
@@ -73,6 +80,7 @@ public class Organization extends BaseModelBean{
 	public StringAttribute businessLicenseImage(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_image");
+		// member.setName("businessLicenseImage");
 		member.setName("business_license_image");
 		useMember(member);
 		return member;
@@ -81,12 +89,13 @@ public class Organization extends BaseModelBean{
 	public NumberAttribute version(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
+		// member.setName("version");
 		member.setName("version");
 		useMember(member);
 		return member;
 	}
 
 
-	
+
 }
 

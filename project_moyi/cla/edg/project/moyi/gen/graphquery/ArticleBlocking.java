@@ -1,6 +1,7 @@
 package cla.edg.project.moyi.gen.graphquery;
 
 import java.util.Map;
+
 import cla.edg.modelbean.*;
 
 public class ArticleBlocking extends BaseModelBean{
@@ -17,6 +18,7 @@ public class ArticleBlocking extends BaseModelBean{
 		member.setName("blocking_type");
 		member.setMemberName("blockingType");
 		member.setReferDirection(true);
+		member.setRelationName("blockingType");
 		append(member);
 		return member;
 	}
@@ -27,6 +29,7 @@ public class ArticleBlocking extends BaseModelBean{
 		member.setName("blocked_article");
 		member.setMemberName("blockedArticle");
 		member.setReferDirection(true);
+		member.setRelationName("blockedArticle");
 		append(member);
 		return member;
 	}
@@ -37,18 +40,20 @@ public class ArticleBlocking extends BaseModelBean{
 		member.setName("sponsor");
 		member.setMemberName("sponsor");
 		member.setReferDirection(true);
+		member.setRelationName("sponsor");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("id");
 		member.setName("id");
 		useMember(member);
 		return member;
@@ -57,6 +62,7 @@ public class ArticleBlocking extends BaseModelBean{
 	public StringAttribute comments(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("comments");
 		member.setName("comments");
 		useMember(member);
 		return member;
@@ -65,6 +71,7 @@ public class ArticleBlocking extends BaseModelBean{
 	public DateTimeAttribute createTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_create");
+		// member.setName("createTime");
 		member.setName("create_time");
 		useMember(member);
 		return member;
@@ -73,12 +80,13 @@ public class ArticleBlocking extends BaseModelBean{
 	public NumberAttribute version(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
+		// member.setName("version");
 		member.setName("version");
 		useMember(member);
 		return member;
 	}
 
 
-	
+
 }
 

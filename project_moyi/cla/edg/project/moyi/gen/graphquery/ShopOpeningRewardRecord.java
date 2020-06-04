@@ -1,6 +1,7 @@
 package cla.edg.project.moyi.gen.graphquery;
 
 import java.util.Map;
+
 import cla.edg.modelbean.*;
 
 public class ShopOpeningRewardRecord extends BaseModelBean{
@@ -17,6 +18,7 @@ public class ShopOpeningRewardRecord extends BaseModelBean{
 		member.setName("beneficiary");
 		member.setMemberName("beneficiary");
 		member.setReferDirection(true);
+		member.setRelationName("beneficiary");
 		append(member);
 		return member;
 	}
@@ -27,6 +29,7 @@ public class ShopOpeningRewardRecord extends BaseModelBean{
 		member.setName("moyi_shop");
 		member.setMemberName("moyiShop");
 		member.setReferDirection(true);
+		member.setRelationName("moyiShop");
 		append(member);
 		return member;
 	}
@@ -37,6 +40,7 @@ public class ShopOpeningRewardRecord extends BaseModelBean{
 		member.setName("status");
 		member.setMemberName("status");
 		member.setReferDirection(true);
+		member.setRelationName("status");
 		append(member);
 		return member;
 	}
@@ -47,18 +51,20 @@ public class ShopOpeningRewardRecord extends BaseModelBean{
 		member.setName("show_in");
 		member.setMemberName("showIn");
 		member.setReferDirection(true);
+		member.setRelationName("showIn");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("id");
 		member.setName("id");
 		useMember(member);
 		return member;
@@ -67,6 +73,7 @@ public class ShopOpeningRewardRecord extends BaseModelBean{
 	public StringAttribute title(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("title");
 		member.setName("title");
 		useMember(member);
 		return member;
@@ -75,6 +82,7 @@ public class ShopOpeningRewardRecord extends BaseModelBean{
 	public StringAttribute rule(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("rule");
 		member.setName("rule");
 		useMember(member);
 		return member;
@@ -83,6 +91,7 @@ public class ShopOpeningRewardRecord extends BaseModelBean{
 	public NumberAttribute amount(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
+		// member.setName("amount");
 		member.setName("amount");
 		useMember(member);
 		return member;
@@ -91,6 +100,7 @@ public class ShopOpeningRewardRecord extends BaseModelBean{
 	public StringAttribute detail(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_longtext");
+		// member.setName("detail");
 		member.setName("detail");
 		useMember(member);
 		return member;
@@ -99,6 +109,7 @@ public class ShopOpeningRewardRecord extends BaseModelBean{
 	public DateTimeAttribute createTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_create");
+		// member.setName("createTime");
 		member.setName("create_time");
 		useMember(member);
 		return member;
@@ -107,6 +118,7 @@ public class ShopOpeningRewardRecord extends BaseModelBean{
 	public DateTimeAttribute paidTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time");
+		// member.setName("paidTime");
 		member.setName("paid_time");
 		useMember(member);
 		return member;
@@ -115,6 +127,7 @@ public class ShopOpeningRewardRecord extends BaseModelBean{
 	public DateTimeAttribute lastUpdateTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_update");
+		// member.setName("lastUpdateTime");
 		member.setName("last_update_time");
 		useMember(member);
 		return member;
@@ -123,12 +136,13 @@ public class ShopOpeningRewardRecord extends BaseModelBean{
 	public NumberAttribute version(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
+		// member.setName("version");
 		member.setName("version");
 		useMember(member);
 		return member;
 	}
 
 
-	
+
 }
 

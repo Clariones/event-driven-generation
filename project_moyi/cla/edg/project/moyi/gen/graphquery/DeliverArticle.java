@@ -1,6 +1,7 @@
 package cla.edg.project.moyi.gen.graphquery;
 
 import java.util.Map;
+
 import cla.edg.modelbean.*;
 
 public class DeliverArticle extends BaseModelBean{
@@ -17,6 +18,7 @@ public class DeliverArticle extends BaseModelBean{
 		member.setName("article_type");
 		member.setMemberName("articleType");
 		member.setReferDirection(true);
+		member.setRelationName("articleType");
 		append(member);
 		return member;
 	}
@@ -27,6 +29,7 @@ public class DeliverArticle extends BaseModelBean{
 		member.setName("master_column");
 		member.setMemberName("masterColumn");
 		member.setReferDirection(true);
+		member.setRelationName("masterColumn");
 		append(member);
 		return member;
 	}
@@ -37,6 +40,7 @@ public class DeliverArticle extends BaseModelBean{
 		member.setName("related_artwork");
 		member.setMemberName("relatedArtwork");
 		member.setReferDirection(true);
+		member.setRelationName("relatedArtwork");
 		append(member);
 		return member;
 	}
@@ -47,18 +51,20 @@ public class DeliverArticle extends BaseModelBean{
 		member.setName("section");
 		member.setMemberName("section");
 		member.setReferDirection(true);
+		member.setRelationName("section");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("id");
 		member.setName("id");
 		useMember(member);
 		return member;
@@ -67,6 +73,7 @@ public class DeliverArticle extends BaseModelBean{
 	public StringAttribute title(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("title");
 		member.setName("title");
 		useMember(member);
 		return member;
@@ -75,6 +82,7 @@ public class DeliverArticle extends BaseModelBean{
 	public StringAttribute sourceInfo(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("sourceInfo");
 		member.setName("source_info");
 		useMember(member);
 		return member;
@@ -83,6 +91,7 @@ public class DeliverArticle extends BaseModelBean{
 	public StringAttribute imageUrl(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_image");
+		// member.setName("imageUrl");
 		member.setName("image_url");
 		useMember(member);
 		return member;
@@ -91,6 +100,7 @@ public class DeliverArticle extends BaseModelBean{
 	public StringAttribute imageText(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("imageText");
 		member.setName("image_text");
 		useMember(member);
 		return member;
@@ -99,12 +109,13 @@ public class DeliverArticle extends BaseModelBean{
 	public NumberAttribute version(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
+		// member.setName("version");
 		member.setName("version");
 		useMember(member);
 		return member;
 	}
 
 
-	
+
 }
 

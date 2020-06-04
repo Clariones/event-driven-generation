@@ -1,6 +1,7 @@
 package cla.edg.project.moyi.gen.graphquery;
 
 import java.util.Map;
+
 import cla.edg.modelbean.*;
 
 public class ChannelSection extends BaseModelBean{
@@ -17,6 +18,7 @@ public class ChannelSection extends BaseModelBean{
 		member.setName("channel_section_type");
 		member.setMemberName("channelSectionType");
 		member.setReferDirection(true);
+		member.setRelationName("channelSectionType");
 		append(member);
 		return member;
 	}
@@ -27,6 +29,7 @@ public class ChannelSection extends BaseModelBean{
 		member.setName("active");
 		member.setMemberName("active");
 		member.setReferDirection(true);
+		member.setRelationName("active");
 		append(member);
 		return member;
 	}
@@ -37,6 +40,7 @@ public class ChannelSection extends BaseModelBean{
 		member.setName("section");
 		member.setMemberName("section");
 		member.setReferDirection(true);
+		member.setRelationName("section");
 		append(member);
 		return member;
 	}
@@ -47,6 +51,7 @@ public class ChannelSection extends BaseModelBean{
 		member.setName("channel");
 		member.setMemberName("channel");
 		member.setReferDirection(true);
+		member.setRelationName("channel");
 		append(member);
 		return member;
 	}
@@ -57,28 +62,31 @@ public class ChannelSection extends BaseModelBean{
 		member.setName("moyi");
 		member.setMemberName("moyi");
 		member.setReferDirection(true);
+		member.setRelationName("moyi");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
-	
+
 	public ChannelArticle channelArticleList() {
 		ChannelArticle member = new ChannelArticle();
 		member.setModelTypeName("channel_article");
 		member.setName("channel_section");
 		member.setMemberName("channelArticleList");
+		member.setRelationName("channelSection");
 		member.setReferDirection(false);
 		append(member);
 		return member;
 	}
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("id");
 		member.setName("id");
 		useMember(member);
 		return member;
@@ -87,6 +95,7 @@ public class ChannelSection extends BaseModelBean{
 	public StringAttribute name(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("name");
 		member.setName("name");
 		useMember(member);
 		return member;
@@ -95,6 +104,7 @@ public class ChannelSection extends BaseModelBean{
 	public NumberAttribute displayOrder(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
+		// member.setName("displayOrder");
 		member.setName("display_order");
 		useMember(member);
 		return member;
@@ -103,6 +113,7 @@ public class ChannelSection extends BaseModelBean{
 	public DateTimeAttribute addedTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_create");
+		// member.setName("addedTime");
 		member.setName("added_time");
 		useMember(member);
 		return member;
@@ -111,12 +122,13 @@ public class ChannelSection extends BaseModelBean{
 	public NumberAttribute version(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
+		// member.setName("version");
 		member.setName("version");
 		useMember(member);
 		return member;
 	}
 
 
-	
+
 }
 

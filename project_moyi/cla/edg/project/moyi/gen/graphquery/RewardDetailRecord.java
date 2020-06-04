@@ -1,6 +1,7 @@
 package cla.edg.project.moyi.gen.graphquery;
 
 import java.util.Map;
+
 import cla.edg.modelbean.*;
 
 public class RewardDetailRecord extends BaseModelBean{
@@ -17,6 +18,7 @@ public class RewardDetailRecord extends BaseModelBean{
 		member.setName("moyi_user");
 		member.setMemberName("moyiUser");
 		member.setReferDirection(true);
+		member.setRelationName("moyiUser");
 		append(member);
 		return member;
 	}
@@ -27,6 +29,7 @@ public class RewardDetailRecord extends BaseModelBean{
 		member.setName("payer");
 		member.setMemberName("payer");
 		member.setReferDirection(true);
+		member.setRelationName("payer");
 		append(member);
 		return member;
 	}
@@ -37,6 +40,7 @@ public class RewardDetailRecord extends BaseModelBean{
 		member.setName("transaction_direction");
 		member.setMemberName("transactionDirection");
 		member.setReferDirection(true);
+		member.setRelationName("transactionDirection");
 		append(member);
 		return member;
 	}
@@ -47,6 +51,7 @@ public class RewardDetailRecord extends BaseModelBean{
 		member.setName("status");
 		member.setMemberName("status");
 		member.setReferDirection(true);
+		member.setRelationName("status");
 		append(member);
 		return member;
 	}
@@ -57,6 +62,7 @@ public class RewardDetailRecord extends BaseModelBean{
 		member.setName("article");
 		member.setMemberName("article");
 		member.setReferDirection(true);
+		member.setRelationName("article");
 		append(member);
 		return member;
 	}
@@ -67,6 +73,7 @@ public class RewardDetailRecord extends BaseModelBean{
 		member.setName("artwork");
 		member.setMemberName("artwork");
 		member.setReferDirection(true);
+		member.setRelationName("artwork");
 		append(member);
 		return member;
 	}
@@ -77,6 +84,7 @@ public class RewardDetailRecord extends BaseModelBean{
 		member.setName("review");
 		member.setMemberName("review");
 		member.setReferDirection(true);
+		member.setRelationName("review");
 		append(member);
 		return member;
 	}
@@ -87,18 +95,20 @@ public class RewardDetailRecord extends BaseModelBean{
 		member.setName("moyi");
 		member.setMemberName("moyi");
 		member.setReferDirection(true);
+		member.setRelationName("moyi");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("id");
 		member.setName("id");
 		useMember(member);
 		return member;
@@ -107,6 +117,7 @@ public class RewardDetailRecord extends BaseModelBean{
 	public StringAttribute summary(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("summary");
 		member.setName("summary");
 		useMember(member);
 		return member;
@@ -115,6 +126,7 @@ public class RewardDetailRecord extends BaseModelBean{
 	public StringAttribute description(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("description");
 		member.setName("description");
 		useMember(member);
 		return member;
@@ -123,6 +135,7 @@ public class RewardDetailRecord extends BaseModelBean{
 	public StringAttribute ruleCode(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("ruleCode");
 		member.setName("rule_code");
 		useMember(member);
 		return member;
@@ -131,6 +144,7 @@ public class RewardDetailRecord extends BaseModelBean{
 	public NumberAttribute amount(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("double");
+		// member.setName("amount");
 		member.setName("amount");
 		useMember(member);
 		return member;
@@ -139,6 +153,7 @@ public class RewardDetailRecord extends BaseModelBean{
 	public NumberAttribute balance(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("double");
+		// member.setName("balance");
 		member.setName("balance");
 		useMember(member);
 		return member;
@@ -147,6 +162,7 @@ public class RewardDetailRecord extends BaseModelBean{
 	public BooleanAttribute personalPay(){
 		BooleanAttribute member = new BooleanAttribute();
 		member.setModelTypeName("bool");
+		// member.setName("personalPay");
 		member.setName("personal_pay");
 		useMember(member);
 		return member;
@@ -155,6 +171,7 @@ public class RewardDetailRecord extends BaseModelBean{
 	public BooleanAttribute personalIncome(){
 		BooleanAttribute member = new BooleanAttribute();
 		member.setModelTypeName("bool");
+		// member.setName("personalIncome");
 		member.setName("personal_income");
 		useMember(member);
 		return member;
@@ -163,6 +180,7 @@ public class RewardDetailRecord extends BaseModelBean{
 	public StringAttribute transactionAddress(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("transactionAddress");
 		member.setName("transaction_address");
 		useMember(member);
 		return member;
@@ -171,6 +189,7 @@ public class RewardDetailRecord extends BaseModelBean{
 	public DateTimeAttribute createTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_create");
+		// member.setName("createTime");
 		member.setName("create_time");
 		useMember(member);
 		return member;
@@ -179,6 +198,7 @@ public class RewardDetailRecord extends BaseModelBean{
 	public DateTimeAttribute settlementDeadLine(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time");
+		// member.setName("settlementDeadLine");
 		member.setName("settlement_dead_line");
 		useMember(member);
 		return member;
@@ -187,6 +207,7 @@ public class RewardDetailRecord extends BaseModelBean{
 	public DateTimeAttribute lastUpdateTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_update");
+		// member.setName("lastUpdateTime");
 		member.setName("last_update_time");
 		useMember(member);
 		return member;
@@ -195,12 +216,13 @@ public class RewardDetailRecord extends BaseModelBean{
 	public NumberAttribute version(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
+		// member.setName("version");
 		member.setName("version");
 		useMember(member);
 		return member;
 	}
 
 
-	
+
 }
 

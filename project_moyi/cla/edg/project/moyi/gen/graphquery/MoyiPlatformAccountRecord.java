@@ -1,6 +1,7 @@
 package cla.edg.project.moyi.gen.graphquery;
 
 import java.util.Map;
+
 import cla.edg.modelbean.*;
 
 public class MoyiPlatformAccountRecord extends BaseModelBean{
@@ -17,18 +18,20 @@ public class MoyiPlatformAccountRecord extends BaseModelBean{
 		member.setName("account");
 		member.setMemberName("account");
 		member.setReferDirection(true);
+		member.setRelationName("account");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("id");
 		member.setName("id");
 		useMember(member);
 		return member;
@@ -37,6 +40,7 @@ public class MoyiPlatformAccountRecord extends BaseModelBean{
 	public NumberAttribute cashAmount(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
+		// member.setName("cashAmount");
 		member.setName("cash_amount");
 		useMember(member);
 		return member;
@@ -45,6 +49,7 @@ public class MoyiPlatformAccountRecord extends BaseModelBean{
 	public NumberAttribute ibAmount(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
+		// member.setName("ibAmount");
 		member.setName("ib_amount");
 		useMember(member);
 		return member;
@@ -53,6 +58,7 @@ public class MoyiPlatformAccountRecord extends BaseModelBean{
 	public NumberAttribute cashBalance(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
+		// member.setName("cashBalance");
 		member.setName("cash_balance");
 		useMember(member);
 		return member;
@@ -61,6 +67,7 @@ public class MoyiPlatformAccountRecord extends BaseModelBean{
 	public NumberAttribute ibBalance(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
+		// member.setName("ibBalance");
 		member.setName("ib_balance");
 		useMember(member);
 		return member;
@@ -69,6 +76,7 @@ public class MoyiPlatformAccountRecord extends BaseModelBean{
 	public StringAttribute summary(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("summary");
 		member.setName("summary");
 		useMember(member);
 		return member;
@@ -77,6 +85,7 @@ public class MoyiPlatformAccountRecord extends BaseModelBean{
 	public StringAttribute referToType(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("referToType");
 		member.setName("refer_to_type");
 		useMember(member);
 		return member;
@@ -85,6 +94,7 @@ public class MoyiPlatformAccountRecord extends BaseModelBean{
 	public StringAttribute referToId(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("referToId");
 		member.setName("refer_to_id");
 		useMember(member);
 		return member;
@@ -93,6 +103,7 @@ public class MoyiPlatformAccountRecord extends BaseModelBean{
 	public DateTimeAttribute createTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_create");
+		// member.setName("createTime");
 		member.setName("create_time");
 		useMember(member);
 		return member;
@@ -101,12 +112,13 @@ public class MoyiPlatformAccountRecord extends BaseModelBean{
 	public NumberAttribute version(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
+		// member.setName("version");
 		member.setName("version");
 		useMember(member);
 		return member;
 	}
 
 
-	
+
 }
 

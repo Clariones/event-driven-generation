@@ -1,6 +1,7 @@
 package cla.edg.project.moyi.gen.graphquery;
 
 import java.util.Map;
+
 import cla.edg.modelbean.*;
 
 public class SystemMessage extends BaseModelBean{
@@ -17,6 +18,7 @@ public class SystemMessage extends BaseModelBean{
 		member.setName("moyi_user");
 		member.setMemberName("moyiUser");
 		member.setReferDirection(true);
+		member.setRelationName("moyiUser");
 		append(member);
 		return member;
 	}
@@ -27,18 +29,20 @@ public class SystemMessage extends BaseModelBean{
 		member.setName("act_user");
 		member.setMemberName("actUser");
 		member.setReferDirection(true);
+		member.setRelationName("actUser");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("id");
 		member.setName("id");
 		useMember(member);
 		return member;
@@ -47,6 +51,7 @@ public class SystemMessage extends BaseModelBean{
 	public StringAttribute title(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("title");
 		member.setName("title");
 		useMember(member);
 		return member;
@@ -55,6 +60,7 @@ public class SystemMessage extends BaseModelBean{
 	public StringAttribute description(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("description");
 		member.setName("description");
 		useMember(member);
 		return member;
@@ -63,6 +69,7 @@ public class SystemMessage extends BaseModelBean{
 	public BooleanAttribute alreadyRead(){
 		BooleanAttribute member = new BooleanAttribute();
 		member.setModelTypeName("bool");
+		// member.setName("alreadyRead");
 		member.setName("already_read");
 		useMember(member);
 		return member;
@@ -71,6 +78,7 @@ public class SystemMessage extends BaseModelBean{
 	public StringAttribute relatedObjectType(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("relatedObjectType");
 		member.setName("related_object_type");
 		useMember(member);
 		return member;
@@ -79,6 +87,7 @@ public class SystemMessage extends BaseModelBean{
 	public StringAttribute relatedObjectId(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("relatedObjectId");
 		member.setName("related_object_id");
 		useMember(member);
 		return member;
@@ -87,6 +96,7 @@ public class SystemMessage extends BaseModelBean{
 	public DateTimeAttribute createTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_create");
+		// member.setName("createTime");
 		member.setName("create_time");
 		useMember(member);
 		return member;
@@ -95,12 +105,13 @@ public class SystemMessage extends BaseModelBean{
 	public NumberAttribute version(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
+		// member.setName("version");
 		member.setName("version");
 		useMember(member);
 		return member;
 	}
 
 
-	
+
 }
 

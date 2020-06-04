@@ -1,6 +1,7 @@
 package cla.edg.project.moyi.gen.graphquery;
 
 import java.util.Map;
+
 import cla.edg.modelbean.*;
 
 public class ModeratorBonus extends BaseModelBean{
@@ -17,6 +18,7 @@ public class ModeratorBonus extends BaseModelBean{
 		member.setName("moderator");
 		member.setMemberName("moderator");
 		member.setReferDirection(true);
+		member.setRelationName("moderator");
 		append(member);
 		return member;
 	}
@@ -27,18 +29,20 @@ public class ModeratorBonus extends BaseModelBean{
 		member.setName("moyi");
 		member.setMemberName("moyi");
 		member.setReferDirection(true);
+		member.setRelationName("moyi");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("id");
 		member.setName("id");
 		useMember(member);
 		return member;
@@ -47,6 +51,7 @@ public class ModeratorBonus extends BaseModelBean{
 	public NumberAttribute inkCoinValue(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("double");
+		// member.setName("inkCoinValue");
 		member.setName("ink_coin_value");
 		useMember(member);
 		return member;
@@ -55,6 +60,7 @@ public class ModeratorBonus extends BaseModelBean{
 	public NumberAttribute experienceValue(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
+		// member.setName("experienceValue");
 		member.setName("experience_value");
 		useMember(member);
 		return member;
@@ -62,7 +68,8 @@ public class ModeratorBonus extends BaseModelBean{
 
 	public DateTimeAttribute bonusDatetime(){
 		DateTimeAttribute member = new DateTimeAttribute();
-		member.setModelTypeName("date_time_now");
+		member.setModelTypeName("date_time");
+		// member.setName("bonusDatetime");
 		member.setName("bonus_datetime");
 		useMember(member);
 		return member;
@@ -71,12 +78,13 @@ public class ModeratorBonus extends BaseModelBean{
 	public NumberAttribute version(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
+		// member.setName("version");
 		member.setName("version");
 		useMember(member);
 		return member;
 	}
 
 
-	
+
 }
 

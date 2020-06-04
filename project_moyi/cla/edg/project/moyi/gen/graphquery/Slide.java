@@ -1,6 +1,7 @@
 package cla.edg.project.moyi.gen.graphquery;
 
 import java.util.Map;
+
 import cla.edg.modelbean.*;
 
 public class Slide extends BaseModelBean{
@@ -17,6 +18,7 @@ public class Slide extends BaseModelBean{
 		member.setName("slide_type");
 		member.setMemberName("slideType");
 		member.setReferDirection(true);
+		member.setRelationName("slideType");
 		append(member);
 		return member;
 	}
@@ -27,6 +29,7 @@ public class Slide extends BaseModelBean{
 		member.setName("linked_artwork");
 		member.setMemberName("linkedArtwork");
 		member.setReferDirection(true);
+		member.setRelationName("linkedArtwork");
 		append(member);
 		return member;
 	}
@@ -37,6 +40,7 @@ public class Slide extends BaseModelBean{
 		member.setName("linked_article");
 		member.setMemberName("linkedArticle");
 		member.setReferDirection(true);
+		member.setRelationName("linkedArticle");
 		append(member);
 		return member;
 	}
@@ -47,18 +51,20 @@ public class Slide extends BaseModelBean{
 		member.setName("moyi");
 		member.setMemberName("moyi");
 		member.setReferDirection(true);
+		member.setRelationName("moyi");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("id");
 		member.setName("id");
 		useMember(member);
 		return member;
@@ -67,6 +73,7 @@ public class Slide extends BaseModelBean{
 	public StringAttribute name(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("name");
 		member.setName("name");
 		useMember(member);
 		return member;
@@ -75,6 +82,7 @@ public class Slide extends BaseModelBean{
 	public StringAttribute image(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_image");
+		// member.setName("image");
 		member.setName("image");
 		useMember(member);
 		return member;
@@ -83,6 +91,7 @@ public class Slide extends BaseModelBean{
 	public StringAttribute linkUrl(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("linkUrl");
 		member.setName("link_url");
 		useMember(member);
 		return member;
@@ -91,12 +100,13 @@ public class Slide extends BaseModelBean{
 	public NumberAttribute version(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
+		// member.setName("version");
 		member.setName("version");
 		useMember(member);
 		return member;
 	}
 
 
-	
+
 }
 

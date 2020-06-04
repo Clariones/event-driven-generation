@@ -1,6 +1,7 @@
 package cla.edg.project.moyi.gen.graphquery;
 
 import java.util.Map;
+
 import cla.edg.modelbean.*;
 
 public class PrivateMessage extends BaseModelBean{
@@ -17,6 +18,7 @@ public class PrivateMessage extends BaseModelBean{
 		member.setName("sender");
 		member.setMemberName("sender");
 		member.setReferDirection(true);
+		member.setRelationName("sender");
 		append(member);
 		return member;
 	}
@@ -27,6 +29,7 @@ public class PrivateMessage extends BaseModelBean{
 		member.setName("receiver");
 		member.setMemberName("receiver");
 		member.setReferDirection(true);
+		member.setRelationName("receiver");
 		append(member);
 		return member;
 	}
@@ -37,18 +40,20 @@ public class PrivateMessage extends BaseModelBean{
 		member.setName("moyi");
 		member.setMemberName("moyi");
 		member.setReferDirection(true);
+		member.setRelationName("moyi");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("id");
 		member.setName("id");
 		useMember(member);
 		return member;
@@ -57,6 +62,7 @@ public class PrivateMessage extends BaseModelBean{
 	public StringAttribute messageText(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_longtext");
+		// member.setName("messageText");
 		member.setName("message_text");
 		useMember(member);
 		return member;
@@ -65,6 +71,7 @@ public class PrivateMessage extends BaseModelBean{
 	public StringAttribute messageImage(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_image");
+		// member.setName("messageImage");
 		member.setName("message_image");
 		useMember(member);
 		return member;
@@ -73,6 +80,7 @@ public class PrivateMessage extends BaseModelBean{
 	public DateTimeAttribute sendTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_create");
+		// member.setName("sendTime");
 		member.setName("send_time");
 		useMember(member);
 		return member;
@@ -81,6 +89,7 @@ public class PrivateMessage extends BaseModelBean{
 	public BooleanAttribute alreadyRead(){
 		BooleanAttribute member = new BooleanAttribute();
 		member.setModelTypeName("bool");
+		// member.setName("alreadyRead");
 		member.setName("already_read");
 		useMember(member);
 		return member;
@@ -89,12 +98,13 @@ public class PrivateMessage extends BaseModelBean{
 	public NumberAttribute version(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
+		// member.setName("version");
 		member.setName("version");
 		useMember(member);
 		return member;
 	}
 
 
-	
+
 }
 

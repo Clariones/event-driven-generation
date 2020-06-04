@@ -1,6 +1,7 @@
 package cla.edg.project.moyi.gen.graphquery;
 
 import java.util.Map;
+
 import cla.edg.modelbean.*;
 
 public class ContentTag extends BaseModelBean{
@@ -17,6 +18,7 @@ public class ContentTag extends BaseModelBean{
 		member.setName("article");
 		member.setMemberName("article");
 		member.setReferDirection(true);
+		member.setRelationName("article");
 		append(member);
 		return member;
 	}
@@ -27,6 +29,7 @@ public class ContentTag extends BaseModelBean{
 		member.setName("artwork");
 		member.setMemberName("artwork");
 		member.setReferDirection(true);
+		member.setRelationName("artwork");
 		append(member);
 		return member;
 	}
@@ -37,6 +40,7 @@ public class ContentTag extends BaseModelBean{
 		member.setName("moyi_user");
 		member.setMemberName("moyiUser");
 		member.setReferDirection(true);
+		member.setRelationName("moyiUser");
 		append(member);
 		return member;
 	}
@@ -47,6 +51,7 @@ public class ContentTag extends BaseModelBean{
 		member.setName("section");
 		member.setMemberName("section");
 		member.setReferDirection(true);
+		member.setRelationName("section");
 		append(member);
 		return member;
 	}
@@ -57,18 +62,20 @@ public class ContentTag extends BaseModelBean{
 		member.setName("moyi");
 		member.setMemberName("moyi");
 		member.setReferDirection(true);
+		member.setRelationName("moyi");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("id");
 		member.setName("id");
 		useMember(member);
 		return member;
@@ -77,6 +84,7 @@ public class ContentTag extends BaseModelBean{
 	public StringAttribute name(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("name");
 		member.setName("name");
 		useMember(member);
 		return member;
@@ -85,12 +93,13 @@ public class ContentTag extends BaseModelBean{
 	public NumberAttribute version(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
+		// member.setName("version");
 		member.setName("version");
 		useMember(member);
 		return member;
 	}
 
 
-	
+
 }
 

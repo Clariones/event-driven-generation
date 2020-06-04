@@ -1,6 +1,7 @@
 package cla.edg.project.moyi.gen.graphquery;
 
 import java.util.Map;
+
 import cla.edg.modelbean.*;
 
 public class UserApp extends BaseModelBean{
@@ -17,48 +18,42 @@ public class UserApp extends BaseModelBean{
 		member.setName("sec_user");
 		member.setMemberName("secUser");
 		member.setReferDirection(true);
+		member.setRelationName("secUser");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
-	
+
 	public QuickLink quickLinkList() {
 		QuickLink member = new QuickLink();
 		member.setModelTypeName("quick_link");
 		member.setName("app");
 		member.setMemberName("quickLinkList");
+		member.setRelationName("app");
 		member.setReferDirection(false);
 		append(member);
 		return member;
 	}
-	
+
 	public ListAccess listAccessList() {
 		ListAccess member = new ListAccess();
 		member.setModelTypeName("list_access");
 		member.setName("app");
 		member.setMemberName("listAccessList");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-	
-	public ObjectAccess objectAccessList() {
-		ObjectAccess member = new ObjectAccess();
-		member.setModelTypeName("object_access");
-		member.setName("app");
-		member.setMemberName("objectAccessList");
+		member.setRelationName("app");
 		member.setReferDirection(false);
 		append(member);
 		return member;
 	}
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("id");
 		member.setName("id");
 		useMember(member);
 		return member;
@@ -67,6 +62,7 @@ public class UserApp extends BaseModelBean{
 	public StringAttribute title(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("title");
 		member.setName("title");
 		useMember(member);
 		return member;
@@ -75,6 +71,7 @@ public class UserApp extends BaseModelBean{
 	public StringAttribute appIcon(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("appIcon");
 		member.setName("app_icon");
 		useMember(member);
 		return member;
@@ -83,6 +80,7 @@ public class UserApp extends BaseModelBean{
 	public BooleanAttribute fullAccess(){
 		BooleanAttribute member = new BooleanAttribute();
 		member.setModelTypeName("bool");
+		// member.setName("fullAccess");
 		member.setName("full_access");
 		useMember(member);
 		return member;
@@ -91,6 +89,7 @@ public class UserApp extends BaseModelBean{
 	public StringAttribute permission(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("permission");
 		member.setName("permission");
 		useMember(member);
 		return member;
@@ -99,6 +98,7 @@ public class UserApp extends BaseModelBean{
 	public StringAttribute objectType(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("objectType");
 		member.setName("object_type");
 		useMember(member);
 		return member;
@@ -107,6 +107,7 @@ public class UserApp extends BaseModelBean{
 	public StringAttribute objectId(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("objectId");
 		member.setName("object_id");
 		useMember(member);
 		return member;
@@ -115,6 +116,7 @@ public class UserApp extends BaseModelBean{
 	public StringAttribute location(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("location");
 		member.setName("location");
 		useMember(member);
 		return member;
@@ -123,12 +125,13 @@ public class UserApp extends BaseModelBean{
 	public NumberAttribute version(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
+		// member.setName("version");
 		member.setName("version");
 		useMember(member);
 		return member;
 	}
 
 
-	
+
 }
 

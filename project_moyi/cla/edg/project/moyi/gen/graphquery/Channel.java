@@ -1,6 +1,7 @@
 package cla.edg.project.moyi.gen.graphquery;
 
 import java.util.Map;
+
 import cla.edg.modelbean.*;
 
 public class Channel extends BaseModelBean{
@@ -17,6 +18,7 @@ public class Channel extends BaseModelBean{
 		member.setName("channel_type");
 		member.setMemberName("channelType");
 		member.setReferDirection(true);
+		member.setRelationName("channelType");
 		append(member);
 		return member;
 	}
@@ -27,6 +29,7 @@ public class Channel extends BaseModelBean{
 		member.setName("active");
 		member.setMemberName("active");
 		member.setReferDirection(true);
+		member.setRelationName("active");
 		append(member);
 		return member;
 	}
@@ -37,6 +40,7 @@ public class Channel extends BaseModelBean{
 		member.setName("art_type");
 		member.setMemberName("artType");
 		member.setReferDirection(true);
+		member.setRelationName("artType");
 		append(member);
 		return member;
 	}
@@ -47,28 +51,31 @@ public class Channel extends BaseModelBean{
 		member.setName("moyi");
 		member.setMemberName("moyi");
 		member.setReferDirection(true);
+		member.setRelationName("moyi");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
-	
+
 	public ChannelSection channelSectionList() {
 		ChannelSection member = new ChannelSection();
 		member.setModelTypeName("channel_section");
 		member.setName("channel");
 		member.setMemberName("channelSectionList");
+		member.setRelationName("channel");
 		member.setReferDirection(false);
 		append(member);
 		return member;
 	}
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("id");
 		member.setName("id");
 		useMember(member);
 		return member;
@@ -77,6 +84,7 @@ public class Channel extends BaseModelBean{
 	public StringAttribute name(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("name");
 		member.setName("name");
 		useMember(member);
 		return member;
@@ -85,6 +93,7 @@ public class Channel extends BaseModelBean{
 	public NumberAttribute displayOrder(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
+		// member.setName("displayOrder");
 		member.setName("display_order");
 		useMember(member);
 		return member;
@@ -93,6 +102,7 @@ public class Channel extends BaseModelBean{
 	public StringAttribute channelImage(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_image");
+		// member.setName("channelImage");
 		member.setName("channel_image");
 		useMember(member);
 		return member;
@@ -101,12 +111,13 @@ public class Channel extends BaseModelBean{
 	public NumberAttribute version(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
+		// member.setName("version");
 		member.setName("version");
 		useMember(member);
 		return member;
 	}
 
 
-	
+
 }
 

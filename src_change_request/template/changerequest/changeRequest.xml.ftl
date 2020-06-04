@@ -1,17 +1,21 @@
 <root>
   	
   <change_request_type
-	name="<#list projectSpec.changeRequestList as crSpec>${crSpec.title}|</#list>[1,100]"
-	code="<#list projectSpec.changeRequestList as crSpec>${helper.NAME_AS_THIS(crSpec.changeRequestType!"what?")}|</#list>[1,100]"
-    icon="<#list projectSpec.changeRequestList as crSpec>${crSpec.icon}|</#list>[1,100]"
+	name="value()|[1,100]"
+	code="value()|[1,100]"
+    icon="value()|[1,100]"
     display_order="1|2|3|4|5|6"
     bind_types="text()"
     step_configuration="text()"
     platform="$(platform)"
     _features="cr_type"
     _identified_by="code"
-  />
-   <change_request
+  >
+<#list projectSpec.changeRequestList as crSpec>
+    <${'#'}value name="${crSpec.title}" code="${helper.NAME_AS_THIS(crSpec.changeRequestType!"what?")}" icon="${crSpec.icon}"/>
+</#list>
+  </change_request_type>
+  <change_request
 	    name="注册|开始考试|答题|[1,50]"
 	    create_time="createTime()"
 	    remote_ip="remoteIp()"

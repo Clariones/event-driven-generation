@@ -1,6 +1,7 @@
 package cla.edg.project.moyi.gen.graphquery;
 
 import java.util.Map;
+
 import cla.edg.modelbean.*;
 
 public class TipArtwork extends BaseModelBean{
@@ -17,18 +18,20 @@ public class TipArtwork extends BaseModelBean{
 		member.setName("artwork");
 		member.setMemberName("artwork");
 		member.setReferDirection(true);
+		member.setRelationName("artwork");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("id");
 		member.setName("id");
 		useMember(member);
 		return member;
@@ -37,6 +40,7 @@ public class TipArtwork extends BaseModelBean{
 	public StringAttribute comments(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("comments");
 		member.setName("comments");
 		useMember(member);
 		return member;
@@ -45,12 +49,13 @@ public class TipArtwork extends BaseModelBean{
 	public NumberAttribute version(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
+		// member.setName("version");
 		member.setName("version");
 		useMember(member);
 		return member;
 	}
 
 
-	
+
 }
 

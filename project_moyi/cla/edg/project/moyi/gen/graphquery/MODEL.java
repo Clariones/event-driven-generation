@@ -983,18 +983,6 @@ public class MODEL{
 		return rst;
 	}
 
-	public static TradeRelatedConfiguration tradeRelatedConfiguration() {
-		TradeRelatedConfiguration rst = new TradeRelatedConfiguration();
-		rst.setModelTypeName("trade_related_configuration");
-		return rst;
-	}
-
-	public static AdditionalPlatformConfiguration additionalPlatformConfiguration() {
-		AdditionalPlatformConfiguration rst = new AdditionalPlatformConfiguration();
-		rst.setModelTypeName("additional_platform_configuration");
-		return rst;
-	}
-
 	public static AssetStatus assetStatus() {
 		AssetStatus rst = new AssetStatus();
 		rst.setModelTypeName("asset_status");
@@ -1049,6 +1037,24 @@ public class MODEL{
 		return rst;
 	}
 
+	public static MobileApp mobileApp() {
+		MobileApp rst = new MobileApp();
+		rst.setModelTypeName("mobile_app");
+		return rst;
+	}
+
+	public static AdditionalPlatformConfiguration additionalPlatformConfiguration() {
+		AdditionalPlatformConfiguration rst = new AdditionalPlatformConfiguration();
+		rst.setModelTypeName("additional_platform_configuration");
+		return rst;
+	}
+
+	public static TradeRelatedConfiguration tradeRelatedConfiguration() {
+		TradeRelatedConfiguration rst = new TradeRelatedConfiguration();
+		rst.setModelTypeName("trade_related_configuration");
+		return rst;
+	}
+
 	public static UserDomain userDomain() {
 		UserDomain rst = new UserDomain();
 		rst.setModelTypeName("user_domain");
@@ -1064,12 +1070,6 @@ public class MODEL{
 	public static SecUser secUser() {
 		SecUser rst = new SecUser();
 		rst.setModelTypeName("sec_user");
-		return rst;
-	}
-
-	public static SecUserBlocking secUserBlocking() {
-		SecUserBlocking rst = new SecUserBlocking();
-		rst.setModelTypeName("sec_user_blocking");
 		return rst;
 	}
 
@@ -1091,45 +1091,9 @@ public class MODEL{
 		return rst;
 	}
 
-	public static ObjectAccess objectAccess() {
-		ObjectAccess rst = new ObjectAccess();
-		rst.setModelTypeName("object_access");
-		return rst;
-	}
-
 	public static LoginHistory loginHistory() {
 		LoginHistory rst = new LoginHistory();
 		rst.setModelTypeName("login_history");
-		return rst;
-	}
-
-	public static GenericForm genericForm() {
-		GenericForm rst = new GenericForm();
-		rst.setModelTypeName("generic_form");
-		return rst;
-	}
-
-	public static FormMessage formMessage() {
-		FormMessage rst = new FormMessage();
-		rst.setModelTypeName("form_message");
-		return rst;
-	}
-
-	public static FormFieldMessage formFieldMessage() {
-		FormFieldMessage rst = new FormFieldMessage();
-		rst.setModelTypeName("form_field_message");
-		return rst;
-	}
-
-	public static FormField formField() {
-		FormField rst = new FormField();
-		rst.setModelTypeName("form_field");
-		return rst;
-	}
-
-	public static FormAction formAction() {
-		FormAction rst = new FormAction();
-		rst.setModelTypeName("form_action");
 		return rst;
 	}
 
@@ -1142,6 +1106,36 @@ public class MODEL{
 	public static CandidateElement candidateElement() {
 		CandidateElement rst = new CandidateElement();
 		rst.setModelTypeName("candidate_element");
+		return rst;
+	}
+
+	public static WechatWorkappIdentity wechatWorkappIdentity() {
+		WechatWorkappIdentity rst = new WechatWorkappIdentity();
+		rst.setModelTypeName("wechat_workapp_identity");
+		return rst;
+	}
+
+	public static WechatMiniappIdentity wechatMiniappIdentity() {
+		WechatMiniappIdentity rst = new WechatMiniappIdentity();
+		rst.setModelTypeName("wechat_miniapp_identity");
+		return rst;
+	}
+
+	public static KeypairIdentity keypairIdentity() {
+		KeypairIdentity rst = new KeypairIdentity();
+		rst.setModelTypeName("keypair_identity");
+		return rst;
+	}
+
+	public static PublicKeyType publicKeyType() {
+		PublicKeyType rst = new PublicKeyType();
+		rst.setModelTypeName("public_key_type");
+		return rst;
+	}
+
+	public static TreeNode treeNode() {
+		TreeNode rst = new TreeNode();
+		rst.setModelTypeName("tree_node");
 		return rst;
 	}
 

@@ -1,6 +1,7 @@
 package cla.edg.project.moyi.gen.graphquery;
 
 import java.util.Map;
+
 import cla.edg.modelbean.*;
 
 public class FundsVariationType extends BaseModelBean{
@@ -21,38 +22,42 @@ public class FundsVariationType extends BaseModelBean{
 		member.setName("moyi");
 		member.setMemberName("moyi");
 		member.setReferDirection(true);
+		member.setRelationName("moyi");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
-	
+
 	public MoyiShopDepositRecord moyiShopDepositRecordList() {
 		MoyiShopDepositRecord member = new MoyiShopDepositRecord();
 		member.setModelTypeName("moyi_shop_deposit_record");
 		member.setName("variation_type");
 		member.setMemberName("moyiShopDepositRecordList");
+		member.setRelationName("variationType");
 		member.setReferDirection(false);
 		append(member);
 		return member;
 	}
-	
+
 	public MoyiUserAccountRecord moyiUserAccountRecordList() {
 		MoyiUserAccountRecord member = new MoyiUserAccountRecord();
 		member.setModelTypeName("moyi_user_account_record");
 		member.setName("variation_type");
 		member.setMemberName("moyiUserAccountRecordList");
+		member.setRelationName("variationType");
 		member.setReferDirection(false);
 		append(member);
 		return member;
 	}
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("id");
 		member.setName("id");
 		useMember(member);
 		return member;
@@ -61,6 +66,7 @@ public class FundsVariationType extends BaseModelBean{
 	public StringAttribute name(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("name");
 		member.setName("name");
 		useMember(member);
 		return member;
@@ -69,6 +75,7 @@ public class FundsVariationType extends BaseModelBean{
 	public StringAttribute code(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("code");
 		member.setName("code");
 		useMember(member);
 		return member;
@@ -77,12 +84,13 @@ public class FundsVariationType extends BaseModelBean{
 	public NumberAttribute version(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
+		// member.setName("version");
 		member.setName("version");
 		useMember(member);
 		return member;
 	}
 
 
-	
+
 }
 

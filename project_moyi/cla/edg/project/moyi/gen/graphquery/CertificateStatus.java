@@ -1,6 +1,7 @@
 package cla.edg.project.moyi.gen.graphquery;
 
 import java.util.Map;
+
 import cla.edg.modelbean.*;
 
 public class CertificateStatus extends BaseModelBean{
@@ -22,38 +23,42 @@ public class CertificateStatus extends BaseModelBean{
 		member.setName("moyi");
 		member.setMemberName("moyi");
 		member.setReferDirection(true);
+		member.setRelationName("moyi");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
-	
+
 	public MoyiShopCertification moyiShopCertificationList() {
 		MoyiShopCertification member = new MoyiShopCertification();
 		member.setModelTypeName("moyi_shop_certification");
 		member.setName("certificate_status");
 		member.setMemberName("moyiShopCertificationList");
+		member.setRelationName("certificateStatus");
 		member.setReferDirection(false);
 		append(member);
 		return member;
 	}
-	
+
 	public ArtworkOwnershipCertificate artworkOwnershipCertificateList() {
 		ArtworkOwnershipCertificate member = new ArtworkOwnershipCertificate();
 		member.setModelTypeName("artwork_ownership_certificate");
 		member.setName("certificate_status");
 		member.setMemberName("artworkOwnershipCertificateList");
+		member.setRelationName("certificateStatus");
 		member.setReferDirection(false);
 		append(member);
 		return member;
 	}
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("id");
 		member.setName("id");
 		useMember(member);
 		return member;
@@ -62,6 +67,7 @@ public class CertificateStatus extends BaseModelBean{
 	public StringAttribute name(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("name");
 		member.setName("name");
 		useMember(member);
 		return member;
@@ -70,6 +76,7 @@ public class CertificateStatus extends BaseModelBean{
 	public StringAttribute code(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("code");
 		member.setName("code");
 		useMember(member);
 		return member;
@@ -78,12 +85,13 @@ public class CertificateStatus extends BaseModelBean{
 	public NumberAttribute version(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
+		// member.setName("version");
 		member.setName("version");
 		useMember(member);
 		return member;
 	}
 
 
-	
+
 }
 

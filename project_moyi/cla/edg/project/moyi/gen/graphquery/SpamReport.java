@@ -1,6 +1,7 @@
 package cla.edg.project.moyi.gen.graphquery;
 
 import java.util.Map;
+
 import cla.edg.modelbean.*;
 
 public class SpamReport extends BaseModelBean{
@@ -17,6 +18,7 @@ public class SpamReport extends BaseModelBean{
 		member.setName("report_user");
 		member.setMemberName("reportUser");
 		member.setReferDirection(true);
+		member.setRelationName("reportUser");
 		append(member);
 		return member;
 	}
@@ -27,6 +29,7 @@ public class SpamReport extends BaseModelBean{
 		member.setName("spam_article");
 		member.setMemberName("spamArticle");
 		member.setReferDirection(true);
+		member.setRelationName("spamArticle");
 		append(member);
 		return member;
 	}
@@ -37,6 +40,7 @@ public class SpamReport extends BaseModelBean{
 		member.setName("spam_review");
 		member.setMemberName("spamReview");
 		member.setReferDirection(true);
+		member.setRelationName("spamReview");
 		append(member);
 		return member;
 	}
@@ -47,6 +51,7 @@ public class SpamReport extends BaseModelBean{
 		member.setName("spam_artwork");
 		member.setMemberName("spamArtwork");
 		member.setReferDirection(true);
+		member.setRelationName("spamArtwork");
 		append(member);
 		return member;
 	}
@@ -57,18 +62,20 @@ public class SpamReport extends BaseModelBean{
 		member.setName("moyi");
 		member.setMemberName("moyi");
 		member.setReferDirection(true);
+		member.setRelationName("moyi");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("id");
 		member.setName("id");
 		useMember(member);
 		return member;
@@ -77,6 +84,7 @@ public class SpamReport extends BaseModelBean{
 	public StringAttribute spamDescription(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("spamDescription");
 		member.setName("spam_description");
 		useMember(member);
 		return member;
@@ -85,6 +93,7 @@ public class SpamReport extends BaseModelBean{
 	public DateTimeAttribute reportDatetime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_create");
+		// member.setName("reportDatetime");
 		member.setName("report_datetime");
 		useMember(member);
 		return member;
@@ -93,12 +102,13 @@ public class SpamReport extends BaseModelBean{
 	public NumberAttribute version(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
+		// member.setName("version");
 		member.setName("version");
 		useMember(member);
 		return member;
 	}
 
 
-	
+
 }
 

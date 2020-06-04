@@ -1,6 +1,7 @@
 package cla.edg.project.moyi.gen.graphquery;
 
 import java.util.Map;
+
 import cla.edg.modelbean.*;
 
 public class ArtworkTypeRank extends BaseModelBean{
@@ -17,6 +18,7 @@ public class ArtworkTypeRank extends BaseModelBean{
 		member.setName("artwork_type");
 		member.setMemberName("artworkType");
 		member.setReferDirection(true);
+		member.setRelationName("artworkType");
 		append(member);
 		return member;
 	}
@@ -27,18 +29,20 @@ public class ArtworkTypeRank extends BaseModelBean{
 		member.setName("moyi");
 		member.setMemberName("moyi");
 		member.setReferDirection(true);
+		member.setRelationName("moyi");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("id");
 		member.setName("id");
 		useMember(member);
 		return member;
@@ -47,6 +51,7 @@ public class ArtworkTypeRank extends BaseModelBean{
 	public NumberAttribute rankPoint(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("double");
+		// member.setName("rankPoint");
 		member.setName("rank_point");
 		useMember(member);
 		return member;
@@ -55,6 +60,7 @@ public class ArtworkTypeRank extends BaseModelBean{
 	public NumberAttribute bonusPoint(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("double");
+		// member.setName("bonusPoint");
 		member.setName("bonus_point");
 		useMember(member);
 		return member;
@@ -63,6 +69,7 @@ public class ArtworkTypeRank extends BaseModelBean{
 	public NumberAttribute artworkCount(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
+		// member.setName("artworkCount");
 		member.setName("artwork_count");
 		useMember(member);
 		return member;
@@ -71,6 +78,7 @@ public class ArtworkTypeRank extends BaseModelBean{
 	public NumberAttribute auctionCount(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
+		// member.setName("auctionCount");
 		member.setName("auction_count");
 		useMember(member);
 		return member;
@@ -79,6 +87,7 @@ public class ArtworkTypeRank extends BaseModelBean{
 	public NumberAttribute artworkSoldCount(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
+		// member.setName("artworkSoldCount");
 		member.setName("artwork_sold_count");
 		useMember(member);
 		return member;
@@ -87,6 +96,7 @@ public class ArtworkTypeRank extends BaseModelBean{
 	public DateTimeAttribute lastUpdateTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_update");
+		// member.setName("lastUpdateTime");
 		member.setName("last_update_time");
 		useMember(member);
 		return member;
@@ -95,12 +105,13 @@ public class ArtworkTypeRank extends BaseModelBean{
 	public NumberAttribute version(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
+		// member.setName("version");
 		member.setName("version");
 		useMember(member);
 		return member;
 	}
 
 
-	
+
 }
 

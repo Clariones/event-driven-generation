@@ -1,6 +1,7 @@
 package cla.edg.project.moyi.gen.graphquery;
 
 import java.util.Map;
+
 import cla.edg.modelbean.*;
 
 public class ImportantOperationRecord extends BaseModelBean{
@@ -13,12 +14,13 @@ public class ImportantOperationRecord extends BaseModelBean{
 
 	// 被引用的对象
 
-	
+
 	// 普通属性
 
 	public StringAttribute id(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("id");
 		member.setName("id");
 		useMember(member);
 		return member;
@@ -27,6 +29,7 @@ public class ImportantOperationRecord extends BaseModelBean{
 	public StringAttribute title(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("title");
 		member.setName("title");
 		useMember(member);
 		return member;
@@ -35,6 +38,7 @@ public class ImportantOperationRecord extends BaseModelBean{
 	public StringAttribute operationType(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("operationType");
 		member.setName("operation_type");
 		useMember(member);
 		return member;
@@ -43,6 +47,7 @@ public class ImportantOperationRecord extends BaseModelBean{
 	public StringAttribute actorSecUser(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("actorSecUser");
 		member.setName("actor_sec_user");
 		useMember(member);
 		return member;
@@ -51,6 +56,7 @@ public class ImportantOperationRecord extends BaseModelBean{
 	public StringAttribute actorMoyiUser(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("actorMoyiUser");
 		member.setName("actor_moyi_user");
 		useMember(member);
 		return member;
@@ -59,6 +65,7 @@ public class ImportantOperationRecord extends BaseModelBean{
 	public StringAttribute objectType(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("objectType");
 		member.setName("object_type");
 		useMember(member);
 		return member;
@@ -67,6 +74,7 @@ public class ImportantOperationRecord extends BaseModelBean{
 	public StringAttribute objectId(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
+		// member.setName("objectId");
 		member.setName("object_id");
 		useMember(member);
 		return member;
@@ -75,6 +83,7 @@ public class ImportantOperationRecord extends BaseModelBean{
 	public StringAttribute comments(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_longtext");
+		// member.setName("comments");
 		member.setName("comments");
 		useMember(member);
 		return member;
@@ -83,6 +92,7 @@ public class ImportantOperationRecord extends BaseModelBean{
 	public DateTimeAttribute lastUpdateTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_update");
+		// member.setName("lastUpdateTime");
 		member.setName("last_update_time");
 		useMember(member);
 		return member;
@@ -91,12 +101,13 @@ public class ImportantOperationRecord extends BaseModelBean{
 	public NumberAttribute version(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
+		// member.setName("version");
 		member.setName("version");
 		useMember(member);
 		return member;
 	}
 
 
-	
+
 }
 
