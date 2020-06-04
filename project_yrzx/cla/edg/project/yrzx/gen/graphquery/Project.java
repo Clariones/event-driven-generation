@@ -245,6 +245,17 @@ public class Project extends BaseModelBean{
 		return member;
 	}
 
+	public LaborDispute laborDisputeList() {
+		LaborDispute member = new LaborDispute();
+		member.setModelTypeName("labor_dispute");
+		member.setName("project");
+		member.setMemberName("laborDisputeList");
+		member.setRelationName("project");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 	public ProjectReport projectReportList() {
 		ProjectReport member = new ProjectReport();
 		member.setModelTypeName("project_report");
@@ -371,6 +382,39 @@ public class Project extends BaseModelBean{
 		member.setModelTypeName("material_change");
 		member.setName("project");
 		member.setMemberName("materialChangeList");
+		member.setRelationName("project");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public MaterialAcceptanceApplication materialAcceptanceApplicationList() {
+		MaterialAcceptanceApplication member = new MaterialAcceptanceApplication();
+		member.setModelTypeName("material_acceptance_application");
+		member.setName("project");
+		member.setMemberName("materialAcceptanceApplicationList");
+		member.setRelationName("project");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public SubcontractApplication subcontractApplicationList() {
+		SubcontractApplication member = new SubcontractApplication();
+		member.setModelTypeName("subcontract_application");
+		member.setName("project");
+		member.setMemberName("subcontractApplicationList");
+		member.setRelationName("project");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EventSubcontractApplication eventSubcontractApplicationList() {
+		EventSubcontractApplication member = new EventSubcontractApplication();
+		member.setModelTypeName("event_subcontract_application");
+		member.setName("project");
+		member.setMemberName("eventSubcontractApplicationList");
 		member.setRelationName("project");
 		member.setReferDirection(false);
 		append(member);

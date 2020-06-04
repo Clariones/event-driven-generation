@@ -202,6 +202,15 @@ public class MaterialChange extends BaseModelBean{
 		return member;
 	}
 
+	public DateTimeAttribute updateTime(){
+		DateTimeAttribute member = new DateTimeAttribute();
+		member.setModelTypeName("date_time_update");
+		// member.setName("updateTime");
+		member.setName("update_time");
+		useMember(member);
+		return member;
+	}
+
 	public DateTimeAttribute createTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_create");

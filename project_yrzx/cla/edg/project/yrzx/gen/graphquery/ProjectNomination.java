@@ -168,6 +168,17 @@ public class ProjectNomination extends BaseModelBean{
 		return member;
 	}
 
+	public LaborDispute laborDisputeList() {
+		LaborDispute member = new LaborDispute();
+		member.setModelTypeName("labor_dispute");
+		member.setName("applicant");
+		member.setMemberName("laborDisputeList");
+		member.setRelationName("applicant");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 	public ProjectReport projectReportList() {
 		ProjectReport member = new ProjectReport();
 		member.setModelTypeName("project_report");
@@ -217,6 +228,61 @@ public class ProjectNomination extends BaseModelBean{
 		member.setModelTypeName("material_change");
 		member.setName("applicant");
 		member.setMemberName("materialChangeList");
+		member.setRelationName("applicant");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public MaterialAcceptanceApplication materialAcceptanceApplicationList() {
+		MaterialAcceptanceApplication member = new MaterialAcceptanceApplication();
+		member.setModelTypeName("material_acceptance_application");
+		member.setName("auditor");
+		member.setMemberName("materialAcceptanceApplicationList");
+		member.setRelationName("auditor");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EventMaterialChangeInfo eventMaterialChangeInfoList() {
+		EventMaterialChangeInfo member = new EventMaterialChangeInfo();
+		member.setModelTypeName("event_material_change_info");
+		member.setName("applicant");
+		member.setMemberName("eventMaterialChangeInfoList");
+		member.setRelationName("applicant");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EventMaterialAcceptanceBasicInfo eventMaterialAcceptanceBasicInfoList() {
+		EventMaterialAcceptanceBasicInfo member = new EventMaterialAcceptanceBasicInfo();
+		member.setModelTypeName("event_material_acceptance_basic_info");
+		member.setName("auditor");
+		member.setMemberName("eventMaterialAcceptanceBasicInfoList");
+		member.setRelationName("auditor");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EventMaterialPreservedInfo eventMaterialPreservedInfoList() {
+		EventMaterialPreservedInfo member = new EventMaterialPreservedInfo();
+		member.setModelTypeName("event_material_preserved_info");
+		member.setName("material_manager");
+		member.setMemberName("eventMaterialPreservedInfoList");
+		member.setRelationName("materialManager");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EventLaborDispute eventLaborDisputeList() {
+		EventLaborDispute member = new EventLaborDispute();
+		member.setModelTypeName("event_labor_dispute");
+		member.setName("applicant");
+		member.setMemberName("eventLaborDisputeList");
 		member.setRelationName("applicant");
 		member.setReferDirection(false);
 		append(member);

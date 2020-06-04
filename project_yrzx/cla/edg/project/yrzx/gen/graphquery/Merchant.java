@@ -443,6 +443,28 @@ public class Merchant extends BaseModelBean{
 		return member;
 	}
 
+	public SubcontractApplication subcontractApplicationListAsApplicationMerchant() {
+		SubcontractApplication member = new SubcontractApplication();
+		member.setModelTypeName("subcontract_application");
+		member.setName("application_merchant");
+		member.setMemberName("subcontractApplicationListAsApplicationMerchant");
+		member.setRelationName("applicationMerchant");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public SubcontractApplication subcontractApplicationListAsApplicant() {
+		SubcontractApplication member = new SubcontractApplication();
+		member.setModelTypeName("subcontract_application");
+		member.setName("applicant");
+		member.setMemberName("subcontractApplicationListAsApplicant");
+		member.setRelationName("applicationMerchant");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 	public Notification notificationListAsReceiver() {
 		Notification member = new Notification();
 		member.setModelTypeName("notification");

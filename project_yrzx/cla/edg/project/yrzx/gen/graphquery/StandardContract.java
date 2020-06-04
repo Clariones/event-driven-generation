@@ -256,6 +256,50 @@ public class StandardContract extends BaseModelBean{
 		return member;
 	}
 
+	public MaterialAcceptanceApplication materialAcceptanceApplicationList() {
+		MaterialAcceptanceApplication member = new MaterialAcceptanceApplication();
+		member.setModelTypeName("material_acceptance_application");
+		member.setName("contract");
+		member.setMemberName("materialAcceptanceApplicationList");
+		member.setRelationName("contract");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EventMaterialAcceptanceBasicInfo eventMaterialAcceptanceBasicInfoList() {
+		EventMaterialAcceptanceBasicInfo member = new EventMaterialAcceptanceBasicInfo();
+		member.setModelTypeName("event_material_acceptance_basic_info");
+		member.setName("contract");
+		member.setMemberName("eventMaterialAcceptanceBasicInfoList");
+		member.setRelationName("contract");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EventMaterialChangeContractInfo eventMaterialChangeContractInfoList() {
+		EventMaterialChangeContractInfo member = new EventMaterialChangeContractInfo();
+		member.setModelTypeName("event_material_change_contract_info");
+		member.setName("contract");
+		member.setMemberName("eventMaterialChangeContractInfoList");
+		member.setRelationName("contract");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EventMaterialPreservedBasicInfo eventMaterialPreservedBasicInfoList() {
+		EventMaterialPreservedBasicInfo member = new EventMaterialPreservedBasicInfo();
+		member.setModelTypeName("event_material_preserved_basic_info");
+		member.setName("contract");
+		member.setMemberName("eventMaterialPreservedBasicInfoList");
+		member.setRelationName("contract");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 	public EventProjectPenalties eventProjectPenaltiesList() {
 		EventProjectPenalties member = new EventProjectPenalties();
 		member.setModelTypeName("event_project_penalties");

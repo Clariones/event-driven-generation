@@ -65,7 +65,7 @@ public class AfterSalesAndDisputeChangeRequest implements ChangeRequestSpecFacto
 					.values_can_select_from_query_by(null)
 				.has_field("forfeit").which_type_of(FieldType.MONEY).zh_CN("处罚金额")
 				.has_field("reason").which_type_of(FieldType.MULTI_TEXT).zh_CN("处罚理由")
-				.has_field("images").which_type_of(FieldType.IMAGES).zh_CN("旁证、巡视、见证图片")
+				.has_field("images").which_type_of(FieldType.IMAGES).zh_CN("旁站、巡视、见证图片")
 
 				;
 	}

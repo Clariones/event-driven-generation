@@ -4,13 +4,24 @@ import java.util.Map;
 
 import cla.edg.modelbean.*;
 
-public class MaterialBidSample extends BaseModelBean{
+public class MaterialAcceptanceApplication extends BaseModelBean{
 	public String getFullClassName() {
-		return "com.yrdec.yrzx.materialbidsample.MaterialBidSample";
+		return "com.yrdec.yrzx.materialacceptanceapplication.MaterialAcceptanceApplication";
 	}
 	// 枚举对象
 
 	// 引用的对象
+
+	public Project project() {
+		Project member = new Project();
+		member.setModelTypeName("project");
+		member.setName("project");
+		member.setMemberName("project");
+		member.setReferDirection(true);
+		member.setRelationName("project");
+		append(member);
+		return member;
+	}
 
 	public StandardContract contract() {
 		StandardContract member = new StandardContract();
@@ -45,35 +56,13 @@ public class MaterialBidSample extends BaseModelBean{
 		return member;
 	}
 
-	public ProjectNomination materialManager() {
+	public ProjectNomination auditor() {
 		ProjectNomination member = new ProjectNomination();
 		member.setModelTypeName("project_nomination");
-		member.setName("material_manager");
-		member.setMemberName("materialManager");
+		member.setName("auditor");
+		member.setMemberName("auditor");
 		member.setReferDirection(true);
-		member.setRelationName("materialManager");
-		append(member);
-		return member;
-	}
-
-	public Project project() {
-		Project member = new Project();
-		member.setModelTypeName("project");
-		member.setName("project");
-		member.setMemberName("project");
-		member.setReferDirection(true);
-		member.setRelationName("project");
-		append(member);
-		return member;
-	}
-
-	public DailyTaskType dailyTaskType() {
-		DailyTaskType member = new DailyTaskType();
-		member.setModelTypeName("daily_task_type");
-		member.setName("daily_task_type");
-		member.setMemberName("dailyTaskType");
-		member.setReferDirection(true);
-		member.setRelationName("dailyTaskType");
+		member.setRelationName("auditor");
 		append(member);
 		return member;
 	}
@@ -110,11 +99,11 @@ public class MaterialBidSample extends BaseModelBean{
 		return member;
 	}
 
-	public StringAttribute position(){
+	public StringAttribute usePart(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		// member.setName("position");
-		member.setName("position");
+		// member.setName("usePart");
+		member.setName("use_part");
 		useMember(member);
 		return member;
 	}
@@ -146,11 +135,65 @@ public class MaterialBidSample extends BaseModelBean{
 		return member;
 	}
 
-	public StringAttribute sealUpMaterialName(){
+	public NumberAttribute plannedMaterialAmount(){
+		NumberAttribute member = new NumberAttribute();
+		member.setModelTypeName("int");
+		// member.setName("plannedMaterialAmount");
+		member.setName("planned_material_amount");
+		useMember(member);
+		return member;
+	}
+
+	public NumberAttribute actualMaterialAmount(){
+		NumberAttribute member = new NumberAttribute();
+		member.setModelTypeName("int");
+		// member.setName("actualMaterialAmount");
+		member.setName("actual_material_amount");
+		useMember(member);
+		return member;
+	}
+
+	public NumberAttribute plannedArrivedAmount(){
+		NumberAttribute member = new NumberAttribute();
+		member.setModelTypeName("int");
+		// member.setName("plannedArrivedAmount");
+		member.setName("planned_arrived_amount");
+		useMember(member);
+		return member;
+	}
+
+	public StringAttribute isBroken(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		// member.setName("sealUpMaterialName");
-		member.setName("seal_up_material_name");
+		// member.setName("isBroken");
+		member.setName("is_broken");
+		useMember(member);
+		return member;
+	}
+
+	public BooleanAttribute materialMatches(){
+		BooleanAttribute member = new BooleanAttribute();
+		member.setModelTypeName("bool");
+		// member.setName("materialMatches");
+		member.setName("material_matches");
+		useMember(member);
+		return member;
+	}
+
+	public BooleanAttribute meetQuanlityStandard(){
+		BooleanAttribute member = new BooleanAttribute();
+		member.setModelTypeName("bool");
+		// member.setName("meetQuanlityStandard");
+		member.setName("meet_quanlity_standard");
+		useMember(member);
+		return member;
+	}
+
+	public BooleanAttribute hasCertificates(){
+		BooleanAttribute member = new BooleanAttribute();
+		member.setModelTypeName("bool");
+		// member.setName("hasCertificates");
+		member.setName("has_certificates");
 		useMember(member);
 		return member;
 	}
@@ -160,24 +203,6 @@ public class MaterialBidSample extends BaseModelBean{
 		member.setModelTypeName("images");
 		// member.setName("images");
 		member.setName("images");
-		useMember(member);
-		return member;
-	}
-
-	public StringAttribute comments(){
-		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string_longtext");
-		// member.setName("comments");
-		member.setName("comments");
-		useMember(member);
-		return member;
-	}
-
-	public DateTimeAttribute createTime(){
-		DateTimeAttribute member = new DateTimeAttribute();
-		member.setModelTypeName("date_time_create");
-		// member.setName("createTime");
-		member.setName("create_time");
 		useMember(member);
 		return member;
 	}

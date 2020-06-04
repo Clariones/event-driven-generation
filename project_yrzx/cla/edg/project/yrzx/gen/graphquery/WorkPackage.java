@@ -102,11 +102,33 @@ public class WorkPackage extends BaseModelBean{
 		return member;
 	}
 
+	public LaborDispute laborDisputeList() {
+		LaborDispute member = new LaborDispute();
+		member.setModelTypeName("labor_dispute");
+		member.setName("work_package");
+		member.setMemberName("laborDisputeList");
+		member.setRelationName("workPackage");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 	public EventProjectWorkPosition eventProjectWorkPositionList() {
 		EventProjectWorkPosition member = new EventProjectWorkPosition();
 		member.setModelTypeName("event_project_work_position");
 		member.setName("work_package");
 		member.setMemberName("eventProjectWorkPositionList");
+		member.setRelationName("workPackage");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EventLaborDispute eventLaborDisputeList() {
+		EventLaborDispute member = new EventLaborDispute();
+		member.setModelTypeName("event_labor_dispute");
+		member.setName("work_package");
+		member.setMemberName("eventLaborDisputeList");
 		member.setRelationName("workPackage");
 		member.setReferDirection(false);
 		append(member);

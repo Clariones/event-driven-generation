@@ -14,23 +14,29 @@ public class ChangeRequestType extends BaseModelBean{
 	public static EnumAttribute REVIEW_CONTRACT = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "REVIEW_CONTRACT");
 	public static EnumAttribute APPLY_RECOMMENDATION = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "APPLY_RECOMMENDATION");
 	public static EnumAttribute ADD_DEBIT_CARD = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "ADD_DEBIT_CARD");
-	public static EnumAttribute ADD_PROJECT_NOMINATION = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "ADD_PROJECT_NOMINATION");
 	public static EnumAttribute PROJECT_COMMAND = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "PROJECT_COMMAND");
 	public static EnumAttribute TASK_REPORT = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "TASK_REPORT");
 	public static EnumAttribute ADD_EMPLOYEE = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "ADD_EMPLOYEE");
 	public static EnumAttribute ACCEPTANCE_APPLICATION = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "ACCEPTANCE_APPLICATION");
-	public static EnumAttribute AFTER_SALES = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "AFTER_SALES");
-	public static EnumAttribute APPLY_DECORATION = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "APPLY_DECORATION");
 	public static EnumAttribute REVIEW_MATERIALS = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "REVIEW_MATERIALS");
 	public static EnumAttribute APPLY_PERSONAL_EMPLACEMENT = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "APPLY_PERSONAL_EMPLACEMENT");
+	public static EnumAttribute APPLY_FOR_MATERIAL_CHANGE = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "APPLY_FOR_MATERIAL_CHANGE");
+	public static EnumAttribute CREATE_MATERIAL_PRESERVED_SAMPLE = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "CREATE_MATERIAL_PRESERVED_SAMPLE");
+	public static EnumAttribute FILL_PERSONAL_DETAIL = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "FILL_PERSONAL_DETAIL");
+	public static EnumAttribute SUBCONTRACT_APPLICATION = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "SUBCONTRACT_APPLICATION");
+	public static EnumAttribute CREATE_MATERIAL_BID_SAMPLE = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "CREATE_MATERIAL_BID_SAMPLE");
+	public static EnumAttribute ADD_PROJECT_NOMINATION = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "ADD_PROJECT_NOMINATION");
+	public static EnumAttribute LABOR_DISPUTE = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "LABOR_DISPUTE");
+	public static EnumAttribute AFTER_SALES = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "AFTER_SALES");
+	public static EnumAttribute APPLY_DECORATION = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "APPLY_DECORATION");
 	public static EnumAttribute LABOR_SUPERVISOR = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "LABOR_SUPERVISOR");
 	public static EnumAttribute PROJECT_PENALTIES = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "PROJECT_PENALTIES");
 	public static EnumAttribute APPLY_EMPLACEMENT = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "APPLY_EMPLACEMENT");
+	public static EnumAttribute APPLY_FOR_MATERIAL_ACCEPTANCE = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "APPLY_FOR_MATERIAL_ACCEPTANCE");
 	public static EnumAttribute PROJECT_PROGRESS = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "PROJECT_PROGRESS");
 	public static EnumAttribute COMMENTS_ON_MATERIALS = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "COMMENTS_ON_MATERIALS");
 	public static EnumAttribute APPLY_FOR_ADVANCE_COMPENSATION = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "APPLY_FOR_ADVANCE_COMPENSATION");
 	public static EnumAttribute PROJECT_MANAGER_REPORT = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "PROJECT_MANAGER_REPORT");
-	public static EnumAttribute FILL_PERSONAL_DETAIL = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "FILL_PERSONAL_DETAIL");
 	public static EnumAttribute PROJECT_SUPERVISION_REPORT = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "PROJECT_SUPERVISION_REPORT");
 
 	// 引用的对象

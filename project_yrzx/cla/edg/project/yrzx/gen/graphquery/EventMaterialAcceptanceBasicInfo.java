@@ -4,9 +4,9 @@ import java.util.Map;
 
 import cla.edg.modelbean.*;
 
-public class MaterialBidSample extends BaseModelBean{
+public class EventMaterialAcceptanceBasicInfo extends BaseModelBean{
 	public String getFullClassName() {
-		return "com.yrdec.yrzx.materialbidsample.MaterialBidSample";
+		return "com.yrdec.yrzx.eventmaterialacceptancebasicinfo.EventMaterialAcceptanceBasicInfo";
 	}
 	// 枚举对象
 
@@ -23,57 +23,35 @@ public class MaterialBidSample extends BaseModelBean{
 		return member;
 	}
 
-	public MaterialCategory materialCategory() {
-		MaterialCategory member = new MaterialCategory();
-		member.setModelTypeName("material_category");
-		member.setName("material_category");
-		member.setMemberName("materialCategory");
-		member.setReferDirection(true);
-		member.setRelationName("materialCategory");
-		append(member);
-		return member;
-	}
-
-	public MaterialUnitOfMeasurement materialUnitOfMeasurement() {
+	public MaterialUnitOfMeasurement uom() {
 		MaterialUnitOfMeasurement member = new MaterialUnitOfMeasurement();
 		member.setModelTypeName("material_unit_of_measurement");
-		member.setName("material_unit_of_measurement");
-		member.setMemberName("materialUnitOfMeasurement");
+		member.setName("uom");
+		member.setMemberName("uom");
 		member.setReferDirection(true);
-		member.setRelationName("materialUnitOfMeasurement");
+		member.setRelationName("uom");
 		append(member);
 		return member;
 	}
 
-	public ProjectNomination materialManager() {
+	public ProjectNomination auditor() {
 		ProjectNomination member = new ProjectNomination();
 		member.setModelTypeName("project_nomination");
-		member.setName("material_manager");
-		member.setMemberName("materialManager");
+		member.setName("auditor");
+		member.setMemberName("auditor");
 		member.setReferDirection(true);
-		member.setRelationName("materialManager");
+		member.setRelationName("auditor");
 		append(member);
 		return member;
 	}
 
-	public Project project() {
-		Project member = new Project();
-		member.setModelTypeName("project");
-		member.setName("project");
-		member.setMemberName("project");
+	public ChangeRequest changeRequest() {
+		ChangeRequest member = new ChangeRequest();
+		member.setModelTypeName("change_request");
+		member.setName("change_request");
+		member.setMemberName("changeRequest");
 		member.setReferDirection(true);
-		member.setRelationName("project");
-		append(member);
-		return member;
-	}
-
-	public DailyTaskType dailyTaskType() {
-		DailyTaskType member = new DailyTaskType();
-		member.setModelTypeName("daily_task_type");
-		member.setName("daily_task_type");
-		member.setMemberName("dailyTaskType");
-		member.setReferDirection(true);
-		member.setRelationName("dailyTaskType");
+		member.setRelationName("changeRequest");
 		append(member);
 		return member;
 	}
@@ -110,11 +88,20 @@ public class MaterialBidSample extends BaseModelBean{
 		return member;
 	}
 
-	public StringAttribute position(){
+	public StringAttribute materialType(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		// member.setName("position");
-		member.setName("position");
+		// member.setName("materialType");
+		member.setName("material_type");
+		useMember(member);
+		return member;
+	}
+
+	public StringAttribute userPart(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string");
+		// member.setName("userPart");
+		member.setName("user_part");
 		useMember(member);
 		return member;
 	}
@@ -128,11 +115,11 @@ public class MaterialBidSample extends BaseModelBean{
 		return member;
 	}
 
-	public StringAttribute materialBrand(){
+	public StringAttribute brand(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		// member.setName("materialBrand");
-		member.setName("material_brand");
+		// member.setName("brand");
+		member.setName("brand");
 		useMember(member);
 		return member;
 	}
@@ -146,38 +133,29 @@ public class MaterialBidSample extends BaseModelBean{
 		return member;
 	}
 
-	public StringAttribute sealUpMaterialName(){
+	public StringAttribute fieldGroup(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		// member.setName("sealUpMaterialName");
-		member.setName("seal_up_material_name");
+		// member.setName("fieldGroup");
+		member.setName("field_group");
 		useMember(member);
 		return member;
 	}
 
-	public StringAttribute images(){
+	public StringAttribute eventInitiatorType(){
 		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("images");
-		// member.setName("images");
-		member.setName("images");
+		member.setModelTypeName("string");
+		// member.setName("eventInitiatorType");
+		member.setName("event_initiator_type");
 		useMember(member);
 		return member;
 	}
 
-	public StringAttribute comments(){
+	public StringAttribute eventInitiatorId(){
 		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string_longtext");
-		// member.setName("comments");
-		member.setName("comments");
-		useMember(member);
-		return member;
-	}
-
-	public DateTimeAttribute createTime(){
-		DateTimeAttribute member = new DateTimeAttribute();
-		member.setModelTypeName("date_time_create");
-		// member.setName("createTime");
-		member.setName("create_time");
+		member.setModelTypeName("string");
+		// member.setName("eventInitiatorId");
+		member.setName("event_initiator_id");
 		useMember(member);
 		return member;
 	}

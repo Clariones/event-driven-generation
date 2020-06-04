@@ -47,6 +47,17 @@ public class CareerType extends BaseModelBean{
 		return member;
 	}
 
+	public SubcontractApplication subcontractApplicationList() {
+		SubcontractApplication member = new SubcontractApplication();
+		member.setModelTypeName("subcontract_application");
+		member.setName("career_type");
+		member.setMemberName("subcontractApplicationList");
+		member.setRelationName("careerType");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 	public EventApplyPersonalEmplacement eventApplyPersonalEmplacementList() {
 		EventApplyPersonalEmplacement member = new EventApplyPersonalEmplacement();
 		member.setModelTypeName("event_apply_personal_emplacement");
@@ -64,6 +75,17 @@ public class CareerType extends BaseModelBean{
 		member.setName("career_type");
 		member.setMemberName("eventFillPersonalDetailList");
 		member.setRelationName("careerType");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EventSubcontractApplication eventSubcontractApplicationList() {
+		EventSubcontractApplication member = new EventSubcontractApplication();
+		member.setModelTypeName("event_subcontract_application");
+		member.setName("application_type");
+		member.setMemberName("eventSubcontractApplicationList");
+		member.setRelationName("applicationType");
 		member.setReferDirection(false);
 		append(member);
 		return member;

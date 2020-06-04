@@ -503,6 +503,24 @@ public class MODEL{
 		return rst;
 	}
 
+	public static LaborDispute laborDispute() {
+		LaborDispute rst = new LaborDispute();
+		rst.setModelTypeName("labor_dispute");
+		return rst;
+	}
+
+	public static LaborDisputeStatus laborDisputeStatus() {
+		LaborDisputeStatus rst = new LaborDisputeStatus();
+		rst.setModelTypeName("labor_dispute_status");
+		return rst;
+	}
+
+	public static LaborDisputeType laborDisputeType() {
+		LaborDisputeType rst = new LaborDisputeType();
+		rst.setModelTypeName("labor_dispute_type");
+		return rst;
+	}
+
 	public static ProjectReport projectReport() {
 		ProjectReport rst = new ProjectReport();
 		rst.setModelTypeName("project_report");
@@ -635,6 +653,12 @@ public class MODEL{
 		return rst;
 	}
 
+	public static MaterialAcceptanceApplication materialAcceptanceApplication() {
+		MaterialAcceptanceApplication rst = new MaterialAcceptanceApplication();
+		rst.setModelTypeName("material_acceptance_application");
+		return rst;
+	}
+
 	public static AccountBookType accountBookType() {
 		AccountBookType rst = new AccountBookType();
 		rst.setModelTypeName("account_book_type");
@@ -725,6 +749,12 @@ public class MODEL{
 		return rst;
 	}
 
+	public static SubcontractApplication subcontractApplication() {
+		SubcontractApplication rst = new SubcontractApplication();
+		rst.setModelTypeName("subcontract_application");
+		return rst;
+	}
+
 	public static BpmnModel bpmnModel() {
 		BpmnModel rst = new BpmnModel();
 		rst.setModelTypeName("bpmn_model");
@@ -791,6 +821,18 @@ public class MODEL{
 		return rst;
 	}
 
+	public static EventMaterialAcceptanceImage eventMaterialAcceptanceImage() {
+		EventMaterialAcceptanceImage rst = new EventMaterialAcceptanceImage();
+		rst.setModelTypeName("event_material_acceptance_image");
+		return rst;
+	}
+
+	public static EventMaterialCheck eventMaterialCheck() {
+		EventMaterialCheck rst = new EventMaterialCheck();
+		rst.setModelTypeName("event_material_check");
+		return rst;
+	}
+
 	public static EventProjectCommand eventProjectCommand() {
 		EventProjectCommand rst = new EventProjectCommand();
 		rst.setModelTypeName("event_project_command");
@@ -821,9 +863,39 @@ public class MODEL{
 		return rst;
 	}
 
+	public static EventMaterialChangeInfo eventMaterialChangeInfo() {
+		EventMaterialChangeInfo rst = new EventMaterialChangeInfo();
+		rst.setModelTypeName("event_material_change_info");
+		return rst;
+	}
+
+	public static EventMaterialAcceptanceBasicInfo eventMaterialAcceptanceBasicInfo() {
+		EventMaterialAcceptanceBasicInfo rst = new EventMaterialAcceptanceBasicInfo();
+		rst.setModelTypeName("event_material_acceptance_basic_info");
+		return rst;
+	}
+
 	public static EventMaterialReview eventMaterialReview() {
 		EventMaterialReview rst = new EventMaterialReview();
 		rst.setModelTypeName("event_material_review");
+		return rst;
+	}
+
+	public static EventMaterialPreservedInfo eventMaterialPreservedInfo() {
+		EventMaterialPreservedInfo rst = new EventMaterialPreservedInfo();
+		rst.setModelTypeName("event_material_preserved_info");
+		return rst;
+	}
+
+	public static EventMaterialChangeContractInfo eventMaterialChangeContractInfo() {
+		EventMaterialChangeContractInfo rst = new EventMaterialChangeContractInfo();
+		rst.setModelTypeName("event_material_change_contract_info");
+		return rst;
+	}
+
+	public static EventMaterialChangeDataUpload eventMaterialChangeDataUpload() {
+		EventMaterialChangeDataUpload rst = new EventMaterialChangeDataUpload();
+		rst.setModelTypeName("event_material_change_data_upload");
 		return rst;
 	}
 
@@ -842,6 +914,24 @@ public class MODEL{
 	public static EventProjectSupervisorReportBasicInfo eventProjectSupervisorReportBasicInfo() {
 		EventProjectSupervisorReportBasicInfo rst = new EventProjectSupervisorReportBasicInfo();
 		rst.setModelTypeName("event_project_supervisor_report_basic_info");
+		return rst;
+	}
+
+	public static EventSubcontractApplication eventSubcontractApplication() {
+		EventSubcontractApplication rst = new EventSubcontractApplication();
+		rst.setModelTypeName("event_subcontract_application");
+		return rst;
+	}
+
+	public static EventMaterialPreservedBasicInfo eventMaterialPreservedBasicInfo() {
+		EventMaterialPreservedBasicInfo rst = new EventMaterialPreservedBasicInfo();
+		rst.setModelTypeName("event_material_preserved_basic_info");
+		return rst;
+	}
+
+	public static EventLaborDispute eventLaborDispute() {
+		EventLaborDispute rst = new EventLaborDispute();
+		rst.setModelTypeName("event_labor_dispute");
 		return rst;
 	}
 
@@ -896,6 +986,12 @@ public class MODEL{
 	public static EventApplyEmplacement eventApplyEmplacement() {
 		EventApplyEmplacement rst = new EventApplyEmplacement();
 		rst.setModelTypeName("event_apply_emplacement");
+		return rst;
+	}
+
+	public static EventMaterialChangeAudit eventMaterialChangeAudit() {
+		EventMaterialChangeAudit rst = new EventMaterialChangeAudit();
+		rst.setModelTypeName("event_material_change_audit");
 		return rst;
 	}
 
