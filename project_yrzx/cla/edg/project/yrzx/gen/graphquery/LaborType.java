@@ -4,14 +4,14 @@ import java.util.Map;
 
 import cla.edg.modelbean.*;
 
-public class AuditStatus extends BaseModelBean{
+public class LaborType extends BaseModelBean{
 	public String getFullClassName() {
-		return "com.yrdec.yrzx.auditstatus.AuditStatus";
+		return "com.yrdec.yrzx.labortype.LaborType";
 	}
 	// 枚举对象
-	public static EnumAttribute PENDING = new EnumAttribute("com.yrdec.yrzx.auditstatus.AuditStatus", "PENDING");
-	public static EnumAttribute APPROVED = new EnumAttribute("com.yrdec.yrzx.auditstatus.AuditStatus", "APPROVED");
-	public static EnumAttribute UNAPPROVED = new EnumAttribute("com.yrdec.yrzx.auditstatus.AuditStatus", "UNAPPROVED");
+	public static EnumAttribute ONE = new EnumAttribute("com.yrdec.yrzx.labortype.LaborType", "ONE");
+	public static EnumAttribute TWO = new EnumAttribute("com.yrdec.yrzx.labortype.LaborType", "TWO");
+	public static EnumAttribute THREE = new EnumAttribute("com.yrdec.yrzx.labortype.LaborType", "THREE");
 
 	// 引用的对象
 
@@ -28,23 +28,12 @@ public class AuditStatus extends BaseModelBean{
 
 	// 被引用的对象
 
-	public PersonalEmplacementApplication personalEmplacementApplicationList() {
-		PersonalEmplacementApplication member = new PersonalEmplacementApplication();
-		member.setModelTypeName("personal_emplacement_application");
-		member.setName("status");
-		member.setMemberName("personalEmplacementApplicationList");
-		member.setRelationName("status");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-
-	public AuditRecord auditRecordList() {
-		AuditRecord member = new AuditRecord();
-		member.setModelTypeName("audit_record");
-		member.setName("status");
-		member.setMemberName("auditRecordList");
-		member.setRelationName("status");
+	public LaborRecord laborRecordList() {
+		LaborRecord member = new LaborRecord();
+		member.setModelTypeName("labor_record");
+		member.setName("type");
+		member.setMemberName("laborRecordList");
+		member.setRelationName("type");
 		member.setReferDirection(false);
 		append(member);
 		return member;

@@ -79,7 +79,7 @@ public class EventApplyEmplacement extends BaseModelBean{
 
 	public StringAttribute merchantWebsite(){
 		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
+		member.setModelTypeName("string_url");
 		// member.setName("merchantWebsite");
 		member.setName("merchant_website");
 		useMember(member);

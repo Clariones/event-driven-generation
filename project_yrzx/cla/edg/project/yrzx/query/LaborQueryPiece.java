@@ -44,6 +44,37 @@ public class LaborQueryPiece extends PieceOfScript {
 						MODEL.laborDispute().status()
 				)
 
+			.query(MODEL.standardContract()).which("has workpackage by project").with_string("project id").pagination()
+				.comments("查询项目下的分包合同")
+				.do_it_as()
+				.where(MODEL.standardContract().project().eq("${project id}"),
+						MODEL.standardContract().workPackage().not_null()
+						)
+				.wants(
+						MODEL.standardContract().workPackage(),
+						MODEL.standardContract().partyB(),
+						MODEL.standardContract().contractPayItemList()
+				)
+
+
+			.query(MODEL.projectNomination()).which("project by role").with_string("project id").with_string("role").pagination()
+				.comments("按角色查询项目下的人")
+				.do_it_as()
+				.where(
+						MODEL.projectNomination().project().eq("${project id}")
+//						MODEL.projectNomination().projectRole().eq("${}")
+				)
+
+			.query(MODEL.laborRecord()).list_of("project nomination by type").with_string("project nomination id").with_string("type id").pagination()
+				.comments("按类型查询某人在项目中的出勤记录")
+		 		.do_it_as()
+				.where(MODEL.laborRecord().projectNomination().eq("${project nomination id}"),
+					MODEL.laborRecord().type().eq("${type id}")
+
+
+				)
+				.wants(MODEL.laborRecord().type())
+
 		;
 
 		return script;

@@ -256,6 +256,17 @@ public class Project extends BaseModelBean{
 		return member;
 	}
 
+	public LaborRecord laborRecordList() {
+		LaborRecord member = new LaborRecord();
+		member.setModelTypeName("labor_record");
+		member.setName("project");
+		member.setMemberName("laborRecordList");
+		member.setRelationName("project");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 	public ProjectReport projectReportList() {
 		ProjectReport member = new ProjectReport();
 		member.setModelTypeName("project_report");

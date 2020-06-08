@@ -371,6 +371,18 @@ public class MODEL{
 		return rst;
 	}
 
+	public static DailyTaskSecondType dailyTaskSecondType() {
+		DailyTaskSecondType rst = new DailyTaskSecondType();
+		rst.setModelTypeName("daily_task_second_type");
+		return rst;
+	}
+
+	public static DailyTaskThirdType dailyTaskThirdType() {
+		DailyTaskThirdType rst = new DailyTaskThirdType();
+		rst.setModelTypeName("daily_task_third_type");
+		return rst;
+	}
+
 	public static DailyTaskTemplate dailyTaskTemplate() {
 		DailyTaskTemplate rst = new DailyTaskTemplate();
 		rst.setModelTypeName("daily_task_template");
@@ -518,6 +530,18 @@ public class MODEL{
 	public static LaborDisputeType laborDisputeType() {
 		LaborDisputeType rst = new LaborDisputeType();
 		rst.setModelTypeName("labor_dispute_type");
+		return rst;
+	}
+
+	public static LaborRecord laborRecord() {
+		LaborRecord rst = new LaborRecord();
+		rst.setModelTypeName("labor_record");
+		return rst;
+	}
+
+	public static LaborRecordType laborRecordType() {
+		LaborRecordType rst = new LaborRecordType();
+		rst.setModelTypeName("labor_record_type");
 		return rst;
 	}
 
@@ -1028,6 +1052,24 @@ public class MODEL{
 	public static AuditStatus auditStatus() {
 		AuditStatus rst = new AuditStatus();
 		rst.setModelTypeName("audit_status");
+		return rst;
+	}
+
+	public static AuditRecord auditRecord() {
+		AuditRecord rst = new AuditRecord();
+		rst.setModelTypeName("audit_record");
+		return rst;
+	}
+
+	public static CommentsRecord commentsRecord() {
+		CommentsRecord rst = new CommentsRecord();
+		rst.setModelTypeName("comments_record");
+		return rst;
+	}
+
+	public static Menu menu() {
+		Menu rst = new Menu();
+		rst.setModelTypeName("menu");
 		return rst;
 	}
 

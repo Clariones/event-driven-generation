@@ -4,21 +4,21 @@ import java.util.Map;
 
 import cla.edg.modelbean.*;
 
-public class DebitCard extends BaseModelBean{
+public class CommentsRecord extends BaseModelBean{
 	public String getFullClassName() {
-		return "com.yrdec.yrzx.debitcard.DebitCard";
+		return "com.yrdec.yrzx.commentsrecord.CommentsRecord";
 	}
 	// 枚举对象
 
 	// 引用的对象
 
-	public Merchant merchant() {
-		Merchant member = new Merchant();
-		member.setModelTypeName("merchant");
-		member.setName("merchant");
-		member.setMemberName("merchant");
+	public ProjectNomination submitter() {
+		ProjectNomination member = new ProjectNomination();
+		member.setModelTypeName("project_nomination");
+		member.setName("submitter");
+		member.setMemberName("submitter");
 		member.setReferDirection(true);
-		member.setRelationName("merchant");
+		member.setRelationName("submitter");
 		append(member);
 		return member;
 	}
@@ -37,47 +37,20 @@ public class DebitCard extends BaseModelBean{
 		return member;
 	}
 
-	public StringAttribute bank(){
+	public StringAttribute commentObjectType(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		// member.setName("bank");
-		member.setName("bank");
+		// member.setName("commentObjectType");
+		member.setName("comment_object_type");
 		useMember(member);
 		return member;
 	}
 
-	public StringAttribute bankAddress(){
+	public StringAttribute commentObjectId(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		// member.setName("bankAddress");
-		member.setName("bank_address");
-		useMember(member);
-		return member;
-	}
-
-	public StringAttribute number(){
-		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
-		// member.setName("number");
-		member.setName("number");
-		useMember(member);
-		return member;
-	}
-
-	public StringAttribute accountName(){
-		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
-		// member.setName("accountName");
-		member.setName("account_name");
-		useMember(member);
-		return member;
-	}
-
-	public DateTimeAttribute lastUpdateTime(){
-		DateTimeAttribute member = new DateTimeAttribute();
-		member.setModelTypeName("date_time_update");
-		// member.setName("lastUpdateTime");
-		member.setName("last_update_time");
+		// member.setName("commentObjectId");
+		member.setName("comment_object_id");
 		useMember(member);
 		return member;
 	}
@@ -87,6 +60,15 @@ public class DebitCard extends BaseModelBean{
 		member.setModelTypeName("date_time_create");
 		// member.setName("createTime");
 		member.setName("create_time");
+		useMember(member);
+		return member;
+	}
+
+	public StringAttribute comments(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string_longtext");
+		// member.setName("comments");
+		member.setName("comments");
 		useMember(member);
 		return member;
 	}

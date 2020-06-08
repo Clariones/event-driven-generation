@@ -16,6 +16,9 @@ public class Page extends BaseModelBean{
 	public static EnumAttribute ASSOCIATION = new EnumAttribute("com.yrdec.yrzx.page.Page", "ASSOCIATION");
 	public static EnumAttribute BIZ_CHAIN = new EnumAttribute("com.yrdec.yrzx.page.Page", "BIZ_CHAIN");
 	public static EnumAttribute REAL_ESTATE = new EnumAttribute("com.yrdec.yrzx.page.Page", "REAL_ESTATE");
+	public static EnumAttribute JGDT = new EnumAttribute("com.yrdec.yrzx.page.Page", "JGDT");
+	public static EnumAttribute YZPP = new EnumAttribute("com.yrdec.yrzx.page.Page", "YZPP");
+	public static EnumAttribute BIM = new EnumAttribute("com.yrdec.yrzx.page.Page", "BIM");
 
 	// 引用的对象
 

@@ -55,6 +55,15 @@ public class EventAddDebitCard extends BaseModelBean{
 		return member;
 	}
 
+	public StringAttribute bankAddress(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string");
+		// member.setName("bankAddress");
+		member.setName("bank_address");
+		useMember(member);
+		return member;
+	}
+
 	public StringAttribute number(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");

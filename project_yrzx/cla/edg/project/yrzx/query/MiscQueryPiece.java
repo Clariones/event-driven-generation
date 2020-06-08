@@ -3,18 +3,25 @@ package cla.edg.project.yrzx.query;
 import cla.edg.pageflow.PageFlowScript;
 import cla.edg.pageflow.PieceOfScript;
 import cla.edg.project.yrzx.gen.graphquery.MODEL;
+import cla.edg.project.yrzx.gen.graphquery.Role;
 
 
 public class MiscQueryPiece extends PieceOfScript {
 	@Override
 	public PageFlowScript makeSequel(PageFlowScript script) {
 		script
-			.query(MODEL.employeeNomination()).list_of("company merchant").pagination().with_string("merchant id")
-				.comments("查询一个公司的所有岗位")
+			.query(MODEL.employeeNomination()).list_of("company merchant except").pagination().with_string("merchant id").with_string("except id")
+				.comments("查询一个公司除某个以外的所有岗位")
 				.do_it_as()
-				.where(MODEL.employeeNomination().employer().eq("${merchant id}"))
+				.where(MODEL.employeeNomination().employer().eq("${merchant id}"),
+						MODEL.employeeNomination().employee().not("${except id}"))
 				.wants(MODEL.employeeNomination().employee(), MODEL.employeeNomination().job(), MODEL.employeeNomination().role())
 
+			.find(MODEL.employeeNomination()).which("is admin in company").with_string("merchant id")
+				.comments("查询公司的管理员")
+				.do_it_as()
+				.where(MODEL.employeeNomination().employer().eq("${merchant id}"),MODEL.employeeNomination().role().eq(Role.ADMIN))
+				.wants(MODEL.employeeNomination().employee(), MODEL.employeeNomination().job(), MODEL.employeeNomination().role())
 			.query(MODEL.employeeNomination()).list_of("current user").pagination().with_string("merchant id")
 				.comments("查询当前用户的所有岗位")
 				.do_it_as()
@@ -61,6 +68,13 @@ public class MiscQueryPiece extends PieceOfScript {
 				.comments("根据文章分类查询文章")
 				.do_it_as()
 				.where(MODEL.article().category().name().eq("${article category name}"))
+
+
+		.query(MODEL.dailyTaskSecondType()).list_of("daily task type").with_string("type id")
+			.do_it_as()
+			.where(MODEL.dailyTaskSecondType().parent().code().eq("${type id }")).order_by(MODEL.dailyTaskSecondType().id()).asc()
+
+
 
 			;
 

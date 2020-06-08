@@ -42,7 +42,14 @@ public class NominationQueryPiece extends PieceOfScript {
 					MODEL.projectNomination().worker().job()
 
 			)
-;
+
+			.query(MODEL.employeeNomination()).list_of("company merchant").pagination().with_string("merchant id").with_string("item id")
+				.comments("查询一个公司的所有岗位")
+				.do_it_as()
+				.where(MODEL.employeeNomination().employer().eq("${merchant id}"))
+				.wants(MODEL.employeeNomination().employee(), MODEL.employeeNomination().job(), MODEL.employeeNomination().role())
+
+		;
 
 		return script;
 	}

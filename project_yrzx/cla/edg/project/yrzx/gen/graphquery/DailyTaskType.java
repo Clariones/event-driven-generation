@@ -36,6 +36,17 @@ public class DailyTaskType extends BaseModelBean{
 
 	// 被引用的对象
 
+	public DailyTaskSecondType dailyTaskSecondTypeList() {
+		DailyTaskSecondType member = new DailyTaskSecondType();
+		member.setModelTypeName("daily_task_second_type");
+		member.setName("parent");
+		member.setMemberName("dailyTaskSecondTypeList");
+		member.setRelationName("parent");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 	public DailyTaskTemplate dailyTaskTemplateList() {
 		DailyTaskTemplate member = new DailyTaskTemplate();
 		member.setModelTypeName("daily_task_template");

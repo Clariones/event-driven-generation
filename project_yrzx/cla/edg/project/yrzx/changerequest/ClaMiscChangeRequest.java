@@ -33,6 +33,7 @@ public class ClaMiscChangeRequest implements ChangeRequestSpecFactory {
 						.values_can_select_from_query_by(null)
 					.has_field("job").zh_CN("职位").which_model_of(MODEL.job())
 						.values_can_select_from_query_by(null)
+					.has_field("description").zh_CN("职责描述").which_type_of(FieldType.MULTI_TEXT)
 
 				// 添加项目职位 (project nomination)
 				.change_request("add project nomination").zh_CN("添加岗位")
@@ -52,6 +53,7 @@ public class ClaMiscChangeRequest implements ChangeRequestSpecFactory {
 							.has_field("project job").zh_CN("职位").which_model_of(MODEL.projectOrganizationType())
 								.place_holder("请选择职务类型")
 								.values_can_select_from_query_by(null)
+							.has_field("description").zh_CN("职责描述").which_type_of(FieldType.MULTI_TEXT)
 							.has_field("project role").zh_CN("类型").which_model_of(MODEL.projectRole())
 								.place_holder("请选择权限类型")
 								.values_can_select_from_query_by(null)

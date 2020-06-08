@@ -9,6 +9,8 @@ public class IconConfiguration extends BaseModelBean{
 		return "com.yrdec.yrzx.iconconfiguration.IconConfiguration";
 	}
 	// 枚举对象
+	public static EnumAttribute ME_WDTJ = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "ME_WDTJ");
+	public static EnumAttribute ME_ZXSQ = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "ME_ZXSQ");
 	public static EnumAttribute SY_RK_JZLP = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "SY_RK_JZLP");
 	public static EnumAttribute SY_RK_SYLS = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "SY_RK_SYLS");
 	public static EnumAttribute SY_RK_SHXH = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "SY_RK_SHXH");
@@ -41,6 +43,7 @@ public class IconConfiguration extends BaseModelBean{
 	public static EnumAttribute SY_RK_JPFW = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "SY_RK_JPFW");
 	public static EnumAttribute SY_RK_YZPP = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "SY_RK_YZPP");
 	public static EnumAttribute SY_RK_JGDT = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "SY_RK_JGDT");
+	public static EnumAttribute SY_RK_BIM = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "SY_RK_BIM");
 
 	// 引用的对象
 
