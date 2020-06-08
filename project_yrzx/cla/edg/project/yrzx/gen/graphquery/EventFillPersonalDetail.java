@@ -97,6 +97,15 @@ public class EventFillPersonalDetail extends BaseModelBean{
 		return member;
 	}
 
+	public StringAttribute phone(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string");
+		// member.setName("phone");
+		member.setName("phone");
+		useMember(member);
+		return member;
+	}
+
 	public StringAttribute gender(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");

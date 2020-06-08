@@ -399,6 +399,28 @@ public class Platform extends BaseModelBean{
 		return member;
 	}
 
+	public DailyTaskSecondType dailyTaskSecondTypeList() {
+		DailyTaskSecondType member = new DailyTaskSecondType();
+		member.setModelTypeName("daily_task_second_type");
+		member.setName("platform");
+		member.setMemberName("dailyTaskSecondTypeList");
+		member.setRelationName("platform");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public DailyTaskThirdType dailyTaskThirdTypeList() {
+		DailyTaskThirdType member = new DailyTaskThirdType();
+		member.setModelTypeName("daily_task_third_type");
+		member.setName("platform");
+		member.setMemberName("dailyTaskThirdTypeList");
+		member.setRelationName("platform");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 	public DailyTaskTemplate dailyTaskTemplateList() {
 		DailyTaskTemplate member = new DailyTaskTemplate();
 		member.setModelTypeName("daily_task_template");
@@ -679,6 +701,17 @@ public class Platform extends BaseModelBean{
 		member.setModelTypeName("audit_status");
 		member.setName("platform");
 		member.setMemberName("auditStatusList");
+		member.setRelationName("platform");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public Menu menuList() {
+		Menu member = new Menu();
+		member.setModelTypeName("menu");
+		member.setName("platform");
+		member.setMemberName("menuList");
 		member.setRelationName("platform");
 		member.setReferDirection(false);
 		append(member);

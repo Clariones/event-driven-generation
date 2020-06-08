@@ -18,7 +18,6 @@ public class MiscPageFlowPiece extends PieceOfScript {
 				.got_page("articles")
 
 
-
 		.request("popup page").with_string("title").with_string("message").with_string("next url")
 			.got_page("popup")
 
@@ -27,6 +26,16 @@ public class MiscPageFlowPiece extends PieceOfScript {
 
 		.request("remove project nomination").with_string("project nomination id").with_string("project id").with_string("merchant id").with_string("type id")
 			.got_page("project organization employee list")
+
+
+				/**
+				 * 菜单页，
+				 * #1 给的ID作为树的根，加载出子树
+				 * #2 渲染子树listOf
+				 *
+				 */
+				.request("view menu").with_string("tree node id")
+				.got_page("menu")
 			;
 		return script;
 	}

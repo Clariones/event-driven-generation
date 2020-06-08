@@ -23,7 +23,10 @@ public class ProjectHallPageFlowPiece extends PieceOfScript {
 		viewPureDocumentPages(script, "安全文明", "SAFE_AND_CIVILISE");
 		viewPureDocumentPages(script, "设计变更", "DESIGN_CHANGES");
 		viewPureDocumentPages(script, "设计管理", "DESIGN_MANAGMENT");
-
+		viewPureDocumentPages(script, "BIM应用", "BIM_APPLICATION");
+		viewBimPages(script, "BIM应用", "BIM_APPLICATION");
+		viewPureDocumentPages(script, "法律合规", "LAW");
+		viewPureDocumentPages(script, "教育培训", "EDUCATION");
 
 		// 纯文档的2级页面
 //		viewList(script, "document list by category", "按照文档的类目查看当前项目的文档列表",
@@ -84,6 +87,11 @@ public class ProjectHallPageFlowPiece extends PieceOfScript {
 			;
 		return script;
 	}
+
+	private void viewBimPages(PageFlowScript script, String title, String code) {
+		viewProjectElementIn4Levels(script,title,code);
+	}
+
 
 	private void viewMaterialManagement(PageFlowScript script, String title, String code) {
 		script.request("view material pannel").with_string("project id")
@@ -223,6 +231,22 @@ public class ProjectHallPageFlowPiece extends PieceOfScript {
 		.request("view labor dispute detail").with_string("item id")
 			.comments("查看劳务纠纷详情").need_login()
 			.got_page("labor dispute detail")
+
+		.request("view labor attendance").with_string("project id").with_last_record_id()
+			.comments("当日劳务录入")
+			.got_page("labor attendance list")
+
+		.request("view labor attendance more").with_string("project id").with_last_record_id()
+			.comments("当日劳务录入 more")
+			.got_page("labor attendance more list")
+
+		.request("view employee labor attendance list").with_string("project id").with_string("project nomination id")
+			.comments("当日劳务录入")
+			.got_page("employee labor attendance list")
+
+		.request("view employee labor attendance detail").with_string("item id")
+				.comments("当日劳务录入")
+				.got_page("employee labor attendance detail")
 				
 		;
 	}

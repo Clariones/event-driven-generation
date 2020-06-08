@@ -37,6 +37,20 @@ public class HighLevelMePageFlowPiece extends PieceOfScript {
 					.comments("查看我的订单. 订单计算后分类为: 待处理订单/已完成订单/其他/全部").need_login()
 					.got_page("order list").title("我的订单").list_of("order")
 						.may_request("view order detail")
+//				我的订单-->合同台账
+				.request("view contract record").with_string("merchant id")
+					.comments("我的订单-->合同台账")
+					.got_page("contract record")
+
+				.request("view contract payment")
+					.comments("合同付款")
+				 	.got_page("contract payment")
+
+				.request("view contract receipts")
+					.comments("合同收款")
+					.got_page("contract receipts")
+
+
 				// 装修申请
 				.request("view my application list").with_string("filter").with_last_record_id()
 					.comments("查看我的申请").need_login()

@@ -24,6 +24,7 @@ public class EmployeeChangeRequest implements ChangeRequestSpecFactory {
 				.has_field("merchant id").hidden()
 				.has_field("avatar").zh_CN("头像").which_type_of(FieldType.IMAGE)
 				.has_field("merchant name").zh_CN("姓名").disabled()
+				.has_field("phone").zh_CN("电话").disabled()
 				.has_field("gender").zh_CN("性别")
 					.values_canbe("male","男").or("female","女")
 				.has_field("id number").zh_CN("身份证号")
@@ -70,6 +71,7 @@ public class EmployeeChangeRequest implements ChangeRequestSpecFactory {
 //						or("瑞士银行 ","瑞士银行 ").
 //						or("德意志银行","德意志银行")
 				.has_field("account name").zh_CN("开户名称")
+				.has_field("bank address").zh_CN("开户地址").range(1,500).place_holder("例: 四川省成都市高新区世纪城路1132号附1号招商银行世纪城支行")
 				.has_field("number").zh_CN("银行账号")
 
 

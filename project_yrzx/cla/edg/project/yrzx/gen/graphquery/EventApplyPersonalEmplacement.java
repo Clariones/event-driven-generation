@@ -99,7 +99,7 @@ public class EventApplyPersonalEmplacement extends BaseModelBean{
 
 	public StringAttribute homePage(){
 		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
+		member.setModelTypeName("string_url");
 		// member.setName("homePage");
 		member.setName("home_page");
 		useMember(member);

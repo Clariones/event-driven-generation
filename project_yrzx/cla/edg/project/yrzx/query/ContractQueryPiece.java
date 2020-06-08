@@ -111,7 +111,41 @@ public class ContractQueryPiece extends PieceOfScript {
 				.where(MODEL.contractCommentsRecord().contract().eq("${contract id}"))
 				.top("${number}")
 				.wants(MODEL.contractCommentsRecord().submitter().type(), MODEL.projectNomination().projectRole(), MODEL.projectNomination().worker().employee())
-			;
+
+			.query(MODEL.standardContract()).list_of("company by user").with_string("merchant id").pagination()
+				.comments("查询某人公司相关的合同")
+				.do_it_as()
+				.where(
+
+						MODEL.standardContract().project().projectNominationList().worker().employee().eq("${merchant id}")
+				)
+
+			.query(MODEL.contractPayItem()).list_of("payer").with_string("merchant id").pagination()
+				.comments("查询某人相关的合同付款项")
+				.do_it_as()
+				.where(
+						MODEL.contractPayItem().payer().employeeNominationListAsEmployer().employee().eq("${merchant id}")
+				).wants(
+						MODEL.contractPayItem().payer(),
+				MODEL.contractPayItem().payee(),
+				MODEL.contractPayItem().payItemStatus(),
+				MODEL.contractPayItem().contract()
+		)
+
+
+			.query(MODEL.contractPayItem()).list_of("payee").with_string("merchant id").pagination()
+				.comments("查询某人相关的合同收款项")
+				.do_it_as()
+				.where(
+						MODEL.contractPayItem().payee().employeeNominationListAsEmployer().employee().eq("${merchant id}")
+				).wants(
+				MODEL.contractPayItem().payer(),
+				MODEL.contractPayItem().payee(),
+				MODEL.contractPayItem().payItemStatus(),
+				MODEL.contractPayItem().contract()
+		)
+
+		;
 
 		return script;
 	}

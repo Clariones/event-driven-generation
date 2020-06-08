@@ -363,6 +363,13 @@ public class ProjectQueryPiece extends PieceOfScript {
 				.wants(MODEL.project().projectPhase(), MODEL.project().projectOwner(), MODEL.project().projectImageList(), MODEL.project().projectServiceType(), MODEL.project().constructionStatus())
 				.order_by(MODEL.project().createTime()).desc()
 				.top("${limit}")
+
+//
+//			.query(MODEL.projectNotification()).list_of("user").with_string("merchant id")
+//				.do_it_as()
+//				.where(
+//						MODEL.projectNotification().
+//				)
 		;
 
 		return script;

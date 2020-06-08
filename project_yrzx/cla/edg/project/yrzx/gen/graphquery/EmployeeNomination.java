@@ -321,6 +321,15 @@ public class EmployeeNomination extends BaseModelBean{
 		return member;
 	}
 
+	public StringAttribute description(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string_longtext");
+		// member.setName("description");
+		member.setName("description");
+		useMember(member);
+		return member;
+	}
+
 	public DateTimeAttribute startDate(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date");

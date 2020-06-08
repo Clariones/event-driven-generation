@@ -179,6 +179,17 @@ public class ProjectNomination extends BaseModelBean{
 		return member;
 	}
 
+	public LaborRecord laborRecordList() {
+		LaborRecord member = new LaborRecord();
+		member.setModelTypeName("labor_record");
+		member.setName("project_nomination");
+		member.setMemberName("laborRecordList");
+		member.setRelationName("projectNomination");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 	public ProjectReport projectReportList() {
 		ProjectReport member = new ProjectReport();
 		member.setModelTypeName("project_report");
@@ -289,6 +300,28 @@ public class ProjectNomination extends BaseModelBean{
 		return member;
 	}
 
+	public AuditRecord auditRecordList() {
+		AuditRecord member = new AuditRecord();
+		member.setModelTypeName("audit_record");
+		member.setName("reviewer");
+		member.setMemberName("auditRecordList");
+		member.setRelationName("reviewer");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public CommentsRecord commentsRecordList() {
+		CommentsRecord member = new CommentsRecord();
+		member.setModelTypeName("comments_record");
+		member.setName("submitter");
+		member.setMemberName("commentsRecordList");
+		member.setRelationName("submitter");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 
 	// 普通属性
 
@@ -315,6 +348,15 @@ public class ProjectNomination extends BaseModelBean{
 		member.setModelTypeName("bool");
 		// member.setName("active");
 		member.setName("active");
+		useMember(member);
+		return member;
+	}
+
+	public StringAttribute description(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string_longtext");
+		// member.setName("description");
+		member.setName("description");
 		useMember(member);
 		return member;
 	}

@@ -12,7 +12,7 @@ public class HomePageFlowPiece extends PieceOfScript {
                 .got_page("home");
 
         // slide 下面的4个block
-        request4MerketingBlock(script, new String[]{"REAL_ESTATE", "BIZ_CHAIN", "ASSOCIATION", "ORGNIZATION"});
+        request4MerketingBlock(script, new String[]{"REAL_ESTATE", "BIZ_CHAIN", "ASSOCIATION", "ORGNIZATION","JGDT"});
         // footer 的两个页面
         request4MerketingBlock(script, new String[]{"GOLDEN_SERVICE", "DESIGNER"});
         // article 的几个

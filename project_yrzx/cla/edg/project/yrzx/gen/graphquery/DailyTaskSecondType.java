@@ -4,16 +4,24 @@ import java.util.Map;
 
 import cla.edg.modelbean.*;
 
-public class AuditStatus extends BaseModelBean{
+public class DailyTaskSecondType extends BaseModelBean{
 	public String getFullClassName() {
-		return "com.yrdec.yrzx.auditstatus.AuditStatus";
+		return "com.yrdec.yrzx.dailytasksecondtype.DailyTaskSecondType";
 	}
 	// 枚举对象
-	public static EnumAttribute PENDING = new EnumAttribute("com.yrdec.yrzx.auditstatus.AuditStatus", "PENDING");
-	public static EnumAttribute APPROVED = new EnumAttribute("com.yrdec.yrzx.auditstatus.AuditStatus", "APPROVED");
-	public static EnumAttribute UNAPPROVED = new EnumAttribute("com.yrdec.yrzx.auditstatus.AuditStatus", "UNAPPROVED");
 
 	// 引用的对象
+
+	public DailyTaskType parent() {
+		DailyTaskType member = new DailyTaskType();
+		member.setModelTypeName("daily_task_type");
+		member.setName("parent");
+		member.setMemberName("parent");
+		member.setReferDirection(true);
+		member.setRelationName("parent");
+		append(member);
+		return member;
+	}
 
 	public Platform platform() {
 		Platform member = new Platform();
@@ -28,23 +36,12 @@ public class AuditStatus extends BaseModelBean{
 
 	// 被引用的对象
 
-	public PersonalEmplacementApplication personalEmplacementApplicationList() {
-		PersonalEmplacementApplication member = new PersonalEmplacementApplication();
-		member.setModelTypeName("personal_emplacement_application");
-		member.setName("status");
-		member.setMemberName("personalEmplacementApplicationList");
-		member.setRelationName("status");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-
-	public AuditRecord auditRecordList() {
-		AuditRecord member = new AuditRecord();
-		member.setModelTypeName("audit_record");
-		member.setName("status");
-		member.setMemberName("auditRecordList");
-		member.setRelationName("status");
+	public DailyTaskThirdType dailyTaskThirdTypeList() {
+		DailyTaskThirdType member = new DailyTaskThirdType();
+		member.setModelTypeName("daily_task_third_type");
+		member.setName("parent");
+		member.setMemberName("dailyTaskThirdTypeList");
+		member.setRelationName("parent");
 		member.setReferDirection(false);
 		append(member);
 		return member;
@@ -76,6 +73,15 @@ public class AuditStatus extends BaseModelBean{
 		member.setModelTypeName("string");
 		// member.setName("code");
 		member.setName("code");
+		useMember(member);
+		return member;
+	}
+
+	public StringAttribute icon(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string_image");
+		// member.setName("icon");
+		member.setName("icon");
 		useMember(member);
 		return member;
 	}

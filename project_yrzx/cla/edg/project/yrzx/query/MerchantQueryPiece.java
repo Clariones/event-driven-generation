@@ -20,7 +20,8 @@ public class MerchantQueryPiece extends PieceOfScript {
 			.wants(
 					MODEL.merchant().merchantDetailList().engineeringType(),
 					MODEL.merchant().merchantDetailList().careerType(),
-					MODEL.merchant().merchantDetailList().industryType()
+					MODEL.merchant().merchantDetailList().industryType(),
+					MODEL.merchant().debitCardList()
 			)
 
 
