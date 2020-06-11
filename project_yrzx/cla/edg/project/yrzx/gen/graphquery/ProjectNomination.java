@@ -190,6 +190,17 @@ public class ProjectNomination extends BaseModelBean{
 		return member;
 	}
 
+	public WorkOvertimeRecord workOvertimeRecordList() {
+		WorkOvertimeRecord member = new WorkOvertimeRecord();
+		member.setModelTypeName("work_overtime_record");
+		member.setName("project_nomination");
+		member.setMemberName("workOvertimeRecordList");
+		member.setRelationName("projectNomination");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 	public ProjectReport projectReportList() {
 		ProjectReport member = new ProjectReport();
 		member.setModelTypeName("project_report");

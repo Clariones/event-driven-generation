@@ -25,6 +25,16 @@ public class ContractQueryPiece extends PieceOfScript {
 						MODEL.standardContract().contractStatus().eq("${filter}").optional())
 				.order_by(MODEL.standardContract().lastUpdateTime()).asc()
 				.wants(MODEL.standardContract().contractStatus(), MODEL.standardContract().partyA())
+
+			.query(MODEL.standardContract()).list_of("project by category").pagination().with_string("project id").with_string("category")
+				.comments("按合同类别查询项目中的合同")
+				.do_it_as()
+				.where(MODEL.standardContract().project().eq("${project id}"),
+						MODEL.standardContract().contractType().category().eq("${category}")
+						)
+				.order_by(MODEL.standardContract().lastUpdateTime()).asc()
+				.wants(MODEL.standardContract().contractStatus(), MODEL.standardContract().partyA())
+
 			.find(MODEL.standardContract()).which("by id").with_string("contract id")
 				.comments("按ID加载合同")
 				.do_it_as()
@@ -56,7 +66,8 @@ public class ContractQueryPiece extends PieceOfScript {
 				.comments("按照ID加载支付项")
 				.do_it_as()
 				.where(MODEL.contractPayItem().id().eq("${item id}"))
-				.wants(MODEL.contractPayItem().payItemStatus(), MODEL.contractPayItem().payer())
+				.wants(MODEL.contractPayItem().payItemStatus(), MODEL.contractPayItem().payer(),
+						MODEL.contractPayItem().contract())
 
 			.query(MODEL.contractPayItem()).list_of("project").with_string("project id").pagination()
 				.comments("查询项目下的所有合同支付项")
@@ -64,6 +75,34 @@ public class ContractQueryPiece extends PieceOfScript {
 				.where(
 						MODEL.contractPayItem().contract().project().eq("${project id}")
 				)
+				.wants(
+						MODEL.contractPayItem().contract(),
+						MODEL.contractPayItem().payItemStatus(),
+						MODEL.contractPayItem().payee().employeeNominationListAsEmployee().projectNominationList().project()
+				)
+
+			.query(MODEL.contractPayItem()).list_of("project by payer").with_string("project id").with_string("merchant id").pagination()
+				.comments("查询项目下的所有合同支付项")
+				.do_it_as()
+				.where(
+						MODEL.contractPayItem().contract().project().eq("${project id}"),
+						MODEL.contractPayItem().payer().eq("${merchant id}")
+				).order_by(MODEL.contractPayItem().expectedTime()).desc()
+				.wants(
+						MODEL.contractPayItem().contract(),
+						MODEL.contractPayItem().payItemStatus(),
+						MODEL.contractPayItem().payee().employeeNominationListAsEmployee().projectNominationList().project()
+				)
+
+
+			.query(MODEL.contractPayItem()).list_of("project by payee").with_string("project id").with_string("merchant id").pagination()
+				.comments("查询项目下的所有合同收款项")
+				.do_it_as()
+				.where(
+						MODEL.contractPayItem().contract().project().eq("${project id}"),
+						MODEL.contractPayItem().payer().eq("${merchant id}")
+				)
+				.order_by(MODEL.contractPayItem().expectedTime()).desc()
 				.wants(
 						MODEL.contractPayItem().contract(),
 						MODEL.contractPayItem().payItemStatus(),
@@ -119,6 +158,10 @@ public class ContractQueryPiece extends PieceOfScript {
 
 						MODEL.standardContract().project().projectNominationList().worker().employee().eq("${merchant id}")
 				)
+				.wants(
+						MODEL.standardContract().contractStatus(),
+						MODEL.standardContract().partyA()
+				)
 
 			.query(MODEL.contractPayItem()).list_of("payer").with_string("merchant id").pagination()
 				.comments("查询某人相关的合同付款项")
@@ -144,6 +187,9 @@ public class ContractQueryPiece extends PieceOfScript {
 				MODEL.contractPayItem().payItemStatus(),
 				MODEL.contractPayItem().contract()
 		)
+
+
+
 
 		;
 

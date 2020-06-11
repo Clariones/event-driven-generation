@@ -335,6 +335,12 @@ public class MODEL{
 		return rst;
 	}
 
+	public static ProjectOrganizationCategory projectOrganizationCategory() {
+		ProjectOrganizationCategory rst = new ProjectOrganizationCategory();
+		rst.setModelTypeName("project_organization_category");
+		return rst;
+	}
+
 	public static ProjectNomination projectNomination() {
 		ProjectNomination rst = new ProjectNomination();
 		rst.setModelTypeName("project_nomination");
@@ -536,6 +542,12 @@ public class MODEL{
 	public static LaborRecord laborRecord() {
 		LaborRecord rst = new LaborRecord();
 		rst.setModelTypeName("labor_record");
+		return rst;
+	}
+
+	public static WorkOvertimeRecord workOvertimeRecord() {
+		WorkOvertimeRecord rst = new WorkOvertimeRecord();
+		rst.setModelTypeName("work_overtime_record");
 		return rst;
 	}
 
@@ -1070,6 +1082,12 @@ public class MODEL{
 	public static Menu menu() {
 		Menu rst = new Menu();
 		rst.setModelTypeName("menu");
+		return rst;
+	}
+
+	public static Worker worker() {
+		Worker rst = new Worker();
+		rst.setModelTypeName("worker");
 		return rst;
 	}
 

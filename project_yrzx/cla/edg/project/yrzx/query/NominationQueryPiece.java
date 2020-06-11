@@ -49,6 +49,8 @@ public class NominationQueryPiece extends PieceOfScript {
 				.where(MODEL.employeeNomination().employer().eq("${merchant id}"))
 				.wants(MODEL.employeeNomination().employee(), MODEL.employeeNomination().job(), MODEL.employeeNomination().role())
 
+
+
 		;
 
 		return script;

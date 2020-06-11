@@ -184,7 +184,13 @@ public class ProjectHallPageFlowPiece extends PieceOfScript {
 
 		.request("view " + Utils.toWords(code)+ " list").with_string("project id").with_string("type id").with_string("filter")
 		.comments("查看 " + title).need_login()
-		.got_page("project book list").title(title).list_of(code);
+		.got_page("project book list").title(title).list_of(code)
+
+		.request("mark project book as to be adjusted").with_string("item id").need_login()
+			.got_page("project book list")
+
+
+				;
 	}
 
 	protected void viewProjectOrgnization(PageFlowScript script, String title, String code) {

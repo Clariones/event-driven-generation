@@ -57,6 +57,8 @@ public class LaborQueryPiece extends PieceOfScript {
 				)
 
 
+
+
 			.query(MODEL.projectNomination()).which("project by role").with_string("project id").with_string("role").pagination()
 				.comments("按角色查询项目下的人")
 				.do_it_as()
@@ -64,6 +66,7 @@ public class LaborQueryPiece extends PieceOfScript {
 						MODEL.projectNomination().project().eq("${project id}")
 //						MODEL.projectNomination().projectRole().eq("${}")
 				)
+				.wants(MODEL.projectNomination().worker().employee())
 
 			.query(MODEL.laborRecord()).list_of("project nomination by type").with_string("project nomination id").with_string("type id").pagination()
 				.comments("按类型查询某人在项目中的出勤记录")

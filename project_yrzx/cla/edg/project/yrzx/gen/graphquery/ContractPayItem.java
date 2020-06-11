@@ -108,6 +108,15 @@ public class ContractPayItem extends BaseModelBean{
 		return member;
 	}
 
+	public DateTimeAttribute expectedTime(){
+		DateTimeAttribute member = new DateTimeAttribute();
+		member.setModelTypeName("date");
+		// member.setName("expectedTime");
+		member.setName("expected_time");
+		useMember(member);
+		return member;
+	}
+
 	public StringAttribute payCriteira(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");

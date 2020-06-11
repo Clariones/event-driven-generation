@@ -21,7 +21,7 @@
 
 
 
-=================Execute Report (Model Time 200608T1620) @Mon Jun 08 16:21:22 CST 2020, 267 objects and 2349 fields===========================
+=================Execute Report (Model Time 200611T1143) @Thu Jun 11 11:44:19 CST 2020, 270 objects and 2372 fields===========================
 from file "/Users/jarryzhou/githome/web-code-generator/sky/modeling/microservice/yrzx.xml"
 
 
@@ -856,10 +856,25 @@ Info: Add virtual field [working_statuss(es)] to <platform>
  processing: project_organization_type
 
 
+ processing: project_organization_type.project_organization_category.project_organization_category
+
+Info: Add virtual field [project_organization_types(es)] to <project_organization_category>
+	project_organization_type.project_organization_category
+
+
  processing: project_organization_type.platform.platform
 
 Info: Add virtual field [project_organization_types(es)] to <platform>
 	project_organization_type.platform
+
+
+ processing: project_organization_category
+
+
+ processing: project_organization_category.platform.platform
+
+Info: Add virtual field [project_organization_categorys(es)] to <platform>
+	project_organization_category.platform
 
 
  processing: project_nomination
@@ -1454,6 +1469,21 @@ Info: Add virtual field [labor_records(es)] to <labor_record_type>
 
 Info: Add virtual field [labor_records(es)] to <project>
 	labor_record.project
+
+
+ processing: work_overtime_record
+
+
+ processing: work_overtime_record.project_nomination.project_nomination
+
+Info: Add virtual field [work_overtime_records(es)] to <project_nomination>
+	work_overtime_record.project_nomination
+
+
+ processing: work_overtime_record.project.project
+
+Info: Add virtual field [work_overtime_records(es)] to <project>
+	work_overtime_record.project
 
 
  processing: labor_record_type
@@ -2933,6 +2963,15 @@ Info: Add virtual field [comments_records(es)] to <project_nomination>
 
 Info: Add virtual field [menus(es)] to <platform>
 	menu.platform
+
+
+ processing: worker
+
+
+ processing: worker.menu.menu
+
+Info: Add virtual field [workers(es)] to <menu>
+	worker.menu
 
 
  processing: contract_template_file
@@ -4437,7 +4476,7 @@ platform{
 		date_time_update	last_update_time('updateTime()'), verb: false, required: true,type:date_time_update;
 		int	version('2147483647'), verb: false, required: true,type:version;
 	}
-	references field(139){
+	references field(140){
 		platformConfigurationList	platform(系统配置)--platform;
 		contractTemplateList	platform(合同管理)--platform;
 		contractTypeList	platform(__no_group)--platform;
@@ -4469,6 +4508,7 @@ platform{
 		projectPhaseList	platform(__no_group)--platform;
 		workingStatusList	platform(__no_group)--platform;
 		projectOrganizationTypeList	platform(__no_group)--platform;
+		projectOrganizationCategoryList	platform(__no_group)--platform;
 		projectRoleList	platform(__no_group)--platform;
 		projectProgressStatusList	platform(__no_group)--platform;
 		dailyTaskCategoryList	platform(__no_group)--platform;
@@ -4837,7 +4877,7 @@ standard_contract{
 
 meta{name=contract_pay_item, vg4payer=合同管理, vg4payee=合同管理}
 contract_pay_item{
-	fields(10){
+	fields(11){
 		string	id('AB'), verb: false, required: true,type:id;
 		string	name('平台项目管理服务费'), verb: false, required: true,type:string;
 		string	brief('托管服务费首期支付|托管服务费二期支付|托管服务费三期支付|托管服务费四期支付|托管服务费五期支付'), verb: false, required: true,type:string;
@@ -4845,6 +4885,7 @@ contract_pay_item{
 		merchant	payer('$(object)'), verb: false, required: true, referenceBy: contractPayItemListAsPayer,type:merchant;
 		merchant	payee('$(object)'), verb: false, required: true, referenceBy: contractPayItemListAsPayee,type:merchant;
 		money	pay_amount('$0.00|$9999999.99'), verb: false, required: true,type:money;
+		date	expected_time('2020-05-05'), verb: false, required: true,type:date;
 		string	pay_criteira('合同款项支付条件文本描述'), verb: false, required: true,type:string;
 		pay_item_status	pay_item_status('$(object)'), verb: false, required: true, referenceBy: contractPayItemList,type:pay_item_status;
 		int	version('2147483647'), verb: false, required: true,type:version;
@@ -5571,7 +5612,7 @@ project{
 		platform	platform('$(object)'), verb: false, required: true, referenceBy: projectList,type:platform;
 		int	version('2147483647'), verb: false, required: true,type:version;
 	}
-	references field(52){
+	references field(53){
 		standardContractList	project(合同管理)--project;
 		workPackageList	project(项目运营)--project;
 		projectImageList	project(项目运营)--project;
@@ -5586,6 +5627,7 @@ project{
 		laborWageManagementSheetList	project(人力资源)--project;
 		laborDisputeList	project(人力资源)--project;
 		laborRecordList	project(__no_group)--project;
+		workOvertimeRecordList	project(__no_group)--project;
 		projectReportList	project(项目运营)--project;
 		projectCommandList	project(__no_group)--project;
 		loanFundList	project(__no_group)--project;
@@ -5704,17 +5746,34 @@ working_status{
 
 meta{name=project_organization_type, group_by=category, identified_by=code, features=setting}
 project_organization_type{
-	fields(6){
+	fields(8){
 		string	id('AB'), verb: false, required: true,type:id;
 		string	name('甲方代表|品牌代表|优荣平台|造价咨询|优荣招标|项目设计|项目经理|项目监理|项目审计|分包服务商|分包负责人|分包施工员|BIM技术'), verb: false, required: true,type:string;
 		string	code('PROPERTY_OWNER|BRADN_REP|PLATFORM|CONSTRUCTION_CONSULTANT|BIDDING|DESIGN|PROJECT_MANAGER|PROJECT_SUPERVISOR|PROJECT_AUDITOR|SERVICE_VENDOR|SERVICE_ADMIN|SERVICE_WORKER|BIM_TECH'), verb: false, required: true,type:string;
 		string	category('业主|品牌方|优荣平台|优荣平台|优荣平台|设计|项目管理|项目管理|项目管理|平行分包商|平行分包商|平行分包商'), verb: false, required: true,type:string;
+		project_organization_category	project_organization_category('$(object)'), verb: false, required: true, referenceBy: projectOrganizationTypeList,type:project_organization_category;
+		int	display_order('1|2|3|500'), verb: false, required: true,type:int;
 		platform	platform('$(object)'), verb: false, required: true, referenceBy: projectOrganizationTypeList,type:platform;
 		int	version('2147483647'), verb: false, required: true,type:version;
 	}
 	references field(2){
 		projectNominationList	type(__no_group)--type;
 		eventProjectWorkPositionList	project_job(__no_group)--project_job;
+	}
+} depth=2; isRoot = false
+
+meta{name=project_organization_category, identified_by=code, features=setting}
+project_organization_category{
+	fields(6){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('优荣代建|项目建设方|品牌输入方|BIM技术|工程监理|工程设计|工程勘测|工程招标|工程造价|质量检测|项目审计|项目规划部门|住建管理部门|档案管理部门|工程管理'), verb: false, required: true,type:string;
+		string	code('YR_CONSTRUCTION_AGENCY|PROJECT_CONSTRUCTION|BRAND|BIM|PROJECT_SUPERVISION|PROJECT_DESIGN|PROJECT_SURVEY|PROJECT_BIDDING|PROJECT_COST|QUALITY_CONTROL|PROJECT_AUDIT|PROJECT_PLANNING|HOUSING_MANAGEMENT|FILE_MANAGEMENT|PROJECT_MANAGEMENT'), verb: false, required: true,type:string;
+		int	display_order('1|2|3|500'), verb: false, required: true,type:int;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: projectOrganizationCategoryList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		projectOrganizationTypeList	project_organization_category(__no_group)--project_organization_category;
 	}
 } depth=1; isRoot = false
 
@@ -5734,7 +5793,7 @@ project_nomination{
 		date_time_update	last_update_time('updateTime()'), verb: false, required: true,type:date_time_update;
 		int	version('2147483647'), verb: false, required: true,type:version;
 	}
-	references field(23){
+	references field(24){
 		contractReviewRecordList	reviewer(__no_group)--reviewer;
 		contractCommentsRecordList	submitter(__no_group)--submitter;
 		projectMaterialReviewRecordList	reviewer(__no_group)--reviewer;
@@ -5746,6 +5805,7 @@ project_nomination{
 		laborWageManagementSheetListAsPaymentManager	payment_manager(__no_group)--contract_payment_manager;
 		laborDisputeList	applicant(__no_group)--applicant;
 		laborRecordList	project_nomination(__no_group)--project_nomination;
+		workOvertimeRecordList	project_nomination(__no_group)--project_nomination;
 		projectReportList	submitter(__no_group)--submitter;
 		projectCommandAssignmentList	reciever(__no_group)--reciever;
 		materialPreservedSampleList	material_manager(__no_group)--material_manager;
@@ -6314,7 +6374,7 @@ labor_dispute_type{
 
 meta{name=labor_record}
 labor_record{
-	fields(10){
+	fields(11){
 		string	id('AB'), verb: false, required: true,type:id;
 		project_nomination	project_nomination('$(object)'), verb: false, required: true, referenceBy: laborRecordList,type:project_nomination;
 		labor_record_type	type('$(object)'), verb: false, required: true, referenceBy: laborRecordList,type:labor_record_type;
@@ -6324,6 +6384,23 @@ labor_record{
 		date	afternoon_start_working_time('2020-05-05'), verb: false, required: true,type:date;
 		date	afternoon_end_working_time('2020-05-05'), verb: false, required: true,type:date;
 		project	project('$(object)'), verb: false, required: true, referenceBy: laborRecordList,type:project;
+		date_time_create	create_time('createTime()'), verb: false, required: true,type:date_time_create;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=6; isRoot = false
+
+meta{name=work_overtime_record}
+work_overtime_record{
+	fields(8){
+		string	id('AB'), verb: false, required: true,type:id;
+		project_nomination	project_nomination('$(object)'), verb: false, required: true, referenceBy: workOvertimeRecordList,type:project_nomination;
+		date	attendance_date('2020-05-05'), verb: false, required: true,type:date;
+		date	start_time('2020-05-05'), verb: false, required: true,type:date;
+		date	end_time('2020-05-05'), verb: false, required: true,type:date;
+		project	project('$(object)'), verb: false, required: true, referenceBy: workOvertimeRecordList,type:project;
+		date_time_create	create_time('createTime()'), verb: false, required: true,type:date_time_create;
 		int	version('2147483647'), verb: false, required: true,type:version;
 	}
 	references field(0){
@@ -8072,7 +8149,7 @@ comments_record{
 	}
 } depth=6; isRoot = false
 
-meta{name=menu, features=tree}
+meta{name=menu, features=tree, immutable_fields=code}
 menu{
 	fields(6){
 		string	id('AB'), verb: false, required: true,type:id;
@@ -8082,9 +8159,23 @@ menu{
 		platform	platform('$(object)'), verb: false, required: true, referenceBy: menuList,type:platform;
 		int	version('2147483647'), verb: false, required: true,type:version;
 	}
-	references field(0){
+	references field(1){
+		workerList	menu(__no_group)--menu;
 	}
 } depth=1; isRoot = false
+
+meta{name=worker}
+worker{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		int	name('123'), verb: false, required: true,type:int;
+		int	age('19'), verb: false, required: true,type:int;
+		menu	menu('$(object)'), verb: false, required: true, referenceBy: workerList,type:menu;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=2; isRoot = false
 
 meta{vg4platform=模板中心, name=contract_template_file}
 contract_template_file{
@@ -9322,7 +9413,7 @@ platform{
 		date_time_update	last_update_time('updateTime()'), verb: false, required: true,type:date_time_update;
 		int	version('2147483647'), verb: false, required: true,type:version;
 	}
-	references field(139){
+	references field(140){
 		platformConfigurationList	platform(系统配置)--platform;
 		contractTemplateList	platform(合同管理)--platform;
 		contractTypeList	platform(__no_group)--platform;
@@ -9354,6 +9445,7 @@ platform{
 		projectPhaseList	platform(__no_group)--platform;
 		workingStatusList	platform(__no_group)--platform;
 		projectOrganizationTypeList	platform(__no_group)--platform;
+		projectOrganizationCategoryList	platform(__no_group)--platform;
 		projectRoleList	platform(__no_group)--platform;
 		projectProgressStatusList	platform(__no_group)--platform;
 		dailyTaskCategoryList	platform(__no_group)--platform;
@@ -9722,7 +9814,7 @@ standard_contract{
 
 meta{name=contract_pay_item, vg4payer=合同管理, vg4payee=合同管理}
 contract_pay_item{
-	fields(10){
+	fields(11){
 		string	id('AB'), verb: false, required: true,type:id;
 		string	name('平台项目管理服务费'), verb: false, required: true,type:string;
 		string	brief('托管服务费首期支付|托管服务费二期支付|托管服务费三期支付|托管服务费四期支付|托管服务费五期支付'), verb: false, required: true,type:string;
@@ -9730,6 +9822,7 @@ contract_pay_item{
 		merchant	payer('$(object)'), verb: false, required: true, referenceBy: contractPayItemListAsPayer,type:merchant;
 		merchant	payee('$(object)'), verb: false, required: true, referenceBy: contractPayItemListAsPayee,type:merchant;
 		money	pay_amount('$0.00|$9999999.99'), verb: false, required: true,type:money;
+		date	expected_time('2020-05-05'), verb: false, required: true,type:date;
 		string	pay_criteira('合同款项支付条件文本描述'), verb: false, required: true,type:string;
 		pay_item_status	pay_item_status('$(object)'), verb: false, required: true, referenceBy: contractPayItemList,type:pay_item_status;
 		int	version('2147483647'), verb: false, required: true,type:version;
@@ -10456,7 +10549,7 @@ project{
 		platform	platform('$(object)'), verb: false, required: true, referenceBy: projectList,type:platform;
 		int	version('2147483647'), verb: false, required: true,type:version;
 	}
-	references field(52){
+	references field(53){
 		standardContractList	project(合同管理)--project;
 		workPackageList	project(项目运营)--project;
 		projectImageList	project(项目运营)--project;
@@ -10471,6 +10564,7 @@ project{
 		laborWageManagementSheetList	project(人力资源)--project;
 		laborDisputeList	project(人力资源)--project;
 		laborRecordList	project(__no_group)--project;
+		workOvertimeRecordList	project(__no_group)--project;
 		projectReportList	project(项目运营)--project;
 		projectCommandList	project(__no_group)--project;
 		loanFundList	project(__no_group)--project;
@@ -10589,17 +10683,34 @@ working_status{
 
 meta{name=project_organization_type, group_by=category, identified_by=code, features=setting}
 project_organization_type{
-	fields(6){
+	fields(8){
 		string	id('AB'), verb: false, required: true,type:id;
 		string	name('甲方代表|品牌代表|优荣平台|造价咨询|优荣招标|项目设计|项目经理|项目监理|项目审计|分包服务商|分包负责人|分包施工员|BIM技术'), verb: false, required: true,type:string;
 		string	code('PROPERTY_OWNER|BRADN_REP|PLATFORM|CONSTRUCTION_CONSULTANT|BIDDING|DESIGN|PROJECT_MANAGER|PROJECT_SUPERVISOR|PROJECT_AUDITOR|SERVICE_VENDOR|SERVICE_ADMIN|SERVICE_WORKER|BIM_TECH'), verb: false, required: true,type:string;
 		string	category('业主|品牌方|优荣平台|优荣平台|优荣平台|设计|项目管理|项目管理|项目管理|平行分包商|平行分包商|平行分包商'), verb: false, required: true,type:string;
+		project_organization_category	project_organization_category('$(object)'), verb: false, required: true, referenceBy: projectOrganizationTypeList,type:project_organization_category;
+		int	display_order('1|2|3|500'), verb: false, required: true,type:int;
 		platform	platform('$(object)'), verb: false, required: true, referenceBy: projectOrganizationTypeList,type:platform;
 		int	version('2147483647'), verb: false, required: true,type:version;
 	}
 	references field(2){
 		projectNominationList	type(__no_group)--type;
 		eventProjectWorkPositionList	project_job(__no_group)--project_job;
+	}
+} depth=2; isRoot = false
+
+meta{name=project_organization_category, identified_by=code, features=setting}
+project_organization_category{
+	fields(6){
+		string	id('AB'), verb: false, required: true,type:id;
+		string	name('优荣代建|项目建设方|品牌输入方|BIM技术|工程监理|工程设计|工程勘测|工程招标|工程造价|质量检测|项目审计|项目规划部门|住建管理部门|档案管理部门|工程管理'), verb: false, required: true,type:string;
+		string	code('YR_CONSTRUCTION_AGENCY|PROJECT_CONSTRUCTION|BRAND|BIM|PROJECT_SUPERVISION|PROJECT_DESIGN|PROJECT_SURVEY|PROJECT_BIDDING|PROJECT_COST|QUALITY_CONTROL|PROJECT_AUDIT|PROJECT_PLANNING|HOUSING_MANAGEMENT|FILE_MANAGEMENT|PROJECT_MANAGEMENT'), verb: false, required: true,type:string;
+		int	display_order('1|2|3|500'), verb: false, required: true,type:int;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: projectOrganizationCategoryList,type:platform;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(1){
+		projectOrganizationTypeList	project_organization_category(__no_group)--project_organization_category;
 	}
 } depth=1; isRoot = false
 
@@ -10619,7 +10730,7 @@ project_nomination{
 		date_time_update	last_update_time('updateTime()'), verb: false, required: true,type:date_time_update;
 		int	version('2147483647'), verb: false, required: true,type:version;
 	}
-	references field(23){
+	references field(24){
 		contractReviewRecordList	reviewer(__no_group)--reviewer;
 		contractCommentsRecordList	submitter(__no_group)--submitter;
 		projectMaterialReviewRecordList	reviewer(__no_group)--reviewer;
@@ -10631,6 +10742,7 @@ project_nomination{
 		laborWageManagementSheetListAsPaymentManager	payment_manager(__no_group)--contract_payment_manager;
 		laborDisputeList	applicant(__no_group)--applicant;
 		laborRecordList	project_nomination(__no_group)--project_nomination;
+		workOvertimeRecordList	project_nomination(__no_group)--project_nomination;
 		projectReportList	submitter(__no_group)--submitter;
 		projectCommandAssignmentList	reciever(__no_group)--reciever;
 		materialPreservedSampleList	material_manager(__no_group)--material_manager;
@@ -11199,7 +11311,7 @@ labor_dispute_type{
 
 meta{name=labor_record}
 labor_record{
-	fields(10){
+	fields(11){
 		string	id('AB'), verb: false, required: true,type:id;
 		project_nomination	project_nomination('$(object)'), verb: false, required: true, referenceBy: laborRecordList,type:project_nomination;
 		labor_record_type	type('$(object)'), verb: false, required: true, referenceBy: laborRecordList,type:labor_record_type;
@@ -11209,6 +11321,23 @@ labor_record{
 		date	afternoon_start_working_time('2020-05-05'), verb: false, required: true,type:date;
 		date	afternoon_end_working_time('2020-05-05'), verb: false, required: true,type:date;
 		project	project('$(object)'), verb: false, required: true, referenceBy: laborRecordList,type:project;
+		date_time_create	create_time('createTime()'), verb: false, required: true,type:date_time_create;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=6; isRoot = false
+
+meta{name=work_overtime_record}
+work_overtime_record{
+	fields(8){
+		string	id('AB'), verb: false, required: true,type:id;
+		project_nomination	project_nomination('$(object)'), verb: false, required: true, referenceBy: workOvertimeRecordList,type:project_nomination;
+		date	attendance_date('2020-05-05'), verb: false, required: true,type:date;
+		date	start_time('2020-05-05'), verb: false, required: true,type:date;
+		date	end_time('2020-05-05'), verb: false, required: true,type:date;
+		project	project('$(object)'), verb: false, required: true, referenceBy: workOvertimeRecordList,type:project;
+		date_time_create	create_time('createTime()'), verb: false, required: true,type:date_time_create;
 		int	version('2147483647'), verb: false, required: true,type:version;
 	}
 	references field(0){
@@ -12957,7 +13086,7 @@ comments_record{
 	}
 } depth=6; isRoot = false
 
-meta{name=menu, features=tree}
+meta{name=menu, features=tree, immutable_fields=code}
 menu{
 	fields(6){
 		string	id('AB'), verb: false, required: true,type:id;
@@ -12967,9 +13096,23 @@ menu{
 		platform	platform('$(object)'), verb: false, required: true, referenceBy: menuList,type:platform;
 		int	version('2147483647'), verb: false, required: true,type:version;
 	}
-	references field(0){
+	references field(1){
+		workerList	menu(__no_group)--menu;
 	}
 } depth=1; isRoot = false
+
+meta{name=worker}
+worker{
+	fields(5){
+		string	id('AB'), verb: false, required: true,type:id;
+		int	name('123'), verb: false, required: true,type:int;
+		int	age('19'), verb: false, required: true,type:int;
+		menu	menu('$(object)'), verb: false, required: true, referenceBy: workerList,type:menu;
+		int	version('2147483647'), verb: false, required: true,type:version;
+	}
+	references field(0){
+	}
+} depth=2; isRoot = false
 
 meta{vg4platform=模板中心, name=contract_template_file}
 contract_template_file{
