@@ -25,6 +25,7 @@ public class MainPageFlow extends BasePageFlowDescriptionScript {
 				.import_from(new ClientCRPageFlowPiece())
 				.import_from(new HomePageFlowPiece())
 				.import_from(new MiscPageFlowPiece())
+				.import_from(new MePageContractOrderPageFlowPiece())
 
 				// 查询
 				.import_from(new HomepageQueryPiece())
@@ -41,6 +42,7 @@ public class MainPageFlow extends BasePageFlowDescriptionScript {
 				.import_from(new MerchantQueryPiece())
 				.import_from(new LicenseQueryPiece())
 				.import_from(new MaterialQueryPiece())
+
 				;
 	}
 

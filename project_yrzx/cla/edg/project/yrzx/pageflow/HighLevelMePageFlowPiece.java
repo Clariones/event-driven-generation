@@ -11,7 +11,7 @@ public class HighLevelMePageFlowPiece extends PieceOfScript {
 					.got_page("me").title("我的").as_class("com.terapico.appview.MePage")
 						.may_request("view my project list")
 						.may_request("view my account list")
-						.may_request("view my order list")
+						.may_request("view my contract order")
 						.may_request("view my application list")
 						.may_request("view my recommendation list")
 						.may_request("view my emplacement list")
@@ -26,29 +26,6 @@ public class HighLevelMePageFlowPiece extends PieceOfScript {
 						.got_page("project list").title("我的项目").list_of("project")
 							.may_request("view project hall")
 
-
-				// 账户
-				.request("view my account list").with_string("filter")
-					.comments("查看我的账户").need_login()
-					.got_page("account list").title("我的账户").list_of("card")
-						.may_request("view account detail")
-				// 订单
-				.request("view my order list").with_string("filter").with_last_record_id()
-					.comments("查看我的订单. 订单计算后分类为: 待处理订单/已完成订单/其他/全部").need_login()
-					.got_page("order list").title("我的订单").list_of("order")
-						.may_request("view order detail")
-//				我的订单-->合同台账
-				.request("view contract record").with_string("merchant id")
-					.comments("我的订单-->合同台账")
-					.got_page("contract record")
-
-				.request("view contract payment")
-					.comments("合同付款")
-				 	.got_page("contract payment")
-
-				.request("view contract receipts")
-					.comments("合同收款")
-					.got_page("contract receipts")
 
 
 				// 装修申请
@@ -86,19 +63,24 @@ public class HighLevelMePageFlowPiece extends PieceOfScript {
 				.request("logout").comments("退出当前账号").no_login().no_footprint()
 					.got_page("me")
 
-				// 账户详情
+				// 我的账户
 				.request("view my account")
 					.comments("我的账户")
 					.got_page("my account")
 
-					//我的账单
-					.request("view account detail").with_string("account id").with_string("filter").with_last_record_id()
-						.comments("查看某个账户的详情,带明细").need_login().no_footprint()
-						.got_page("account detail").title("账户详情")
-							.may_request("view account record list")
-					.request("view account record list").with_string("account id").with_last_record_id()
-						.comments("查看某个账户的流水").need_login().no_footprint()
-						.got_page("account record list").title("账户明细").list_of("card")
+
+				//	我的账户 -> 我的账单
+				.request("view my account list").with_last_record_id()
+				.comments("查看我的账户").need_login()
+				.got_page("account list").title("我的账户").list_of("card")
+					//我的账户 -> 我的账单
+//					.request("view account detail").with_string("account id").with_string("filter").with_last_record_id()
+//						.comments("查看某个账户的详情,带明细").need_login().no_footprint()
+//						.got_page("account detail").title("账户详情")
+//							.may_request("view account record list")
+//					.request("view account record list").with_string("account id").with_last_record_id()
+//						.comments("查看某个账户的流水").need_login().no_footprint()
+//						.got_page("account record list").title("账户明细").list_of("card")
 
 					//绑定银行卡
 					.request("card detail")

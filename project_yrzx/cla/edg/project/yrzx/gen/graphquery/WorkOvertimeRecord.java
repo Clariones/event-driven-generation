@@ -4,9 +4,9 @@ import java.util.Map;
 
 import cla.edg.modelbean.*;
 
-public class LaborRecord extends BaseModelBean{
+public class WorkOvertimeRecord extends BaseModelBean{
 	public String getFullClassName() {
-		return "com.yrdec.yrzx.laborrecord.LaborRecord";
+		return "com.yrdec.yrzx.workovertimerecord.WorkOvertimeRecord";
 	}
 	// 枚举对象
 
@@ -19,17 +19,6 @@ public class LaborRecord extends BaseModelBean{
 		member.setMemberName("projectNomination");
 		member.setReferDirection(true);
 		member.setRelationName("projectNomination");
-		append(member);
-		return member;
-	}
-
-	public LaborRecordType type() {
-		LaborRecordType member = new LaborRecordType();
-		member.setModelTypeName("labor_record_type");
-		member.setName("type");
-		member.setMemberName("type");
-		member.setReferDirection(true);
-		member.setRelationName("type");
 		append(member);
 		return member;
 	}
@@ -68,38 +57,20 @@ public class LaborRecord extends BaseModelBean{
 		return member;
 	}
 
-	public DateTimeAttribute morningStartWorkingTime(){
+	public DateTimeAttribute startTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date");
-		// member.setName("morningStartWorkingTime");
-		member.setName("morning_start_working_time");
+		// member.setName("startTime");
+		member.setName("start_time");
 		useMember(member);
 		return member;
 	}
 
-	public DateTimeAttribute morningEndWorkingTime(){
+	public DateTimeAttribute endTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date");
-		// member.setName("morningEndWorkingTime");
-		member.setName("morning_end_working_time");
-		useMember(member);
-		return member;
-	}
-
-	public DateTimeAttribute afternoonStartWorkingTime(){
-		DateTimeAttribute member = new DateTimeAttribute();
-		member.setModelTypeName("date");
-		// member.setName("afternoonStartWorkingTime");
-		member.setName("afternoon_start_working_time");
-		useMember(member);
-		return member;
-	}
-
-	public DateTimeAttribute afternoonEndWorkingTime(){
-		DateTimeAttribute member = new DateTimeAttribute();
-		member.setModelTypeName("date");
-		// member.setName("afternoonEndWorkingTime");
-		member.setName("afternoon_end_working_time");
+		// member.setName("endTime");
+		member.setName("end_time");
 		useMember(member);
 		return member;
 	}

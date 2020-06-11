@@ -25,6 +25,17 @@ public class Menu extends BaseModelBean{
 
 	// 被引用的对象
 
+	public Worker workerList() {
+		Worker member = new Worker();
+		member.setModelTypeName("worker");
+		member.setName("menu");
+		member.setMemberName("workerList");
+		member.setRelationName("menu");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 
 	// 普通属性
 

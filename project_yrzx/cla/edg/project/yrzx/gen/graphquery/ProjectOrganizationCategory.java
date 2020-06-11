@@ -4,24 +4,13 @@ import java.util.Map;
 
 import cla.edg.modelbean.*;
 
-public class ProjectOrganizationType extends BaseModelBean{
+public class ProjectOrganizationCategory extends BaseModelBean{
 	public String getFullClassName() {
-		return "com.yrdec.yrzx.projectorganizationtype.ProjectOrganizationType";
+		return "com.yrdec.yrzx.projectorganizationcategory.ProjectOrganizationCategory";
 	}
 	// 枚举对象
 
 	// 引用的对象
-
-	public ProjectOrganizationCategory projectOrganizationCategory() {
-		ProjectOrganizationCategory member = new ProjectOrganizationCategory();
-		member.setModelTypeName("project_organization_category");
-		member.setName("project_organization_category");
-		member.setMemberName("projectOrganizationCategory");
-		member.setReferDirection(true);
-		member.setRelationName("projectOrganizationCategory");
-		append(member);
-		return member;
-	}
 
 	public Platform platform() {
 		Platform member = new Platform();
@@ -36,23 +25,12 @@ public class ProjectOrganizationType extends BaseModelBean{
 
 	// 被引用的对象
 
-	public ProjectNomination projectNominationList() {
-		ProjectNomination member = new ProjectNomination();
-		member.setModelTypeName("project_nomination");
-		member.setName("type");
-		member.setMemberName("projectNominationList");
-		member.setRelationName("type");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-
-	public EventProjectWorkPosition eventProjectWorkPositionList() {
-		EventProjectWorkPosition member = new EventProjectWorkPosition();
-		member.setModelTypeName("event_project_work_position");
-		member.setName("project_job");
-		member.setMemberName("eventProjectWorkPositionList");
-		member.setRelationName("projectJob");
+	public ProjectOrganizationType projectOrganizationTypeList() {
+		ProjectOrganizationType member = new ProjectOrganizationType();
+		member.setModelTypeName("project_organization_type");
+		member.setName("project_organization_category");
+		member.setMemberName("projectOrganizationTypeList");
+		member.setRelationName("projectOrganizationCategory");
 		member.setReferDirection(false);
 		append(member);
 		return member;
@@ -84,15 +62,6 @@ public class ProjectOrganizationType extends BaseModelBean{
 		member.setModelTypeName("string");
 		// member.setName("code");
 		member.setName("code");
-		useMember(member);
-		return member;
-	}
-
-	public StringAttribute category(){
-		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
-		// member.setName("category");
-		member.setName("category");
 		useMember(member);
 		return member;
 	}

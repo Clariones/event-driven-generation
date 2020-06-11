@@ -355,6 +355,17 @@ public class Platform extends BaseModelBean{
 		return member;
 	}
 
+	public ProjectOrganizationCategory projectOrganizationCategoryList() {
+		ProjectOrganizationCategory member = new ProjectOrganizationCategory();
+		member.setModelTypeName("project_organization_category");
+		member.setName("platform");
+		member.setMemberName("projectOrganizationCategoryList");
+		member.setRelationName("platform");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 	public ProjectRole projectRoleList() {
 		ProjectRole member = new ProjectRole();
 		member.setModelTypeName("project_role");
