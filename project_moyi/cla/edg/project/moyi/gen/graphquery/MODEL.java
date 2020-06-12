@@ -1055,6 +1055,24 @@ public class MODEL{
 		return rst;
 	}
 
+	public static RankConfiguration rankConfiguration() {
+		RankConfiguration rst = new RankConfiguration();
+		rst.setModelTypeName("rank_configuration");
+		return rst;
+	}
+
+	public static ArtworkRank artworkRank() {
+		ArtworkRank rst = new ArtworkRank();
+		rst.setModelTypeName("artwork_rank");
+		return rst;
+	}
+
+	public static ArtworkAuctionSortingItem artworkAuctionSortingItem() {
+		ArtworkAuctionSortingItem rst = new ArtworkAuctionSortingItem();
+		rst.setModelTypeName("artwork_auction_sorting_item");
+		return rst;
+	}
+
 	public static UserDomain userDomain() {
 		UserDomain rst = new UserDomain();
 		rst.setModelTypeName("user_domain");

@@ -454,6 +454,28 @@ public class Artwork extends BaseModelBean{
 		return member;
 	}
 
+	public ArtworkRank artworkRankList() {
+		ArtworkRank member = new ArtworkRank();
+		member.setModelTypeName("artwork_rank");
+		member.setName("artwork");
+		member.setMemberName("artworkRankList");
+		member.setRelationName("artwork");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ArtworkAuctionSortingItem artworkAuctionSortingItemList() {
+		ArtworkAuctionSortingItem member = new ArtworkAuctionSortingItem();
+		member.setModelTypeName("artwork_auction_sorting_item");
+		member.setName("artwork");
+		member.setMemberName("artworkAuctionSortingItemList");
+		member.setRelationName("artwork");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 
 	// 普通属性
 

@@ -70,7 +70,7 @@ public class MoyiPlatformConfiguration extends BaseModelBean{
 
 	public StringAttribute communityDeclarationLink(){
 		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
+		member.setModelTypeName("string_url");
 		// member.setName("communityDeclarationLink");
 		member.setName("community_declaration_link");
 		useMember(member);
@@ -79,7 +79,7 @@ public class MoyiPlatformConfiguration extends BaseModelBean{
 
 	public StringAttribute aboutUsLink(){
 		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
+		member.setModelTypeName("string_url");
 		// member.setName("aboutUsLink");
 		member.setName("about_us_link");
 		useMember(member);
@@ -88,7 +88,7 @@ public class MoyiPlatformConfiguration extends BaseModelBean{
 
 	public StringAttribute appDownloadLink(){
 		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
+		member.setModelTypeName("string_url");
 		// member.setName("appDownloadLink");
 		member.setName("app_download_link");
 		useMember(member);
@@ -268,7 +268,7 @@ public class MoyiPlatformConfiguration extends BaseModelBean{
 
 	public StringAttribute h5ServerPrefix(){
 		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
+		member.setModelTypeName("string_url");
 		// member.setName("h5ServerPrefix");
 		member.setName("h5server_prefix");
 		useMember(member);
@@ -277,7 +277,7 @@ public class MoyiPlatformConfiguration extends BaseModelBean{
 
 	public StringAttribute testServerPrefix(){
 		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
+		member.setModelTypeName("string_url");
 		// member.setName("testServerPrefix");
 		member.setName("test_server_prefix");
 		useMember(member);
@@ -286,7 +286,7 @@ public class MoyiPlatformConfiguration extends BaseModelBean{
 
 	public StringAttribute previewServerPrefix(){
 		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
+		member.setModelTypeName("string_url");
 		// member.setName("previewServerPrefix");
 		member.setName("preview_server_prefix");
 		useMember(member);

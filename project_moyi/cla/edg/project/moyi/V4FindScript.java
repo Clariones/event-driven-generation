@@ -3,6 +3,7 @@ package cla.edg.project.moyi;
 import cla.edg.pageflow.PageFlowScript;
 import cla.edg.pageflow.PieceOfScript;
 import cla.edg.project.moyi.gen.graphquery.ArtworkAuctionStatus;
+import cla.edg.project.moyi.gen.graphquery.InkDeedStatus;
 import cla.edg.project.moyi.gen.graphquery.MODEL;
 import cla.edg.project.moyi.gen.graphquery.SurvivalStatus;
 
@@ -163,7 +164,46 @@ public class V4FindScript extends PieceOfScript {
 				.do_it_as()
 					.where(MODEL.moyiShop().shopkeeper().artistListAsMoyiUser().id().eq("${artist}"))
 					.wants(MODEL.moyiShop().certificate().moyiShopType())
+
+			// 店铺关注数量
+			.find(MODEL.artworkFans()).which("for calc shop fans count").with_string("shop id")
+				.comments("为计算店铺的总关注量,统计作品的关注量")
+				.do_it_as().count()
+					.where(MODEL.artworkFans().artwork().artworkAuctionList().moyiShop().eq("${shop id}"))
 					
+			.find(MODEL.artistFans()).which("for calc shop fans count").with_string("shop id")
+				.comments("为计算店铺的总关注量,统计艺术家的关注量")
+				.do_it_as().count()
+					.where(MODEL.artistFans().artist().artworkList().artworkAuctionList().moyiShop().eq("${shop id}"))
+					
+			.query(MODEL.artwork()).list_of("order by rank").pagination()
+				.comments("按照2020-06-08新定义的顺序,查询所有的艺术品").need_know(MODEL.artworkRank().getFullClassName())
+				.do_it_as()
+					.where(MODEL.artwork().active().code().eq(SurvivalStatus.NORMAL))
+					.order_by(MODEL.artwork().artworkRankList().rankPoint()).desc()
+					.order_by(MODEL.artwork().artworkRankList().artwork()).desc()
+					
+			// 店铺内的拍品改成 全部拍品 后的查询
+			.query(MODEL.artworkAuction()).list_of("all in shop").pagination().with_string("shop id").with_date("anchor time")
+				.comments("游客查看店铺详情中的 所有拍品 列表查询")
+				.do_it_as()
+					.where(MODEL.artworkAuction().artworkAuctionSortingItemListAsArtworkAuction().moyiShop().eq("${shop id}"))
+					.order_by(MODEL.artworkAuction().artworkAuctionSortingItemListAsArtworkAuction().sortPriority()).asc()
+					.order_by(MODEL.artworkAuction().artworkAuctionSortingItemListAsArtworkAuction().recordTime()).desc()
+					.order_by(MODEL.artworkAuction().artworkAuctionSortingItemListAsArtworkAuction().artworkAuction()).desc()
+			.find(MODEL.artworkAuctionSortingItem()).which("by auction and shop").with_string("shop").with_string("auction")
+				.comments("查询当前店铺的某个拍品的排序信息")
+				.do_it_as()
+					.where(MODEL.artworkAuctionSortingItem().artworkAuction().eq("${auction}"),
+							MODEL.artworkAuctionSortingItem().moyiShop().eq("${shop}"))
+			.find(MODEL.inkDeed()).which("sold to other user").with_string("artwork auction id").with_string("current user id")
+				.comments("统计有多少墨契卖给别人了")
+				.do_it_as().count()
+					.where(MODEL.inkDeed().auction().eq("${artwork auction id}"),
+						MODEL.inkDeed().status().in(InkDeedStatus.BE_DRAWN, InkDeedStatus.BOOKED)
+							.or(MODEL.inkDeed().status().not_in(InkDeedStatus.DORMANT, InkDeedStatus.DESTROYED)
+									.and(MODEL.inkDeed().holder().not("${current user id}")))
+						)
 		;
 	}
 }

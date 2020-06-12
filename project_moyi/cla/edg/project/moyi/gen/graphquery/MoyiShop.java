@@ -157,6 +157,17 @@ public class MoyiShop extends BaseModelBean{
 		return member;
 	}
 
+	public ArtworkAuctionSortingItem artworkAuctionSortingItemList() {
+		ArtworkAuctionSortingItem member = new ArtworkAuctionSortingItem();
+		member.setModelTypeName("artwork_auction_sorting_item");
+		member.setName("moyi_shop");
+		member.setMemberName("artworkAuctionSortingItemList");
+		member.setRelationName("moyiShop");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 
 	// 普通属性
 

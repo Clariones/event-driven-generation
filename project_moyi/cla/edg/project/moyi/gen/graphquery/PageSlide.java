@@ -134,7 +134,7 @@ public class PageSlide extends BaseModelBean{
 
 	public StringAttribute linkToUrl(){
 		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
+		member.setModelTypeName("string_url");
 		// member.setName("linkToUrl");
 		member.setName("link_to_url");
 		useMember(member);

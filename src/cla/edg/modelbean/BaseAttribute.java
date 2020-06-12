@@ -1,5 +1,8 @@
 package cla.edg.modelbean;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import cla.edg.modelbean.LogicalOperator.Operator;
 
 public class BaseAttribute {
@@ -7,6 +10,7 @@ public class BaseAttribute {
 	protected boolean parentDirection;
 	protected String modelTypeName;
 	protected BaseModelBean containerBean;
+	protected Map<String, Object> extData;
 	
 	public BaseModelBean getContainerBean() {
 		return containerBean;
@@ -56,5 +60,18 @@ public class BaseAttribute {
 	}
 	public LogicalOperator bigger_or_eq(Object o) {
 		return LogicalOperator.create(Operator.bigger_or_eq, this, o);
+	}
+	
+	public Map<String, Object> getExtData() {
+		if (extData == null) {
+			extData = new HashMap<>();
+		}
+		return extData;
+	}
+	public void setExtData(Map<String, Object> extData) {
+		this.extData = extData;
+	}
+	public void addExtData(String key, Object value) {
+		getExtData().put(key, value);
 	}
 }

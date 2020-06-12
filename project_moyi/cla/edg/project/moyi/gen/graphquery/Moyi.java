@@ -1147,6 +1147,28 @@ public class Moyi extends BaseModelBean{
 		return member;
 	}
 
+	public RankConfiguration rankConfigurationList() {
+		RankConfiguration member = new RankConfiguration();
+		member.setModelTypeName("rank_configuration");
+		member.setName("moyi");
+		member.setMemberName("rankConfigurationList");
+		member.setRelationName("moyi");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ArtworkRank artworkRankList() {
+		ArtworkRank member = new ArtworkRank();
+		member.setModelTypeName("artwork_rank");
+		member.setName("moyi");
+		member.setMemberName("artworkRankList");
+		member.setRelationName("moyi");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 
 	// 普通属性
 

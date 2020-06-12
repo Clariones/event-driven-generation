@@ -48,7 +48,7 @@ public class MoyiPlatformConfigurationV2 extends BaseModelBean{
 
 	public StringAttribute auctionProcedurePage(){
 		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
+		member.setModelTypeName("string_url");
 		// member.setName("auctionProcedurePage");
 		member.setName("auction_procedure_page");
 		useMember(member);
@@ -147,7 +147,7 @@ public class MoyiPlatformConfigurationV2 extends BaseModelBean{
 
 	public StringAttribute inkDeedSaleProtocol(){
 		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
+		member.setModelTypeName("string_url");
 		// member.setName("inkDeedSaleProtocol");
 		member.setName("ink_deed_sale_protocol");
 		useMember(member);
@@ -156,7 +156,7 @@ public class MoyiPlatformConfigurationV2 extends BaseModelBean{
 
 	public StringAttribute shopLocatingProtocol(){
 		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
+		member.setModelTypeName("string_url");
 		// member.setName("shopLocatingProtocol");
 		member.setName("shop_locating_protocol");
 		useMember(member);
@@ -165,7 +165,7 @@ public class MoyiPlatformConfigurationV2 extends BaseModelBean{
 
 	public StringAttribute ownershipCertificateProtocol(){
 		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
+		member.setModelTypeName("string_url");
 		// member.setName("ownershipCertificateProtocol");
 		member.setName("ownership_certificate_protocol");
 		useMember(member);
@@ -174,7 +174,7 @@ public class MoyiPlatformConfigurationV2 extends BaseModelBean{
 
 	public StringAttribute artworkAuctionProtocol(){
 		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
+		member.setModelTypeName("string_url");
 		// member.setName("artworkAuctionProtocol");
 		member.setName("artwork_auction_protocol");
 		useMember(member);
@@ -183,7 +183,7 @@ public class MoyiPlatformConfigurationV2 extends BaseModelBean{
 
 	public StringAttribute autoBuyIbProtocol(){
 		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
+		member.setModelTypeName("string_url");
 		// member.setName("autoBuyIbProtocol");
 		member.setName("auto_buy_ib_protocol");
 		useMember(member);
@@ -192,7 +192,7 @@ public class MoyiPlatformConfigurationV2 extends BaseModelBean{
 
 	public StringAttribute affiliateServerPrefix(){
 		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
+		member.setModelTypeName("string_url");
 		// member.setName("affiliateServerPrefix");
 		member.setName("affiliate_server_prefix");
 		useMember(member);
@@ -201,7 +201,7 @@ public class MoyiPlatformConfigurationV2 extends BaseModelBean{
 
 	public StringAttribute affiliateServerLink(){
 		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
+		member.setModelTypeName("string_url");
 		// member.setName("affiliateServerLink");
 		member.setName("affiliate_server_link");
 		useMember(member);
@@ -237,7 +237,7 @@ public class MoyiPlatformConfigurationV2 extends BaseModelBean{
 
 	public StringAttribute withdrawIntroductionUrl(){
 		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
+		member.setModelTypeName("string_url");
 		// member.setName("withdrawIntroductionUrl");
 		member.setName("withdraw_introduction_url");
 		useMember(member);
@@ -318,7 +318,7 @@ public class MoyiPlatformConfigurationV2 extends BaseModelBean{
 
 	public StringAttribute shopDepositProtocol(){
 		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
+		member.setModelTypeName("string_url");
 		// member.setName("shopDepositProtocol");
 		member.setName("shop_deposit_protocol");
 		useMember(member);
@@ -327,7 +327,7 @@ public class MoyiPlatformConfigurationV2 extends BaseModelBean{
 
 	public StringAttribute customerServicePage(){
 		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
+		member.setModelTypeName("string_url");
 		// member.setName("customerServicePage");
 		member.setName("customer_service_page");
 		useMember(member);

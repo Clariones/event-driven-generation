@@ -18,6 +18,7 @@ public class AdditionalPlatformConfiguration extends BaseModelBean{
 	public static EnumAttribute CONTACT_WECHAT = new EnumAttribute("com.terapico.moyi.additionalplatformconfiguration.AdditionalPlatformConfiguration", "CONTACT_WECHAT");
 	public static EnumAttribute MESSAGE_BUY_INKDEED_IN_PDP = new EnumAttribute("com.terapico.moyi.additionalplatformconfiguration.AdditionalPlatformConfiguration", "MESSAGE_BUY_INKDEED_IN_PDP");
 	public static EnumAttribute COLORS_FOR_SECTIONS = new EnumAttribute("com.terapico.moyi.additionalplatformconfiguration.AdditionalPlatformConfiguration", "COLORS_FOR_SECTIONS");
+	public static EnumAttribute TIPS_WHEN_OPEN_SHOP = new EnumAttribute("com.terapico.moyi.additionalplatformconfiguration.AdditionalPlatformConfiguration", "TIPS_WHEN_OPEN_SHOP");
 
 	// 引用的对象
 

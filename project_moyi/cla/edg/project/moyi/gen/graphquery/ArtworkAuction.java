@@ -311,6 +311,28 @@ public class ArtworkAuction extends BaseModelBean{
 		return member;
 	}
 
+	public ArtworkAuctionSortingItem artworkAuctionSortingItemListAsArtworkAuction() {
+		ArtworkAuctionSortingItem member = new ArtworkAuctionSortingItem();
+		member.setModelTypeName("artwork_auction_sorting_item");
+		member.setName("artwork_auction");
+		member.setMemberName("artworkAuctionSortingItemListAsArtworkAuction");
+		member.setRelationName("artworkAuction");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ArtworkAuctionSortingItem artworkAuctionSortingItemListAsLastArtworkAuction() {
+		ArtworkAuctionSortingItem member = new ArtworkAuctionSortingItem();
+		member.setModelTypeName("artwork_auction_sorting_item");
+		member.setName("last_artwork_auction");
+		member.setMemberName("artworkAuctionSortingItemListAsLastArtworkAuction");
+		member.setRelationName("artworkAuction");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 
 	// 普通属性
 

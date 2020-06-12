@@ -49,6 +49,20 @@ public class V4PageFlow extends PieceOfScript {
 			.request("view artist resume in h5").with_string("artist id").with_string("invite code")
 				.comments("从分享中打开艺术家履历H5页面").no_login().can_refresh()
 				.got_page("artist resume h5").title("艺术家")
+				
+		// 店铺详情改了列表业务规则,新增的"下一页所有拍品"
+			.request("view next page autions in shop").with_string("shop id").with_string("timestamp string").with_last_record_id()
+				.comments("游客查看店铺的下一页所有拍品").no_footprint().no_login()
+				.got_page("store detail next page auctions").as_class("com.terapico.moyi.nativeappv2pageview.StoreDetailPage")
+				
+		// 下架拍品
+			.request("show confirm off sale auction").with_string("artwork auction id")
+				.comments("显示 确认下架 或者 不能下架 的popup").need_login().no_footprint()
+				.got_popup_page()
+					.may_request("confirm to off sale auction")
+			.request("confirm to off sale auction").with_string("artwork auction id")
+				.comments("确认执行 拍品下架 的操作").need_login().no_footprint()
+				.got_page("artwork auction detail")
 		;
 	}
 }

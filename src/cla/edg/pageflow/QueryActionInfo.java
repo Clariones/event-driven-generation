@@ -473,6 +473,9 @@ public class QueryActionInfo {
 				if (standOnVarName.equals("data")) {
 					standOnVarName = "asList(data)";
 				}
+				if (standOnVarName.equals("lastRecord")) {
+					standOnVarName = "asList(lastRecord)";
+				}
 			}
 			result.add(Utils.put("enhancedTypeName", enhancedTypeName)
 					.put("enhancedListVarName", enhancedListVarName)

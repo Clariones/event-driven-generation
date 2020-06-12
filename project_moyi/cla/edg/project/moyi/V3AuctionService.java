@@ -43,6 +43,9 @@ public class V3AuctionService extends BaseMoyiEventScript {
 				.rule_comments("有效荐宝全部保留")
 				.rule_comments("竞拍保证金全部已经退回,所以要保证所有竞拍保证金全部无效")
 
+//			.on_event("delist auction").with("artwork auction")
+//				.comments("处理下架事项")
+				
 			.on_event("reward for refferral").comments("对店铺推荐者发放奖励")
 			// //////////////////
 			// 以下为内部消息
