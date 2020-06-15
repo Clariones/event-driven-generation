@@ -4,21 +4,21 @@ import java.util.Map;
 
 import cla.edg.modelbean.*;
 
-public class DemoProduct extends BaseModelBean {
+public class ChangeRequest extends BaseModelBean {
   public String getFullClassName() {
-    return "com.doublechaintech.optical.demoproduct.DemoProduct";
+    return "com.doublechaintech.optical.changerequest.ChangeRequest";
   }
   // 枚举对象
 
   // 引用的对象
 
-  public Category category() {
-    Category member = new Category();
-    member.setModelTypeName("category");
-    member.setName("category");
-    member.setMemberName("category");
+  public ChangeRequestType requestType() {
+    ChangeRequestType member = new ChangeRequestType();
+    member.setModelTypeName("change_request_type");
+    member.setName("request_type");
+    member.setMemberName("requestType");
     member.setReferDirection(true);
-    member.setRelationName("category");
+    member.setRelationName("requestType");
     append(member);
     return member;
   }
@@ -36,12 +36,12 @@ public class DemoProduct extends BaseModelBean {
 
   // 被引用的对象
 
-  public DemoSku demoSkuList() {
-    DemoSku member = new DemoSku();
-    member.setModelTypeName("demo_sku");
-    member.setName("demo_product");
-    member.setMemberName("demoSkuList");
-    member.setRelationName("demoProduct");
+  public EventInvitor eventInvitorList() {
+    EventInvitor member = new EventInvitor();
+    member.setModelTypeName("event_invitor");
+    member.setName("change_request");
+    member.setMemberName("eventInvitorList");
+    member.setRelationName("changeRequest");
     member.setReferDirection(false);
     append(member);
     return member;
@@ -67,11 +67,29 @@ public class DemoProduct extends BaseModelBean {
     return member;
   }
 
-  public StringAttribute heroImage() {
+  public DateTimeAttribute createTime() {
+    DateTimeAttribute member = new DateTimeAttribute();
+    member.setModelTypeName("date_time_create");
+    // member.setName("createTime");
+    member.setName("create_time");
+    useMember(member);
+    return member;
+  }
+
+  public StringAttribute remoteIp() {
     StringAttribute member = new StringAttribute();
-    member.setModelTypeName("string_image");
-    // member.setName("heroImage");
-    member.setName("hero_image");
+    member.setModelTypeName("string_client_ip");
+    // member.setName("remoteIp");
+    member.setName("remote_ip");
+    useMember(member);
+    return member;
+  }
+
+  public BooleanAttribute commited() {
+    BooleanAttribute member = new BooleanAttribute();
+    member.setModelTypeName("bool");
+    // member.setName("commited");
+    member.setName("commited");
     useMember(member);
     return member;
   }

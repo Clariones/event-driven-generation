@@ -4,21 +4,21 @@ import java.util.Map;
 
 import cla.edg.modelbean.*;
 
-public class Slide extends BaseModelBean {
+public class EventInvitor extends BaseModelBean {
   public String getFullClassName() {
-    return "com.doublechaintech.optical.slide.Slide";
+    return "com.doublechaintech.optical.eventinvitor.EventInvitor";
   }
   // 枚举对象
 
   // 引用的对象
 
-  public Page page() {
-    Page member = new Page();
-    member.setModelTypeName("page");
-    member.setName("page");
-    member.setMemberName("page");
+  public ChangeRequest changeRequest() {
+    ChangeRequest member = new ChangeRequest();
+    member.setModelTypeName("change_request");
+    member.setName("change_request");
+    member.setMemberName("changeRequest");
     member.setReferDirection(true);
-    member.setRelationName("page");
+    member.setRelationName("changeRequest");
     append(member);
     return member;
   }
@@ -45,38 +45,38 @@ public class Slide extends BaseModelBean {
     return member;
   }
 
-  public NumberAttribute displayOrder() {
-    NumberAttribute member = new NumberAttribute();
-    member.setModelTypeName("int");
-    // member.setName("displayOrder");
-    member.setName("display_order");
-    useMember(member);
-    return member;
-  }
-
-  public StringAttribute imageUrl() {
-    StringAttribute member = new StringAttribute();
-    member.setModelTypeName("string_image");
-    // member.setName("imageUrl");
-    member.setName("image_url");
-    useMember(member);
-    return member;
-  }
-
-  public StringAttribute videoUrl() {
-    StringAttribute member = new StringAttribute();
-    member.setModelTypeName("string_image");
-    // member.setName("videoUrl");
-    member.setName("video_url");
-    useMember(member);
-    return member;
-  }
-
-  public StringAttribute linkToUrl() {
+  public StringAttribute mobile() {
     StringAttribute member = new StringAttribute();
     member.setModelTypeName("string");
-    // member.setName("linkToUrl");
-    member.setName("link_to_url");
+    // member.setName("mobile");
+    member.setName("mobile");
+    useMember(member);
+    return member;
+  }
+
+  public StringAttribute fieldGroup() {
+    StringAttribute member = new StringAttribute();
+    member.setModelTypeName("string");
+    // member.setName("fieldGroup");
+    member.setName("field_group");
+    useMember(member);
+    return member;
+  }
+
+  public StringAttribute eventInitiatorType() {
+    StringAttribute member = new StringAttribute();
+    member.setModelTypeName("string");
+    // member.setName("eventInitiatorType");
+    member.setName("event_initiator_type");
+    useMember(member);
+    return member;
+  }
+
+  public StringAttribute eventInitiatorId() {
+    StringAttribute member = new StringAttribute();
+    member.setModelTypeName("string");
+    // member.setName("eventInitiatorId");
+    member.setName("event_initiator_id");
     useMember(member);
     return member;
   }

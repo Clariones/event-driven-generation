@@ -18,7 +18,7 @@ public class Main {
 		testPageFlow(new MainPageFlow());
 //		testV3EventService(new V3InkDeedService());
 //		testV3EventService(new V3AuctionService());
-        // testChagneRequest(new MainChangeRequest().getSpec());
+        testChagneRequest(new MainChangeRequest().getSpec());
 	}
 
 	private static void testPageFlow(BasePageFlowDescriptionScript test) throws Exception {
@@ -37,7 +37,7 @@ public class Main {
         ChangeRequestGenerator generator = new ChangeRequestGenerator();
         generator.setChangeRequestSpec(script);
         generator.setProjectName("optical");
-        generator.setOrgName("cla");
+        generator.setOrgName("doublechaintech");
         List<GenrationResult> files = generator.runJob();
 
         String outputFolder = "/works/jobs/optical_v1/workspace/optical-biz-suite/bizcore/WEB-INF";

@@ -4,25 +4,14 @@ import java.util.Map;
 
 import cla.edg.modelbean.*;
 
-public class CoatingType extends BaseModelBean {
+public class ChangeRequestType extends BaseModelBean {
   public String getFullClassName() {
-    return "com.doublechaintech.optical.coatingtype.CoatingType";
+    return "com.doublechaintech.optical.changerequesttype.ChangeRequestType";
   }
   // 枚举对象
-  public static EnumAttribute STANDARD_AR_COATING =
+  public static EnumAttribute TEST_CR =
       new EnumAttribute(
-          "com.doublechaintech.optical.coatingtype.CoatingType", "STANDARD_AR_COATING");
-  public static EnumAttribute SUPER_HYDROPHOBIC_WATER_RESISTANT_AR_COATING =
-      new EnumAttribute(
-          "com.doublechaintech.optical.coatingtype.CoatingType",
-          "SUPER_HYDROPHOBIC_WATER_RESISTANT_AR_COATING");
-  public static EnumAttribute OLEOPHOBIC_AR_COATING =
-      new EnumAttribute(
-          "com.doublechaintech.optical.coatingtype.CoatingType", "OLEOPHOBIC_AR_COATING");
-  public static EnumAttribute MIRROR_FINISH_OLEOPHOBIC_COATING =
-      new EnumAttribute(
-          "com.doublechaintech.optical.coatingtype.CoatingType",
-          "MIRROR_FINISH_OLEOPHOBIC_COATING");
+          "com.doublechaintech.optical.changerequesttype.ChangeRequestType", "TEST_CR");
 
   // 引用的对象
 
@@ -39,12 +28,12 @@ public class CoatingType extends BaseModelBean {
 
   // 被引用的对象
 
-  public LensArCoating lensArCoatingList() {
-    LensArCoating member = new LensArCoating();
-    member.setModelTypeName("lens_ar_coating");
-    member.setName("coating_type");
-    member.setMemberName("lensArCoatingList");
-    member.setRelationName("coatingType");
+  public ChangeRequest changeRequestList() {
+    ChangeRequest member = new ChangeRequest();
+    member.setModelTypeName("change_request");
+    member.setName("request_type");
+    member.setMemberName("changeRequestList");
+    member.setRelationName("requestType");
     member.setReferDirection(false);
     append(member);
     return member;
@@ -75,6 +64,42 @@ public class CoatingType extends BaseModelBean {
     member.setModelTypeName("string");
     // member.setName("code");
     member.setName("code");
+    useMember(member);
+    return member;
+  }
+
+  public StringAttribute icon() {
+    StringAttribute member = new StringAttribute();
+    member.setModelTypeName("string");
+    // member.setName("icon");
+    member.setName("icon");
+    useMember(member);
+    return member;
+  }
+
+  public NumberAttribute displayOrder() {
+    NumberAttribute member = new NumberAttribute();
+    member.setModelTypeName("int");
+    // member.setName("displayOrder");
+    member.setName("display_order");
+    useMember(member);
+    return member;
+  }
+
+  public StringAttribute bindTypes() {
+    StringAttribute member = new StringAttribute();
+    member.setModelTypeName("string_longtext");
+    // member.setName("bindTypes");
+    member.setName("bind_types");
+    useMember(member);
+    return member;
+  }
+
+  public StringAttribute stepConfiguration() {
+    StringAttribute member = new StringAttribute();
+    member.setModelTypeName("string_longtext");
+    // member.setName("stepConfiguration");
+    member.setName("step_configuration");
     useMember(member);
     return member;
   }
