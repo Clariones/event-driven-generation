@@ -126,7 +126,7 @@ public class ChangeRequestSpecBuildingServiceLocalImpl extends CRSBuildingServic
 		stepSpec.addEvent(newEvent);
 		EventSpec spec = sureEvent(crName, stepName, tmpName);
 		spec.addI18n("zh_CN", stepSpec.getTitle());
-		spec.getPrototype().tryeAddI18n("zh_CN", stepSpec.getTitle());
+		spec.getPrototype().tryAddI18n("zh_CN", stepSpec.getTitle());
 		return tmpName;
 	}
 
@@ -375,6 +375,19 @@ public class ChangeRequestSpecBuildingServiceLocalImpl extends CRSBuildingServic
 	public void setNeedLogin(String crName, boolean needLogin) {
 		getChangeRequest(crName).setNeedLogin(needLogin);
 	}
-	
-	
+
+	@Override
+	public void setShowPreviousEventSize(String crName, String stepName, String eventName, int showPrevRecord) {
+		EventSpec eventSpec = sureEvent(crName, stepName, eventName);
+		if (!eventSpec.getIsCollection()){
+			throw new RuntimeException("事件"+eventSpec.getName()+"("+eventSpec.getTitle()+")不是Multi-Event,不能指定前项展示数量");
+		}
+		eventSpec.setShowPreviousCount(showPrevRecord);
+		EventSpec prototypeEventSpec = eventSpec.getPrototype();
+		if (prototypeEventSpec.getShowPreviousCount() == 0) {
+			prototypeEventSpec.setShowPreviousCount(showPrevRecord);
+		}
+	}
+
+
 }

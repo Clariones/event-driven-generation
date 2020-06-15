@@ -36,7 +36,7 @@ public class Main {
     private static void testChagneRequest(Map<String, Map<String, Object>> script) throws Exception  {
         ChangeRequestGenerator generator = new ChangeRequestGenerator();
         generator.setChangeRequestSpec(script);
-        generator.setProjectName("sds");
+        generator.setProjectName("optical");
         generator.setOrgName("cla");
         List<GenrationResult> files = generator.runJob();
 

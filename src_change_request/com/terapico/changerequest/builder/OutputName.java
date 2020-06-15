@@ -28,6 +28,7 @@ public interface OutputName {
 				String TYPE = "eventType";
 				String MUST = "mustHave";
 				String MULTIPLE = "multiple";
+				String SHOW_PREVIOUS = "showPrevious";
 				String MIN = "minimalNumber";
 				String MAX = "maximumNumber";
 				String FIELD_LIST = "fieldList";

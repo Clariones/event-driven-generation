@@ -357,7 +357,17 @@ public class ChangeRequestSpecBaseBuilder<T extends ChangeRequestSpecBaseBuilder
 		}
 		return me;
 	}
-	
+
+	public T show_previous_event(int showSameRecord) {
+		switch (workingBoard.currentWorkingLevel()) {
+			case WorkingBoard.EVENT:
+				service.setShowPreviousEventSize($CR(), $STEP(), $EVENT(), showSameRecord);
+				break;
+			default:
+				error("只有描述 Multi-Event 才能指定展示前项的数量");
+		}
+		return me;
+	}
 	
 	public T only_one() {
 		switch (workingBoard.currentWorkingLevel()) {

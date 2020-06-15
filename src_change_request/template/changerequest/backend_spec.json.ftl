@@ -23,6 +23,7 @@
 							"title":"${group.title}",
 							"modelName":"${group.eventType}",
 							"multiple": ${group.multiple?c},
+							"showPrevious": ${group.showPrevious?c},
 			<#if group.minimalNumber??>
 							"minimalNumber": ${group.minimalNumber?c},
 			</#if>

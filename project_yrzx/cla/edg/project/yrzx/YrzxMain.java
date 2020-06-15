@@ -47,6 +47,9 @@ public class YrzxMain {
 		
 		String outputFolder = "/Users/jarryzhou/codebase/yrzx-biz-suite/bizcore/WEB-INF";
 		String crXmlOutputFolder = "/Users/jarryzhou/codebase/web-code-generator/sky";
+
+		// String outputFolder = "/works/jobs/yrzx_v3/workspace/yrzx-biz-suite/bizcore/WEB-INF";
+		// String crXmlOutputFolder = "/works/jobs/yrzx_v3/workspace/web-code-generator/sky";
 		generator.saveToFiles( Utils.put("ALL", new File(outputFolder))
 				.put("changeRequest.xml", new File(crXmlOutputFolder)).into_map(File.class), files); // "changeRequest.xml"
 	}

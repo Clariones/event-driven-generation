@@ -203,6 +203,7 @@ public abstract class CRSBuildingServiceBaseLocalImpl implements ChangeRequestSp
 		result.put(EVENT.MUST, eventSpec.getIsRequired());
 		result.put(EVENT.TYPE, eventSpec.getType());
 		result.put(EVENT.MULTIPLE, eventSpec.getIsCollection());
+		result.put(EVENT.SHOW_PREVIOUS, eventSpec.getShowPreviousCount());
 		if (eventSpec.getIsCollection()) {
 			if (eventSpec.getMinCollectionSize()==null) {
 				result.put(EVENT.MIN, eventSpec.getIsRequired()?1:0);

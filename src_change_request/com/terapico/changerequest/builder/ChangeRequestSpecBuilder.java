@@ -67,6 +67,14 @@ public class ChangeRequestSpecBuilder extends ChangeRequestSpecBaseBuilder<Chang
 		return required_times(min,max);
 	}
 
+	public ChangeRequestSpecBuilder show_them_all_in_cr() {
+		return show_previous_event(-1);
+	}
+
+	public ChangeRequestSpecBuilder show_last_5_in_cr() {
+		return show_previous_event(5);
+	}
+
 	public ChangeRequestSpecBuilder cannot_skip() {
 		return is_required(true);
 	}

@@ -1,4 +1,4 @@
-package cla.edg.project.yrzx.pageflow;
+package cla.edg.project.optical.pageflow;
 
 import cla.edg.pageflow.PageFlowScript;
 import cla.edg.pageflow.PieceOfScript;

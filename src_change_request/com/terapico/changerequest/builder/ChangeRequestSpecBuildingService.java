@@ -98,11 +98,5 @@ public interface ChangeRequestSpecBuildingService {
 
 	public void setNeedLogin(String crName, boolean needLogin);
 
-	
-
-	
-
-	
-	
-
+	public void setShowPreviousEventSize(String crName, String stepName, String eventName, int showSameRecord);
 }
