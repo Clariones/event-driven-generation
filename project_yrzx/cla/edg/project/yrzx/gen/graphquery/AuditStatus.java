@@ -28,12 +28,34 @@ public class AuditStatus extends BaseModelBean{
 
 	// 被引用的对象
 
+	public ContractPaymentApplication contractPaymentApplicationList() {
+		ContractPaymentApplication member = new ContractPaymentApplication();
+		member.setModelTypeName("contract_payment_application");
+		member.setName("status");
+		member.setMemberName("contractPaymentApplicationList");
+		member.setRelationName("status");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 	public PersonalEmplacementApplication personalEmplacementApplicationList() {
 		PersonalEmplacementApplication member = new PersonalEmplacementApplication();
 		member.setModelTypeName("personal_emplacement_application");
 		member.setName("status");
 		member.setMemberName("personalEmplacementApplicationList");
 		member.setRelationName("status");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EventReview eventReviewList() {
+		EventReview member = new EventReview();
+		member.setModelTypeName("event_review");
+		member.setName("review_result");
+		member.setMemberName("eventReviewList");
+		member.setRelationName("reviewResult");
 		member.setReferDirection(false);
 		append(member);
 		return member;

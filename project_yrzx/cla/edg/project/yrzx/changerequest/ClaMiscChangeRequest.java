@@ -65,6 +65,24 @@ public class ClaMiscChangeRequest implements ChangeRequestSpecFactory {
 								.place_holder("请选择担任此岗位的员工")
 								.values_can_select_from_query_by(null)
 
+				.change_request("review").zh_CN("审核")
+					.icon("form")
+					.has_field("audit record id").hidden()
+					.has_field("review result").zh_CN("审核结论").which_model_of(MODEL.auditStatus()).values_can_select_from_query_by("project id")
+					.has_field("comments").zh_CN("备注").optional()
+				.change_request("comments").zh_CN("添加批注")
+					.icon("form")
+					.has_field("comment item type").which_type_of(FieldType.MULTI_TEXT).hidden()
+					.has_field("comment item id").which_type_of(FieldType.MULTI_TEXT).hidden()
+					.has_field("comments").zh_CN("备注")
+
+
+
+
+
+
+
+
 					;
 		
 	}

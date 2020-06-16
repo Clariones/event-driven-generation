@@ -62,7 +62,7 @@ public class ViewComponentGenerator extends BasicGenerator {
 		ViewComponentGenerator generator = new ViewComponentGenerator();
 		List<GenrationResult> results = generator.runJob();
 
-		String tgtFolder = "/works/jobs/yrzx_v3/workspace/yrzx-biz-suite/bizcore/WEB-INF";
+		String tgtFolder = "/Users/jarryzhou/codebase/yrzx-biz-suite/bizcore/WEB-INF";
 		generator.saveToFiles(new File(tgtFolder), results);
 	}
 }

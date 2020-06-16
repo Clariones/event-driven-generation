@@ -3,6 +3,7 @@ package cla.edg.project.yrzx.query;
 import cla.edg.pageflow.PageFlowScript;
 import cla.edg.pageflow.PieceOfScript;
 import cla.edg.project.yrzx.gen.graphquery.MODEL;
+import cla.edg.project.yrzx.gen.graphquery.PayItemStatus;
 
 public class ContractQueryPiece extends PieceOfScript {
 	@Override
@@ -66,8 +67,12 @@ public class ContractQueryPiece extends PieceOfScript {
 				.comments("按照ID加载支付项")
 				.do_it_as()
 				.where(MODEL.contractPayItem().id().eq("${item id}"))
-				.wants(MODEL.contractPayItem().payItemStatus(), MODEL.contractPayItem().payer(),
-						MODEL.contractPayItem().contract())
+				.wants(MODEL.contractPayItem().payItemStatus(),
+						MODEL.contractPayItem().payer(),
+						MODEL.contractPayItem().contract().project(),
+						MODEL.contractPayItem().contract().partyB()
+		)
+
 
 			.query(MODEL.contractPayItem()).list_of("project").with_string("project id").pagination()
 				.comments("查询项目下的所有合同支付项")
@@ -188,9 +193,25 @@ public class ContractQueryPiece extends PieceOfScript {
 				MODEL.contractPayItem().contract()
 		)
 
+			.query(MODEL.contractPaymentApplication()).which("is created by merchant").with_string("merchant id")
+				.do_it_as()
+				.where(
+						MODEL.contractPaymentApplication().submitter().eq("${merchant id}")
+				)
+				.wants(MODEL.contractPaymentApplication().payItem(),MODEL.contractPaymentApplication().status())
 
+			.query(MODEL.auditRecord()).list_of("pending on merchant review").with_string("merchant id").with_string("audit object type")
+				.do_it_as()
+				.where(
+						MODEL.auditRecord().auditObjectType().eq("${audit object type}"),
+						MODEL.auditRecord().reviewer().eq("${merchant id}")
+				)
 
-
+			.find(MODEL.contractPayItem()).which("by pay application").with_string("item id")
+			.do_it_as()
+			.where(
+					MODEL.contractPayItem().contractPaymentApplicationList().id().eq("${item id}")
+			)
 		;
 
 		return script;

@@ -9,10 +9,13 @@ public class PayItemStatus extends BaseModelBean{
 		return "com.yrdec.yrzx.payitemstatus.PayItemStatus";
 	}
 	// 枚举对象
-	public static EnumAttribute PENDING = new EnumAttribute("com.yrdec.yrzx.payitemstatus.PayItemStatus", "PENDING");
-	public static EnumAttribute NEED_APPROVE = new EnumAttribute("com.yrdec.yrzx.payitemstatus.PayItemStatus", "NEED_APPROVE");
-	public static EnumAttribute UNPAID = new EnumAttribute("com.yrdec.yrzx.payitemstatus.PayItemStatus", "UNPAID");
-	public static EnumAttribute PAID = new EnumAttribute("com.yrdec.yrzx.payitemstatus.PayItemStatus", "PAID");
+	public static EnumAttribute PENDING_ON_APPLICATION = new EnumAttribute("com.yrdec.yrzx.payitemstatus.PayItemStatus", "PENDING_ON_APPLICATION");
+	public static EnumAttribute PENDING_ON_AUDIT = new EnumAttribute("com.yrdec.yrzx.payitemstatus.PayItemStatus", "PENDING_ON_AUDIT");
+	public static EnumAttribute APPROVED = new EnumAttribute("com.yrdec.yrzx.payitemstatus.PayItemStatus", "APPROVED");
+	public static EnumAttribute UNAPPROVED = new EnumAttribute("com.yrdec.yrzx.payitemstatus.PayItemStatus", "UNAPPROVED");
+	public static EnumAttribute CONCERN = new EnumAttribute("com.yrdec.yrzx.payitemstatus.PayItemStatus", "CONCERN");
+	public static EnumAttribute PENDING_ON_CONFIRMATION = new EnumAttribute("com.yrdec.yrzx.payitemstatus.PayItemStatus", "PENDING_ON_CONFIRMATION");
+	public static EnumAttribute CONFIRMED = new EnumAttribute("com.yrdec.yrzx.payitemstatus.PayItemStatus", "CONFIRMED");
 
 	// 引用的对象
 

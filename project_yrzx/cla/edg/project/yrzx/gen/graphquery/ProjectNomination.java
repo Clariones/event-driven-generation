@@ -311,28 +311,6 @@ public class ProjectNomination extends BaseModelBean{
 		return member;
 	}
 
-	public AuditRecord auditRecordList() {
-		AuditRecord member = new AuditRecord();
-		member.setModelTypeName("audit_record");
-		member.setName("reviewer");
-		member.setMemberName("auditRecordList");
-		member.setRelationName("reviewer");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-
-	public CommentsRecord commentsRecordList() {
-		CommentsRecord member = new CommentsRecord();
-		member.setModelTypeName("comments_record");
-		member.setName("submitter");
-		member.setMemberName("commentsRecordList");
-		member.setRelationName("submitter");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-
 
 	// 普通属性
 

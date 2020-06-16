@@ -201,6 +201,17 @@ public class ChangeRequest extends BaseModelBean{
 		return member;
 	}
 
+	public EventReview eventReviewList() {
+		EventReview member = new EventReview();
+		member.setModelTypeName("event_review");
+		member.setName("change_request");
+		member.setMemberName("eventReviewList");
+		member.setRelationName("changeRequest");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 	public EventMaterialChangeDataUpload eventMaterialChangeDataUploadList() {
 		EventMaterialChangeDataUpload member = new EventMaterialChangeDataUpload();
 		member.setModelTypeName("event_material_change_data_upload");
@@ -239,6 +250,17 @@ public class ChangeRequest extends BaseModelBean{
 		member.setModelTypeName("event_project_supervisor_report_basic_info");
 		member.setName("change_request");
 		member.setMemberName("eventProjectSupervisorReportBasicInfoList");
+		member.setRelationName("changeRequest");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EventComments eventCommentsList() {
+		EventComments member = new EventComments();
+		member.setModelTypeName("event_comments");
+		member.setName("change_request");
+		member.setMemberName("eventCommentsList");
 		member.setRelationName("changeRequest");
 		member.setReferDirection(false);
 		append(member);
@@ -338,6 +360,17 @@ public class ChangeRequest extends BaseModelBean{
 		member.setModelTypeName("event_report_check_item");
 		member.setName("change_request");
 		member.setMemberName("eventReportCheckItemList");
+		member.setRelationName("changeRequest");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EventExpectedPayItemComments eventExpectedPayItemCommentsList() {
+		EventExpectedPayItemComments member = new EventExpectedPayItemComments();
+		member.setModelTypeName("event_expected_pay_item_comments");
+		member.setName("change_request");
+		member.setMemberName("eventExpectedPayItemCommentsList");
 		member.setRelationName("changeRequest");
 		member.setReferDirection(false);
 		append(member);

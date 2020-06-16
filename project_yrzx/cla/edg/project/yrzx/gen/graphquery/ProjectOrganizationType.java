@@ -12,17 +12,6 @@ public class ProjectOrganizationType extends BaseModelBean{
 
 	// 引用的对象
 
-	public ProjectOrganizationCategory projectOrganizationCategory() {
-		ProjectOrganizationCategory member = new ProjectOrganizationCategory();
-		member.setModelTypeName("project_organization_category");
-		member.setName("project_organization_category");
-		member.setMemberName("projectOrganizationCategory");
-		member.setReferDirection(true);
-		member.setRelationName("projectOrganizationCategory");
-		append(member);
-		return member;
-	}
-
 	public Platform platform() {
 		Platform member = new Platform();
 		member.setModelTypeName("platform");

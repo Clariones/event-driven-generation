@@ -12,6 +12,17 @@ public class ContractType extends BaseModelBean{
 
 	// 引用的对象
 
+	public ContractCategory parentCategory() {
+		ContractCategory member = new ContractCategory();
+		member.setModelTypeName("contract_category");
+		member.setName("parent_category");
+		member.setMemberName("parentCategory");
+		member.setReferDirection(true);
+		member.setRelationName("parentCategory");
+		append(member);
+		return member;
+	}
+
 	public Platform platform() {
 		Platform member = new Platform();
 		member.setModelTypeName("platform");

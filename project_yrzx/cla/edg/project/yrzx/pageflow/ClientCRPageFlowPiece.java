@@ -116,7 +116,19 @@ public class ClientCRPageFlowPiece extends PieceOfScript {
 					.comments("材料变更申请")
 					.got_page("material change detail")
 
+				.request_with_changerequest("create contract payment application").need_login().with_string("project id").with_string("contract id").with_string("item id")
+					.comments("发起收款申请")
+					.got_page("contract payment application detail")
 
+				.request_with_changerequest("review").need_login().with_string("project id").with_string("audit record id")
+					.comments("审核")
+//					.when("ContractPayApplication")
+						.got_page("contract payment application detail")
+
+				.request_with_changerequest("comments").need_login().with_string("project id").with_string("item id").with_string("item type")
+					.comments("批注")
+	//					.when("ContractPayApplication")
+					.got_page("contract payment application detail")
 
 				;
 	}

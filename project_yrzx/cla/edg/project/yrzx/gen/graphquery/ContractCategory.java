@@ -4,9 +4,9 @@ import java.util.Map;
 
 import cla.edg.modelbean.*;
 
-public class ProjectOrganizationCategory extends BaseModelBean{
+public class ContractCategory extends BaseModelBean{
 	public String getFullClassName() {
-		return "com.yrdec.yrzx.projectorganizationcategory.ProjectOrganizationCategory";
+		return "com.yrdec.yrzx.contractcategory.ContractCategory";
 	}
 	// 枚举对象
 
@@ -25,12 +25,12 @@ public class ProjectOrganizationCategory extends BaseModelBean{
 
 	// 被引用的对象
 
-	public ProjectOrganizationType projectOrganizationTypeList() {
-		ProjectOrganizationType member = new ProjectOrganizationType();
-		member.setModelTypeName("project_organization_type");
-		member.setName("project_organization_category");
-		member.setMemberName("projectOrganizationTypeList");
-		member.setRelationName("projectOrganizationCategory");
+	public ContractType contractTypeList() {
+		ContractType member = new ContractType();
+		member.setModelTypeName("contract_type");
+		member.setName("parent_category");
+		member.setMemberName("contractTypeList");
+		member.setRelationName("parentCategory");
 		member.setReferDirection(false);
 		append(member);
 		return member;
@@ -66,11 +66,11 @@ public class ProjectOrganizationCategory extends BaseModelBean{
 		return member;
 	}
 
-	public NumberAttribute displayOrder(){
-		NumberAttribute member = new NumberAttribute();
-		member.setModelTypeName("int");
-		// member.setName("displayOrder");
-		member.setName("display_order");
+	public StringAttribute icon(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string_image");
+		// member.setName("icon");
+		member.setName("icon");
 		useMember(member);
 		return member;
 	}
