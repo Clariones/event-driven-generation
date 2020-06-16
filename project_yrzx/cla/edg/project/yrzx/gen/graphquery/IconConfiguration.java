@@ -44,6 +44,11 @@ public class IconConfiguration extends BaseModelBean{
 	public static EnumAttribute SY_RK_YZPP = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "SY_RK_YZPP");
 	public static EnumAttribute SY_RK_JGDT = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "SY_RK_JGDT");
 	public static EnumAttribute SY_RK_BIM = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "SY_RK_BIM");
+	public static EnumAttribute SUPER_ACCOUNT = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "SUPER_ACCOUNT");
+	public static EnumAttribute EXPECTED_EXPENSE = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "EXPECTED_EXPENSE");
+	public static EnumAttribute CONTRACT_RECONCILIATION = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "CONTRACT_RECONCILIATION");
+	public static EnumAttribute CONTRACT_RECEIPT = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "CONTRACT_RECEIPT");
+	public static EnumAttribute CONTRACT_PAYMENT = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "CONTRACT_PAYMENT");
 
 	// 引用的对象
 

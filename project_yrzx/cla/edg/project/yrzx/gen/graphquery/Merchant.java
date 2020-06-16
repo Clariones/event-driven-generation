@@ -146,6 +146,17 @@ public class Merchant extends BaseModelBean{
 		return member;
 	}
 
+	public ContractPaymentApplication contractPaymentApplicationList() {
+		ContractPaymentApplication member = new ContractPaymentApplication();
+		member.setModelTypeName("contract_payment_application");
+		member.setName("submitter");
+		member.setMemberName("contractPaymentApplicationList");
+		member.setRelationName("submitter");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 	public Article articleList() {
 		Article member = new Article();
 		member.setModelTypeName("article");
@@ -482,6 +493,39 @@ public class Merchant extends BaseModelBean{
 		member.setName("sender");
 		member.setMemberName("notificationListAsSender");
 		member.setRelationName("receiver");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public AuditRecord auditRecordList() {
+		AuditRecord member = new AuditRecord();
+		member.setModelTypeName("audit_record");
+		member.setName("reviewer");
+		member.setMemberName("auditRecordList");
+		member.setRelationName("reviewer");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public CommentsRecord commentsRecordList() {
+		CommentsRecord member = new CommentsRecord();
+		member.setModelTypeName("comments_record");
+		member.setName("submitter");
+		member.setMemberName("commentsRecordList");
+		member.setRelationName("submitter");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public CcRecord ccRecordList() {
+		CcRecord member = new CcRecord();
+		member.setModelTypeName("cc_record");
+		member.setName("cc_to");
+		member.setMemberName("ccRecordList");
+		member.setRelationName("ccTo");
 		member.setReferDirection(false);
 		append(member);
 		return member;

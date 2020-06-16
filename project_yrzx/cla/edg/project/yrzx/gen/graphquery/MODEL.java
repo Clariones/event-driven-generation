@@ -71,6 +71,12 @@ public class MODEL{
 		return rst;
 	}
 
+	public static ContractCategory contractCategory() {
+		ContractCategory rst = new ContractCategory();
+		rst.setModelTypeName("contract_category");
+		return rst;
+	}
+
 	public static ContractStatus contractStatus() {
 		ContractStatus rst = new ContractStatus();
 		rst.setModelTypeName("contract_status");
@@ -86,6 +92,18 @@ public class MODEL{
 	public static ContractPayItem contractPayItem() {
 		ContractPayItem rst = new ContractPayItem();
 		rst.setModelTypeName("contract_pay_item");
+		return rst;
+	}
+
+	public static SupplementaryContract supplementaryContract() {
+		SupplementaryContract rst = new SupplementaryContract();
+		rst.setModelTypeName("supplementary_contract");
+		return rst;
+	}
+
+	public static ContractVisa contractVisa() {
+		ContractVisa rst = new ContractVisa();
+		rst.setModelTypeName("contract_visa");
 		return rst;
 	}
 
@@ -122,6 +140,12 @@ public class MODEL{
 	public static ContractOperationLog contractOperationLog() {
 		ContractOperationLog rst = new ContractOperationLog();
 		rst.setModelTypeName("contract_operation_log");
+		return rst;
+	}
+
+	public static ContractPaymentApplication contractPaymentApplication() {
+		ContractPaymentApplication rst = new ContractPaymentApplication();
+		rst.setModelTypeName("contract_payment_application");
 		return rst;
 	}
 
@@ -332,12 +356,6 @@ public class MODEL{
 	public static ProjectOrganizationType projectOrganizationType() {
 		ProjectOrganizationType rst = new ProjectOrganizationType();
 		rst.setModelTypeName("project_organization_type");
-		return rst;
-	}
-
-	public static ProjectOrganizationCategory projectOrganizationCategory() {
-		ProjectOrganizationCategory rst = new ProjectOrganizationCategory();
-		rst.setModelTypeName("project_organization_category");
 		return rst;
 	}
 
@@ -929,6 +947,12 @@ public class MODEL{
 		return rst;
 	}
 
+	public static EventReview eventReview() {
+		EventReview rst = new EventReview();
+		rst.setModelTypeName("event_review");
+		return rst;
+	}
+
 	public static EventMaterialChangeDataUpload eventMaterialChangeDataUpload() {
 		EventMaterialChangeDataUpload rst = new EventMaterialChangeDataUpload();
 		rst.setModelTypeName("event_material_change_data_upload");
@@ -950,6 +974,12 @@ public class MODEL{
 	public static EventProjectSupervisorReportBasicInfo eventProjectSupervisorReportBasicInfo() {
 		EventProjectSupervisorReportBasicInfo rst = new EventProjectSupervisorReportBasicInfo();
 		rst.setModelTypeName("event_project_supervisor_report_basic_info");
+		return rst;
+	}
+
+	public static EventComments eventComments() {
+		EventComments rst = new EventComments();
+		rst.setModelTypeName("event_comments");
 		return rst;
 	}
 
@@ -1004,6 +1034,12 @@ public class MODEL{
 	public static EventReportCheckItem eventReportCheckItem() {
 		EventReportCheckItem rst = new EventReportCheckItem();
 		rst.setModelTypeName("event_report_check_item");
+		return rst;
+	}
+
+	public static EventExpectedPayItemComments eventExpectedPayItemComments() {
+		EventExpectedPayItemComments rst = new EventExpectedPayItemComments();
+		rst.setModelTypeName("event_expected_pay_item_comments");
 		return rst;
 	}
 
@@ -1079,15 +1115,9 @@ public class MODEL{
 		return rst;
 	}
 
-	public static Menu menu() {
-		Menu rst = new Menu();
-		rst.setModelTypeName("menu");
-		return rst;
-	}
-
-	public static Worker worker() {
-		Worker rst = new Worker();
-		rst.setModelTypeName("worker");
+	public static CcRecord ccRecord() {
+		CcRecord rst = new CcRecord();
+		rst.setModelTypeName("cc_record");
 		return rst;
 	}
 

@@ -4,21 +4,32 @@ import java.util.Map;
 
 import cla.edg.modelbean.*;
 
-public class Worker extends BaseModelBean{
+public class ContractPayApplication extends BaseModelBean{
 	public String getFullClassName() {
-		return "com.yrdec.yrzx.worker.Worker";
+		return "com.yrdec.yrzx.contractpayapplication.ContractPayApplication";
 	}
 	// 枚举对象
 
 	// 引用的对象
 
-	public Menu menu() {
-		Menu member = new Menu();
-		member.setModelTypeName("menu");
-		member.setName("menu");
-		member.setMemberName("menu");
+	public AuditStatus status() {
+		AuditStatus member = new AuditStatus();
+		member.setModelTypeName("audit_status");
+		member.setName("status");
+		member.setMemberName("status");
 		member.setReferDirection(true);
-		member.setRelationName("menu");
+		member.setRelationName("status");
+		append(member);
+		return member;
+	}
+
+	public ContractPayItem payItem() {
+		ContractPayItem member = new ContractPayItem();
+		member.setModelTypeName("contract_pay_item");
+		member.setName("pay_item");
+		member.setMemberName("payItem");
+		member.setReferDirection(true);
+		member.setRelationName("payItem");
 		append(member);
 		return member;
 	}
@@ -33,24 +44,6 @@ public class Worker extends BaseModelBean{
 		member.setModelTypeName("string");
 		// member.setName("id");
 		member.setName("id");
-		useMember(member);
-		return member;
-	}
-
-	public NumberAttribute name(){
-		NumberAttribute member = new NumberAttribute();
-		member.setModelTypeName("int");
-		// member.setName("name");
-		member.setName("name");
-		useMember(member);
-		return member;
-	}
-
-	public NumberAttribute age(){
-		NumberAttribute member = new NumberAttribute();
-		member.setModelTypeName("int");
-		// member.setName("age");
-		member.setName("age");
 		useMember(member);
 		return member;
 	}

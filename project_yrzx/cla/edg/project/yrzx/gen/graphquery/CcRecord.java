@@ -4,21 +4,21 @@ import java.util.Map;
 
 import cla.edg.modelbean.*;
 
-public class CommentsRecord extends BaseModelBean{
+public class CcRecord extends BaseModelBean{
 	public String getFullClassName() {
-		return "com.yrdec.yrzx.commentsrecord.CommentsRecord";
+		return "com.yrdec.yrzx.ccrecord.CcRecord";
 	}
 	// 枚举对象
 
 	// 引用的对象
 
-	public Merchant submitter() {
+	public Merchant ccTo() {
 		Merchant member = new Merchant();
 		member.setModelTypeName("merchant");
-		member.setName("submitter");
-		member.setMemberName("submitter");
+		member.setName("cc_to");
+		member.setMemberName("ccTo");
 		member.setReferDirection(true);
-		member.setRelationName("submitter");
+		member.setRelationName("ccTo");
 		append(member);
 		return member;
 	}
@@ -37,20 +37,20 @@ public class CommentsRecord extends BaseModelBean{
 		return member;
 	}
 
-	public StringAttribute commentObjectType(){
+	public StringAttribute ccItemType(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		// member.setName("commentObjectType");
-		member.setName("comment_object_type");
+		// member.setName("ccItemType");
+		member.setName("cc_item_type");
 		useMember(member);
 		return member;
 	}
 
-	public StringAttribute commentObjectId(){
+	public StringAttribute ccItemId(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		// member.setName("commentObjectId");
-		member.setName("comment_object_id");
+		// member.setName("ccItemId");
+		member.setName("cc_item_id");
 		useMember(member);
 		return member;
 	}
@@ -60,15 +60,6 @@ public class CommentsRecord extends BaseModelBean{
 		member.setModelTypeName("date_time_create");
 		// member.setName("createTime");
 		member.setName("create_time");
-		useMember(member);
-		return member;
-	}
-
-	public StringAttribute comments(){
-		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string_longtext");
-		// member.setName("comments");
-		member.setName("comments");
 		useMember(member);
 		return member;
 	}

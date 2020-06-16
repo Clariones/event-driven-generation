@@ -25,6 +25,10 @@ public class MerchantQueryPiece extends PieceOfScript {
 			)
 
 
+		.find(MODEL.merchant()).which("by project nomination id").with_string("project nomination id")
+			.comments("根据项目职位查询merchant")
+			.do_it_as()
+			.where(MODEL.merchant().employeeNominationListAsEmployee().projectNominationList().id().eq("${project nomination id}"))
 
 ;
 

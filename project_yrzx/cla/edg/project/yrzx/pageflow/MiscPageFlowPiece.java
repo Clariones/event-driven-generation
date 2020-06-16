@@ -28,14 +28,11 @@ public class MiscPageFlowPiece extends PieceOfScript {
 			.got_page("project organization employee list")
 
 
-				/**
-				 * 菜单页，
-				 * #1 给的ID作为树的根，加载出子树
-				 * #2 渲染子树listOf
-				 *
-				 */
-				.request("view menu").with_string("tree node id")
-				.got_page("menu")
+
+		.request("confirm create contract order").with_string("item id")
+
+			.comments("创建合同收付款订单")
+			.got_page("contract pay item detail")
 			;
 		return script;
 	}

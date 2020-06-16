@@ -473,6 +473,15 @@ public class StandardContract extends BaseModelBean{
 		return member;
 	}
 
+	public StringAttribute images(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("images");
+		// member.setName("images");
+		member.setName("images");
+		useMember(member);
+		return member;
+	}
+
 	public StringAttribute contract(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_document");

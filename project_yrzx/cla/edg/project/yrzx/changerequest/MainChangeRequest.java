@@ -29,6 +29,7 @@ public class MainChangeRequest implements ChangeRequestSpecFactory {
 			.import_from(new EmployeeChangeRequest())
 			.import_from(new AdvanceCompensationChangeRequest())
 			.import_from(new MaterialManagementChangeRequest())
+				.import_from(new ContractChangeRequest())
 			.getChangeRequestSpec();
 	}
 }

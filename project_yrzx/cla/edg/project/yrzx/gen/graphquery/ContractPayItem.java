@@ -58,12 +58,45 @@ public class ContractPayItem extends BaseModelBean{
 
 	// 被引用的对象
 
+	public SupplementaryContract supplementaryContractList() {
+		SupplementaryContract member = new SupplementaryContract();
+		member.setModelTypeName("supplementary_contract");
+		member.setName("contract_pay_item");
+		member.setMemberName("supplementaryContractList");
+		member.setRelationName("contractPayItem");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ContractVisa contractVisaList() {
+		ContractVisa member = new ContractVisa();
+		member.setModelTypeName("contract_visa");
+		member.setName("contract_pay_item");
+		member.setMemberName("contractVisaList");
+		member.setRelationName("contractPayItem");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 	public CommissionPayItem commissionPayItemList() {
 		CommissionPayItem member = new CommissionPayItem();
 		member.setModelTypeName("commission_pay_item");
 		member.setName("contract_pay_item");
 		member.setMemberName("commissionPayItemList");
 		member.setRelationName("contractPayItem");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public ContractPaymentApplication contractPaymentApplicationList() {
+		ContractPaymentApplication member = new ContractPaymentApplication();
+		member.setModelTypeName("contract_payment_application");
+		member.setName("pay_item");
+		member.setMemberName("contractPaymentApplicationList");
+		member.setRelationName("payItem");
 		member.setReferDirection(false);
 		append(member);
 		return member;

@@ -23,9 +23,9 @@ public class AuditRecord extends BaseModelBean{
 		return member;
 	}
 
-	public ProjectNomination reviewer() {
-		ProjectNomination member = new ProjectNomination();
-		member.setModelTypeName("project_nomination");
+	public Merchant reviewer() {
+		Merchant member = new Merchant();
+		member.setModelTypeName("merchant");
 		member.setName("reviewer");
 		member.setMemberName("reviewer");
 		member.setReferDirection(true);

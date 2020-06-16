@@ -4,37 +4,26 @@ import java.util.Map;
 
 import cla.edg.modelbean.*;
 
-public class Menu extends BaseModelBean{
+public class EventContractReceiptsManagement extends BaseModelBean{
 	public String getFullClassName() {
-		return "com.yrdec.yrzx.menu.Menu";
+		return "com.yrdec.yrzx.eventcontractreceiptsmanagement.EventContractReceiptsManagement";
 	}
 	// 枚举对象
 
 	// 引用的对象
 
-	public Platform platform() {
-		Platform member = new Platform();
-		member.setModelTypeName("platform");
-		member.setName("platform");
-		member.setMemberName("platform");
+	public ChangeRequest changeRequest() {
+		ChangeRequest member = new ChangeRequest();
+		member.setModelTypeName("change_request");
+		member.setName("change_request");
+		member.setMemberName("changeRequest");
 		member.setReferDirection(true);
-		member.setRelationName("platform");
+		member.setRelationName("changeRequest");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
-
-	public Worker workerList() {
-		Worker member = new Worker();
-		member.setModelTypeName("worker");
-		member.setName("menu");
-		member.setMemberName("workerList");
-		member.setRelationName("menu");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
 
 
 	// 普通属性
@@ -48,29 +37,29 @@ public class Menu extends BaseModelBean{
 		return member;
 	}
 
-	public StringAttribute name(){
+	public StringAttribute fieldGroup(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		// member.setName("name");
-		member.setName("name");
+		// member.setName("fieldGroup");
+		member.setName("field_group");
 		useMember(member);
 		return member;
 	}
 
-	public StringAttribute icon(){
+	public StringAttribute eventInitiatorType(){
 		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string_image");
-		// member.setName("icon");
-		member.setName("icon");
+		member.setModelTypeName("string");
+		// member.setName("eventInitiatorType");
+		member.setName("event_initiator_type");
 		useMember(member);
 		return member;
 	}
 
-	public StringAttribute code(){
+	public StringAttribute eventInitiatorId(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		// member.setName("code");
-		member.setName("code");
+		// member.setName("eventInitiatorId");
+		member.setName("event_initiator_id");
 		useMember(member);
 		return member;
 	}

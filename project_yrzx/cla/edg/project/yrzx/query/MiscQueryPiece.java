@@ -28,6 +28,7 @@ public class MiscQueryPiece extends PieceOfScript {
 				.where(MODEL.employeeNomination().employee().eq("${merchant id}"))
 				.wants(MODEL.employeeNomination().employer(), MODEL.employeeNomination().job(), MODEL.employeeNomination().role())
 
+
 		// 查询employee nomination 是否被使用，
 			.find(MODEL.projectNomination()).which("used employee").with_string("employee id")
 				.comments("统计指定员工在项目中的任职数量")
@@ -74,9 +75,43 @@ public class MiscQueryPiece extends PieceOfScript {
 			.do_it_as()
 			.where(MODEL.dailyTaskSecondType().parent().code().eq("${type id }")).order_by(MODEL.dailyTaskSecondType().id()).asc()
 
+		.query(MODEL.auditRecord()).list_of("item").with_string("item type").with_string("item id")
+				.comments("根据审批的对象类型和ID 查询审批记录")
+			.do_it_as()
+			.where(MODEL.auditRecord().auditObjectId().eq("${item id}"),
+					MODEL.auditRecord().auditObjectType().eq("${item type}"))
+				.wants(MODEL.auditRecord().reviewer(),MODEL.auditRecord().status())
 
 
-			;
+		.query(MODEL.ccRecord()).list_of("item").with_string("item type").with_string("item id")
+				.comments("根据抄送的对象类型和ID 查询审批记录")
+			.do_it_as()
+			.where(MODEL.ccRecord().ccItemId().eq("${item id}"),
+						MODEL.ccRecord().ccItemType().eq("${item type}"))
+
+		.wants(MODEL.ccRecord().ccTo())
+
+
+		.find(MODEL.auditRecord()).which("by reviewer").with_string("merchant id").with_string("review object type").with_string("status")
+			.comments("查询某人review某对象的某种状态的记录")
+			.do_it_as()
+			.where(
+					MODEL.auditRecord().reviewer().eq("${merchant id}"),
+					MODEL.auditRecord().auditObjectType().eq("${review object type}"),
+					MODEL.auditRecord().status().eq("${status}")
+			)
+
+		.query(MODEL.commentsRecord()).list_of("item").with_string("comment object type").with_string("item id")
+				.comments("查询批注某对象的记录")
+				.do_it_as()
+				.where(
+						MODEL.commentsRecord().commentObjectType().eq("${comment object type}"),
+						MODEL.commentsRecord().commentObjectId().eq("${item id}")
+				)
+				.wants(MODEL.commentsRecord().submitter())
+
+
+		;
 
 		return script;
 	}

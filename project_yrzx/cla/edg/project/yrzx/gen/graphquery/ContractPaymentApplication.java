@@ -4,13 +4,35 @@ import java.util.Map;
 
 import cla.edg.modelbean.*;
 
-public class CommentsRecord extends BaseModelBean{
+public class ContractPaymentApplication extends BaseModelBean{
 	public String getFullClassName() {
-		return "com.yrdec.yrzx.commentsrecord.CommentsRecord";
+		return "com.yrdec.yrzx.contractpaymentapplication.ContractPaymentApplication";
 	}
 	// 枚举对象
 
 	// 引用的对象
+
+	public AuditStatus status() {
+		AuditStatus member = new AuditStatus();
+		member.setModelTypeName("audit_status");
+		member.setName("status");
+		member.setMemberName("status");
+		member.setReferDirection(true);
+		member.setRelationName("status");
+		append(member);
+		return member;
+	}
+
+	public ContractPayItem payItem() {
+		ContractPayItem member = new ContractPayItem();
+		member.setModelTypeName("contract_pay_item");
+		member.setName("pay_item");
+		member.setMemberName("payItem");
+		member.setReferDirection(true);
+		member.setRelationName("payItem");
+		append(member);
+		return member;
+	}
 
 	public Merchant submitter() {
 		Merchant member = new Merchant();
@@ -37,38 +59,11 @@ public class CommentsRecord extends BaseModelBean{
 		return member;
 	}
 
-	public StringAttribute commentObjectType(){
-		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
-		// member.setName("commentObjectType");
-		member.setName("comment_object_type");
-		useMember(member);
-		return member;
-	}
-
-	public StringAttribute commentObjectId(){
-		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
-		// member.setName("commentObjectId");
-		member.setName("comment_object_id");
-		useMember(member);
-		return member;
-	}
-
 	public DateTimeAttribute createTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date_time_create");
 		// member.setName("createTime");
 		member.setName("create_time");
-		useMember(member);
-		return member;
-	}
-
-	public StringAttribute comments(){
-		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string_longtext");
-		// member.setName("comments");
-		member.setName("comments");
 		useMember(member);
 		return member;
 	}
