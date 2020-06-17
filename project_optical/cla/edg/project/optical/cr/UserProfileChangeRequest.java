@@ -25,6 +25,8 @@ public class UserProfileChangeRequest implements ChangeRequestSpecFactory {
                 .contains_event("dinner").zh_CN("宴会")
                     .has_field("invitor name").zh_CN("邀请人姓名").disabled()
                         .fill_by_submitted("guest.name")
+                    .has_field("dinner type").zh_CN("宴会相关产品").disabled()
+                        .fill_by_submitted_member("guest.type", MODEL.coatingType().name())
 
                 ;
     }

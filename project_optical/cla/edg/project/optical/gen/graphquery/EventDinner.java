@@ -45,6 +45,15 @@ public class EventDinner extends BaseModelBean {
     return member;
   }
 
+  public StringAttribute dinnerType() {
+    StringAttribute member = new StringAttribute();
+    member.setModelTypeName("string");
+    // member.setName("dinnerType");
+    member.setName("dinner_type");
+    useMember(member);
+    return member;
+  }
+
   public StringAttribute fieldGroup() {
     StringAttribute member = new StringAttribute();
     member.setModelTypeName("string");

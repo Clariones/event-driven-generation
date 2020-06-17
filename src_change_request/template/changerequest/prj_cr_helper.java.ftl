@@ -672,18 +672,23 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 	<#list crSpec.stepList as scene>
 		<#list scene.eventList as group>
 		    <#list group.fieldList as field>
+		           <#assign field_name_const = "CR."+helper.JAVA_CONST(crSpec.changeRequestType)+".FIELD_"+helper.NAME_AS_THIS(field.name)+"_IN_"+helper.JAVA_CONST(group.name)+"_OF_"+helper.JAVA_CONST(scene.name)/>
 		        <#if helper.canFillFromRequest(field)>
-		case CR.${helper.JAVA_CONST(crSpec.changeRequestType)}.FIELD_${helper.NAME_AS_THIS(field.name)}_IN_${helper.JAVA_CONST(group.name)}_OF_${helper.JAVA_CONST(scene.name)}:
+		case ${field_name_const}:
 		    return userContext.get${helper.NameAsThis(field.autoFillExpression?substring(10))}();
 		        </#if>
 		        <#if helper.canFillFromRequestObject(field)>
-		case CR.${helper.JAVA_CONST(crSpec.changeRequestType)}.FIELD_${helper.NAME_AS_THIS(field.name)}_IN_${helper.JAVA_CONST(group.name)}_OF_${helper.JAVA_CONST(scene.name)}:
+        case ${field_name_const}:
             return ${helper.getFillFromRequestCode(projectName, field)};
                 </#if>
 		        <#if helper.canFillFromSubmitted(field)>
-		case CR.${helper.JAVA_CONST(crSpec.changeRequestType)}.FIELD_${helper.NAME_AS_THIS(field.name)}_IN_${helper.JAVA_CONST(group.name)}_OF_${helper.JAVA_CONST(scene.name)}:
+		case ${field_name_const}:
             return ${helper.getFillFromSubmittedCode(projectName, field)};
                  </#if>
+                 <#if helper.canFillFromSubmittedMember(field)>
+        case ${field_name_const}:
+            return ${helper.getFillFromSubmittedMemberCode(projectName, field)};
+                  </#if>
             </#list>
 		</#list>
 	</#list>

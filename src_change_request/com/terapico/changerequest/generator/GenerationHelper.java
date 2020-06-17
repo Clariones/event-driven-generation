@@ -273,7 +273,7 @@ public class GenerationHelper extends BaseHelper {
 	public String getFillFromRequestCode(String projectName, Map<String, Object> fieldSpec){
 		StringBuilder sb = new StringBuilder();
 		String afe = (String) fieldSpec.get(OutputName.CHANGE_REQUEST.STEP.EVENT.FIELD.AUTO_FILL_EXPRESSION);
-		afe = afe.substring(20);
+		afe = getAutoFillExpressionContext(afe);
 		String[] afePieces = afe.split("/");
 		String modelName = afePieces[0];
 		String param = afePieces[1];
@@ -295,12 +295,49 @@ public class GenerationHelper extends BaseHelper {
 	}
 	public String getFillFromSubmittedCode(String projectName, Map<String, Object> fieldSpec) {
 		String afe = (String) fieldSpec.get(OutputName.CHANGE_REQUEST.STEP.EVENT.FIELD.AUTO_FILL_EXPRESSION);
-		afe = afe.substring(12);
+		afe = getAutoFillExpressionContext(afe);
 		if (afe.contains(".")){
 			return String.format("getValueFromPostedData(userContext.getChangeRequestProcessResult().getPostedData(),\"%s\",\"%s\")",
 					afe.substring(0, afe.indexOf(".")),
 							afe.substring(afe.indexOf(".")+1));
 		}
 		return String.format("getValueFromPostedData(null,\"%s\")",	afe);
+	}
+
+	private String getAutoFillExpressionContext(String afe) {
+		int pos = afe.indexOf("://");
+		return afe.substring(pos+3);
+	}
+
+	public boolean canFillFromSubmittedMember(Map<String, Object> fieldSpec) {
+		String afe = (String) fieldSpec.get(OutputName.CHANGE_REQUEST.STEP.EVENT.FIELD.AUTO_FILL_EXPRESSION);
+		if (afe == null){
+			return false;
+		}
+		return afe.startsWith("submitted_member_of://");
+	}
+	public String getFillFromSubmittedMemberCode(String projectName, Map<String, Object> fieldSpec) {
+		String afe = (String) fieldSpec.get(OutputName.CHANGE_REQUEST.STEP.EVENT.FIELD.AUTO_FILL_EXPRESSION);
+		StringBuilder sb = new StringBuilder();
+		afe = getAutoFillExpressionContext(afe);
+		String[] afePieces = afe.split("/");
+		String modelName = afePieces[0];
+		String expression = afePieces[1];
+		String member = afePieces[2];
+		String paramGroup = null;
+		String paramField = expression;
+		int pos = expression.indexOf(".");
+		if (pos > 0){
+			paramGroup = expression.substring(0, pos);
+			paramField = expression.substring(pos+1);
+		}
+		sb.append("((").append(NameAsThis(modelName)).append(")(")
+				.append(NameAsThis(projectName)).append("BaseUtils.loadBaseEntityById(userContext, ")
+				.append(NameAsThis(modelName)).append(".INTERNAL_TYPE, \r\n")
+				.append("                         (String)getValueFromPostedData(userContext.getChangeRequestProcessResult().getPostedData(),")
+				.append(paramGroup==null?"null":("\"" + paramGroup+"\"")).append(",\"").append(paramField).append("\"")
+				.append("))\r\n                )).get")
+				.append(NameAsThis(member)).append("()");
+		return sb.toString();
 	}
 }
