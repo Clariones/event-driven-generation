@@ -47,6 +47,28 @@ public class ChangeRequest extends BaseModelBean {
     return member;
   }
 
+  public EventDinner eventDinnerList() {
+    EventDinner member = new EventDinner();
+    member.setModelTypeName("event_dinner");
+    member.setName("change_request");
+    member.setMemberName("eventDinnerList");
+    member.setRelationName("changeRequest");
+    member.setReferDirection(false);
+    append(member);
+    return member;
+  }
+
+  public EventMaster eventMasterList() {
+    EventMaster member = new EventMaster();
+    member.setModelTypeName("event_master");
+    member.setName("change_request");
+    member.setMemberName("eventMasterList");
+    member.setRelationName("changeRequest");
+    member.setReferDirection(false);
+    append(member);
+    return member;
+  }
+
   // 普通属性
 
   public StringAttribute id() {

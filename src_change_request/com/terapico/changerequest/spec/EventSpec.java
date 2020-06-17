@@ -10,6 +10,7 @@ public class EventSpec extends CommonSpec<EventSpec>{
 	protected List<FieldSpec> fieldSpecs;
 	protected String type;
 	protected transient EventSpec prototype;
+	protected int showPreviousCount = 0;  // 如果是multi-event, 0表示不显示之前的记录,-1表示显示所有之前的记录, 1~N表示显示前1~N条记录
 	
 	public String getType() {
 		return type;
@@ -29,9 +30,13 @@ public class EventSpec extends CommonSpec<EventSpec>{
 	public void setPrototype(EventSpec prototype) {
 		this.prototype = prototype;
 	}
-	
-	
-	
+	public int getShowPreviousCount() {
+		return showPreviousCount;
+	}
+	public void setShowPreviousCount(int showPreviousCount) {
+		this.showPreviousCount = showPreviousCount;
+	}
+
 	public EventSpec withType(String eventType) {
 		this.setType(eventType);
 		return this;
@@ -68,7 +73,7 @@ public class EventSpec extends CommonSpec<EventSpec>{
 		}
 	}
 	
-	public void tryeAddI18n(String localeCode, String text) {
+	public void tryAddI18n(String localeCode, String text) {
 		if (this.getI18nName() != null && this.getI18nName().containsKey(localeCode)) {
 			return; // 如果已经有了,就不更新
 		}

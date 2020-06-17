@@ -9,7 +9,7 @@ import com.terapico.utils.DebugUtil;
 public class ChangeRequestHelper extends ${projectName?cap_first}ChangeRequestHelper{
 	private ChangeRequestHelper() {}
 	
-	public static ChangeRequestHelper of(${projectName?cap_first}UserContextImpl ctx) throws Exception {
+	public static ChangeRequestHelper of(Custom${projectName?cap_first}UserContextImpl ctx) throws Exception {
 		ChangeRequestHelper instance = (ChangeRequestHelper) ctx.getFromContextLocalStorage(key(ctx));
 		if (instance != null) {
 			return instance;

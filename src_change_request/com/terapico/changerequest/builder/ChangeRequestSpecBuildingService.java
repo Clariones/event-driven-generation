@@ -99,4 +99,8 @@ public interface ChangeRequestSpecBuildingService {
 	public void setNeedLogin(String crName, boolean needLogin);
 
 	public void setShowPreviousEventSize(String crName, String stepName, String eventName, int showSameRecord);
+
+	void setFieldAutoFillExpression(String crName, String stepName, String eventName, String fieldName, String expression);
+
+	void referToModel(String modelTypeName);
 }

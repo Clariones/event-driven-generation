@@ -50,6 +50,17 @@ public class CoatingType extends BaseModelBean {
     return member;
   }
 
+  public EventInvitor eventInvitorList() {
+    EventInvitor member = new EventInvitor();
+    member.setModelTypeName("event_invitor");
+    member.setName("type");
+    member.setMemberName("eventInvitorList");
+    member.setRelationName("type");
+    member.setReferDirection(false);
+    append(member);
+    return member;
+  }
+
   // 普通属性
 
   public StringAttribute id() {

@@ -14,6 +14,9 @@ public class UserProfilePageFlow extends PieceOfScript {
                 .request("view dashboard")
                     .comments("个人信息").need_login()
                     .got_page("customer dashboard")
+                .request_with_changerequest("test cr").with_string("catalog id")
+                    .comments("打开CR测试form页面").no_login()
+                    .got_page("customer dashboard")
                 ;
     }
 

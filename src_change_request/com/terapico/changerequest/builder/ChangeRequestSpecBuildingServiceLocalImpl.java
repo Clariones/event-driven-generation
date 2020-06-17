@@ -44,6 +44,7 @@ public class ChangeRequestSpecBuildingServiceLocalImpl extends CRSBuildingServic
 		Map<String, Map<String, Object>> result = new HashMap<>();
 		result.put("projectSpec", makeOutput());
 		result.put("allEventSpec", allEventSpec);
+
 		return result;
 	}
 
@@ -299,6 +300,13 @@ public class ChangeRequestSpecBuildingServiceLocalImpl extends CRSBuildingServic
 	}
 
 	@Override
+	public void setFieldAutoFillExpression(String crName, String stepName, String eventName, String fieldName,
+									String autoFillExpression) {
+		sureField(crName, stepName, eventName, fieldName).setAutoFillExpression(autoFillExpression);
+		prototypeField(crName, stepName, eventName, fieldName).setAutoFillExpressionIfNeed(autoFillExpression);
+	}
+
+	@Override
 	public void setFieldSampleData(String crName, String stepName, String eventName, String fieldName,
 			String sampleData) {
 		sureField(crName, stepName, eventName, fieldName).setSampleData(sampleData);
@@ -389,5 +397,8 @@ public class ChangeRequestSpecBuildingServiceLocalImpl extends CRSBuildingServic
 		}
 	}
 
-
+	@Override
+	public void referToModel(String modelTypeName) {
+		projectSpec.addReferModelName(modelTypeName);
+	}
 }

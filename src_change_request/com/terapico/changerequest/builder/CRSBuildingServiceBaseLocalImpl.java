@@ -152,7 +152,8 @@ public abstract class CRSBuildingServiceBaseLocalImpl implements ChangeRequestSp
 		Map<String, Object> result = new HashMap<>();
 		result.put(OutputName.NAME, root().getName());
 		result.put(OutputName.TITLE, root().getTitle());
-		
+		result.put("referModelName", projectSpec.getRefferModelNames());
+
 		List<Object> crSpecs = new ArrayList<>();
 		root().getChangeRequestSpecs().forEach((crName,crSpec)->{
 			Map<String, Object> crSpecOutput = makeCROutput(crSpec);
@@ -243,6 +244,7 @@ public abstract class CRSBuildingServiceBaseLocalImpl implements ChangeRequestSp
 		putIfNotNull(result, FIELD.TIPS_TITLE, fieldSpec.getTipsTitle());
 		putIfNotNull(result, FIELD.FORCE_VALUE, fieldSpec.getForceValue());
 		putIfNotNull(result, FIELD.DEFAULT_VALUE, fieldSpec.getDefaultValue());
+		putIfNotNull(result, FIELD.AUTO_FILL_EXPRESSION, fieldSpec.getAutoFillExpression());
 		putIfNotNull(result, FIELD.VALUES, fieldSpec.getValuesMapping());
 		putIfNotNull(result, FIELD.VALUES_RETRIEVE_API, fieldSpec.getDataRetrieveApiUrl());
 		putIfNotNull(result, FIELD.SAMPLE_DATA,  calcSampleData(fieldSpec));//fieldSpec.getSampleData());

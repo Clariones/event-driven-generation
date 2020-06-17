@@ -52,6 +52,7 @@ public interface OutputName {
 					String SELECTABLE_MULTI = "multi_selectable";
 					String FORCE_VALUE = "value";
 					String DEFAULT_VALUE = "defaultValue";
+					String AUTO_FILL_EXPRESSION = "autoFillExpression";
 					String VALUES = "valuesMapping";
 					String VALUES_RETRIEVE_API = "valuesRetrieveApi";
 					String SAMPLE_DATA = "sampleData";

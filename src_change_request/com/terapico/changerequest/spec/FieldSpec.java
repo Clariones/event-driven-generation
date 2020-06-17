@@ -14,6 +14,7 @@ public class FieldSpec extends CommonSpec<FieldSpec> implements Cloneable{
 	protected String interactionMode;
 	protected FieldType inputType;
 	protected Serializable defaultValue;
+	protected String autoFillExpression;
 	protected Serializable forceValue;
 	protected Serializable[] rangeArgs;
 	protected String placeholder;
@@ -27,7 +28,19 @@ public class FieldSpec extends CommonSpec<FieldSpec> implements Cloneable{
 	protected String modelName;
 	protected UIStyle uiStyle;
 	protected String regularExpression;
-	
+
+	/**
+	 * 自动填充的表达式.<p/>
+	 *
+	 * 1. 从 request 的参数中填充: request/param name
+	 * @return
+	 */
+	public String getAutoFillExpression() {
+		return autoFillExpression;
+	}
+	public void setAutoFillExpression(String autoFillExpression) {
+		this.autoFillExpression = autoFillExpression;
+	}
 	public String getSampleData() {
 		return sampleData;
 	}
@@ -143,6 +156,7 @@ public class FieldSpec extends CommonSpec<FieldSpec> implements Cloneable{
 		newOne.interactionMode = this.interactionMode;
 		newOne.inputType = this.inputType;
 		newOne.defaultValue = this.defaultValue;
+		newOne.autoFillExpression = this.autoFillExpression;
 		newOne.forceValue = this.forceValue;
 		if (this.rangeArgs != null) {
 			newOne.rangeArgs = Arrays.copyOf(this.rangeArgs, this.rangeArgs.length);
@@ -181,6 +195,9 @@ public class FieldSpec extends CommonSpec<FieldSpec> implements Cloneable{
 		}
 		if (this.getDefaultValue() == null) {
 			this.setDefaultValue(baseData.getDefaultValue());
+		}
+		if (this.getAutoFillExpression() == null ) {
+			this.setAutoFillExpression(baseData.getAutoFillExpression());
 		}
 		if (this.getForceValue() == null) {
 			this.setForceValue(baseData.getForceValue());
@@ -332,6 +349,12 @@ public class FieldSpec extends CommonSpec<FieldSpec> implements Cloneable{
 			setDefaultValue(defaultValue2);
 		}
 		
+	}
+	public void setAutoFillExpressionIfNeed(String expStr) {
+		if (notSet("autoFillExpression")) {
+			setAutoFillExpression(expStr);
+		}
+
 	}
 	public void setRegularExpressionIfNeed(String regExp) {
 		if (notSet("regExp")) {

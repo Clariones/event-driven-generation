@@ -44,7 +44,7 @@ import com.${orgName?lower_case}.${projectName?lower_case}.event${helper.CamelNa
 		</#if>
 	</#list>
 </#list>
-<#list modelNames as modelName>
+<#list helper.getAllModelNamesNeedCandidates(projectSpec) as modelName>
 import com.${orgName?lower_case}.${projectName?lower_case}.${helper.CamelName(modelName)?lower_case}.${helper.CamelName(modelName)};
 </#list>
 
@@ -57,16 +57,16 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
     protected BaseEntity anonymousUser() {
         return new AnonymousUser(userContext.tokenId);
     }
-	protected ${projectName?cap_first}UserContextImpl userContext;
+	protected Custom${projectName?cap_first}UserContextImpl userContext;
 	
 	protected static String key(${projectName?cap_first}UserContextImpl ctx) {
 		return "_key_for_thread_scope_ChangeRequestHelper";
 	}
 
-	public ${projectName?cap_first}UserContextImpl getUserContext() {
+	public Custom${projectName?cap_first}UserContextImpl getUserContext() {
 		return userContext;
 	}
-	public void setUserContext(${projectName?cap_first}UserContextImpl userContext) {
+	public void setUserContext(Custom${projectName?cap_first}UserContextImpl userContext) {
 		this.userContext = userContext;
 	}
 	protected void loadCrSpec() throws Exception {
@@ -182,7 +182,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 		fulfillChangeRequestActions(requestData, crSpec, sceneCode, processUrl);
 		return requestData;
 	}
-	
+
 	protected ChangeRequest loadCrDataByGroups(String crType, BaseEntity currentUserInfo, List<CRGroupSpec> groupSpecList) throws Exception {
 		List<Object> params = new ArrayList<>();
 		StringBuilder sb = new StringBuilder(
@@ -279,7 +279,10 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 	<#list crSpec.stepList as scene>
 		<#list scene.eventList as group>
 		case CR.${helper.JAVA_CONST(crSpec.changeRequestType)}.SCENE_${helper.JAVA_CONST(scene.name)}.GROUP_${helper.JAVA_CONST(group.name)}.NAME:
-			curRecordIdx = fulfillChangeRequestFieldByGroup(requestData, dbCrData, groupData, fieldSpecList, dbCrData.getEvent${helper.CamelName(group.eventType)}List(), groupRecordIndex);
+			curRecordIdx = fulfillChangeRequestFieldByGroup(requestData, dbCrData, groupData, fieldSpecList, dbCrData.getEvent${helper.CamelName(group.eventType)}List(), groupRecordIndex, groupSpec.getName());
+			<#if group.multiple>
+			fulfillPreviousGroupData(requestData, dbCrData, groupData, fieldSpecList, dbCrData.getEvent${helper.CamelName(group.eventType)}List(), curRecordIdx);
+			</#if>
 			break;
 		</#list>
 	</#list>
@@ -294,12 +297,12 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 	}
 	
 	protected int fulfillChangeRequestFieldByGroup(GenericFormPage requestData, ChangeRequest dbCrData,
-			CRGroupData groupData, List<CRFieldSpec> fieldSpecList, SmartList<? extends BaseEntity> eventList, int groupRecordIndex) throws Exception {
+			CRGroupData groupData, List<CRFieldSpec> fieldSpecList, SmartList<? extends BaseEntity> eventList, int groupRecordIndex, String groupName) throws Exception {
 		String gName = CR.GROUP_HIDDEN+"_indexof_"+groupData.getName();
 		CRFieldData gidField = HIDDEN_GROUP(requestData).getFieldList().stream().filter(it -> it.getName().equals(gName))
 				.findFirst().orElse(null);
 		if (eventList == null || eventList.isEmpty()) {
-			fullFillNewFields(requestData, dbCrData, groupData, fieldSpecList);
+			fullFillNewFields(requestData, dbCrData, groupData, groupName, fieldSpecList);
 			if (gidField != null) {
 				gidField.setValue("1");
 			}
@@ -331,7 +334,8 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 					String memberName = FIELD_NAME(fieldSpec);
 					KeyValuePair kv = kvList.stream().filter(entry->entry.getKey().equals(memberName)).findAny().orElse(null);
 					if (kv == null || kv.getValue() == null) {
-						fieldData.setValue(TO_VALUE(getFieldValueWhenFillResponse(fieldSpec.getDefaultValue(),requestData, dbCrData, groupData, fieldSpec)));
+					    Object suggestedDefaultValue = calcSuggestedDefaultValue(groupName, fieldSpec, fieldSpec.getDefaultValue());
+                        fieldData.setValue(TO_VALUE(getFieldValueWhenFillResponse(suggestedDefaultValue,requestData, dbCrData, groupData, fieldSpec)));
 					}else {
 						fieldData.setValue(TO_VALUE(getFieldValueWhenFillResponse(kv.getValue(),requestData, dbCrData, groupData, fieldSpec)));
 					}
@@ -342,7 +346,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 			}
 		}
 		if (!fillAny) {
-			fullFillNewFields(requestData, dbCrData, groupData, fieldSpecList);
+			fullFillNewFields(requestData, dbCrData, groupData, groupName, fieldSpecList);
 			if (gidField != null) {
 				gidField.setValue(String.valueOf(foundAny+1));
 			}
@@ -352,7 +356,11 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 		}
 	}
 
-	protected void fullFillNewFields(GenericFormPage requestData, ChangeRequest dbCrData, CRGroupData groupData, List<CRFieldSpec> fieldSpecList) throws Exception{
+    protected void fulfillPreviousGroupData(GenericFormPage requestData, ChangeRequest dbCrData,
+			CRGroupData groupData, List<CRFieldSpec> fieldSpecList, SmartList<? extends BaseEntity> eventList, int groupRecordIndex) throws Exception {
+		// TODO: 填充当前记录的前项. 0 是不填充, -1是所有前项, 0<N 是前N项
+	}
+	protected void fullFillNewFields(GenericFormPage requestData, ChangeRequest dbCrData, CRGroupData groupData, String groupName, List<CRFieldSpec> fieldSpecList) throws Exception{
 		for(CRFieldSpec fieldSpec: fieldSpecList) {
 			if (!GROUP_NAME(fieldSpec).equals(groupData.getName())){
 				continue;
@@ -363,7 +371,8 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 			if (fieldSpec.getValue() != null) {
 				fieldData.setValue(TO_VALUE(getFieldValueWhenFillResponse(fieldSpec.getValue(),requestData, dbCrData, groupData, fieldSpec)));
 			}else {
-				fieldData.setValue(TO_VALUE(getFieldValueWhenFillResponse(fieldSpec.getDefaultValue(),requestData, dbCrData, groupData, fieldSpec)));
+				Object suggestedDefaultValue = calcSuggestedDefaultValue(groupName, fieldSpec, fieldSpec.getDefaultValue());
+                fieldData.setValue(TO_VALUE(getFieldValueWhenFillResponse(suggestedDefaultValue,requestData, dbCrData, groupData, fieldSpec)));
 			}
 			setFieldSpecInfo(requestData, dbCrData, groupData, fieldData, fieldSpec);
 			groupData.addField(fieldData);
@@ -636,23 +645,62 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 		return null;
 	}
 
-	protected Object getFieldValueWhenFillResponse(
-          Object suggestValue,
-          GenericFormPage requestData,
-          ChangeRequest changeRequest,
-          CRGroupData groupData,
-          CRFieldSpec fieldSpec)
-          throws Exception {
+<#--
+    protected Object calcSuggestedDefaultValue(String groupName, CRFieldSpec fieldSpec, Object defaultValue){
+        if (TextUtil.isBlank(fieldSpec.getAutoFillExpression())){
+            return defaultValue;
+        }
+        List<String> afeList = AutoFillUtil.splitAutoFillExpression(fieldSpec.getAutoFillExpression());
+        return pickAutoFillValueByExpression(afeList, userContext);
+    }
+
+    protected Object pickAutoFillValueByExpression(List<String> afeList, Object contextObject) {
+        String key = "afe_expression_" + String.join(".", afeList);
+        if (userContext.getContextLocalStorage().containsKey(key)){
+            return userContext.getFromContextLocalStorage(key);
+        }
+        if (afeList.size() == 1) {
+            return pickValueFromContextObject(afeList.get(0), contextObject);
+        }
+        Object parentContextObject = pickAutoFillValueByExpression(afeList.subList(0, afeList.size()-1), contextObject);
+        return pickValueFromContextObject( afeList.get(0), parentContextObject);
+    }
+-->
+    protected Object calcSuggestedDefaultValue(String groupName, CRFieldSpec fieldSpec, Object defaultValue) throws Exception{
+        switch (fieldSpec.getName()){
+<#list helper.getGroupListWhichHasAutoFillExpression(projectSpec) as crSpec>
+	<#list crSpec.stepList as scene>
+		<#list scene.eventList as group>
+		    <#list group.fieldList as field>
+		        <#if helper.canFillFromRequest(field)>
+		case CR.${helper.JAVA_CONST(crSpec.changeRequestType)}.FIELD_${helper.NAME_AS_THIS(field.name)}_IN_${helper.JAVA_CONST(group.name)}_OF_${helper.JAVA_CONST(scene.name)}:
+		    return userContext.get${helper.NameAsThis(field.autoFillExpression?substring(10))}();
+		        </#if>
+		        <#if helper.canFillFromRequestObject(field)>
+		case CR.${helper.JAVA_CONST(crSpec.changeRequestType)}.FIELD_${helper.NAME_AS_THIS(field.name)}_IN_${helper.JAVA_CONST(group.name)}_OF_${helper.JAVA_CONST(scene.name)}:
+            return ${helper.getFillFromRequestCode(projectName, field)};
+                </#if>
+		        <#if helper.canFillFromSubmitted(field)>
+		case CR.${helper.JAVA_CONST(crSpec.changeRequestType)}.FIELD_${helper.NAME_AS_THIS(field.name)}_IN_${helper.JAVA_CONST(group.name)}_OF_${helper.JAVA_CONST(scene.name)}:
+            return ${helper.getFillFromSubmittedCode(projectName, field)};
+                 </#if>
+            </#list>
+		</#list>
+	</#list>
+</#list>
+        default:
+		    break;
+		}
+		return defaultValue;
+	}
+	protected Object getFieldValueWhenFillResponse(Object suggestValue,
+          GenericFormPage requestData, ChangeRequest changeRequest, CRGroupData groupData,
+          CRFieldSpec fieldSpec) throws Exception {
         return suggestValue;
       }
 
-      protected Object getFieldCandidatesWhenFillResponse(
-          GenericFormPage requestData,
-          ChangeRequest changeRequest,
-          CRGroupData groupData,
-          CRFieldSpec fieldSpec,
-          CRFieldData fieldData)
-          throws Exception {
+      protected Object getFieldCandidatesWhenFillResponse(GenericFormPage requestData, ChangeRequest changeRequest, CRGroupData groupData,
+          CRFieldSpec fieldSpec, CRFieldData fieldData) throws Exception {
         return makeFieldCandidateValues(groupData, fieldData, fieldSpec);
       }
 

@@ -1,11 +1,14 @@
 package com.terapico.changerequest.spec;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class ProjectChangeRequestSpec extends CommonSpec<ProjectChangeRequestSpec>{
 	protected Map<String, EventSpec> allEventSpecs;
 	protected Map<String, ChangeRequestSpec> changeRequestSpecs;
+	protected Set<String> refferModelNames = new HashSet<>();
 	protected String requestUrlPrefix;
 
 	public Map<String, EventSpec> getAllEventSpecs() {
@@ -20,8 +23,11 @@ public class ProjectChangeRequestSpec extends CommonSpec<ProjectChangeRequestSpe
 	public void setChangeRequestSpecs(Map<String, ChangeRequestSpec> changeRequestSpecs) {
 		this.changeRequestSpecs = changeRequestSpecs;
 	}
-	
-	
+
+	public Set<String> getRefferModelNames() {
+		return refferModelNames;
+	}
+
 	public String getRequestUrlPrefix() {
 		return requestUrlPrefix;
 	}
@@ -54,5 +60,9 @@ public class ProjectChangeRequestSpec extends CommonSpec<ProjectChangeRequestSpe
 	@Override
 	public String getSpecType() {
 		return "Project";
+	}
+
+	public void addReferModelName(String modelName){
+		refferModelNames.add(modelName);
 	}
 }

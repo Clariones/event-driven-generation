@@ -533,6 +533,18 @@ public class MODEL {
     return rst;
   }
 
+  public static EventDinner eventDinner() {
+    EventDinner rst = new EventDinner();
+    rst.setModelTypeName("event_dinner");
+    return rst;
+  }
+
+  public static EventMaster eventMaster() {
+    EventMaster rst = new EventMaster();
+    rst.setModelTypeName("event_master");
+    return rst;
+  }
+
   public static MobileApp mobileApp() {
     MobileApp rst = new MobileApp();
     rst.setModelTypeName("mobile_app");

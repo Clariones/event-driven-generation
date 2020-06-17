@@ -14,7 +14,7 @@ public class MainPageFlow extends BasePageFlowDescriptionScript {
             .parent_class_name("WxappService")
             .parent_class_package("com.doublechaintech.optical.wxappservice")
             .bean_name("wxappService")
-            .addTag("change_request", "false");
+            .addTag("change_request", "true");
 
 
     @Override

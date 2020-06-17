@@ -1,19 +1,17 @@
 package com.terapico.changerequest.generator;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import com.terapico.changerequest.builder.FieldType;
 import com.terapico.changerequest.builder.OutputName;
 import com.terapico.changerequest.builder.UIStyle;
 import com.terapico.generator.BaseHelper;
 import com.terapico.generator.Utils;
+
+import javax.naming.Name;
 
 @SuppressWarnings("unchecked")
 public class GenerationHelper extends BaseHelper {
@@ -230,7 +228,79 @@ public class GenerationHelper extends BaseHelper {
 				});
 			});
 		});
+
+		result.addAll((Collection<? extends String>) projectSpec.get("referModelName"));
+		System.out.println("refer to models: " + result);
 		return result;
 	}
-	
+
+	@SuppressWarnings("unchecked")
+	public List<Map<String, Object>> getGroupListWhichHasAutoFillExpression(Map<String, Object> projectSpec) {
+		Set<String> result = new HashSet<>();
+		List<Map<String, Object>> allCRs = (List<Map<String, Object>>) projectSpec.get(OutputName.CHANGE_REQUEST_LIST);
+
+		return allCRs.stream().filter(crSpec->{
+			List<Map<String, Object>> stepList = (List<Map<String, Object>>) crSpec
+					.get(OutputName.CHANGE_REQUEST.STEP_LIST);
+			return stepList.stream().anyMatch(stepSpec->{
+				List<Map<String, Object>> eventList = (List<Map<String, Object>>) stepSpec
+						.get(OutputName.CHANGE_REQUEST.STEP.EVENT_LIST);
+					return eventList.stream().anyMatch(eventSepc->{
+						List<Map<String, Object>> fieldList = (List<Map<String, Object>>) eventSepc
+								.get(OutputName.CHANGE_REQUEST.STEP.EVENT.FIELD_LIST);
+						return fieldList.stream().anyMatch(fieldSpec->{
+							return fieldSpec.get(OutputName.CHANGE_REQUEST.STEP.EVENT.FIELD.AUTO_FILL_EXPRESSION) != null;
+						});
+					});
+			});
+		}).collect(Collectors.toList());
+	}
+
+	public boolean canFillFromRequest(Map<String, Object> fieldSpec) {
+		String afe = (String) fieldSpec.get(OutputName.CHANGE_REQUEST.STEP.EVENT.FIELD.AUTO_FILL_EXPRESSION);
+		if (afe == null){
+			return false;
+		}
+		return afe.startsWith("request://");
+	}
+	public boolean canFillFromRequestObject(Map<String, Object> fieldSpec) {
+		String afe = (String) fieldSpec.get(OutputName.CHANGE_REQUEST.STEP.EVENT.FIELD.AUTO_FILL_EXPRESSION);
+		if (afe == null){
+			return false;
+		}
+		return afe.startsWith("request_member_of://");
+	}
+	public String getFillFromRequestCode(String projectName, Map<String, Object> fieldSpec){
+		StringBuilder sb = new StringBuilder();
+		String afe = (String) fieldSpec.get(OutputName.CHANGE_REQUEST.STEP.EVENT.FIELD.AUTO_FILL_EXPRESSION);
+		afe = afe.substring(20);
+		String[] afePieces = afe.split("/");
+		String modelName = afePieces[0];
+		String param = afePieces[1];
+		String member = afePieces[2];
+
+		sb.append("((").append(NameAsThis(modelName)).append(")(")
+				.append(NameAsThis(projectName)).append("BaseUtils.loadBaseEntityById(userContext, ")
+				.append(NameAsThis(modelName)).append(".INTERNAL_TYPE, userContext.get")
+				.append(NameAsThis(param)).append("()))).get")
+				.append(NameAsThis(member)).append("()");
+		return sb.toString();
+	}
+	public boolean canFillFromSubmitted(Map<String, Object> fieldSpec) {
+		String afe = (String) fieldSpec.get(OutputName.CHANGE_REQUEST.STEP.EVENT.FIELD.AUTO_FILL_EXPRESSION);
+		if (afe == null){
+			return false;
+		}
+		return afe.startsWith("submitted://");
+	}
+	public String getFillFromSubmittedCode(String projectName, Map<String, Object> fieldSpec) {
+		String afe = (String) fieldSpec.get(OutputName.CHANGE_REQUEST.STEP.EVENT.FIELD.AUTO_FILL_EXPRESSION);
+		afe = afe.substring(12);
+		if (afe.contains(".")){
+			return String.format("getValueFromPostedData(userContext.getChangeRequestProcessResult().getPostedData(),\"%s\",\"%s\")",
+					afe.substring(0, afe.indexOf(".")),
+							afe.substring(afe.indexOf(".")+1));
+		}
+		return String.format("getValueFromPostedData(null,\"%s\")",	afe);
+	}
 }

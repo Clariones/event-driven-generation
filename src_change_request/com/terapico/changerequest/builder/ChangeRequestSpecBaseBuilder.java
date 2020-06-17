@@ -3,6 +3,7 @@ package com.terapico.changerequest.builder;
 import java.io.Serializable;
 import java.util.Map;
 
+import cla.edg.modelbean.BaseAttribute;
 import com.terapico.generator.Utils;
 
 public class ChangeRequestSpecBaseBuilder<T extends ChangeRequestSpecBaseBuilder<T>>
@@ -177,6 +178,34 @@ public class ChangeRequestSpecBaseBuilder<T extends ChangeRequestSpecBaseBuilder
 		}
 		return me;
 	}
+
+	public T fill_by_request(String expression) {
+		return auto_fill_expression("request://"+expression);
+	}
+	public T fill_by_request_member(String expression, BaseAttribute attribute) {
+		service.referToModel(attribute.getContainerBean().getModelTypeName());
+		return auto_fill_expression("request_member_of://"+attribute.getContainerBean().getModelTypeName()+"/"+expression+"/"+attribute.getName());
+	}
+
+
+	public T fill_by_submitted(String expression) {
+		return auto_fill_expression("submitted://"+expression);
+	}
+	public T fill_by_submitted_member(String expression, BaseAttribute attribute) {
+		return auto_fill_expression("submitted_member_of://"+attribute.getContainerBean().getModelTypeName()+"/"+expression+"/"+attribute.getName());
+	}
+
+	protected T auto_fill_expression(String expression) {
+		// TODO
+		if(workingBoard.isBuildingField()) {
+			service.setFieldAutoFillExpression($CR(),$STEP(),$EVENT(),$FIELD(), expression);
+			workingBoard.onJob(WorkingBoard.DEFAULT_VALUE);
+		}else {
+			error("目前只有字段才能指定自动填充方式");
+		}
+		return me;
+	}
+
 
 	public T value(Serializable forceValue) {
 		if(workingBoard.isBuildingField()) {
