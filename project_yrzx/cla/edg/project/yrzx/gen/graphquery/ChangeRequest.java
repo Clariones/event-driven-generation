@@ -157,6 +157,17 @@ public class ChangeRequest extends BaseModelBean{
 		return member;
 	}
 
+	public EventContractBasicInfo eventContractBasicInfoList() {
+		EventContractBasicInfo member = new EventContractBasicInfo();
+		member.setModelTypeName("event_contract_basic_info");
+		member.setName("change_request");
+		member.setMemberName("eventContractBasicInfoList");
+		member.setRelationName("changeRequest");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 	public EventMaterialAcceptanceBasicInfo eventMaterialAcceptanceBasicInfoList() {
 		EventMaterialAcceptanceBasicInfo member = new EventMaterialAcceptanceBasicInfo();
 		member.setModelTypeName("event_material_acceptance_basic_info");
@@ -283,6 +294,17 @@ public class ChangeRequest extends BaseModelBean{
 		member.setModelTypeName("event_material_preserved_basic_info");
 		member.setName("change_request");
 		member.setMemberName("eventMaterialPreservedBasicInfoList");
+		member.setRelationName("changeRequest");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EventContractPaymentPhase eventContractPaymentPhaseList() {
+		EventContractPaymentPhase member = new EventContractPaymentPhase();
+		member.setModelTypeName("event_contract_payment_phase");
+		member.setName("change_request");
+		member.setMemberName("eventContractPaymentPhaseList");
 		member.setRelationName("changeRequest");
 		member.setReferDirection(false);
 		append(member);

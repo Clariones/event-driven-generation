@@ -157,17 +157,6 @@ public class Merchant extends BaseModelBean{
 		return member;
 	}
 
-	public Article articleList() {
-		Article member = new Article();
-		member.setModelTypeName("article");
-		member.setName("post_by_merchant");
-		member.setMemberName("articleList");
-		member.setRelationName("postByMerchant");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-
 	public MerchantActiveNomination merchantActiveNominationList() {
 		MerchantActiveNomination member = new MerchantActiveNomination();
 		member.setModelTypeName("merchant_active_nomination");
@@ -493,6 +482,50 @@ public class Merchant extends BaseModelBean{
 		member.setName("sender");
 		member.setMemberName("notificationListAsSender");
 		member.setRelationName("receiver");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EventContractBasicInfo eventContractBasicInfoListAsPartyA() {
+		EventContractBasicInfo member = new EventContractBasicInfo();
+		member.setModelTypeName("event_contract_basic_info");
+		member.setName("party_a");
+		member.setMemberName("eventContractBasicInfoListAsPartyA");
+		member.setRelationName("partyA");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EventContractBasicInfo eventContractBasicInfoListAsPartyB() {
+		EventContractBasicInfo member = new EventContractBasicInfo();
+		member.setModelTypeName("event_contract_basic_info");
+		member.setName("party_b");
+		member.setMemberName("eventContractBasicInfoListAsPartyB");
+		member.setRelationName("partyA");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EventContractPaymentPhase eventContractPaymentPhaseListAsPayer() {
+		EventContractPaymentPhase member = new EventContractPaymentPhase();
+		member.setModelTypeName("event_contract_payment_phase");
+		member.setName("payer");
+		member.setMemberName("eventContractPaymentPhaseListAsPayer");
+		member.setRelationName("payer");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EventContractPaymentPhase eventContractPaymentPhaseListAsPayee() {
+		EventContractPaymentPhase member = new EventContractPaymentPhase();
+		member.setModelTypeName("event_contract_payment_phase");
+		member.setName("payee");
+		member.setMemberName("eventContractPaymentPhaseListAsPayee");
+		member.setRelationName("payer");
 		member.setReferDirection(false);
 		append(member);
 		return member;

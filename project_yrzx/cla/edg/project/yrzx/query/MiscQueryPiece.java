@@ -110,7 +110,9 @@ public class MiscQueryPiece extends PieceOfScript {
 				)
 				.wants(MODEL.commentsRecord().submitter())
 
+		.query(MODEL.projectNotification()).list_of("all").pagination()
 
+				.query(MODEL.notification()).list_of("all").pagination()
 		;
 
 		return script;

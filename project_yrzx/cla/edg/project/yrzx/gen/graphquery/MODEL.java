@@ -119,6 +119,12 @@ public class MODEL{
 		return rst;
 	}
 
+	public static PayItemType payItemType() {
+		PayItemType rst = new PayItemType();
+		rst.setModelTypeName("pay_item_type");
+		return rst;
+	}
+
 	public static ContractReviewRecord contractReviewRecord() {
 		ContractReviewRecord rst = new ContractReviewRecord();
 		rst.setModelTypeName("contract_review_record");
@@ -146,6 +152,12 @@ public class MODEL{
 	public static ContractPaymentApplication contractPaymentApplication() {
 		ContractPaymentApplication rst = new ContractPaymentApplication();
 		rst.setModelTypeName("contract_payment_application");
+		return rst;
+	}
+
+	public static AccountBookRecord accountBookRecord() {
+		AccountBookRecord rst = new AccountBookRecord();
+		rst.setModelTypeName("account_book_record");
 		return rst;
 	}
 
@@ -737,12 +749,6 @@ public class MODEL{
 		return rst;
 	}
 
-	public static AccountBookRecord accountBookRecord() {
-		AccountBookRecord rst = new AccountBookRecord();
-		rst.setModelTypeName("account_book_record");
-		return rst;
-	}
-
 	public static ApplicationStatus applicationStatus() {
 		ApplicationStatus rst = new ApplicationStatus();
 		rst.setModelTypeName("application_status");
@@ -923,6 +929,12 @@ public class MODEL{
 		return rst;
 	}
 
+	public static EventContractBasicInfo eventContractBasicInfo() {
+		EventContractBasicInfo rst = new EventContractBasicInfo();
+		rst.setModelTypeName("event_contract_basic_info");
+		return rst;
+	}
+
 	public static EventMaterialAcceptanceBasicInfo eventMaterialAcceptanceBasicInfo() {
 		EventMaterialAcceptanceBasicInfo rst = new EventMaterialAcceptanceBasicInfo();
 		rst.setModelTypeName("event_material_acceptance_basic_info");
@@ -992,6 +1004,12 @@ public class MODEL{
 	public static EventMaterialPreservedBasicInfo eventMaterialPreservedBasicInfo() {
 		EventMaterialPreservedBasicInfo rst = new EventMaterialPreservedBasicInfo();
 		rst.setModelTypeName("event_material_preserved_basic_info");
+		return rst;
+	}
+
+	public static EventContractPaymentPhase eventContractPaymentPhase() {
+		EventContractPaymentPhase rst = new EventContractPaymentPhase();
+		rst.setModelTypeName("event_contract_payment_phase");
 		return rst;
 	}
 

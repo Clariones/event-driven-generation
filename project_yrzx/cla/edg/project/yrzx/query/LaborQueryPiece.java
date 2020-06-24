@@ -3,6 +3,7 @@ package cla.edg.project.yrzx.query;
 import cla.edg.pageflow.PageFlowScript;
 import cla.edg.pageflow.PieceOfScript;
 import cla.edg.project.yrzx.gen.graphquery.MODEL;
+import cla.edg.project.yrzx.gen.graphquery.PayItemStatus;
 
 /**
  * 劳务监督相关
@@ -44,17 +45,7 @@ public class LaborQueryPiece extends PieceOfScript {
 						MODEL.laborDispute().status()
 				)
 
-			.query(MODEL.standardContract()).which("has workpackage by project").with_string("project id").pagination()
-				.comments("查询项目下的分包合同")
-				.do_it_as()
-				.where(MODEL.standardContract().project().eq("${project id}"),
-						MODEL.standardContract().workPackage().not_null()
-						)
-				.wants(
-						MODEL.standardContract().workPackage(),
-						MODEL.standardContract().partyB(),
-						MODEL.standardContract().contractPayItemList()
-				)
+
 
 
 
@@ -77,6 +68,25 @@ public class LaborQueryPiece extends PieceOfScript {
 
 				)
 				.wants(MODEL.laborRecord().type())
+
+
+			.find(MODEL.standardContract()).list_of("project by type").with_string("project id").with_string("type")
+				.comments("统计项目下某类型合同数量")
+				.do_it_as().count()
+				.where(MODEL.standardContract().contractType().eq("${type}"),
+						MODEL.standardContract().project().eq("${project id}")
+						)
+
+			.find(MODEL.contractPayItem()).which("in project by type").with_string("project id").with_string("type")
+				.comments("统计项目下某类型的合同支付项目金额总和")
+				.do_it_as().sum(MODEL.contractPayItem().payAmount())
+				.where(MODEL.contractPayItem().contract().project().eq("${project id}"),
+					MODEL.contractPayItem().payItemType().code().eq("${type}")
+				)
+
+
+
+
 
 		;
 

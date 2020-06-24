@@ -91,17 +91,6 @@ public class EmployeeNomination extends BaseModelBean{
 		return member;
 	}
 
-	public Article articleList() {
-		Article member = new Article();
-		member.setModelTypeName("article");
-		member.setName("post_by_employee");
-		member.setMemberName("articleList");
-		member.setRelationName("postByEmployee");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-
 	public MerchantActiveNomination merchantActiveNominationList() {
 		MerchantActiveNomination member = new MerchantActiveNomination();
 		member.setModelTypeName("merchant_active_nomination");

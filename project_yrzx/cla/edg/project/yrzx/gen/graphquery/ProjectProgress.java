@@ -47,6 +47,17 @@ public class ProjectProgress extends BaseModelBean{
 
 	// 被引用的对象
 
+	public ContractPayItem contractPayItemList() {
+		ContractPayItem member = new ContractPayItem();
+		member.setModelTypeName("contract_pay_item");
+		member.setName("project_progress");
+		member.setMemberName("contractPayItemList");
+		member.setRelationName("projectProgress");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 	public LaborWageManagementSheet laborWageManagementSheetList() {
 		LaborWageManagementSheet member = new LaborWageManagementSheet();
 		member.setModelTypeName("labor_wage_management_sheet");
@@ -64,6 +75,17 @@ public class ProjectProgress extends BaseModelBean{
 		member.setName("planned_approach_phase");
 		member.setMemberName("materialRecordList");
 		member.setRelationName("plannedApproachPhase");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EventContractPaymentPhase eventContractPaymentPhaseList() {
+		EventContractPaymentPhase member = new EventContractPaymentPhase();
+		member.setModelTypeName("event_contract_payment_phase");
+		member.setName("project_progress");
+		member.setMemberName("eventContractPaymentPhaseList");
+		member.setRelationName("projectProgress");
 		member.setReferDirection(false);
 		append(member);
 		return member;

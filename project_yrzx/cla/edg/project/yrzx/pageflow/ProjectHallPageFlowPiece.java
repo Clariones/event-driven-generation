@@ -220,7 +220,11 @@ public class ProjectHallPageFlowPiece extends PieceOfScript {
 			.comments("查看劳务监督管理").need_login().has_footprint()
 			.got_page("labor supervision list").title("劳务监督管理").list_of("card")
 				.comments("平台台账. 与平台账户相关的所有往来台账明细")
-				
+
+		.request("view labor supervision detail").with_string("item id")
+			.comments("查看劳务监督管理详情页").need_login().has_footprint()
+			.got_page("labor supervision detail").title("劳务监督管理")
+
 		.request("view labor wages list").with_string("project id").with_last_record_id()
 			.comments("查看工资发放记录列表").need_login().has_footprint()
 			.got_page("labor wages list").title("劳务工资发放").list_of("card")

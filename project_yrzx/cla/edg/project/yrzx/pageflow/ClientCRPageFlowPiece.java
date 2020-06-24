@@ -120,15 +120,29 @@ public class ClientCRPageFlowPiece extends PieceOfScript {
 					.comments("发起收款申请")
 					.got_page("contract payment application detail")
 
+
+
+
+
+				.request_with_changerequest("create contract").with_string("project id").with_string("type id")
+				.comments("创建合同")
+				.got_page("project contract detail")
+
+
+
+
 				.request_with_changerequest("review").need_login().with_string("project id").with_string("audit record id")
-					.comments("审核")
+				.comments("审核")
 //					.when("ContractPayApplication")
-						.got_page("contract payment application detail")
+//						.got_page("contract payment application detail")
+//					.when_others()
+						.got_page("redirect")
 
 				.request_with_changerequest("comments").need_login().with_string("project id").with_string("item id").with_string("item type")
 					.comments("批注")
-	//					.when("ContractPayApplication")
+				//					.when("ContractPayApplication")
 					.got_page("contract payment application detail")
+
 
 				;
 	}

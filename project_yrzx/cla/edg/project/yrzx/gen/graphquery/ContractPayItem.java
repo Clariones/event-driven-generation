@@ -56,6 +56,28 @@ public class ContractPayItem extends BaseModelBean{
 		return member;
 	}
 
+	public PayItemType payItemType() {
+		PayItemType member = new PayItemType();
+		member.setModelTypeName("pay_item_type");
+		member.setName("pay_item_type");
+		member.setMemberName("payItemType");
+		member.setReferDirection(true);
+		member.setRelationName("payItemType");
+		append(member);
+		return member;
+	}
+
+	public ProjectProgress projectProgress() {
+		ProjectProgress member = new ProjectProgress();
+		member.setModelTypeName("project_progress");
+		member.setName("project_progress");
+		member.setMemberName("projectProgress");
+		member.setReferDirection(true);
+		member.setRelationName("projectProgress");
+		append(member);
+		return member;
+	}
+
 	// 被引用的对象
 
 	public SupplementaryContract supplementaryContractList() {
@@ -132,6 +154,15 @@ public class ContractPayItem extends BaseModelBean{
 		return member;
 	}
 
+	public NumberAttribute paymentPhase(){
+		NumberAttribute member = new NumberAttribute();
+		member.setModelTypeName("int");
+		// member.setName("paymentPhase");
+		member.setName("payment_phase");
+		useMember(member);
+		return member;
+	}
+
 	public NumberAttribute payAmount(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
@@ -141,20 +172,20 @@ public class ContractPayItem extends BaseModelBean{
 		return member;
 	}
 
-	public DateTimeAttribute expectedTime(){
-		DateTimeAttribute member = new DateTimeAttribute();
-		member.setModelTypeName("date");
-		// member.setName("expectedTime");
-		member.setName("expected_time");
-		useMember(member);
-		return member;
-	}
-
 	public StringAttribute payCriteira(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
 		// member.setName("payCriteira");
 		member.setName("pay_criteira");
+		useMember(member);
+		return member;
+	}
+
+	public DateTimeAttribute expectedPayTime(){
+		DateTimeAttribute member = new DateTimeAttribute();
+		member.setModelTypeName("date");
+		// member.setName("expectedPayTime");
+		member.setName("expected_pay_time");
 		useMember(member);
 		return member;
 	}

@@ -91,11 +91,11 @@ public class Platform extends BaseModelBean{
 		return member;
 	}
 
-	public Article articleList() {
-		Article member = new Article();
-		member.setModelTypeName("article");
+	public PayItemType payItemTypeList() {
+		PayItemType member = new PayItemType();
+		member.setModelTypeName("pay_item_type");
 		member.setName("platform");
-		member.setMemberName("articleList");
+		member.setMemberName("payItemTypeList");
 		member.setRelationName("platform");
 		member.setReferDirection(false);
 		append(member);

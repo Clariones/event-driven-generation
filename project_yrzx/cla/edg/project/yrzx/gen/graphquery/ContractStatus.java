@@ -41,6 +41,17 @@ public class ContractStatus extends BaseModelBean{
 		return member;
 	}
 
+	public EventContractBasicInfo eventContractBasicInfoList() {
+		EventContractBasicInfo member = new EventContractBasicInfo();
+		member.setModelTypeName("event_contract_basic_info");
+		member.setName("status");
+		member.setMemberName("eventContractBasicInfoList");
+		member.setRelationName("status");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 
 	// 普通属性
 
