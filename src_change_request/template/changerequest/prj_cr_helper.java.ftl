@@ -148,6 +148,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 		{
 			CRGroupData hiddenGroup = new CRGroupData();
 			hiddenGroup.setName(CR.GROUP_HIDDEN);
+			hiddenGroup.setId(CR.GROUP_HIDDEN);
 			hiddenGroup.setTitle("隐藏字段");
 			hiddenGroup.setHidden(true);
 			requestData.getGroupList().add(hiddenGroup);
@@ -171,6 +172,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 		for(CRGroupSpec groupSpec: groupSpecList) {
 			CRGroupData groupData = new CRGroupData();
 			groupData.setName(groupSpec.getName());
+			groupData.setId(groupSpec.getName());
 			groupData.setTitle(groupSpec.getTitle());
 			groupData.setHidden(false);
 			requestData.getGroupList().add(groupData);
