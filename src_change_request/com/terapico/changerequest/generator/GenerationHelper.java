@@ -223,9 +223,7 @@ public class GenerationHelper extends BaseHelper {
 						if (Utils.isBlank(mName)) {
 							return;
 						}
-						result.add(
-								mName.trim().replace('_', ' ').replaceAll("\\s+", " ")
-						);
+						result.add(mName.trim().replace('_', ' ').replaceAll("\\s+", " "));
 					});
 				});
 			});
@@ -280,7 +278,7 @@ public class GenerationHelper extends BaseHelper {
 		String modelName = afePieces[0];
 		String param = afePieces[1];
 		String member = afePieces[2];
-
+		sb.append("userContext.get").append(NameAsThis(param)).append("() == null ? defaultValue : ");
 		sb.append("((").append(NameAsThis(modelName)).append(")(")
 				.append(NameAsThis(projectName)).append("BaseUtils.loadBaseEntityById(userContext, ")
 				.append(NameAsThis(modelName)).append(".INTERNAL_TYPE, userContext.get")
@@ -295,15 +293,35 @@ public class GenerationHelper extends BaseHelper {
 		}
 		return afe.startsWith("submitted://");
 	}
+
+	/**
+	 * Example: <pre>
+	 *   Object posted = getValueFromPostedData(userContext.getChangeRequestProcessResult().getPostedData(),"guest","type");
+	 * 	 if (posted == null){
+	 * 	     return defaultValue;
+	 * 	 }
+	 * 	 return posted;
+	 * </pre>
+	 * @param projectName
+	 * @param fieldSpec
+	 * @return
+	 */
 	public String getFillFromSubmittedCode(String projectName, Map<String, Object> fieldSpec) {
 		String afe = (String) fieldSpec.get(OutputName.CHANGE_REQUEST.STEP.EVENT.FIELD.AUTO_FILL_EXPRESSION);
 		afe = getAutoFillExpressionContext(afe);
+		StringBuilder sb = new StringBuilder();
+		sb.append("Object posted = getValueFromPostedData(userContext.getChangeRequestProcessResult().getPostedData(), ");
 		if (afe.contains(".")){
-			return String.format("getValueFromPostedData(userContext.getChangeRequestProcessResult().getPostedData(),\"%s\",\"%s\")",
-					afe.substring(0, afe.indexOf(".")),
-							afe.substring(afe.indexOf(".")+1));
+			sb.append("\"").append(afe.substring(0, afe.indexOf("."))).append("\",\"").append(nameAsThis(afe.substring(afe.indexOf(".")+1))).append("\"");
+		}else {
+			sb.append("null, \"").append(nameAsThis(afe.substring(afe.indexOf(".")+1))).append("\"");
 		}
-		return String.format("getValueFromPostedData(null,\"%s\")",	afe);
+		sb.append(");").append("\r\n");
+		sb.append("            if (posted == null){").append("\r\n");
+		sb.append("                return defaultValue;").append("\r\n");
+		sb.append("            }").append("\r\n");
+		sb.append("            return posted;");
+		return sb.toString();
 	}
 
 	private String getAutoFillExpressionContext(String afe) {
@@ -318,6 +336,19 @@ public class GenerationHelper extends BaseHelper {
 		}
 		return afe.startsWith("submitted_member_of://");
 	}
+
+	/**
+	 * Example: <pre>
+	 * String postedId = (String)getValueFromPostedData(userContext.getChangeRequestProcessResult().getPostedData(),"guest","type");
+	 * if (postedId == null){
+	 *     return defaultValue;
+	 * }
+	 * return ((CoatingType)(OpticalBaseUtils.loadBaseEntityById(userContext, CoatingType.INTERNAL_TYPE, postedId))).getName();
+	 * </pre>
+	 * @param projectName
+	 * @param fieldSpec
+	 * @return
+	 */
 	public String getFillFromSubmittedMemberCode(String projectName, Map<String, Object> fieldSpec) {
 		String afe = (String) fieldSpec.get(OutputName.CHANGE_REQUEST.STEP.EVENT.FIELD.AUTO_FILL_EXPRESSION);
 		StringBuilder sb = new StringBuilder();
@@ -326,6 +357,9 @@ public class GenerationHelper extends BaseHelper {
 		String modelName = afePieces[0];
 		String expression = afePieces[1];
 		String member = afePieces[2];
+		if (member.contains("/") || member.contains(".")){
+			throw new RuntimeException("暂时不支持多级对象属性: " + afe);
+		}
 		String paramGroup = null;
 		String paramField = expression;
 		int pos = expression.indexOf(".");
@@ -333,13 +367,16 @@ public class GenerationHelper extends BaseHelper {
 			paramGroup = expression.substring(0, pos);
 			paramField = expression.substring(pos+1);
 		}
-		sb.append("((").append(NameAsThis(modelName)).append(")(")
+		sb.append("String postedId = (String)getValueFromPostedData(userContext.getChangeRequestProcessResult().getPostedData(),")
+				.append(paramGroup==null?"null":("\"" + nameAsThis(paramGroup)+"\"")).append(",\"").append(nameAsThis(paramField)).append("\"").append(");")
+				.append("\r\n");
+		sb.append("            if (postedId == null){").append("\r\n");
+		sb.append("                 return defaultValue;").append("\r\n");
+		sb.append("            }").append("\r\n");
+		sb.append("            return ((").append(NameAsThis(modelName)).append(")(")
 				.append(NameAsThis(projectName)).append("BaseUtils.loadBaseEntityById(userContext, ")
-				.append(NameAsThis(modelName)).append(".INTERNAL_TYPE, \r\n")
-				.append("                         (String)getValueFromPostedData(userContext.getChangeRequestProcessResult().getPostedData(),")
-				.append(paramGroup==null?"null":("\"" + paramGroup+"\"")).append(",\"").append(paramField).append("\"")
-				.append("))\r\n                )).get")
-				.append(NameAsThis(member)).append("()");
+				.append(NameAsThis(modelName)).append(".INTERNAL_TYPE, postedId))).get")
+				.append(NameAsThis(member)).append("();");
 		return sb.toString();
 	}
 }

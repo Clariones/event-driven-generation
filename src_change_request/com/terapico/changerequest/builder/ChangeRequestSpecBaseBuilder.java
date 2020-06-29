@@ -182,7 +182,7 @@ public class ChangeRequestSpecBaseBuilder<T extends ChangeRequestSpecBaseBuilder
 	public T fill_by_request(String expression) {
 		return auto_fill_expression("request://"+expression);
 	}
-	public T fill_by_request_member(String expression, BaseAttribute attribute) {
+	public T fill_by_request(String expression, BaseAttribute attribute) {
 		service.referToModel(attribute.getContainerBean().getModelTypeName());
 		return auto_fill_expression("request_member_of://"+attribute.getContainerBean().getModelTypeName()+"/"+expression+"/"+attribute.getName());
 	}
@@ -191,7 +191,7 @@ public class ChangeRequestSpecBaseBuilder<T extends ChangeRequestSpecBaseBuilder
 	public T fill_by_submitted(String expression) {
 		return auto_fill_expression("submitted://"+expression);
 	}
-	public T fill_by_submitted_member(String expression, BaseAttribute attribute) {
+	public T fill_by_submitted(String expression, BaseAttribute attribute) {
 		return auto_fill_expression("submitted_member_of://"+attribute.getContainerBean().getModelTypeName()+"/"+expression+"/"+attribute.getName());
 	}
 
@@ -387,10 +387,10 @@ public class ChangeRequestSpecBaseBuilder<T extends ChangeRequestSpecBaseBuilder
 		return me;
 	}
 
-	public T show_previous_event(int showSameRecord) {
+	public T show_previous_event(int showPrevNumber, int showNextNumber) {
 		switch (workingBoard.currentWorkingLevel()) {
 			case WorkingBoard.EVENT:
-				service.setShowPreviousEventSize($CR(), $STEP(), $EVENT(), showSameRecord);
+				service.setShowPreviousEventSize($CR(), $STEP(), $EVENT(), showPrevNumber, showNextNumber);
 				break;
 			default:
 				error("只有描述 Multi-Event 才能指定展示前项的数量");

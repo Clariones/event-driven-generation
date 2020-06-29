@@ -11,7 +11,8 @@ public class EventSpec extends CommonSpec<EventSpec>{
 	protected String type;
 	protected transient EventSpec prototype;
 	protected int showPreviousCount = 0;  // 如果是multi-event, 0表示不显示之前的记录,-1表示显示所有之前的记录, 1~N表示显示前1~N条记录
-	
+	protected int showNextCount = 0;  // 如果是multi-event, 0表示不显示next的记录,-1表示显示所有next的记录, 1~N表示显示next 1~N条记录
+
 	public String getType() {
 		return type;
 	}
@@ -35,6 +36,14 @@ public class EventSpec extends CommonSpec<EventSpec>{
 	}
 	public void setShowPreviousCount(int showPreviousCount) {
 		this.showPreviousCount = showPreviousCount;
+	}
+
+	public int getShowNextCount() {
+		return showNextCount;
+	}
+
+	public void setShowNextCount(int showNextCount) {
+		this.showNextCount = showNextCount;
 	}
 
 	public EventSpec withType(String eventType) {

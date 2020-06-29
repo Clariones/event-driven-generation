@@ -68,11 +68,11 @@ public class ChangeRequestSpecBuilder extends ChangeRequestSpecBaseBuilder<Chang
 	}
 
 	public ChangeRequestSpecBuilder show_them_all_in_cr() {
-		return show_previous_event(-1);
+		return show_previous_event(-1,-1);
 	}
 
 	public ChangeRequestSpecBuilder show_last_5_in_cr() {
-		return show_previous_event(5);
+		return show_previous_event(5,1);
 	}
 
 	public ChangeRequestSpecBuilder cannot_skip() {
