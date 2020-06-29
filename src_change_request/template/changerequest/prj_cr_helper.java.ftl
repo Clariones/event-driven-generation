@@ -23,6 +23,7 @@ import com.terapico.changerequest.CRFieldSpec;
 import com.terapico.changerequest.CRGroupSpec;
 import com.terapico.changerequest.CRSpec;
 
+import com.terapico.utils.MapUtil;
 import com.terapico.utils.TextUtil;
 import com.terapico.uccaf.CafEntity;
 import com.terapico.caf.baseelement.CandidateQuery;
@@ -802,4 +803,38 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 		}
 		groupData.addNextExistsInList(existsRecordList);
 	}
+
+	protected Object makeExistsRecordForShowInList(int idx, String groupName, List<CRFieldSpec> fieldSpecList, List<KeyValuePair> keyValuePairOf) throws Exception {
+        List<Object> allData = new ArrayList<>();
+        {// 序号 这个字段
+            Map<String, Object> fieldData = MapUtil.put("title", "序号")
+                  .put("type", "string")
+                  .put("id", idx + "_id")
+                  .put("value", TO_VALUE(idx))
+                  .into_map();
+            allData.add(fieldData);
+        }
+        for (CRFieldSpec crFieldSpec : fieldSpecList) {
+            if (!crFieldSpec.getName().startsWith(groupName)) {
+                continue;
+            }
+            if (!crFieldSpec.getInteractionMode().equalsIgnoreCase("input")) {
+                continue; // 不是手工填写的字段, 直接忽略
+            }
+
+            for (KeyValuePair keyValuePair : keyValuePairOf) {
+                String name = keyValuePair.getKey();
+                if (crFieldSpec.getName().endsWith("_"+name)) {
+                    Map<String, Object> fieldData = MapUtil.put("title", crFieldSpec.getLabel())
+                      .put("type", crFieldSpec.getType())
+                      .put("id", idx+"_"+allData.size())
+                      .put("value", TO_VALUE(keyValuePair.getValue()))
+                      .into_map();
+                allData.add(fieldData);
+                break;
+                }
+            }
+        }
+        return MapUtil.put("id", idx).put("data",allData).into_map();
+    }
 }
