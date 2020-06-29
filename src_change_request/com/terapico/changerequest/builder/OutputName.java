@@ -29,6 +29,7 @@ public interface OutputName {
 				String MUST = "mustHave";
 				String MULTIPLE = "multiple";
 				String SHOW_PREVIOUS = "showPrevious";
+				String SHOW_NEXT = "showNext";
 				String MIN = "minimalNumber";
 				String MAX = "maximumNumber";
 				String FIELD_LIST = "fieldList";

@@ -385,20 +385,24 @@ public class ChangeRequestSpecBuildingServiceLocalImpl extends CRSBuildingServic
 	}
 
 	@Override
-	public void setShowPreviousEventSize(String crName, String stepName, String eventName, int showPrevRecord) {
+	public void setShowPreviousEventSize(String crName, String stepName, String eventName, int showPrevRecord, int showNextRecord) {
 		EventSpec eventSpec = sureEvent(crName, stepName, eventName);
 		if (!eventSpec.getIsCollection()){
 			throw new RuntimeException("事件"+eventSpec.getName()+"("+eventSpec.getTitle()+")不是Multi-Event,不能指定前项展示数量");
 		}
 		eventSpec.setShowPreviousCount(showPrevRecord);
+		eventSpec.setShowNextCount(showNextRecord);
 		EventSpec prototypeEventSpec = eventSpec.getPrototype();
 		if (prototypeEventSpec.getShowPreviousCount() == 0) {
 			prototypeEventSpec.setShowPreviousCount(showPrevRecord);
+		}
+		if (prototypeEventSpec.getShowNextCount() == 0) {
+			prototypeEventSpec.setShowNextCount(showNextRecord);
 		}
 	}
 
 	@Override
 	public void referToModel(String modelTypeName) {
-		projectSpec.addReferModelName(modelTypeName);
+		projectSpec.addReferModelName(modelTypeName.replaceAll("_"," ").replaceAll("\\s+"," ").trim());
 	}
 }

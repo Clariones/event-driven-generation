@@ -282,8 +282,8 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 		<#list scene.eventList as group>
 		case CR.${helper.JAVA_CONST(crSpec.changeRequestType)}.SCENE_${helper.JAVA_CONST(scene.name)}.GROUP_${helper.JAVA_CONST(group.name)}.NAME:
 			curRecordIdx = fulfillChangeRequestFieldByGroup(requestData, dbCrData, groupData, fieldSpecList, dbCrData.getEvent${helper.CamelName(group.eventType)}List(), groupRecordIndex, groupSpec.getName());
-			<#if group.multiple>
-			fulfillPreviousGroupData(requestData, dbCrData, groupData, fieldSpecList, dbCrData.getEvent${helper.CamelName(group.eventType)}List(), curRecordIdx);
+			<#if group.multiple >
+			fulfillExistsGroupData(requestData, dbCrData, groupData, fieldSpecList, dbCrData.getEvent${helper.CamelName(group.eventType)}List(), curRecordIdx, ${group.showPrevious}, ${group.showNext});
 			</#if>
 			break;
 		</#list>
@@ -339,7 +339,8 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 					    Object suggestedDefaultValue = calcSuggestedDefaultValue(groupName, fieldSpec, fieldSpec.getDefaultValue());
                         fieldData.setValue(TO_VALUE(getFieldValueWhenFillResponse(suggestedDefaultValue,requestData, dbCrData, groupData, fieldSpec)));
 					}else {
-						fieldData.setValue(TO_VALUE(getFieldValueWhenFillResponse(kv.getValue(),requestData, dbCrData, groupData, fieldSpec)));
+					    Object suggestedDefaultValue = calcSuggestedDefaultValue(groupName, fieldSpec, kv.getValue());
+                    	fieldData.setValue(TO_VALUE(getFieldValueWhenFillResponse(suggestedDefaultValue,requestData, dbCrData, groupData, fieldSpec)));
 					}
 				}
 				setFieldSpecInfo(requestData, dbCrData, groupData, fieldData, fieldSpec);
@@ -358,10 +359,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 		}
 	}
 
-    protected void fulfillPreviousGroupData(GenericFormPage requestData, ChangeRequest dbCrData,
-			CRGroupData groupData, List<CRFieldSpec> fieldSpecList, SmartList<? extends BaseEntity> eventList, int groupRecordIndex) throws Exception {
-		// TODO: 填充当前记录的前项. 0 是不填充, -1是所有前项, 0<N 是前N项
-	}
+
 	protected void fullFillNewFields(GenericFormPage requestData, ChangeRequest dbCrData, CRGroupData groupData, String groupName, List<CRFieldSpec> fieldSpecList) throws Exception{
 		for(CRFieldSpec fieldSpec: fieldSpecList) {
 			if (!GROUP_NAME(fieldSpec).equals(groupData.getName())){
@@ -371,7 +369,8 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 			CRFieldData fieldData = new CRFieldData();
 			fieldData.setName(fieldSpec.getName()+"_new");
 			if (fieldSpec.getValue() != null) {
-				fieldData.setValue(TO_VALUE(getFieldValueWhenFillResponse(fieldSpec.getValue(),requestData, dbCrData, groupData, fieldSpec)));
+				Object suggestedDefaultValue = calcSuggestedDefaultValue(groupName, fieldSpec, fieldSpec.getValue());
+                fieldData.setValue(TO_VALUE(getFieldValueWhenFillResponse(suggestedDefaultValue,requestData, dbCrData, groupData, fieldSpec)));
 			}else {
 				Object suggestedDefaultValue = calcSuggestedDefaultValue(groupName, fieldSpec, fieldSpec.getDefaultValue());
                 fieldData.setValue(TO_VALUE(getFieldValueWhenFillResponse(suggestedDefaultValue,requestData, dbCrData, groupData, fieldSpec)));
@@ -677,6 +676,9 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 		           <#assign field_name_const = "CR."+helper.JAVA_CONST(crSpec.changeRequestType)+".FIELD_"+helper.NAME_AS_THIS(field.name)+"_IN_"+helper.JAVA_CONST(group.name)+"_OF_"+helper.JAVA_CONST(scene.name)/>
 		        <#if helper.canFillFromRequest(field)>
 		case ${field_name_const}:
+		    if (userContext.get${helper.NameAsThis(field.autoFillExpression?substring(10))}() == null) {
+		        return defaultValue;
+		    }
 		    return userContext.get${helper.NameAsThis(field.autoFillExpression?substring(10))}();
 		        </#if>
 		        <#if helper.canFillFromRequestObject(field)>
@@ -706,30 +708,25 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
         return suggestValue;
       }
 
-      protected Object getFieldCandidatesWhenFillResponse(GenericFormPage requestData, ChangeRequest changeRequest, CRGroupData groupData,
+    protected Object getFieldCandidatesWhenFillResponse(GenericFormPage requestData, ChangeRequest changeRequest, CRGroupData groupData,
           CRFieldSpec fieldSpec, CRFieldData fieldData) throws Exception {
         return makeFieldCandidateValues(groupData, fieldData, fieldSpec);
-      }
+    }
 
-      protected void setFieldSpecInfo(
-            GenericFormPage requestData,
-            ChangeRequest dbCrData,
-            CRGroupData groupData,
-            CRFieldData fieldData,
-            CRFieldSpec fieldSpec)
-            throws Exception {
-          fieldData.setRequired(fieldSpec.getRequired());
-          fieldData.setDisabled(!fieldSpec.getInteractionMode().equals("input"));
-          if (fieldData.isDisabled()) {
+    protected void setFieldSpecInfo(GenericFormPage requestData, ChangeRequest dbCrData, CRGroupData groupData,
+            CRFieldData fieldData, CRFieldSpec fieldSpec) throws Exception {
+        fieldData.setRequired(fieldSpec.getRequired());
+        fieldData.setDisabled(!fieldSpec.getInteractionMode().equals("input"));
+        if (fieldData.isDisabled()) {
             fieldData.setRequired(false);
-          }
-          if (fieldSpec.getInteractionMode().equals("display")) {
+        }
+        if (fieldSpec.getInteractionMode().equals("display")) {
             fieldData.setType("prompt_message");
             fieldData.setRequired(false);
-          } else if (fieldSpec.getInteractionMode().equals("hidden")) {
+        } else if (fieldSpec.getInteractionMode().equals("hidden")) {
             fieldData.setHidden(true);
             fieldData.setType("hidden");
-          } else {
+        } else {
             if (!isFieldNeedQueryForCandidates(fieldSpec)) {
               if (fieldSpec.getUiStyle().equals("text")
                   && DataTypeUtil.getInt(fieldSpec.getMaximum(), 40) > 100) {
@@ -744,28 +741,62 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
                 fieldData.setType("single-select");
               }
             }
-          }
-
-          fieldData.setCandidateValues(
-              convertToUiCandidateValues(
-                  fieldSpec,
-                  getFieldCandidatesWhenFillResponse(
-                      requestData, dbCrData, groupData, fieldSpec, fieldData)));
-          fieldData.setLabel(fieldSpec.getLabel());
-          fieldData.setPlaceholder(
-              fieldSpec.getPlaceholder() == null ? "请输入" : fieldSpec.getPlaceholder());
-          fieldData.setTipsTitle(fieldSpec.getTipsTitle());
-          fieldData.setTipsContent(fieldSpec.getTipsContent());
-          fieldData.setIcon(fieldSpec.getIcon());
-
-          fieldData.setMultiple(CRFieldSpec.MULTI_SELECTABLE.equals(fieldSpec.getSelectable()));
-          fieldData.setCandidateValuesApi(fieldSpec.getValuesRetrieveApi());
-          fieldData.setMinimum(fieldSpec.getMinimum());
-          fieldData.setMaximum(fieldSpec.getMaximum());
-          fieldData.setRules(getFiledRules(fieldSpec));
-
-          //		所有数据填充完毕后的一些处理
-          updateFieldCandidateValueSelected(fieldData, fieldSpec);
         }
 
+        fieldData.setCandidateValues(
+                convertToUiCandidateValues(fieldSpec,
+                    getFieldCandidatesWhenFillResponse(requestData, dbCrData, groupData, fieldSpec, fieldData)));
+        fieldData.setLabel(fieldSpec.getLabel());
+        fieldData.setPlaceholder(fieldSpec.getPlaceholder() == null ? "请输入" : fieldSpec.getPlaceholder());
+        fieldData.setTipsTitle(fieldSpec.getTipsTitle());
+        fieldData.setTipsContent(fieldSpec.getTipsContent());
+        fieldData.setIcon(fieldSpec.getIcon());
+
+        fieldData.setMultiple(CRFieldSpec.MULTI_SELECTABLE.equals(fieldSpec.getSelectable()));
+        fieldData.setCandidateValuesApi(fieldSpec.getValuesRetrieveApi());
+        fieldData.setMinimum(fieldSpec.getMinimum());
+        fieldData.setMaximum(fieldSpec.getMaximum());
+        fieldData.setRules(getFiledRules(fieldSpec));
+
+        //	所有数据填充完毕后的一些处理
+        updateFieldCandidateValueSelected(fieldData, fieldSpec);
+    }
+
+    protected void fulfillExistsGroupData(GenericFormPage requestData, ChangeRequest dbCrData, CRGroupData groupData,
+			List<CRFieldSpec> fieldSpecList, SmartList<? extends BaseEntity> eventList, int groupRecordIndex, int showPrevious, int showNext) throws Exception {
+		fulfillPreviousGroupData(requestData, dbCrData, groupData, fieldSpecList, eventList, groupRecordIndex, showPrevious);
+		fulfillNextGroupData(requestData, dbCrData, groupData, fieldSpecList, eventList, groupRecordIndex, showNext);
+	}
+
+	protected void fulfillPreviousGroupData(GenericFormPage requestData, ChangeRequest dbCrData, CRGroupData groupData,
+			            List<CRFieldSpec> fieldSpecList, SmartList<? extends BaseEntity> eventList, int groupRecordIndex, int showRecordCnt) throws Exception {
+		if (showRecordCnt == 0){
+			return;
+		}
+		List<Object> existsRecordList = new ArrayList<>();
+		for(int i=0;i<eventList.size();i++){
+			if (!shouldShowPreviousRecord(i+1,groupRecordIndex, showRecordCnt)){
+				continue;
+			}
+			Object value = makeExistsRecordForShowInList(i+1,groupData.getName(), fieldSpecList, eventList.get(i).keyValuePairOf());
+			existsRecordList.add(value);
+		}
+		groupData.addPreviousExistsInList(existsRecordList);
+	}
+
+	protected void fulfillNextGroupData(GenericFormPage requestData, ChangeRequest dbCrData, CRGroupData groupData,
+			            List<CRFieldSpec> fieldSpecList, SmartList<? extends BaseEntity> eventList, int groupRecordIndex, int showRecordCnt) throws Exception {
+		if (showRecordCnt == 0){
+			return;
+		}
+		List<Object> existsRecordList = new ArrayList<>();
+		for(int i=0;i<eventList.size();i++){
+			if (!shouldShowNextRecord(i+1,groupRecordIndex, showRecordCnt)){
+				continue;
+			}
+			Object value = makeExistsRecordForShowInList(i+1, groupData.getName(), fieldSpecList, eventList.get(i).keyValuePairOf());
+			existsRecordList.add(value);
+		}
+		groupData.addNextExistsInList(existsRecordList);
+	}
 }
