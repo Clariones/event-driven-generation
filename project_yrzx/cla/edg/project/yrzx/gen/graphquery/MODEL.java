@@ -1625,9 +1625,9 @@ public class MODEL{
 		return rst;
 	}
 
-	public static UserWhiteList userWhiteList() {
-		UserWhiteList rst = new UserWhiteList();
-		rst.setModelTypeName("user_white_list");
+	public static UserAllowList userAllowList() {
+		UserAllowList rst = new UserAllowList();
+		rst.setModelTypeName("user_allow_list");
 		return rst;
 	}
 
