@@ -63,6 +63,6 @@ public class ProjectChangeRequestSpec extends CommonSpec<ProjectChangeRequestSpe
 	}
 
 	public void addReferModelName(String modelName){
-		refferModelNames.add(modelName);
+		refferModelNames.add(modelName.trim().replaceAll("_"," ").replace("\\s+"," ").trim());
 	}
 }

@@ -4,16 +4,14 @@ import java.util.Map;
 
 import cla.edg.modelbean.*;
 
-public class PayItemStatus extends BaseModelBean{
+public class PayItemType extends BaseModelBean{
 	public String getFullClassName() {
-		return "com.yrdec.yrzx.payitemstatus.PayItemStatus";
+		return "com.yrdec.yrzx.payitemtype.PayItemType";
 	}
 	// 枚举对象
-	public static EnumAttribute PENDING_ON_APPLICATION = new EnumAttribute("com.yrdec.yrzx.payitemstatus.PayItemStatus", "PENDING_ON_APPLICATION");
-	public static EnumAttribute PENDING_ON_AUDIT = new EnumAttribute("com.yrdec.yrzx.payitemstatus.PayItemStatus", "PENDING_ON_AUDIT");
-	public static EnumAttribute CONCERN = new EnumAttribute("com.yrdec.yrzx.payitemstatus.PayItemStatus", "CONCERN");
-	public static EnumAttribute PENDING_ON_CONFIRMATION = new EnumAttribute("com.yrdec.yrzx.payitemstatus.PayItemStatus", "PENDING_ON_CONFIRMATION");
-	public static EnumAttribute CONFIRMED = new EnumAttribute("com.yrdec.yrzx.payitemstatus.PayItemStatus", "CONFIRMED");
+	public static EnumAttribute LABOR = new EnumAttribute("com.yrdec.yrzx.payitemtype.PayItemType", "LABOR");
+	public static EnumAttribute MATERIAL = new EnumAttribute("com.yrdec.yrzx.payitemtype.PayItemType", "MATERIAL");
+	public static EnumAttribute OTHER = new EnumAttribute("com.yrdec.yrzx.payitemtype.PayItemType", "OTHER");
 
 	// 引用的对象
 
@@ -33,20 +31,9 @@ public class PayItemStatus extends BaseModelBean{
 	public ContractPayItem contractPayItemList() {
 		ContractPayItem member = new ContractPayItem();
 		member.setModelTypeName("contract_pay_item");
-		member.setName("pay_item_status");
+		member.setName("pay_item_type");
 		member.setMemberName("contractPayItemList");
-		member.setRelationName("payItemStatus");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-
-	public CommissionPayItem commissionPayItemList() {
-		CommissionPayItem member = new CommissionPayItem();
-		member.setModelTypeName("commission_pay_item");
-		member.setName("pay_item_status");
-		member.setMemberName("commissionPayItemList");
-		member.setRelationName("payItemStatus");
+		member.setRelationName("payItemType");
 		member.setReferDirection(false);
 		append(member);
 		return member;

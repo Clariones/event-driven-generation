@@ -4,9 +4,9 @@ import java.util.Map;
 
 import cla.edg.modelbean.*;
 
-public class ContractVisa extends BaseModelBean{
+public class SupplementaryContractPayItem extends BaseModelBean{
 	public String getFullClassName() {
-		return "com.yrdec.yrzx.contractvisa.ContractVisa";
+		return "com.yrdec.yrzx.supplementarycontractpayitem.SupplementaryContractPayItem";
 	}
 	// 枚举对象
 
@@ -19,6 +19,50 @@ public class ContractVisa extends BaseModelBean{
 		member.setMemberName("contractPayItem");
 		member.setReferDirection(true);
 		member.setRelationName("contractPayItem");
+		append(member);
+		return member;
+	}
+
+	public SupplementaryContract supplementaryContract() {
+		SupplementaryContract member = new SupplementaryContract();
+		member.setModelTypeName("supplementary_contract");
+		member.setName("supplementary_contract");
+		member.setMemberName("supplementaryContract");
+		member.setReferDirection(true);
+		member.setRelationName("supplementaryContract");
+		append(member);
+		return member;
+	}
+
+	public Merchant payer() {
+		Merchant member = new Merchant();
+		member.setModelTypeName("merchant");
+		member.setName("payer");
+		member.setMemberName("payer");
+		member.setReferDirection(true);
+		member.setRelationName("payer");
+		append(member);
+		return member;
+	}
+
+	public Merchant payee() {
+		Merchant member = new Merchant();
+		member.setModelTypeName("merchant");
+		member.setName("payee");
+		member.setMemberName("payee");
+		member.setReferDirection(true);
+		member.setRelationName("payee");
+		append(member);
+		return member;
+	}
+
+	public AuditStatus status() {
+		AuditStatus member = new AuditStatus();
+		member.setModelTypeName("audit_status");
+		member.setName("status");
+		member.setMemberName("status");
+		member.setReferDirection(true);
+		member.setRelationName("status");
 		append(member);
 		return member;
 	}
@@ -55,20 +99,11 @@ public class ContractVisa extends BaseModelBean{
 		return member;
 	}
 
-	public NumberAttribute amount(){
+	public NumberAttribute ajustment(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("double");
-		// member.setName("amount");
-		member.setName("amount");
-		useMember(member);
-		return member;
-	}
-
-	public DateTimeAttribute expectedTime(){
-		DateTimeAttribute member = new DateTimeAttribute();
-		member.setModelTypeName("date");
-		// member.setName("expectedTime");
-		member.setName("expected_time");
+		// member.setName("ajustment");
+		member.setName("ajustment");
 		useMember(member);
 		return member;
 	}
@@ -82,11 +117,11 @@ public class ContractVisa extends BaseModelBean{
 		return member;
 	}
 
-	public DateTimeAttribute createTime(){
+	public DateTimeAttribute expectedPayTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
-		member.setModelTypeName("date_time_create");
-		// member.setName("createTime");
-		member.setName("create_time");
+		member.setModelTypeName("date");
+		// member.setName("expectedPayTime");
+		member.setName("expected_pay_time");
 		useMember(member);
 		return member;
 	}

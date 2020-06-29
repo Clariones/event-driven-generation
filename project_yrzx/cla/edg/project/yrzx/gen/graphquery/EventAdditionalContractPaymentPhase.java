@@ -4,13 +4,24 @@ import java.util.Map;
 
 import cla.edg.modelbean.*;
 
-public class EventReview extends BaseModelBean{
+public class EventAdditionalContractPaymentPhase extends BaseModelBean{
 	public String getFullClassName() {
-		return "com.yrdec.yrzx.eventreview.EventReview";
+		return "com.yrdec.yrzx.eventadditionalcontractpaymentphase.EventAdditionalContractPaymentPhase";
 	}
 	// 枚举对象
 
 	// 引用的对象
+
+	public ContractPayItem paymentItem() {
+		ContractPayItem member = new ContractPayItem();
+		member.setModelTypeName("contract_pay_item");
+		member.setName("payment_item");
+		member.setMemberName("paymentItem");
+		member.setReferDirection(true);
+		member.setRelationName("paymentItem");
+		append(member);
+		return member;
+	}
 
 	public ChangeRequest changeRequest() {
 		ChangeRequest member = new ChangeRequest();
@@ -37,29 +48,38 @@ public class EventReview extends BaseModelBean{
 		return member;
 	}
 
-	public StringAttribute auditRecordId(){
+	public StringAttribute name(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		// member.setName("auditRecordId");
-		member.setName("audit_record_id");
-		useMember(member);
-		return member;
-	}
-
-	public StringAttribute reviewResult(){
-		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
-		// member.setName("reviewResult");
-		member.setName("review_result");
+		// member.setName("name");
+		member.setName("name");
 		useMember(member);
 		return member;
 	}
 
 	public StringAttribute comments(){
 		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
+		member.setModelTypeName("string_longtext");
 		// member.setName("comments");
 		member.setName("comments");
+		useMember(member);
+		return member;
+	}
+
+	public NumberAttribute adjustment(){
+		NumberAttribute member = new NumberAttribute();
+		member.setModelTypeName("money");
+		// member.setName("adjustment");
+		member.setName("adjustment");
+		useMember(member);
+		return member;
+	}
+
+	public DateTimeAttribute expectedPayTime(){
+		DateTimeAttribute member = new DateTimeAttribute();
+		member.setModelTypeName("date");
+		// member.setName("expectedPayTime");
+		member.setName("expected_pay_time");
 		useMember(member);
 		return member;
 	}

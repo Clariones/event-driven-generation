@@ -26,7 +26,7 @@ public class MainPageFlow extends BasePageFlowDescriptionScript {
 				.import_from(new HomePageFlowPiece())
 				.import_from(new MiscPageFlowPiece())
 				.import_from(new MePageContractOrderPageFlowPiece())
-
+				.import_from(new ReviewAndCommentPageFlowPiece())
 				// 查询
 				.import_from(new HomepageQueryPiece())
 				.import_from(new ProjectQueryPiece())

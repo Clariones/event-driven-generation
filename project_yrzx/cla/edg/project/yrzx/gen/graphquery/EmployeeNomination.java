@@ -91,12 +91,12 @@ public class EmployeeNomination extends BaseModelBean{
 		return member;
 	}
 
-	public Article articleList() {
-		Article member = new Article();
-		member.setModelTypeName("article");
-		member.setName("post_by_employee");
-		member.setMemberName("articleList");
-		member.setRelationName("postByEmployee");
+	public SupplementaryContract supplementaryContractList() {
+		SupplementaryContract member = new SupplementaryContract();
+		member.setModelTypeName("supplementary_contract");
+		member.setName("submitter");
+		member.setMemberName("supplementaryContractList");
+		member.setRelationName("submitter");
 		member.setReferDirection(false);
 		append(member);
 		return member;

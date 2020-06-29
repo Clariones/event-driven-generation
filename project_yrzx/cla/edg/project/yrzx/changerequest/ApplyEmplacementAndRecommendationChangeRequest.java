@@ -95,7 +95,7 @@ public class ApplyEmplacementAndRecommendationChangeRequest implements ChangeReq
 
 
 
-				.change_request("subcontract application").zh_CN("分包申请").need_login()
+				.change_request("subcontract application").zh_CN("项目参与").need_login()
 					.icon("form")
 						.has_field("project").zh_CN("参与项目").which_model_of(MODEL.project()).values_can_select_from_query_by(null)
 						.has_field("application type").zh_CN("参与类型").which_model_of(MODEL.careerType()).values_can_select_from_query_by("project id")

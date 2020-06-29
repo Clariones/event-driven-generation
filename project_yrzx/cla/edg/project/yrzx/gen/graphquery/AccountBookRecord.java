@@ -48,6 +48,15 @@ public class AccountBookRecord extends BaseModelBean{
 		return member;
 	}
 
+	public BooleanAttribute confirmed(){
+		BooleanAttribute member = new BooleanAttribute();
+		member.setModelTypeName("bool");
+		// member.setName("confirmed");
+		member.setName("confirmed");
+		useMember(member);
+		return member;
+	}
+
 	public StringAttribute title(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");

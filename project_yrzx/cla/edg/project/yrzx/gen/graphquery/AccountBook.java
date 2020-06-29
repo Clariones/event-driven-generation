@@ -36,17 +36,6 @@ public class AccountBook extends BaseModelBean{
 
 	// 被引用的对象
 
-	public AccountBookItem accountBookItemList() {
-		AccountBookItem member = new AccountBookItem();
-		member.setModelTypeName("account_book_item");
-		member.setName("account_book");
-		member.setMemberName("accountBookItemList");
-		member.setRelationName("accountBook");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-
 	public AccountBookRecord accountBookRecordListAsPayerAccount() {
 		AccountBookRecord member = new AccountBookRecord();
 		member.setModelTypeName("account_book_record");
@@ -64,6 +53,17 @@ public class AccountBook extends BaseModelBean{
 		member.setName("payee_account");
 		member.setMemberName("accountBookRecordListAsPayeeAccount");
 		member.setRelationName("payerAccount");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public AccountBookItem accountBookItemList() {
+		AccountBookItem member = new AccountBookItem();
+		member.setModelTypeName("account_book_item");
+		member.setName("account_book");
+		member.setMemberName("accountBookItemList");
+		member.setRelationName("accountBook");
 		member.setReferDirection(false);
 		append(member);
 		return member;

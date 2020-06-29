@@ -12,18 +12,73 @@ public class SupplementaryContract extends BaseModelBean{
 
 	// 引用的对象
 
-	public ContractPayItem contractPayItem() {
-		ContractPayItem member = new ContractPayItem();
-		member.setModelTypeName("contract_pay_item");
-		member.setName("contract_pay_item");
-		member.setMemberName("contractPayItem");
+	public StandardContract contract() {
+		StandardContract member = new StandardContract();
+		member.setModelTypeName("standard_contract");
+		member.setName("contract");
+		member.setMemberName("contract");
 		member.setReferDirection(true);
-		member.setRelationName("contractPayItem");
+		member.setRelationName("contract");
+		append(member);
+		return member;
+	}
+
+	public SupplementaryContractType type() {
+		SupplementaryContractType member = new SupplementaryContractType();
+		member.setModelTypeName("supplementary_contract_type");
+		member.setName("type");
+		member.setMemberName("type");
+		member.setReferDirection(true);
+		member.setRelationName("type");
+		append(member);
+		return member;
+	}
+
+	public ContractStatus status() {
+		ContractStatus member = new ContractStatus();
+		member.setModelTypeName("contract_status");
+		member.setName("status");
+		member.setMemberName("status");
+		member.setReferDirection(true);
+		member.setRelationName("status");
+		append(member);
+		return member;
+	}
+
+	public EmployeeNomination submitter() {
+		EmployeeNomination member = new EmployeeNomination();
+		member.setModelTypeName("employee_nomination");
+		member.setName("submitter");
+		member.setMemberName("submitter");
+		member.setReferDirection(true);
+		member.setRelationName("submitter");
+		append(member);
+		return member;
+	}
+
+	public Platform platform() {
+		Platform member = new Platform();
+		member.setModelTypeName("platform");
+		member.setName("platform");
+		member.setMemberName("platform");
+		member.setReferDirection(true);
+		member.setRelationName("platform");
 		append(member);
 		return member;
 	}
 
 	// 被引用的对象
+
+	public SupplementaryContractPayItem supplementaryContractPayItemList() {
+		SupplementaryContractPayItem member = new SupplementaryContractPayItem();
+		member.setModelTypeName("supplementary_contract_pay_item");
+		member.setName("supplementary_contract");
+		member.setMemberName("supplementaryContractPayItemList");
+		member.setRelationName("supplementaryContract");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
 
 
 	// 普通属性
@@ -46,6 +101,24 @@ public class SupplementaryContract extends BaseModelBean{
 		return member;
 	}
 
+	public StringAttribute contractNumber(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string");
+		// member.setName("contractNumber");
+		member.setName("contract_number");
+		useMember(member);
+		return member;
+	}
+
+	public StringAttribute document(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string_document");
+		// member.setName("document");
+		member.setName("document");
+		useMember(member);
+		return member;
+	}
+
 	public StringAttribute brief(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
@@ -55,29 +128,11 @@ public class SupplementaryContract extends BaseModelBean{
 		return member;
 	}
 
-	public NumberAttribute amount(){
-		NumberAttribute member = new NumberAttribute();
-		member.setModelTypeName("double");
-		// member.setName("amount");
-		member.setName("amount");
-		useMember(member);
-		return member;
-	}
-
-	public DateTimeAttribute expectedTime(){
-		DateTimeAttribute member = new DateTimeAttribute();
-		member.setModelTypeName("date");
-		// member.setName("expectedTime");
-		member.setName("expected_time");
-		useMember(member);
-		return member;
-	}
-
-	public StringAttribute payCriteira(){
+	public StringAttribute images(){
 		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
-		// member.setName("payCriteira");
-		member.setName("pay_criteira");
+		member.setModelTypeName("images");
+		// member.setName("images");
+		member.setName("images");
 		useMember(member);
 		return member;
 	}
@@ -87,6 +142,15 @@ public class SupplementaryContract extends BaseModelBean{
 		member.setModelTypeName("date_time_create");
 		// member.setName("createTime");
 		member.setName("create_time");
+		useMember(member);
+		return member;
+	}
+
+	public DateTimeAttribute lastUpdateTime(){
+		DateTimeAttribute member = new DateTimeAttribute();
+		member.setModelTypeName("date_time_update");
+		// member.setName("lastUpdateTime");
+		member.setName("last_update_time");
 		useMember(member);
 		return member;
 	}
