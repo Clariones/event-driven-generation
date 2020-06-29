@@ -2,13 +2,15 @@ package cla.edg.project.yrzx.pageflow;
 
 import cla.edg.pageflow.PageFlowScript;
 import cla.edg.pageflow.PieceOfScript;
+import cla.edg.pageflow.Request;
 import cla.edg.project.yrzx.gen.graphquery.MODEL;
 
 public class MiscPageFlowPiece extends PieceOfScript {
 	@Override
 	public PageFlowScript makeSequel(PageFlowScript script) {
-		script.request("test")
-			.got_page("simple toast").title("提示")
+		script
+//				request("test")
+//			.got_page("simple toast").title("提示")
 
 		.request("view notification center").with_string("merchant id").comments("查看所有消息")
 				.got_page("notification center")
@@ -33,7 +35,22 @@ public class MiscPageFlowPiece extends PieceOfScript {
 
 			.comments("创建合同收付款订单")
 			.got_page("contract pay item detail")
-			;
+
+
+		.request("test").got_page("test")
+
+
+
+		.request("view project notifications of platform").no_login().with_last_record_id().got_page("project notifications of platform")
+
+
+
+		.request("view notifications of platform").no_login().with_last_record_id().got_page("notifications of platform")
+
+		;
+
+
+
 		return script;
 	}
 

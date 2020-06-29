@@ -49,6 +49,11 @@ public class IconConfiguration extends BaseModelBean{
 	public static EnumAttribute CONTRACT_RECONCILIATION = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "CONTRACT_RECONCILIATION");
 	public static EnumAttribute CONTRACT_RECEIPT = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "CONTRACT_RECEIPT");
 	public static EnumAttribute CONTRACT_PAYMENT = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "CONTRACT_PAYMENT");
+	public static EnumAttribute NOTIFICATION = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "NOTIFICATION");
+	public static EnumAttribute AUDIT = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "AUDIT");
+	public static EnumAttribute COMMENT = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "COMMENT");
+	public static EnumAttribute CONFIRM = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "CONFIRM");
+	public static EnumAttribute CONCERN = new EnumAttribute("com.yrdec.yrzx.iconconfiguration.IconConfiguration", "CONCERN");
 
 	// 引用的对象
 
@@ -106,7 +111,7 @@ public class IconConfiguration extends BaseModelBean{
 
 	public StringAttribute icon(){
 		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string_image");
+		member.setModelTypeName("string");
 		// member.setName("icon");
 		member.setName("icon");
 		useMember(member);

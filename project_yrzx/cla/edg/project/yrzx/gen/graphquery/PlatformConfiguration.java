@@ -36,17 +36,6 @@ public class PlatformConfiguration extends BaseModelBean{
 		return member;
 	}
 
-	public ArticleCategory articleCategoryList() {
-		ArticleCategory member = new ArticleCategory();
-		member.setModelTypeName("article_category");
-		member.setName("platform_configuration");
-		member.setMemberName("articleCategoryList");
-		member.setRelationName("platformConfiguration");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-
 	public ApplicationStatus applicationStatusList() {
 		ApplicationStatus member = new ApplicationStatus();
 		member.setModelTypeName("application_status");

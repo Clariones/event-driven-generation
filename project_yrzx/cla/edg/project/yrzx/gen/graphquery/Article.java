@@ -23,35 +23,13 @@ public class Article extends BaseModelBean{
 		return member;
 	}
 
-	public Merchant postByMerchant() {
-		Merchant member = new Merchant();
-		member.setModelTypeName("merchant");
-		member.setName("post_by_merchant");
-		member.setMemberName("postByMerchant");
+	public MobileApp container() {
+		MobileApp member = new MobileApp();
+		member.setModelTypeName("mobile_app");
+		member.setName("container");
+		member.setMemberName("container");
 		member.setReferDirection(true);
-		member.setRelationName("postByMerchant");
-		append(member);
-		return member;
-	}
-
-	public EmployeeNomination postByEmployee() {
-		EmployeeNomination member = new EmployeeNomination();
-		member.setModelTypeName("employee_nomination");
-		member.setName("post_by_employee");
-		member.setMemberName("postByEmployee");
-		member.setReferDirection(true);
-		member.setRelationName("postByEmployee");
-		append(member);
-		return member;
-	}
-
-	public Platform platform() {
-		Platform member = new Platform();
-		member.setModelTypeName("platform");
-		member.setName("platform");
-		member.setMemberName("platform");
-		member.setReferDirection(true);
-		member.setRelationName("platform");
+		member.setRelationName("container");
 		append(member);
 		return member;
 	}

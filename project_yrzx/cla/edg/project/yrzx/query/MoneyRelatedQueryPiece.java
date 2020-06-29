@@ -26,19 +26,7 @@ public class MoneyRelatedQueryPiece extends PieceOfScript {
 				.do_it_as()
 				.where(MODEL.accountBookRecord().payeeAccount().eq("${account book id}").or(MODEL.accountBookRecord().payerAccount().eq("${account book id}")))
 
-			.query(MODEL.accountBookRecord()).list_of("user").pagination().with_string("merchant id")
-				.comments("查询某人的账单流水")
-				.do_it_as()
-				.where(
-						MODEL.accountBookRecord().payerAccount().owner().eq("${merchant id}").or(
-								MODEL.accountBookRecord().payeeAccount().owner().eq("${merchant id}")
-						)
 
-				)
-				.wants(
-						MODEL.accountBookRecord().payeeAccount().owner()
-
-				)
 
 			.query(MODEL.accountBookRecord()).list_of("user in time span").with_string("merchant id").with_date("start date").with_date("end date")
 				.comments("查询某时间段内某人流水")
@@ -60,8 +48,8 @@ public class MoneyRelatedQueryPiece extends PieceOfScript {
 				.do_it_as()
 				.sum(MODEL.contractPayItem().payAmount())
 				.where(
-						MODEL.contractPayItem().expectedTime().bigger_or_eq("${start time}"),
-						MODEL.contractPayItem().expectedTime().before("${end time}"),
+//						MODEL.contractPayItem().expectedTime().bigger_or_eq("${start time}"),
+//						MODEL.contractPayItem().expectedTime().before("${end time}"),
 						MODEL.contractPayItem().payer().eq("${merchant id}"),
 						MODEL.contractPayItem().contract().project().eq("${project id}")
 				)
@@ -71,8 +59,8 @@ public class MoneyRelatedQueryPiece extends PieceOfScript {
 				.do_it_as()
 				.sum(MODEL.contractPayItem().payAmount())
 				.where(
-						MODEL.contractPayItem().expectedTime().bigger_or_eq("${start time}"),
-						MODEL.contractPayItem().expectedTime().before("${end time}"),
+//						MODEL.contractPayItem().expectedTime().bigger_or_eq("${start time}"),
+//						MODEL.contractPayItem().expectedTime().before("${end time}"),
 						MODEL.contractPayItem().payee().eq("${merchant id}"),
 						MODEL.contractPayItem().contract().project().eq("${project id}")
 				)
@@ -87,6 +75,7 @@ public class MoneyRelatedQueryPiece extends PieceOfScript {
 						MODEL.contractPayItem().contract().eq("${contract id}")
 				)
 
+
 				.find(MODEL.contractPayItem()).list_of("project to be paid by contract").with_string("project id").with_string("merchant id").with_string("contract id")
 				.comments("按合同统计项目中预期支出总数")
 				.do_it_as()
@@ -96,6 +85,41 @@ public class MoneyRelatedQueryPiece extends PieceOfScript {
 						MODEL.contractPayItem().contract().project().eq("${project id}"),
 						MODEL.contractPayItem().contract().eq("${contract id}")
 				)
+
+
+
+				.find(MODEL.accountBook()).list_of("merchant by type").with_string("merchant id").with_string("type id")
+					.comments("查询某人的某账本")
+					.do_it_as()
+					.where(
+							MODEL.accountBook().owner().employeeNominationListAsEmployer().employee().eq("${merchant id}"),
+							MODEL.accountBook().type().eq("${type id}")
+					)
+
+
+				.query(MODEL.accountBookRecord()).list_of("merchant").with_string("merchant id").pagination()
+					.comments("查看某人相关流水")
+					.do_it_as()
+					.where(
+							MODEL.accountBookRecord().payerAccount().owner().employeeNominationListAsEmployer().employee().eq("${merchant id}")
+							.or(
+									MODEL.accountBookRecord().payeeAccount().owner().employeeNominationListAsEmployer().employee().eq("${merchant id}")
+							)
+					)
+					.wants(
+							MODEL.accountBookRecord().payerAccount().owner()
+					)
+					.order_by(MODEL.accountBookRecord().createTime()).desc()
+
+				.query(MODEL.accountBookRecord()).list_of("account book by payer in project").with_string("merchant id").with_string("project id").with_string("account book type").pagination()
+					.comments("按项目查询某人的某本账上的付款记录")
+
+				.query(MODEL.accountBookRecord()).list_of("account book by payee in project").with_string("merchant id").with_string("project id").with_string("account book type").pagination()
+				.comments("按项目查询某人的某本账上的收款记录")
+
+
+
+
 		;
 
 		return script;

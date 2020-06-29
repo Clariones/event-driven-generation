@@ -432,6 +432,17 @@ public class Project extends BaseModelBean{
 		return member;
 	}
 
+	public Notification notificationList() {
+		Notification member = new Notification();
+		member.setModelTypeName("notification");
+		member.setName("project");
+		member.setMemberName("notificationList");
+		member.setRelationName("project");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 	public EventSubcontractApplication eventSubcontractApplicationList() {
 		EventSubcontractApplication member = new EventSubcontractApplication();
 		member.setModelTypeName("event_subcontract_application");

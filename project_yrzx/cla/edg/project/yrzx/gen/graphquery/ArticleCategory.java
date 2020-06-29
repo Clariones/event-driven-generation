@@ -12,13 +12,13 @@ public class ArticleCategory extends BaseModelBean{
 
 	// 引用的对象
 
-	public PlatformConfiguration platformConfiguration() {
-		PlatformConfiguration member = new PlatformConfiguration();
-		member.setModelTypeName("platform_configuration");
-		member.setName("platform_configuration");
-		member.setMemberName("platformConfiguration");
+	public MobileApp container() {
+		MobileApp member = new MobileApp();
+		member.setModelTypeName("mobile_app");
+		member.setName("container");
+		member.setMemberName("container");
 		member.setReferDirection(true);
-		member.setRelationName("platformConfiguration");
+		member.setRelationName("container");
 		append(member);
 		return member;
 	}

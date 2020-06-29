@@ -44,9 +44,18 @@ public class MePageContractOrderPageFlowPiece extends PieceOfScript {
 					.comments("我的->合同订单-选择项目-合同订单页面-合同预期收支-预期支出")
 					.got_page("expected contract expenses")
 
+				.request("view expected labor expenses").with_string("project id").with_string("filter").with_last_record_id()
+					.comments("我的->合同订单-选择项目-合同订单页面-合同预期收支-预期劳务支出")
+					.got_page("expected labor expenses")
+
+				.request("view expected labor income").with_string("project id").with_string("filter").with_last_record_id()
+					.comments("我的->合同订单-选择项目-合同订单页面-合同预期收支-预期劳务收入")
+					.got_page("expected labor income")
+
 				.request("view expected contract expense detail").with_string("item id")
 					.comments("我的->合同订单-选择项目-合同订单页面-合同预期收支-预期支出-预期支出详情")
-					.got_page("expected contract expense detail")
+//					.got_page("expected contract expense detail")
+				.got_page("contract pay item detail")
 				.request("create contract payment application").with_string("item id")
 					.comments("我的->合同订单-选择项目-合同订单页面-合同预期收支-预期支出-预期支出详情-创建付款申请")
 					.got_page("contract payment application detail")
@@ -61,16 +70,20 @@ public class MePageContractOrderPageFlowPiece extends PieceOfScript {
 
 				.request("view expected contract receipt detail").with_string("item id")
 					.comments("我的->合同订单-选择项目-合同订单页面-合同预期收支-预期收入-预期收入详情")
-					.got_page("expected contract receipt detail")
+					.got_page("contract pay item detail")
 
 
 
 				//合同付款
-				.request("view contract payment").with_string("project id")
+				.request("view contract payment").with_string("project id").with_string("filter").with_last_record_id()
 					.comments("我的->合同订单-选择项目-合同订单页面-合同付款")
 					.got_page("contract payment")
+
+				.request("view contract receipts detail").with_string("item id")
+					.comments("我的->合同订单-选择项目-合同订单页面-合同收款-详情(认领页面)")
+					.got_page("contract receipts detail")
 				//合同收款
-				.request("view contract receipts").with_string("project id")
+				.request("view contract receipts").with_string("project id").with_string("filter").with_last_record_id()
 					.comments("我的->合同订单-选择项目-合同订单页面-合同收款")
 					.got_page("contract receipts")
 
@@ -84,20 +97,30 @@ public class MePageContractOrderPageFlowPiece extends PieceOfScript {
 							.got_page("contract supplement record list")
 
 
-//
-//				// tab->劳务订单
-//						//劳务合同台账
-//						.request("view labor contract record list")
-//							.comments("我的-合同订单-劳务订单-劳务合同台账")
-//							.got_page("labor contract record list")
-//						//劳务合同付款
-//						.request("view labor contract payment")
-//							.comments("我的-合同订单-劳务订单-劳务合同付款")
-//							.got_page("labor contract payment")
-//						//劳务合同收款
-//						.request("view labor contract receipts")
-//							.comments("我的-合同订单-劳务订单-劳务合同收款")
-//							.got_page("labor contract receipts")
+				//顶部菜单
+//				.request("view contract order notifications")
+//					.comments("我的->合同订单-通知")
+
+				.request("view pay application audit").with_string("project id")
+					.comments("我的->合同订单-审核")
+					.got_page("pay application audit")
+
+				.request("view order contract reconciliation comments").with_string("project id").with_last_record_id()
+					.comments("查看项目下的合同对账批注")
+					.got_page("order contract reconciliation comments")
+
+				.request("view order contract reconciliation with concern").with_string("project id").with_last_record_id()
+				.comments("查看项目下的有疑虑的合同对账")
+				.got_page("order contract reconciliation with concern")
+
+				.request("view contract receipts confirmation list").with_string("project id").with_string("filter").with_last_record_id()
+				.comments("我的->合同订单-认领")
+				.got_page("contract receipts confirmation list")
+
+				.request("view project notifications").with_string("project id").with_last_record_id()
+					.comments("我的->合同订单->通知")
+					.got_page("project notifications")
+
 
 				
 			;

@@ -56,24 +56,35 @@ public class ContractPayItem extends BaseModelBean{
 		return member;
 	}
 
-	// 被引用的对象
-
-	public SupplementaryContract supplementaryContractList() {
-		SupplementaryContract member = new SupplementaryContract();
-		member.setModelTypeName("supplementary_contract");
-		member.setName("contract_pay_item");
-		member.setMemberName("supplementaryContractList");
-		member.setRelationName("contractPayItem");
-		member.setReferDirection(false);
+	public PayItemType payItemType() {
+		PayItemType member = new PayItemType();
+		member.setModelTypeName("pay_item_type");
+		member.setName("pay_item_type");
+		member.setMemberName("payItemType");
+		member.setReferDirection(true);
+		member.setRelationName("payItemType");
 		append(member);
 		return member;
 	}
 
-	public ContractVisa contractVisaList() {
-		ContractVisa member = new ContractVisa();
-		member.setModelTypeName("contract_visa");
+	public ProjectProgress projectProgress() {
+		ProjectProgress member = new ProjectProgress();
+		member.setModelTypeName("project_progress");
+		member.setName("project_progress");
+		member.setMemberName("projectProgress");
+		member.setReferDirection(true);
+		member.setRelationName("projectProgress");
+		append(member);
+		return member;
+	}
+
+	// 被引用的对象
+
+	public SupplementaryContractPayItem supplementaryContractPayItemList() {
+		SupplementaryContractPayItem member = new SupplementaryContractPayItem();
+		member.setModelTypeName("supplementary_contract_pay_item");
 		member.setName("contract_pay_item");
-		member.setMemberName("contractVisaList");
+		member.setMemberName("supplementaryContractPayItemList");
 		member.setRelationName("contractPayItem");
 		member.setReferDirection(false);
 		append(member);
@@ -97,6 +108,17 @@ public class ContractPayItem extends BaseModelBean{
 		member.setName("pay_item");
 		member.setMemberName("contractPaymentApplicationList");
 		member.setRelationName("payItem");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EventAdditionalContractPaymentPhase eventAdditionalContractPaymentPhaseList() {
+		EventAdditionalContractPaymentPhase member = new EventAdditionalContractPaymentPhase();
+		member.setModelTypeName("event_additional_contract_payment_phase");
+		member.setName("payment_item");
+		member.setMemberName("eventAdditionalContractPaymentPhaseList");
+		member.setRelationName("paymentItem");
 		member.setReferDirection(false);
 		append(member);
 		return member;
@@ -132,6 +154,15 @@ public class ContractPayItem extends BaseModelBean{
 		return member;
 	}
 
+	public NumberAttribute paymentPhase(){
+		NumberAttribute member = new NumberAttribute();
+		member.setModelTypeName("int");
+		// member.setName("paymentPhase");
+		member.setName("payment_phase");
+		useMember(member);
+		return member;
+	}
+
 	public NumberAttribute payAmount(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
@@ -141,20 +172,20 @@ public class ContractPayItem extends BaseModelBean{
 		return member;
 	}
 
-	public DateTimeAttribute expectedTime(){
-		DateTimeAttribute member = new DateTimeAttribute();
-		member.setModelTypeName("date");
-		// member.setName("expectedTime");
-		member.setName("expected_time");
-		useMember(member);
-		return member;
-	}
-
 	public StringAttribute payCriteira(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
 		// member.setName("payCriteira");
 		member.setName("pay_criteira");
+		useMember(member);
+		return member;
+	}
+
+	public DateTimeAttribute expectedPayTime(){
+		DateTimeAttribute member = new DateTimeAttribute();
+		member.setModelTypeName("date");
+		// member.setName("expectedPayTime");
+		member.setName("expected_pay_time");
 		useMember(member);
 		return member;
 	}

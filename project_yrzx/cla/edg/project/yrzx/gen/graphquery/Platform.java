@@ -80,6 +80,17 @@ public class Platform extends BaseModelBean{
 		return member;
 	}
 
+	public SupplementaryContract supplementaryContractList() {
+		SupplementaryContract member = new SupplementaryContract();
+		member.setModelTypeName("supplementary_contract");
+		member.setName("platform");
+		member.setMemberName("supplementaryContractList");
+		member.setRelationName("platform");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 	public PayItemStatus payItemStatusList() {
 		PayItemStatus member = new PayItemStatus();
 		member.setModelTypeName("pay_item_status");
@@ -91,11 +102,11 @@ public class Platform extends BaseModelBean{
 		return member;
 	}
 
-	public Article articleList() {
-		Article member = new Article();
-		member.setModelTypeName("article");
+	public PayItemType payItemTypeList() {
+		PayItemType member = new PayItemType();
+		member.setModelTypeName("pay_item_type");
 		member.setName("platform");
-		member.setMemberName("articleList");
+		member.setMemberName("payItemTypeList");
 		member.setRelationName("platform");
 		member.setReferDirection(false);
 		append(member);

@@ -17,7 +17,7 @@ public class HomepageQueryPiece extends PieceOfScript {
 			.comments("查询分类中的文章")
 			.do_it_as()
 			.where(MODEL.article().category().eq("${category id}"))
-			.wants(MODEL.article().postByEmployee().employee(), MODEL.article().postByEmployee().job())
+
 			;
 		script.import_from(new MiscQueryPiece());
 		return script;

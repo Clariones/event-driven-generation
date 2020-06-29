@@ -135,6 +135,17 @@ public class StandardContract extends BaseModelBean{
 		return member;
 	}
 
+	public SupplementaryContract supplementaryContractList() {
+		SupplementaryContract member = new SupplementaryContract();
+		member.setModelTypeName("supplementary_contract");
+		member.setName("contract");
+		member.setMemberName("supplementaryContractList");
+		member.setRelationName("contract");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 	public CommissionPayItem commissionPayItemList() {
 		CommissionPayItem member = new CommissionPayItem();
 		member.setModelTypeName("commission_pay_item");

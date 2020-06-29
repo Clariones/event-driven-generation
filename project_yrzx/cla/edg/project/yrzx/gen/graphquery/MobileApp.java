@@ -36,6 +36,28 @@ public class MobileApp extends BaseModelBean{
 		return member;
 	}
 
+	public ArticleCategory articleCategoryList() {
+		ArticleCategory member = new ArticleCategory();
+		member.setModelTypeName("article_category");
+		member.setName("container");
+		member.setMemberName("articleCategoryList");
+		member.setRelationName("container");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public Article articleList() {
+		Article member = new Article();
+		member.setModelTypeName("article");
+		member.setName("container");
+		member.setMemberName("articleList");
+		member.setRelationName("container");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 
 	// 普通属性
 
