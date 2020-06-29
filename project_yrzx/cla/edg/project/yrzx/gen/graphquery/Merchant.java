@@ -102,6 +102,28 @@ public class Merchant extends BaseModelBean{
 		return member;
 	}
 
+	public SupplementaryContractPayItem supplementaryContractPayItemListAsPayer() {
+		SupplementaryContractPayItem member = new SupplementaryContractPayItem();
+		member.setModelTypeName("supplementary_contract_pay_item");
+		member.setName("payer");
+		member.setMemberName("supplementaryContractPayItemListAsPayer");
+		member.setRelationName("payer");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public SupplementaryContractPayItem supplementaryContractPayItemListAsPayee() {
+		SupplementaryContractPayItem member = new SupplementaryContractPayItem();
+		member.setModelTypeName("supplementary_contract_pay_item");
+		member.setName("payee");
+		member.setMemberName("supplementaryContractPayItemListAsPayee");
+		member.setRelationName("payer");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 	public CommissionPayItem commissionPayItemListAsPayer() {
 		CommissionPayItem member = new CommissionPayItem();
 		member.setModelTypeName("commission_pay_item");
@@ -526,6 +548,17 @@ public class Merchant extends BaseModelBean{
 		member.setName("payee");
 		member.setMemberName("eventContractPaymentPhaseListAsPayee");
 		member.setRelationName("payer");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EventShowAllTypeStepOne eventShowAllTypeStepOneList() {
+		EventShowAllTypeStepOne member = new EventShowAllTypeStepOne();
+		member.setModelTypeName("event_show_all_type_step_one");
+		member.setName("field_biz_candidate");
+		member.setMemberName("eventShowAllTypeStepOneList");
+		member.setRelationName("fieldBizCandidate");
 		member.setReferDirection(false);
 		append(member);
 		return member;

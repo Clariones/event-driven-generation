@@ -118,6 +118,8 @@ public class MoneyRelatedQueryPiece extends PieceOfScript {
 				.comments("按项目查询某人的某本账上的收款记录")
 
 
+
+
 		;
 
 		return script;

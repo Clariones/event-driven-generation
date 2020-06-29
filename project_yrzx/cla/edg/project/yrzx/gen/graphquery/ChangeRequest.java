@@ -36,6 +36,28 @@ public class ChangeRequest extends BaseModelBean{
 
 	// 被引用的对象
 
+	public EventShowAllTypeStepTwo eventShowAllTypeStepTwoList() {
+		EventShowAllTypeStepTwo member = new EventShowAllTypeStepTwo();
+		member.setModelTypeName("event_show_all_type_step_two");
+		member.setName("change_request");
+		member.setMemberName("eventShowAllTypeStepTwoList");
+		member.setRelationName("changeRequest");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EventAdditionalContractPaymentPhase eventAdditionalContractPaymentPhaseList() {
+		EventAdditionalContractPaymentPhase member = new EventAdditionalContractPaymentPhase();
+		member.setModelTypeName("event_additional_contract_payment_phase");
+		member.setName("change_request");
+		member.setMemberName("eventAdditionalContractPaymentPhaseList");
+		member.setRelationName("changeRequest");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 	public EventResolveAfterSales eventResolveAfterSalesList() {
 		EventResolveAfterSales member = new EventResolveAfterSales();
 		member.setModelTypeName("event_resolve_after_sales");
@@ -74,6 +96,17 @@ public class ChangeRequest extends BaseModelBean{
 		member.setModelTypeName("event_material_acceptance_image");
 		member.setName("change_request");
 		member.setMemberName("eventMaterialAcceptanceImageList");
+		member.setRelationName("changeRequest");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EventAdditionalContractBasicInfo eventAdditionalContractBasicInfoList() {
+		EventAdditionalContractBasicInfo member = new EventAdditionalContractBasicInfo();
+		member.setModelTypeName("event_additional_contract_basic_info");
+		member.setName("change_request");
+		member.setMemberName("eventAdditionalContractBasicInfoList");
 		member.setRelationName("changeRequest");
 		member.setReferDirection(false);
 		append(member);
@@ -305,6 +338,17 @@ public class ChangeRequest extends BaseModelBean{
 		member.setModelTypeName("event_contract_payment_phase");
 		member.setName("change_request");
 		member.setMemberName("eventContractPaymentPhaseList");
+		member.setRelationName("changeRequest");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EventShowAllTypeStepOne eventShowAllTypeStepOneList() {
+		EventShowAllTypeStepOne member = new EventShowAllTypeStepOne();
+		member.setModelTypeName("event_show_all_type_step_one");
+		member.setName("change_request");
+		member.setMemberName("eventShowAllTypeStepOneList");
 		member.setRelationName("changeRequest");
 		member.setReferDirection(false);
 		append(member);

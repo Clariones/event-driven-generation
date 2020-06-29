@@ -65,11 +65,24 @@ public class MiscQueryPiece extends PieceOfScript {
 				.where(MODEL.notification().receiver().eq("${merchant id}"))
 				.order_by(MODEL.notification().createTime()).desc()
 
+
+			.query(MODEL.notification()).pagination().list_of("").with_string("merchant id")
+				.comments("查询发给当前merchant的消息")
+				.do_it_as()
+				.where(MODEL.notification().receiver().eq("${merchant id}"))
+				.order_by(MODEL.notification().createTime()).desc()
+
 			.query(MODEL.article()).list_of("category name").with_string("article category name").pagination()
 				.comments("根据文章分类查询文章")
 				.do_it_as()
 				.where(MODEL.article().category().name().eq("${article category name}"))
 
+
+			.query(MODEL.notification()).pagination().list_of("project").with_string("project id")
+				.comments("查询项目相关消息")
+				.do_it_as()
+				.where(MODEL.notification().project().eq("${project id}"))
+				.order_by(MODEL.notification().createTime()).desc()
 
 		.query(MODEL.dailyTaskSecondType()).list_of("daily task type").with_string("type id")
 			.do_it_as()
@@ -113,8 +126,9 @@ public class MiscQueryPiece extends PieceOfScript {
 		.query(MODEL.projectNotification()).list_of("all").pagination()
 
 				.query(MODEL.notification()).list_of("all").pagination()
-		;
 
+
+;
 		return script;
 	}
 

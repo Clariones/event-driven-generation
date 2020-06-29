@@ -143,7 +143,7 @@ public class ClientCRPageFlowPiece extends PieceOfScript {
 				//					.when("ContractPayApplication")
 					.got_page("contract payment application detail")
 
-
+					.request_with_changerequest("show all type").no_login().got_page("show all type")
 				;
 	}
 }

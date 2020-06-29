@@ -16,6 +16,8 @@ public class ExampleChangeRequest implements ChangeRequestSpecFactory {
 		return builder 
 				.change_request("show all type").zh_CN("数据类型展示")
 				.icon("table")
+				.step("step one").zh_CN("第一步")
+					.contains_event("show all type step one")
 				.has_field("field_display").value("只是显示").display()
 				.has_field("field_text").zh_CN("短文本").which_type_of(FieldType.TEXT).with_style(UIStyle.INPUT_TEXT)
 				.has_field("field_id_number").zh_CN("身份证").which_type_of(FieldType.TEXT)
@@ -35,7 +37,6 @@ public class ExampleChangeRequest implements ChangeRequestSpecFactory {
 				.has_field("field_image").zh_CN("单图").which_type_of(FieldType.IMAGE)
 				.has_field("field_date").zh_CN("日期").which_type_of(FieldType.DATE)
 				.has_field("field_datetime").zh_CN("日期时间").which_type_of(FieldType.DATE_TIME)
-				.has_field("field_time").zh_CN("时间").which_type_of(FieldType.TIME).with_style(UIStyle.INPUT_TEXT)
 				.has_field("field_integer").zh_CN("整数").which_type_of(FieldType.INTEGER)
 				.has_field("field_decimal").zh_CN("小数").which_type_of(FieldType.DECIMAL)
 				.has_field("field_money").zh_CN("金融").which_type_of(FieldType.MONEY).range(100,10000)
@@ -43,6 +44,10 @@ public class ExampleChangeRequest implements ChangeRequestSpecFactory {
 					.values_can_select_from_query_by("field_integer")
 				.has_field("field_multi_model").zh_CN("多选的对象").which_model_of(MODEL.employeeNomination().getModelTypeName())
 					.values_can_check_from_query_by(":field integer")
+
+				.step("step two").zh_CN("第二步")
+					.contains_event("show all type step two").many_times(0,100)
+					.has_field("simple text").zh_CN("简单字符串")
 			;
 	}
 }

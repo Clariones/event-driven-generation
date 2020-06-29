@@ -80,6 +80,17 @@ public class Platform extends BaseModelBean{
 		return member;
 	}
 
+	public SupplementaryContract supplementaryContractList() {
+		SupplementaryContract member = new SupplementaryContract();
+		member.setModelTypeName("supplementary_contract");
+		member.setName("platform");
+		member.setMemberName("supplementaryContractList");
+		member.setRelationName("platform");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 	public PayItemStatus payItemStatusList() {
 		PayItemStatus member = new PayItemStatus();
 		member.setModelTypeName("pay_item_status");

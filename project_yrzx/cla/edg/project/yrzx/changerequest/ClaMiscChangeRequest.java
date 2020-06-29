@@ -1,6 +1,7 @@
 package cla.edg.project.yrzx.changerequest;
 
 
+import cla.edg.project.yrzx.gen.graphquery.AuditStatus;
 import cla.edg.project.yrzx.gen.graphquery.MODEL;
 import com.terapico.changerequest.builder.ChangeRequestSpecBuilder;
 import com.terapico.changerequest.builder.ChangeRequestSpecFactory;
@@ -68,7 +69,9 @@ public class ClaMiscChangeRequest implements ChangeRequestSpecFactory {
 				.change_request("review").zh_CN("审核")
 					.icon("form")
 					.has_field("audit record id").hidden()
-					.has_field("review result").zh_CN("审核结论").which_model_of(MODEL.auditStatus()).values_can_select_from_query_by("project id")
+					.has_field("review result").zh_CN("审核结论").
+						values_canbe(AuditStatus.APPROVED.getLiteralName(),"通过").or(AuditStatus.UNAPPROVED.getLiteralName(),"有疑虑")
+//						which_model_of(MODEL.auditStatus()).values_can_select_from_query_by("project id")
 					.has_field("comments").zh_CN("备注").optional()
 				.change_request("comments").zh_CN("添加批注")
 					.icon("form")

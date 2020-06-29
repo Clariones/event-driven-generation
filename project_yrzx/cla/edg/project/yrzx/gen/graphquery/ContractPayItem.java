@@ -80,22 +80,11 @@ public class ContractPayItem extends BaseModelBean{
 
 	// 被引用的对象
 
-	public SupplementaryContract supplementaryContractList() {
-		SupplementaryContract member = new SupplementaryContract();
-		member.setModelTypeName("supplementary_contract");
+	public SupplementaryContractPayItem supplementaryContractPayItemList() {
+		SupplementaryContractPayItem member = new SupplementaryContractPayItem();
+		member.setModelTypeName("supplementary_contract_pay_item");
 		member.setName("contract_pay_item");
-		member.setMemberName("supplementaryContractList");
-		member.setRelationName("contractPayItem");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-
-	public ContractVisa contractVisaList() {
-		ContractVisa member = new ContractVisa();
-		member.setModelTypeName("contract_visa");
-		member.setName("contract_pay_item");
-		member.setMemberName("contractVisaList");
+		member.setMemberName("supplementaryContractPayItemList");
 		member.setRelationName("contractPayItem");
 		member.setReferDirection(false);
 		append(member);
@@ -119,6 +108,17 @@ public class ContractPayItem extends BaseModelBean{
 		member.setName("pay_item");
 		member.setMemberName("contractPaymentApplicationList");
 		member.setRelationName("payItem");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EventAdditionalContractPaymentPhase eventAdditionalContractPaymentPhaseList() {
+		EventAdditionalContractPaymentPhase member = new EventAdditionalContractPaymentPhase();
+		member.setModelTypeName("event_additional_contract_payment_phase");
+		member.setName("payment_item");
+		member.setMemberName("eventAdditionalContractPaymentPhaseList");
+		member.setRelationName("paymentItem");
 		member.setReferDirection(false);
 		append(member);
 		return member;

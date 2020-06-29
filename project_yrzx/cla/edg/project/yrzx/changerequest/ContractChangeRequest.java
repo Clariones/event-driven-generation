@@ -70,6 +70,28 @@ public class ContractChangeRequest implements ChangeRequestSpecFactory {
 						.has_field("expected pay time").zh_CN("预期付款时间").which_type_of(FieldType.DATE)
 
 
+			.change_request("create additional contract").zh_CN("签证及补充合同")
+				.icon("form")
+					.step("additional contract basic info").zh_CN("基本信息")
+					.contains_event("additional contract basic info")
+					.has_field("contract id").hidden().fill_by_request("contract id")
+					.has_field("project id").hidden().fill_by_request("project id")
+					.has_field("name").zh_CN("合同名称")
+					.has_field("number").zh_CN("合同编号").which_type_of(FieldType.MULTI_TEXT)
+					.has_field("contract type").zh_CN("合同类型").which_model_of(MODEL.supplementaryContractType()).values_can_select_from_query_by("project id")
+					.has_field("main contract").zh_CN("主合同").disabled().fill_by_request_member("contract id",MODEL.standardContract().name())
+					.has_field("project name").zh_CN("工程名称").disabled().fill_by_request_member("project id",MODEL.project().title())
+					.has_field("summary").zh_CN("摘要").which_type_of(FieldType.MULTI_TEXT)
+//					.has_field("contract document").zh_CN("合同文档").which_type_of(FieldType.of(""))
+				.step("pay item").zh_CN("付款方式")
+				.contains_event("additional contract payment phase").zh_CN("付款周期调整").many_times(1,100)
+					.has_field("name").zh_CN("名称")
+					.has_field("payment item").zh_CN("调整款项").which_model_of(MODEL.contractPayItem()).values_can_select_from_query_by(null)
+					.has_field("comments").zh_CN("备注").which_type_of(FieldType.MULTI_TEXT)
+					.has_field("adjustment").zh_CN("金额调整").which_type_of(FieldType.MONEY)
+					.has_field("expected pay time").zh_CN("预期时间调整").which_type_of(FieldType.DATE).optional()
+
+
 				/**
 				 *
 				 *   contract_pay_item="$(contract_pay_item)"

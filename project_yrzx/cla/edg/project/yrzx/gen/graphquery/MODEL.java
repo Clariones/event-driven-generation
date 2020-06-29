@@ -95,15 +95,21 @@ public class MODEL{
 		return rst;
 	}
 
+	public static SupplementaryContractType supplementaryContractType() {
+		SupplementaryContractType rst = new SupplementaryContractType();
+		rst.setModelTypeName("supplementary_contract_type");
+		return rst;
+	}
+
 	public static SupplementaryContract supplementaryContract() {
 		SupplementaryContract rst = new SupplementaryContract();
 		rst.setModelTypeName("supplementary_contract");
 		return rst;
 	}
 
-	public static ContractVisa contractVisa() {
-		ContractVisa rst = new ContractVisa();
-		rst.setModelTypeName("contract_visa");
+	public static SupplementaryContractPayItem supplementaryContractPayItem() {
+		SupplementaryContractPayItem rst = new SupplementaryContractPayItem();
+		rst.setModelTypeName("supplementary_contract_pay_item");
 		return rst;
 	}
 
@@ -863,6 +869,18 @@ public class MODEL{
 		return rst;
 	}
 
+	public static EventShowAllTypeStepTwo eventShowAllTypeStepTwo() {
+		EventShowAllTypeStepTwo rst = new EventShowAllTypeStepTwo();
+		rst.setModelTypeName("event_show_all_type_step_two");
+		return rst;
+	}
+
+	public static EventAdditionalContractPaymentPhase eventAdditionalContractPaymentPhase() {
+		EventAdditionalContractPaymentPhase rst = new EventAdditionalContractPaymentPhase();
+		rst.setModelTypeName("event_additional_contract_payment_phase");
+		return rst;
+	}
+
 	public static EventResolveAfterSales eventResolveAfterSales() {
 		EventResolveAfterSales rst = new EventResolveAfterSales();
 		rst.setModelTypeName("event_resolve_after_sales");
@@ -884,6 +902,12 @@ public class MODEL{
 	public static EventMaterialAcceptanceImage eventMaterialAcceptanceImage() {
 		EventMaterialAcceptanceImage rst = new EventMaterialAcceptanceImage();
 		rst.setModelTypeName("event_material_acceptance_image");
+		return rst;
+	}
+
+	public static EventAdditionalContractBasicInfo eventAdditionalContractBasicInfo() {
+		EventAdditionalContractBasicInfo rst = new EventAdditionalContractBasicInfo();
+		rst.setModelTypeName("event_additional_contract_basic_info");
 		return rst;
 	}
 
@@ -1010,6 +1034,12 @@ public class MODEL{
 	public static EventContractPaymentPhase eventContractPaymentPhase() {
 		EventContractPaymentPhase rst = new EventContractPaymentPhase();
 		rst.setModelTypeName("event_contract_payment_phase");
+		return rst;
+	}
+
+	public static EventShowAllTypeStepOne eventShowAllTypeStepOne() {
+		EventShowAllTypeStepOne rst = new EventShowAllTypeStepOne();
+		rst.setModelTypeName("event_show_all_type_step_one");
 		return rst;
 	}
 

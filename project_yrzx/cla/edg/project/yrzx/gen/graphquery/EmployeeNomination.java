@@ -91,6 +91,17 @@ public class EmployeeNomination extends BaseModelBean{
 		return member;
 	}
 
+	public SupplementaryContract supplementaryContractList() {
+		SupplementaryContract member = new SupplementaryContract();
+		member.setModelTypeName("supplementary_contract");
+		member.setName("submitter");
+		member.setMemberName("supplementaryContractList");
+		member.setRelationName("submitter");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 	public MerchantActiveNomination merchantActiveNominationList() {
 		MerchantActiveNomination member = new MerchantActiveNomination();
 		member.setModelTypeName("merchant_active_nomination");

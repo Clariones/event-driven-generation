@@ -297,8 +297,31 @@ public class ContractQueryPiece extends PieceOfScript {
 				)
 
 
+			.query(MODEL.commentsRecord()).list_of("order reconciliation in project").with_string("project id").pagination()
+				.comments("查询项目下的合同对账批注")
 
 
+			.query(MODEL.contractPaymentApplication()).list_of("project by status").with_string("project id").with_string("status id").pagination()
+				.comments("按状态查询项目下的合同对账申请")
+				.do_it_as()
+				.where(
+						MODEL.contractPaymentApplication().payItem().contract().project().eq("${project id}"),
+						MODEL.contractPaymentApplication().status().eq("${status id}")
+				)
+				.wants(MODEL.contractPaymentApplication().payItem().payer(),MODEL.contractPaymentApplication().status())
+
+
+			.query(MODEL.accountBookRecord()).list_of("payee by confirmation status").with_string("merchant id").with_boolean("confirmed").pagination()
+				.comments("按认领状态查询某个收款人的收款流水")
+				.do_it_as()
+				.where(
+						MODEL.accountBookRecord().payeeAccount().owner().eq("${merchant id}"),
+						MODEL.accountBookRecord().confirmed().eq("${confirmed}").optional()
+				)
+				.wants(
+						MODEL.accountBookRecord().payerAccount().owner()
+				)
+				.order_by(MODEL.accountBookRecord().createTime()).desc()
 		;
 
 		return script;

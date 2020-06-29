@@ -105,10 +105,21 @@ public class MePageContractOrderPageFlowPiece extends PieceOfScript {
 					.comments("我的->合同订单-审核")
 					.got_page("pay application audit")
 
+				.request("view order contract reconciliation comments").with_string("project id").with_last_record_id()
+					.comments("查看项目下的合同对账批注")
+					.got_page("order contract reconciliation comments")
 
-//
-					//劳务收支
+				.request("view order contract reconciliation with concern").with_string("project id").with_last_record_id()
+				.comments("查看项目下的有疑虑的合同对账")
+				.got_page("order contract reconciliation with concern")
 
+				.request("view contract receipts confirmation list").with_string("project id").with_string("filter").with_last_record_id()
+				.comments("我的->合同订单-认领")
+				.got_page("contract receipts confirmation list")
+
+				.request("view project notifications").with_string("project id").with_last_record_id()
+					.comments("我的->合同订单->通知")
+					.got_page("project notifications")
 
 
 				

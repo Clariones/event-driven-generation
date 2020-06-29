@@ -4,13 +4,24 @@ import java.util.Map;
 
 import cla.edg.modelbean.*;
 
-public class EventReview extends BaseModelBean{
+public class EventAdditionalContractBasicInfo extends BaseModelBean{
 	public String getFullClassName() {
-		return "com.yrdec.yrzx.eventreview.EventReview";
+		return "com.yrdec.yrzx.eventadditionalcontractbasicinfo.EventAdditionalContractBasicInfo";
 	}
 	// 枚举对象
 
 	// 引用的对象
+
+	public SupplementaryContractType contractType() {
+		SupplementaryContractType member = new SupplementaryContractType();
+		member.setModelTypeName("supplementary_contract_type");
+		member.setName("contract_type");
+		member.setMemberName("contractType");
+		member.setReferDirection(true);
+		member.setRelationName("contractType");
+		append(member);
+		return member;
+	}
 
 	public ChangeRequest changeRequest() {
 		ChangeRequest member = new ChangeRequest();
@@ -37,29 +48,65 @@ public class EventReview extends BaseModelBean{
 		return member;
 	}
 
-	public StringAttribute auditRecordId(){
+	public StringAttribute contractId(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		// member.setName("auditRecordId");
-		member.setName("audit_record_id");
+		// member.setName("contractId");
+		member.setName("contract_id");
 		useMember(member);
 		return member;
 	}
 
-	public StringAttribute reviewResult(){
+	public StringAttribute projectId(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		// member.setName("reviewResult");
-		member.setName("review_result");
+		// member.setName("projectId");
+		member.setName("project_id");
 		useMember(member);
 		return member;
 	}
 
-	public StringAttribute comments(){
+	public StringAttribute name(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		// member.setName("comments");
-		member.setName("comments");
+		// member.setName("name");
+		member.setName("name");
+		useMember(member);
+		return member;
+	}
+
+	public StringAttribute number(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string_longtext");
+		// member.setName("number");
+		member.setName("number");
+		useMember(member);
+		return member;
+	}
+
+	public StringAttribute mainContract(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string");
+		// member.setName("mainContract");
+		member.setName("main_contract");
+		useMember(member);
+		return member;
+	}
+
+	public StringAttribute projectName(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string");
+		// member.setName("projectName");
+		member.setName("project_name");
+		useMember(member);
+		return member;
+	}
+
+	public StringAttribute summary(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string_longtext");
+		// member.setName("summary");
+		member.setName("summary");
 		useMember(member);
 		return member;
 	}
