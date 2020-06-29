@@ -223,9 +223,7 @@ public class GenerationHelper extends BaseHelper {
 						if (Utils.isBlank(mName)) {
 							return;
 						}
-						result.add(
-								mName.trim().replace('_', ' ').replaceAll("\\s+", " ")
-						);
+						result.add(mName.trim().replace('_', ' ').replaceAll("\\s+", " "));
 					});
 				});
 			});
