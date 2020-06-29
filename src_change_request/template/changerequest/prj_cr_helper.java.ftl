@@ -667,6 +667,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
         return pickValueFromContextObject( afeList.get(0), parentContextObject);
     }
 -->
+    // 暂时来说, 应该是 postedData 不存在,或者postData里的action是 下一条/下一步 才推断要填的值. 暂时先不考虑这个.
     protected Object calcSuggestedDefaultValue(String groupName, CRFieldSpec fieldSpec, Object defaultValue) throws Exception{
         switch (fieldSpec.getName()){
 <#list helper.getGroupListWhichHasAutoFillExpression(projectSpec) as crSpec>
@@ -686,12 +687,14 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
             return ${helper.getFillFromRequestCode(projectName, field)};
                 </#if>
 		        <#if helper.canFillFromSubmitted(field)>
-		case ${field_name_const}:
-            return ${helper.getFillFromSubmittedCode(projectName, field)};
+		case ${field_name_const}: {
+            ${helper.getFillFromSubmittedCode(projectName, field)}
+        }
                  </#if>
                  <#if helper.canFillFromSubmittedMember(field)>
-        case ${field_name_const}:
-            return ${helper.getFillFromSubmittedMemberCode(projectName, field)};
+        case ${field_name_const}: {
+            ${helper.getFillFromSubmittedMemberCode(projectName, field)}
+        }
                   </#if>
             </#list>
 		</#list>

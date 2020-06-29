@@ -20,14 +20,19 @@ public class UserProfileChangeRequest implements ChangeRequestSpecFactory {
                 .contains_event("master").zh_CN("被邀请人")
                     .as("owner")
                     .has_field("name").zh_CN("姓名")
-                        .fill_by_request_member("catalog id", MODEL.catalog().name())
+                        .fill_by_request("catalog id", MODEL.catalog().name())
             .step("step 2").zh_CN("宴会内容")
                 .contains_event("dinner").zh_CN("宴会")
                     .has_field("invitor name").zh_CN("邀请人姓名").disabled()
-                        .fill_by_submitted("guest.name")
+                        .fill_by_submitted("name")
                     .has_field("dinner type").zh_CN("宴会相关产品").disabled()
-                        .fill_by_submitted_member("guest.type", MODEL.coatingType().name())
-
+                        .fill_by_submitted("guest.type", MODEL.coatingType().name())
+            .step("step 3").zh_CN("宴会内容3")
+                .contains_event("dinner").zh_CN("宴会")
+                    .has_field("invitor name").zh_CN("邀请人姓名").disabled()
+                        .fill_by_submitted("dinner type")
+                    .has_field("dinner type").zh_CN("宴会相关产品").disabled()
+                        .fill_by_submitted("invitor name")
                 ;
     }
 }
