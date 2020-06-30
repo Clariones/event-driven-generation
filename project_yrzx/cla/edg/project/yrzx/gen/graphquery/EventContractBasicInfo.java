@@ -142,6 +142,15 @@ public class EventContractBasicInfo extends BaseModelBean{
 		return member;
 	}
 
+	public StringAttribute importantRules(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string_longtext");
+		// member.setName("importantRules");
+		member.setName("important_rules");
+		useMember(member);
+		return member;
+	}
+
 	public NumberAttribute amount(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");

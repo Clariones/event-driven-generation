@@ -106,15 +106,6 @@ public class EventContractPaymentPhase extends BaseModelBean{
 		return member;
 	}
 
-	public NumberAttribute laborFeeProportion(){
-		NumberAttribute member = new NumberAttribute();
-		member.setModelTypeName("double");
-		// member.setName("laborFeeProportion");
-		member.setName("labor_fee_proportion");
-		useMember(member);
-		return member;
-	}
-
 	public NumberAttribute laborFee(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
@@ -124,29 +115,11 @@ public class EventContractPaymentPhase extends BaseModelBean{
 		return member;
 	}
 
-	public NumberAttribute materialFeeProportion(){
-		NumberAttribute member = new NumberAttribute();
-		member.setModelTypeName("double");
-		// member.setName("materialFeeProportion");
-		member.setName("material_fee_proportion");
-		useMember(member);
-		return member;
-	}
-
 	public NumberAttribute materialFee(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
 		// member.setName("materialFee");
 		member.setName("material_fee");
-		useMember(member);
-		return member;
-	}
-
-	public NumberAttribute otherProportion(){
-		NumberAttribute member = new NumberAttribute();
-		member.setModelTypeName("double");
-		// member.setName("otherProportion");
-		member.setName("other_proportion");
 		useMember(member);
 		return member;
 	}

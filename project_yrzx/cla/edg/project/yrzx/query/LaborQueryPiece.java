@@ -63,7 +63,7 @@ public class LaborQueryPiece extends PieceOfScript {
 				.comments("按类型查询某人在项目中的出勤记录")
 		 		.do_it_as()
 				.where(MODEL.laborRecord().projectNomination().eq("${project nomination id}"),
-					MODEL.laborRecord().type().eq("${type id}")
+					MODEL.laborRecord().type().eq("${type id}").optional()
 
 
 				)
@@ -77,17 +77,24 @@ public class LaborQueryPiece extends PieceOfScript {
 						MODEL.standardContract().project().eq("${project id}")
 						)
 
-			.find(MODEL.contractPayItem()).which("in project by type").with_string("project id").with_string("type")
-				.comments("统计项目下某类型的合同支付项目金额总和")
-				.do_it_as().sum(MODEL.contractPayItem().payAmount())
-				.where(MODEL.contractPayItem().contract().project().eq("${project id}"),
-					MODEL.contractPayItem().payItemType().code().eq("${type}")
+//			.find(MODEL.contractPayItem()).which("in project by type").with_string("project id").with_string("type")
+//				.comments("统计项目下某类型的合同支付项目金额总和")
+//				.do_it_as().sum(MODEL.contractPayItem().payAmount())
+//				.where(MODEL.contractPayItem().contract().project().eq("${project id}"),
+//					MODEL.contractPayItem().payItemType().code().eq("${type}")
+//				)
+
+
+
+			.find(MODEL.laborRecord()).list_of("user by date").with_string("project id").with_string("merchant id").with_date("start date").with_date("end date")
+				.comments("查询某人某天的劳务记录")
+				.do_it_as()
+				.where(
+						MODEL.laborRecord().projectNomination().project().eq("${project id}"),
+						MODEL.laborRecord().projectNomination().worker().employee().eq("${merchant id}"),
+						MODEL.laborRecord().attendanceDate().bigger_or_eq("${start date}"),
+						MODEL.laborRecord().attendanceDate().less_or_eq("${end date}")
 				)
-
-
-
-
-
 		;
 
 		return script;

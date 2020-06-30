@@ -370,6 +370,12 @@ public class ProjectQueryPiece extends PieceOfScript {
 //				.where(
 //						MODEL.projectNotification().
 //				)
+
+				.find(MODEL.projectNomination()).which("id is").with_string("project nomination id")
+					.comments("按id查询 project nomination")
+					.do_it_as()
+					.where(MODEL.projectNomination().id().eq("${project nomination id}"))
+					.wants(MODEL.projectNomination().worker().employee())
 		;
 
 		return script;
