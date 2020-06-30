@@ -102,17 +102,6 @@ public class Platform extends BaseModelBean{
 		return member;
 	}
 
-	public PayItemType payItemTypeList() {
-		PayItemType member = new PayItemType();
-		member.setModelTypeName("pay_item_type");
-		member.setName("platform");
-		member.setMemberName("payItemTypeList");
-		member.setRelationName("platform");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-
 	public LicenseCategory licenseCategoryList() {
 		LicenseCategory member = new LicenseCategory();
 		member.setModelTypeName("license_category");

@@ -125,12 +125,6 @@ public class MODEL{
 		return rst;
 	}
 
-	public static PayItemType payItemType() {
-		PayItemType rst = new PayItemType();
-		rst.setModelTypeName("pay_item_type");
-		return rst;
-	}
-
 	public static ContractReviewRecord contractReviewRecord() {
 		ContractReviewRecord rst = new ContractReviewRecord();
 		rst.setModelTypeName("contract_review_record");

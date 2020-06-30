@@ -47,6 +47,22 @@ public class MiscPageFlowPiece extends PieceOfScript {
 
 		.request("view notifications of platform").no_login().with_last_record_id().got_page("notifications of platform")
 
+
+		.request("work record").with_string("project id")
+				.got_page("work record")
+
+		.request("record work").with_string("project id").with_string("item type")
+				.got_page("work record")
+
+		.request("overtime record").with_string("project id").got_page("overtime record")
+		.request("record overtime").with_string("project id").with_string("item type")
+				.got_page("overtime record")
+
+
+
+		.request("manage")
+		.got_page("manage")
+
 		;
 
 

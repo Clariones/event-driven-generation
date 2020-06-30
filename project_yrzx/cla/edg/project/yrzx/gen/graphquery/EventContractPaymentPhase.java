@@ -79,15 +79,6 @@ public class EventContractPaymentPhase extends BaseModelBean{
 		return member;
 	}
 
-	public StringAttribute totalAmount(){
-		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
-		// member.setName("totalAmount");
-		member.setName("total_amount");
-		useMember(member);
-		return member;
-	}
-
 	public StringAttribute criteria(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_longtext");
@@ -106,29 +97,38 @@ public class EventContractPaymentPhase extends BaseModelBean{
 		return member;
 	}
 
-	public NumberAttribute laborFeeProportion(){
+	public NumberAttribute subTotal(){
 		NumberAttribute member = new NumberAttribute();
-		member.setModelTypeName("double");
-		// member.setName("laborFeeProportion");
-		member.setName("labor_fee_proportion");
+		member.setModelTypeName("money");
+		// member.setName("subTotal");
+		member.setName("sub_total");
 		useMember(member);
 		return member;
 	}
 
-	public NumberAttribute materialFeeProportion(){
+	public NumberAttribute laborFee(){
 		NumberAttribute member = new NumberAttribute();
-		member.setModelTypeName("double");
-		// member.setName("materialFeeProportion");
-		member.setName("material_fee_proportion");
+		member.setModelTypeName("money");
+		// member.setName("laborFee");
+		member.setName("labor_fee");
 		useMember(member);
 		return member;
 	}
 
-	public NumberAttribute otherProportion(){
+	public NumberAttribute materialFee(){
 		NumberAttribute member = new NumberAttribute();
-		member.setModelTypeName("double");
-		// member.setName("otherProportion");
-		member.setName("other_proportion");
+		member.setModelTypeName("money");
+		// member.setName("materialFee");
+		member.setName("material_fee");
+		useMember(member);
+		return member;
+	}
+
+	public NumberAttribute otherFee(){
+		NumberAttribute member = new NumberAttribute();
+		member.setModelTypeName("money");
+		// member.setName("otherFee");
+		member.setName("other_fee");
 		useMember(member);
 		return member;
 	}
