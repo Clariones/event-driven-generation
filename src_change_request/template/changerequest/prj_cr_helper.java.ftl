@@ -804,16 +804,14 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 		groupData.addNextExistsInList(existsRecordList);
 	}
 
-	protected Object makeExistsRecordForShowInList(int idx, String groupName, List<CRFieldSpec> fieldSpecList, List<KeyValuePair> keyValuePairOf) throws Exception {
-        List<Object> allData = new ArrayList<>();
-        {// 序号 这个字段
-            Map<String, Object> fieldData = MapUtil.put("title", "序号")
-                  .put("type", "string")
-                  .put("id", idx + "_id")
-                  .put("value", TO_VALUE(idx))
-                  .into_map();
-            allData.add(fieldData);
-        }
+	protected Object makeExistsRecordForShowInList(
+    			int idx, String groupName, List<CRFieldSpec> fieldSpecList, List<KeyValuePair> keyValuePairOf)
+    			throws Exception {
+        List<Map<String, Object>> fieldValues = new ArrayList<>();
+        //		fieldValues.add(MapUtil.put("id", idx)
+        //				.put("title", "序号")
+        //				.put("value", idx)
+        //				.into_map());
         for (CRFieldSpec crFieldSpec : fieldSpecList) {
             if (!crFieldSpec.getName().startsWith(groupName)) {
                 continue;
@@ -824,17 +822,17 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 
             for (KeyValuePair keyValuePair : keyValuePairOf) {
                 String name = keyValuePair.getKey();
-                if (crFieldSpec.getName().endsWith("_"+name)) {
-                    Map<String, Object> fieldData = MapUtil.put("title", crFieldSpec.getLabel())
-                      .put("type", crFieldSpec.getType())
-                      .put("id", idx+"_"+allData.size())
-                      .put("value", TO_VALUE(keyValuePair.getValue()))
-                      .into_map();
-                allData.add(fieldData);
-                break;
+                if (crFieldSpec.getName().endsWith("_" + name)) {
+                    fieldValues.add(MapUtil.put("id", name)
+                            .put("title", crFieldSpec.getLabel())
+                            .put("value", TO_VALUE(keyValuePair.getValue()))
+                            .into_map()
+                    );
+                    break;
                 }
             }
         }
-        return MapUtil.put("id", idx).put("data",allData).into_map();
+        return MapUtil.put("id", idx).put("title", idx+"").put("displayMode", "card")
+                .put("infoList", fieldValues).into_map();
     }
 }
