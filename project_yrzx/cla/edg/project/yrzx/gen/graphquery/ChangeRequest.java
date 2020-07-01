@@ -91,6 +91,17 @@ public class ChangeRequest extends BaseModelBean{
 		return member;
 	}
 
+	public EventSign eventSignList() {
+		EventSign member = new EventSign();
+		member.setModelTypeName("event_sign");
+		member.setName("change_request");
+		member.setMemberName("eventSignList");
+		member.setRelationName("changeRequest");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 	public EventMaterialAcceptanceImage eventMaterialAcceptanceImageList() {
 		EventMaterialAcceptanceImage member = new EventMaterialAcceptanceImage();
 		member.setModelTypeName("event_material_acceptance_image");
@@ -514,6 +525,17 @@ public class ChangeRequest extends BaseModelBean{
 		member.setModelTypeName("event_apply_for_advance_compensation");
 		member.setName("change_request");
 		member.setMemberName("eventApplyForAdvanceCompensationList");
+		member.setRelationName("changeRequest");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EventLoanApplication eventLoanApplicationList() {
+		EventLoanApplication member = new EventLoanApplication();
+		member.setModelTypeName("event_loan_application");
+		member.setName("change_request");
+		member.setMemberName("eventLoanApplicationList");
 		member.setRelationName("changeRequest");
 		member.setReferDirection(false);
 		append(member);

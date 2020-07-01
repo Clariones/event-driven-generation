@@ -12,28 +12,6 @@ public class EventContractPaymentPhase extends BaseModelBean{
 
 	// 引用的对象
 
-	public Merchant payer() {
-		Merchant member = new Merchant();
-		member.setModelTypeName("merchant");
-		member.setName("payer");
-		member.setMemberName("payer");
-		member.setReferDirection(true);
-		member.setRelationName("payer");
-		append(member);
-		return member;
-	}
-
-	public Merchant payee() {
-		Merchant member = new Merchant();
-		member.setModelTypeName("merchant");
-		member.setName("payee");
-		member.setMemberName("payee");
-		member.setReferDirection(true);
-		member.setRelationName("payee");
-		append(member);
-		return member;
-	}
-
 	public ProjectProgress projectProgress() {
 		ProjectProgress member = new ProjectProgress();
 		member.setModelTypeName("project_progress");
@@ -79,6 +57,24 @@ public class EventContractPaymentPhase extends BaseModelBean{
 		return member;
 	}
 
+	public StringAttribute payer(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string");
+		// member.setName("payer");
+		member.setName("payer");
+		useMember(member);
+		return member;
+	}
+
+	public StringAttribute payee(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string");
+		// member.setName("payee");
+		member.setName("payee");
+		useMember(member);
+		return member;
+	}
+
 	public StringAttribute criteria(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_longtext");
@@ -106,15 +102,6 @@ public class EventContractPaymentPhase extends BaseModelBean{
 		return member;
 	}
 
-	public NumberAttribute laborFeeProportion(){
-		NumberAttribute member = new NumberAttribute();
-		member.setModelTypeName("double");
-		// member.setName("laborFeeProportion");
-		member.setName("labor_fee_proportion");
-		useMember(member);
-		return member;
-	}
-
 	public NumberAttribute laborFee(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
@@ -124,29 +111,11 @@ public class EventContractPaymentPhase extends BaseModelBean{
 		return member;
 	}
 
-	public NumberAttribute materialFeeProportion(){
-		NumberAttribute member = new NumberAttribute();
-		member.setModelTypeName("double");
-		// member.setName("materialFeeProportion");
-		member.setName("material_fee_proportion");
-		useMember(member);
-		return member;
-	}
-
 	public NumberAttribute materialFee(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
 		// member.setName("materialFee");
 		member.setName("material_fee");
-		useMember(member);
-		return member;
-	}
-
-	public NumberAttribute otherProportion(){
-		NumberAttribute member = new NumberAttribute();
-		member.setModelTypeName("double");
-		// member.setName("otherProportion");
-		member.setName("other_proportion");
 		useMember(member);
 		return member;
 	}

@@ -56,17 +56,6 @@ public class ContractPayItem extends BaseModelBean{
 		return member;
 	}
 
-	public PayItemType payItemType() {
-		PayItemType member = new PayItemType();
-		member.setModelTypeName("pay_item_type");
-		member.setName("pay_item_type");
-		member.setMemberName("payItemType");
-		member.setReferDirection(true);
-		member.setRelationName("payItemType");
-		append(member);
-		return member;
-	}
-
 	public ProjectProgress projectProgress() {
 		ProjectProgress member = new ProjectProgress();
 		member.setModelTypeName("project_progress");
@@ -168,6 +157,33 @@ public class ContractPayItem extends BaseModelBean{
 		member.setModelTypeName("money");
 		// member.setName("payAmount");
 		member.setName("pay_amount");
+		useMember(member);
+		return member;
+	}
+
+	public NumberAttribute laborFee(){
+		NumberAttribute member = new NumberAttribute();
+		member.setModelTypeName("money");
+		// member.setName("laborFee");
+		member.setName("labor_fee");
+		useMember(member);
+		return member;
+	}
+
+	public NumberAttribute materialFee(){
+		NumberAttribute member = new NumberAttribute();
+		member.setModelTypeName("money");
+		// member.setName("materialFee");
+		member.setName("material_fee");
+		useMember(member);
+		return member;
+	}
+
+	public NumberAttribute otherFee(){
+		NumberAttribute member = new NumberAttribute();
+		member.setModelTypeName("money");
+		// member.setName("otherFee");
+		member.setName("other_fee");
 		useMember(member);
 		return member;
 	}

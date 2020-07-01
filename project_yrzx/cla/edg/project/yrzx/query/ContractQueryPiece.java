@@ -50,15 +50,23 @@ public class ContractQueryPiece extends PieceOfScript {
 				.comments("统计一个合同下，每种状态的支付款项有多少个")
 				.do_it_as().count_by(MODEL.contractPayItem().payItemStatus())
 				.where(MODEL.contractPayItem().contract().eq("${contract id}"))
-			.query(MODEL.contractPayItem()).list_of("contract").with_string("contract id").with_integer("top n")
+			.query(MODEL.contractPayItem()).list_of("contract in top n").with_string("contract id").with_integer("top n")
 				.comments("查询合同的 支付 类的支付款项")
 				.do_it_as()
 				.where(MODEL.contractPayItem().contract().eq("${contract id}"))
 				.top("${top n}")
 				.order_by(MODEL.contractPayItem().id()).asc()
 				.wants(MODEL.contractPayItem().payer(), MODEL.contractPayItem().payItemStatus())
-			.query(MODEL.contractPayItem()).list_of("contract by pay status").pagination().with_string("contract id").with_string("filter")
+
+			.query(MODEL.contractPayItem()).list_of("contract").with_string("contract id").pagination()
 				.comments("查询合同的 支付 类的支付款项")
+				.do_it_as()
+				.where(MODEL.contractPayItem().contract().eq("${contract id}"))
+				.order_by(MODEL.contractPayItem().id()).asc()
+				.wants(MODEL.contractPayItem().payer(), MODEL.contractPayItem().payItemStatus())
+
+			.query(MODEL.contractPayItem()).list_of("contract by pay status").pagination().with_string("contract id").with_string("filter")
+				.comments("按状态查询合同的 支付 类的支付款项")
 				.do_it_as()
 				.where(MODEL.contractPayItem().contract().eq("${contract id}"),
 						MODEL.contractPayItem().payItemStatus().eq("${filter}").optional())
@@ -217,37 +225,24 @@ public class ContractQueryPiece extends PieceOfScript {
 					MODEL.contractPayItem().contractPaymentApplicationList().id().eq("${item id}")
 			)
 
-			.query(MODEL.contractPayItem()).list_of("contract by type").with_string("contract id").with_string("type id")
-				.do_it_as()
-				.where(
-						MODEL.contractPayItem().contract().eq("${contract id}"),
-						MODEL.contractPayItem().payItemType().eq("${type id}")
-				)
-				.wants(
-						MODEL.contractPayItem().payItemStatus(),
-						MODEL.contractPayItem().payItemType()
-				)
+			
 
-			.query(MODEL.contractPayItem()).list_of("payer in project by type").with_string("merchant id").with_string("project id").with_string("type id").pagination()
+			.query(MODEL.contractPayItem()).list_of("payer in project").with_string("merchant id").with_string("project id").pagination()
 				.comments("查询某人在某项目中的某种类型的支出")
 				.do_it_as()
 				.where(
 						MODEL.contractPayItem().contract().project().eq("${project id}"),
-						MODEL.contractPayItem().payer().eq("${merchant id}"),
-						MODEL.contractPayItem().payItemType().eq("${type id}")
+						MODEL.contractPayItem().payer().eq("${merchant id}")
 				)
 				.wants(MODEL.contractPayItem().payItemStatus()
-
-
 				)
 
-			.query(MODEL.contractPayItem()).list_of("payee in project by type").with_string("merchant id").with_string("project id").with_string("type id").pagination()
+			.query(MODEL.contractPayItem()).list_of("payee in project").with_string("merchant id").with_string("project id").pagination()
 				.comments("查询某人在某项目中的某种类型的收入")
 				.do_it_as()
 				.where(
 						MODEL.contractPayItem().contract().project().eq("${project id}"),
-						MODEL.contractPayItem().payee().eq("${merchant id}"),
-						MODEL.contractPayItem().payItemType().eq("${type id}")
+						MODEL.contractPayItem().payee().eq("${merchant id}")
 				)
 
 			.query(MODEL.contractPayItem()).list_of("approved contract income").with_string("merchant id").with_string("project id").pagination()
@@ -256,7 +251,6 @@ public class ContractQueryPiece extends PieceOfScript {
 				.where(
 						MODEL.contractPayItem().contract().project().eq("${project id}"),
 						MODEL.contractPayItem().payee().eq("${merchant id}"),
-						MODEL.contractPayItem().payItemType().not(PayItemType.LABOR),
 						MODEL.contractPayItem().payItemStatus().eq(PayItemStatus.PENDING_ON_CONFIRMATION)
 				)
 
@@ -267,21 +261,11 @@ public class ContractQueryPiece extends PieceOfScript {
 				.where(
 						MODEL.contractPayItem().contract().project().eq("${project id}"),
 						MODEL.contractPayItem().payer().eq("${merchant id}"),
-						MODEL.contractPayItem().payItemType().not(PayItemType.LABOR),
 						MODEL.contractPayItem().payItemStatus().eq(PayItemStatus.PENDING_ON_CONFIRMATION)
 				)
 
 
-			.query(MODEL.contractPayItem()).list_of("project by type").with_string("project id").with_string("type id")
-				.comments("按类型查询项目中的款项")
-				.do_it_as()
-				.where(
-						MODEL.contractPayItem().contract().project().eq("${project id}"),
-						MODEL.contractPayItem().payItemType().eq("${type id}")
-				)
-				.wants(MODEL.contractPayItem().projectProgress(),
-						MODEL.contractPayItem().payItemStatus()
-				)
+
 
 
 

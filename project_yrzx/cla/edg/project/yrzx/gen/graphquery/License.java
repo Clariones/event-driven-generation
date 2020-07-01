@@ -130,9 +130,9 @@ public class License extends BaseModelBean{
 		return member;
 	}
 
-	public StringAttribute expiredDate(){
-		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
+	public DateTimeAttribute expiredDate(){
+		DateTimeAttribute member = new DateTimeAttribute();
+		member.setModelTypeName("date_time");
 		// member.setName("expiredDate");
 		member.setName("expired_date");
 		useMember(member);

@@ -14,11 +14,11 @@ public class UserDomain extends BaseModelBean{
 
 	// 被引用的对象
 
-	public UserWhiteList userWhiteListList() {
-		UserWhiteList member = new UserWhiteList();
-		member.setModelTypeName("user_white_list");
+	public UserAllowList userAllowListList() {
+		UserAllowList member = new UserAllowList();
+		member.setModelTypeName("user_allow_list");
 		member.setName("domain");
-		member.setMemberName("userWhiteListList");
+		member.setMemberName("userAllowListList");
 		member.setRelationName("domain");
 		member.setReferDirection(false);
 		append(member);

@@ -128,6 +128,30 @@ public class MiscQueryPiece extends PieceOfScript {
 				.query(MODEL.notification()).list_of("all").pagination()
 
 
+		.query(MODEL.signRecord()).list_of("item").with_string("item id").with_string("item type").with_integer("top n").pagination()
+			.comments("查询某个对象的签收记录")
+			.do_it_as()
+			.where(
+					MODEL.signRecord().signItemId().eq("${item id}"),
+					MODEL.signRecord().signItemType().eq("${item type}")
+			)
+			.top("${top n}")
+			.wants(
+
+					MODEL.signRecord().signer()
+			)
+
+
+		.query(MODEL.signRecord()).list_of("submitter by type").with_string("merchant id").with_string("item type").pagination()
+			.do_it_as()
+			.where(
+					MODEL.signRecord().signer().eq("${merchant id}"),
+					MODEL.signRecord().signItemType().eq("${item type}")
+			)
+
+
+
+
 ;
 		return script;
 	}

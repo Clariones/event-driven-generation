@@ -15,6 +15,7 @@ public class ChangeRequestType extends BaseModelBean{
 	public static EnumAttribute APPLY_RECOMMENDATION = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "APPLY_RECOMMENDATION");
 	public static EnumAttribute ADD_DEBIT_CARD = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "ADD_DEBIT_CARD");
 	public static EnumAttribute SHOW_ALL_TYPE = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "SHOW_ALL_TYPE");
+	public static EnumAttribute SIGN = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "SIGN");
 	public static EnumAttribute CREATE_CONTRACT = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "CREATE_CONTRACT");
 	public static EnumAttribute PROJECT_COMMAND = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "PROJECT_COMMAND");
 	public static EnumAttribute TASK_REPORT = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "TASK_REPORT");
@@ -42,6 +43,7 @@ public class ChangeRequestType extends BaseModelBean{
 	public static EnumAttribute PROJECT_PROGRESS = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "PROJECT_PROGRESS");
 	public static EnumAttribute COMMENTS_ON_MATERIALS = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "COMMENTS_ON_MATERIALS");
 	public static EnumAttribute APPLY_FOR_ADVANCE_COMPENSATION = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "APPLY_FOR_ADVANCE_COMPENSATION");
+	public static EnumAttribute LOAN_APPLICATION = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "LOAN_APPLICATION");
 	public static EnumAttribute PROJECT_MANAGER_REPORT = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "PROJECT_MANAGER_REPORT");
 	public static EnumAttribute PROJECT_SUPERVISION_REPORT = new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "PROJECT_SUPERVISION_REPORT");
 

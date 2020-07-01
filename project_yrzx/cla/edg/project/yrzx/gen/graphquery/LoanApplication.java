@@ -34,9 +34,9 @@ public class LoanApplication extends BaseModelBean{
 		return member;
 	}
 
-	public LoanApplicationStatus status() {
-		LoanApplicationStatus member = new LoanApplicationStatus();
-		member.setModelTypeName("loan_application_status");
+	public AuditStatus status() {
+		AuditStatus member = new AuditStatus();
+		member.setModelTypeName("audit_status");
 		member.setName("status");
 		member.setMemberName("status");
 		member.setReferDirection(true);
@@ -115,6 +115,24 @@ public class LoanApplication extends BaseModelBean{
 		member.setModelTypeName("date_time_create");
 		// member.setName("applicationTime");
 		member.setName("application_time");
+		useMember(member);
+		return member;
+	}
+
+	public StringAttribute loanUsage(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string_longtext");
+		// member.setName("loanUsage");
+		member.setName("loan_usage");
+		useMember(member);
+		return member;
+	}
+
+	public DateTimeAttribute expectedRepaymentTime(){
+		DateTimeAttribute member = new DateTimeAttribute();
+		member.setModelTypeName("date");
+		// member.setName("expectedRepaymentTime");
+		member.setName("expected_repayment_time");
 		useMember(member);
 		return member;
 	}
