@@ -71,6 +71,7 @@ public class ClaMiscChangeRequest implements ChangeRequestSpecFactory {
 					.has_field("audit record id").hidden()
 					.has_field("review result").zh_CN("审核结论").
 						values_canbe(AuditStatus.APPROVED.getLiteralName(),"通过").or(AuditStatus.UNAPPROVED.getLiteralName(),"有疑虑")
+						.range(0,48)
 //						which_model_of(MODEL.auditStatus()).values_can_select_from_query_by("project id")
 					.has_field("comments").zh_CN("备注").optional()
 				.change_request("comments").zh_CN("添加批注")
@@ -80,9 +81,12 @@ public class ClaMiscChangeRequest implements ChangeRequestSpecFactory {
 					.has_field("comments").zh_CN("备注")
 
 
-
-
-
+				.change_request("sign").zh_CN("签收")
+					.icon("from")
+					.has_field("sign object type").hidden().fill_by_request("item type")
+					.has_field("sign object id").hidden().fill_by_request("item id")
+					.has_field("comments").zh_CN("备注").which_type_of(FieldType.MULTI_TEXT).optional()
+					.has_field("submit time").zh_CN("签收时间").disabled().value("提交后自动生成")
 
 					;
 		

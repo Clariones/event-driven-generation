@@ -61,7 +61,9 @@ public class ProjectHallPageFlowPiece extends PieceOfScript {
 			.request("view project material comments list").with_string("item id").with_last_record_id()
 				.comments("查看项目资料的所有批注列表").need_login().no_footprint()
 				.got_page("comments record list").title("批注列表").list_of("card")
-
+			.request("view sign list").with_string("item id").with_string("item type").with_last_record_id()
+				.comments("查看对象的签收记录列表").need_login().no_footprint()
+				.got_page("sign record list").title("签收记录").list_of("card")
 			.request("view contract review list").with_string("item id").with_last_record_id()
 				.comments("查看合同的所有审批记录列表").need_login().no_footprint()
 				.got_page("contract review record list").title("审核记录").list_of("card")

@@ -4,24 +4,13 @@ import java.util.Map;
 
 import cla.edg.modelbean.*;
 
-public class EventContractPaymentPhase extends BaseModelBean{
+public class EventLoanApplication extends BaseModelBean{
 	public String getFullClassName() {
-		return "com.yrdec.yrzx.eventcontractpaymentphase.EventContractPaymentPhase";
+		return "com.yrdec.yrzx.eventloanapplication.EventLoanApplication";
 	}
 	// 枚举对象
 
 	// 引用的对象
-
-	public ProjectProgress projectProgress() {
-		ProjectProgress member = new ProjectProgress();
-		member.setModelTypeName("project_progress");
-		member.setName("project_progress");
-		member.setMemberName("projectProgress");
-		member.setReferDirection(true);
-		member.setRelationName("projectProgress");
-		append(member);
-		return member;
-	}
 
 	public ChangeRequest changeRequest() {
 		ChangeRequest member = new ChangeRequest();
@@ -57,92 +46,56 @@ public class EventContractPaymentPhase extends BaseModelBean{
 		return member;
 	}
 
-	public StringAttribute payer(){
+	public StringAttribute projectId(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		// member.setName("payer");
-		member.setName("payer");
+		// member.setName("projectId");
+		member.setName("project_id");
 		useMember(member);
 		return member;
 	}
 
-	public StringAttribute payee(){
+	public StringAttribute projectName(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string");
-		// member.setName("payee");
-		member.setName("payee");
+		// member.setName("projectName");
+		member.setName("project_name");
 		useMember(member);
 		return member;
 	}
 
-	public StringAttribute criteria(){
+	public StringAttribute borrower(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string");
+		// member.setName("borrower");
+		member.setName("borrower");
+		useMember(member);
+		return member;
+	}
+
+	public NumberAttribute amount(){
+		NumberAttribute member = new NumberAttribute();
+		member.setModelTypeName("money");
+		// member.setName("amount");
+		member.setName("amount");
+		useMember(member);
+		return member;
+	}
+
+	public StringAttribute loanUsage(){
 		StringAttribute member = new StringAttribute();
 		member.setModelTypeName("string_longtext");
-		// member.setName("criteria");
-		member.setName("criteria");
+		// member.setName("loanUsage");
+		member.setName("loan_usage");
 		useMember(member);
 		return member;
 	}
 
-	public NumberAttribute proportion(){
-		NumberAttribute member = new NumberAttribute();
-		member.setModelTypeName("double");
-		// member.setName("proportion");
-		member.setName("proportion");
-		useMember(member);
-		return member;
-	}
-
-	public NumberAttribute subTotal(){
-		NumberAttribute member = new NumberAttribute();
-		member.setModelTypeName("money");
-		// member.setName("subTotal");
-		member.setName("sub_total");
-		useMember(member);
-		return member;
-	}
-
-	public NumberAttribute laborFee(){
-		NumberAttribute member = new NumberAttribute();
-		member.setModelTypeName("money");
-		// member.setName("laborFee");
-		member.setName("labor_fee");
-		useMember(member);
-		return member;
-	}
-
-	public NumberAttribute materialFee(){
-		NumberAttribute member = new NumberAttribute();
-		member.setModelTypeName("money");
-		// member.setName("materialFee");
-		member.setName("material_fee");
-		useMember(member);
-		return member;
-	}
-
-	public NumberAttribute otherFee(){
-		NumberAttribute member = new NumberAttribute();
-		member.setModelTypeName("money");
-		// member.setName("otherFee");
-		member.setName("other_fee");
-		useMember(member);
-		return member;
-	}
-
-	public StringAttribute comments(){
-		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string_longtext");
-		// member.setName("comments");
-		member.setName("comments");
-		useMember(member);
-		return member;
-	}
-
-	public DateTimeAttribute expectedPayTime(){
+	public DateTimeAttribute expectedRepaymentTime(){
 		DateTimeAttribute member = new DateTimeAttribute();
 		member.setModelTypeName("date");
-		// member.setName("expectedPayTime");
-		member.setName("expected_pay_time");
+		// member.setName("expectedRepaymentTime");
+		member.setName("expected_repayment_time");
 		useMember(member);
 		return member;
 	}

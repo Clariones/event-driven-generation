@@ -531,28 +531,6 @@ public class Merchant extends BaseModelBean{
 		return member;
 	}
 
-	public EventContractPaymentPhase eventContractPaymentPhaseListAsPayer() {
-		EventContractPaymentPhase member = new EventContractPaymentPhase();
-		member.setModelTypeName("event_contract_payment_phase");
-		member.setName("payer");
-		member.setMemberName("eventContractPaymentPhaseListAsPayer");
-		member.setRelationName("payer");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-
-	public EventContractPaymentPhase eventContractPaymentPhaseListAsPayee() {
-		EventContractPaymentPhase member = new EventContractPaymentPhase();
-		member.setModelTypeName("event_contract_payment_phase");
-		member.setName("payee");
-		member.setMemberName("eventContractPaymentPhaseListAsPayee");
-		member.setRelationName("payer");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-
 	public EventShowAllTypeStepOne eventShowAllTypeStepOneList() {
 		EventShowAllTypeStepOne member = new EventShowAllTypeStepOne();
 		member.setModelTypeName("event_show_all_type_step_one");
@@ -592,6 +570,17 @@ public class Merchant extends BaseModelBean{
 		member.setName("cc_to");
 		member.setMemberName("ccRecordList");
 		member.setRelationName("ccTo");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public SignRecord signRecordList() {
+		SignRecord member = new SignRecord();
+		member.setModelTypeName("sign_record");
+		member.setName("signer");
+		member.setMemberName("signRecordList");
+		member.setRelationName("signer");
 		member.setReferDirection(false);
 		append(member);
 		return member;

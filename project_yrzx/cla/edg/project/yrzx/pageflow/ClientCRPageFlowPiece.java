@@ -144,6 +144,15 @@ public class ClientCRPageFlowPiece extends PieceOfScript {
 					.got_page("contract payment application detail")
 
 					.request_with_changerequest("show all type").no_login().got_page("show all type")
+
+
+				.request_with_changerequest("sign").need_login().with_string("item id").with_string("item type")
+					.comments("签收")
+					.got_page("redirect")
+
+                .request_with_changerequest("loan application").need_login().with_string("project id").with_string("merchant id")
+                    .comments("贷款申请")
+                    .got_page("loan application detail")
 				;
 	}
 }

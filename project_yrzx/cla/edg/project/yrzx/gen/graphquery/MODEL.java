@@ -629,12 +629,6 @@ public class MODEL{
 		return rst;
 	}
 
-	public static LoanApplicationStatus loanApplicationStatus() {
-		LoanApplicationStatus rst = new LoanApplicationStatus();
-		rst.setModelTypeName("loan_application_status");
-		return rst;
-	}
-
 	public static LoanContract loanContract() {
 		LoanContract rst = new LoanContract();
 		rst.setModelTypeName("loan_contract");
@@ -893,6 +887,12 @@ public class MODEL{
 		return rst;
 	}
 
+	public static EventSign eventSign() {
+		EventSign rst = new EventSign();
+		rst.setModelTypeName("event_sign");
+		return rst;
+	}
+
 	public static EventMaterialAcceptanceImage eventMaterialAcceptanceImage() {
 		EventMaterialAcceptanceImage rst = new EventMaterialAcceptanceImage();
 		rst.setModelTypeName("event_material_acceptance_image");
@@ -1127,6 +1127,12 @@ public class MODEL{
 		return rst;
 	}
 
+	public static EventLoanApplication eventLoanApplication() {
+		EventLoanApplication rst = new EventLoanApplication();
+		rst.setModelTypeName("event_loan_application");
+		return rst;
+	}
+
 	public static EventContractComment eventContractComment() {
 		EventContractComment rst = new EventContractComment();
 		rst.setModelTypeName("event_contract_comment");
@@ -1160,6 +1166,12 @@ public class MODEL{
 	public static CcRecord ccRecord() {
 		CcRecord rst = new CcRecord();
 		rst.setModelTypeName("cc_record");
+		return rst;
+	}
+
+	public static SignRecord signRecord() {
+		SignRecord rst = new SignRecord();
+		rst.setModelTypeName("sign_record");
 		return rst;
 	}
 

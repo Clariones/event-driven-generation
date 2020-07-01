@@ -50,6 +50,17 @@ public class AuditStatus extends BaseModelBean{
 		return member;
 	}
 
+	public LoanApplication loanApplicationList() {
+		LoanApplication member = new LoanApplication();
+		member.setModelTypeName("loan_application");
+		member.setName("status");
+		member.setMemberName("loanApplicationList");
+		member.setRelationName("status");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 	public PersonalEmplacementApplication personalEmplacementApplicationList() {
 		PersonalEmplacementApplication member = new PersonalEmplacementApplication();
 		member.setModelTypeName("personal_emplacement_application");
