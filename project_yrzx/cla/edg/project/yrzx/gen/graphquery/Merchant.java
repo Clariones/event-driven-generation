@@ -344,34 +344,12 @@ public class Merchant extends BaseModelBean{
 		return member;
 	}
 
-	public LoanApplication loanApplicationList() {
-		LoanApplication member = new LoanApplication();
-		member.setModelTypeName("loan_application");
-		member.setName("applicant");
-		member.setMemberName("loanApplicationList");
-		member.setRelationName("applicant");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-
-	public LoanContract loanContractListAsBorrower() {
+	public LoanContract loanContractList() {
 		LoanContract member = new LoanContract();
 		member.setModelTypeName("loan_contract");
-		member.setName("borrower");
-		member.setMemberName("loanContractListAsBorrower");
-		member.setRelationName("borrower");
-		member.setReferDirection(false);
-		append(member);
-		return member;
-	}
-
-	public LoanContract loanContractListAsLender() {
-		LoanContract member = new LoanContract();
-		member.setModelTypeName("loan_contract");
-		member.setName("lender");
-		member.setMemberName("loanContractListAsLender");
-		member.setRelationName("borrower");
+		member.setName("borrower_unit");
+		member.setMemberName("loanContractList");
+		member.setRelationName("borrowerUnit");
 		member.setReferDirection(false);
 		append(member);
 		return member;

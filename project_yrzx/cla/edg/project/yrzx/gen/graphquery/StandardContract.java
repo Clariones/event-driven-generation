@@ -223,6 +223,28 @@ public class StandardContract extends BaseModelBean{
 		return member;
 	}
 
+	public LoanApplication loanApplicationList() {
+		LoanApplication member = new LoanApplication();
+		member.setModelTypeName("loan_application");
+		member.setName("pledged_contract");
+		member.setMemberName("loanApplicationList");
+		member.setRelationName("pledgedContract");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public LoanContract loanContractList() {
+		LoanContract member = new LoanContract();
+		member.setModelTypeName("loan_contract");
+		member.setName("pledged_contract");
+		member.setMemberName("loanContractList");
+		member.setRelationName("pledgedContract");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 	public MaterialPreservedSample materialPreservedSampleList() {
 		MaterialPreservedSample member = new MaterialPreservedSample();
 		member.setModelTypeName("material_preserved_sample");
@@ -317,6 +339,17 @@ public class StandardContract extends BaseModelBean{
 		member.setName("work_package_contract");
 		member.setMemberName("eventProjectPenaltiesList");
 		member.setRelationName("workPackageContract");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
+	public EventLoanApplication eventLoanApplicationList() {
+		EventLoanApplication member = new EventLoanApplication();
+		member.setModelTypeName("event_loan_application");
+		member.setName("pledged_contract");
+		member.setMemberName("eventLoanApplicationList");
+		member.setRelationName("pledgedContract");
 		member.setReferDirection(false);
 		append(member);
 		return member;
