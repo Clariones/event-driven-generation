@@ -36,8 +36,6 @@ public class FinanceServiceQueryPiece extends PieceOfScript {
 					MODEL.loanContract().project().eq("${project id}")
 			)
 			.wants(
-					MODEL.loanContract().borrower(),
-					MODEL.loanContract().lender(),
 					MODEL.loanContract().status()
 			)
 
@@ -74,8 +72,6 @@ public class FinanceServiceQueryPiece extends PieceOfScript {
 				)
 			.wants(
 					MODEL.loanContract().status(),
-					MODEL.loanContract().borrower(),
-					MODEL.loanContract().lender(),
 					MODEL.loanContract().loanApplication().loanProject()
 			)
 

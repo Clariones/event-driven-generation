@@ -23,9 +23,20 @@ public class LoanApplication extends BaseModelBean{
 		return member;
 	}
 
-	public Merchant applicant() {
-		Merchant member = new Merchant();
-		member.setModelTypeName("merchant");
+	public StandardContract pledgedContract() {
+		StandardContract member = new StandardContract();
+		member.setModelTypeName("standard_contract");
+		member.setName("pledged_contract");
+		member.setMemberName("pledgedContract");
+		member.setReferDirection(true);
+		member.setRelationName("pledgedContract");
+		append(member);
+		return member;
+	}
+
+	public EmployeeNomination applicant() {
+		EmployeeNomination member = new EmployeeNomination();
+		member.setModelTypeName("employee_nomination");
 		member.setName("applicant");
 		member.setMemberName("applicant");
 		member.setReferDirection(true);

@@ -168,6 +168,17 @@ public class EmployeeNomination extends BaseModelBean{
 		return member;
 	}
 
+	public LoanApplication loanApplicationList() {
+		LoanApplication member = new LoanApplication();
+		member.setModelTypeName("loan_application");
+		member.setName("applicant");
+		member.setMemberName("loanApplicationList");
+		member.setRelationName("applicant");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 	public CompensationApplication compensationApplicationList() {
 		CompensationApplication member = new CompensationApplication();
 		member.setModelTypeName("compensation_application");

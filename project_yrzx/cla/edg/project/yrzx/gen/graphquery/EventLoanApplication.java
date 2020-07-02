@@ -12,6 +12,17 @@ public class EventLoanApplication extends BaseModelBean{
 
 	// 引用的对象
 
+	public StandardContract pledgedContract() {
+		StandardContract member = new StandardContract();
+		member.setModelTypeName("standard_contract");
+		member.setName("pledged_contract");
+		member.setMemberName("pledgedContract");
+		member.setReferDirection(true);
+		member.setRelationName("pledgedContract");
+		append(member);
+		return member;
+	}
+
 	public ChangeRequest changeRequest() {
 		ChangeRequest member = new ChangeRequest();
 		member.setModelTypeName("change_request");

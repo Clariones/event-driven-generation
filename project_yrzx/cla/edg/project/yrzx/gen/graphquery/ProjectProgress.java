@@ -69,6 +69,17 @@ public class ProjectProgress extends BaseModelBean{
 		return member;
 	}
 
+	public LoanContract loanContractList() {
+		LoanContract member = new LoanContract();
+		member.setModelTypeName("loan_contract");
+		member.setName("project_progress");
+		member.setMemberName("loanContractList");
+		member.setRelationName("projectProgress");
+		member.setReferDirection(false);
+		append(member);
+		return member;
+	}
+
 	public MaterialRecord materialRecordList() {
 		MaterialRecord member = new MaterialRecord();
 		member.setModelTypeName("material_record");

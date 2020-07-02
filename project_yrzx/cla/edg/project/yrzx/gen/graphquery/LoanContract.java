@@ -23,24 +23,35 @@ public class LoanContract extends BaseModelBean{
 		return member;
 	}
 
-	public Merchant borrower() {
+	public Merchant borrowerUnit() {
 		Merchant member = new Merchant();
 		member.setModelTypeName("merchant");
-		member.setName("borrower");
-		member.setMemberName("borrower");
+		member.setName("borrower_unit");
+		member.setMemberName("borrowerUnit");
 		member.setReferDirection(true);
-		member.setRelationName("borrower");
+		member.setRelationName("borrowerUnit");
 		append(member);
 		return member;
 	}
 
-	public Merchant lender() {
-		Merchant member = new Merchant();
-		member.setModelTypeName("merchant");
-		member.setName("lender");
-		member.setMemberName("lender");
+	public StandardContract pledgedContract() {
+		StandardContract member = new StandardContract();
+		member.setModelTypeName("standard_contract");
+		member.setName("pledged_contract");
+		member.setMemberName("pledgedContract");
 		member.setReferDirection(true);
-		member.setRelationName("lender");
+		member.setRelationName("pledgedContract");
+		append(member);
+		return member;
+	}
+
+	public ProjectProgress projectProgress() {
+		ProjectProgress member = new ProjectProgress();
+		member.setModelTypeName("project_progress");
+		member.setName("project_progress");
+		member.setMemberName("projectProgress");
+		member.setReferDirection(true);
+		member.setRelationName("projectProgress");
 		append(member);
 		return member;
 	}
@@ -112,6 +123,15 @@ public class LoanContract extends BaseModelBean{
 		return member;
 	}
 
+	public StringAttribute loanUsage(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string_longtext");
+		// member.setName("loanUsage");
+		member.setName("loan_usage");
+		useMember(member);
+		return member;
+	}
+
 	public NumberAttribute loanAmount(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("money");
@@ -121,11 +141,47 @@ public class LoanContract extends BaseModelBean{
 		return member;
 	}
 
-	public NumberAttribute loanTerm(){
+	public NumberAttribute interestRate(){
+		NumberAttribute member = new NumberAttribute();
+		member.setModelTypeName("double");
+		// member.setName("interestRate");
+		member.setName("interest_rate");
+		useMember(member);
+		return member;
+	}
+
+	public NumberAttribute repaymentTerm(){
 		NumberAttribute member = new NumberAttribute();
 		member.setModelTypeName("int");
-		// member.setName("loanTerm");
-		member.setName("loan_term");
+		// member.setName("repaymentTerm");
+		member.setName("repayment_term");
+		useMember(member);
+		return member;
+	}
+
+	public DateTimeAttribute applyTime(){
+		DateTimeAttribute member = new DateTimeAttribute();
+		member.setModelTypeName("date");
+		// member.setName("applyTime");
+		member.setName("apply_time");
+		useMember(member);
+		return member;
+	}
+
+	public DateTimeAttribute expectedRepaymentTime(){
+		DateTimeAttribute member = new DateTimeAttribute();
+		member.setModelTypeName("date");
+		// member.setName("expectedRepaymentTime");
+		member.setName("expected_repayment_time");
+		useMember(member);
+		return member;
+	}
+
+	public StringAttribute document(){
+		StringAttribute member = new StringAttribute();
+		member.setModelTypeName("string_document");
+		// member.setName("document");
+		member.setName("document");
 		useMember(member);
 		return member;
 	}
