@@ -373,7 +373,8 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 				Object suggestedDefaultValue = calcSuggestedDefaultValue(groupName, fieldSpec, fieldSpec.getValue());
                 fieldData.setValue(TO_VALUE(getFieldValueWhenFillResponse(suggestedDefaultValue,requestData, dbCrData, groupData, fieldSpec)));
 			}else {
-				Object suggestedDefaultValue = calcSuggestedDefaultValue(groupName, fieldSpec, fieldSpec.getDefaultValue());
+			    Object dv = getValueFromPostedData(userContext.getChangeRequestProcessResult().getPostedData(), groupName, fieldSpec.getName());
+			    Object suggestedDefaultValue = calcSuggestedDefaultValue(groupName, fieldSpec, dv==null?fieldSpec.getDefaultValue():dv);
                 fieldData.setValue(TO_VALUE(getFieldValueWhenFillResponse(suggestedDefaultValue,requestData, dbCrData, groupData, fieldSpec)));
 			}
 			setFieldSpecInfo(requestData, dbCrData, groupData, fieldData, fieldSpec);
