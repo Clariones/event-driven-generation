@@ -27,13 +27,14 @@ public class NominationQueryPiece extends PieceOfScript {
 				)
 
 		.query(MODEL.projectNomination()).which("in project by merchant and type").with_string("project id").with_string("merchant id").with_string("type id")
+				.comments("按项目组织类别查询项目人员分配")
 			.do_it_as()
 			.where(
 					MODEL.projectNomination().project().eq("${project id}")
 					,
 					MODEL.projectNomination().worker().employer().eq("${merchant id}")
 					,
-					MODEL.projectNomination().type().eq("${type id}")
+					MODEL.projectNomination().type().id().eq("${type id}")
 			)
 			.wants(
 					MODEL.projectNomination().project(),

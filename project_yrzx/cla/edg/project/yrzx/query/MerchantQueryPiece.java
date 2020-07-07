@@ -21,7 +21,8 @@ public class MerchantQueryPiece extends PieceOfScript {
 					MODEL.merchant().merchantDetailList().engineeringType(),
 					MODEL.merchant().merchantDetailList().careerType(),
 					MODEL.merchant().merchantDetailList().industryType(),
-					MODEL.merchant().debitCardList()
+					MODEL.merchant().debitCardList(),
+					MODEL.merchant().licenseList().licenseCategory()
 			)
 
 
@@ -38,7 +39,6 @@ public class MerchantQueryPiece extends PieceOfScript {
 					MODEL.merchant().employeeNominationListAsEmployee().projectNominationList().projectRole().eq("${role id}"),
 					MODEL.merchant().employeeNominationListAsEmployee().projectNominationList().project().eq("${project id}")
 			)
-
 ;
 
 		return script;
