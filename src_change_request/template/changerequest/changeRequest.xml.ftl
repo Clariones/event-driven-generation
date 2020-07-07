@@ -31,9 +31,11 @@
 	${helper.toModelStyleName(fieldSpec.name)}="${helper.getExampleDataOfField(fieldSpec)}"
 		</#if>
 	</#list>
+<#--
 	field_group="cr_type/step_name/event_name/event_index|[5,100]"
 	event_initiator_type="SecUser|Merchant|[1,64]"
 	event_initiator_id="SU000001|M0000001|[1,64]"
+-->
 	change_request="$(${crModelName})"
 	<#if allEventSpec[eventName].multiple >
 	_features="n*event"
@@ -44,4 +46,27 @@
 	/>
 	
 </#list>
+
+  <!--
+   按照 ChangeRequest 来保存数据, 此表内部使用.
+   events_info内部是个map,等价于
+    event_type="EventInvitor|EventAnother|[1,64]"
+    event_id="EI000001|EA0000001|[1,64]"
+    field_group="cr_type/step_name/event_name/event_index|[1,100]"
+
+   status 有3个:
+    OPENING: 还在填写中. 包括 撤销 也算在这个状态.
+    COMMITTED: 已经提交,并且以后要重新填写;
+    PRESET: 已经提交,并且以后用这里的值做预填充值.
+  -->
+  <event_info_in_cr
+    change_request="$(change_request)"
+    change_request_type="$(change_request_type)"
+    status="OPENING|COMMITTED|PRESET"
+    initiator_type="SecUser|Merchant|[1,64]"
+    initiator_id="SU000001|M0000001|[1,64]"
+    events_info="text()"
+    last_update_time="updateTime()"
+    _max_count="1000000000"
+    />
 </root>

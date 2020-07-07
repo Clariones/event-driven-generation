@@ -1,28 +1,25 @@
 package com.${orgName?lower_case}.${projectName?lower_case};
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Date;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
-
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.terapico.utils.DataTypeUtil;
+
 import com.${orgName?lower_case}.${projectName?lower_case}.changerequest.ChangeRequest;
 import com.${orgName?lower_case}.${projectName?lower_case}.changerequest.ChangeRequestTokens;
+import com.${orgName?lower_case}.${projectName?lower_case}.eventinfoincr.EventInfoInCr;
+import com.${orgName?lower_case}.${projectName?lower_case}.eventinfoincr.EventInfoInCrTable;
 import com.terapico.caf.appview.CRFieldData;
 import com.terapico.caf.appview.CRGroupData;
 import com.terapico.caf.appview.CRSceneData;
 import com.terapico.caf.viewcomponent.GenericFormPage;
 import com.terapico.caf.appview.ChangeRequestPostData;
 import com.terapico.caf.appview.ChangeRequestProcessResult;
-import com.terapico.changerequest.BaseChangeRequestHelper;
-import com.terapico.changerequest.CRFieldSpec;
-import com.terapico.changerequest.CRGroupSpec;
-import com.terapico.changerequest.CRSpec;
+import com.terapico.changerequest.*;
 
+import com.terapico.utils.DebugUtil;
 import com.terapico.utils.MapUtil;
 import com.terapico.utils.TextUtil;
 import com.terapico.uccaf.CafEntity;
@@ -78,14 +75,23 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 		return "event_" + (groupSpec.getModelName().trim().replace(' ', '_').toLowerCase())+"_data";
 	}
 
-	public void markAsCommited(ChangeRequest cr) {
+	public void markAsCommitted(ChangeRequest cr) {
+        markCommittedStatus(cr, STATUS_COMMITTED);
+    }
+    public void markAsCommittedAndPreset(ChangeRequest cr) {
+        markCommittedStatus(cr, STATUS_PRESET);
+    }
+    protected void markCommittedStatus(ChangeRequest cr, String committedStatus) {
         cr.updateCommited(true);
         try {
             userContext.getManagerGroup().getChangeRequestManager().internalSaveChangeRequest(userContext, cr, EO);
+            String sql = "update "+EventInfoInCrTable.TABLE_NAME+" set status=? where change_request=? ";
+            userContext.dao().updateBySql(sql, new Object[]{committedStatus, cr.getId()});
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
 	public ChangeRequestProcessResult processChangeRequest(ChangeRequestPostData postedData, BaseEntity currentUserInfo) throws Exception {
 	    if (currentUserInfo == null) {
     		currentUserInfo = anonymousUser();
@@ -187,33 +193,63 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 	}
 
 	protected ChangeRequest loadCrDataByGroups(String crType, BaseEntity currentUserInfo, List<CRGroupSpec> groupSpecList) throws Exception {
-		List<Object> params = new ArrayList<>();
-		StringBuilder sb = new StringBuilder(
-				"select * from change_request_data CR where CR.request_type=? and commited is false and (");
-		params.add(crType);
-		final int paramsLen = params.size();
-		ALL_GROUPS(CR(crType)).forEach(group -> {
-			if (params.size() > paramsLen) {
-				// 不是循环第一次
-				sb.append(" or ");
-			}
-			sb.append(" exists (select * from ").append(toEventTableName(group))
-					.append(" E where E.change_request = CR.id and event_initiator_type=? and event_initiator_id=? and E.field_group=?) \n");
-			params.add(currentUserInfo.getInternalType());
-			params.add(currentUserInfo.getId());
-			params.add(group.getName());
-		});
-		sb.append(" ) order by id desc limit ?");
-		params.add(1);
-		SmartList<ChangeRequest> qList = userContext.getDAOGroup().getChangeRequestDAO().queryList(sb.toString(),
-				params.toArray());
-		if (qList==null||qList.isEmpty()) {
-			return null;
-		}
-		
-		ChangeRequest cr = qList.first();
-		enhanceChangeRequest(cr, groupSpecList);
-		return cr;
+            List<Object> params = new ArrayList<>();
+            String sql = "select * from event_info_in_cr_data E " +
+                    " where E.initiator_type=? and E.initiator_id=? and E.change_request_type=? " +
+                    "    order by E.id desc limit ?";
+    //		StringBuilder sb = new StringBuilder(
+    //				"select * from change_request_data CR where CR.request_type=? and commited is false and (");
+
+            params.add(currentUserInfo.getInternalType());
+            params.add(currentUserInfo.getId());
+            params.add(crType);
+            params.add(1);
+            SmartList<EventInfoInCr> list = getUserContext().getDAOGroup().getEventInfoInCrDAO().queryList(sql, params.toArray());
+            if (list == null || list.isEmpty()) {
+                return null;
+            }
+
+            EventInfoInCr info = list.first();
+            // 如果是正在填写的,直接返回
+            if (info.getStatus().equals(STATUS_OPENING)){
+                String crId = info.getChangeRequest().getId();
+                ChangeRequest cr = getUserContext().getDAOGroup().getChangeRequestDAO().load(crId, ChangeRequestTokens.withoutLists());
+                enhanceChangeRequest(cr, groupSpecList);
+                return cr;
+            }
+
+            // 如果是 已提交 , 那么就返回空CR
+            if (info.getStatus().equals(STATUS_COMMITTED)){
+                return null;
+            }
+
+            // 如果是: 提交并且作为下一次的 样本, 那么就应该复制所有的event, 现在暂时没做. 还是返回空
+            return null;
+
+        //		final int paramsLen = params.size();
+        //		ALL_GROUPS(CR(crType)).forEach(group -> {
+        //			if (params.size() > paramsLen) {
+        //				// 不是循环第一次
+        //				sb.append(" or ");
+        //			}
+        //			sb.append(" exists (select * from ").append(toEventTableName(group))
+        //					.append(" E where E.change_request = CR.id and event_initiator_type=? and event_initiator_id=? and E.field_group=?) \n");
+        //			params.add(currentUserInfo.getInternalType());
+        //			params.add(currentUserInfo.getId());
+        //			params.add(group.getName());
+        //		});
+        //		sb.append(" ) order by id desc limit ?");
+        //		params.add(1);
+        //		SmartList<ChangeRequest> qList = userContext.getDAOGroup().getChangeRequestDAO().queryList(sb.toString(),
+        //				params.toArray());
+        //		if (qList==null||qList.isEmpty()) {
+        //			return null;
+        //		}
+        //
+        //		ChangeRequest cr = qList.first();
+        //		enhanceChangeRequest(cr, groupSpecList);
+        //		return cr;
+        // }
 	}
 
 	protected void addHiddenField(GenericFormPage requestData, String fieldShortName, String value) {
@@ -251,12 +287,23 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 		}
 	}
 
+	protected EventInfoInCr getEventInfoInCr(String crId) {
+        String sql = "select * from " + EventInfoInCrTable.TABLE_NAME+" where change_request=? order by id desc limit 1";
+        return getUserContext().getDAOGroup().getEventInfoInCrDAO().queryList(sql, crId).first();
+    }
+
 <#list projectSpec.changeRequestList as crSpec>
 	protected void enhance${helper.CamelName(crSpec.changeRequestType)}ChangeRequest(ChangeRequest cr, List<CRGroupSpec> groupSpecList) throws Exception{
-		groupSpecList.forEach(group->{
-			Object[] params = new Object[] {cr.getId(), group.getName(), 1000};
-			String sql = "select * from " + toEventTableName(group) + " E where E.change_request=? " + 
-					" and E.field_group=? order by id asc limit ?";
+		EventInfoInCr eiic = getEventInfoInCr(cr.getId());
+        Map<String, EventInfo> eventsInfo = getEventInfoMapFrom(eiic.getEventsInfo());
+        groupSpecList.forEach(group->{
+            List<String> eventIds = getEventIdsFromByGroupName(eventsInfo, group.getName());
+            if (eventIds == null || eventIds.isEmpty()) {
+                return;
+            }
+            Object[] params = eventIds.toArray();
+            String sql = "select * from " + toEventTableName(group) + " E where E.id in (" +
+                    TextUtil.repeat("?", eventIds.size(), ",") + ")";
 			switch (group.getName()) {
 		<#list crSpec.stepList as scene>
 			<#list scene.eventList as group>
@@ -313,13 +360,15 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 		}
 		int foundAny = 0;
 		boolean fillAny = false;
+		EventInfoInCr eiic = this.getEventInfoInCr(dbCrData.getId());
+        Map<String, EventInfo> eventsInfo = this.getEventInfoMapFrom(eiic.getEventsInfo());
 		for(int i=0;i<eventList.size();i++) {
 			BaseEntity evtData = eventList.get(i);
 			List<KeyValuePair> kvList = evtData.keyValuePairOf();
-			KeyValuePair fieldGroup = kvList.stream().filter(entry->entry.getKey().equals("fieldGroup")).findAny().orElse(null);
-			if (fieldGroup == null || !fieldGroup.getValue().equals(groupData.getName())) {
-				continue;
-			}
+			String evtGroupName = getFieldGroupOfEvent(eventsInfo, evtData.getId());
+            if (evtGroupName == null || !evtGroupName.equals(groupData.getName())) {
+                continue;
+            }
 			foundAny++;
 			if (foundAny != groupRecordIndex) {
 				continue;
@@ -373,7 +422,10 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 				Object suggestedDefaultValue = calcSuggestedDefaultValue(groupName, fieldSpec, fieldSpec.getValue());
                 fieldData.setValue(TO_VALUE(getFieldValueWhenFillResponse(suggestedDefaultValue,requestData, dbCrData, groupData, fieldSpec)));
 			}else {
-			    Object dv = getValueFromPostedData(userContext.getChangeRequestProcessResult().getPostedData(), groupName, fieldSpec.getName());
+			    Object dv = null;
+			    if (userContext.getChangeRequestProcessResult() != null) {
+			        dv = getValueFromPostedData(userContext.getChangeRequestProcessResult().getPostedData(), groupName, fieldSpec.getName());
+			    }
 			    Object suggestedDefaultValue = calcSuggestedDefaultValue(groupName, fieldSpec, dv==null?fieldSpec.getDefaultValue():dv);
                 fieldData.setValue(TO_VALUE(getFieldValueWhenFillResponse(suggestedDefaultValue,requestData, dbCrData, groupData, fieldSpec)));
 			}
@@ -480,7 +532,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 	<#list crSpec.stepList as scene>
 		<#list scene.eventList as group>
 			case CR.${helper.JAVA_CONST(crSpec.changeRequestType)}.SCENE_${helper.JAVA_CONST(scene.name)}.GROUP_${helper.JAVA_CONST(group.name)}.NAME:
-				save${helper.CamelName(crSpec.changeRequestType)}${helper.CamelName(scene.name)}${helper.CamelName(group.name)}(crId, fieldValues,currentUserInfo);
+				save${helper.CamelName(crSpec.changeRequestType)}${helper.CamelName(scene.name)}${helper.CamelName(group.name)}(crId, crSpec.getChangeRequestType(), fieldValues,currentUserInfo);
 				break;
 		</#list>
 	</#list>
@@ -519,7 +571,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 <#list projectSpec.changeRequestList as crSpec>
 	<#list crSpec.stepList as scene>
 		<#list scene.eventList as group>
-	protected void save${helper.CamelName(crSpec.changeRequestType)}${helper.CamelName(scene.name)}${helper.CamelName(group.name)}(String crId, List<Map<String, Object>> fieldValues, BaseEntity currentUserInfo) throws Exception {
+	protected void save${helper.CamelName(crSpec.changeRequestType)}${helper.CamelName(scene.name)}${helper.CamelName(group.name)}(String crId, String crType, List<Map<String, Object>> fieldValues, BaseEntity currentUserInfo) throws Exception {
 		if (fieldValues == null || fieldValues.isEmpty()) {
 			return;
 		}
@@ -542,7 +594,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 				String eventInitiatorType = currentUserInfo.getInternalType();
 				String eventInitiatorId = currentUserInfo.getId();
 				String changeRequestId = crId;
-				getUserContext().getManagerGroup().getEvent${helper.CamelName(group.eventType)}Manager()
+				BaseEntity eventRcd = getUserContext().getManagerGroup().getEvent${helper.CamelName(group.eventType)}Manager()
 					.createEvent${helper.CamelName(group.eventType)}(getUserContext(),<@compress single_line=true>
 			<#list group.fieldList as field>
 				<#if field.interactionMode == "display">
@@ -550,8 +602,8 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 				</#if>
 				${helper.javaVar(field.name)},
 			</#list>
-			</@compress>${''}
-						fieldGroup, eventInitiatorType, eventInitiatorId, changeRequestId);
+			</@compress> changeRequestId);
+				updateEventInfoInCR(getUserContext(), changeRequestId, crType, eventRcd, fieldGroup, eventInitiatorType, eventInitiatorId);
 			}else{
 				Event${helper.CamelName(group.eventType)} event = getUserContext().getDAOGroup().getEvent${helper.CamelName(group.eventType)}DAO().load(id, EO);
 			<#list group.fieldList as field>
@@ -573,6 +625,43 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 		</#list>
 	</#list>
 </#list>
+
+    protected EventInfoInCr updateEventInfoInCR(Custom${projectName?cap_first}UserContextImpl ctx, String changeRequestId, String crType, BaseEntity eventRcd,
+                                                String fieldGroup, String eventInitiatorType, String eventInitiatorId) throws Exception{
+
+        SmartList<EventInfoInCr> crList = ctx.getDAOGroup().getEventInfoInCrDAO().findEventInfoInCrByChangeRequest(changeRequestId, EO);
+        if (crList != null && crList.size() > 1){
+            // 删除自动生成的不合理数据
+            ctx.getDAOGroup().getEventInfoInCrDAO().removeEventInfoInCrList(crList, EO);
+            crList = null;
+        }
+        if (crList == null || crList.isEmpty()){
+            EventInfo eventInfo = new EventInfo(eventRcd.getInternalType(), eventRcd.getId(), fieldGroup);
+            String eventsInfoStr = DebugUtil.dumpAsJson(MapUtil.put(eventRcd.getId(), eventInfo).into_map(), false);
+            return ctx.getManagerGroup().getEventInfoInCrManager().createEventInfoInCr(ctx, changeRequestId, crType, STATUS_OPENING,
+                        eventInitiatorType, eventInitiatorId, eventsInfoStr);
+        }else{
+            EventInfoInCr eiicRcd = crList.first();
+            EventInfo eventInfo = new EventInfo(eventRcd.getInternalType(), eventRcd.getId(), fieldGroup);
+            updateOrAddOneEventInfo(eiicRcd, eventInfo);
+            return ctx.getManagerGroup().getEventInfoInCrManager().internalSaveEventInfoInCr(ctx, eiicRcd, EO);
+        }
+    }
+
+    protected void updateOrAddOneEventInfo(EventInfoInCr eiicRcd, EventInfo eventInfo) throws Exception {
+        if (TextUtil.isBlank(eiicRcd.getEventsInfo())) {
+            Map<String, EventInfo> eventsInfo = MapUtil.put(eventInfo.getEventId(), eventInfo).into_map(EventInfo.class);
+            eiicRcd.updateEventsInfo(DebugUtil.dumpAsJson(eventsInfo, false));
+            return;
+        }
+        Map<String, EventInfo> eventsInfo = DebugUtil.getObjectMapper().readValue(eiicRcd.getEventsInfo(),
+                new TypeReference<Map<String, EventInfo>>(){});
+        if (eventsInfo == null){
+            eventsInfo = new HashMap<>();
+        }
+        eventsInfo.put(eventInfo.getEventId(),eventInfo);
+        eiicRcd.updateEventsInfo(DebugUtil.dumpAsJson(eventsInfo, false));
+    }
 
 	protected CafEntity loadWholeChangeRequest(String changeRequestId) throws Exception {
 		return this.getUserContext().getDAOGroup().getChangeRequestDAO().load(changeRequestId, ChangeRequestTokens.all());
