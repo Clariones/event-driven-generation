@@ -4,37 +4,26 @@ import java.util.Map;
 
 import cla.edg.modelbean.*;
 
-public class ArtworkSkill extends BaseModelBean {
+public class UserAllowList extends BaseModelBean {
   public String getFullClassName() {
-    return "com.terapico.moyi.artworkskill.ArtworkSkill";
+    return "com.terapico.moyi.userallowlist.UserAllowList";
   }
   // 枚举对象
 
   // 引用的对象
 
-  public Moyi moyi() {
-    Moyi member = new Moyi();
-    member.setModelTypeName("moyi");
-    member.setName("moyi");
-    member.setMemberName("moyi");
+  public UserDomain domain() {
+    UserDomain member = new UserDomain();
+    member.setModelTypeName("user_domain");
+    member.setName("domain");
+    member.setMemberName("domain");
     member.setReferDirection(true);
-    member.setRelationName("moyi");
+    member.setRelationName("domain");
     append(member);
     return member;
   }
 
   // 被引用的对象
-
-  public Artwork artworkList() {
-    Artwork member = new Artwork();
-    member.setModelTypeName("artwork");
-    member.setName("artwork_skill");
-    member.setMemberName("artworkList");
-    member.setRelationName("artworkSkill");
-    member.setReferDirection(false);
-    append(member);
-    return member;
-  }
 
   // 普通属性
 
@@ -47,11 +36,20 @@ public class ArtworkSkill extends BaseModelBean {
     return member;
   }
 
-  public StringAttribute name() {
+  public StringAttribute userIdentity() {
     StringAttribute member = new StringAttribute();
     member.setModelTypeName("string");
-    // member.setName("name");
-    member.setName("name");
+    // member.setName("userIdentity");
+    member.setName("user_identity");
+    useMember(member);
+    return member;
+  }
+
+  public StringAttribute userSpecialFunctions() {
+    StringAttribute member = new StringAttribute();
+    member.setModelTypeName("string");
+    // member.setName("userSpecialFunctions");
+    member.setName("user_special_functions");
     useMember(member);
     return member;
   }

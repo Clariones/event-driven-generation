@@ -4,78 +4,73 @@ import java.util.Map;
 
 import cla.edg.modelbean.*;
 
-public class ArtworkDailyInkValue extends BaseModelBean{
-	public String getFullClassName() {
-		return "com.terapico.moyi.artworkdailyinkvalue.ArtworkDailyInkValue";
-	}
-	// 枚举对象
+public class ArtworkDailyInkValue extends BaseModelBean {
+  public String getFullClassName() {
+    return "com.terapico.moyi.artworkdailyinkvalue.ArtworkDailyInkValue";
+  }
+  // 枚举对象
 
-	// 引用的对象
+  // 引用的对象
 
-	public Artwork artwork() {
-		Artwork member = new Artwork();
-		member.setModelTypeName("artwork");
-		member.setName("artwork");
-		member.setMemberName("artwork");
-		member.setReferDirection(true);
-		member.setRelationName("artwork");
-		append(member);
-		return member;
-	}
+  public Artwork artwork() {
+    Artwork member = new Artwork();
+    member.setModelTypeName("artwork");
+    member.setName("artwork");
+    member.setMemberName("artwork");
+    member.setReferDirection(true);
+    member.setRelationName("artwork");
+    append(member);
+    return member;
+  }
 
-	public Moyi moyi() {
-		Moyi member = new Moyi();
-		member.setModelTypeName("moyi");
-		member.setName("moyi");
-		member.setMemberName("moyi");
-		member.setReferDirection(true);
-		member.setRelationName("moyi");
-		append(member);
-		return member;
-	}
+  public Moyi moyi() {
+    Moyi member = new Moyi();
+    member.setModelTypeName("moyi");
+    member.setName("moyi");
+    member.setMemberName("moyi");
+    member.setReferDirection(true);
+    member.setRelationName("moyi");
+    append(member);
+    return member;
+  }
 
-	// 被引用的对象
+  // 被引用的对象
 
+  // 普通属性
 
-	// 普通属性
+  public StringAttribute id() {
+    StringAttribute member = new StringAttribute();
+    member.setModelTypeName("string");
+    // member.setName("id");
+    member.setName("id");
+    useMember(member);
+    return member;
+  }
 
-	public StringAttribute id(){
-		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
-		// member.setName("id");
-		member.setName("id");
-		useMember(member);
-		return member;
-	}
+  public StringAttribute artworkIdentification() {
+    StringAttribute member = new StringAttribute();
+    member.setModelTypeName("string");
+    // member.setName("artworkIdentification");
+    member.setName("artwork_identification");
+    useMember(member);
+    return member;
+  }
 
-	public StringAttribute artworkIdentification(){
-		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
-		// member.setName("artworkIdentification");
-		member.setName("artwork_identification");
-		useMember(member);
-		return member;
-	}
+  public NumberAttribute artworkInkValue() {
+    NumberAttribute member = new NumberAttribute();
+    member.setModelTypeName("double");
+    // member.setName("artworkInkValue");
+    member.setName("artwork_ink_value");
+    useMember(member);
+    return member;
+  }
 
-	public NumberAttribute artworkInkValue(){
-		NumberAttribute member = new NumberAttribute();
-		member.setModelTypeName("double");
-		// member.setName("artworkInkValue");
-		member.setName("artwork_ink_value");
-		useMember(member);
-		return member;
-	}
-
-	public NumberAttribute version(){
-		NumberAttribute member = new NumberAttribute();
-		member.setModelTypeName("int");
-		// member.setName("version");
-		member.setName("version");
-		useMember(member);
-		return member;
-	}
-
-
-
+  public NumberAttribute version() {
+    NumberAttribute member = new NumberAttribute();
+    member.setModelTypeName("int");
+    // member.setName("version");
+    member.setName("version");
+    useMember(member);
+    return member;
+  }
 }
-

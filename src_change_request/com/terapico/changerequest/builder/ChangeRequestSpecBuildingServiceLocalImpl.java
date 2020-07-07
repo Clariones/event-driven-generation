@@ -316,6 +316,7 @@ public class ChangeRequestSpecBuildingServiceLocalImpl extends CRSBuildingServic
 	@Override
 	public void setEventRepeatTimes(String crName, String stepName, String eventName, int min, int max) {
 		sureEvent(crName, stepName, eventName).setIsCollection(true);
+		sureEvent(crName, stepName, eventName).getPrototype().setIsCollection(true);
 		sureEvent(crName, stepName, eventName).setMinCollectionSize(min);
 		sureEvent(crName, stepName, eventName).setMaxCollectionSize(max);
 	}

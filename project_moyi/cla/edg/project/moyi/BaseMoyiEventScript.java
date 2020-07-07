@@ -1,7 +1,7 @@
 package cla.edg.project.moyi;
 
 import cla.edg.eventscript.EventScript;
-import cla.edg.project.yourong.events.BaseYourongEventScript;
+
 
 public abstract class BaseMoyiEventScript {
 	protected static EventScript $(String name) {

@@ -4,85 +4,80 @@ import java.util.Map;
 
 import cla.edg.modelbean.*;
 
-public class ArtworkImage extends BaseModelBean{
-	public String getFullClassName() {
-		return "com.terapico.moyi.artworkimage.ArtworkImage";
-	}
-	// 枚举对象
+public class ArtworkImage extends BaseModelBean {
+  public String getFullClassName() {
+    return "com.terapico.moyi.artworkimage.ArtworkImage";
+  }
+  // 枚举对象
 
-	// 引用的对象
+  // 引用的对象
 
-	public Artwork artwork() {
-		Artwork member = new Artwork();
-		member.setModelTypeName("artwork");
-		member.setName("artwork");
-		member.setMemberName("artwork");
-		member.setReferDirection(true);
-		member.setRelationName("artwork");
-		append(member);
-		return member;
-	}
+  public Artwork artwork() {
+    Artwork member = new Artwork();
+    member.setModelTypeName("artwork");
+    member.setName("artwork");
+    member.setMemberName("artwork");
+    member.setReferDirection(true);
+    member.setRelationName("artwork");
+    append(member);
+    return member;
+  }
 
-	// 被引用的对象
+  // 被引用的对象
 
+  // 普通属性
 
-	// 普通属性
+  public StringAttribute id() {
+    StringAttribute member = new StringAttribute();
+    member.setModelTypeName("string");
+    // member.setName("id");
+    member.setName("id");
+    useMember(member);
+    return member;
+  }
 
-	public StringAttribute id(){
-		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string");
-		// member.setName("id");
-		member.setName("id");
-		useMember(member);
-		return member;
-	}
+  public StringAttribute image() {
+    StringAttribute member = new StringAttribute();
+    member.setModelTypeName("string_image");
+    // member.setName("image");
+    member.setName("image");
+    useMember(member);
+    return member;
+  }
 
-	public StringAttribute image(){
-		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string_image");
-		// member.setName("image");
-		member.setName("image");
-		useMember(member);
-		return member;
-	}
+  public NumberAttribute imageWidth() {
+    NumberAttribute member = new NumberAttribute();
+    member.setModelTypeName("int");
+    // member.setName("imageWidth");
+    member.setName("image_width");
+    useMember(member);
+    return member;
+  }
 
-	public NumberAttribute imageWidth(){
-		NumberAttribute member = new NumberAttribute();
-		member.setModelTypeName("int");
-		// member.setName("imageWidth");
-		member.setName("image_width");
-		useMember(member);
-		return member;
-	}
+  public NumberAttribute imageHeight() {
+    NumberAttribute member = new NumberAttribute();
+    member.setModelTypeName("int");
+    // member.setName("imageHeight");
+    member.setName("image_height");
+    useMember(member);
+    return member;
+  }
 
-	public NumberAttribute imageHeight(){
-		NumberAttribute member = new NumberAttribute();
-		member.setModelTypeName("int");
-		// member.setName("imageHeight");
-		member.setName("image_height");
-		useMember(member);
-		return member;
-	}
+  public StringAttribute description() {
+    StringAttribute member = new StringAttribute();
+    member.setModelTypeName("string_longtext");
+    // member.setName("description");
+    member.setName("description");
+    useMember(member);
+    return member;
+  }
 
-	public StringAttribute description(){
-		StringAttribute member = new StringAttribute();
-		member.setModelTypeName("string_longtext");
-		// member.setName("description");
-		member.setName("description");
-		useMember(member);
-		return member;
-	}
-
-	public NumberAttribute version(){
-		NumberAttribute member = new NumberAttribute();
-		member.setModelTypeName("int");
-		// member.setName("version");
-		member.setName("version");
-		useMember(member);
-		return member;
-	}
-
-
-
+  public NumberAttribute version() {
+    NumberAttribute member = new NumberAttribute();
+    member.setModelTypeName("int");
+    // member.setName("version");
+    member.setName("version");
+    useMember(member);
+    return member;
+  }
 }
-

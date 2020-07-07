@@ -35,7 +35,11 @@
 	event_initiator_type="SecUser|Merchant|[1,64]"
 	event_initiator_id="SU000001|M0000001|[1,64]"
 	change_request="$(${crModelName})"
+	<#if allEventSpec[eventName].multiple >
+	_features="n*event"
+	<#else>
 	_features="event"
+	</#if>
 	_bind_with_cr_type="${helper.getAllCRTypeUsedEvent(allEventSpec[eventName].eventType, projectSpec)?join("|")}"
 	/>
 	
