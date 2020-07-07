@@ -38,7 +38,7 @@ public class ProjectQueryPiece extends PieceOfScript {
 				.do_it_as().count_by(MODEL.projectNomination().workPackage())
 				.where(MODEL.projectNomination().project().eq("${project id}"))
 
-			.find(MODEL.projectNomination()).which("by type").with_string("project id")
+			.find(MODEL.projectNomination()).which("by category").with_string("project id")
 				.comments("按组织类型统计项目下的人数")
 				.do_it_as().count_by(MODEL.projectNomination().type())
 				.where(MODEL.projectNomination().project().eq("${project id}"))
@@ -171,14 +171,19 @@ public class ProjectQueryPiece extends PieceOfScript {
 				.do_it_as()
 				.where(MODEL.projectNomination().project().eq("${project id}"),
 						MODEL.projectNomination().workPackage().is_null())
-				.wants(MODEL.projectNomination().worker().employee(), MODEL.projectNomination().projectRole(), MODEL.projectNomination().type())
+				.wants(MODEL.projectNomination().worker().employee(),
+						MODEL.projectNomination().projectRole(),
+						MODEL.projectNomination().type()
+				)
 			.query(MODEL.projectNomination()).which("work package level").pagination().with_string("project id").with_string("work package id")
 				.comments("查询项目的所有 项目岗位, 不包括 分包商 级别")
 				.do_it_as()
 				.where(MODEL.projectNomination().project().eq("${project id}"),
 						MODEL.projectNomination().workPackage().eq("${work package id}"))
 				.wants(MODEL.projectNomination().worker().employee(),MODEL.projectNomination().worker().job(),
-						MODEL.projectNomination().projectRole(), MODEL.projectNomination().type())
+						MODEL.projectNomination().projectRole(), MODEL.projectNomination().type()
+						,MODEL.projectNomination().type()
+				)
 			.query(MODEL.workPackage()).which("assigned in project organization").with_string("project id")
 				.comments("查询在项目组织中指定的，某个项目下的所有工作包")
 				.do_it_as()
@@ -317,9 +322,10 @@ public class ProjectQueryPiece extends PieceOfScript {
 				)
 
 			.query(MODEL.merchant().getModelTypeName()).list_of("project by role").with_string("project id").with_string("role")
+				.comments("按项目职位类型查询项目中的merchant")
 				.do_it_as()
 				.where(
-						MODEL.merchant().employeeNominationListAsEmployee().projectNominationList().projectRole().eq("${role}"),
+						MODEL.merchant().employeeNominationListAsEmployee().projectNominationList().projectRole().eq("${role}").optional(),
 						MODEL.merchant().employeeNominationListAsEmployee().projectNominationList().project().eq("${project id}")
 				)
 

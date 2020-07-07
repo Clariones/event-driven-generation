@@ -201,7 +201,7 @@ public class ProjectHallPageFlowPiece extends PieceOfScript {
 		.got_page("project organization").title(title).list_of(code)
 			.may_request("view project organization in work package")
 
-	.request("view project organization employee list").with_string("project id").with_string("merchant id").with_string("type id")
+	.request("view project organization employee list").with_string("project id").with_string("merchant id").with_string("category id")
 				.with_last_record_id()
 				.comments("查看项目组织分类中的该项目员工列表")
 				.got_page("project organization employee list")
@@ -252,7 +252,7 @@ public class ProjectHallPageFlowPiece extends PieceOfScript {
 			.comments("当日劳务录入 more")
 			.got_page("labor attendance more list")
 
-		.request("view employee labor attendance list").with_string("project id").with_string("project nomination id")
+		.request("view employee labor attendance list").with_string("project id").with_string("merchant id")
 			.comments("当日劳务录入")
 			.got_page("employee labor attendance list")
 

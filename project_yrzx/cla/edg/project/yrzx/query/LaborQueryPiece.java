@@ -54,15 +54,15 @@ public class LaborQueryPiece extends PieceOfScript {
 				.comments("按角色查询项目下的人")
 				.do_it_as()
 				.where(
-						MODEL.projectNomination().project().eq("${project id}")
-//						MODEL.projectNomination().projectRole().eq("${}")
+						MODEL.projectNomination().project().eq("${project id}"),
+						MODEL.projectNomination().projectRole().eq("${role}").optional()
 				)
 				.wants(MODEL.projectNomination().worker().employee())
 
-			.query(MODEL.laborRecord()).list_of("project nomination by type").with_string("project nomination id").with_string("type id").pagination()
+			.query(MODEL.laborRecord()).list_of("merchant by type").with_string("merchant id").with_string("type id").pagination()
 				.comments("按类型查询某人在项目中的出勤记录")
 		 		.do_it_as()
-				.where(MODEL.laborRecord().projectNomination().eq("${project nomination id}"),
+				.where(MODEL.laborRecord().owner().eq("${merchant id}"),
 					MODEL.laborRecord().type().eq("${type id}").optional()
 
 
@@ -90,11 +90,20 @@ public class LaborQueryPiece extends PieceOfScript {
 				.comments("查询某人某天的劳务记录")
 				.do_it_as()
 				.where(
-						MODEL.laborRecord().projectNomination().project().eq("${project id}"),
-						MODEL.laborRecord().projectNomination().worker().employee().eq("${merchant id}"),
+						MODEL.laborRecord().project().eq("${project id}"),
+						MODEL.laborRecord().owner().eq("${merchant id}"),
 						MODEL.laborRecord().attendanceDate().bigger_or_eq("${start date}"),
 						MODEL.laborRecord().attendanceDate().less_or_eq("${end date}")
 				)
+			.find(MODEL.laborRecord()).list_of("employee in project").with_string("merchant id").with_string("project id")
+				.comments("统计某人在某项目中打了多少天卡")
+				.do_it_as().count()
+				.where(MODEL.laborRecord().project().eq("${project id}")
+					,
+						MODEL.laborRecord().owner().eq("${merchant id}")
+				)
+
+
 		;
 
 		return script;

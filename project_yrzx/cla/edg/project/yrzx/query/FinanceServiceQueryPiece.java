@@ -72,7 +72,12 @@ public class FinanceServiceQueryPiece extends PieceOfScript {
 				)
 			.wants(
 					MODEL.loanContract().status(),
-					MODEL.loanContract().loanApplication().loanProject()
+					MODEL.loanContract().project(),
+					MODEL.loanContract().borrowerUnit(),
+					MODEL.loanContract().loanApplication().loanProject(),
+					MODEL.loanContract().pledgedContract().partyA(),
+					MODEL.loanContract().projectProgress()
+
 			)
 
 
