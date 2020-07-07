@@ -365,7 +365,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 		for(int i=0;i<eventList.size();i++) {
 			BaseEntity evtData = eventList.get(i);
 			List<KeyValuePair> kvList = evtData.keyValuePairOf();
-			String evtGroupName = getFieldGroupOfEvent(eventsInfo, evtData.getId());
+			String evtGroupName = getFieldGroupOfEvent(eventsInfo, evtData.getInternalType()+"_"+evtData.getId());
             if (evtGroupName == null || !evtGroupName.equals(groupData.getName())) {
                 continue;
             }
@@ -551,6 +551,8 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 		if (id == null || id.isEmpty()) {
 			return;
 		}
+		EventInfoInCr eiic = getEventInfoInCr(crId);
+        Map<String, EventInfo> eventsInfo = getEventInfoMapFrom(eiic.getEventsInfo());
 		switch (groupSpec.getName()) {
 <#list projectSpec.changeRequestList as crSpec>
 	<#list crSpec.stepList as scene>
@@ -558,6 +560,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 			case CR.${helper.JAVA_CONST(crSpec.changeRequestType)}.SCENE_${helper.JAVA_CONST(scene.name)}.GROUP_${helper.JAVA_CONST(group.name)}.NAME:{
 				Event${helper.CamelName(group.eventType)} event = getUserContext().getDAOGroup().getEvent${helper.CamelName(group.eventType)}DAO().load(id, EO);
 				getUserContext().getManagerGroup().getChangeRequestManager().removeEvent${helper.CamelName(group.eventType)}(getUserContext(), crId, id, event.getVersion(), new String[]{});
+				removeEventInfoFromCR(eventsInfo, event.getInternalType()+"_"+event.getId());
 			}
 				break;
 		</#list>
@@ -566,8 +569,15 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 			default:
 				break;
 		}
+		eiic.updateEventsInfo(DebugUtil.dumpAsJson(eventsInfo, false));
+        getUserContext().getManagerGroup().getEventInfoInCrManager().internalSaveEventInfoInCr(getUserContext(), eiic, EO);
 	}
 
+    protected void removeEventInfoFromCR(Map<String, EventInfo> eventsInfo, String eventKey) {
+		if (eventsInfo != null && eventKey != null) {
+			eventsInfo.remove(eventKey);
+		}
+	}
 <#list projectSpec.changeRequestList as crSpec>
 	<#list crSpec.stepList as scene>
 		<#list scene.eventList as group>
@@ -637,7 +647,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
         }
         if (crList == null || crList.isEmpty()){
             EventInfo eventInfo = new EventInfo(eventRcd.getInternalType(), eventRcd.getId(), fieldGroup);
-            String eventsInfoStr = DebugUtil.dumpAsJson(MapUtil.put(eventRcd.getId(), eventInfo).into_map(), false);
+            String eventsInfoStr = DebugUtil.dumpAsJson(MapUtil.put(eventRcd.getInternalType()+"_"+eventRcd.getId(), eventInfo).into_map(), false);
             return ctx.getManagerGroup().getEventInfoInCrManager().createEventInfoInCr(ctx, changeRequestId, crType, STATUS_OPENING,
                         eventInitiatorType, eventInitiatorId, eventsInfoStr);
         }else{
@@ -650,7 +660,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 
     protected void updateOrAddOneEventInfo(EventInfoInCr eiicRcd, EventInfo eventInfo) throws Exception {
         if (TextUtil.isBlank(eiicRcd.getEventsInfo())) {
-            Map<String, EventInfo> eventsInfo = MapUtil.put(eventInfo.getEventId(), eventInfo).into_map(EventInfo.class);
+            Map<String, EventInfo> eventsInfo = MapUtil.put(eventInfo.getEventType()+"_"+eventInfo.getEventId(), eventInfo).into_map(EventInfo.class);
             eiicRcd.updateEventsInfo(DebugUtil.dumpAsJson(eventsInfo, false));
             return;
         }
@@ -659,7 +669,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
         if (eventsInfo == null){
             eventsInfo = new HashMap<>();
         }
-        eventsInfo.put(eventInfo.getEventId(),eventInfo);
+        eventsInfo.put(eventInfo.getEventType()+"_"+eventInfo.getEventId(),eventInfo);
         eiicRcd.updateEventsInfo(DebugUtil.dumpAsJson(eventsInfo, false));
     }
 
