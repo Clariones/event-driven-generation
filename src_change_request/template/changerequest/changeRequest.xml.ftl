@@ -1,10 +1,10 @@
 <root>
   	
   <change_request_type
-	name="value()|[1,100]"
-	code="value()|[1,100]"
-    icon="value()|[1,100]"
-    display_order="1|2|3|4|5|6"
+	name="名称:value()|[1,100]"
+	code="代码:value()|[1,100]"
+    icon="图标:value()|[1,100]"
+    display_order="显示顺序:1|2|3|4|5|6"
     bind_types="text()"
     step_configuration="text()"
     platform="$(platform)"
@@ -16,11 +16,11 @@
 </#list>
   </change_request_type>
   <change_request
-	    name="注册|开始考试|答题|[1,50]"
-	    create_time="createTime()"
+	    name="名称:注册|开始考试|答题|[1,50]"
+	    create_time="创建时间:createTime()"
 	    remote_ip="remoteIp()"
-	    request_type="$(change_request_type)"
-	    commited="false"
+	    request_type="类型:$(change_request_type)"
+	    commited="已提交:false"
 	    platform="$(platform)"
 	    _features="change_request"
   	/>
@@ -28,14 +28,9 @@
 <event_${helper.toModelStyleName(allEventSpec[eventName].eventType)}
 	<#list allEventSpec[eventName].fieldList as fieldSpec>
 		<#if fieldSpec.interactionMode != 'display'>
-	${helper.toModelStyleName(fieldSpec.name)}="${helper.getExampleDataOfField(fieldSpec)}"
+	${helper.toModelStyleName(fieldSpec.name)}="${fieldSpec.title}:${helper.getExampleDataOfField(fieldSpec)}"
 		</#if>
 	</#list>
-<#--
-	field_group="cr_type/step_name/event_name/event_index|[5,100]"
-	event_initiator_type="SecUser|Merchant|[1,64]"
-	event_initiator_id="SU000001|M0000001|[1,64]"
--->
 	change_request="$(${crModelName})"
 	<#if allEventSpec[eventName].multiple >
 	_features="n*event"
@@ -60,12 +55,12 @@
     PRESET: 已经提交,并且以后用这里的值做预填充值.
   -->
   <event_info_in_cr
-    change_request="$(change_request)"
-    change_request_type="$(change_request_type)"
+    change_request="CR-ID:$(change_request)"
+    change_request_type="CR类型:$(change_request_type)"
     status="OPENING|COMMITTED|PRESET"
-    initiator_type="SecUser|Merchant|[1,64]"
-    initiator_id="SU000001|M0000001|[1,64]"
-    events_info="text()"
+    initiator_type="发起者类型:SecUser|Merchant|[1,64]"
+    initiator_id="发起者ID:SU000001|M0000001|[1,64]"
+    events_info="事件详情:text()"
     last_update_time="updateTime()"
     _max_count="1000000000"
     />

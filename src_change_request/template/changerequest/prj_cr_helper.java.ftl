@@ -185,7 +185,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 			requestData.getGroupList().add(groupData);
 			
 			int groupRecordIndex = getIndexOfGroup(requestData, groupSpec);
-			fulfillChangeRequestField(requestData, cr, crSpec, groupData, groupSpec, crSpec.getFieldList(), groupRecordIndex, processUrl);
+			fulfillChangeRequestField(requestData, cr, crSpec, groupData, groupSpec, crSpec.getFieldList(), groupRecordIndex, processUrl, sceneCode);
 		}
 		// 最后是CR级别的actions
 		fulfillChangeRequestActions(requestData, crSpec, sceneCode, processUrl);
@@ -322,7 +322,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 	
 </#list>
 	protected void fulfillChangeRequestField(GenericFormPage requestData, ChangeRequest dbCrData, CRSpec crSpec, CRGroupData groupData, CRGroupSpec groupSpec,
-			List<CRFieldSpec> fieldSpecList, int groupRecordIndex, String processUrl) throws Exception {
+			List<CRFieldSpec> fieldSpecList, int groupRecordIndex, String processUrl, String sceneCode) throws Exception {
 		int curRecordIdx = groupRecordIndex;
 		switch (groupSpec.getName()) {
 <#list projectSpec.changeRequestList as crSpec>
@@ -343,7 +343,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 		if (groupSpec.isMultiple()) {
 			groupData.setTitle(groupData.getTitle()+" "+curRecordIdx);
 		}
-		fulfillGroupActions(crSpec, groupData, groupSpec, curRecordIdx, processUrl);
+		fulfillGroupActions(crSpec, groupData, groupSpec, curRecordIdx, processUrl, sceneCode);
 	}
 	
 	protected int fulfillChangeRequestFieldByGroup(GenericFormPage requestData, ChangeRequest dbCrData,
