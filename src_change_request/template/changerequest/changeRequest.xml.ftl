@@ -28,7 +28,7 @@
 <event_${helper.toModelStyleName(allEventSpec[eventName].eventType)}
 	<#list allEventSpec[eventName].fieldList as fieldSpec>
 		<#if fieldSpec.interactionMode != 'display'>
-	${helper.toModelStyleName(fieldSpec.name)}="${fieldSpec.title}:${helper.getExampleDataOfField(fieldSpec)}"
+	${helper.toModelStyleName(fieldSpec.name)}="<#if fieldSpec.title?has_content>${fieldSpec.title}:</#if>${helper.getExampleDataOfField(fieldSpec)}"
 		</#if>
 	</#list>
 	change_request="$(${crModelName})"

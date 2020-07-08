@@ -188,7 +188,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 			fulfillChangeRequestField(requestData, cr, crSpec, groupData, groupSpec, crSpec.getFieldList(), groupRecordIndex, processUrl, sceneCode);
 		}
 		// 最后是CR级别的actions
-		fulfillChangeRequestActions(requestData, crSpec, sceneCode, processUrl);
+		fulfillChangeRequestActions(cr.getId(), requestData, crSpec, sceneCode, processUrl);
 		return requestData;
 	}
 
@@ -343,7 +343,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 		if (groupSpec.isMultiple()) {
 			groupData.setTitle(groupData.getTitle()+" "+curRecordIdx);
 		}
-		fulfillGroupActions(crSpec, groupData, groupSpec, curRecordIdx, processUrl, sceneCode);
+		fulfillGroupActions(crSpec, dbCrData.getId(), groupData, groupSpec, curRecordIdx, processUrl, sceneCode);
 	}
 	
 	protected int fulfillChangeRequestFieldByGroup(GenericFormPage requestData, ChangeRequest dbCrData,
@@ -504,6 +504,10 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 			${projectName?cap_first}Exception exception = wrapTo${projectName?cap_first}Exception(postedData, msg);
 			throw exception;
 		}
+		if (CR.ACTION_DELETE_RECORD.equals(postedData.getActionCode())){
+            CRGroupSpec groupSpec = GROUP_SPEC(postedData.getActionGroup());
+            deleteEvent(groupSpec, postedData.getChangeRequestId(), postedData.getRecordId());
+        }
 		List<CRGroupSpec> groupSpecList = GROUPS(crSpec, postedData.getSceneCode());
 		if (postedData.getFieldData() == null || postedData.getFieldData().isEmpty()) {
 			// 没提交任何数据, 那么,只有全部都是可选,才能这样
@@ -523,7 +527,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 				error("无法处理提交的 "+groupName+" 的数据");
 			}
 			if (groupSpec.getName().equals(postedData.getActionGroup()) && CR.ACTION_DELETE_RECORD.equals(postedData.getActionCode())) {
-				deleteGroup(groupSpec, postedData.getChangeRequestId(),fieldValues);
+				// deleteGroup(groupSpec, postedData.getChangeRequestId(),fieldValues);
 				continue;
 			}
 			String crId = postedData.getChangeRequestId();
@@ -551,6 +555,10 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 		if (id == null || id.isEmpty()) {
 			return;
 		}
+		deleteEvent(groupSpec, crId, id);
+    }
+
+    protected void deleteEvent(CRGroupSpec groupSpec, String crId, String eventId) throws Exception {
 		EventInfoInCr eiic = getEventInfoInCr(crId);
         Map<String, EventInfo> eventsInfo = getEventInfoMapFrom(eiic.getEventsInfo());
 		switch (groupSpec.getName()) {
@@ -558,8 +566,8 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 	<#list crSpec.stepList as scene>
 		<#list scene.eventList as group>
 			case CR.${helper.JAVA_CONST(crSpec.changeRequestType)}.SCENE_${helper.JAVA_CONST(scene.name)}.GROUP_${helper.JAVA_CONST(group.name)}.NAME:{
-				Event${helper.CamelName(group.eventType)} event = getUserContext().getDAOGroup().getEvent${helper.CamelName(group.eventType)}DAO().load(id, EO);
-				getUserContext().getManagerGroup().getChangeRequestManager().removeEvent${helper.CamelName(group.eventType)}(getUserContext(), crId, id, event.getVersion(), new String[]{});
+				Event${helper.CamelName(group.eventType)} event = getUserContext().getDAOGroup().getEvent${helper.CamelName(group.eventType)}DAO().load(eventId, EO);
+				getUserContext().getManagerGroup().getChangeRequestManager().removeEvent${helper.CamelName(group.eventType)}(getUserContext(), crId, eventId, event.getVersion(), new String[]{});
 				removeEventInfoFromCR(eventsInfo, event.getInternalType()+"_"+event.getId());
 			}
 				break;
