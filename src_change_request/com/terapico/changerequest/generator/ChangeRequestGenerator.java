@@ -90,6 +90,7 @@ public class ChangeRequestGenerator extends BasicGenerator {
 				.put("userModelName", this.getUserModelName())
 				.put("helper", new GenerationHelper())
 				.put("allEventSpec", this.getChangeRequestSpec().get("allEventSpec"))
+				.put("assist", this.getChangeRequestSpec().get("assist"))
 				.into_map();
 		String templatePath = "/changerequest/changeRequest.xml.ftl";
 		String fileName = this.toFileName(data,

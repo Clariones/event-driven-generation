@@ -44,6 +44,9 @@ public class ChangeRequestSpecBuildingServiceLocalImpl extends CRSBuildingServic
 		Map<String, Map<String, Object>> result = new HashMap<>();
 		result.put("projectSpec", makeOutput());
 		result.put("allEventSpec", allEventSpec);
+		Map<String, Object> assistInfo = new HashMap<>();
+		assistInfo.put("allEventNames", root().getAllEventNames());
+		result.put("assist", assistInfo);
 
 		return result;
 	}

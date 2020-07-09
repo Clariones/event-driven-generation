@@ -1,15 +1,21 @@
 package com.terapico.changerequest.spec;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class ProjectChangeRequestSpec extends CommonSpec<ProjectChangeRequestSpec>{
 	protected Map<String, EventSpec> allEventSpecs;
 	protected Map<String, ChangeRequestSpec> changeRequestSpecs;
 	protected Set<String> refferModelNames = new HashSet<>();
 	protected String requestUrlPrefix;
+	protected List<String> allEventNames = new ArrayList<>();
+
+	public List<String> getAllEventNames() {
+		return allEventNames;
+	}
+
+	public void setAllEventNames(List<String> allEventNames) {
+		this.allEventNames = allEventNames;
+	}
 
 	public Map<String, EventSpec> getAllEventSpecs() {
 		return allEventSpecs;
@@ -54,6 +60,7 @@ public class ProjectChangeRequestSpec extends CommonSpec<ProjectChangeRequestSpe
 		return ensureChangeRequestSpecs().put(crSpec.getName(), crSpec);
 	}
 	public EventSpec addEvent(EventSpec eventSpec) {
+		allEventNames.add(eventSpec.getType());
 		return ensureAllEventSpecs().put(eventSpec.getType(), eventSpec);
 	}
 	

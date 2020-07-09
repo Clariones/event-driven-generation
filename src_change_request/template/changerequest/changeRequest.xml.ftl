@@ -24,7 +24,7 @@
 	    platform="$(platform)"
 	    _features="change_request"
   	/>
-<#list allEventSpec?keys as eventName>
+<#list assist.allEventNames as eventName>
 <event_${helper.toModelStyleName(allEventSpec[eventName].eventType)}
 	<#list allEventSpec[eventName].fieldList as fieldSpec>
 		<#if fieldSpec.interactionMode != 'display'>
