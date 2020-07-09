@@ -7,5 +7,15 @@ public abstract class BasePageFlowDescriptionScript {
 		return result;
 	}
 
+	protected static String getClassName(String fullClassName) {
+		int pos = fullClassName.lastIndexOf(".");
+		return pos > 0 ? fullClassName.substring(pos+1) : fullClassName;
+	}
+
+	protected static String getPackageName(String fullClassName) {
+		int pos = fullClassName.lastIndexOf(".");
+		return pos > 0 ? fullClassName.substring(0,pos) : fullClassName;
+	}
+
 	public abstract PageFlowScript getScript();
 }

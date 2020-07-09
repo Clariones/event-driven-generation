@@ -69,11 +69,14 @@ public class BasicGenerator {
 
 	protected Template getTemplate(String tmplFileName)
 			throws IOException, TemplateNotFoundException, MalformedTemplateNameException, ParseException {
-		Configuration cfg = new Configuration(Configuration.VERSION_2_3_25);
-		cfg.setDefaultEncoding("utf-8");
-		File tmpFolder = new File(baseTempalteFolder);
-		System.out.println("try to load template from " + tmpFolder.getCanonicalPath());
-		cfg.setDirectoryForTemplateLoading(tmpFolder);
+		Configuration cfg = new Configuration(Configuration.VERSION_2_3_28);
+		cfg.setClassForTemplateLoading(this.getClass(), "/template");
+		cfg.setDefaultEncoding("UTF-8");
+//
+//		cfg.setDefaultEncoding("utf-8");
+//		File tmpFolder = new File(baseTempalteFolder);
+//		System.out.println("try to load template from " + tmpFolder.getCanonicalPath());
+//		cfg.setDirectoryForTemplateLoading(tmpFolder);
 		Template template = cfg.getTemplate(tmplFileName);
 		return template;
 	}
