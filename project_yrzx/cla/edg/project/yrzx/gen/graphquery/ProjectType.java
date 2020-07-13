@@ -36,28 +36,6 @@ public class ProjectType extends BaseModelBean {
     return member;
   }
 
-  public EventCreateProject eventCreateProjectList() {
-    EventCreateProject member = new EventCreateProject();
-    member.setModelTypeName("event_create_project");
-    member.setName("project_type");
-    member.setMemberName("eventCreateProjectList");
-    member.setRelationName("projectType");
-    member.setReferDirection(false);
-    append(member);
-    return member;
-  }
-
-  public EventCreateProjectBaseInfo eventCreateProjectBaseInfoList() {
-    EventCreateProjectBaseInfo member = new EventCreateProjectBaseInfo();
-    member.setModelTypeName("event_create_project_base_info");
-    member.setName("project_type");
-    member.setMemberName("eventCreateProjectBaseInfoList");
-    member.setRelationName("projectType");
-    member.setReferDirection(false);
-    append(member);
-    return member;
-  }
-
   // 普通属性
 
   public StringAttribute id() {

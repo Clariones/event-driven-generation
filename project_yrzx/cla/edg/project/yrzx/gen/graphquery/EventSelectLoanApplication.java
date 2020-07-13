@@ -4,13 +4,24 @@ import java.util.Map;
 
 import cla.edg.modelbean.*;
 
-public class EventCommonReport extends BaseModelBean {
+public class EventSelectLoanApplication extends BaseModelBean {
   public String getFullClassName() {
-    return "com.yrdec.yrzx.eventcommonreport.EventCommonReport";
+    return "com.yrdec.yrzx.eventselectloanapplication.EventSelectLoanApplication";
   }
   // 枚举对象
 
   // 引用的对象
+
+  public HelpApplication loanApplication() {
+    HelpApplication member = new HelpApplication();
+    member.setModelTypeName("help_application");
+    member.setName("loan_application");
+    member.setMemberName("loanApplication");
+    member.setReferDirection(true);
+    member.setRelationName("loanApplication");
+    append(member);
+    return member;
+  }
 
   public ChangeRequest changeRequest() {
     ChangeRequest member = new ChangeRequest();
@@ -32,24 +43,6 @@ public class EventCommonReport extends BaseModelBean {
     member.setModelTypeName("string");
     // member.setName("id");
     member.setName("id");
-    useMember(member);
-    return member;
-  }
-
-  public StringAttribute content() {
-    StringAttribute member = new StringAttribute();
-    member.setModelTypeName("string_longtext");
-    // member.setName("content");
-    member.setName("content");
-    useMember(member);
-    return member;
-  }
-
-  public StringAttribute images() {
-    StringAttribute member = new StringAttribute();
-    member.setModelTypeName("images");
-    // member.setName("images");
-    member.setName("images");
     useMember(member);
     return member;
   }

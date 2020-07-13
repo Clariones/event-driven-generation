@@ -4,24 +4,13 @@ import java.util.Map;
 
 import cla.edg.modelbean.*;
 
-public class EventCreateLoanContract extends BaseModelBean {
+public class EventLoanContractBasicInfo extends BaseModelBean {
   public String getFullClassName() {
-    return "com.yrdec.yrzx.eventcreateloancontract.EventCreateLoanContract";
+    return "com.yrdec.yrzx.eventloancontractbasicinfo.EventLoanContractBasicInfo";
   }
   // 枚举对象
 
   // 引用的对象
-
-  public LoanApplication loanApplication() {
-    LoanApplication member = new LoanApplication();
-    member.setModelTypeName("loan_application");
-    member.setName("loan_application");
-    member.setMemberName("loanApplication");
-    member.setReferDirection(true);
-    member.setRelationName("loanApplication");
-    append(member);
-    return member;
-  }
 
   public Merchant borrowerUnit() {
     Merchant member = new Merchant();
@@ -91,11 +80,11 @@ public class EventCreateLoanContract extends BaseModelBean {
     return member;
   }
 
-  public StringAttribute loanContractName() {
+  public StringAttribute name() {
     StringAttribute member = new StringAttribute();
     member.setModelTypeName("string");
-    // member.setName("loanContractName");
-    member.setName("loan_contract_name");
+    // member.setName("name");
+    member.setName("name");
     useMember(member);
     return member;
   }
@@ -154,11 +143,11 @@ public class EventCreateLoanContract extends BaseModelBean {
     return member;
   }
 
-  public StringAttribute loanContractDocument() {
+  public StringAttribute document() {
     StringAttribute member = new StringAttribute();
     member.setModelTypeName("string_document");
-    // member.setName("loanContractDocument");
-    member.setName("loan_contract_document");
+    // member.setName("document");
+    member.setName("document");
     useMember(member);
     return member;
   }

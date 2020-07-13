@@ -61,50 +61,6 @@ public class WorkingStatus extends BaseModelBean {
     return member;
   }
 
-  public EventCreateProject eventCreateProjectListAsDesignStatus() {
-    EventCreateProject member = new EventCreateProject();
-    member.setModelTypeName("event_create_project");
-    member.setName("design_status");
-    member.setMemberName("eventCreateProjectListAsDesignStatus");
-    member.setRelationName("designStatus");
-    member.setReferDirection(false);
-    append(member);
-    return member;
-  }
-
-  public EventCreateProject eventCreateProjectListAsConstructionStatus() {
-    EventCreateProject member = new EventCreateProject();
-    member.setModelTypeName("event_create_project");
-    member.setName("construction_status");
-    member.setMemberName("eventCreateProjectListAsConstructionStatus");
-    member.setRelationName("designStatus");
-    member.setReferDirection(false);
-    append(member);
-    return member;
-  }
-
-  public EventCreateProjectBaseInfo eventCreateProjectBaseInfoListAsDesignStatus() {
-    EventCreateProjectBaseInfo member = new EventCreateProjectBaseInfo();
-    member.setModelTypeName("event_create_project_base_info");
-    member.setName("design_status");
-    member.setMemberName("eventCreateProjectBaseInfoListAsDesignStatus");
-    member.setRelationName("designStatus");
-    member.setReferDirection(false);
-    append(member);
-    return member;
-  }
-
-  public EventCreateProjectBaseInfo eventCreateProjectBaseInfoListAsConstructionStatus() {
-    EventCreateProjectBaseInfo member = new EventCreateProjectBaseInfo();
-    member.setModelTypeName("event_create_project_base_info");
-    member.setName("construction_status");
-    member.setMemberName("eventCreateProjectBaseInfoListAsConstructionStatus");
-    member.setRelationName("designStatus");
-    member.setReferDirection(false);
-    append(member);
-    return member;
-  }
-
   public Design designList() {
     Design member = new Design();
     member.setModelTypeName("design");

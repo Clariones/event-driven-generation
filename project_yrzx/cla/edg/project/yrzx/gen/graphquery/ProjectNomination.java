@@ -245,6 +245,28 @@ public class ProjectNomination extends BaseModelBean {
     return member;
   }
 
+  public EventLaborDispute eventLaborDisputeList() {
+    EventLaborDispute member = new EventLaborDispute();
+    member.setModelTypeName("event_labor_dispute");
+    member.setName("applicant");
+    member.setMemberName("eventLaborDisputeList");
+    member.setRelationName("applicant");
+    member.setReferDirection(false);
+    append(member);
+    return member;
+  }
+
+  public EventMaterialPreservedInfo eventMaterialPreservedInfoList() {
+    EventMaterialPreservedInfo member = new EventMaterialPreservedInfo();
+    member.setModelTypeName("event_material_preserved_info");
+    member.setName("material_manager");
+    member.setMemberName("eventMaterialPreservedInfoList");
+    member.setRelationName("materialManager");
+    member.setReferDirection(false);
+    append(member);
+    return member;
+  }
+
   public EventMaterialChangeInfo eventMaterialChangeInfoList() {
     EventMaterialChangeInfo member = new EventMaterialChangeInfo();
     member.setModelTypeName("event_material_change_info");
@@ -262,28 +284,6 @@ public class ProjectNomination extends BaseModelBean {
     member.setName("auditor");
     member.setMemberName("eventMaterialAcceptanceBasicInfoList");
     member.setRelationName("auditor");
-    member.setReferDirection(false);
-    append(member);
-    return member;
-  }
-
-  public EventMaterialPreservedInfo eventMaterialPreservedInfoList() {
-    EventMaterialPreservedInfo member = new EventMaterialPreservedInfo();
-    member.setModelTypeName("event_material_preserved_info");
-    member.setName("material_manager");
-    member.setMemberName("eventMaterialPreservedInfoList");
-    member.setRelationName("materialManager");
-    member.setReferDirection(false);
-    append(member);
-    return member;
-  }
-
-  public EventLaborDispute eventLaborDisputeList() {
-    EventLaborDispute member = new EventLaborDispute();
-    member.setModelTypeName("event_labor_dispute");
-    member.setName("applicant");
-    member.setMemberName("eventLaborDisputeList");
-    member.setRelationName("applicant");
     member.setReferDirection(false);
     append(member);
     return member;

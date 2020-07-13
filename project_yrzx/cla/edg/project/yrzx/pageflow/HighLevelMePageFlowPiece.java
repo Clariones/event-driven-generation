@@ -96,6 +96,10 @@ public class HighLevelMePageFlowPiece extends PieceOfScript {
 						.comments("我的工资")
 						.got_page("my salary")
 
+					.request("view my loan").with_last_record_id()
+						.comments("我的债务")
+						.got_page("my loan")
+
 
 				// 订单详情
 				.request("view order detail").with_string("order id")

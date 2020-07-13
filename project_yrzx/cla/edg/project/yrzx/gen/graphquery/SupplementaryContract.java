@@ -45,6 +45,17 @@ public class SupplementaryContract extends BaseModelBean {
     return member;
   }
 
+  public AuditStatus auditStatus() {
+    AuditStatus member = new AuditStatus();
+    member.setModelTypeName("audit_status");
+    member.setName("audit_status");
+    member.setMemberName("auditStatus");
+    member.setReferDirection(true);
+    member.setRelationName("auditStatus");
+    append(member);
+    return member;
+  }
+
   public EmployeeNomination submitter() {
     EmployeeNomination member = new EmployeeNomination();
     member.setModelTypeName("employee_nomination");

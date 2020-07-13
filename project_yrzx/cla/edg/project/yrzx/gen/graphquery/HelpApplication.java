@@ -4,21 +4,21 @@ import java.util.Map;
 
 import cla.edg.modelbean.*;
 
-public class LoanApplication extends BaseModelBean {
+public class HelpApplication extends BaseModelBean {
   public String getFullClassName() {
-    return "com.yrdec.yrzx.loanapplication.LoanApplication";
+    return "com.yrdec.yrzx.helpapplication.HelpApplication";
   }
   // 枚举对象
 
   // 引用的对象
 
-  public Project loanProject() {
+  public Project helpProject() {
     Project member = new Project();
     member.setModelTypeName("project");
-    member.setName("loan_project");
-    member.setMemberName("loanProject");
+    member.setName("help_project");
+    member.setMemberName("helpProject");
     member.setReferDirection(true);
-    member.setRelationName("loanProject");
+    member.setRelationName("helpProject");
     append(member);
     return member;
   }
@@ -69,33 +69,22 @@ public class LoanApplication extends BaseModelBean {
 
   // 被引用的对象
 
-  public LoanContract loanContractList() {
-    LoanContract member = new LoanContract();
-    member.setModelTypeName("loan_contract");
-    member.setName("loan_application");
-    member.setMemberName("loanContractList");
-    member.setRelationName("loanApplication");
+  public HelpContract helpContractList() {
+    HelpContract member = new HelpContract();
+    member.setModelTypeName("help_contract");
+    member.setName("help_application");
+    member.setMemberName("helpContractList");
+    member.setRelationName("helpApplication");
     member.setReferDirection(false);
     append(member);
     return member;
   }
 
-  public EventCreateLoanContract eventCreateLoanContractList() {
-    EventCreateLoanContract member = new EventCreateLoanContract();
-    member.setModelTypeName("event_create_loan_contract");
+  public EventSelectLoanApplication eventSelectLoanApplicationList() {
+    EventSelectLoanApplication member = new EventSelectLoanApplication();
+    member.setModelTypeName("event_select_loan_application");
     member.setName("loan_application");
-    member.setMemberName("eventCreateLoanContractList");
-    member.setRelationName("loanApplication");
-    member.setReferDirection(false);
-    append(member);
-    return member;
-  }
-
-  public FinancialServiceStatisticReport financialServiceStatisticReportList() {
-    FinancialServiceStatisticReport member = new FinancialServiceStatisticReport();
-    member.setModelTypeName("financial_service_statistic_report");
-    member.setName("loan_application");
-    member.setMemberName("financialServiceStatisticReportList");
+    member.setMemberName("eventSelectLoanApplicationList");
     member.setRelationName("loanApplication");
     member.setReferDirection(false);
     append(member);
@@ -140,11 +129,11 @@ public class LoanApplication extends BaseModelBean {
     return member;
   }
 
-  public StringAttribute loanUsage() {
+  public StringAttribute helpReason() {
     StringAttribute member = new StringAttribute();
     member.setModelTypeName("string_longtext");
-    // member.setName("loanUsage");
-    member.setName("loan_usage");
+    // member.setName("helpReason");
+    member.setName("help_reason");
     useMember(member);
     return member;
   }
@@ -154,6 +143,15 @@ public class LoanApplication extends BaseModelBean {
     member.setModelTypeName("date");
     // member.setName("expectedRepaymentTime");
     member.setName("expected_repayment_time");
+    useMember(member);
+    return member;
+  }
+
+  public BooleanAttribute contractCreated() {
+    BooleanAttribute member = new BooleanAttribute();
+    member.setModelTypeName("bool");
+    // member.setName("contractCreated");
+    member.setName("contract_created");
     useMember(member);
     return member;
   }

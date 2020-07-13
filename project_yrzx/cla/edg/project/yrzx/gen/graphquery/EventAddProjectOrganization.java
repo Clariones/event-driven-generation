@@ -4,21 +4,32 @@ import java.util.Map;
 
 import cla.edg.modelbean.*;
 
-public class EventProjectWorkPosition extends BaseModelBean {
+public class EventAddProjectOrganization extends BaseModelBean {
   public String getFullClassName() {
-    return "com.yrdec.yrzx.eventprojectworkposition.EventProjectWorkPosition";
+    return "com.yrdec.yrzx.eventaddprojectorganization.EventAddProjectOrganization";
   }
   // 枚举对象
 
   // 引用的对象
 
-  public ProjectOrganizationType projectJob() {
+  public EmployeeNomination employee() {
+    EmployeeNomination member = new EmployeeNomination();
+    member.setModelTypeName("employee_nomination");
+    member.setName("employee");
+    member.setMemberName("employee");
+    member.setReferDirection(true);
+    member.setRelationName("employee");
+    append(member);
+    return member;
+  }
+
+  public ProjectOrganizationType projectOrganizationType() {
     ProjectOrganizationType member = new ProjectOrganizationType();
     member.setModelTypeName("project_organization_type");
-    member.setName("project_job");
-    member.setMemberName("projectJob");
+    member.setName("project_organization_type");
+    member.setMemberName("projectOrganizationType");
     member.setReferDirection(true);
-    member.setRelationName("projectJob");
+    member.setRelationName("projectOrganizationType");
     append(member);
     return member;
   }
@@ -45,17 +56,6 @@ public class EventProjectWorkPosition extends BaseModelBean {
     return member;
   }
 
-  public EmployeeNomination employee() {
-    EmployeeNomination member = new EmployeeNomination();
-    member.setModelTypeName("employee_nomination");
-    member.setName("employee");
-    member.setMemberName("employee");
-    member.setReferDirection(true);
-    member.setRelationName("employee");
-    append(member);
-    return member;
-  }
-
   public ChangeRequest changeRequest() {
     ChangeRequest member = new ChangeRequest();
     member.setModelTypeName("change_request");
@@ -76,24 +76,6 @@ public class EventProjectWorkPosition extends BaseModelBean {
     member.setModelTypeName("string");
     // member.setName("id");
     member.setName("id");
-    useMember(member);
-    return member;
-  }
-
-  public StringAttribute projectId() {
-    StringAttribute member = new StringAttribute();
-    member.setModelTypeName("string");
-    // member.setName("projectId");
-    member.setName("project_id");
-    useMember(member);
-    return member;
-  }
-
-  public StringAttribute merchantId() {
-    StringAttribute member = new StringAttribute();
-    member.setModelTypeName("string");
-    // member.setName("merchantId");
-    member.setName("merchant_id");
     useMember(member);
     return member;
   }

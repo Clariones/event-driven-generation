@@ -58,22 +58,22 @@ public class AvailableServiceLocation extends BaseModelBean {
     return member;
   }
 
-  public EventApplyPersonalEmplacement eventApplyPersonalEmplacementList() {
-    EventApplyPersonalEmplacement member = new EventApplyPersonalEmplacement();
-    member.setModelTypeName("event_apply_personal_emplacement");
+  public EventApplyEmplacement eventApplyEmplacementList() {
+    EventApplyEmplacement member = new EventApplyEmplacement();
+    member.setModelTypeName("event_apply_emplacement");
     member.setName("service_location");
-    member.setMemberName("eventApplyPersonalEmplacementList");
+    member.setMemberName("eventApplyEmplacementList");
     member.setRelationName("serviceLocation");
     member.setReferDirection(false);
     append(member);
     return member;
   }
 
-  public EventApplyEmplacement eventApplyEmplacementList() {
-    EventApplyEmplacement member = new EventApplyEmplacement();
-    member.setModelTypeName("event_apply_emplacement");
+  public EventApplyPersonalEmplacement eventApplyPersonalEmplacementList() {
+    EventApplyPersonalEmplacement member = new EventApplyPersonalEmplacement();
+    member.setModelTypeName("event_apply_personal_emplacement");
     member.setName("service_location");
-    member.setMemberName("eventApplyEmplacementList");
+    member.setMemberName("eventApplyPersonalEmplacementList");
     member.setRelationName("serviceLocation");
     member.setReferDirection(false);
     append(member);
