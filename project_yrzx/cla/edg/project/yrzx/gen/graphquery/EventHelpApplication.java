@@ -4,9 +4,9 @@ import java.util.Map;
 
 import cla.edg.modelbean.*;
 
-public class EventLoanApplication extends BaseModelBean {
+public class EventHelpApplication extends BaseModelBean {
   public String getFullClassName() {
-    return "com.yrdec.yrzx.eventloanapplication.EventLoanApplication";
+    return "com.yrdec.yrzx.eventhelpapplication.EventHelpApplication";
   }
   // 枚举对象
 
@@ -106,33 +106,6 @@ public class EventLoanApplication extends BaseModelBean {
     member.setModelTypeName("date");
     // member.setName("expectedRepaymentTime");
     member.setName("expected_repayment_time");
-    useMember(member);
-    return member;
-  }
-
-  public StringAttribute fieldGroup() {
-    StringAttribute member = new StringAttribute();
-    member.setModelTypeName("string");
-    // member.setName("fieldGroup");
-    member.setName("field_group");
-    useMember(member);
-    return member;
-  }
-
-  public StringAttribute eventInitiatorType() {
-    StringAttribute member = new StringAttribute();
-    member.setModelTypeName("string");
-    // member.setName("eventInitiatorType");
-    member.setName("event_initiator_type");
-    useMember(member);
-    return member;
-  }
-
-  public StringAttribute eventInitiatorId() {
-    StringAttribute member = new StringAttribute();
-    member.setModelTypeName("string");
-    // member.setName("eventInitiatorId");
-    member.setName("event_initiator_id");
     useMember(member);
     return member;
   }

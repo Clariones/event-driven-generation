@@ -118,7 +118,12 @@ public class MoneyRelatedQueryPiece extends PieceOfScript {
 				.comments("按项目查询某人的某本账上的收款记录")
 
 
-
+			.find(MODEL.accountBook()).list_of("merchant").with_string("merchant id")
+				.do_it_as()
+				.where(
+						MODEL.accountBook().owner().eq("${merchant id}")
+				)
+			.order_by(MODEL.accountBook().lastUpdateTime()).desc()
 
 		;
 

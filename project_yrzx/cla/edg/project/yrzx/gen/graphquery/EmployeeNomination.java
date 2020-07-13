@@ -168,11 +168,11 @@ public class EmployeeNomination extends BaseModelBean {
     return member;
   }
 
-  public LoanApplication loanApplicationList() {
-    LoanApplication member = new LoanApplication();
-    member.setModelTypeName("loan_application");
+  public HelpApplication helpApplicationList() {
+    HelpApplication member = new HelpApplication();
+    member.setModelTypeName("help_application");
     member.setName("applicant");
-    member.setMemberName("loanApplicationList");
+    member.setMemberName("helpApplicationList");
     member.setRelationName("applicant");
     member.setReferDirection(false);
     append(member);
@@ -223,12 +223,12 @@ public class EmployeeNomination extends BaseModelBean {
     return member;
   }
 
-  public EventProjectWorkPosition eventProjectWorkPositionList() {
-    EventProjectWorkPosition member = new EventProjectWorkPosition();
-    member.setModelTypeName("event_project_work_position");
-    member.setName("employee");
-    member.setMemberName("eventProjectWorkPositionList");
-    member.setRelationName("employee");
+  public EventAdditionalContractBasicInfo eventAdditionalContractBasicInfoList() {
+    EventAdditionalContractBasicInfo member = new EventAdditionalContractBasicInfo();
+    member.setModelTypeName("event_additional_contract_basic_info");
+    member.setName("submitter");
+    member.setMemberName("eventAdditionalContractBasicInfoList");
+    member.setRelationName("submitter");
     member.setReferDirection(false);
     append(member);
     return member;
@@ -245,166 +245,34 @@ public class EmployeeNomination extends BaseModelBean {
     return member;
   }
 
-  public EventCreateProjectOrganization eventCreateProjectOrganizationListAsYrConstructionAgency() {
-    EventCreateProjectOrganization member = new EventCreateProjectOrganization();
-    member.setModelTypeName("event_create_project_organization");
-    member.setName("yr_construction_agency");
-    member.setMemberName("eventCreateProjectOrganizationListAsYrConstructionAgency");
-    member.setRelationName("yrConstructionAgency");
+  public EventProjectWorkPosition eventProjectWorkPositionList() {
+    EventProjectWorkPosition member = new EventProjectWorkPosition();
+    member.setModelTypeName("event_project_work_position");
+    member.setName("employee");
+    member.setMemberName("eventProjectWorkPositionList");
+    member.setRelationName("employee");
     member.setReferDirection(false);
     append(member);
     return member;
   }
 
-  public EventCreateProjectOrganization eventCreateProjectOrganizationListAsProjectConstruction() {
-    EventCreateProjectOrganization member = new EventCreateProjectOrganization();
-    member.setModelTypeName("event_create_project_organization");
-    member.setName("project_construction");
-    member.setMemberName("eventCreateProjectOrganizationListAsProjectConstruction");
-    member.setRelationName("yrConstructionAgency");
+  public EventContractBasicInfo eventContractBasicInfoList() {
+    EventContractBasicInfo member = new EventContractBasicInfo();
+    member.setModelTypeName("event_contract_basic_info");
+    member.setName("submitter");
+    member.setMemberName("eventContractBasicInfoList");
+    member.setRelationName("submitter");
     member.setReferDirection(false);
     append(member);
     return member;
   }
 
-  public EventCreateProjectOrganization eventCreateProjectOrganizationListAsBrand() {
-    EventCreateProjectOrganization member = new EventCreateProjectOrganization();
-    member.setModelTypeName("event_create_project_organization");
-    member.setName("brand");
-    member.setMemberName("eventCreateProjectOrganizationListAsBrand");
-    member.setRelationName("yrConstructionAgency");
-    member.setReferDirection(false);
-    append(member);
-    return member;
-  }
-
-  public EventCreateProjectOrganization eventCreateProjectOrganizationListAsBim() {
-    EventCreateProjectOrganization member = new EventCreateProjectOrganization();
-    member.setModelTypeName("event_create_project_organization");
-    member.setName("bim");
-    member.setMemberName("eventCreateProjectOrganizationListAsBim");
-    member.setRelationName("yrConstructionAgency");
-    member.setReferDirection(false);
-    append(member);
-    return member;
-  }
-
-  public EventCreateProjectOrganization eventCreateProjectOrganizationListAsProjectSupervision() {
-    EventCreateProjectOrganization member = new EventCreateProjectOrganization();
-    member.setModelTypeName("event_create_project_organization");
-    member.setName("project_supervision");
-    member.setMemberName("eventCreateProjectOrganizationListAsProjectSupervision");
-    member.setRelationName("yrConstructionAgency");
-    member.setReferDirection(false);
-    append(member);
-    return member;
-  }
-
-  public EventCreateProjectOrganization eventCreateProjectOrganizationListAsProjectDesign() {
-    EventCreateProjectOrganization member = new EventCreateProjectOrganization();
-    member.setModelTypeName("event_create_project_organization");
-    member.setName("project_design");
-    member.setMemberName("eventCreateProjectOrganizationListAsProjectDesign");
-    member.setRelationName("yrConstructionAgency");
-    member.setReferDirection(false);
-    append(member);
-    return member;
-  }
-
-  public EventCreateProjectOrganization eventCreateProjectOrganizationListAsProjectSurvey() {
-    EventCreateProjectOrganization member = new EventCreateProjectOrganization();
-    member.setModelTypeName("event_create_project_organization");
-    member.setName("project_survey");
-    member.setMemberName("eventCreateProjectOrganizationListAsProjectSurvey");
-    member.setRelationName("yrConstructionAgency");
-    member.setReferDirection(false);
-    append(member);
-    return member;
-  }
-
-  public EventCreateProjectOrganization eventCreateProjectOrganizationListAsProjectBidding() {
-    EventCreateProjectOrganization member = new EventCreateProjectOrganization();
-    member.setModelTypeName("event_create_project_organization");
-    member.setName("project_bidding");
-    member.setMemberName("eventCreateProjectOrganizationListAsProjectBidding");
-    member.setRelationName("yrConstructionAgency");
-    member.setReferDirection(false);
-    append(member);
-    return member;
-  }
-
-  public EventCreateProjectOrganization eventCreateProjectOrganizationListAsProjectCost() {
-    EventCreateProjectOrganization member = new EventCreateProjectOrganization();
-    member.setModelTypeName("event_create_project_organization");
-    member.setName("project_cost");
-    member.setMemberName("eventCreateProjectOrganizationListAsProjectCost");
-    member.setRelationName("yrConstructionAgency");
-    member.setReferDirection(false);
-    append(member);
-    return member;
-  }
-
-  public EventCreateProjectOrganization eventCreateProjectOrganizationListAsQualityControl() {
-    EventCreateProjectOrganization member = new EventCreateProjectOrganization();
-    member.setModelTypeName("event_create_project_organization");
-    member.setName("quality_control");
-    member.setMemberName("eventCreateProjectOrganizationListAsQualityControl");
-    member.setRelationName("yrConstructionAgency");
-    member.setReferDirection(false);
-    append(member);
-    return member;
-  }
-
-  public EventCreateProjectOrganization eventCreateProjectOrganizationListAsProjectAudit() {
-    EventCreateProjectOrganization member = new EventCreateProjectOrganization();
-    member.setModelTypeName("event_create_project_organization");
-    member.setName("project_audit");
-    member.setMemberName("eventCreateProjectOrganizationListAsProjectAudit");
-    member.setRelationName("yrConstructionAgency");
-    member.setReferDirection(false);
-    append(member);
-    return member;
-  }
-
-  public EventCreateProjectOrganization eventCreateProjectOrganizationListAsProjectPlanning() {
-    EventCreateProjectOrganization member = new EventCreateProjectOrganization();
-    member.setModelTypeName("event_create_project_organization");
-    member.setName("project_planning");
-    member.setMemberName("eventCreateProjectOrganizationListAsProjectPlanning");
-    member.setRelationName("yrConstructionAgency");
-    member.setReferDirection(false);
-    append(member);
-    return member;
-  }
-
-  public EventCreateProjectOrganization eventCreateProjectOrganizationListAsHousingManagement() {
-    EventCreateProjectOrganization member = new EventCreateProjectOrganization();
-    member.setModelTypeName("event_create_project_organization");
-    member.setName("housing_management");
-    member.setMemberName("eventCreateProjectOrganizationListAsHousingManagement");
-    member.setRelationName("yrConstructionAgency");
-    member.setReferDirection(false);
-    append(member);
-    return member;
-  }
-
-  public EventCreateProjectOrganization eventCreateProjectOrganizationListAsFileManagement() {
-    EventCreateProjectOrganization member = new EventCreateProjectOrganization();
-    member.setModelTypeName("event_create_project_organization");
-    member.setName("file_management");
-    member.setMemberName("eventCreateProjectOrganizationListAsFileManagement");
-    member.setRelationName("yrConstructionAgency");
-    member.setReferDirection(false);
-    append(member);
-    return member;
-  }
-
-  public EventCreateProjectOrganization eventCreateProjectOrganizationListAsProjectManagement() {
-    EventCreateProjectOrganization member = new EventCreateProjectOrganization();
-    member.setModelTypeName("event_create_project_organization");
-    member.setName("project_management");
-    member.setMemberName("eventCreateProjectOrganizationListAsProjectManagement");
-    member.setRelationName("yrConstructionAgency");
+  public EventAddProjectOrganization eventAddProjectOrganizationList() {
+    EventAddProjectOrganization member = new EventAddProjectOrganization();
+    member.setModelTypeName("event_add_project_organization");
+    member.setName("employee");
+    member.setMemberName("eventAddProjectOrganizationList");
+    member.setRelationName("employee");
     member.setReferDirection(false);
     append(member);
     return member;

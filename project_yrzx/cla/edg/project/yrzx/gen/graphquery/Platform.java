@@ -531,33 +531,22 @@ public class Platform extends BaseModelBean {
     return member;
   }
 
-  public LoanFund loanFundList() {
-    LoanFund member = new LoanFund();
-    member.setModelTypeName("loan_fund");
+  public HelpApplication helpApplicationList() {
+    HelpApplication member = new HelpApplication();
+    member.setModelTypeName("help_application");
     member.setName("platform");
-    member.setMemberName("loanFundList");
+    member.setMemberName("helpApplicationList");
     member.setRelationName("platform");
     member.setReferDirection(false);
     append(member);
     return member;
   }
 
-  public LoanApplication loanApplicationList() {
-    LoanApplication member = new LoanApplication();
-    member.setModelTypeName("loan_application");
+  public HelpContract helpContractList() {
+    HelpContract member = new HelpContract();
+    member.setModelTypeName("help_contract");
     member.setName("platform");
-    member.setMemberName("loanApplicationList");
-    member.setRelationName("platform");
-    member.setReferDirection(false);
-    append(member);
-    return member;
-  }
-
-  public LoanContract loanContractList() {
-    LoanContract member = new LoanContract();
-    member.setModelTypeName("loan_contract");
-    member.setName("platform");
-    member.setMemberName("loanContractList");
+    member.setMemberName("helpContractList");
     member.setRelationName("platform");
     member.setReferDirection(false);
     append(member);
@@ -888,17 +877,6 @@ public class Platform extends BaseModelBean {
     member.setModelTypeName("service_vendor_statistic_report");
     member.setName("platform");
     member.setMemberName("serviceVendorStatisticReportList");
-    member.setRelationName("platform");
-    member.setReferDirection(false);
-    append(member);
-    return member;
-  }
-
-  public FinancialServiceStatisticReport financialServiceStatisticReportList() {
-    FinancialServiceStatisticReport member = new FinancialServiceStatisticReport();
-    member.setModelTypeName("financial_service_statistic_report");
-    member.setName("platform");
-    member.setMemberName("financialServiceStatisticReportList");
     member.setRelationName("platform");
     member.setReferDirection(false);
     append(member);

@@ -15,6 +15,10 @@ public class AccountBookType extends BaseModelBean {
       new EnumAttribute("com.yrdec.yrzx.accountbooktype.AccountBookType", "RECEIVABLE");
   public static EnumAttribute PAYABLE =
       new EnumAttribute("com.yrdec.yrzx.accountbooktype.AccountBookType", "PAYABLE");
+  public static EnumAttribute LOAN =
+      new EnumAttribute("com.yrdec.yrzx.accountbooktype.AccountBookType", "LOAN");
+  public static EnumAttribute FIXED =
+      new EnumAttribute("com.yrdec.yrzx.accountbooktype.AccountBookType", "FIXED");
 
   // 引用的对象
 

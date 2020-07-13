@@ -26,6 +26,9 @@ public class ProjectOrganizationType extends BaseModelBean {
   public static EnumAttribute PROJECT_DESIGN =
       new EnumAttribute(
           "com.yrdec.yrzx.projectorganizationtype.ProjectOrganizationType", "PROJECT_DESIGN");
+  public static EnumAttribute DESIGN_REVIEW =
+      new EnumAttribute(
+          "com.yrdec.yrzx.projectorganizationtype.ProjectOrganizationType", "DESIGN_REVIEW");
   public static EnumAttribute PROJECT_SURVEY =
       new EnumAttribute(
           "com.yrdec.yrzx.projectorganizationtype.ProjectOrganizationType", "PROJECT_SURVEY");
@@ -86,6 +89,17 @@ public class ProjectOrganizationType extends BaseModelBean {
     member.setName("project_job");
     member.setMemberName("eventProjectWorkPositionList");
     member.setRelationName("projectJob");
+    member.setReferDirection(false);
+    append(member);
+    return member;
+  }
+
+  public EventAddProjectOrganization eventAddProjectOrganizationList() {
+    EventAddProjectOrganization member = new EventAddProjectOrganization();
+    member.setModelTypeName("event_add_project_organization");
+    member.setName("project_organization_type");
+    member.setMemberName("eventAddProjectOrganizationList");
+    member.setRelationName("projectOrganizationType");
     member.setReferDirection(false);
     append(member);
     return member;

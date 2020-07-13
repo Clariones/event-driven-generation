@@ -69,23 +69,23 @@ public class CareerType extends BaseModelBean {
     return member;
   }
 
-  public EventFillPersonalDetail eventFillPersonalDetailList() {
-    EventFillPersonalDetail member = new EventFillPersonalDetail();
-    member.setModelTypeName("event_fill_personal_detail");
-    member.setName("career_type");
-    member.setMemberName("eventFillPersonalDetailList");
-    member.setRelationName("careerType");
-    member.setReferDirection(false);
-    append(member);
-    return member;
-  }
-
   public EventSubcontractApplication eventSubcontractApplicationList() {
     EventSubcontractApplication member = new EventSubcontractApplication();
     member.setModelTypeName("event_subcontract_application");
     member.setName("application_type");
     member.setMemberName("eventSubcontractApplicationList");
     member.setRelationName("applicationType");
+    member.setReferDirection(false);
+    append(member);
+    return member;
+  }
+
+  public EventFillPersonalDetail eventFillPersonalDetailList() {
+    EventFillPersonalDetail member = new EventFillPersonalDetail();
+    member.setModelTypeName("event_fill_personal_detail");
+    member.setName("career_type");
+    member.setMemberName("eventFillPersonalDetailList");
+    member.setRelationName("careerType");
     member.setReferDirection(false);
     append(member);
     return member;

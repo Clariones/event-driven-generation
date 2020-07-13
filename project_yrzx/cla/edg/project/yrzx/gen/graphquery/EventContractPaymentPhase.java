@@ -56,24 +56,6 @@ public class EventContractPaymentPhase extends BaseModelBean {
     return member;
   }
 
-  public StringAttribute payer() {
-    StringAttribute member = new StringAttribute();
-    member.setModelTypeName("string");
-    // member.setName("payer");
-    member.setName("payer");
-    useMember(member);
-    return member;
-  }
-
-  public StringAttribute payee() {
-    StringAttribute member = new StringAttribute();
-    member.setModelTypeName("string");
-    // member.setName("payee");
-    member.setName("payee");
-    useMember(member);
-    return member;
-  }
-
   public StringAttribute criteria() {
     StringAttribute member = new StringAttribute();
     member.setModelTypeName("string_longtext");
@@ -142,33 +124,6 @@ public class EventContractPaymentPhase extends BaseModelBean {
     member.setModelTypeName("date");
     // member.setName("expectedPayTime");
     member.setName("expected_pay_time");
-    useMember(member);
-    return member;
-  }
-
-  public StringAttribute fieldGroup() {
-    StringAttribute member = new StringAttribute();
-    member.setModelTypeName("string");
-    // member.setName("fieldGroup");
-    member.setName("field_group");
-    useMember(member);
-    return member;
-  }
-
-  public StringAttribute eventInitiatorType() {
-    StringAttribute member = new StringAttribute();
-    member.setModelTypeName("string");
-    // member.setName("eventInitiatorType");
-    member.setName("event_initiator_type");
-    useMember(member);
-    return member;
-  }
-
-  public StringAttribute eventInitiatorId() {
-    StringAttribute member = new StringAttribute();
-    member.setModelTypeName("string");
-    // member.setName("eventInitiatorId");
-    member.setName("event_initiator_id");
     useMember(member);
     return member;
   }

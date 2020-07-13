@@ -102,17 +102,6 @@ public class ContractPayItem extends BaseModelBean {
     return member;
   }
 
-  public EventAdditionalContractPaymentPhase eventAdditionalContractPaymentPhaseList() {
-    EventAdditionalContractPaymentPhase member = new EventAdditionalContractPaymentPhase();
-    member.setModelTypeName("event_additional_contract_payment_phase");
-    member.setName("payment_item");
-    member.setMemberName("eventAdditionalContractPaymentPhaseList");
-    member.setRelationName("paymentItem");
-    member.setReferDirection(false);
-    append(member);
-    return member;
-  }
-
   // 普通属性
 
   public StringAttribute id() {

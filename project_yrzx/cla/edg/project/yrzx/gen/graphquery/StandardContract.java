@@ -223,22 +223,22 @@ public class StandardContract extends BaseModelBean {
     return member;
   }
 
-  public LoanApplication loanApplicationList() {
-    LoanApplication member = new LoanApplication();
-    member.setModelTypeName("loan_application");
+  public HelpApplication helpApplicationList() {
+    HelpApplication member = new HelpApplication();
+    member.setModelTypeName("help_application");
     member.setName("pledged_contract");
-    member.setMemberName("loanApplicationList");
+    member.setMemberName("helpApplicationList");
     member.setRelationName("pledgedContract");
     member.setReferDirection(false);
     append(member);
     return member;
   }
 
-  public LoanContract loanContractList() {
-    LoanContract member = new LoanContract();
-    member.setModelTypeName("loan_contract");
+  public HelpContract helpContractList() {
+    HelpContract member = new HelpContract();
+    member.setModelTypeName("help_contract");
     member.setName("pledged_contract");
-    member.setMemberName("loanContractList");
+    member.setMemberName("helpContractList");
     member.setRelationName("pledgedContract");
     member.setReferDirection(false);
     append(member);
@@ -300,33 +300,11 @@ public class StandardContract extends BaseModelBean {
     return member;
   }
 
-  public EventMaterialAcceptanceBasicInfo eventMaterialAcceptanceBasicInfoList() {
-    EventMaterialAcceptanceBasicInfo member = new EventMaterialAcceptanceBasicInfo();
-    member.setModelTypeName("event_material_acceptance_basic_info");
+  public EventAdditionalContractBasicInfo eventAdditionalContractBasicInfoList() {
+    EventAdditionalContractBasicInfo member = new EventAdditionalContractBasicInfo();
+    member.setModelTypeName("event_additional_contract_basic_info");
     member.setName("contract");
-    member.setMemberName("eventMaterialAcceptanceBasicInfoList");
-    member.setRelationName("contract");
-    member.setReferDirection(false);
-    append(member);
-    return member;
-  }
-
-  public EventMaterialChangeContractInfo eventMaterialChangeContractInfoList() {
-    EventMaterialChangeContractInfo member = new EventMaterialChangeContractInfo();
-    member.setModelTypeName("event_material_change_contract_info");
-    member.setName("contract");
-    member.setMemberName("eventMaterialChangeContractInfoList");
-    member.setRelationName("contract");
-    member.setReferDirection(false);
-    append(member);
-    return member;
-  }
-
-  public EventMaterialPreservedBasicInfo eventMaterialPreservedBasicInfoList() {
-    EventMaterialPreservedBasicInfo member = new EventMaterialPreservedBasicInfo();
-    member.setModelTypeName("event_material_preserved_basic_info");
-    member.setName("contract");
-    member.setMemberName("eventMaterialPreservedBasicInfoList");
+    member.setMemberName("eventAdditionalContractBasicInfoList");
     member.setRelationName("contract");
     member.setReferDirection(false);
     append(member);
@@ -344,22 +322,55 @@ public class StandardContract extends BaseModelBean {
     return member;
   }
 
-  public EventLoanApplication eventLoanApplicationList() {
-    EventLoanApplication member = new EventLoanApplication();
-    member.setModelTypeName("event_loan_application");
+  public EventMaterialPreservedBasicInfo eventMaterialPreservedBasicInfoList() {
+    EventMaterialPreservedBasicInfo member = new EventMaterialPreservedBasicInfo();
+    member.setModelTypeName("event_material_preserved_basic_info");
+    member.setName("contract");
+    member.setMemberName("eventMaterialPreservedBasicInfoList");
+    member.setRelationName("contract");
+    member.setReferDirection(false);
+    append(member);
+    return member;
+  }
+
+  public EventMaterialChangeContractInfo eventMaterialChangeContractInfoList() {
+    EventMaterialChangeContractInfo member = new EventMaterialChangeContractInfo();
+    member.setModelTypeName("event_material_change_contract_info");
+    member.setName("contract");
+    member.setMemberName("eventMaterialChangeContractInfoList");
+    member.setRelationName("contract");
+    member.setReferDirection(false);
+    append(member);
+    return member;
+  }
+
+  public EventMaterialAcceptanceBasicInfo eventMaterialAcceptanceBasicInfoList() {
+    EventMaterialAcceptanceBasicInfo member = new EventMaterialAcceptanceBasicInfo();
+    member.setModelTypeName("event_material_acceptance_basic_info");
+    member.setName("contract");
+    member.setMemberName("eventMaterialAcceptanceBasicInfoList");
+    member.setRelationName("contract");
+    member.setReferDirection(false);
+    append(member);
+    return member;
+  }
+
+  public EventLoanContractBasicInfo eventLoanContractBasicInfoList() {
+    EventLoanContractBasicInfo member = new EventLoanContractBasicInfo();
+    member.setModelTypeName("event_loan_contract_basic_info");
     member.setName("pledged_contract");
-    member.setMemberName("eventLoanApplicationList");
+    member.setMemberName("eventLoanContractBasicInfoList");
     member.setRelationName("pledgedContract");
     member.setReferDirection(false);
     append(member);
     return member;
   }
 
-  public EventCreateLoanContract eventCreateLoanContractList() {
-    EventCreateLoanContract member = new EventCreateLoanContract();
-    member.setModelTypeName("event_create_loan_contract");
+  public EventHelpApplication eventHelpApplicationList() {
+    EventHelpApplication member = new EventHelpApplication();
+    member.setModelTypeName("event_help_application");
     member.setName("pledged_contract");
-    member.setMemberName("eventCreateLoanContractList");
+    member.setMemberName("eventHelpApplicationList");
     member.setRelationName("pledgedContract");
     member.setReferDirection(false);
     append(member);

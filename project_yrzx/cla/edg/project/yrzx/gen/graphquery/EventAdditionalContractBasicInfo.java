@@ -12,6 +12,28 @@ public class EventAdditionalContractBasicInfo extends BaseModelBean {
 
   // 引用的对象
 
+  public Project project() {
+    Project member = new Project();
+    member.setModelTypeName("project");
+    member.setName("project");
+    member.setMemberName("project");
+    member.setReferDirection(true);
+    member.setRelationName("project");
+    append(member);
+    return member;
+  }
+
+  public StandardContract contract() {
+    StandardContract member = new StandardContract();
+    member.setModelTypeName("standard_contract");
+    member.setName("contract");
+    member.setMemberName("contract");
+    member.setReferDirection(true);
+    member.setRelationName("contract");
+    append(member);
+    return member;
+  }
+
   public SupplementaryContractType contractType() {
     SupplementaryContractType member = new SupplementaryContractType();
     member.setModelTypeName("supplementary_contract_type");
@@ -19,6 +41,28 @@ public class EventAdditionalContractBasicInfo extends BaseModelBean {
     member.setMemberName("contractType");
     member.setReferDirection(true);
     member.setRelationName("contractType");
+    append(member);
+    return member;
+  }
+
+  public ContractStatus status() {
+    ContractStatus member = new ContractStatus();
+    member.setModelTypeName("contract_status");
+    member.setName("status");
+    member.setMemberName("status");
+    member.setReferDirection(true);
+    member.setRelationName("status");
+    append(member);
+    return member;
+  }
+
+  public EmployeeNomination submitter() {
+    EmployeeNomination member = new EmployeeNomination();
+    member.setModelTypeName("employee_nomination");
+    member.setName("submitter");
+    member.setMemberName("submitter");
+    member.setReferDirection(true);
+    member.setRelationName("submitter");
     append(member);
     return member;
   }
@@ -47,24 +91,6 @@ public class EventAdditionalContractBasicInfo extends BaseModelBean {
     return member;
   }
 
-  public StringAttribute contractId() {
-    StringAttribute member = new StringAttribute();
-    member.setModelTypeName("string");
-    // member.setName("contractId");
-    member.setName("contract_id");
-    useMember(member);
-    return member;
-  }
-
-  public StringAttribute projectId() {
-    StringAttribute member = new StringAttribute();
-    member.setModelTypeName("string");
-    // member.setName("projectId");
-    member.setName("project_id");
-    useMember(member);
-    return member;
-  }
-
   public StringAttribute name() {
     StringAttribute member = new StringAttribute();
     member.setModelTypeName("string");
@@ -76,27 +102,9 @@ public class EventAdditionalContractBasicInfo extends BaseModelBean {
 
   public StringAttribute number() {
     StringAttribute member = new StringAttribute();
-    member.setModelTypeName("string_longtext");
+    member.setModelTypeName("string");
     // member.setName("number");
     member.setName("number");
-    useMember(member);
-    return member;
-  }
-
-  public StringAttribute mainContract() {
-    StringAttribute member = new StringAttribute();
-    member.setModelTypeName("string");
-    // member.setName("mainContract");
-    member.setName("main_contract");
-    useMember(member);
-    return member;
-  }
-
-  public StringAttribute projectName() {
-    StringAttribute member = new StringAttribute();
-    member.setModelTypeName("string");
-    // member.setName("projectName");
-    member.setName("project_name");
     useMember(member);
     return member;
   }
@@ -110,29 +118,11 @@ public class EventAdditionalContractBasicInfo extends BaseModelBean {
     return member;
   }
 
-  public StringAttribute fieldGroup() {
+  public StringAttribute document() {
     StringAttribute member = new StringAttribute();
-    member.setModelTypeName("string");
-    // member.setName("fieldGroup");
-    member.setName("field_group");
-    useMember(member);
-    return member;
-  }
-
-  public StringAttribute eventInitiatorType() {
-    StringAttribute member = new StringAttribute();
-    member.setModelTypeName("string");
-    // member.setName("eventInitiatorType");
-    member.setName("event_initiator_type");
-    useMember(member);
-    return member;
-  }
-
-  public StringAttribute eventInitiatorId() {
-    StringAttribute member = new StringAttribute();
-    member.setModelTypeName("string");
-    // member.setName("eventInitiatorId");
-    member.setName("event_initiator_id");
+    member.setModelTypeName("string_document");
+    // member.setName("document");
+    member.setName("document");
     useMember(member);
     return member;
   }

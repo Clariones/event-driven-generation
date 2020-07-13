@@ -37,6 +37,9 @@ public class ChangeRequestType extends BaseModelBean {
   public static EnumAttribute CREATE_ADDITIONAL_CONTRACT =
       new EnumAttribute(
           "com.yrdec.yrzx.changerequesttype.ChangeRequestType", "CREATE_ADDITIONAL_CONTRACT");
+  public static EnumAttribute CREATE_PROJECT_ORGANIZATION =
+      new EnumAttribute(
+          "com.yrdec.yrzx.changerequesttype.ChangeRequestType", "CREATE_PROJECT_ORGANIZATION");
   public static EnumAttribute ACCEPTANCE_APPLICATION =
       new EnumAttribute(
           "com.yrdec.yrzx.changerequesttype.ChangeRequestType", "ACCEPTANCE_APPLICATION");
@@ -48,6 +51,9 @@ public class ChangeRequestType extends BaseModelBean {
   public static EnumAttribute APPLY_FOR_MATERIAL_CHANGE =
       new EnumAttribute(
           "com.yrdec.yrzx.changerequesttype.ChangeRequestType", "APPLY_FOR_MATERIAL_CHANGE");
+  public static EnumAttribute CREATE_LOAN_CONTRACT =
+      new EnumAttribute(
+          "com.yrdec.yrzx.changerequesttype.ChangeRequestType", "CREATE_LOAN_CONTRACT");
   public static EnumAttribute REVIEW =
       new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "REVIEW");
   public static EnumAttribute CREATE_MATERIAL_PRESERVED_SAMPLE =
@@ -77,6 +83,9 @@ public class ChangeRequestType extends BaseModelBean {
       new EnumAttribute(
           "com.yrdec.yrzx.changerequesttype.ChangeRequestType",
           "CREATE_CONTRACT_PAYMENT_APPLICATION");
+  public static EnumAttribute ADD_DESIGN_DOCUMENT =
+      new EnumAttribute(
+          "com.yrdec.yrzx.changerequesttype.ChangeRequestType", "ADD_DESIGN_DOCUMENT");
   public static EnumAttribute LABOR_SUPERVISOR =
       new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "LABOR_SUPERVISOR");
   public static EnumAttribute PROJECT_PENALTIES =
@@ -94,11 +103,11 @@ public class ChangeRequestType extends BaseModelBean {
   public static EnumAttribute APPLY_FOR_ADVANCE_COMPENSATION =
       new EnumAttribute(
           "com.yrdec.yrzx.changerequesttype.ChangeRequestType", "APPLY_FOR_ADVANCE_COMPENSATION");
-  public static EnumAttribute LOAN_APPLICATION =
-      new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "LOAN_APPLICATION");
   public static EnumAttribute PROJECT_MANAGER_REPORT =
       new EnumAttribute(
           "com.yrdec.yrzx.changerequesttype.ChangeRequestType", "PROJECT_MANAGER_REPORT");
+  public static EnumAttribute HELP_APPLICATION =
+      new EnumAttribute("com.yrdec.yrzx.changerequesttype.ChangeRequestType", "HELP_APPLICATION");
   public static EnumAttribute PROJECT_SUPERVISION_REPORT =
       new EnumAttribute(
           "com.yrdec.yrzx.changerequesttype.ChangeRequestType", "PROJECT_SUPERVISION_REPORT");
@@ -124,6 +133,17 @@ public class ChangeRequestType extends BaseModelBean {
     member.setName("request_type");
     member.setMemberName("changeRequestList");
     member.setRelationName("requestType");
+    member.setReferDirection(false);
+    append(member);
+    return member;
+  }
+
+  public EventInfoInCr eventInfoInCrList() {
+    EventInfoInCr member = new EventInfoInCr();
+    member.setModelTypeName("event_info_in_cr");
+    member.setName("change_request_type");
+    member.setMemberName("eventInfoInCrList");
+    member.setRelationName("changeRequestType");
     member.setReferDirection(false);
     append(member);
     return member;

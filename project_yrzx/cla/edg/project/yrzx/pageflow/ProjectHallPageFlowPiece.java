@@ -53,7 +53,7 @@ public class ProjectHallPageFlowPiece extends PieceOfScript {
 		viewProject5Book(script, "五书详情", "YOURONG_5BOOK");
 		viewProjectElementIn3Levels(script, "合同任务", "PROJECT_CONTRACT");
 		viewProjectElementIn4Levels(script, "项目资料", "PROJECT_DOCS");
-		viewFinancialService(script, "金融服务", "FINANCIAL_SERVICE");
+		viewFinancialService(script, "项目扶持", "FINANCIAL_SERVICE");
 		viewMaterialManagement(script, "材料管理", "MATERIALS_MANAGEMENT");
 		script.request("view project material review list").with_string("item id").with_last_record_id()
 				.comments("查看项目资料的所有审批记录列表").need_login().no_footprint()
@@ -168,13 +168,13 @@ public class ProjectHallPageFlowPiece extends PieceOfScript {
 				.request("view financial service pannel").comments("查看金融服务分类").with_string("project id").need_login().has_footprint().got_page("financial service pannel")
 
 				//二级
-				.request("view loan fund list").comments("查看贷款资金列表").with_string("project id").need_login().has_footprint().with_last_record_id().got_page("loan fund list")
-				.request("view loan application list").comments("查看贷款申请列表").with_string("project id").with_string("filter").need_login().has_footprint().with_last_record_id().got_page("loan application list")
-				.request("view loan contract list").comments("查看贷款合同列表").with_string("project id").with_string("filter").need_login().has_footprint().with_last_record_id().got_page("loan contract list")
+				.request("view help fund list").comments("查看贷款资金列表").with_string("project id").need_login().has_footprint().with_last_record_id().got_page("help fund list")
+				.request("view help application list").comments("查看贷款申请列表").with_string("project id").with_string("filter").need_login().has_footprint().with_last_record_id().got_page("help application list")
+				.request("view help contract list").comments("查看贷款合同列表").with_string("project id").with_string("filter").need_login().has_footprint().with_last_record_id().got_page("help contract list")
 
 				//三级
-				.request("view loan application detail").comments("查看贷款申请详情").with_string("item id").need_login().has_footprint().got_page("loan application detail")
-				.request("view loan contract detail").comments("查看贷款合同详情").with_string("item id").need_login().has_footprint().got_page("loan contract detail");
+				.request("view help application detail").comments("查看贷款申请详情").with_string("item id").need_login().has_footprint().got_page("help application detail")
+				.request("view help contract detail").comments("查看贷款合同详情").with_string("item id").need_login().has_footprint().got_page("help contract detail");
 
 	}
 

@@ -300,33 +300,22 @@ public class Project extends BaseModelBean {
     return member;
   }
 
-  public LoanFund loanFundList() {
-    LoanFund member = new LoanFund();
-    member.setModelTypeName("loan_fund");
-    member.setName("project");
-    member.setMemberName("loanFundList");
-    member.setRelationName("project");
+  public HelpApplication helpApplicationList() {
+    HelpApplication member = new HelpApplication();
+    member.setModelTypeName("help_application");
+    member.setName("help_project");
+    member.setMemberName("helpApplicationList");
+    member.setRelationName("helpProject");
     member.setReferDirection(false);
     append(member);
     return member;
   }
 
-  public LoanApplication loanApplicationList() {
-    LoanApplication member = new LoanApplication();
-    member.setModelTypeName("loan_application");
-    member.setName("loan_project");
-    member.setMemberName("loanApplicationList");
-    member.setRelationName("loanProject");
-    member.setReferDirection(false);
-    append(member);
-    return member;
-  }
-
-  public LoanContract loanContractList() {
-    LoanContract member = new LoanContract();
-    member.setModelTypeName("loan_contract");
+  public HelpContract helpContractList() {
+    HelpContract member = new HelpContract();
+    member.setModelTypeName("help_contract");
     member.setName("project");
-    member.setMemberName("loanContractList");
+    member.setMemberName("helpContractList");
     member.setRelationName("project");
     member.setReferDirection(false);
     append(member);
@@ -443,6 +432,17 @@ public class Project extends BaseModelBean {
     return member;
   }
 
+  public EventAdditionalContractBasicInfo eventAdditionalContractBasicInfoList() {
+    EventAdditionalContractBasicInfo member = new EventAdditionalContractBasicInfo();
+    member.setModelTypeName("event_additional_contract_basic_info");
+    member.setName("project");
+    member.setMemberName("eventAdditionalContractBasicInfoList");
+    member.setRelationName("project");
+    member.setReferDirection(false);
+    append(member);
+    return member;
+  }
+
   public EventSubcontractApplication eventSubcontractApplicationList() {
     EventSubcontractApplication member = new EventSubcontractApplication();
     member.setModelTypeName("event_subcontract_application");
@@ -454,22 +454,44 @@ public class Project extends BaseModelBean {
     return member;
   }
 
-  public EventCreateLoanContract eventCreateLoanContractList() {
-    EventCreateLoanContract member = new EventCreateLoanContract();
-    member.setModelTypeName("event_create_loan_contract");
+  public EventAddDesignDocument eventAddDesignDocumentList() {
+    EventAddDesignDocument member = new EventAddDesignDocument();
+    member.setModelTypeName("event_add_design_document");
     member.setName("project");
-    member.setMemberName("eventCreateLoanContractList");
+    member.setMemberName("eventAddDesignDocumentList");
     member.setRelationName("project");
     member.setReferDirection(false);
     append(member);
     return member;
   }
 
-  public EventCreateProjectOrganization eventCreateProjectOrganizationList() {
-    EventCreateProjectOrganization member = new EventCreateProjectOrganization();
-    member.setModelTypeName("event_create_project_organization");
+  public EventContractBasicInfo eventContractBasicInfoList() {
+    EventContractBasicInfo member = new EventContractBasicInfo();
+    member.setModelTypeName("event_contract_basic_info");
     member.setName("project");
-    member.setMemberName("eventCreateProjectOrganizationList");
+    member.setMemberName("eventContractBasicInfoList");
+    member.setRelationName("project");
+    member.setReferDirection(false);
+    append(member);
+    return member;
+  }
+
+  public EventLoanContractBasicInfo eventLoanContractBasicInfoList() {
+    EventLoanContractBasicInfo member = new EventLoanContractBasicInfo();
+    member.setModelTypeName("event_loan_contract_basic_info");
+    member.setName("project");
+    member.setMemberName("eventLoanContractBasicInfoList");
+    member.setRelationName("project");
+    member.setReferDirection(false);
+    append(member);
+    return member;
+  }
+
+  public EventSelectProject eventSelectProjectList() {
+    EventSelectProject member = new EventSelectProject();
+    member.setModelTypeName("event_select_project");
+    member.setName("project");
+    member.setMemberName("eventSelectProjectList");
     member.setRelationName("project");
     member.setReferDirection(false);
     append(member);

@@ -69,11 +69,11 @@ public class ProjectProgress extends BaseModelBean {
     return member;
   }
 
-  public LoanContract loanContractList() {
-    LoanContract member = new LoanContract();
-    member.setModelTypeName("loan_contract");
+  public HelpContract helpContractList() {
+    HelpContract member = new HelpContract();
+    member.setModelTypeName("help_contract");
     member.setName("project_progress");
-    member.setMemberName("loanContractList");
+    member.setMemberName("helpContractList");
     member.setRelationName("projectProgress");
     member.setReferDirection(false);
     append(member);
@@ -91,6 +91,17 @@ public class ProjectProgress extends BaseModelBean {
     return member;
   }
 
+  public EventAdditionalContractPaymentPhase eventAdditionalContractPaymentPhaseList() {
+    EventAdditionalContractPaymentPhase member = new EventAdditionalContractPaymentPhase();
+    member.setModelTypeName("event_additional_contract_payment_phase");
+    member.setName("project_progress");
+    member.setMemberName("eventAdditionalContractPaymentPhaseList");
+    member.setRelationName("projectProgress");
+    member.setReferDirection(false);
+    append(member);
+    return member;
+  }
+
   public EventContractPaymentPhase eventContractPaymentPhaseList() {
     EventContractPaymentPhase member = new EventContractPaymentPhase();
     member.setModelTypeName("event_contract_payment_phase");
@@ -102,11 +113,11 @@ public class ProjectProgress extends BaseModelBean {
     return member;
   }
 
-  public EventCreateLoanContract eventCreateLoanContractList() {
-    EventCreateLoanContract member = new EventCreateLoanContract();
-    member.setModelTypeName("event_create_loan_contract");
+  public EventLoanContractBasicInfo eventLoanContractBasicInfoList() {
+    EventLoanContractBasicInfo member = new EventLoanContractBasicInfo();
+    member.setModelTypeName("event_loan_contract_basic_info");
     member.setName("project_progress");
-    member.setMemberName("eventCreateLoanContractList");
+    member.setMemberName("eventLoanContractBasicInfoList");
     member.setRelationName("projectProgress");
     member.setReferDirection(false);
     append(member);
