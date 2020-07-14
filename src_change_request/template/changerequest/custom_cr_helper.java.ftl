@@ -28,7 +28,12 @@ public class ChangeRequestHelper extends ${projectName?cap_first}ChangeRequestHe
 		}
 	}
 	
-	
+	protected void afterFieldFulfilled(Custom${projectName?cap_first}UserContextImpl ctx, GenericFormPage requestData, ChangeRequest dbCrData,
+                                           CRFieldSpec fieldSpec, CRGroupData groupData, CRFieldData fieldData) throws Exception{
+        // when field data was prepared by default logical, will call it
+        // you can do you special logical for one field here.
+        super.afterFieldFulfilled(ctx, requestData,dbCrData,fieldSpec,groupData,fieldData);
+    }
 	
 	
 	

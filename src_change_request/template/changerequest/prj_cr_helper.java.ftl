@@ -394,6 +394,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 					}
 				}
 				setFieldSpecInfo(requestData, dbCrData, groupData, fieldData, fieldSpec);
+				afterFieldFulfilled(getUserContext(), requestData, dbCrData, fieldSpec, groupData, fieldData);
 				groupData.addField(fieldData);
 				fillAny = true;
 			}
@@ -430,10 +431,16 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
                 fieldData.setValue(TO_VALUE(getFieldValueWhenFillResponse(suggestedDefaultValue,requestData, dbCrData, groupData, fieldSpec)));
 			}
 			setFieldSpecInfo(requestData, dbCrData, groupData, fieldData, fieldSpec);
+			afterFieldFulfilled(getUserContext(), requestData, dbCrData, fieldSpec, groupData, fieldData);
 			groupData.addField(fieldData);
 		}
 	}
-	
+
+	protected void afterFieldFulfilled(CustomOpticalUserContextImpl userContext, GenericFormPage requestData, ChangeRequest dbCrData,
+                                       CRFieldSpec fieldSpec, CRGroupData groupData, CRFieldData fieldData) throws Exception{
+        // by default, nothing need do here
+    }
+
 	protected void doFieldChecking(ChangeRequestPostData postedData, CRFieldSpec fieldSpec, String fieldName, Object value) {
 		switch (fieldSpec.getName()) {
 <#list projectSpec.changeRequestList as crSpec>

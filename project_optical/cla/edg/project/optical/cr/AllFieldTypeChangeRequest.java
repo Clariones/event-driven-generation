@@ -15,7 +15,6 @@ public class AllFieldTypeChangeRequest implements ChangeRequestSpecFactory {
                         .range(1,40)
                     .has_field("mobile").zh_CN("电话").which_type_of(FieldType.MOBILE)
                         .with_style(UIStyle.INPUT_VERIFY_CODE)
-                        .link_to_url()
                     .has_field("gender").zh_CN("性别")
                         .values_canbe("male","男").or("female","女").or("secret","保密")
                         .with_style(UIStyle.INPUT_SINGLE_SELECT)

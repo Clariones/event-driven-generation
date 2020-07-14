@@ -299,10 +299,10 @@ public abstract class CRSBuildingServiceBaseLocalImpl implements ChangeRequestSp
 			fixFieldRangeIfNeeded(fieldSpec, "0", "1");
 			return String.format("%s.jpg", Utils.toJavaVariableName(fieldSpec.getName()));
 		case VIDEO:
-			fixFieldRangeIfNeeded(fieldSpec, "0", "1");
+			fixFieldRangeIfNeeded(fieldSpec, "0", "1024");
 			return String.format("%s.mp4", Utils.toJavaVariableName(fieldSpec.getName()));
 		case ATTACHMENT:
-			fixFieldRangeIfNeeded(fieldSpec, "0", "1");
+			fixFieldRangeIfNeeded(fieldSpec, "0", "1024");
 			return String.format("%s.docx", Utils.toJavaVariableName(fieldSpec.getName()));
 		case DATE:
 			fixFieldRangeIfNeeded(fieldSpec, "1970-1-1", "2099-12-31");
