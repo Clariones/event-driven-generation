@@ -212,6 +212,17 @@ public class DailyTaskType extends BaseModelBean {
     return member;
   }
 
+  public EventAddProjectMaterial eventAddProjectMaterialList() {
+    EventAddProjectMaterial member = new EventAddProjectMaterial();
+    member.setModelTypeName("event_add_project_material");
+    member.setName("type");
+    member.setMemberName("eventAddProjectMaterialList");
+    member.setRelationName("type");
+    member.setReferDirection(false);
+    append(member);
+    return member;
+  }
+
   // 普通属性
 
   public StringAttribute id() {

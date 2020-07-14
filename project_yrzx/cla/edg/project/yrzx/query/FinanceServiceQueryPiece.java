@@ -18,9 +18,8 @@ public class FinanceServiceQueryPiece extends PieceOfScript {
 		MODEL.helpApplication().status().eq("${filter}").optional()
 		)
 		.wants(
-
 				MODEL.helpApplication().status(),
-				MODEL.helpApplication().applicant(),
+				MODEL.helpApplication().submitter(),
 				MODEL.helpApplication().helpContractList()
 		)
 
@@ -47,12 +46,12 @@ public class FinanceServiceQueryPiece extends PieceOfScript {
 			.do_it_as()
 			.where(MODEL.helpApplication().id().eq("${id}"))
 			.wants(
-					MODEL.helpApplication().applicant(),
 					MODEL.helpApplication().status(),
 					MODEL.helpApplication().helpProject(),
 					MODEL.helpApplication().platform(),
 					MODEL.helpApplication().pledgedContract().contractPayItemList(),
-					MODEL.helpApplication().pledgedContract().partyA()
+					MODEL.helpApplication().pledgedContract().partyA(),
+					MODEL.helpApplication().submitter().worker().employer()
 					)
 
 

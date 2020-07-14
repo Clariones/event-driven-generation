@@ -201,6 +201,17 @@ public class ProjectNomination extends BaseModelBean {
     return member;
   }
 
+  public HelpApplication helpApplicationList() {
+    HelpApplication member = new HelpApplication();
+    member.setModelTypeName("help_application");
+    member.setName("submitter");
+    member.setMemberName("helpApplicationList");
+    member.setRelationName("submitter");
+    member.setReferDirection(false);
+    append(member);
+    return member;
+  }
+
   public MaterialPreservedSample materialPreservedSampleList() {
     MaterialPreservedSample member = new MaterialPreservedSample();
     member.setModelTypeName("material_preserved_sample");

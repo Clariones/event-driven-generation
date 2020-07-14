@@ -12,24 +12,13 @@ public class SupplementaryContractPayItem extends BaseModelBean {
 
   // 引用的对象
 
-  public ContractPayItem contractPayItem() {
-    ContractPayItem member = new ContractPayItem();
-    member.setModelTypeName("contract_pay_item");
-    member.setName("contract_pay_item");
-    member.setMemberName("contractPayItem");
-    member.setReferDirection(true);
-    member.setRelationName("contractPayItem");
-    append(member);
-    return member;
-  }
-
-  public SupplementaryContract supplementaryContract() {
+  public SupplementaryContract contract() {
     SupplementaryContract member = new SupplementaryContract();
     member.setModelTypeName("supplementary_contract");
-    member.setName("supplementary_contract");
-    member.setMemberName("supplementaryContract");
+    member.setName("contract");
+    member.setMemberName("contract");
     member.setReferDirection(true);
-    member.setRelationName("supplementaryContract");
+    member.setRelationName("contract");
     append(member);
     return member;
   }
@@ -56,13 +45,24 @@ public class SupplementaryContractPayItem extends BaseModelBean {
     return member;
   }
 
-  public AuditStatus status() {
-    AuditStatus member = new AuditStatus();
-    member.setModelTypeName("audit_status");
-    member.setName("status");
-    member.setMemberName("status");
+  public PayItemStatus payItemStatus() {
+    PayItemStatus member = new PayItemStatus();
+    member.setModelTypeName("pay_item_status");
+    member.setName("pay_item_status");
+    member.setMemberName("payItemStatus");
     member.setReferDirection(true);
-    member.setRelationName("status");
+    member.setRelationName("payItemStatus");
+    append(member);
+    return member;
+  }
+
+  public ProjectProgress projectProgress() {
+    ProjectProgress member = new ProjectProgress();
+    member.setModelTypeName("project_progress");
+    member.setName("project_progress");
+    member.setMemberName("projectProgress");
+    member.setReferDirection(true);
+    member.setRelationName("projectProgress");
     append(member);
     return member;
   }
@@ -98,11 +98,38 @@ public class SupplementaryContractPayItem extends BaseModelBean {
     return member;
   }
 
-  public NumberAttribute ajustment() {
+  public NumberAttribute payAmount() {
     NumberAttribute member = new NumberAttribute();
-    member.setModelTypeName("double");
-    // member.setName("ajustment");
-    member.setName("ajustment");
+    member.setModelTypeName("money");
+    // member.setName("payAmount");
+    member.setName("pay_amount");
+    useMember(member);
+    return member;
+  }
+
+  public NumberAttribute laborFee() {
+    NumberAttribute member = new NumberAttribute();
+    member.setModelTypeName("money");
+    // member.setName("laborFee");
+    member.setName("labor_fee");
+    useMember(member);
+    return member;
+  }
+
+  public NumberAttribute materialFee() {
+    NumberAttribute member = new NumberAttribute();
+    member.setModelTypeName("money");
+    // member.setName("materialFee");
+    member.setName("material_fee");
+    useMember(member);
+    return member;
+  }
+
+  public NumberAttribute otherFee() {
+    NumberAttribute member = new NumberAttribute();
+    member.setModelTypeName("money");
+    // member.setName("otherFee");
+    member.setName("other_fee");
     useMember(member);
     return member;
   }

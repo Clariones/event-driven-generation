@@ -83,6 +83,15 @@ public class EventHelpApplication extends BaseModelBean {
     return member;
   }
 
+  public StringAttribute borrowerUnit() {
+    StringAttribute member = new StringAttribute();
+    member.setModelTypeName("string");
+    // member.setName("borrowerUnit");
+    member.setName("borrower_unit");
+    useMember(member);
+    return member;
+  }
+
   public NumberAttribute amount() {
     NumberAttribute member = new NumberAttribute();
     member.setModelTypeName("money");
@@ -97,6 +106,15 @@ public class EventHelpApplication extends BaseModelBean {
     member.setModelTypeName("string_longtext");
     // member.setName("loanUsage");
     member.setName("loan_usage");
+    useMember(member);
+    return member;
+  }
+
+  public StringAttribute materialMerchant() {
+    StringAttribute member = new StringAttribute();
+    member.setModelTypeName("string_longtext");
+    // member.setName("materialMerchant");
+    member.setName("material_merchant");
     useMember(member);
     return member;
   }

@@ -102,28 +102,6 @@ public class Merchant extends BaseModelBean {
     return member;
   }
 
-  public SupplementaryContractPayItem supplementaryContractPayItemListAsPayer() {
-    SupplementaryContractPayItem member = new SupplementaryContractPayItem();
-    member.setModelTypeName("supplementary_contract_pay_item");
-    member.setName("payer");
-    member.setMemberName("supplementaryContractPayItemListAsPayer");
-    member.setRelationName("payer");
-    member.setReferDirection(false);
-    append(member);
-    return member;
-  }
-
-  public SupplementaryContractPayItem supplementaryContractPayItemListAsPayee() {
-    SupplementaryContractPayItem member = new SupplementaryContractPayItem();
-    member.setModelTypeName("supplementary_contract_pay_item");
-    member.setName("payee");
-    member.setMemberName("supplementaryContractPayItemListAsPayee");
-    member.setRelationName("payer");
-    member.setReferDirection(false);
-    append(member);
-    return member;
-  }
-
   public CommissionPayItem commissionPayItemListAsPayer() {
     CommissionPayItem member = new CommissionPayItem();
     member.setModelTypeName("commission_pay_item");
@@ -355,6 +333,28 @@ public class Merchant extends BaseModelBean {
     return member;
   }
 
+  public HelpApplicationBeneficiary helpApplicationBeneficiaryList() {
+    HelpApplicationBeneficiary member = new HelpApplicationBeneficiary();
+    member.setModelTypeName("help_application_beneficiary");
+    member.setName("merchant");
+    member.setMemberName("helpApplicationBeneficiaryList");
+    member.setRelationName("merchant");
+    member.setReferDirection(false);
+    append(member);
+    return member;
+  }
+
+  public HelpContractBeneficiary helpContractBeneficiaryList() {
+    HelpContractBeneficiary member = new HelpContractBeneficiary();
+    member.setModelTypeName("help_contract_beneficiary");
+    member.setName("merchant");
+    member.setMemberName("helpContractBeneficiaryList");
+    member.setRelationName("merchant");
+    member.setReferDirection(false);
+    append(member);
+    return member;
+  }
+
   public HelpContract helpContractList() {
     HelpContract member = new HelpContract();
     member.setModelTypeName("help_contract");
@@ -514,6 +514,17 @@ public class Merchant extends BaseModelBean {
     member.setModelTypeName("event_add_design_document");
     member.setName("submitter");
     member.setMemberName("eventAddDesignDocumentList");
+    member.setRelationName("submitter");
+    member.setReferDirection(false);
+    append(member);
+    return member;
+  }
+
+  public EventAddProjectMaterial eventAddProjectMaterialList() {
+    EventAddProjectMaterial member = new EventAddProjectMaterial();
+    member.setModelTypeName("event_add_project_material");
+    member.setName("submitter");
+    member.setMemberName("eventAddProjectMaterialList");
     member.setRelationName("submitter");
     member.setReferDirection(false);
     append(member);

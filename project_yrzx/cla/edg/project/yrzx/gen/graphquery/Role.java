@@ -9,6 +9,7 @@ public class Role extends BaseModelBean {
     return "com.yrdec.yrzx.role.Role";
   }
   // 枚举对象
+  public static EnumAttribute HEAD = new EnumAttribute("com.yrdec.yrzx.role.Role", "HEAD");
   public static EnumAttribute ADMIN = new EnumAttribute("com.yrdec.yrzx.role.Role", "ADMIN");
   public static EnumAttribute FINANCE = new EnumAttribute("com.yrdec.yrzx.role.Role", "FINANCE");
   public static EnumAttribute WORKER = new EnumAttribute("com.yrdec.yrzx.role.Role", "WORKER");

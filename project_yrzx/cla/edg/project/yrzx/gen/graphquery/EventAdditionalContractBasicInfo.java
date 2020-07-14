@@ -34,6 +34,17 @@ public class EventAdditionalContractBasicInfo extends BaseModelBean {
     return member;
   }
 
+  public ContractPayItem contractPayItem() {
+    ContractPayItem member = new ContractPayItem();
+    member.setModelTypeName("contract_pay_item");
+    member.setName("contract_pay_item");
+    member.setMemberName("contractPayItem");
+    member.setReferDirection(true);
+    member.setRelationName("contractPayItem");
+    append(member);
+    return member;
+  }
+
   public SupplementaryContractType contractType() {
     SupplementaryContractType member = new SupplementaryContractType();
     member.setModelTypeName("supplementary_contract_type");
@@ -63,6 +74,17 @@ public class EventAdditionalContractBasicInfo extends BaseModelBean {
     member.setMemberName("submitter");
     member.setReferDirection(true);
     member.setRelationName("submitter");
+    append(member);
+    return member;
+  }
+
+  public ProjectProgress projectProgress() {
+    ProjectProgress member = new ProjectProgress();
+    member.setModelTypeName("project_progress");
+    member.setName("project_progress");
+    member.setMemberName("projectProgress");
+    member.setReferDirection(true);
+    member.setRelationName("projectProgress");
     append(member);
     return member;
   }
@@ -123,6 +145,69 @@ public class EventAdditionalContractBasicInfo extends BaseModelBean {
     member.setModelTypeName("string_document");
     // member.setName("document");
     member.setName("document");
+    useMember(member);
+    return member;
+  }
+
+  public StringAttribute criteria() {
+    StringAttribute member = new StringAttribute();
+    member.setModelTypeName("string_longtext");
+    // member.setName("criteria");
+    member.setName("criteria");
+    useMember(member);
+    return member;
+  }
+
+  public NumberAttribute subTotal() {
+    NumberAttribute member = new NumberAttribute();
+    member.setModelTypeName("money");
+    // member.setName("subTotal");
+    member.setName("sub_total");
+    useMember(member);
+    return member;
+  }
+
+  public NumberAttribute laborFee() {
+    NumberAttribute member = new NumberAttribute();
+    member.setModelTypeName("money");
+    // member.setName("laborFee");
+    member.setName("labor_fee");
+    useMember(member);
+    return member;
+  }
+
+  public NumberAttribute materialFee() {
+    NumberAttribute member = new NumberAttribute();
+    member.setModelTypeName("money");
+    // member.setName("materialFee");
+    member.setName("material_fee");
+    useMember(member);
+    return member;
+  }
+
+  public NumberAttribute otherFee() {
+    NumberAttribute member = new NumberAttribute();
+    member.setModelTypeName("money");
+    // member.setName("otherFee");
+    member.setName("other_fee");
+    useMember(member);
+    return member;
+  }
+
+  public StringAttribute comments() {
+    StringAttribute member = new StringAttribute();
+    member.setModelTypeName("string_longtext");
+    // member.setName("comments");
+    member.setName("comments");
+    useMember(member);
+    return member;
+  }
+
+  public DateTimeAttribute expectedPayTime() {
+    DateTimeAttribute member = new DateTimeAttribute();
+    member.setModelTypeName("date");
+    // member.setName("expectedPayTime");
+    member.setName("expected_pay_time");
     useMember(member);
     return member;
   }
