@@ -2,10 +2,7 @@ package cla.edg.project.moyi;
 
 import cla.edg.pageflow.PageFlowScript;
 import cla.edg.pageflow.PieceOfScript;
-import cla.edg.project.moyi.gen.graphquery.ArtworkAuctionStatus;
-import cla.edg.project.moyi.gen.graphquery.InkDeedStatus;
-import cla.edg.project.moyi.gen.graphquery.MODEL;
-import cla.edg.project.moyi.gen.graphquery.SurvivalStatus;
+import cla.edg.project.moyi.gen.graphquery.*;
 
 public class V4FindScript extends PieceOfScript {
 	@Override
@@ -53,7 +50,10 @@ public class V4FindScript extends PieceOfScript {
 			.query(MODEL.hotShopRank()).list_of("all").pagination()
 				.comments("按照热度查询所有的店铺")
 				.do_it_as()
-					.where(MODEL.hotShopRank().moyiShop().not_null(), MODEL.hotShopRank().moyiShop().moyi().not_null())
+					.where(MODEL.hotShopRank().moyiShop().not_null(),
+							MODEL.hotShopRank().moyiShop().certificate().certificateStatus().code().eq(CertificateStatus.CERTIFICATED),
+							MODEL.hotShopRank().moyiShop().availableDeposit().bigger(0),
+							MODEL.hotShopRank().moyiShop().moyi().not_null())
 					.order_by(MODEL.hotShopRank().rankPoint()).desc()
 						.order_by(MODEL.hotShopRank().runningDays()).desc()
 						.order_by(MODEL.hotShopRank().moyiShop()).desc()
@@ -62,12 +62,22 @@ public class V4FindScript extends PieceOfScript {
 			.query(MODEL.hotShopRank()).list_of("artwork type").pagination().with_string("artwork type id")
 				.comments("按照热度查询所有的店铺")
 				.do_it_as()
-					.where(MODEL.hotShopRank().moyiShop().artworkAuctionList().artwork().artworkType().eq("${artwork type id}"))
+					.where(MODEL.hotShopRank().moyiShop().artworkAuctionList().artwork().artworkType().eq("${artwork type id}"),
+							MODEL.hotShopRank().moyiShop().certificate().certificateStatus().code().eq(CertificateStatus.CERTIFICATED),
+							MODEL.hotShopRank().moyiShop().availableDeposit().bigger(0))
 					.order_by(MODEL.hotShopRank().rankPoint()).desc()
 						.order_by(MODEL.hotShopRank().runningDays()).desc()
 						.order_by(MODEL.hotShopRank().moyiShop()).desc()
 					.wants(MODEL.hotShopRank().moyiShop().shopkeeper(), MODEL.moyiShop().certificate().moyiShopType())
-					
+
+			.query(MODEL.artwork()).list_of("shop for hot display").with_string("shop id")
+				.comments("查找店铺相关的3副作品")
+				.do_it_as()
+					.where(MODEL.artwork().postBy().moyiShopList().id().eq("${shop id}"),
+							MODEL.artwork().active().code().eq(SurvivalStatus.NORMAL))
+					.top_5()
+					.wants(MODEL.artwork().artworkImageList())
+
 			.find(MODEL.artworkAuction()).which("by shop").with_string("shop id")
 				.comments("统计店铺的拍品数量")
 				.do_it_as().count()
@@ -88,7 +98,9 @@ public class V4FindScript extends PieceOfScript {
 			.query(MODEL.artworkAuction()).list_of("hot in shop").with_string("shop id")
 				.comments("查询店铺中最 hot 的几个作品")
 				.do_it_as()
-				.where(MODEL.artworkAuction().moyiShop().eq("${shop id}"))
+				.where(MODEL.artworkAuction().moyiShop().eq("${shop id}"),
+						MODEL.artworkAuction().artworkAuctionStatus().code()
+								.not_in(ArtworkAuctionStatus.CANCELLED, ArtworkAuctionStatus.WAIT_FOR_DISPLAY))
 				.top_3()
 				.order_by(MODEL.artworkAuction().artworkAuctionStatus()).asc()
 					.order_by(MODEL.artworkAuction().auctionEndTime()).desc()

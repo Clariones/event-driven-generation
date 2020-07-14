@@ -4,9 +4,9 @@ import java.util.Map;
 
 import cla.edg.modelbean.*;
 
-public class Merchant extends BaseModelBean {
+public class CommunityStatistic extends BaseModelBean {
   public String getFullClassName() {
-    return "com.doublechaintech.optical.merchant.Merchant";
+    return "com.doublechaintech.optical.communitystatistic.CommunityStatistic";
   }
   // 枚举对象
 
@@ -25,28 +25,6 @@ public class Merchant extends BaseModelBean {
 
   // 被引用的对象
 
-  public MainOrder mainOrderList() {
-    MainOrder member = new MainOrder();
-    member.setModelTypeName("main_order");
-    member.setName("seller");
-    member.setMemberName("mainOrderList");
-    member.setRelationName("seller");
-    member.setReferDirection(false);
-    append(member);
-    return member;
-  }
-
-  public EventSimpleType eventSimpleTypeList() {
-    EventSimpleType member = new EventSimpleType();
-    member.setModelTypeName("event_simple_type");
-    member.setName("field_biz_candidate");
-    member.setMemberName("eventSimpleTypeList");
-    member.setRelationName("fieldBizCandidate");
-    member.setReferDirection(false);
-    append(member);
-    return member;
-  }
-
   // 普通属性
 
   public StringAttribute id() {
@@ -58,11 +36,29 @@ public class Merchant extends BaseModelBean {
     return member;
   }
 
-  public StringAttribute name() {
+  public StringAttribute indexTitle() {
     StringAttribute member = new StringAttribute();
     member.setModelTypeName("string");
-    // member.setName("name");
-    member.setName("name");
+    // member.setName("indexTitle");
+    member.setName("index_title");
+    useMember(member);
+    return member;
+  }
+
+  public NumberAttribute indexValue() {
+    NumberAttribute member = new NumberAttribute();
+    member.setModelTypeName("int");
+    // member.setName("indexValue");
+    member.setName("index_value");
+    useMember(member);
+    return member;
+  }
+
+  public StringAttribute icon() {
+    StringAttribute member = new StringAttribute();
+    member.setModelTypeName("string_image");
+    // member.setName("icon");
+    member.setName("icon");
     useMember(member);
     return member;
   }

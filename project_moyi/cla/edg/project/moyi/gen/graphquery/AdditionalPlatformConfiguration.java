@@ -49,6 +49,10 @@ public class AdditionalPlatformConfiguration extends BaseModelBean {
       new EnumAttribute(
           "com.terapico.moyi.additionalplatformconfiguration.AdditionalPlatformConfiguration",
           "TIPS_WHEN_OPEN_SHOP");
+  public static EnumAttribute TIPS_WHEN_NO_INKDEED_CAN_BUY =
+      new EnumAttribute(
+          "com.terapico.moyi.additionalplatformconfiguration.AdditionalPlatformConfiguration",
+          "TIPS_WHEN_NO_INKDEED_CAN_BUY");
 
   // 引用的对象
 

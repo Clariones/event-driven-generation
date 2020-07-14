@@ -108,11 +108,20 @@ public class GenerationHelper extends BaseHelper {
 			if (FieldType.MULTI_TEXT.isEquals(inputType)) {
 				value = "text()";
 			}
+			if (FieldType.RICH_TEXT.isEquals(inputType)) {
+				value = "richText()";
+			}
 			if (FieldType.INTEGER.isEquals(inputType)) {
 				value = "999999999|123456789";
 			}
 			if (FieldType.IMAGE.isEquals(inputType)) {
 				value = "product.jpg";
+			}
+			if (FieldType.VIDEO.isEquals(inputType)) {
+				value = "introduce.mp4";
+			}
+			if (FieldType.ATTACHMENT.isEquals(inputType)) {
+				value = "product.docx";
 			}
 			if (FieldType.IMAGES.isEquals(inputType)) {
 				value = "images()";

@@ -36,6 +36,17 @@ public class Platform extends BaseModelBean {
     return member;
   }
 
+  public CommunityStatistic communityStatisticList() {
+    CommunityStatistic member = new CommunityStatistic();
+    member.setModelTypeName("community_statistic");
+    member.setName("platform");
+    member.setMemberName("communityStatisticList");
+    member.setRelationName("platform");
+    member.setReferDirection(false);
+    append(member);
+    return member;
+  }
+
   public User userList() {
     User member = new User();
     member.setModelTypeName("user");

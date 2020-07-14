@@ -2,9 +2,11 @@ package com.terapico.changerequest.builder;
 
 public enum UIStyle {
 	INPUT_TEXT("text"),
+	INPUT_VERIFY_CODE("vcode"),
 	INPUT_EMAIL("email"),
 	INPUT_URL("url"),
 	INPUT_TEXTAREA("textarea"),
+	INPUT_RICHTEXT("richtext"),
 	INPUT_LONGTEXT("longtext"),
 	INPUT_INTEGER("integer"),
 	INPUT_DOUBLE("double"),
@@ -17,6 +19,8 @@ public enum UIStyle {
 	INPUT_MULTI_SELECT("multi-select"),
 	INPUT_TREE_SELECT("tree-select"),
 	INPUT_IMAGE("image"),
+	INPUT_VIDEO("video"),
+	INPUT_ATTACHMENT("file"),
 	INPUT_ARTICLE("article"),
 	INPUT_OBJECT_SELECT("object-selector");
 	

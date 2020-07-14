@@ -2,10 +2,13 @@ package com.terapico.changerequest.builder;
 
 public enum FieldType {
 	TEXT("string","String"), 
-	MULTI_TEXT("longtext", "String"), 
+	MULTI_TEXT("longtext", "String"),
+	RICH_TEXT("rich_text", "String"),
 	BOOLEAN("boolean", "Boolean"), 
 	IMAGES("images", "Images"), 
-	IMAGE("image", "String"), 
+	IMAGE("image", "String"),
+	VIDEO("video", "String"),
+	ATTACHMENT("file", "String"),
 	DATE("date", "Date"), 
 	DATE_TIME("datetime", "DateTime"), 
 	TIME("time", "Date"), 

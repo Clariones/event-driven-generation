@@ -9,6 +9,9 @@ public class ChangeRequestType extends BaseModelBean {
     return "com.doublechaintech.optical.changerequesttype.ChangeRequestType";
   }
   // 枚举对象
+  public static EnumAttribute DEMO_ALL_FIELD =
+      new EnumAttribute(
+          "com.doublechaintech.optical.changerequesttype.ChangeRequestType", "DEMO_ALL_FIELD");
   public static EnumAttribute TEST_CR =
       new EnumAttribute(
           "com.doublechaintech.optical.changerequesttype.ChangeRequestType", "TEST_CR");
@@ -34,6 +37,17 @@ public class ChangeRequestType extends BaseModelBean {
     member.setName("request_type");
     member.setMemberName("changeRequestList");
     member.setRelationName("requestType");
+    member.setReferDirection(false);
+    append(member);
+    return member;
+  }
+
+  public EventInfoInCr eventInfoInCrList() {
+    EventInfoInCr member = new EventInfoInCr();
+    member.setModelTypeName("event_info_in_cr");
+    member.setName("change_request_type");
+    member.setMemberName("eventInfoInCrList");
+    member.setRelationName("changeRequestType");
     member.setReferDirection(false);
     append(member);
     return member;

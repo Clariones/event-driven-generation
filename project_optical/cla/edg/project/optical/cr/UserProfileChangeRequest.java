@@ -22,7 +22,7 @@ public class UserProfileChangeRequest implements ChangeRequestSpecFactory {
                     .has_field("name").zh_CN("姓名")
                         .fill_by_request("catalog id", MODEL.catalog().name())
             .step("step 2").zh_CN("宴会内容")
-                .contains_event("dinner").zh_CN("宴会")
+                .contains_event("dinner").zh_CN("宴会").many_times(1,10).show_them_all_in_cr()
                     .has_field("invitor name").zh_CN("邀请人姓名").disabled()
                         .fill_by_submitted("name")
                     .has_field("dinner type").zh_CN("宴会相关产品").disabled()

@@ -287,6 +287,9 @@ public abstract class CRSBuildingServiceBaseLocalImpl implements ChangeRequestSp
 		case MULTI_TEXT:
 			fixFieldRangeIfNeeded(fieldSpec, fieldSpec.getIsRequired()?"1":null, (1024*1024*1024)+"");
 			return "text()";
+		case RICH_TEXT:
+			fixFieldRangeIfNeeded(fieldSpec, fieldSpec.getIsRequired()?"1":null, (1024*1024*1024)+"");
+			return "richText()";
 		case BOOLEAN:
 			return "true|false";
 		case IMAGES:
@@ -295,6 +298,12 @@ public abstract class CRSBuildingServiceBaseLocalImpl implements ChangeRequestSp
 		case IMAGE:
 			fixFieldRangeIfNeeded(fieldSpec, "0", "1");
 			return String.format("%s.jpg", Utils.toJavaVariableName(fieldSpec.getName()));
+		case VIDEO:
+			fixFieldRangeIfNeeded(fieldSpec, "0", "1");
+			return String.format("%s.mp4", Utils.toJavaVariableName(fieldSpec.getName()));
+		case ATTACHMENT:
+			fixFieldRangeIfNeeded(fieldSpec, "0", "1");
+			return String.format("%s.docx", Utils.toJavaVariableName(fieldSpec.getName()));
 		case DATE:
 			fixFieldRangeIfNeeded(fieldSpec, "1970-1-1", "2099-12-31");
 			return "2099-12-31";
@@ -366,11 +375,17 @@ public abstract class CRSBuildingServiceBaseLocalImpl implements ChangeRequestSp
 		switch (fieldSpec.getInputType()) {
 		case MULTI_TEXT: 
 			return UIStyle.INPUT_LONGTEXT.getName();
+		case RICH_TEXT:
+			return UIStyle.INPUT_RICHTEXT.getName();
 		case BOOLEAN:
 			return UIStyle.INPUT_BOOLEAN.getName();
 		case IMAGES:
 		case IMAGE:
 			return UIStyle.INPUT_IMAGE.getName();
+		case ATTACHMENT:
+			return UIStyle.INPUT_ATTACHMENT.getName();
+		case VIDEO:
+			return UIStyle.INPUT_VIDEO.getName();
 		case DATE:
 			return UIStyle.INPUT_DATE.getName();
 		case DATE_TIME:
@@ -390,6 +405,7 @@ public abstract class CRSBuildingServiceBaseLocalImpl implements ChangeRequestSp
 		case TIME:
 		case TEXT:
 			break;
+
 		default:
 			error(fieldSpec.getInputType() + "的calaFieldUiStyle()还没做");
 			break;

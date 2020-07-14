@@ -4,21 +4,21 @@ import java.util.Map;
 
 import cla.edg.modelbean.*;
 
-public class EventMaster extends BaseModelBean {
+public class UserAllowList extends BaseModelBean {
   public String getFullClassName() {
-    return "com.doublechaintech.optical.eventmaster.EventMaster";
+    return "com.doublechaintech.optical.userallowlist.UserAllowList";
   }
   // 枚举对象
 
   // 引用的对象
 
-  public ChangeRequest changeRequest() {
-    ChangeRequest member = new ChangeRequest();
-    member.setModelTypeName("change_request");
-    member.setName("change_request");
-    member.setMemberName("changeRequest");
+  public UserDomain domain() {
+    UserDomain member = new UserDomain();
+    member.setModelTypeName("user_domain");
+    member.setName("domain");
+    member.setMemberName("domain");
     member.setReferDirection(true);
-    member.setRelationName("changeRequest");
+    member.setRelationName("domain");
     append(member);
     return member;
   }
@@ -36,11 +36,20 @@ public class EventMaster extends BaseModelBean {
     return member;
   }
 
-  public StringAttribute name() {
+  public StringAttribute userIdentity() {
     StringAttribute member = new StringAttribute();
     member.setModelTypeName("string");
-    // member.setName("name");
-    member.setName("name");
+    // member.setName("userIdentity");
+    member.setName("user_identity");
+    useMember(member);
+    return member;
+  }
+
+  public StringAttribute userSpecialFunctions() {
+    StringAttribute member = new StringAttribute();
+    member.setModelTypeName("string");
+    // member.setName("userSpecialFunctions");
+    member.setName("user_special_functions");
     useMember(member);
     return member;
   }

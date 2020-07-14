@@ -157,6 +157,10 @@ public class RouteUtil {
 				paramValueExpList.add(wrapString((String) op2));
 				return "?";
 			}
+			if (op2 instanceof Integer) {
+				paramValueExpList.add(wrapString(String.valueOf(op2)));
+				return "?";
+			}
 			if (op2 instanceof BaseModelBean) {
 				BaseModelBean node = (BaseModelBean) op2;
 				String alias = node.getBeanRoute().getCurrentMeetingPoint().getAlias();

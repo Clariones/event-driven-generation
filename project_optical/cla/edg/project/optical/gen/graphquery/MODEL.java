@@ -23,6 +23,12 @@ public class MODEL {
     return rst;
   }
 
+  public static CommunityStatistic communityStatistic() {
+    CommunityStatistic rst = new CommunityStatistic();
+    rst.setModelTypeName("community_statistic");
+    return rst;
+  }
+
   public static User user() {
     User rst = new User();
     rst.setModelTypeName("user");
@@ -533,15 +539,33 @@ public class MODEL {
     return rst;
   }
 
+  public static EventMaster eventMaster() {
+    EventMaster rst = new EventMaster();
+    rst.setModelTypeName("event_master");
+    return rst;
+  }
+
   public static EventDinner eventDinner() {
     EventDinner rst = new EventDinner();
     rst.setModelTypeName("event_dinner");
     return rst;
   }
 
-  public static EventMaster eventMaster() {
-    EventMaster rst = new EventMaster();
-    rst.setModelTypeName("event_master");
+  public static EventSimpleType eventSimpleType() {
+    EventSimpleType rst = new EventSimpleType();
+    rst.setModelTypeName("event_simple_type");
+    return rst;
+  }
+
+  public static EventOtherType eventOtherType() {
+    EventOtherType rst = new EventOtherType();
+    rst.setModelTypeName("event_other_type");
+    return rst;
+  }
+
+  public static EventInfoInCr eventInfoInCr() {
+    EventInfoInCr rst = new EventInfoInCr();
+    rst.setModelTypeName("event_info_in_cr");
     return rst;
   }
 
@@ -587,9 +611,9 @@ public class MODEL {
     return rst;
   }
 
-  public static UserWhiteList userWhiteList() {
-    UserWhiteList rst = new UserWhiteList();
-    rst.setModelTypeName("user_white_list");
+  public static UserAllowList userAllowList() {
+    UserAllowList rst = new UserAllowList();
+    rst.setModelTypeName("user_allow_list");
     return rst;
   }
 

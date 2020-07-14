@@ -47,6 +47,17 @@ public class ChangeRequest extends BaseModelBean {
     return member;
   }
 
+  public EventMaster eventMasterList() {
+    EventMaster member = new EventMaster();
+    member.setModelTypeName("event_master");
+    member.setName("change_request");
+    member.setMemberName("eventMasterList");
+    member.setRelationName("changeRequest");
+    member.setReferDirection(false);
+    append(member);
+    return member;
+  }
+
   public EventDinner eventDinnerList() {
     EventDinner member = new EventDinner();
     member.setModelTypeName("event_dinner");
@@ -58,11 +69,33 @@ public class ChangeRequest extends BaseModelBean {
     return member;
   }
 
-  public EventMaster eventMasterList() {
-    EventMaster member = new EventMaster();
-    member.setModelTypeName("event_master");
+  public EventSimpleType eventSimpleTypeList() {
+    EventSimpleType member = new EventSimpleType();
+    member.setModelTypeName("event_simple_type");
     member.setName("change_request");
-    member.setMemberName("eventMasterList");
+    member.setMemberName("eventSimpleTypeList");
+    member.setRelationName("changeRequest");
+    member.setReferDirection(false);
+    append(member);
+    return member;
+  }
+
+  public EventOtherType eventOtherTypeList() {
+    EventOtherType member = new EventOtherType();
+    member.setModelTypeName("event_other_type");
+    member.setName("change_request");
+    member.setMemberName("eventOtherTypeList");
+    member.setRelationName("changeRequest");
+    member.setReferDirection(false);
+    append(member);
+    return member;
+  }
+
+  public EventInfoInCr eventInfoInCrList() {
+    EventInfoInCr member = new EventInfoInCr();
+    member.setModelTypeName("event_info_in_cr");
+    member.setName("change_request");
+    member.setMemberName("eventInfoInCrList");
     member.setRelationName("changeRequest");
     member.setReferDirection(false);
     append(member);

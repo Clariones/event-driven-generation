@@ -4,9 +4,9 @@ import java.util.Map;
 
 import cla.edg.modelbean.*;
 
-public class EventMaster extends BaseModelBean {
+public class EventOtherType extends BaseModelBean {
   public String getFullClassName() {
-    return "com.doublechaintech.optical.eventmaster.EventMaster";
+    return "com.doublechaintech.optical.eventothertype.EventOtherType";
   }
   // 枚举对象
 
@@ -36,11 +36,29 @@ public class EventMaster extends BaseModelBean {
     return member;
   }
 
-  public StringAttribute name() {
+  public StringAttribute fieldRichtext() {
+    StringAttribute member = new StringAttribute();
+    member.setModelTypeName("string_longtext");
+    // member.setName("fieldRichtext");
+    member.setName("field_richtext");
+    useMember(member);
+    return member;
+  }
+
+  public StringAttribute fieldLongtext() {
+    StringAttribute member = new StringAttribute();
+    member.setModelTypeName("string_longtext");
+    // member.setName("fieldLongtext");
+    member.setName("field_longtext");
+    useMember(member);
+    return member;
+  }
+
+  public StringAttribute fieldVideo() {
     StringAttribute member = new StringAttribute();
     member.setModelTypeName("string");
-    // member.setName("name");
-    member.setName("name");
+    // member.setName("fieldVideo");
+    member.setName("field_video");
     useMember(member);
     return member;
   }
