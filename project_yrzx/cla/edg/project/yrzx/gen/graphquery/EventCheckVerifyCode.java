@@ -4,24 +4,13 @@ import java.util.Map;
 
 import cla.edg.modelbean.*;
 
-public class EventApplyRecommendation extends BaseModelBean {
+public class EventCheckVerifyCode extends BaseModelBean {
   public String getFullClassName() {
-    return "com.yrdec.yrzx.eventapplyrecommendation.EventApplyRecommendation";
+    return "com.yrdec.yrzx.eventcheckverifycode.EventCheckVerifyCode";
   }
   // 枚举对象
 
   // 引用的对象
-
-  public RecommendationType recommendationType() {
-    RecommendationType member = new RecommendationType();
-    member.setModelTypeName("recommendation_type");
-    member.setName("recommendation_type");
-    member.setMemberName("recommendationType");
-    member.setReferDirection(true);
-    member.setRelationName("recommendationType");
-    append(member);
-    return member;
-  }
 
   public ChangeRequest changeRequest() {
     ChangeRequest member = new ChangeRequest();
@@ -47,38 +36,29 @@ public class EventApplyRecommendation extends BaseModelBean {
     return member;
   }
 
-  public StringAttribute title() {
+  public StringAttribute verifyCode() {
     StringAttribute member = new StringAttribute();
     member.setModelTypeName("string");
-    // member.setName("title");
-    member.setName("title");
+    // member.setName("verifyCode");
+    member.setName("verify_code");
     useMember(member);
     return member;
   }
 
-  public StringAttribute comments() {
+  public StringAttribute itemId() {
     StringAttribute member = new StringAttribute();
     member.setModelTypeName("string");
-    // member.setName("comments");
-    member.setName("comments");
+    // member.setName("itemId");
+    member.setName("item_id");
     useMember(member);
     return member;
   }
 
-  public StringAttribute contactName() {
+  public StringAttribute itemType() {
     StringAttribute member = new StringAttribute();
     member.setModelTypeName("string");
-    // member.setName("contactName");
-    member.setName("contact_name");
-    useMember(member);
-    return member;
-  }
-
-  public StringAttribute contactMobile() {
-    StringAttribute member = new StringAttribute();
-    member.setModelTypeName("string_china_mobile_phone");
-    // member.setName("contactMobile");
-    member.setName("contact_mobile");
+    // member.setName("itemType");
+    member.setName("item_type");
     useMember(member);
     return member;
   }

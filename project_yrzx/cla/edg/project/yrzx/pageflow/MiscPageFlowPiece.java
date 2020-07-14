@@ -15,6 +15,8 @@ public class MiscPageFlowPiece extends PieceOfScript {
 		.request("view notification center").with_string("merchant id").comments("查看所有消息")
 				.got_page("notification center")
 
+		.request("view notification detail").with_string("item id").comments("消息详情").got_page("notification detail")
+
 		.request("view articles by page").no_login().with_string("page id")
 				.comments("按页面查看文章分组,用于首页的设计师和服务商")
 				.got_page("articles")

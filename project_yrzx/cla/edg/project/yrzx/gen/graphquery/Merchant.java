@@ -102,28 +102,6 @@ public class Merchant extends BaseModelBean {
     return member;
   }
 
-  public SupplementaryContractPayItem supplementaryContractPayItemListAsPayer() {
-    SupplementaryContractPayItem member = new SupplementaryContractPayItem();
-    member.setModelTypeName("supplementary_contract_pay_item");
-    member.setName("payer");
-    member.setMemberName("supplementaryContractPayItemListAsPayer");
-    member.setRelationName("payer");
-    member.setReferDirection(false);
-    append(member);
-    return member;
-  }
-
-  public SupplementaryContractPayItem supplementaryContractPayItemListAsPayee() {
-    SupplementaryContractPayItem member = new SupplementaryContractPayItem();
-    member.setModelTypeName("supplementary_contract_pay_item");
-    member.setName("payee");
-    member.setMemberName("supplementaryContractPayItemListAsPayee");
-    member.setRelationName("payer");
-    member.setReferDirection(false);
-    append(member);
-    return member;
-  }
-
   public CommissionPayItem commissionPayItemListAsPayer() {
     CommissionPayItem member = new CommissionPayItem();
     member.setModelTypeName("commission_pay_item");
@@ -355,22 +333,33 @@ public class Merchant extends BaseModelBean {
     return member;
   }
 
-  public LoanFund loanFundList() {
-    LoanFund member = new LoanFund();
-    member.setModelTypeName("loan_fund");
-    member.setName("fund_vendor");
-    member.setMemberName("loanFundList");
-    member.setRelationName("fundVendor");
+  public HelpApplicationBeneficiary helpApplicationBeneficiaryList() {
+    HelpApplicationBeneficiary member = new HelpApplicationBeneficiary();
+    member.setModelTypeName("help_application_beneficiary");
+    member.setName("merchant");
+    member.setMemberName("helpApplicationBeneficiaryList");
+    member.setRelationName("merchant");
     member.setReferDirection(false);
     append(member);
     return member;
   }
 
-  public LoanContract loanContractList() {
-    LoanContract member = new LoanContract();
-    member.setModelTypeName("loan_contract");
+  public HelpContractBeneficiary helpContractBeneficiaryList() {
+    HelpContractBeneficiary member = new HelpContractBeneficiary();
+    member.setModelTypeName("help_contract_beneficiary");
+    member.setName("merchant");
+    member.setMemberName("helpContractBeneficiaryList");
+    member.setRelationName("merchant");
+    member.setReferDirection(false);
+    append(member);
+    return member;
+  }
+
+  public HelpContract helpContractList() {
+    HelpContract member = new HelpContract();
+    member.setModelTypeName("help_contract");
     member.setName("borrower_unit");
-    member.setMemberName("loanContractList");
+    member.setMemberName("helpContractList");
     member.setRelationName("borrowerUnit");
     member.setReferDirection(false);
     append(member);
@@ -509,6 +498,39 @@ public class Merchant extends BaseModelBean {
     return member;
   }
 
+  public EventShowAllTypeStepOne eventShowAllTypeStepOneList() {
+    EventShowAllTypeStepOne member = new EventShowAllTypeStepOne();
+    member.setModelTypeName("event_show_all_type_step_one");
+    member.setName("field_biz_candidate");
+    member.setMemberName("eventShowAllTypeStepOneList");
+    member.setRelationName("fieldBizCandidate");
+    member.setReferDirection(false);
+    append(member);
+    return member;
+  }
+
+  public EventAddDesignDocument eventAddDesignDocumentList() {
+    EventAddDesignDocument member = new EventAddDesignDocument();
+    member.setModelTypeName("event_add_design_document");
+    member.setName("submitter");
+    member.setMemberName("eventAddDesignDocumentList");
+    member.setRelationName("submitter");
+    member.setReferDirection(false);
+    append(member);
+    return member;
+  }
+
+  public EventAddProjectMaterial eventAddProjectMaterialList() {
+    EventAddProjectMaterial member = new EventAddProjectMaterial();
+    member.setModelTypeName("event_add_project_material");
+    member.setName("submitter");
+    member.setMemberName("eventAddProjectMaterialList");
+    member.setRelationName("submitter");
+    member.setReferDirection(false);
+    append(member);
+    return member;
+  }
+
   public EventContractBasicInfo eventContractBasicInfoListAsPartyA() {
     EventContractBasicInfo member = new EventContractBasicInfo();
     member.setModelTypeName("event_contract_basic_info");
@@ -531,12 +553,12 @@ public class Merchant extends BaseModelBean {
     return member;
   }
 
-  public EventShowAllTypeStepOne eventShowAllTypeStepOneList() {
-    EventShowAllTypeStepOne member = new EventShowAllTypeStepOne();
-    member.setModelTypeName("event_show_all_type_step_one");
-    member.setName("field_biz_candidate");
-    member.setMemberName("eventShowAllTypeStepOneList");
-    member.setRelationName("fieldBizCandidate");
+  public EventLoanContractBasicInfo eventLoanContractBasicInfoList() {
+    EventLoanContractBasicInfo member = new EventLoanContractBasicInfo();
+    member.setModelTypeName("event_loan_contract_basic_info");
+    member.setName("borrower_unit");
+    member.setMemberName("eventLoanContractBasicInfoList");
+    member.setRelationName("borrowerUnit");
     member.setReferDirection(false);
     append(member);
     return member;
@@ -581,83 +603,6 @@ public class Merchant extends BaseModelBean {
     member.setName("signer");
     member.setMemberName("signRecordList");
     member.setRelationName("signer");
-    member.setReferDirection(false);
-    append(member);
-    return member;
-  }
-
-  public EventCreateLoanContract eventCreateLoanContractList() {
-    EventCreateLoanContract member = new EventCreateLoanContract();
-    member.setModelTypeName("event_create_loan_contract");
-    member.setName("borrower_unit");
-    member.setMemberName("eventCreateLoanContractList");
-    member.setRelationName("borrowerUnit");
-    member.setReferDirection(false);
-    append(member);
-    return member;
-  }
-
-  public EventCreateProject eventCreateProjectListAsProjectOwner() {
-    EventCreateProject member = new EventCreateProject();
-    member.setModelTypeName("event_create_project");
-    member.setName("project_owner");
-    member.setMemberName("eventCreateProjectListAsProjectOwner");
-    member.setRelationName("projectOwner");
-    member.setReferDirection(false);
-    append(member);
-    return member;
-  }
-
-  public EventCreateProject eventCreateProjectListAsStore() {
-    EventCreateProject member = new EventCreateProject();
-    member.setModelTypeName("event_create_project");
-    member.setName("store");
-    member.setMemberName("eventCreateProjectListAsStore");
-    member.setRelationName("projectOwner");
-    member.setReferDirection(false);
-    append(member);
-    return member;
-  }
-
-  public EventCreateProject eventCreateProjectListAsPartner() {
-    EventCreateProject member = new EventCreateProject();
-    member.setModelTypeName("event_create_project");
-    member.setName("partner");
-    member.setMemberName("eventCreateProjectListAsPartner");
-    member.setRelationName("projectOwner");
-    member.setReferDirection(false);
-    append(member);
-    return member;
-  }
-
-  public EventCreateProjectBaseInfo eventCreateProjectBaseInfoListAsProjectOwner() {
-    EventCreateProjectBaseInfo member = new EventCreateProjectBaseInfo();
-    member.setModelTypeName("event_create_project_base_info");
-    member.setName("project_owner");
-    member.setMemberName("eventCreateProjectBaseInfoListAsProjectOwner");
-    member.setRelationName("projectOwner");
-    member.setReferDirection(false);
-    append(member);
-    return member;
-  }
-
-  public EventCreateProjectBaseInfo eventCreateProjectBaseInfoListAsStore() {
-    EventCreateProjectBaseInfo member = new EventCreateProjectBaseInfo();
-    member.setModelTypeName("event_create_project_base_info");
-    member.setName("store");
-    member.setMemberName("eventCreateProjectBaseInfoListAsStore");
-    member.setRelationName("projectOwner");
-    member.setReferDirection(false);
-    append(member);
-    return member;
-  }
-
-  public EventCreateProjectBaseInfo eventCreateProjectBaseInfoListAsPartner() {
-    EventCreateProjectBaseInfo member = new EventCreateProjectBaseInfo();
-    member.setModelTypeName("event_create_project_base_info");
-    member.setName("partner");
-    member.setMemberName("eventCreateProjectBaseInfoListAsPartner");
-    member.setRelationName("projectOwner");
     member.setReferDirection(false);
     append(member);
     return member;
@@ -779,17 +724,6 @@ public class Merchant extends BaseModelBean {
     member.setName("owner");
     member.setMemberName("serviceVendorStatisticReportListAsOwner");
     member.setRelationName("vendor");
-    member.setReferDirection(false);
-    append(member);
-    return member;
-  }
-
-  public FinancialServiceStatisticReport financialServiceStatisticReportList() {
-    FinancialServiceStatisticReport member = new FinancialServiceStatisticReport();
-    member.setModelTypeName("financial_service_statistic_report");
-    member.setName("owner");
-    member.setMemberName("financialServiceStatisticReportList");
-    member.setRelationName("owner");
     member.setReferDirection(false);
     append(member);
     return member;

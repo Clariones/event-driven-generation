@@ -39,6 +39,15 @@ public class MerchantQueryPiece extends PieceOfScript {
 					MODEL.merchant().employeeNominationListAsEmployee().projectNominationList().projectRole().eq("${role id}"),
 					MODEL.merchant().employeeNominationListAsEmployee().projectNominationList().project().eq("${project id}")
 			)
+
+
+		.query(MODEL.merchant()).list_of("company by role").with_string("merchant id").with_string("role id")
+		.comments("查询公司中某职位的人")
+			.do_it_as()
+				.where(
+						MODEL.merchant().employeeNominationListAsEmployer().employer().eq("${merchant id}"),
+						MODEL.merchant().employeeNominationListAsEmployer().role().eq("${role id}")
+				)
 ;
 
 		return script;

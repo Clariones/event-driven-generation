@@ -179,6 +179,17 @@ public class DailyTaskType extends BaseModelBean {
     return member;
   }
 
+  public EventAcceptanceApplication eventAcceptanceApplicationList() {
+    EventAcceptanceApplication member = new EventAcceptanceApplication();
+    member.setModelTypeName("event_acceptance_application");
+    member.setName("acceptance_type");
+    member.setMemberName("eventAcceptanceApplicationList");
+    member.setRelationName("acceptanceType");
+    member.setReferDirection(false);
+    append(member);
+    return member;
+  }
+
   public EventProjectCommand eventProjectCommandList() {
     EventProjectCommand member = new EventProjectCommand();
     member.setModelTypeName("event_project_command");
@@ -190,12 +201,23 @@ public class DailyTaskType extends BaseModelBean {
     return member;
   }
 
-  public EventAcceptanceApplication eventAcceptanceApplicationList() {
-    EventAcceptanceApplication member = new EventAcceptanceApplication();
-    member.setModelTypeName("event_acceptance_application");
-    member.setName("acceptance_type");
-    member.setMemberName("eventAcceptanceApplicationList");
-    member.setRelationName("acceptanceType");
+  public EventAddDesignDocument eventAddDesignDocumentList() {
+    EventAddDesignDocument member = new EventAddDesignDocument();
+    member.setModelTypeName("event_add_design_document");
+    member.setName("type");
+    member.setMemberName("eventAddDesignDocumentList");
+    member.setRelationName("type");
+    member.setReferDirection(false);
+    append(member);
+    return member;
+  }
+
+  public EventAddProjectMaterial eventAddProjectMaterialList() {
+    EventAddProjectMaterial member = new EventAddProjectMaterial();
+    member.setModelTypeName("event_add_project_material");
+    member.setName("type");
+    member.setMemberName("eventAddProjectMaterialList");
+    member.setRelationName("type");
     member.setReferDirection(false);
     append(member);
     return member;

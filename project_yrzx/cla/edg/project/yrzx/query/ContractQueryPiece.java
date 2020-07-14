@@ -4,7 +4,6 @@ import cla.edg.pageflow.PageFlowScript;
 import cla.edg.pageflow.PieceOfScript;
 import cla.edg.project.yrzx.gen.graphquery.MODEL;
 import cla.edg.project.yrzx.gen.graphquery.PayItemStatus;
-import cla.edg.project.yrzx.gen.graphquery.PayItemType;
 
 public class ContractQueryPiece extends PieceOfScript {
 	@Override

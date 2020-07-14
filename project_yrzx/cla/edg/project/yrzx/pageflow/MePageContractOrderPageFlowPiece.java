@@ -121,6 +121,8 @@ public class MePageContractOrderPageFlowPiece extends PieceOfScript {
 					.comments("我的->合同订单->通知")
 					.got_page("project notifications")
 
+				.request("view my fine list").comments("我的罚款").with_last_record_id().got_page("fine list")
+
 
 				
 			;

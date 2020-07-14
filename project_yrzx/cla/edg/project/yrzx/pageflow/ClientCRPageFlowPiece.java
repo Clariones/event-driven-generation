@@ -123,12 +123,14 @@ public class ClientCRPageFlowPiece extends PieceOfScript {
 
 
 
-
+//
 				.request_with_changerequest("create contract").with_string("project id").with_string("type id")
 				.comments("创建合同")
 				.got_page("project contract detail")
 
-
+				.request_with_changerequest("create additional contract").with_string("project id").with_string("contract id")
+					.comments("创建增补合同")
+					.got_page("project contract detail")
 
 
 				.request_with_changerequest("review").need_login().with_string("project id").with_string("audit record id")
@@ -150,14 +152,17 @@ public class ClientCRPageFlowPiece extends PieceOfScript {
 					.comments("签收")
 					.got_page("redirect")
 
-                .request_with_changerequest("loan application").need_login().with_string("project id").with_string("employee nomination id")
+                .request_with_changerequest("help application").need_login().with_string("project id").with_string("project nomination id")
                     .comments("贷款申请")
-                    .got_page("loan application detail")
+                    .got_page("help application detail")
 
 
-//				.request_with_changerequest("create loan contract").need_login().with_string("project id").with_string("application id")
-//					.comments("创建贷款合同")
-//					.got_page("loan contract detail")
+				.request_with_changerequest("create loan contract").need_login().with_string("project id").with_string("application id")
+					.comments("创建贷款合同")
+					.got_page("loan contract detail")
+
+				.request("confirm help contract").comments("校验验证码").with_string("item type").with_string("item id").got_page("redirect")
+
 				;
 	}
 }

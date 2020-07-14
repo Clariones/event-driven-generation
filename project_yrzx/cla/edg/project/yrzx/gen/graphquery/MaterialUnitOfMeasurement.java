@@ -91,22 +91,11 @@ public class MaterialUnitOfMeasurement extends BaseModelBean {
     return member;
   }
 
-  public EventMaterialChangeInfo eventMaterialChangeInfoList() {
-    EventMaterialChangeInfo member = new EventMaterialChangeInfo();
-    member.setModelTypeName("event_material_change_info");
+  public EventMaterialPreservedBasicInfo eventMaterialPreservedBasicInfoList() {
+    EventMaterialPreservedBasicInfo member = new EventMaterialPreservedBasicInfo();
+    member.setModelTypeName("event_material_preserved_basic_info");
     member.setName("uom");
-    member.setMemberName("eventMaterialChangeInfoList");
-    member.setRelationName("uom");
-    member.setReferDirection(false);
-    append(member);
-    return member;
-  }
-
-  public EventMaterialAcceptanceBasicInfo eventMaterialAcceptanceBasicInfoList() {
-    EventMaterialAcceptanceBasicInfo member = new EventMaterialAcceptanceBasicInfo();
-    member.setModelTypeName("event_material_acceptance_basic_info");
-    member.setName("uom");
-    member.setMemberName("eventMaterialAcceptanceBasicInfoList");
+    member.setMemberName("eventMaterialPreservedBasicInfoList");
     member.setRelationName("uom");
     member.setReferDirection(false);
     append(member);
@@ -124,11 +113,22 @@ public class MaterialUnitOfMeasurement extends BaseModelBean {
     return member;
   }
 
-  public EventMaterialPreservedBasicInfo eventMaterialPreservedBasicInfoList() {
-    EventMaterialPreservedBasicInfo member = new EventMaterialPreservedBasicInfo();
-    member.setModelTypeName("event_material_preserved_basic_info");
+  public EventMaterialChangeInfo eventMaterialChangeInfoList() {
+    EventMaterialChangeInfo member = new EventMaterialChangeInfo();
+    member.setModelTypeName("event_material_change_info");
     member.setName("uom");
-    member.setMemberName("eventMaterialPreservedBasicInfoList");
+    member.setMemberName("eventMaterialChangeInfoList");
+    member.setRelationName("uom");
+    member.setReferDirection(false);
+    append(member);
+    return member;
+  }
+
+  public EventMaterialAcceptanceBasicInfo eventMaterialAcceptanceBasicInfoList() {
+    EventMaterialAcceptanceBasicInfo member = new EventMaterialAcceptanceBasicInfo();
+    member.setModelTypeName("event_material_acceptance_basic_info");
+    member.setName("uom");
+    member.setMemberName("eventMaterialAcceptanceBasicInfoList");
     member.setRelationName("uom");
     member.setReferDirection(false);
     append(member);

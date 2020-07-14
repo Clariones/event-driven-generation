@@ -4,21 +4,21 @@ import java.util.Map;
 
 import cla.edg.modelbean.*;
 
-public class LoanContract extends BaseModelBean {
+public class HelpContract extends BaseModelBean {
   public String getFullClassName() {
-    return "com.yrdec.yrzx.loancontract.LoanContract";
+    return "com.yrdec.yrzx.helpcontract.HelpContract";
   }
   // 枚举对象
 
   // 引用的对象
 
-  public LoanApplication loanApplication() {
-    LoanApplication member = new LoanApplication();
-    member.setModelTypeName("loan_application");
-    member.setName("loan_application");
-    member.setMemberName("loanApplication");
+  public HelpApplication helpApplication() {
+    HelpApplication member = new HelpApplication();
+    member.setModelTypeName("help_application");
+    member.setName("help_application");
+    member.setMemberName("helpApplication");
     member.setReferDirection(true);
-    member.setRelationName("loanApplication");
+    member.setRelationName("helpApplication");
     append(member);
     return member;
   }
@@ -67,6 +67,28 @@ public class LoanContract extends BaseModelBean {
     return member;
   }
 
+  public HelpContractStatus status() {
+    HelpContractStatus member = new HelpContractStatus();
+    member.setModelTypeName("help_contract_status");
+    member.setName("status");
+    member.setMemberName("status");
+    member.setReferDirection(true);
+    member.setRelationName("status");
+    append(member);
+    return member;
+  }
+
+  public AuditStatus auditStatus() {
+    AuditStatus member = new AuditStatus();
+    member.setModelTypeName("audit_status");
+    member.setName("audit_status");
+    member.setMemberName("auditStatus");
+    member.setReferDirection(true);
+    member.setRelationName("auditStatus");
+    append(member);
+    return member;
+  }
+
   public Platform platform() {
     Platform member = new Platform();
     member.setModelTypeName("platform");
@@ -78,25 +100,14 @@ public class LoanContract extends BaseModelBean {
     return member;
   }
 
-  public LoanContractStatus status() {
-    LoanContractStatus member = new LoanContractStatus();
-    member.setModelTypeName("loan_contract_status");
-    member.setName("status");
-    member.setMemberName("status");
-    member.setReferDirection(true);
-    member.setRelationName("status");
-    append(member);
-    return member;
-  }
-
   // 被引用的对象
 
-  public FinancialServiceStatisticReport financialServiceStatisticReportList() {
-    FinancialServiceStatisticReport member = new FinancialServiceStatisticReport();
-    member.setModelTypeName("financial_service_statistic_report");
-    member.setName("loan_contract");
-    member.setMemberName("financialServiceStatisticReportList");
-    member.setRelationName("loanContract");
+  public HelpContractBeneficiary helpContractBeneficiaryList() {
+    HelpContractBeneficiary member = new HelpContractBeneficiary();
+    member.setModelTypeName("help_contract_beneficiary");
+    member.setName("help_contract");
+    member.setMemberName("helpContractBeneficiaryList");
+    member.setRelationName("helpContract");
     member.setReferDirection(false);
     append(member);
     return member;
@@ -122,20 +133,20 @@ public class LoanContract extends BaseModelBean {
     return member;
   }
 
-  public StringAttribute loanUsage() {
+  public StringAttribute helpReason() {
     StringAttribute member = new StringAttribute();
     member.setModelTypeName("string_longtext");
-    // member.setName("loanUsage");
-    member.setName("loan_usage");
+    // member.setName("helpReason");
+    member.setName("help_reason");
     useMember(member);
     return member;
   }
 
-  public NumberAttribute loanAmount() {
+  public NumberAttribute helpAmount() {
     NumberAttribute member = new NumberAttribute();
     member.setModelTypeName("money");
-    // member.setName("loanAmount");
-    member.setName("loan_amount");
+    // member.setName("helpAmount");
+    member.setName("help_amount");
     useMember(member);
     return member;
   }

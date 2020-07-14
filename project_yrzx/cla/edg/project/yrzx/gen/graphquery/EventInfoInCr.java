@@ -4,24 +4,13 @@ import java.util.Map;
 
 import cla.edg.modelbean.*;
 
-public class EventApplyRecommendation extends BaseModelBean {
+public class EventInfoInCr extends BaseModelBean {
   public String getFullClassName() {
-    return "com.yrdec.yrzx.eventapplyrecommendation.EventApplyRecommendation";
+    return "com.yrdec.yrzx.eventinfoincr.EventInfoInCr";
   }
   // 枚举对象
 
   // 引用的对象
-
-  public RecommendationType recommendationType() {
-    RecommendationType member = new RecommendationType();
-    member.setModelTypeName("recommendation_type");
-    member.setName("recommendation_type");
-    member.setMemberName("recommendationType");
-    member.setReferDirection(true);
-    member.setRelationName("recommendationType");
-    append(member);
-    return member;
-  }
 
   public ChangeRequest changeRequest() {
     ChangeRequest member = new ChangeRequest();
@@ -30,6 +19,17 @@ public class EventApplyRecommendation extends BaseModelBean {
     member.setMemberName("changeRequest");
     member.setReferDirection(true);
     member.setRelationName("changeRequest");
+    append(member);
+    return member;
+  }
+
+  public ChangeRequestType changeRequestType() {
+    ChangeRequestType member = new ChangeRequestType();
+    member.setModelTypeName("change_request_type");
+    member.setName("change_request_type");
+    member.setMemberName("changeRequestType");
+    member.setReferDirection(true);
+    member.setRelationName("changeRequestType");
     append(member);
     return member;
   }
@@ -47,38 +47,47 @@ public class EventApplyRecommendation extends BaseModelBean {
     return member;
   }
 
-  public StringAttribute title() {
+  public StringAttribute status() {
     StringAttribute member = new StringAttribute();
     member.setModelTypeName("string");
-    // member.setName("title");
-    member.setName("title");
+    // member.setName("status");
+    member.setName("status");
     useMember(member);
     return member;
   }
 
-  public StringAttribute comments() {
+  public StringAttribute initiatorType() {
     StringAttribute member = new StringAttribute();
     member.setModelTypeName("string");
-    // member.setName("comments");
-    member.setName("comments");
+    // member.setName("initiatorType");
+    member.setName("initiator_type");
     useMember(member);
     return member;
   }
 
-  public StringAttribute contactName() {
+  public StringAttribute initiatorId() {
     StringAttribute member = new StringAttribute();
     member.setModelTypeName("string");
-    // member.setName("contactName");
-    member.setName("contact_name");
+    // member.setName("initiatorId");
+    member.setName("initiator_id");
     useMember(member);
     return member;
   }
 
-  public StringAttribute contactMobile() {
+  public StringAttribute eventsInfo() {
     StringAttribute member = new StringAttribute();
-    member.setModelTypeName("string_china_mobile_phone");
-    // member.setName("contactMobile");
-    member.setName("contact_mobile");
+    member.setModelTypeName("string_longtext");
+    // member.setName("eventsInfo");
+    member.setName("events_info");
+    useMember(member);
+    return member;
+  }
+
+  public DateTimeAttribute lastUpdateTime() {
+    DateTimeAttribute member = new DateTimeAttribute();
+    member.setModelTypeName("date_time_update");
+    // member.setName("lastUpdateTime");
+    member.setName("last_update_time");
     useMember(member);
     return member;
   }

@@ -4,24 +4,13 @@ import java.util.Map;
 
 import cla.edg.modelbean.*;
 
-public class LoanFund extends BaseModelBean {
+public class EventAddDesignDocument extends BaseModelBean {
   public String getFullClassName() {
-    return "com.yrdec.yrzx.loanfund.LoanFund";
+    return "com.yrdec.yrzx.eventadddesigndocument.EventAddDesignDocument";
   }
   // 枚举对象
 
   // 引用的对象
-
-  public Merchant fundVendor() {
-    Merchant member = new Merchant();
-    member.setModelTypeName("merchant");
-    member.setName("fund_vendor");
-    member.setMemberName("fundVendor");
-    member.setReferDirection(true);
-    member.setRelationName("fundVendor");
-    append(member);
-    return member;
-  }
 
   public Project project() {
     Project member = new Project();
@@ -34,29 +23,40 @@ public class LoanFund extends BaseModelBean {
     return member;
   }
 
-  public Platform platform() {
-    Platform member = new Platform();
-    member.setModelTypeName("platform");
-    member.setName("platform");
-    member.setMemberName("platform");
+  public DailyTaskType type() {
+    DailyTaskType member = new DailyTaskType();
+    member.setModelTypeName("daily_task_type");
+    member.setName("type");
+    member.setMemberName("type");
     member.setReferDirection(true);
-    member.setRelationName("platform");
+    member.setRelationName("type");
+    append(member);
+    return member;
+  }
+
+  public Merchant submitter() {
+    Merchant member = new Merchant();
+    member.setModelTypeName("merchant");
+    member.setName("submitter");
+    member.setMemberName("submitter");
+    member.setReferDirection(true);
+    member.setRelationName("submitter");
+    append(member);
+    return member;
+  }
+
+  public ChangeRequest changeRequest() {
+    ChangeRequest member = new ChangeRequest();
+    member.setModelTypeName("change_request");
+    member.setName("change_request");
+    member.setMemberName("changeRequest");
+    member.setReferDirection(true);
+    member.setRelationName("changeRequest");
     append(member);
     return member;
   }
 
   // 被引用的对象
-
-  public FinancialServiceStatisticReport financialServiceStatisticReportList() {
-    FinancialServiceStatisticReport member = new FinancialServiceStatisticReport();
-    member.setModelTypeName("financial_service_statistic_report");
-    member.setName("loan_fund");
-    member.setMemberName("financialServiceStatisticReportList");
-    member.setRelationName("loanFund");
-    member.setReferDirection(false);
-    append(member);
-    return member;
-  }
 
   // 普通属性
 
@@ -78,11 +78,11 @@ public class LoanFund extends BaseModelBean {
     return member;
   }
 
-  public NumberAttribute amount() {
-    NumberAttribute member = new NumberAttribute();
-    member.setModelTypeName("money");
-    // member.setName("amount");
-    member.setName("amount");
+  public StringAttribute document() {
+    StringAttribute member = new StringAttribute();
+    member.setModelTypeName("string_document");
+    // member.setName("document");
+    member.setName("document");
     useMember(member);
     return member;
   }

@@ -58,6 +58,17 @@ public class ContractType extends BaseModelBean {
     return member;
   }
 
+  public EventContractBasicInfo eventContractBasicInfoList() {
+    EventContractBasicInfo member = new EventContractBasicInfo();
+    member.setModelTypeName("event_contract_basic_info");
+    member.setName("contract_type");
+    member.setMemberName("eventContractBasicInfoList");
+    member.setRelationName("contractType");
+    member.setReferDirection(false);
+    append(member);
+    return member;
+  }
+
   public ContractLedger contractLedgerList() {
     ContractLedger member = new ContractLedger();
     member.setModelTypeName("contract_ledger");

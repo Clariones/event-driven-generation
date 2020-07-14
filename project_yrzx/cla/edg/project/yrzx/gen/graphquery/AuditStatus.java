@@ -31,12 +31,12 @@ public class AuditStatus extends BaseModelBean {
 
   // 被引用的对象
 
-  public SupplementaryContractPayItem supplementaryContractPayItemList() {
-    SupplementaryContractPayItem member = new SupplementaryContractPayItem();
-    member.setModelTypeName("supplementary_contract_pay_item");
-    member.setName("status");
-    member.setMemberName("supplementaryContractPayItemList");
-    member.setRelationName("status");
+  public SupplementaryContract supplementaryContractList() {
+    SupplementaryContract member = new SupplementaryContract();
+    member.setModelTypeName("supplementary_contract");
+    member.setName("audit_status");
+    member.setMemberName("supplementaryContractList");
+    member.setRelationName("auditStatus");
     member.setReferDirection(false);
     append(member);
     return member;
@@ -53,12 +53,23 @@ public class AuditStatus extends BaseModelBean {
     return member;
   }
 
-  public LoanApplication loanApplicationList() {
-    LoanApplication member = new LoanApplication();
-    member.setModelTypeName("loan_application");
+  public HelpApplication helpApplicationList() {
+    HelpApplication member = new HelpApplication();
+    member.setModelTypeName("help_application");
     member.setName("status");
-    member.setMemberName("loanApplicationList");
+    member.setMemberName("helpApplicationList");
     member.setRelationName("status");
+    member.setReferDirection(false);
+    append(member);
+    return member;
+  }
+
+  public HelpContract helpContractList() {
+    HelpContract member = new HelpContract();
+    member.setModelTypeName("help_contract");
+    member.setName("audit_status");
+    member.setMemberName("helpContractList");
+    member.setRelationName("auditStatus");
     member.setReferDirection(false);
     append(member);
     return member;

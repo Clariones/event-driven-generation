@@ -4,21 +4,32 @@ import java.util.Map;
 
 import cla.edg.modelbean.*;
 
-public class EventMaterialChangeDataUpload extends BaseModelBean {
+public class HelpContractBeneficiary extends BaseModelBean {
   public String getFullClassName() {
-    return "com.yrdec.yrzx.eventmaterialchangedataupload.EventMaterialChangeDataUpload";
+    return "com.yrdec.yrzx.helpcontractbeneficiary.HelpContractBeneficiary";
   }
   // 枚举对象
 
   // 引用的对象
 
-  public ChangeRequest changeRequest() {
-    ChangeRequest member = new ChangeRequest();
-    member.setModelTypeName("change_request");
-    member.setName("change_request");
-    member.setMemberName("changeRequest");
+  public HelpContract helpContract() {
+    HelpContract member = new HelpContract();
+    member.setModelTypeName("help_contract");
+    member.setName("help_contract");
+    member.setMemberName("helpContract");
     member.setReferDirection(true);
-    member.setRelationName("changeRequest");
+    member.setRelationName("helpContract");
+    append(member);
+    return member;
+  }
+
+  public Merchant merchant() {
+    Merchant member = new Merchant();
+    member.setModelTypeName("merchant");
+    member.setName("merchant");
+    member.setMemberName("merchant");
+    member.setReferDirection(true);
+    member.setRelationName("merchant");
     append(member);
     return member;
   }
@@ -32,15 +43,6 @@ public class EventMaterialChangeDataUpload extends BaseModelBean {
     member.setModelTypeName("string");
     // member.setName("id");
     member.setName("id");
-    useMember(member);
-    return member;
-  }
-
-  public StringAttribute images() {
-    StringAttribute member = new StringAttribute();
-    member.setModelTypeName("images");
-    // member.setName("images");
-    member.setName("images");
     useMember(member);
     return member;
   }

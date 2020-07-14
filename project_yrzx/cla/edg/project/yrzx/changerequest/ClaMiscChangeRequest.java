@@ -82,13 +82,38 @@ public class ClaMiscChangeRequest implements ChangeRequestSpecFactory {
 
 
 				.change_request("sign").zh_CN("签收")
-					.icon("from")
+					.icon("form")
 					.has_field("sign object type").hidden().fill_by_request("item type")
 					.has_field("sign object id").hidden().fill_by_request("item id")
 					.has_field("comments").zh_CN("备注").which_type_of(FieldType.MULTI_TEXT).optional()
 					.has_field("submit time").zh_CN("签收时间").disabled().value("提交后自动生成")
 
-					;
+				.change_request("add design document").zh_CN("添加设计资料")
+					.icon("form")
+					.has_field("project").which_model_of(MODEL.project()).values_can_select_from_query_by(null)
+					.has_field("name").zh_CN("名称").range(1,40)
+					.has_field("type").zh_CN("类型").which_model_of(MODEL.dailyTaskType()).values_can_select_from_query_by(null)
+					.has_field("submitter").zh_CN("提交人").which_model_of(MODEL.merchant()).values_can_select_from_query_by(null)
+					.has_field("document").zh_CN("原件").range(1,512)
+
+
+				.change_request("add project material").zh_CN("添加项目资料")
+					.icon("form")
+					.has_field("project").which_model_of(MODEL.project()).values_can_select_from_query_by(null)
+					.has_field("name").zh_CN("名称").range(1,40)
+					.has_field("type").zh_CN("类型").which_model_of(MODEL.dailyTaskType()).values_can_select_from_query_by(null)
+					.has_field("submitter").zh_CN("提交人").which_model_of(MODEL.merchant()).values_can_select_from_query_by(null)
+					.has_field("document").zh_CN("原件").range(1,512)
+
+
+				.change_request("confirm help contract").zh_CN("确认扶持合同")
+					.icon("form")
+					.contains_event("check verify code")
+					.has_field("verify code").which_type_of(FieldType.TEXT).range(1,20).place_holder("请输入验证码")
+					.has_field("item id").hidden()
+					.has_field("item type").hidden()
+
+				;
 		
 	}
 }

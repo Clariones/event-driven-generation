@@ -107,12 +107,6 @@ public class MODEL {
     return rst;
   }
 
-  public static SupplementaryContractPayItem supplementaryContractPayItem() {
-    SupplementaryContractPayItem rst = new SupplementaryContractPayItem();
-    rst.setModelTypeName("supplementary_contract_pay_item");
-    return rst;
-  }
-
   public static CommissionPayItem commissionPayItem() {
     CommissionPayItem rst = new CommissionPayItem();
     rst.setModelTypeName("commission_pay_item");
@@ -617,27 +611,33 @@ public class MODEL {
     return rst;
   }
 
-  public static LoanFund loanFund() {
-    LoanFund rst = new LoanFund();
-    rst.setModelTypeName("loan_fund");
+  public static HelpApplication helpApplication() {
+    HelpApplication rst = new HelpApplication();
+    rst.setModelTypeName("help_application");
     return rst;
   }
 
-  public static LoanApplication loanApplication() {
-    LoanApplication rst = new LoanApplication();
-    rst.setModelTypeName("loan_application");
+  public static HelpApplicationBeneficiary helpApplicationBeneficiary() {
+    HelpApplicationBeneficiary rst = new HelpApplicationBeneficiary();
+    rst.setModelTypeName("help_application_beneficiary");
     return rst;
   }
 
-  public static LoanContract loanContract() {
-    LoanContract rst = new LoanContract();
-    rst.setModelTypeName("loan_contract");
+  public static HelpContractBeneficiary helpContractBeneficiary() {
+    HelpContractBeneficiary rst = new HelpContractBeneficiary();
+    rst.setModelTypeName("help_contract_beneficiary");
     return rst;
   }
 
-  public static LoanContractStatus loanContractStatus() {
-    LoanContractStatus rst = new LoanContractStatus();
-    rst.setModelTypeName("loan_contract_status");
+  public static HelpContract helpContract() {
+    HelpContract rst = new HelpContract();
+    rst.setModelTypeName("help_contract");
+    return rst;
+  }
+
+  public static HelpContractStatus helpContractStatus() {
+    HelpContractStatus rst = new HelpContractStatus();
+    rst.setModelTypeName("help_contract_status");
     return rst;
   }
 
@@ -845,6 +845,18 @@ public class MODEL {
     return rst;
   }
 
+  public static EventAdditionalContractBasicInfo eventAdditionalContractBasicInfo() {
+    EventAdditionalContractBasicInfo rst = new EventAdditionalContractBasicInfo();
+    rst.setModelTypeName("event_additional_contract_basic_info");
+    return rst;
+  }
+
+  public static EventAdditionalContractPaymentPhase eventAdditionalContractPaymentPhase() {
+    EventAdditionalContractPaymentPhase rst = new EventAdditionalContractPaymentPhase();
+    rst.setModelTypeName("event_additional_contract_payment_phase");
+    return rst;
+  }
+
   public static ChangeRequestType changeRequestType() {
     ChangeRequestType rst = new ChangeRequestType();
     rst.setModelTypeName("change_request_type");
@@ -857,15 +869,15 @@ public class MODEL {
     return rst;
   }
 
-  public static EventShowAllTypeStepTwo eventShowAllTypeStepTwo() {
-    EventShowAllTypeStepTwo rst = new EventShowAllTypeStepTwo();
-    rst.setModelTypeName("event_show_all_type_step_two");
+  public static EventAcceptanceApplication eventAcceptanceApplication() {
+    EventAcceptanceApplication rst = new EventAcceptanceApplication();
+    rst.setModelTypeName("event_acceptance_application");
     return rst;
   }
 
-  public static EventAdditionalContractPaymentPhase eventAdditionalContractPaymentPhase() {
-    EventAdditionalContractPaymentPhase rst = new EventAdditionalContractPaymentPhase();
-    rst.setModelTypeName("event_additional_contract_payment_phase");
+  public static EventAfterSales eventAfterSales() {
+    EventAfterSales rst = new EventAfterSales();
+    rst.setModelTypeName("event_after_sales");
     return rst;
   }
 
@@ -875,39 +887,21 @@ public class MODEL {
     return rst;
   }
 
-  public static EventApplyRecommendation eventApplyRecommendation() {
-    EventApplyRecommendation rst = new EventApplyRecommendation();
-    rst.setModelTypeName("event_apply_recommendation");
+  public static EventProjectPenalties eventProjectPenalties() {
+    EventProjectPenalties rst = new EventProjectPenalties();
+    rst.setModelTypeName("event_project_penalties");
     return rst;
   }
 
-  public static EventAddDebitCard eventAddDebitCard() {
-    EventAddDebitCard rst = new EventAddDebitCard();
-    rst.setModelTypeName("event_add_debit_card");
+  public static EventShowAllTypeStepOne eventShowAllTypeStepOne() {
+    EventShowAllTypeStepOne rst = new EventShowAllTypeStepOne();
+    rst.setModelTypeName("event_show_all_type_step_one");
     return rst;
   }
 
-  public static EventSign eventSign() {
-    EventSign rst = new EventSign();
-    rst.setModelTypeName("event_sign");
-    return rst;
-  }
-
-  public static EventMaterialAcceptanceImage eventMaterialAcceptanceImage() {
-    EventMaterialAcceptanceImage rst = new EventMaterialAcceptanceImage();
-    rst.setModelTypeName("event_material_acceptance_image");
-    return rst;
-  }
-
-  public static EventAdditionalContractBasicInfo eventAdditionalContractBasicInfo() {
-    EventAdditionalContractBasicInfo rst = new EventAdditionalContractBasicInfo();
-    rst.setModelTypeName("event_additional_contract_basic_info");
-    return rst;
-  }
-
-  public static EventMaterialCheck eventMaterialCheck() {
-    EventMaterialCheck rst = new EventMaterialCheck();
-    rst.setModelTypeName("event_material_check");
+  public static EventShowAllTypeStepTwo eventShowAllTypeStepTwo() {
+    EventShowAllTypeStepTwo rst = new EventShowAllTypeStepTwo();
+    rst.setModelTypeName("event_show_all_type_step_two");
     return rst;
   }
 
@@ -917,15 +911,9 @@ public class MODEL {
     return rst;
   }
 
-  public static EventAddEmployee eventAddEmployee() {
-    EventAddEmployee rst = new EventAddEmployee();
-    rst.setModelTypeName("event_add_employee");
-    return rst;
-  }
-
-  public static EventAcceptanceApplication eventAcceptanceApplication() {
-    EventAcceptanceApplication rst = new EventAcceptanceApplication();
-    rst.setModelTypeName("event_acceptance_application");
+  public static EventTaskReportBasicInfo eventTaskReportBasicInfo() {
+    EventTaskReportBasicInfo rst = new EventTaskReportBasicInfo();
+    rst.setModelTypeName("event_task_report_basic_info");
     return rst;
   }
 
@@ -935,33 +923,165 @@ public class MODEL {
     return rst;
   }
 
+  public static EventProjectManagerReportBasicInfo eventProjectManagerReportBasicInfo() {
+    EventProjectManagerReportBasicInfo rst = new EventProjectManagerReportBasicInfo();
+    rst.setModelTypeName("event_project_manager_report_basic_info");
+    return rst;
+  }
+
+  public static EventReportCheckItem eventReportCheckItem() {
+    EventReportCheckItem rst = new EventReportCheckItem();
+    rst.setModelTypeName("event_report_check_item");
+    return rst;
+  }
+
+  public static EventProjectSupervisorReportBasicInfo eventProjectSupervisorReportBasicInfo() {
+    EventProjectSupervisorReportBasicInfo rst = new EventProjectSupervisorReportBasicInfo();
+    rst.setModelTypeName("event_project_supervisor_report_basic_info");
+    return rst;
+  }
+
+  public static EventApplyDecoration eventApplyDecoration() {
+    EventApplyDecoration rst = new EventApplyDecoration();
+    rst.setModelTypeName("event_apply_decoration");
+    return rst;
+  }
+
+  public static EventApplyRecommendation eventApplyRecommendation() {
+    EventApplyRecommendation rst = new EventApplyRecommendation();
+    rst.setModelTypeName("event_apply_recommendation");
+    return rst;
+  }
+
+  public static EventApplyEmplacement eventApplyEmplacement() {
+    EventApplyEmplacement rst = new EventApplyEmplacement();
+    rst.setModelTypeName("event_apply_emplacement");
+    return rst;
+  }
+
   public static EventApplyPersonalEmplacement eventApplyPersonalEmplacement() {
     EventApplyPersonalEmplacement rst = new EventApplyPersonalEmplacement();
     rst.setModelTypeName("event_apply_personal_emplacement");
     return rst;
   }
 
-  public static EventMaterialChangeInfo eventMaterialChangeInfo() {
-    EventMaterialChangeInfo rst = new EventMaterialChangeInfo();
-    rst.setModelTypeName("event_material_change_info");
+  public static EventSubcontractApplication eventSubcontractApplication() {
+    EventSubcontractApplication rst = new EventSubcontractApplication();
+    rst.setModelTypeName("event_subcontract_application");
     return rst;
   }
 
-  public static EventContractBasicInfo eventContractBasicInfo() {
-    EventContractBasicInfo rst = new EventContractBasicInfo();
-    rst.setModelTypeName("event_contract_basic_info");
+  public static EventContractReview eventContractReview() {
+    EventContractReview rst = new EventContractReview();
+    rst.setModelTypeName("event_contract_review");
     return rst;
   }
 
-  public static EventMaterialAcceptanceBasicInfo eventMaterialAcceptanceBasicInfo() {
-    EventMaterialAcceptanceBasicInfo rst = new EventMaterialAcceptanceBasicInfo();
-    rst.setModelTypeName("event_material_acceptance_basic_info");
+  public static EventContractComment eventContractComment() {
+    EventContractComment rst = new EventContractComment();
+    rst.setModelTypeName("event_contract_comment");
     return rst;
   }
 
   public static EventMaterialReview eventMaterialReview() {
     EventMaterialReview rst = new EventMaterialReview();
     rst.setModelTypeName("event_material_review");
+    return rst;
+  }
+
+  public static EventMaterialComment eventMaterialComment() {
+    EventMaterialComment rst = new EventMaterialComment();
+    rst.setModelTypeName("event_material_comment");
+    return rst;
+  }
+
+  public static EventAddEmployee eventAddEmployee() {
+    EventAddEmployee rst = new EventAddEmployee();
+    rst.setModelTypeName("event_add_employee");
+    return rst;
+  }
+
+  public static EventProjectWorkPosition eventProjectWorkPosition() {
+    EventProjectWorkPosition rst = new EventProjectWorkPosition();
+    rst.setModelTypeName("event_project_work_position");
+    return rst;
+  }
+
+  public static EventReview eventReview() {
+    EventReview rst = new EventReview();
+    rst.setModelTypeName("event_review");
+    return rst;
+  }
+
+  public static EventComments eventComments() {
+    EventComments rst = new EventComments();
+    rst.setModelTypeName("event_comments");
+    return rst;
+  }
+
+  public static EventSign eventSign() {
+    EventSign rst = new EventSign();
+    rst.setModelTypeName("event_sign");
+    return rst;
+  }
+
+  public static EventAddDesignDocument eventAddDesignDocument() {
+    EventAddDesignDocument rst = new EventAddDesignDocument();
+    rst.setModelTypeName("event_add_design_document");
+    return rst;
+  }
+
+  public static EventAddProjectMaterial eventAddProjectMaterial() {
+    EventAddProjectMaterial rst = new EventAddProjectMaterial();
+    rst.setModelTypeName("event_add_project_material");
+    return rst;
+  }
+
+  public static EventCheckVerifyCode eventCheckVerifyCode() {
+    EventCheckVerifyCode rst = new EventCheckVerifyCode();
+    rst.setModelTypeName("event_check_verify_code");
+    return rst;
+  }
+
+  public static EventProjectProgress eventProjectProgress() {
+    EventProjectProgress rst = new EventProjectProgress();
+    rst.setModelTypeName("event_project_progress");
+    return rst;
+  }
+
+  public static EventLaborSupervisor eventLaborSupervisor() {
+    EventLaborSupervisor rst = new EventLaborSupervisor();
+    rst.setModelTypeName("event_labor_supervisor");
+    return rst;
+  }
+
+  public static EventLaborDispute eventLaborDispute() {
+    EventLaborDispute rst = new EventLaborDispute();
+    rst.setModelTypeName("event_labor_dispute");
+    return rst;
+  }
+
+  public static EventFillPersonalDetail eventFillPersonalDetail() {
+    EventFillPersonalDetail rst = new EventFillPersonalDetail();
+    rst.setModelTypeName("event_fill_personal_detail");
+    return rst;
+  }
+
+  public static EventAddDebitCard eventAddDebitCard() {
+    EventAddDebitCard rst = new EventAddDebitCard();
+    rst.setModelTypeName("event_add_debit_card");
+    return rst;
+  }
+
+  public static EventApplyForAdvanceCompensation eventApplyForAdvanceCompensation() {
+    EventApplyForAdvanceCompensation rst = new EventApplyForAdvanceCompensation();
+    rst.setModelTypeName("event_apply_for_advance_compensation");
+    return rst;
+  }
+
+  public static EventMaterialPreservedBasicInfo eventMaterialPreservedBasicInfo() {
+    EventMaterialPreservedBasicInfo rst = new EventMaterialPreservedBasicInfo();
+    rst.setModelTypeName("event_material_preserved_basic_info");
     return rst;
   }
 
@@ -977,9 +1097,9 @@ public class MODEL {
     return rst;
   }
 
-  public static EventReview eventReview() {
-    EventReview rst = new EventReview();
-    rst.setModelTypeName("event_review");
+  public static EventMaterialChangeInfo eventMaterialChangeInfo() {
+    EventMaterialChangeInfo rst = new EventMaterialChangeInfo();
+    rst.setModelTypeName("event_material_change_info");
     return rst;
   }
 
@@ -989,93 +1109,27 @@ public class MODEL {
     return rst;
   }
 
-  public static EventFillPersonalDetail eventFillPersonalDetail() {
-    EventFillPersonalDetail rst = new EventFillPersonalDetail();
-    rst.setModelTypeName("event_fill_personal_detail");
+  public static EventMaterialChangeAudit eventMaterialChangeAudit() {
+    EventMaterialChangeAudit rst = new EventMaterialChangeAudit();
+    rst.setModelTypeName("event_material_change_audit");
     return rst;
   }
 
-  public static EventProjectWorkPosition eventProjectWorkPosition() {
-    EventProjectWorkPosition rst = new EventProjectWorkPosition();
-    rst.setModelTypeName("event_project_work_position");
+  public static EventMaterialAcceptanceBasicInfo eventMaterialAcceptanceBasicInfo() {
+    EventMaterialAcceptanceBasicInfo rst = new EventMaterialAcceptanceBasicInfo();
+    rst.setModelTypeName("event_material_acceptance_basic_info");
     return rst;
   }
 
-  public static EventProjectSupervisorReportBasicInfo eventProjectSupervisorReportBasicInfo() {
-    EventProjectSupervisorReportBasicInfo rst = new EventProjectSupervisorReportBasicInfo();
-    rst.setModelTypeName("event_project_supervisor_report_basic_info");
+  public static EventMaterialCheck eventMaterialCheck() {
+    EventMaterialCheck rst = new EventMaterialCheck();
+    rst.setModelTypeName("event_material_check");
     return rst;
   }
 
-  public static EventComments eventComments() {
-    EventComments rst = new EventComments();
-    rst.setModelTypeName("event_comments");
-    return rst;
-  }
-
-  public static EventSubcontractApplication eventSubcontractApplication() {
-    EventSubcontractApplication rst = new EventSubcontractApplication();
-    rst.setModelTypeName("event_subcontract_application");
-    return rst;
-  }
-
-  public static EventMaterialPreservedBasicInfo eventMaterialPreservedBasicInfo() {
-    EventMaterialPreservedBasicInfo rst = new EventMaterialPreservedBasicInfo();
-    rst.setModelTypeName("event_material_preserved_basic_info");
-    return rst;
-  }
-
-  public static EventContractPaymentPhase eventContractPaymentPhase() {
-    EventContractPaymentPhase rst = new EventContractPaymentPhase();
-    rst.setModelTypeName("event_contract_payment_phase");
-    return rst;
-  }
-
-  public static EventShowAllTypeStepOne eventShowAllTypeStepOne() {
-    EventShowAllTypeStepOne rst = new EventShowAllTypeStepOne();
-    rst.setModelTypeName("event_show_all_type_step_one");
-    return rst;
-  }
-
-  public static EventLaborDispute eventLaborDispute() {
-    EventLaborDispute rst = new EventLaborDispute();
-    rst.setModelTypeName("event_labor_dispute");
-    return rst;
-  }
-
-  public static EventProjectManagerReportBasicInfo eventProjectManagerReportBasicInfo() {
-    EventProjectManagerReportBasicInfo rst = new EventProjectManagerReportBasicInfo();
-    rst.setModelTypeName("event_project_manager_report_basic_info");
-    return rst;
-  }
-
-  public static EventAfterSales eventAfterSales() {
-    EventAfterSales rst = new EventAfterSales();
-    rst.setModelTypeName("event_after_sales");
-    return rst;
-  }
-
-  public static EventApplyDecoration eventApplyDecoration() {
-    EventApplyDecoration rst = new EventApplyDecoration();
-    rst.setModelTypeName("event_apply_decoration");
-    return rst;
-  }
-
-  public static EventTaskReportBasicInfo eventTaskReportBasicInfo() {
-    EventTaskReportBasicInfo rst = new EventTaskReportBasicInfo();
-    rst.setModelTypeName("event_task_report_basic_info");
-    return rst;
-  }
-
-  public static EventMaterialComment eventMaterialComment() {
-    EventMaterialComment rst = new EventMaterialComment();
-    rst.setModelTypeName("event_material_comment");
-    return rst;
-  }
-
-  public static EventReportCheckItem eventReportCheckItem() {
-    EventReportCheckItem rst = new EventReportCheckItem();
-    rst.setModelTypeName("event_report_check_item");
+  public static EventMaterialAcceptanceImage eventMaterialAcceptanceImage() {
+    EventMaterialAcceptanceImage rst = new EventMaterialAcceptanceImage();
+    rst.setModelTypeName("event_material_acceptance_image");
     return rst;
   }
 
@@ -1085,57 +1139,57 @@ public class MODEL {
     return rst;
   }
 
-  public static EventLaborSupervisor eventLaborSupervisor() {
-    EventLaborSupervisor rst = new EventLaborSupervisor();
-    rst.setModelTypeName("event_labor_supervisor");
+  public static EventContractBasicInfo eventContractBasicInfo() {
+    EventContractBasicInfo rst = new EventContractBasicInfo();
+    rst.setModelTypeName("event_contract_basic_info");
     return rst;
   }
 
-  public static EventProjectPenalties eventProjectPenalties() {
-    EventProjectPenalties rst = new EventProjectPenalties();
-    rst.setModelTypeName("event_project_penalties");
+  public static EventContractPaymentPhase eventContractPaymentPhase() {
+    EventContractPaymentPhase rst = new EventContractPaymentPhase();
+    rst.setModelTypeName("event_contract_payment_phase");
     return rst;
   }
 
-  public static EventApplyEmplacement eventApplyEmplacement() {
-    EventApplyEmplacement rst = new EventApplyEmplacement();
-    rst.setModelTypeName("event_apply_emplacement");
+  public static EventSelectLoanApplication eventSelectLoanApplication() {
+    EventSelectLoanApplication rst = new EventSelectLoanApplication();
+    rst.setModelTypeName("event_select_loan_application");
     return rst;
   }
 
-  public static EventMaterialChangeAudit eventMaterialChangeAudit() {
-    EventMaterialChangeAudit rst = new EventMaterialChangeAudit();
-    rst.setModelTypeName("event_material_change_audit");
+  public static EventPledgedContractInfo eventPledgedContractInfo() {
+    EventPledgedContractInfo rst = new EventPledgedContractInfo();
+    rst.setModelTypeName("event_pledged_contract_info");
     return rst;
   }
 
-  public static EventProjectProgress eventProjectProgress() {
-    EventProjectProgress rst = new EventProjectProgress();
-    rst.setModelTypeName("event_project_progress");
+  public static EventLoanContractBasicInfo eventLoanContractBasicInfo() {
+    EventLoanContractBasicInfo rst = new EventLoanContractBasicInfo();
+    rst.setModelTypeName("event_loan_contract_basic_info");
     return rst;
   }
 
-  public static EventContractReview eventContractReview() {
-    EventContractReview rst = new EventContractReview();
-    rst.setModelTypeName("event_contract_review");
+  public static EventHelpApplication eventHelpApplication() {
+    EventHelpApplication rst = new EventHelpApplication();
+    rst.setModelTypeName("event_help_application");
     return rst;
   }
 
-  public static EventApplyForAdvanceCompensation eventApplyForAdvanceCompensation() {
-    EventApplyForAdvanceCompensation rst = new EventApplyForAdvanceCompensation();
-    rst.setModelTypeName("event_apply_for_advance_compensation");
+  public static EventSelectProject eventSelectProject() {
+    EventSelectProject rst = new EventSelectProject();
+    rst.setModelTypeName("event_select_project");
     return rst;
   }
 
-  public static EventLoanApplication eventLoanApplication() {
-    EventLoanApplication rst = new EventLoanApplication();
-    rst.setModelTypeName("event_loan_application");
+  public static EventAddProjectOrganization eventAddProjectOrganization() {
+    EventAddProjectOrganization rst = new EventAddProjectOrganization();
+    rst.setModelTypeName("event_add_project_organization");
     return rst;
   }
 
-  public static EventContractComment eventContractComment() {
-    EventContractComment rst = new EventContractComment();
-    rst.setModelTypeName("event_contract_comment");
+  public static EventInfoInCr eventInfoInCr() {
+    EventInfoInCr rst = new EventInfoInCr();
+    rst.setModelTypeName("event_info_in_cr");
     return rst;
   }
 
@@ -1178,30 +1232,6 @@ public class MODEL {
   public static EventCreateMerchant eventCreateMerchant() {
     EventCreateMerchant rst = new EventCreateMerchant();
     rst.setModelTypeName("event_create_merchant");
-    return rst;
-  }
-
-  public static EventCreateLoanContract eventCreateLoanContract() {
-    EventCreateLoanContract rst = new EventCreateLoanContract();
-    rst.setModelTypeName("event_create_loan_contract");
-    return rst;
-  }
-
-  public static EventCreateProject eventCreateProject() {
-    EventCreateProject rst = new EventCreateProject();
-    rst.setModelTypeName("event_create_project");
-    return rst;
-  }
-
-  public static EventCreateProjectBaseInfo eventCreateProjectBaseInfo() {
-    EventCreateProjectBaseInfo rst = new EventCreateProjectBaseInfo();
-    rst.setModelTypeName("event_create_project_base_info");
-    return rst;
-  }
-
-  public static EventCreateProjectOrganization eventCreateProjectOrganization() {
-    EventCreateProjectOrganization rst = new EventCreateProjectOrganization();
-    rst.setModelTypeName("event_create_project_organization");
     return rst;
   }
 
@@ -1298,12 +1328,6 @@ public class MODEL {
   public static ServiceVendorStatisticReport serviceVendorStatisticReport() {
     ServiceVendorStatisticReport rst = new ServiceVendorStatisticReport();
     rst.setModelTypeName("service_vendor_statistic_report");
-    return rst;
-  }
-
-  public static FinancialServiceStatisticReport financialServiceStatisticReport() {
-    FinancialServiceStatisticReport rst = new FinancialServiceStatisticReport();
-    rst.setModelTypeName("financial_service_statistic_report");
     return rst;
   }
 

@@ -4,27 +4,27 @@ import java.util.Map;
 
 import cla.edg.modelbean.*;
 
-public class LoanContractStatus extends BaseModelBean {
+public class HelpContractStatus extends BaseModelBean {
   public String getFullClassName() {
-    return "com.yrdec.yrzx.loancontractstatus.LoanContractStatus";
+    return "com.yrdec.yrzx.helpcontractstatus.HelpContractStatus";
   }
   // 枚举对象
   public static EnumAttribute IN_ACCOMPLISH =
-      new EnumAttribute("com.yrdec.yrzx.loancontractstatus.LoanContractStatus", "IN_ACCOMPLISH");
+      new EnumAttribute("com.yrdec.yrzx.helpcontractstatus.HelpContractStatus", "IN_ACCOMPLISH");
   public static EnumAttribute PENDING =
-      new EnumAttribute("com.yrdec.yrzx.loancontractstatus.LoanContractStatus", "PENDING");
+      new EnumAttribute("com.yrdec.yrzx.helpcontractstatus.HelpContractStatus", "PENDING");
   public static EnumAttribute ACCOMPLISHED =
-      new EnumAttribute("com.yrdec.yrzx.loancontractstatus.LoanContractStatus", "ACCOMPLISHED");
+      new EnumAttribute("com.yrdec.yrzx.helpcontractstatus.HelpContractStatus", "ACCOMPLISHED");
 
   // 引用的对象
 
   // 被引用的对象
 
-  public LoanContract loanContractList() {
-    LoanContract member = new LoanContract();
-    member.setModelTypeName("loan_contract");
+  public HelpContract helpContractList() {
+    HelpContract member = new HelpContract();
+    member.setModelTypeName("help_contract");
     member.setName("status");
-    member.setMemberName("loanContractList");
+    member.setMemberName("helpContractList");
     member.setRelationName("status");
     member.setReferDirection(false);
     append(member);

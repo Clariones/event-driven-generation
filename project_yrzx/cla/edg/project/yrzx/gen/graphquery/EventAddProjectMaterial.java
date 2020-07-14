@@ -4,21 +4,43 @@ import java.util.Map;
 
 import cla.edg.modelbean.*;
 
-public class EventApplyRecommendation extends BaseModelBean {
+public class EventAddProjectMaterial extends BaseModelBean {
   public String getFullClassName() {
-    return "com.yrdec.yrzx.eventapplyrecommendation.EventApplyRecommendation";
+    return "com.yrdec.yrzx.eventaddprojectmaterial.EventAddProjectMaterial";
   }
   // 枚举对象
 
   // 引用的对象
 
-  public RecommendationType recommendationType() {
-    RecommendationType member = new RecommendationType();
-    member.setModelTypeName("recommendation_type");
-    member.setName("recommendation_type");
-    member.setMemberName("recommendationType");
+  public Project project() {
+    Project member = new Project();
+    member.setModelTypeName("project");
+    member.setName("project");
+    member.setMemberName("project");
     member.setReferDirection(true);
-    member.setRelationName("recommendationType");
+    member.setRelationName("project");
+    append(member);
+    return member;
+  }
+
+  public DailyTaskType type() {
+    DailyTaskType member = new DailyTaskType();
+    member.setModelTypeName("daily_task_type");
+    member.setName("type");
+    member.setMemberName("type");
+    member.setReferDirection(true);
+    member.setRelationName("type");
+    append(member);
+    return member;
+  }
+
+  public Merchant submitter() {
+    Merchant member = new Merchant();
+    member.setModelTypeName("merchant");
+    member.setName("submitter");
+    member.setMemberName("submitter");
+    member.setReferDirection(true);
+    member.setRelationName("submitter");
     append(member);
     return member;
   }
@@ -47,38 +69,20 @@ public class EventApplyRecommendation extends BaseModelBean {
     return member;
   }
 
-  public StringAttribute title() {
+  public StringAttribute name() {
     StringAttribute member = new StringAttribute();
     member.setModelTypeName("string");
-    // member.setName("title");
-    member.setName("title");
+    // member.setName("name");
+    member.setName("name");
     useMember(member);
     return member;
   }
 
-  public StringAttribute comments() {
+  public StringAttribute document() {
     StringAttribute member = new StringAttribute();
     member.setModelTypeName("string");
-    // member.setName("comments");
-    member.setName("comments");
-    useMember(member);
-    return member;
-  }
-
-  public StringAttribute contactName() {
-    StringAttribute member = new StringAttribute();
-    member.setModelTypeName("string");
-    // member.setName("contactName");
-    member.setName("contact_name");
-    useMember(member);
-    return member;
-  }
-
-  public StringAttribute contactMobile() {
-    StringAttribute member = new StringAttribute();
-    member.setModelTypeName("string_china_mobile_phone");
-    // member.setName("contactMobile");
-    member.setName("contact_mobile");
+    // member.setName("document");
+    member.setName("document");
     useMember(member);
     return member;
   }

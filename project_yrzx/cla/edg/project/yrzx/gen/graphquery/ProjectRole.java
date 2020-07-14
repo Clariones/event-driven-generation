@@ -53,6 +53,17 @@ public class ProjectRole extends BaseModelBean {
     return member;
   }
 
+  public EventAddProjectOrganization eventAddProjectOrganizationList() {
+    EventAddProjectOrganization member = new EventAddProjectOrganization();
+    member.setModelTypeName("event_add_project_organization");
+    member.setName("project_role");
+    member.setMemberName("eventAddProjectOrganizationList");
+    member.setRelationName("projectRole");
+    member.setReferDirection(false);
+    append(member);
+    return member;
+  }
+
   // 普通属性
 
   public StringAttribute id() {

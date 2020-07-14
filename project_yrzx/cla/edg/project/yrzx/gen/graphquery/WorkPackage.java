@@ -135,6 +135,17 @@ public class WorkPackage extends BaseModelBean {
     return member;
   }
 
+  public EventAddProjectOrganization eventAddProjectOrganizationList() {
+    EventAddProjectOrganization member = new EventAddProjectOrganization();
+    member.setModelTypeName("event_add_project_organization");
+    member.setName("work_package");
+    member.setMemberName("eventAddProjectOrganizationList");
+    member.setRelationName("workPackage");
+    member.setReferDirection(false);
+    append(member);
+    return member;
+  }
+
   public Design designList() {
     Design member = new Design();
     member.setModelTypeName("design");
