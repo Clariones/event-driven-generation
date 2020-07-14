@@ -465,6 +465,17 @@ public class Project extends BaseModelBean {
     return member;
   }
 
+  public EventAddProjectMaterial eventAddProjectMaterialList() {
+    EventAddProjectMaterial member = new EventAddProjectMaterial();
+    member.setModelTypeName("event_add_project_material");
+    member.setName("project");
+    member.setMemberName("eventAddProjectMaterialList");
+    member.setRelationName("project");
+    member.setReferDirection(false);
+    append(member);
+    return member;
+  }
+
   public EventContractBasicInfo eventContractBasicInfoList() {
     EventContractBasicInfo member = new EventContractBasicInfo();
     member.setModelTypeName("event_contract_basic_info");

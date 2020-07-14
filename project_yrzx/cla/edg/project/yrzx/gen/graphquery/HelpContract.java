@@ -102,6 +102,17 @@ public class HelpContract extends BaseModelBean {
 
   // 被引用的对象
 
+  public HelpContractBeneficiary helpContractBeneficiaryList() {
+    HelpContractBeneficiary member = new HelpContractBeneficiary();
+    member.setModelTypeName("help_contract_beneficiary");
+    member.setName("help_contract");
+    member.setMemberName("helpContractBeneficiaryList");
+    member.setRelationName("helpContract");
+    member.setReferDirection(false);
+    append(member);
+    return member;
+  }
+
   // 普通属性
 
   public StringAttribute id() {

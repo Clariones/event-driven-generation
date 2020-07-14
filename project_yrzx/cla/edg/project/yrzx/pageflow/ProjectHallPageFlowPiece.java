@@ -52,6 +52,8 @@ public class ProjectHallPageFlowPiece extends PieceOfScript {
 		viewProjectOrgnization(script, "项目组织", "PROJECT_ORGNIZATION");
 		viewProject5Book(script, "五书详情", "YOURONG_5BOOK");
 		viewProjectElementIn3Levels(script, "合同任务", "PROJECT_CONTRACT");
+		viewProjectElementIn3Levels(script, "增补合同", "ADDITIONAL_CONTRACT");
+		viewProjectElementIn3Levels(script, "工程签证", "PROJECT_VISA");
 		viewProjectElementIn4Levels(script, "项目资料", "PROJECT_DOCS");
 		viewFinancialService(script, "项目扶持", "FINANCIAL_SERVICE");
 		viewMaterialManagement(script, "材料管理", "MATERIALS_MANAGEMENT");

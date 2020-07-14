@@ -42,17 +42,6 @@ public class AuditStatus extends BaseModelBean {
     return member;
   }
 
-  public SupplementaryContractPayItem supplementaryContractPayItemList() {
-    SupplementaryContractPayItem member = new SupplementaryContractPayItem();
-    member.setModelTypeName("supplementary_contract_pay_item");
-    member.setName("status");
-    member.setMemberName("supplementaryContractPayItemList");
-    member.setRelationName("status");
-    member.setReferDirection(false);
-    append(member);
-    return member;
-  }
-
   public ContractPaymentApplication contractPaymentApplicationList() {
     ContractPaymentApplication member = new ContractPaymentApplication();
     member.setModelTypeName("contract_payment_application");

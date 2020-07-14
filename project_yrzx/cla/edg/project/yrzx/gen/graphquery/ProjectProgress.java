@@ -58,6 +58,17 @@ public class ProjectProgress extends BaseModelBean {
     return member;
   }
 
+  public SupplementaryContract supplementaryContractList() {
+    SupplementaryContract member = new SupplementaryContract();
+    member.setModelTypeName("supplementary_contract");
+    member.setName("project_progress");
+    member.setMemberName("supplementaryContractList");
+    member.setRelationName("projectProgress");
+    member.setReferDirection(false);
+    append(member);
+    return member;
+  }
+
   public LaborWageManagementSheet laborWageManagementSheetList() {
     LaborWageManagementSheet member = new LaborWageManagementSheet();
     member.setModelTypeName("labor_wage_management_sheet");
@@ -91,11 +102,11 @@ public class ProjectProgress extends BaseModelBean {
     return member;
   }
 
-  public EventAdditionalContractPaymentPhase eventAdditionalContractPaymentPhaseList() {
-    EventAdditionalContractPaymentPhase member = new EventAdditionalContractPaymentPhase();
-    member.setModelTypeName("event_additional_contract_payment_phase");
+  public EventAdditionalContractBasicInfo eventAdditionalContractBasicInfoList() {
+    EventAdditionalContractBasicInfo member = new EventAdditionalContractBasicInfo();
+    member.setModelTypeName("event_additional_contract_basic_info");
     member.setName("project_progress");
-    member.setMemberName("eventAdditionalContractPaymentPhaseList");
+    member.setMemberName("eventAdditionalContractBasicInfoList");
     member.setRelationName("projectProgress");
     member.setReferDirection(false);
     append(member);

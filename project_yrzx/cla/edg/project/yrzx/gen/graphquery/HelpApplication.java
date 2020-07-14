@@ -34,13 +34,13 @@ public class HelpApplication extends BaseModelBean {
     return member;
   }
 
-  public EmployeeNomination applicant() {
-    EmployeeNomination member = new EmployeeNomination();
-    member.setModelTypeName("employee_nomination");
-    member.setName("applicant");
-    member.setMemberName("applicant");
+  public ProjectNomination submitter() {
+    ProjectNomination member = new ProjectNomination();
+    member.setModelTypeName("project_nomination");
+    member.setName("submitter");
+    member.setMemberName("submitter");
     member.setReferDirection(true);
-    member.setRelationName("applicant");
+    member.setRelationName("submitter");
     append(member);
     return member;
   }
@@ -68,6 +68,17 @@ public class HelpApplication extends BaseModelBean {
   }
 
   // 被引用的对象
+
+  public HelpApplicationBeneficiary helpApplicationBeneficiaryList() {
+    HelpApplicationBeneficiary member = new HelpApplicationBeneficiary();
+    member.setModelTypeName("help_application_beneficiary");
+    member.setName("help_application");
+    member.setMemberName("helpApplicationBeneficiaryList");
+    member.setRelationName("helpApplication");
+    member.setReferDirection(false);
+    append(member);
+    return member;
+  }
 
   public HelpContract helpContractList() {
     HelpContract member = new HelpContract();

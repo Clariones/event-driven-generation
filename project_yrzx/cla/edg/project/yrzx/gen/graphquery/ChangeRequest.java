@@ -47,17 +47,6 @@ public class ChangeRequest extends BaseModelBean {
     return member;
   }
 
-  public EventAdditionalContractPaymentPhase eventAdditionalContractPaymentPhaseList() {
-    EventAdditionalContractPaymentPhase member = new EventAdditionalContractPaymentPhase();
-    member.setModelTypeName("event_additional_contract_payment_phase");
-    member.setName("change_request");
-    member.setMemberName("eventAdditionalContractPaymentPhaseList");
-    member.setRelationName("changeRequest");
-    member.setReferDirection(false);
-    append(member);
-    return member;
-  }
-
   public EventAcceptanceApplication eventAcceptanceApplicationList() {
     EventAcceptanceApplication member = new EventAcceptanceApplication();
     member.setModelTypeName("event_acceptance_application");
@@ -349,6 +338,28 @@ public class ChangeRequest extends BaseModelBean {
     member.setModelTypeName("event_add_design_document");
     member.setName("change_request");
     member.setMemberName("eventAddDesignDocumentList");
+    member.setRelationName("changeRequest");
+    member.setReferDirection(false);
+    append(member);
+    return member;
+  }
+
+  public EventAddProjectMaterial eventAddProjectMaterialList() {
+    EventAddProjectMaterial member = new EventAddProjectMaterial();
+    member.setModelTypeName("event_add_project_material");
+    member.setName("change_request");
+    member.setMemberName("eventAddProjectMaterialList");
+    member.setRelationName("changeRequest");
+    member.setReferDirection(false);
+    append(member);
+    return member;
+  }
+
+  public EventCheckVerifyCode eventCheckVerifyCodeList() {
+    EventCheckVerifyCode member = new EventCheckVerifyCode();
+    member.setModelTypeName("event_check_verify_code");
+    member.setName("change_request");
+    member.setMemberName("eventCheckVerifyCodeList");
     member.setRelationName("changeRequest");
     member.setReferDirection(false);
     append(member);

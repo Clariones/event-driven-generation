@@ -22,11 +22,13 @@ public class FinanceChangeRequest implements ChangeRequestSpecFactory {
 				.has_field("name").zh_CN("名称")
 				.has_field("project id").hidden().fill_by_request("project id")
 				.has_field("project name").zh_CN("扶持项目").disabled().fill_by_request("project id",MODEL.project().title())
-				.has_field("borrower").zh_CN("扶持对象").disabled().fill_by_request("employee nomination id",MODEL.employeeNomination().title())
+				.has_field("borrower").zh_CN("申请人").disabled().fill_by_request("project nomination id",MODEL.projectNomination().title())
+				.has_field("borrower unit").zh_CN("申请人单位").disabled()
 				.has_field("amount").zh_CN("扶持金额").which_type_of(FieldType.MONEY)
 				.has_field("pledged contract").zh_CN("质押合同").which_model_of(MODEL.standardContract()).values_can_select_from_query_by(null)
 				.has_field("submit time").zh_CN("申请时间").display().value("提交后自动生成")
 				.has_field("loan_usage").zh_CN("扶持原因").which_type_of(FieldType.MULTI_TEXT)
+				.has_field("material merchant").zh_CN("材料商").which_model_of(MODEL.merchant()).values_can_check_from_query_by("project id")
 				.has_field("expected repayment time").zh_CN("预期还款时间").which_type_of(FieldType.DATE)
 
 //		loan_application="借款申请:$(loan_application)"

@@ -48,9 +48,15 @@ public class ChangeRequestType extends BaseModelBean {
   public static EnumAttribute APPLY_PERSONAL_EMPLACEMENT =
       new EnumAttribute(
           "com.yrdec.yrzx.changerequesttype.ChangeRequestType", "APPLY_PERSONAL_EMPLACEMENT");
+  public static EnumAttribute CONFIRM_HELP_CONTRACT =
+      new EnumAttribute(
+          "com.yrdec.yrzx.changerequesttype.ChangeRequestType", "CONFIRM_HELP_CONTRACT");
   public static EnumAttribute APPLY_FOR_MATERIAL_CHANGE =
       new EnumAttribute(
           "com.yrdec.yrzx.changerequesttype.ChangeRequestType", "APPLY_FOR_MATERIAL_CHANGE");
+  public static EnumAttribute ADD_PROJECT_MATERIAL =
+      new EnumAttribute(
+          "com.yrdec.yrzx.changerequesttype.ChangeRequestType", "ADD_PROJECT_MATERIAL");
   public static EnumAttribute CREATE_LOAN_CONTRACT =
       new EnumAttribute(
           "com.yrdec.yrzx.changerequesttype.ChangeRequestType", "CREATE_LOAN_CONTRACT");

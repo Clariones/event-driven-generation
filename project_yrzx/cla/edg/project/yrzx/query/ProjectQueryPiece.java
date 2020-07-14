@@ -31,6 +31,7 @@ public class ProjectQueryPiece extends PieceOfScript {
 				.where(MODEL.project().id().eq("${project id}"))
 				.wants(MODEL.project().projectType(), MODEL.project().projectOwner(), MODEL.project().constructionStatus(), MODEL.project().projectServiceType(),
 						MODEL.project().projectMaterialList().dailyTaskType()
+						,MODEL.project().projectMaterialList().materialSubmitter().employee()
 				)
 
 			.find(MODEL.projectNomination()).which("by work package").with_string("project id")

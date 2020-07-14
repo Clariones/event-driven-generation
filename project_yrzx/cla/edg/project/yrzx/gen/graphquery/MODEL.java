@@ -107,12 +107,6 @@ public class MODEL {
     return rst;
   }
 
-  public static SupplementaryContractPayItem supplementaryContractPayItem() {
-    SupplementaryContractPayItem rst = new SupplementaryContractPayItem();
-    rst.setModelTypeName("supplementary_contract_pay_item");
-    return rst;
-  }
-
   public static CommissionPayItem commissionPayItem() {
     CommissionPayItem rst = new CommissionPayItem();
     rst.setModelTypeName("commission_pay_item");
@@ -623,6 +617,18 @@ public class MODEL {
     return rst;
   }
 
+  public static HelpApplicationBeneficiary helpApplicationBeneficiary() {
+    HelpApplicationBeneficiary rst = new HelpApplicationBeneficiary();
+    rst.setModelTypeName("help_application_beneficiary");
+    return rst;
+  }
+
+  public static HelpContractBeneficiary helpContractBeneficiary() {
+    HelpContractBeneficiary rst = new HelpContractBeneficiary();
+    rst.setModelTypeName("help_contract_beneficiary");
+    return rst;
+  }
+
   public static HelpContract helpContract() {
     HelpContract rst = new HelpContract();
     rst.setModelTypeName("help_contract");
@@ -1022,6 +1028,18 @@ public class MODEL {
   public static EventAddDesignDocument eventAddDesignDocument() {
     EventAddDesignDocument rst = new EventAddDesignDocument();
     rst.setModelTypeName("event_add_design_document");
+    return rst;
+  }
+
+  public static EventAddProjectMaterial eventAddProjectMaterial() {
+    EventAddProjectMaterial rst = new EventAddProjectMaterial();
+    rst.setModelTypeName("event_add_project_material");
+    return rst;
+  }
+
+  public static EventCheckVerifyCode eventCheckVerifyCode() {
+    EventCheckVerifyCode rst = new EventCheckVerifyCode();
+    rst.setModelTypeName("event_check_verify_code");
     return rst;
   }
 

@@ -58,6 +58,11 @@ public class DailyTaskCategory extends BaseModelBean {
       new EnumAttribute("com.yrdec.yrzx.dailytaskcategory.DailyTaskCategory", "LAW");
   public static EnumAttribute EDUCATION =
       new EnumAttribute("com.yrdec.yrzx.dailytaskcategory.DailyTaskCategory", "EDUCATION");
+  public static EnumAttribute ADDITIONAL_CONTRACT =
+      new EnumAttribute(
+          "com.yrdec.yrzx.dailytaskcategory.DailyTaskCategory", "ADDITIONAL_CONTRACT");
+  public static EnumAttribute PROJECT_VISA =
+      new EnumAttribute("com.yrdec.yrzx.dailytaskcategory.DailyTaskCategory", "PROJECT_VISA");
 
   // 引用的对象
 
