@@ -78,6 +78,17 @@ public class SupplementaryContract extends BaseModelBean {
     return member;
   }
 
+  public ContractPayItem payItem() {
+    ContractPayItem member = new ContractPayItem();
+    member.setModelTypeName("contract_pay_item");
+    member.setName("pay_item");
+    member.setMemberName("payItem");
+    member.setReferDirection(true);
+    member.setRelationName("payItem");
+    append(member);
+    return member;
+  }
+
   public Platform platform() {
     Platform member = new Platform();
     member.setModelTypeName("platform");
