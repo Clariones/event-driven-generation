@@ -3,6 +3,7 @@ package cla.edg.project.yrzx.query;
 import cla.edg.pageflow.PageFlowScript;
 import cla.edg.pageflow.PieceOfScript;
 import cla.edg.project.yrzx.gen.graphquery.MODEL;
+import cla.edg.project.yrzx.gen.graphquery.MerchantType;
 
 /**
  * Merchant
@@ -48,6 +49,14 @@ public class MerchantQueryPiece extends PieceOfScript {
 						MODEL.merchant().employeeNominationListAsEmployer().employer().eq("${merchant id}"),
 						MODEL.merchant().employeeNominationListAsEmployer().role().eq("${role id}")
 				)
+
+		.query(MODEL.merchant()).list_of("organization in project").with_string("project id")
+			.comments("查询项目中的机构商户")
+			.do_it_as()
+			.where(
+					MODEL.merchant().merchantType().id().eq(MerchantType.ORGANIZATION),
+					MODEL.merchant().employeeNominationListAsEmployer().projectNominationList().project().eq("${project id}")
+			)
 ;
 
 		return script;

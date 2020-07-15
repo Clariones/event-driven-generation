@@ -164,6 +164,8 @@ public class ClientCRPageFlowPiece extends PieceOfScript {
 				.request_with_changerequest("verify code").comments("校验验证码").with_string("item type").with_string("item id")
 					.when("help contract")
 						.got_page("help contract detail")
+					.when("confirm receipt")
+						.got_page("contract pay item detail")
 					.when_others()
 						.got_page("redirect")
 
