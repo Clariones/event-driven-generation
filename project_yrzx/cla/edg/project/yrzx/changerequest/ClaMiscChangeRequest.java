@@ -6,6 +6,7 @@ import cla.edg.project.yrzx.gen.graphquery.MODEL;
 import com.terapico.changerequest.builder.ChangeRequestSpecBuilder;
 import com.terapico.changerequest.builder.ChangeRequestSpecFactory;
 import com.terapico.changerequest.builder.FieldType;
+import com.terapico.changerequest.builder.UIStyle;
 
 
 /**
@@ -106,12 +107,12 @@ public class ClaMiscChangeRequest implements ChangeRequestSpecFactory {
 					.has_field("document").zh_CN("原件").range(1,512)
 
 
-				.change_request("confirm help contract").zh_CN("确认扶持合同")
+				.change_request("verify code").zh_CN("确认扶持合同")
 					.icon("form")
 					.contains_event("check verify code")
-					.has_field("verify code").which_type_of(FieldType.TEXT).range(1,20).place_holder("请输入验证码")
-					.has_field("item id").hidden()
-					.has_field("item type").hidden()
+					.has_field("verify code").zh_CN("验证码").with_style(UIStyle.INPUT_VERIFY_CODE).range(1,20).place_holder("请输入验证码")
+					.has_field("item id").zh_CN("item id").hidden().fill_by_request("item id")
+					.has_field("item type").zh_CN("item type").hidden().fill_by_request("item type")
 
 				;
 		

@@ -22,7 +22,7 @@
 
 
 
-=================Execute Report (Model Time 200714T1351) @Tue Jul 14 13:53:49 CST 2020, 293 objects and 2505 fields===========================
+=================Execute Report (Model Time 200715T1026) @Wed Jul 15 10:28:26 CST 2020, 293 objects and 2513 fields===========================
 from file "/Users/jarryzhou/githome/web-code-generator/sky/modeling/microservice/yrzx.xml"
 
 
@@ -297,6 +297,12 @@ Info: Add virtual field [supplementary_contracts(es)] to <employee_nomination>
 
 Info: Add virtual field [supplementary_contracts(es)] to <project_progress>
 	supplementary_contract.project_progress
+
+
+ processing: supplementary_contract.contract_pay_item.pay_item
+
+Info: Add virtual field [supplementary_contracts(es)] to <contract_pay_item>
+	supplementary_contract.pay_item
 
 
  processing: supplementary_contract.platform.platform
@@ -5297,7 +5303,7 @@ contract_status{
 
 meta{vg4platform=合同管理, name=standard_contract, vg4project=合同管理, vg4party_b=合同管理, vg4party_a=合同管理}
 standard_contract{
-	fields(22){
+	fields(23){
 		string	id('AB'), verb: false, required: true,type:id;
 		string	name('合同名称'), verb: false, required: true,type:string;
 		string	contract_number('SWB-JS-2015-001(01)'), verb: false, required: true,type:string;
@@ -5315,6 +5321,7 @@ standard_contract{
 		date_time_create	create_time('createTime()'), verb: false, required: true,type:date_time_create;
 		date_time_update	last_update_time('updateTime()'), verb: false, required: true,type:date_time_update;
 		money	amount('$0.00|$9999999.99'), verb: false, required: true,type:money;
+		money	original_amount('$0.00|$9999999.99'), verb: false, required: true,type:money;
 		project	project('$(object)'), verb: false, required: false, referenceBy: standardContractList,type:project;
 		work_package	work_package('$(object)'), verb: false, required: false, referenceBy: standardContractList,type:work_package;
 		task	task('$(object)'), verb: false, required: false, referenceBy: standardContractList,type:task;
@@ -5362,7 +5369,7 @@ standard_contract{
 
 meta{name=contract_pay_item, vg4payer=合同管理, vg4payee=合同管理}
 contract_pay_item{
-	fields(16){
+	fields(20){
 		string	id('AB'), verb: false, required: true,type:id;
 		string	name('平台项目管理服务费'), verb: false, required: true,type:string;
 		string	brief('托管服务费首期支付|托管服务费二期支付|托管服务费三期支付|托管服务费四期支付|托管服务费五期支付'), verb: false, required: true,type:string;
@@ -5370,6 +5377,10 @@ contract_pay_item{
 		standard_contract	contract('$(object)'), verb: false, required: true, referenceBy: contractPayItemList,type:standard_contract;
 		merchant	payer('$(object)'), verb: false, required: true, referenceBy: contractPayItemListAsPayer,type:merchant;
 		merchant	payee('$(object)'), verb: false, required: true, referenceBy: contractPayItemListAsPayee,type:merchant;
+		money	original_pay_amount('$0.00|$9999999.99'), verb: false, required: true,type:money;
+		money	original_labor_fee('$0.00|$9999999.99'), verb: false, required: true,type:money;
+		money	original_material_fee('$0.00|$9999999.99'), verb: false, required: true,type:money;
+		money	original_other_fee('$0.00|$9999999.99'), verb: false, required: true,type:money;
 		money	pay_amount('$0.00|$9999999.99'), verb: false, required: true,type:money;
 		money	labor_fee('$0.00|$9999999.99'), verb: false, required: true,type:money;
 		money	material_fee('$0.00|$9999999.99'), verb: false, required: true,type:money;
@@ -5380,7 +5391,8 @@ contract_pay_item{
 		project_progress	project_progress('$(object)'), verb: false, required: true, referenceBy: contractPayItemList,type:project_progress;
 		int	version('2147483647'), verb: false, required: true,type:version;
 	}
-	references field(3){
+	references field(4){
+		supplementaryContractList	pay_item(__no_group)--pay_item;
 		commissionPayItemList	contract_pay_item(__no_group)--contract_pay_item;
 		contractPaymentApplicationList	pay_item(__no_group)--pay_item;
 		eventAdditionalContractBasicInfoList	contract_pay_item(__no_group)--contract_pay_item;
@@ -5403,7 +5415,7 @@ supplementary_contract_type{
 
 meta{vg4platform=合同管理, name=supplementary_contract, vg4project=合同管理, vg4party_b=合同管理, vg4party_a=合同管理}
 supplementary_contract{
-	fields(21){
+	fields(22){
 		string	id('AB'), verb: false, required: true,type:id;
 		string	name('平台项目管理服务费增补合同'), verb: false, required: true,type:string;
 		string	contract_number('SWB-JS-2015-001(01)'), verb: false, required: true,type:string;
@@ -5421,6 +5433,7 @@ supplementary_contract{
 		string	pay_criteira('合同款项支付条件文本描述'), verb: false, required: true,type:string;
 		date	expected_pay_time('2220-05-05'), verb: false, required: true,type:date;
 		project_progress	project_progress('$(object)'), verb: false, required: true, referenceBy: supplementaryContractList,type:project_progress;
+		contract_pay_item	pay_item('$(object)'), verb: false, required: true, referenceBy: supplementaryContractList,type:contract_pay_item;
 		date_time_create	create_time('createTime()'), verb: false, required: true,type:date_time_create;
 		date_time_update	last_update_time('updateTime()'), verb: false, required: true,type:date_time_update;
 		platform	platform('$(object)'), verb: false, required: true, referenceBy: supplementaryContractList,type:platform;
@@ -5428,7 +5441,7 @@ supplementary_contract{
 	}
 	references field(0){
 	}
-} depth=7; isRoot = false
+} depth=8; isRoot = false
 
 meta{name=commission_pay_item, vg4payer=合同管理, vg4payee=合同管理}
 commission_pay_item{
@@ -7137,7 +7150,7 @@ help_contract_beneficiary{
 
 meta{vg4platform=项目扶持, name=help_contract, vg4lender=项目扶持, vg4borrower=项目扶持}
 help_contract{
-	fields(18){
+	fields(20){
 		string	id('AB'), verb: false, required: true,type:id;
 		help_application	help_application('$(object)'), verb: false, required: true, referenceBy: helpContractList,type:help_application;
 		merchant	borrower_unit('$(object)'), verb: false, required: true, referenceBy: helpContractList,type:merchant;
@@ -7154,6 +7167,8 @@ help_contract{
 		string_document	document('document.doc'), verb: false, required: true,type:string_document;
 		help_contract_status	status('$(object)'), verb: false, required: true, referenceBy: helpContractList,type:help_contract_status;
 		audit_status	audit_status('$(object)'), verb: false, required: true, referenceBy: helpContractList,type:audit_status;
+		date_time_create	create_time('createTime()'), verb: false, required: true,type:date_time_create;
+		date_time_update	update_time('updateTime()'), verb: false, required: true,type:date_time_update;
 		platform	platform('$(object)'), verb: false, required: true, referenceBy: helpContractList,type:platform;
 		int	version('2147483647'), verb: false, required: true,type:version;
 	}
@@ -7166,8 +7181,8 @@ meta{name=help_contract_status, features=status, identified_by=code}
 help_contract_status{
 	fields(4){
 		string	id('AB'), verb: false, required: true,type:id;
-		string	name('履行中|待履行|已履行'), verb: false, required: true,type:string;
-		string	code('IN_ACCOMPLISH|PENDING|ACCOMPLISHED'), verb: false, required: true,type:string;
+		string	name('待确认|履行中|待履行|已履行'), verb: false, required: true,type:string;
+		string	code('PENDING_ON_CONFIRMATION|IN_ACCOMPLISH|PENDING|ACCOMPLISHED'), verb: false, required: true,type:string;
 		int	version('2147483647'), verb: false, required: true,type:version;
 	}
 	references field(1){
@@ -7868,8 +7883,8 @@ meta{name=change_request_type, identified_by=code, features=cr_type}
 change_request_type{
 	fields(9){
 		string	id('AB'), verb: false, required: true,type:id;
-		string	name('处理售后单|合同批注|审核合同|我要推荐|添加银行卡|数据类型展示|签收|创建合同|项目指令单|施工日志|添加员工|签证及补充合同|添加项目组织|工程验收申请通知单|资料审核|个人入驻|确认扶持合同|材料变更申请|添加项目资料|创建项目扶持合同|审核|进场主材料存样|完善个人资料|添加批注|项目参与|投标主材料存样|添加岗位|劳务纠纷申请|售后单|我要装修|创建收款申请|添加设计资料|工程劳务管理单|违约处罚|企业入驻|材料验收申请|创建项目进度|资料批注|先行赔付申请|项目经理日志|扶持申请|项目监理日志'), verb: false, required: true,type:string;
-		string	code('RESOLVE_AFTER_SALES|COMMENTS_ON_CONTRACT|REVIEW_CONTRACT|APPLY_RECOMMENDATION|ADD_DEBIT_CARD|SHOW_ALL_TYPE|SIGN|CREATE_CONTRACT|PROJECT_COMMAND|TASK_REPORT|ADD_EMPLOYEE|CREATE_ADDITIONAL_CONTRACT|CREATE_PROJECT_ORGANIZATION|ACCEPTANCE_APPLICATION|REVIEW_MATERIALS|APPLY_PERSONAL_EMPLACEMENT|CONFIRM_HELP_CONTRACT|APPLY_FOR_MATERIAL_CHANGE|ADD_PROJECT_MATERIAL|CREATE_LOAN_CONTRACT|REVIEW|CREATE_MATERIAL_PRESERVED_SAMPLE|FILL_PERSONAL_DETAIL|COMMENTS|SUBCONTRACT_APPLICATION|CREATE_MATERIAL_BID_SAMPLE|ADD_PROJECT_NOMINATION|LABOR_DISPUTE|AFTER_SALES|APPLY_DECORATION|CREATE_CONTRACT_PAYMENT_APPLICATION|ADD_DESIGN_DOCUMENT|LABOR_SUPERVISOR|PROJECT_PENALTIES|APPLY_EMPLACEMENT|APPLY_FOR_MATERIAL_ACCEPTANCE|PROJECT_PROGRESS|COMMENTS_ON_MATERIALS|APPLY_FOR_ADVANCE_COMPENSATION|PROJECT_MANAGER_REPORT|HELP_APPLICATION|PROJECT_SUPERVISION_REPORT'), verb: false, required: true,type:string;
+		string	name('处理售后单|合同批注|审核合同|我要推荐|添加银行卡|数据类型展示|签收|创建合同|项目指令单|施工日志|添加员工|签证及补充合同|添加项目组织|工程验收申请通知单|资料审核|个人入驻|材料变更申请|添加项目资料|确认扶持合同|创建项目扶持合同|审核|进场主材料存样|完善个人资料|添加批注|项目参与|投标主材料存样|添加岗位|劳务纠纷申请|售后单|我要装修|创建收款申请|添加设计资料|工程劳务管理单|违约处罚|企业入驻|材料验收申请|创建项目进度|资料批注|先行赔付申请|项目经理日志|扶持申请|项目监理日志'), verb: false, required: true,type:string;
+		string	code('RESOLVE_AFTER_SALES|COMMENTS_ON_CONTRACT|REVIEW_CONTRACT|APPLY_RECOMMENDATION|ADD_DEBIT_CARD|SHOW_ALL_TYPE|SIGN|CREATE_CONTRACT|PROJECT_COMMAND|TASK_REPORT|ADD_EMPLOYEE|CREATE_ADDITIONAL_CONTRACT|CREATE_PROJECT_ORGANIZATION|ACCEPTANCE_APPLICATION|REVIEW_MATERIALS|APPLY_PERSONAL_EMPLACEMENT|APPLY_FOR_MATERIAL_CHANGE|ADD_PROJECT_MATERIAL|VERIFY_CODE|CREATE_LOAN_CONTRACT|REVIEW|CREATE_MATERIAL_PRESERVED_SAMPLE|FILL_PERSONAL_DETAIL|COMMENTS|SUBCONTRACT_APPLICATION|CREATE_MATERIAL_BID_SAMPLE|ADD_PROJECT_NOMINATION|LABOR_DISPUTE|AFTER_SALES|APPLY_DECORATION|CREATE_CONTRACT_PAYMENT_APPLICATION|ADD_DESIGN_DOCUMENT|LABOR_SUPERVISOR|PROJECT_PENALTIES|APPLY_EMPLACEMENT|APPLY_FOR_MATERIAL_ACCEPTANCE|PROJECT_PROGRESS|COMMENTS_ON_MATERIALS|APPLY_FOR_ADVANCE_COMPENSATION|PROJECT_MANAGER_REPORT|HELP_APPLICATION|PROJECT_SUPERVISION_REPORT'), verb: false, required: true,type:string;
 		string	icon('form|edit|edit|form|form|table|form|form|form|calendar|bars|form|bars|form|edit|form|form|form|form|form|form|form|form|form|form|form|bars|form|form|form|form|form|form|form|form|bars|form|edit|form|tachometer|form|tachometer'), verb: false, required: true,type:string;
 		int	display_order('1|2|3|4|5|6'), verb: false, required: true,type:int;
 		string_longtext	bind_types('text()'), verb: false, required: true,type:string_longtext;
@@ -8447,13 +8462,13 @@ event_add_project_material{
 	}
 } depth=4; isRoot = false
 
-meta{bind_with_cr_type=CONFIRM_HELP_CONTRACT, name=event_check_verify_code, features=event}
+meta{bind_with_cr_type=VERIFY_CODE, name=event_check_verify_code, features=event}
 event_check_verify_code{
 	fields(6){
 		string	id('AB'), verb: false, required: true,type:id;
-		string	verify_code('verify code|null'), verb: false, required: true,type:string;
-		string	item_id('item id|null'), verb: false, required: true,type:string;
-		string	item_type('item type|null'), verb: false, required: true,type:string;
+		string	verify_code('verify code|验证码'), verb: false, required: true,type:string;
+		string	item_id('item id|item id'), verb: false, required: true,type:string;
+		string	item_type('item type|item type'), verb: false, required: true,type:string;
 		change_request	change_request('$(object)'), verb: false, required: true, referenceBy: eventCheckVerifyCodeList,type:change_request;
 		int	version('2147483647'), verb: false, required: true,type:version;
 	}
@@ -10616,7 +10631,7 @@ contract_status{
 
 meta{vg4platform=合同管理, name=standard_contract, vg4project=合同管理, vg4party_b=合同管理, vg4party_a=合同管理}
 standard_contract{
-	fields(22){
+	fields(23){
 		string	id('AB'), verb: false, required: true,type:id;
 		string	name('合同名称'), verb: false, required: true,type:string;
 		string	contract_number('SWB-JS-2015-001(01)'), verb: false, required: true,type:string;
@@ -10634,6 +10649,7 @@ standard_contract{
 		date_time_create	create_time('createTime()'), verb: false, required: true,type:date_time_create;
 		date_time_update	last_update_time('updateTime()'), verb: false, required: true,type:date_time_update;
 		money	amount('$0.00|$9999999.99'), verb: false, required: true,type:money;
+		money	original_amount('$0.00|$9999999.99'), verb: false, required: true,type:money;
 		project	project('$(object)'), verb: false, required: false, referenceBy: standardContractList,type:project;
 		work_package	work_package('$(object)'), verb: false, required: false, referenceBy: standardContractList,type:work_package;
 		task	task('$(object)'), verb: false, required: false, referenceBy: standardContractList,type:task;
@@ -10681,7 +10697,7 @@ standard_contract{
 
 meta{name=contract_pay_item, vg4payer=合同管理, vg4payee=合同管理}
 contract_pay_item{
-	fields(16){
+	fields(20){
 		string	id('AB'), verb: false, required: true,type:id;
 		string	name('平台项目管理服务费'), verb: false, required: true,type:string;
 		string	brief('托管服务费首期支付|托管服务费二期支付|托管服务费三期支付|托管服务费四期支付|托管服务费五期支付'), verb: false, required: true,type:string;
@@ -10689,6 +10705,10 @@ contract_pay_item{
 		standard_contract	contract('$(object)'), verb: false, required: true, referenceBy: contractPayItemList,type:standard_contract;
 		merchant	payer('$(object)'), verb: false, required: true, referenceBy: contractPayItemListAsPayer,type:merchant;
 		merchant	payee('$(object)'), verb: false, required: true, referenceBy: contractPayItemListAsPayee,type:merchant;
+		money	original_pay_amount('$0.00|$9999999.99'), verb: false, required: true,type:money;
+		money	original_labor_fee('$0.00|$9999999.99'), verb: false, required: true,type:money;
+		money	original_material_fee('$0.00|$9999999.99'), verb: false, required: true,type:money;
+		money	original_other_fee('$0.00|$9999999.99'), verb: false, required: true,type:money;
 		money	pay_amount('$0.00|$9999999.99'), verb: false, required: true,type:money;
 		money	labor_fee('$0.00|$9999999.99'), verb: false, required: true,type:money;
 		money	material_fee('$0.00|$9999999.99'), verb: false, required: true,type:money;
@@ -10699,7 +10719,8 @@ contract_pay_item{
 		project_progress	project_progress('$(object)'), verb: false, required: true, referenceBy: contractPayItemList,type:project_progress;
 		int	version('2147483647'), verb: false, required: true,type:version;
 	}
-	references field(3){
+	references field(4){
+		supplementaryContractList	pay_item(__no_group)--pay_item;
 		commissionPayItemList	contract_pay_item(__no_group)--contract_pay_item;
 		contractPaymentApplicationList	pay_item(__no_group)--pay_item;
 		eventAdditionalContractBasicInfoList	contract_pay_item(__no_group)--contract_pay_item;
@@ -10722,7 +10743,7 @@ supplementary_contract_type{
 
 meta{vg4platform=合同管理, name=supplementary_contract, vg4project=合同管理, vg4party_b=合同管理, vg4party_a=合同管理}
 supplementary_contract{
-	fields(21){
+	fields(22){
 		string	id('AB'), verb: false, required: true,type:id;
 		string	name('平台项目管理服务费增补合同'), verb: false, required: true,type:string;
 		string	contract_number('SWB-JS-2015-001(01)'), verb: false, required: true,type:string;
@@ -10740,6 +10761,7 @@ supplementary_contract{
 		string	pay_criteira('合同款项支付条件文本描述'), verb: false, required: true,type:string;
 		date	expected_pay_time('2220-05-05'), verb: false, required: true,type:date;
 		project_progress	project_progress('$(object)'), verb: false, required: true, referenceBy: supplementaryContractList,type:project_progress;
+		contract_pay_item	pay_item('$(object)'), verb: false, required: true, referenceBy: supplementaryContractList,type:contract_pay_item;
 		date_time_create	create_time('createTime()'), verb: false, required: true,type:date_time_create;
 		date_time_update	last_update_time('updateTime()'), verb: false, required: true,type:date_time_update;
 		platform	platform('$(object)'), verb: false, required: true, referenceBy: supplementaryContractList,type:platform;
@@ -10747,7 +10769,7 @@ supplementary_contract{
 	}
 	references field(0){
 	}
-} depth=7; isRoot = false
+} depth=8; isRoot = false
 
 meta{name=commission_pay_item, vg4payer=合同管理, vg4payee=合同管理}
 commission_pay_item{
@@ -12456,7 +12478,7 @@ help_contract_beneficiary{
 
 meta{vg4platform=项目扶持, name=help_contract, vg4lender=项目扶持, vg4borrower=项目扶持}
 help_contract{
-	fields(18){
+	fields(20){
 		string	id('AB'), verb: false, required: true,type:id;
 		help_application	help_application('$(object)'), verb: false, required: true, referenceBy: helpContractList,type:help_application;
 		merchant	borrower_unit('$(object)'), verb: false, required: true, referenceBy: helpContractList,type:merchant;
@@ -12473,6 +12495,8 @@ help_contract{
 		string_document	document('document.doc'), verb: false, required: true,type:string_document;
 		help_contract_status	status('$(object)'), verb: false, required: true, referenceBy: helpContractList,type:help_contract_status;
 		audit_status	audit_status('$(object)'), verb: false, required: true, referenceBy: helpContractList,type:audit_status;
+		date_time_create	create_time('createTime()'), verb: false, required: true,type:date_time_create;
+		date_time_update	update_time('updateTime()'), verb: false, required: true,type:date_time_update;
 		platform	platform('$(object)'), verb: false, required: true, referenceBy: helpContractList,type:platform;
 		int	version('2147483647'), verb: false, required: true,type:version;
 	}
@@ -12485,8 +12509,8 @@ meta{name=help_contract_status, features=status, identified_by=code}
 help_contract_status{
 	fields(4){
 		string	id('AB'), verb: false, required: true,type:id;
-		string	name('履行中|待履行|已履行'), verb: false, required: true,type:string;
-		string	code('IN_ACCOMPLISH|PENDING|ACCOMPLISHED'), verb: false, required: true,type:string;
+		string	name('待确认|履行中|待履行|已履行'), verb: false, required: true,type:string;
+		string	code('PENDING_ON_CONFIRMATION|IN_ACCOMPLISH|PENDING|ACCOMPLISHED'), verb: false, required: true,type:string;
 		int	version('2147483647'), verb: false, required: true,type:version;
 	}
 	references field(1){
@@ -13187,8 +13211,8 @@ meta{name=change_request_type, identified_by=code, features=cr_type}
 change_request_type{
 	fields(9){
 		string	id('AB'), verb: false, required: true,type:id;
-		string	name('处理售后单|合同批注|审核合同|我要推荐|添加银行卡|数据类型展示|签收|创建合同|项目指令单|施工日志|添加员工|签证及补充合同|添加项目组织|工程验收申请通知单|资料审核|个人入驻|确认扶持合同|材料变更申请|添加项目资料|创建项目扶持合同|审核|进场主材料存样|完善个人资料|添加批注|项目参与|投标主材料存样|添加岗位|劳务纠纷申请|售后单|我要装修|创建收款申请|添加设计资料|工程劳务管理单|违约处罚|企业入驻|材料验收申请|创建项目进度|资料批注|先行赔付申请|项目经理日志|扶持申请|项目监理日志'), verb: false, required: true,type:string;
-		string	code('RESOLVE_AFTER_SALES|COMMENTS_ON_CONTRACT|REVIEW_CONTRACT|APPLY_RECOMMENDATION|ADD_DEBIT_CARD|SHOW_ALL_TYPE|SIGN|CREATE_CONTRACT|PROJECT_COMMAND|TASK_REPORT|ADD_EMPLOYEE|CREATE_ADDITIONAL_CONTRACT|CREATE_PROJECT_ORGANIZATION|ACCEPTANCE_APPLICATION|REVIEW_MATERIALS|APPLY_PERSONAL_EMPLACEMENT|CONFIRM_HELP_CONTRACT|APPLY_FOR_MATERIAL_CHANGE|ADD_PROJECT_MATERIAL|CREATE_LOAN_CONTRACT|REVIEW|CREATE_MATERIAL_PRESERVED_SAMPLE|FILL_PERSONAL_DETAIL|COMMENTS|SUBCONTRACT_APPLICATION|CREATE_MATERIAL_BID_SAMPLE|ADD_PROJECT_NOMINATION|LABOR_DISPUTE|AFTER_SALES|APPLY_DECORATION|CREATE_CONTRACT_PAYMENT_APPLICATION|ADD_DESIGN_DOCUMENT|LABOR_SUPERVISOR|PROJECT_PENALTIES|APPLY_EMPLACEMENT|APPLY_FOR_MATERIAL_ACCEPTANCE|PROJECT_PROGRESS|COMMENTS_ON_MATERIALS|APPLY_FOR_ADVANCE_COMPENSATION|PROJECT_MANAGER_REPORT|HELP_APPLICATION|PROJECT_SUPERVISION_REPORT'), verb: false, required: true,type:string;
+		string	name('处理售后单|合同批注|审核合同|我要推荐|添加银行卡|数据类型展示|签收|创建合同|项目指令单|施工日志|添加员工|签证及补充合同|添加项目组织|工程验收申请通知单|资料审核|个人入驻|材料变更申请|添加项目资料|确认扶持合同|创建项目扶持合同|审核|进场主材料存样|完善个人资料|添加批注|项目参与|投标主材料存样|添加岗位|劳务纠纷申请|售后单|我要装修|创建收款申请|添加设计资料|工程劳务管理单|违约处罚|企业入驻|材料验收申请|创建项目进度|资料批注|先行赔付申请|项目经理日志|扶持申请|项目监理日志'), verb: false, required: true,type:string;
+		string	code('RESOLVE_AFTER_SALES|COMMENTS_ON_CONTRACT|REVIEW_CONTRACT|APPLY_RECOMMENDATION|ADD_DEBIT_CARD|SHOW_ALL_TYPE|SIGN|CREATE_CONTRACT|PROJECT_COMMAND|TASK_REPORT|ADD_EMPLOYEE|CREATE_ADDITIONAL_CONTRACT|CREATE_PROJECT_ORGANIZATION|ACCEPTANCE_APPLICATION|REVIEW_MATERIALS|APPLY_PERSONAL_EMPLACEMENT|APPLY_FOR_MATERIAL_CHANGE|ADD_PROJECT_MATERIAL|VERIFY_CODE|CREATE_LOAN_CONTRACT|REVIEW|CREATE_MATERIAL_PRESERVED_SAMPLE|FILL_PERSONAL_DETAIL|COMMENTS|SUBCONTRACT_APPLICATION|CREATE_MATERIAL_BID_SAMPLE|ADD_PROJECT_NOMINATION|LABOR_DISPUTE|AFTER_SALES|APPLY_DECORATION|CREATE_CONTRACT_PAYMENT_APPLICATION|ADD_DESIGN_DOCUMENT|LABOR_SUPERVISOR|PROJECT_PENALTIES|APPLY_EMPLACEMENT|APPLY_FOR_MATERIAL_ACCEPTANCE|PROJECT_PROGRESS|COMMENTS_ON_MATERIALS|APPLY_FOR_ADVANCE_COMPENSATION|PROJECT_MANAGER_REPORT|HELP_APPLICATION|PROJECT_SUPERVISION_REPORT'), verb: false, required: true,type:string;
 		string	icon('form|edit|edit|form|form|table|form|form|form|calendar|bars|form|bars|form|edit|form|form|form|form|form|form|form|form|form|form|form|bars|form|form|form|form|form|form|form|form|bars|form|edit|form|tachometer|form|tachometer'), verb: false, required: true,type:string;
 		int	display_order('1|2|3|4|5|6'), verb: false, required: true,type:int;
 		string_longtext	bind_types('text()'), verb: false, required: true,type:string_longtext;
@@ -13766,13 +13790,13 @@ event_add_project_material{
 	}
 } depth=4; isRoot = false
 
-meta{bind_with_cr_type=CONFIRM_HELP_CONTRACT, name=event_check_verify_code, features=event}
+meta{bind_with_cr_type=VERIFY_CODE, name=event_check_verify_code, features=event}
 event_check_verify_code{
 	fields(6){
 		string	id('AB'), verb: false, required: true,type:id;
-		string	verify_code('verify code|null'), verb: false, required: true,type:string;
-		string	item_id('item id|null'), verb: false, required: true,type:string;
-		string	item_type('item type|null'), verb: false, required: true,type:string;
+		string	verify_code('verify code|验证码'), verb: false, required: true,type:string;
+		string	item_id('item id|item id'), verb: false, required: true,type:string;
+		string	item_type('item type|item type'), verb: false, required: true,type:string;
 		change_request	change_request('$(object)'), verb: false, required: true, referenceBy: eventCheckVerifyCodeList,type:change_request;
 		int	version('2147483647'), verb: false, required: true,type:version;
 	}

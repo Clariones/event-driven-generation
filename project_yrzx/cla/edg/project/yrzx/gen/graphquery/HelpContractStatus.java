@@ -9,6 +9,9 @@ public class HelpContractStatus extends BaseModelBean {
     return "com.yrdec.yrzx.helpcontractstatus.HelpContractStatus";
   }
   // 枚举对象
+  public static EnumAttribute PENDING_ON_CONFIRMATION =
+      new EnumAttribute(
+          "com.yrdec.yrzx.helpcontractstatus.HelpContractStatus", "PENDING_ON_CONFIRMATION");
   public static EnumAttribute IN_ACCOMPLISH =
       new EnumAttribute("com.yrdec.yrzx.helpcontractstatus.HelpContractStatus", "IN_ACCOMPLISH");
   public static EnumAttribute PENDING =

@@ -2,6 +2,7 @@ package cla.edg.project.yrzx.query;
 
 import cla.edg.pageflow.PageFlowScript;
 import cla.edg.pageflow.PieceOfScript;
+import cla.edg.project.yrzx.gen.graphquery.HelpContractStatus;
 import cla.edg.project.yrzx.gen.graphquery.MODEL;
 
 /**
@@ -37,7 +38,16 @@ public class FinanceServiceQueryPiece extends PieceOfScript {
 					MODEL.helpContract().status()
 			)
 
-
+			.query(MODEL.helpContract()).which("are applied in project").with_string("project id").pagination()
+				.comments("查看项目中已放款的贷款合同")
+				.do_it_as()
+				.where(
+						MODEL.helpContract().status().eq(HelpContractStatus.ACCOMPLISHED).or(MODEL.helpContract().status().eq(HelpContractStatus.IN_ACCOMPLISH)),
+						MODEL.helpContract().project().eq("${project id}")
+				)
+				.wants(
+						MODEL.helpContract().status()
+				)
 
 
 
@@ -66,6 +76,7 @@ public class FinanceServiceQueryPiece extends PieceOfScript {
 					MODEL.helpContract().project(),
 					MODEL.helpContract().borrowerUnit(),
 					MODEL.helpContract().helpApplication().helpProject(),
+					MODEL.helpContract().helpApplication().submitter(),
 					MODEL.helpContract().pledgedContract().partyA(),
 					MODEL.helpContract().projectProgress()
 
