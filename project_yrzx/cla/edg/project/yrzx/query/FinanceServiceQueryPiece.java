@@ -20,7 +20,7 @@ public class FinanceServiceQueryPiece extends PieceOfScript {
 		)
 		.wants(
 				MODEL.helpApplication().status(),
-				MODEL.helpApplication().submitter(),
+				MODEL.helpApplication().submitter().worker().employer(),
 				MODEL.helpApplication().helpContractList()
 		)
 

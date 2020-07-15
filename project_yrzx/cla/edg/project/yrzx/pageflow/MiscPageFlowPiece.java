@@ -65,7 +65,9 @@ public class MiscPageFlowPiece extends PieceOfScript {
 		.request("manage")
 		.got_page("manage")
 
-
+		.request("view organization info")
+			.comments("我的->企业信息")
+			.got_page("organization info")
 
 		;
 
