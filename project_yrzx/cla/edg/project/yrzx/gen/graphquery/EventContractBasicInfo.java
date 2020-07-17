@@ -34,17 +34,6 @@ public class EventContractBasicInfo extends BaseModelBean {
     return member;
   }
 
-  public ContractStatus status() {
-    ContractStatus member = new ContractStatus();
-    member.setModelTypeName("contract_status");
-    member.setName("status");
-    member.setMemberName("status");
-    member.setReferDirection(true);
-    member.setRelationName("status");
-    append(member);
-    return member;
-  }
-
   public Merchant partyA() {
     Merchant member = new Merchant();
     member.setModelTypeName("merchant");
