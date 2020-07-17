@@ -30,10 +30,14 @@ public class ProjectCommandQueryPiece extends PieceOfScript {
 				)
 
 			.query(MODEL.projectNomination()).list_of("project").with_string("project id")
+				.comments("查询项目委派")
 				.do_it_as()
 				.where(
 						MODEL.projectNomination().project().eq("${project id}")
-				)
+				).wants(
+
+						MODEL.projectNomination().worker().employer()
+		)
 
 			.find(MODEL.projectCommand()).which("by id").with_string("command id")
 				.do_it_as()

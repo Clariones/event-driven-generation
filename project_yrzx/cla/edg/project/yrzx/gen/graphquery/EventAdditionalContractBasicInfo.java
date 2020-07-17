@@ -56,17 +56,6 @@ public class EventAdditionalContractBasicInfo extends BaseModelBean {
     return member;
   }
 
-  public ContractStatus status() {
-    ContractStatus member = new ContractStatus();
-    member.setModelTypeName("contract_status");
-    member.setName("status");
-    member.setMemberName("status");
-    member.setReferDirection(true);
-    member.setRelationName("status");
-    append(member);
-    return member;
-  }
-
   public EmployeeNomination submitter() {
     EmployeeNomination member = new EmployeeNomination();
     member.setModelTypeName("employee_nomination");
