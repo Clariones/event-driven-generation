@@ -11,6 +11,7 @@ import cla.edg.modelbean.CorperationPathNode;
 import cla.edg.modelbean.LogicalOperator;
 import cla.edg.modelbean.ModelBeanRoute;
 import cla.edg.modelbean.NumberAttribute;
+import com.terapico.generator.Utils;
 
 
 public class PageFlowScript extends BasePageFlowScript {
@@ -351,6 +352,9 @@ public class PageFlowScript extends BasePageFlowScript {
 	public PageFlowScript got_ajax_page() {
 		return got_page("ajax response");
 	}
+	public PageFlowScript got_ajax_response() {
+		return got_page("ajax response");
+	}
 		
 	public BaseGraphQueryDescriptor graph_query_with() {
 		if (getGraphQueryDescriptor() == null) {
@@ -536,6 +540,7 @@ public class PageFlowScript extends BasePageFlowScript {
 		}
 		queryActionInfo.getExternTypesNeedKnown().addAll(beanRoute.getAllNodes().values().stream()
 				.map(it -> it.getData().getFullClassName()).collect(Collectors.toSet()));
+		// System.out.println(Utils.toJson(queryActionInfo.getExternTypesNeedKnown(), true));
 		queryActionInfo.setWantedMap(beanRoute);
 		return this;
 	}
@@ -684,4 +689,7 @@ public class PageFlowScript extends BasePageFlowScript {
     public PageFlowScript request_homepage() {
 		return this.request("view home page").comments("打开首页").no_login();
     }
+	public PageFlowScript request_me_page() {
+		return this.request("view me page").comments("查看用户主页面").no_login();
+	}
 }

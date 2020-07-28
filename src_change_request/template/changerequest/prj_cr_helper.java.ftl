@@ -436,7 +436,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 		}
 	}
 
-	protected void afterFieldFulfilled(CustomOpticalUserContextImpl userContext, GenericFormPage requestData, ChangeRequest dbCrData,
+	protected void afterFieldFulfilled(Custom${projectName?cap_first}UserContextImpl userContext, GenericFormPage requestData, ChangeRequest dbCrData,
                                        CRFieldSpec fieldSpec, CRGroupData groupData, CRFieldData fieldData) throws Exception{
         // by default, nothing need do here
     }

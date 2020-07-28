@@ -1,5 +1,10 @@
 package com.${orgName?lower_case}.${projectName?lower_case};
 
+import com.${orgName?lower_case}.${projectName?lower_case}.changerequest.ChangeRequest;
+import com.terapico.caf.appview.CRFieldData;
+import com.terapico.caf.appview.CRGroupData;
+import com.terapico.caf.viewcomponent.GenericFormPage;
+import com.terapico.changerequest.CRFieldSpec;
 import com.terapico.utils.DebugUtil;
 /**
  * 在这里定制项目的ChangeRequestHelper

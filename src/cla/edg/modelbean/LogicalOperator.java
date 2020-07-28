@@ -8,7 +8,7 @@ import java.util.*;
 public class LogicalOperator {
 	public static Set<String> needKnownClasses = new HashSet<>();
 	public enum Operator {
-		eq,not,less_or_eq,bigger_or_eq,less,bigger,in,not_in,is_null,not_null
+		like,eq,not,less_or_eq,bigger_or_eq,less,bigger,in,not_in,is_null,not_null
 	}
 	public enum CollectionType {
 		and, or

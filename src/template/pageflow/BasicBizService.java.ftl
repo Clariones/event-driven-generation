@@ -6,6 +6,8 @@ import com.terapico.utils.MapUtil;
 import com.terapico.utils.RandomUtil;
 import com.terapico.utils.TextUtil;
 
+import com.skynet.infrastructure.StorageService;
+
 import ${base_package}.${context_name};
 import ${base_package}.${custom_context_name};
 import ${base_package}.Footprint;
@@ -48,4 +50,17 @@ public abstract class Basic${class_name}ViewBizService extends ${class_name}View
 		SimpleToastPage page = this.assemblerSimpleToastPage(ctx, "sendVerifyCode");
 		return page.doRender(ctx);
 	}
+
+	public Object customGetOssToken(${custom_context_name} ctx) throws Exception {
+        String userUploadHome = "upload/anonymous";
+        if (ctx.getCurrentUserInfo() != null) {
+            userUploadHome = "upload/" + ctx.getCurrentUserInfo().getId();
+        }
+        // we will output json only
+        ctx.forceRenderingAsJson();
+
+        StorageService storageService = (StorageService) ctx.getBean("storageService");
+        return storageService.genToken(userUploadHome);
+
+    }
 }

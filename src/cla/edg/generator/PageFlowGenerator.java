@@ -241,6 +241,14 @@ public class PageFlowGenerator extends BasicGenerator {
 				if (query.getObjectName().contains(" ")) {
 					throw new RuntimeException("查询的对象名字不正常："+query.getObjectName());
 				}
+
+				if (query.getQueryActionInfo() != null) {
+					System.out.println("add " +Utils.toJson(query.getQueryActionInfo().getExternTypesNeedKnown(), true));
+					allObjectParamTypes.addAll(query.getQueryActionInfo().getExternTypesNeedKnown());
+				}else{
+					System.out.println("skip " + query.getName());
+				}
+
 				List<AccessParameter> params = query.getParameters();
 				if (params == null || params.isEmpty()) {
 					continue;
@@ -259,11 +267,8 @@ public class PageFlowGenerator extends BasicGenerator {
 						}
 					}
 				}
-				if (query.getQueryActionInfo() != null) {
-					allObjectParamTypes.addAll(query.getQueryActionInfo().getExternTypesNeedKnown());
-				}
 			}
-			
+			// System.out.println(Utils.toJson(allObjectParamTypes, true));
 			if (allObjectParamTypes.size() > 0) {
 				List<String> objTypeNames = new ArrayList<>(allObjectParamTypes);
 				Collections.sort(objTypeNames);

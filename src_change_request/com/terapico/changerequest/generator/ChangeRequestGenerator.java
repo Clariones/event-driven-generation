@@ -69,7 +69,7 @@ public class ChangeRequestGenerator extends BasicGenerator {
 		resultList.add(generateCRHelperClass());
 		resultList.add(generateCustomCRHelperClass());
 		resultList.add(generateChangeRequestXml());
-		resultList.add(generateTodoFile());
+		// resultList.add(generateTodoFile());
 		return resultList;
 	}
 

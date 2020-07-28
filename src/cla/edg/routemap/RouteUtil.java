@@ -144,6 +144,7 @@ public class RouteUtil {
 		case less_or_eq:
 		case bigger_or_eq:
 		case less:
+		case like:
 		case bigger: {
 			if (op2 instanceof EnumAttribute) {
 				// getExternTypesNeedKnown().add(((EnumAttribute) op2).getClassName());
@@ -221,6 +222,8 @@ public class RouteUtil {
 
 	private static String makeOperatorExp(Operator operator) {
 		switch (operator) {
+		case like:
+			return " like ";
 		case eq:
 			return " = ";
 		case not:
