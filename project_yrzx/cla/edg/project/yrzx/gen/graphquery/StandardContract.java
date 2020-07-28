@@ -610,6 +610,15 @@ public class StandardContract extends BaseModelBean {
     return member;
   }
 
+  public NumberAttribute originalAmount() {
+    NumberAttribute member = new NumberAttribute();
+    member.setModelTypeName("money");
+    // member.setName("originalAmount");
+    member.setName("original_amount");
+    useMember(member);
+    return member;
+  }
+
   public NumberAttribute version() {
     NumberAttribute member = new NumberAttribute();
     member.setModelTypeName("int");

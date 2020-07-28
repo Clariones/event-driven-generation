@@ -105,7 +105,7 @@ public class MiscQueryPiece extends PieceOfScript {
 		.wants(MODEL.ccRecord().ccTo())
 
 
-		.find(MODEL.auditRecord()).which("by reviewer").with_string("merchant id").with_string("review object type").with_string("status")
+		.find(MODEL.auditRecord()).which("by reviewer").with_string("merchant id").with_string("review object type").with_string("status").with_boolean("finished")
 			.comments("查询某人review某对象的某种状态的记录")
 			.do_it_as()
 			.where(
@@ -113,6 +113,8 @@ public class MiscQueryPiece extends PieceOfScript {
 					MODEL.auditRecord().auditObjectType().eq("${review object type}"),
 					MODEL.auditRecord().status().eq("${status}")
 			)
+
+
 
 		.query(MODEL.commentsRecord()).list_of("item").with_string("comment object type").with_string("item id")
 				.comments("查询批注某对象的记录")

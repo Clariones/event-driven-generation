@@ -69,6 +69,17 @@ public class ContractPayItem extends BaseModelBean {
 
   // 被引用的对象
 
+  public SupplementaryContract supplementaryContractList() {
+    SupplementaryContract member = new SupplementaryContract();
+    member.setModelTypeName("supplementary_contract");
+    member.setName("pay_item");
+    member.setMemberName("supplementaryContractList");
+    member.setRelationName("payItem");
+    member.setReferDirection(false);
+    append(member);
+    return member;
+  }
+
   public CommissionPayItem commissionPayItemList() {
     CommissionPayItem member = new CommissionPayItem();
     member.setModelTypeName("commission_pay_item");
@@ -136,6 +147,42 @@ public class ContractPayItem extends BaseModelBean {
     member.setModelTypeName("int");
     // member.setName("paymentPhase");
     member.setName("payment_phase");
+    useMember(member);
+    return member;
+  }
+
+  public NumberAttribute originalPayAmount() {
+    NumberAttribute member = new NumberAttribute();
+    member.setModelTypeName("money");
+    // member.setName("originalPayAmount");
+    member.setName("original_pay_amount");
+    useMember(member);
+    return member;
+  }
+
+  public NumberAttribute originalLaborFee() {
+    NumberAttribute member = new NumberAttribute();
+    member.setModelTypeName("money");
+    // member.setName("originalLaborFee");
+    member.setName("original_labor_fee");
+    useMember(member);
+    return member;
+  }
+
+  public NumberAttribute originalMaterialFee() {
+    NumberAttribute member = new NumberAttribute();
+    member.setModelTypeName("money");
+    // member.setName("originalMaterialFee");
+    member.setName("original_material_fee");
+    useMember(member);
+    return member;
+  }
+
+  public NumberAttribute originalOtherFee() {
+    NumberAttribute member = new NumberAttribute();
+    member.setModelTypeName("money");
+    // member.setName("originalOtherFee");
+    member.setName("original_other_fee");
     useMember(member);
     return member;
   }

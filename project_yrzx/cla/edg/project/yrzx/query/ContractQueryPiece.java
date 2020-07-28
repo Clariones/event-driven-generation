@@ -126,6 +126,44 @@ public class ContractQueryPiece extends PieceOfScript {
 				)
 
 
+				.query(MODEL.contractPayItem()).list_of("project by payer which are approved").with_string("project id").with_string("merchant id").pagination()
+				.comments("查询项目下的所有已审核的合同支付项")
+				.do_it_as()
+				.where(
+						MODEL.contractPayItem().contract().project().eq("${project id}"),
+						MODEL.contractPayItem().payer().eq("${merchant id}"),
+						MODEL.contractPayItem().payItemStatus().id().eq(PayItemStatus.PENDING_ON_CONFIRMATION).or(
+								MODEL.contractPayItem().payItemStatus().id().eq(PayItemStatus.CONFIRMED)
+						)
+				)
+//				).order_by(MODEL.contractPayItem().expectedTime()).desc()
+				.wants(
+						MODEL.contractPayItem().contract(),
+						MODEL.contractPayItem().payItemStatus(),
+						MODEL.contractPayItem().payee().employeeNominationListAsEmployee().projectNominationList().project()
+				)
+
+
+				.query(MODEL.contractPayItem()).list_of("project by payee which are approved").with_string("project id").with_string("merchant id").pagination()
+				.comments("查询项目下的已审核的所有合同收款项")
+				.do_it_as()
+				.where(
+						MODEL.contractPayItem().contract().project().eq("${project id}"),
+						MODEL.contractPayItem().payee().eq("${merchant id}").or(
+								MODEL.contractPayItem().payee().employeeNominationListAsEmployer().employee().eq("${merchant id}")
+						),
+						MODEL.contractPayItem().payItemStatus().id().eq(PayItemStatus.PENDING_ON_CONFIRMATION).or(
+								MODEL.contractPayItem().payItemStatus().id().eq(PayItemStatus.CONFIRMED)
+						)
+				)
+				.order_by(MODEL.contractPayItem().expectedPayTime()).desc()
+				.wants(
+						MODEL.contractPayItem().contract(),
+						MODEL.contractPayItem().payItemStatus(),
+						MODEL.contractPayItem().payee().employeeNominationListAsEmployee().projectNominationList().project()
+				)
+
+
 
 			// commission pay item
 			.find(MODEL.commissionPayItem()).which("in contract by pay status").with_string("contract id")
@@ -305,6 +343,13 @@ public class ContractQueryPiece extends PieceOfScript {
 						MODEL.accountBookRecord().payerAccount().owner()
 				)
 				.order_by(MODEL.accountBookRecord().createTime()).desc()
+
+
+
+
+
+
+
 		;
 
 		return script;
