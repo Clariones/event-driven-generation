@@ -58,6 +58,15 @@ public abstract class ${class_name}DBQueryHelper{
         }
         return countMap;
     }
+    protected boolean isEmpty(Object input) {
+        if (input == null){
+            return true;
+        }
+        if (input instanceof String){
+            return TextUtil.isBlank((String) input);
+        }
+        return true;
+    }
 	@SuppressWarnings("serial")
 	public <T> List<T> asList(T object) {
 		return new ArrayList<T>() {{add(object);}};

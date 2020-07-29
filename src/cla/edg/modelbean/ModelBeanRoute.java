@@ -42,14 +42,14 @@ public class ModelBeanRoute extends RouteMap<BaseModelBean, BeanRelation>{
 	}
 
 	
-	public String getCountOrSumSelectClause(String targetModelType, BaseAttribute sumAttribute) {
-		return getSelectClause(targetModelType, sumAttribute, true);
+	public String getCountOrSumSelectClause(String targetModelType, BaseAttribute sumAttribute, boolean isCnt, boolean isSum) {
+		return getSelectClause(targetModelType, sumAttribute, true, isCnt, isSum);
 	}
 	
 	public String getSelectClause(String targetModelType) {
-		return getSelectClause(targetModelType, null, false);
+		return getSelectClause(targetModelType, null, false, false, false);
 	}
-	protected String getSelectClause(String targetModelType, BaseAttribute sumAttribute, boolean isCountOrSum) {
+	protected String getSelectClause(String targetModelType, BaseAttribute sumAttribute, boolean isCountOrSum, boolean isCnt, boolean isSum) {
 		Node<BaseModelBean, BeanRelation> node = this.getNodeByKey(targetModelType);
 		if (node == null) {
 			exception("目标模型"+targetModelType+"没有在bean route中");
@@ -65,19 +65,25 @@ public class ModelBeanRoute extends RouteMap<BaseModelBean, BeanRelation>{
 		StringBuilder sb = new StringBuilder();
 		if (isCountOrSum) {
 			if (sumAttribute == null) {
-				sb.append("SELECT COUNT(DISTINCT ").append(targetAlias).append(".id) from ");
+				sb.append("SELECT ").append(isCnt?"COUNT":"SUM").append("(DISTINCT ").append(targetAlias).append(".id) from ");
 			}else {
 				if (sumAttribute.getName().equalsIgnoreCase("id")) {
 					MeetingPoint<BaseModelBean, BeanRelation> lastMP = sumAttribute.getContainerBean().getBeanRoute().getCurrentMeetingPoint().getEdgesToMe().iterator().next().getFromNode();
 					String countByAlias = lastMP.getAlias();
 					sb.append("SELECT ").append(countByAlias).append(".").append(sumAttribute.getContainerBean().getName())
-							.append(" as id, COUNT(DISTINCT ").append(targetAlias).append(".id) as count from ");
+							.append(" as id, ").append(isCnt?"COUNT":"SUM").append("(DISTINCT ").append(targetAlias).append(".id) as count from ");
 				} else {
 					MeetingPoint<BaseModelBean, BeanRelation> mp = sumAttribute.getContainerBean().getLastMeetingPoint();
 					if (mp == null) {
 						mp = sumAttribute.getContainerBean().getBeanRoute().getCurrentMeetingPoint();
 					}
-					sb.append("SELECT SUM( ").append(mp.getAlias()).append(".").append(sumAttribute.getName()).append(") from ");
+					sb.append("SELECT ");
+					String fieldStr = mp.getAlias()+"."+sumAttribute.getName();
+					if (isCnt){
+						sb.append(fieldStr).append(" as id, COUNT(").append(fieldStr).append(") as count from ");
+					}else {
+						sb.append("SUM").append("( ").append(fieldStr).append(") from ");
+					}
 				}
 			}
 		}else {

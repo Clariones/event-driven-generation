@@ -73,7 +73,7 @@ public class RouteUtil {
 		}
 		sb.append("(");
 		if (where.isOptional()) {
-			sb.append("<IF_OPTIONAL>").append(wrapString((String) where.getOp2())).append("==null?\"1=1 or \":\"\")+\"");
+			sb.append("<IF_OPTIONAL>").append(wrapString((String) where.getOp2())).append(")?\"1=1 or \":\"\")+\"");
 		}
 		sb.append(alias).append(".").append(op1.getName());
 		sb.append(makeOperatorExp(where.getOperator())).append(makeParamExp(paramValueExpList, where));
@@ -95,6 +95,9 @@ public class RouteUtil {
 			default:
 				throw new RuntimeException("只支持'and'或者'or'");
 			}
+//			if (where.isOptional()) {
+//				System.out.println("[DEBUG] now, to process " + subWhere);
+//			}
 			makeWhereClause(paramValueExpList, sb, subWhere, leadSpace+"  ");
 		}
 		sb.append(") ");
@@ -112,7 +115,12 @@ public class RouteUtil {
 		if (where.getOperations() != null && where.getOperations().size() > 0) {
 			sb.append("(");
 		}
-		sb.append("(").append(alias).append(".").append(op1.getName());
+
+		sb.append("(");
+		if (where.isOptional()) {
+			sb.append("<IF_OPTIONAL>").append(wrapString((String) where.getOp2())).append(")?\"1=1 or \":\"\")+\"");
+		}
+		sb.append(alias).append(".").append(op1.getName());
 		sb.append(makeOperatorExp(where.getOperator())).append(makeParamExp(paramValueExpList, where));
 		sb.append(") ");
 		if (where.getOperations() == null || where.getOperations().isEmpty()) {

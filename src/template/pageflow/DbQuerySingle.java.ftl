@@ -9,7 +9,7 @@
 		List<Object> params = new ArrayList<>();
 		String sql = prepareSqlAndParamsFor${getSingleMethodPrefix(query.queryActionInfo)?cap_first}${typeClass}Which${NAMING.toCamelCase(query.name)}(ctx, params<@T.getRequestProcessingMethodParameterNames query/>);
 		<#if query.queryActionInfo.counting && ! (query.queryActionInfo.sunDataType?has_content)>
-		    <#if query.queryActionInfo.sumAttribute?has_content>
+		    <#if query.queryActionInfo.sumAttribute?has_content >
 		return ctx.dao().countBySql(sql, params.toArray());
 		    <#else>
 		Integer cnt = ctx.dao().queryForObject(sql, params.toArray(), Integer.class);

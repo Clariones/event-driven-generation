@@ -586,6 +586,7 @@ public class PageFlowScript extends BasePageFlowScript {
 		if (currentWork instanceof QueryInfo && queryActionInfo != null) {
 			// 目前只支持这种场景
 			queryActionInfo.setCounting(true);
+			queryActionInfo.setSum(false);
 			queryActionInfo.setSumAttribute(countByAttr);
 		} else {
 			throw new RuntimeException("当前任务是" + currentWork.getClass().getSimpleName() + ", 不能指定count by条件");
@@ -596,6 +597,7 @@ public class PageFlowScript extends BasePageFlowScript {
 		if (currentWork instanceof QueryInfo && queryActionInfo != null) {
 			// 目前只支持这种场景
 			queryActionInfo.setCounting(true);
+			queryActionInfo.setSum(false);
 			queryActionInfo.setSumAttribute(countByAttr.id());
 		} else {
 			throw new RuntimeException("当前任务是" + currentWork.getClass().getSimpleName() + ", 不能指定count_by条件");
@@ -606,6 +608,7 @@ public class PageFlowScript extends BasePageFlowScript {
 		if (currentWork instanceof QueryInfo && queryActionInfo != null) {
 			// 目前只支持这种场景
 			queryActionInfo.setSum(true);
+			queryActionInfo.setCounting(false);
 			queryActionInfo.setSumAttribute(attribute);
 		} else {
 			throw new RuntimeException("当前任务是" + currentWork.getClass().getSimpleName() + ", 不能指定求和条件");
@@ -642,7 +645,7 @@ public class PageFlowScript extends BasePageFlowScript {
 	public PageFlowScript desc() {
 		if (currentWork instanceof QueryInfo && queryActionInfo != null) {
 			// 目前只支持这种场景
-			queryActionInfo.setCurrentSortingDirectionASC(false);
+			queryActionInfo.setCurrentSortingDirectionASC(false, false);
 		} else {
 			throw new RuntimeException("当前任务是" + currentWork.getClass().getSimpleName() + ", 不能指定排序方向");
 		}
@@ -651,7 +654,26 @@ public class PageFlowScript extends BasePageFlowScript {
 	public PageFlowScript asc() {
 		if (currentWork instanceof QueryInfo && queryActionInfo != null) {
 			// 目前只支持这种场景
-			queryActionInfo.setCurrentSortingDirectionASC(true);
+			queryActionInfo.setCurrentSortingDirectionASC(true, false);
+		} else {
+			throw new RuntimeException("当前任务是" + currentWork.getClass().getSimpleName() + ", 不能指定排序方向");
+		}
+		return this;
+	}
+
+	public PageFlowScript asc_by_pinyin() {
+		if (currentWork instanceof QueryInfo && queryActionInfo != null) {
+			// 目前只支持这种场景
+			queryActionInfo.setCurrentSortingDirectionASC(true, true);
+		} else {
+			throw new RuntimeException("当前任务是" + currentWork.getClass().getSimpleName() + ", 不能指定排序方向");
+		}
+		return this;
+	}
+	public PageFlowScript desc_by_pinyin() {
+		if (currentWork instanceof QueryInfo && queryActionInfo != null) {
+			// 目前只支持这种场景
+			queryActionInfo.setCurrentSortingDirectionASC(false, true);
 		} else {
 			throw new RuntimeException("当前任务是" + currentWork.getClass().getSimpleName() + ", 不能指定排序方向");
 		}

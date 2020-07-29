@@ -8,6 +8,7 @@ import cla.edg.routemap.MeetingPoint;
 public class SortingInfo {
 	protected MeetingPoint<BaseModelBean, BeanRelation> meetingPoint;
 	protected boolean ascDirection;
+	protected boolean sortWithPinYin = false;
 	protected Object sortField;
 	protected boolean userExpr = false;
 	
@@ -35,7 +36,15 @@ public class SortingInfo {
 	public void setAscDirection(boolean ascDirection) {
 		this.ascDirection = ascDirection;
 	}
-	
+
+	public boolean isSortWithPinYin() {
+		return sortWithPinYin;
+	}
+
+	public void setSortWithPinYin(boolean sortWithPinYin) {
+		this.sortWithPinYin = sortWithPinYin;
+	}
+
 	public String getSortingFieldName() {
 		if (sortField instanceof BaseAttribute) {
 			BaseAttribute attr = (BaseAttribute) sortField;

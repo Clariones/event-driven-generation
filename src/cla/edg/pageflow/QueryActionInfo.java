@@ -215,7 +215,7 @@ public class QueryActionInfo {
 			beanRoute = (ModelBeanRoute) beanRoute.mergeWith(sumAttribute.getContainerBean().getBeanRoute());
 		}
 		beanRoute.assignAlias();
-		String selectStr = beanRoute.getCountOrSumSelectClause(this.getTargetModelTypeName(), this.sumAttribute);
+		String selectStr = beanRoute.getCountOrSumSelectClause(this.getTargetModelTypeName(), this.sumAttribute, this.isCounting(), this.isSum());
 		sb.append(selectStr);
 		
 		params = new ArrayList<>();
@@ -241,7 +241,7 @@ public class QueryActionInfo {
 				.replaceAll("[\r\n]+", "\" +\r\n\t\t\t\"")
 				.replace(IF_LAST_RECORD, "\" +\r\n\t\t    (lastRecord == null ? \"\": \"")
 				.replace(END_OF_BRACKET, "\") +\r\n\t\t\t\"")
-				.replace(IF_OPTIONAL,"\" + (")
+				.replace(IF_OPTIONAL,"\" + (isEmpty(")
 				;
 	}
 	public String getSqlFromSearchClause() {
@@ -323,11 +323,19 @@ public class QueryActionInfo {
 			if (!first) {
 				sb.append(", ");
 			}
+			if (field.isSortWithPinYin()){
+				sb.append("CONVERT(");
+			}
 			if (field.isUserExpr()) {
 				sb.append(field.getSortField());
 			}else {
-				sb.append(field.getMeetingPoint().getAlias()).append(".").append(field.getSortingFieldName()).append(field.isAscDirection()?" asc":" desc");
+				sb.append(field.getMeetingPoint().getAlias()).append(".").append(field.getSortingFieldName());
+				if (field.isSortWithPinYin()){
+					sb.append("  USING GBK)");
+				}
+				sb.append(field.isAscDirection()?" asc":" desc");
 			}
+
 			if (first) {
 				first = false;
 			}
@@ -400,11 +408,12 @@ public class QueryActionInfo {
 		sortingMap = (ModelBeanRoute) sortingMap.mergeWith(inputBeanRoute);
 	}
 	// 设置排序字段的方向 true-asc; false-desc
-	public void setCurrentSortingDirectionASC(boolean asc) {
+	public void setCurrentSortingDirectionASC(boolean asc, boolean sortByPinyin) {
 		if (currentSortingPath == null) {
 			exception("asc()/desc() 应该在 order_by(xxx) 后使用");
 		}
 		currentSortingPath.setAscDirection(asc);
+		currentSortingPath.setSortWithPinYin(sortByPinyin);
 	}
 	
 	private void exception(String message) {

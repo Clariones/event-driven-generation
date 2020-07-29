@@ -243,10 +243,10 @@ public class PageFlowGenerator extends BasicGenerator {
 				}
 
 				if (query.getQueryActionInfo() != null) {
-					System.out.println("add " +Utils.toJson(query.getQueryActionInfo().getExternTypesNeedKnown(), true));
+					// System.out.println("add " +Utils.toJson(query.getQueryActionInfo().getExternTypesNeedKnown(), true));
 					allObjectParamTypes.addAll(query.getQueryActionInfo().getExternTypesNeedKnown());
 				}else{
-					System.out.println("skip " + query.getName());
+					// System.out.println("skip " + query.getName());
 				}
 
 				List<AccessParameter> params = query.getParameters();
