@@ -381,7 +381,8 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 				CRFieldData fieldData = new CRFieldData();
 				fieldData.setName(fieldSpec.getName()+"_"+evtData.getId());
 				if (fieldSpec.getInteractionMode().equals("display")) {
-					fieldData.setValue(TO_VALUE(getFieldValueWhenFillResponse(fieldSpec.getValue(),requestData, dbCrData, groupData, fieldSpec)));
+				    Object suggestedDefaultValue = calcSuggestedDefaultValue(groupName, fieldSpec, fieldSpec.getDefaultValue());
+					fieldData.setValue(TO_VALUE(getFieldValueWhenFillResponse(suggestedDefaultValue,requestData, dbCrData, groupData, fieldSpec)));
 				}else {
 					String memberName = FIELD_NAME(fieldSpec);
 					KeyValuePair kv = kvList.stream().filter(entry->entry.getKey().equals(memberName)).findAny().orElse(null);

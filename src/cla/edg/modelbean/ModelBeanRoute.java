@@ -87,7 +87,7 @@ public class ModelBeanRoute extends RouteMap<BaseModelBean, BeanRelation>{
 				}
 			}
 		}else {
-			sb.append("SELECT DISTINCT ").append(targetAlias).append(".* from ");
+			sb.append("SELECT DISTINCT ").append(targetAlias).append(".*<SELECTED_SORT_FIELDS> from ");
 		}
 		if (this.getAllNodes().size() == 1) {
 			sb.append(targetModelType).append("_data ").append(targetAlias).append(" \r\n");

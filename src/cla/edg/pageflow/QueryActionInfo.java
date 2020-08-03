@@ -162,7 +162,7 @@ public class QueryActionInfo {
 	}
 	
 	public String getDbSql() {
-		return makeOutputString(this.getSqlTemplate().replaceAll("\\?\\{[^\\}]+\\}", "?"));
+		return makeOutputString(this.getSqlTemplate().replaceAll("\\?\\{[^\\}]+\\}", "?"), "");
 	}
 	
 	Pattern ptnSqlParam = Pattern.compile("(\\?(\\{[^\\}]+\\})?)");
@@ -232,13 +232,14 @@ public class QueryActionInfo {
 				sb.append("\r\n    GROUP by ").append(countByAlias).append(".").append(this.getSumAttribute().getName());
 			}
 		}
-		return makeOutputString(sb.toString());
+		return makeOutputString(sb.toString(), "");
 	}
-	private String makeOutputString(String str) {
+	private String makeOutputString(String str, String selectedSortFields) {
 		return str
 				.replaceAll("<IF_LAST_RECORD>[\r\n]*", IF_LAST_RECORD)
 				.replaceAll("<END_OF_BRACKET>[\r\n]*", END_OF_BRACKET)
 				.replaceAll("[\r\n]+", "\" +\r\n\t\t\t\"")
+				.replace("<SELECTED_SORT_FIELDS>", selectedSortFields)
 				.replace(IF_LAST_RECORD, "\" +\r\n\t\t    (lastRecord == null ? \"\": \"")
 				.replace(END_OF_BRACKET, "\") +\r\n\t\t\t\"")
 				.replace(IF_OPTIONAL,"\" + (isEmpty(")
@@ -252,6 +253,7 @@ public class QueryActionInfo {
 		StringBuilder sb =  new StringBuilder();
 		String selectStr = beanRoute.getSelectClause(this.getTargetModelTypeName());
 		sb.append(selectStr);
+		String selectedSortFields = getFieldsBecauseOfOrderBy(beanRoute.getTargetModelAlias(), params, null);
 		
 		params = new ArrayList<>();
 		String whereClause = RouteUtil.getWhereClause(params, this.getSearchWhere());
@@ -262,7 +264,7 @@ public class QueryActionInfo {
 		makeSortClause(params, sb, null);
 		// create limit
 		makeLimitClause(params, sb, null);
-		return makeOutputString(sb.toString());
+		return makeOutputString(sb.toString(), selectedSortFields);
 	}
 	private void makePaginationClause(List<Object> params, StringBuilder sb, Object object) {
 		if (!this.isPagination()) {
@@ -310,6 +312,23 @@ public class QueryActionInfo {
 			sb.append(")");
 		}
 		
+	}
+	private String getFieldsBecauseOfOrderBy(String targetModelAlias, List<Object> paramValueExpList, LogicalOperator whereClauses) {
+		if (this.sortingFields.isEmpty()) {
+			return "";
+		}
+		int n = 1;
+		// 用指定的
+		StringBuilder sb = new StringBuilder();
+		boolean first = true;
+		for(SortingInfo field: sortingFields) {
+			String aliaName = field.getMeetingPoint().getAlias();
+			if (targetModelAlias.equalsIgnoreCase(aliaName)){
+				continue;
+			}
+			sb.append(", ").append(aliaName).append(".").append(field.getSortingFieldName()).append(" as _f").append(n++);
+		}
+		return sb.append(' ').toString();
 	}
 	private void makeSortClause(List<Object> paramValueExpList, StringBuilder sb, LogicalOperator whereClauses) {
 		if (this.sortingFields.isEmpty()) {

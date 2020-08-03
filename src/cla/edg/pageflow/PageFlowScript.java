@@ -2,6 +2,7 @@ package cla.edg.pageflow;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import cla.edg.graphquery.terms.BaseGraphQueryDescriptor;
@@ -498,6 +499,21 @@ public class PageFlowScript extends BasePageFlowScript {
 		if (conditions.length == 1) {
 			beanRoute = c1.getBeanRoute();
 		}else {
+
+			if (doAnd) {
+				if(c1.getCollectionType().equals(LogicalOperator.CollectionType.or)){
+					throw new RuntimeException("目前有bug, 第一个条件如果很复杂,并且是OR, " +
+							"或会生成错误的SQL. 把简单条件放在第一个, 或者第一个写一个 "
+					+ "x.id.eq(x.id) 这样始终为true的条件");
+				}
+			}else{
+				if(c1.getCollectionType().equals(LogicalOperator.CollectionType.or)){
+					throw new RuntimeException("目前有bug, 第一个条件如果很复杂,并且是AND, " +
+							"或会生成错误的SQL. 把简单条件放在第一个, 或者第一个写一个 "
+							+ "x.id.not_eq(x.id) 这样始终为false的条件");
+				}
+			}
+
 			for(int i=1;i<conditions.length;i++) {
 				if (doAnd) {
 					c1.and(conditions[i]);
@@ -713,5 +729,9 @@ public class PageFlowScript extends BasePageFlowScript {
     }
 	public PageFlowScript request_me_page() {
 		return this.request("view me page").comments("查看用户主页面").no_login();
+	}
+
+	public PageFlowScript run_by(Function<PageFlowScript, PageFlowScript> func) {
+		return func.apply(this);
 	}
 }

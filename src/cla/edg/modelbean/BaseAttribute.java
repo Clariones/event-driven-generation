@@ -40,6 +40,9 @@ public class BaseAttribute {
 	public LogicalOperator eq(Object o) {
 		return LogicalOperator.create(Operator.eq, this, o);
 	}
+	public LogicalOperator not_null() {
+		return LogicalOperator.create(Operator.not_null, this, null);
+	}
 	public LogicalOperator not(Object o) {
 		return LogicalOperator.create(Operator.not, this, o);
 	}

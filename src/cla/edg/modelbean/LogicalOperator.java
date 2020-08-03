@@ -7,6 +7,20 @@ import java.util.*;
 
 public class LogicalOperator {
 	public static Set<String> needKnownClasses = new HashSet<>();
+
+	public static LogicalOperator AND(LogicalOperator... conditions) {
+		LogicalOperator result = new LogicalOperator();
+		result.beanRoute = conditions[0].getBeanRoute();
+		result.and(conditions);
+		return result;
+	}
+	public static LogicalOperator OR(LogicalOperator... conditions) {
+		LogicalOperator result = new LogicalOperator();
+		result.beanRoute = conditions[0].getBeanRoute();
+		result.or(conditions);
+		return result;
+	}
+
 	public enum Operator {
 		like,eq,not,less_or_eq,bigger_or_eq,less,bigger,in,not_in,is_null,not_null
 	}
@@ -31,7 +45,7 @@ public class LogicalOperator {
 	protected CollectionType collectionType = CollectionType.and;
 	protected List<LogicalOperator> operations = new ArrayList<>();
 	protected MeetingPoint<BaseModelBean, BeanRelation> delareAtPoint;
-	protected ModelBeanRoute beanRoute;
+	protected transient ModelBeanRoute beanRoute;
 	
 	public MeetingPoint<BaseModelBean, BeanRelation> getDelareAtPoint() {
 		return delareAtPoint;
@@ -43,6 +57,7 @@ public class LogicalOperator {
 		return collectionType;
 	}
 	public void setCollectionType(CollectionType collectionType) {
+		// new Throwable("setCollectionType("+this.hashCode()+"-"+collectionType+")").printStackTrace();
 		this.collectionType = collectionType;
 	}
 	public List<LogicalOperator> getOperations() {
@@ -85,6 +100,7 @@ public class LogicalOperator {
 	public LogicalOperator or (LogicalOperator ... operations) {
 		this.setCollectionType(CollectionType.or);
 		getOperations().addAll(Arrays.asList(operations));
+
 		for(LogicalOperator op : operations) {
 			mergeNodeRoute(this, op);
 		}
@@ -108,6 +124,7 @@ public class LogicalOperator {
 			((BaseAttribute) op1).getContainerBean().setBeanRoute(beanRoute);
 			return;
 		}
+
 		// 目前应该就是这样,不然就要仔细想想
 		exception("逻辑运算更新bean route超出预期");
 	}

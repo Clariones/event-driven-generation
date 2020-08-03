@@ -64,6 +64,7 @@ public class ${class_name}Page extends CustomBaseViewPage{
 </#if>
 	@Override
 	public void assemblerContent(${context_name} userContext, String requestName)throws Exception {
+	    this.userContext = userContext;
 		${custom_context_name} ctx = (${custom_context_name})userContext;
 	<#if class_name=="SimpleToast">
 	    set("toast", ctx.getToast());

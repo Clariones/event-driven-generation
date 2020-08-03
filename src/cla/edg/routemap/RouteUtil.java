@@ -76,7 +76,7 @@ public class RouteUtil {
 			sb.append("<IF_OPTIONAL>").append(wrapString((String) where.getOp2())).append(")?\"1=1 or \":\"\")+\"");
 		}
 		sb.append(alias).append(".").append(op1.getName());
-		sb.append(makeOperatorExp(where.getOperator())).append(makeParamExp(paramValueExpList, where));
+		sb.append(makeOperatorExp(where)).append(makeParamExp(paramValueExpList, where));
 //		if (where.isOptional()) {
 //			sb.append("<END_OF_BRACKET>");
 //		}
@@ -121,7 +121,7 @@ public class RouteUtil {
 			sb.append("<IF_OPTIONAL>").append(wrapString((String) where.getOp2())).append(")?\"1=1 or \":\"\")+\"");
 		}
 		sb.append(alias).append(".").append(op1.getName());
-		sb.append(makeOperatorExp(where.getOperator())).append(makeParamExp(paramValueExpList, where));
+		sb.append(makeOperatorExp(where)).append(makeParamExp(paramValueExpList, where));
 		sb.append(") ");
 		if (where.getOperations() == null || where.getOperations().isEmpty()) {
 			return;
@@ -170,6 +170,12 @@ public class RouteUtil {
 				paramValueExpList.add(wrapString(String.valueOf(op2)));
 				return "?";
 			}
+
+			if (op2 instanceof Boolean) {
+				paramValueExpList.add(wrapString(String.valueOf(op2)));
+				return "?";
+			}
+
 			if (op2 instanceof BaseModelBean) {
 				BaseModelBean node = (BaseModelBean) op2;
 				String alias = node.getBeanRoute().getCurrentMeetingPoint().getAlias();
@@ -228,7 +234,9 @@ public class RouteUtil {
 		return op2;
 	}
 
-	private static String makeOperatorExp(Operator operator) {
+	private static String makeOperatorExp(LogicalOperator where){
+		Operator operator = where.getOperator();
+		Object op2 = where.getOp2();
 		switch (operator) {
 		case like:
 			return " like ";
