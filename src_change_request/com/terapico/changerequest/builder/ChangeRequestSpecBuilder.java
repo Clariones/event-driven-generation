@@ -50,6 +50,10 @@ public class ChangeRequestSpecBuilder extends ChangeRequestSpecBaseBuilder<Chang
 	public ChangeRequestSpecBuilder hidden() {
 		return interaction_mode("hidden");
 	}
+	public ChangeRequestSpecBuilder unhidden() {
+		return interaction_mode(null);
+	}
+
 
 	public ChangeRequestSpecBuilder must_one() {
 		return is_required(true).only_one();
