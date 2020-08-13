@@ -734,4 +734,8 @@ public class PageFlowScript extends BasePageFlowScript {
 	public PageFlowScript run_by(Function<PageFlowScript, PageFlowScript> func) {
 		return func.apply(this);
 	}
+
+    public PageFlowScript with_free_json_form() {
+		return with_form("free form");
+    }
 }

@@ -2,11 +2,12 @@
 	<@compress single_line=true>
 		<#if request.parameters?has_content>
 			<#list request.parameters as param>
-				,
 				<#if param.typeName == "form">
-				String formData
+				    <#if param.formName != "free form">
+				, String formData
+				    </#if>
 				<#else>
-				${param.typeName} ${NAMING.toCamelCase(param.paramName)?uncap_first}
+				, ${param.typeName} ${NAMING.toCamelCase(param.paramName)?uncap_first}
 				</#if>
 			</#list>
 		</#if>
@@ -44,13 +45,14 @@
 	<@compress single_line=true>
 		<#if request.parameters?has_content>
 			<#list request.parameters as param>
-				,
 				<#if param.typeName == "form">
-				"formData"
+				    <#if param.formName != "free form">
+				, "formData"
+				    </#if>
 				<#elseif param.asVariable>
-				":${NAMING.toCamelCase(param.paramName)?uncap_first}"
+				, ":${NAMING.toCamelCase(param.paramName)?uncap_first}"
 				<#else>
-				${NAMING.toCamelCase(param.paramName)?uncap_first}
+				, ${NAMING.toCamelCase(param.paramName)?uncap_first}
 				</#if>
 			</#list>
 		</#if>

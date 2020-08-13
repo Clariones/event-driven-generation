@@ -17,9 +17,13 @@ import ${base_package}.BaseViewPage;
 import ${base_package}.CR;
 import ${base_package}.ChangeRequestHelper;
 </#if>
+import com.terapico.utils.DebugUtil;
 
 
 <#list helper.getAllForms(script) as form>
+    <#if form.formName == "free form">
+        <#continue/>
+    </#if>
 	<#if form.customized>
 import ${base_package}.${NAMING.toCamelCase(form.formName)?lower_case}.${helper.getBaseFormClassName(form)};
 	</#if>
@@ -88,9 +92,14 @@ public abstract class ${class_name}ViewService extends Base${class_name}ViewServ
 			ctx.addFootprint(this);
 	</#if>
 		<#assign formName = request.parameters[0].formName />
+		<#if formName == "free form">
+		    ctx.setFormData(ctx.getRequestParameters());
+		    String formData = DebugUtil.dumpAsJson(ctx.getFormData(), true);
+		<#else>
 			${helper.getBaseFormClassName(request.parameters[0])} form = new ${helper.getFormClassName(request.parameters[0])}().initByRequest(ctx, formData);
 			form.verifyInputs();
 			ctx.setInputFormData(form);
+		</#if>
 			commonLog(ctx, "${T.getRequestProcessingMethodName(request)}", "${request.comments!}", ctx.getRemoteIP(), ctx.tokenId(), formData, null);
 		<@requestProcessAndReturn request "	">
 		</@>

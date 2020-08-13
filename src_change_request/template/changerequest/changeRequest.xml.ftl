@@ -25,7 +25,7 @@
 	    _features="change_request"
   	/>
 <#list assist.allEventNames as eventName>
-<event_${helper.toModelStyleName(allEventSpec[eventName].eventType)}
+<event_${helper.toModelStyleName(allEventSpec[eventName].eventType)} _name="${allEventSpec[eventName].title}事件"
 	<#list allEventSpec[eventName].fieldList as fieldSpec>
 		<#if fieldSpec.interactionMode != 'display'>
 	${helper.toModelStyleName(fieldSpec.name)}="<#if fieldSpec.title?has_content>${fieldSpec.title}:</#if>${helper.getExampleDataOfField(fieldSpec)}"

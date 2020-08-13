@@ -51,7 +51,7 @@ public class ChangeRequestSpecBuilder extends ChangeRequestSpecBaseBuilder<Chang
 		return interaction_mode("hidden");
 	}
 	public ChangeRequestSpecBuilder unhidden() {
-		return interaction_mode(null);
+		return interaction_mode("input");
 	}
 
 

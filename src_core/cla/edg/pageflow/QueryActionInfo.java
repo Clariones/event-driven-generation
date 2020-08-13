@@ -293,21 +293,48 @@ public class QueryActionInfo {
 		}
 		for(int i=0;i<pos;i++) {
 			SortingInfo fd = sortingFields.get(i);
+			String zwf = "?";
+
+			if (fd.isSortWithPinYin()) {
+				zwf = " CONVERT(? USING GBK) ";
+			}
 			if (i>0) {
 				sb.append(" AND ");
 			}
-			sb.append(fd.getMeetingPoint().getAlias()).append(".").append(fd.getSortingFieldName()).append("=?");
+			if (fd.isSortWithPinYin()) {
+				sb.append(" CONVERT( ");
+			}
+			sb.append(fd.getMeetingPoint().getAlias()).append(".").append(fd.getSortingFieldName());
+			if (fd.isSortWithPinYin()) {
+				sb.append(" USING GBK) ");
+			}
+			sb.append("=").append(zwf);
 		}
 		SortingInfo fd = sortingFields.get(pos);
 		if (pos>0) {
 			sb.append(" AND ");
 		}
-		sb.append(fd.getMeetingPoint().getAlias()).append(".").append(fd.getSortingFieldName());
-		if (fd.isAscDirection()) {
-			sb.append(isLast?">=?":">?");
-		}else {
-			sb.append(isLast?"<=?":"<?");
+
+		if (fd.isSortWithPinYin()) {
+			sb.append(" CONVERT( ");
 		}
+		sb.append(fd.getMeetingPoint().getAlias()).append(".").append(fd.getSortingFieldName());
+		if (fd.isSortWithPinYin()) {
+			sb.append(" USING GBK) ");
+		}
+		String zwf = "?";
+
+		if (fd.isSortWithPinYin()) {
+			zwf = " CONVERT(? USING GBK) ";
+		}
+
+			if (fd.isAscDirection()) {
+				sb.append(isLast ? ">=" : ">");
+			} else {
+				sb.append(isLast ? "<=" : "<");
+			}
+			sb.append(zwf);
+
 		if (pos > 0) {
 			sb.append(")");
 		}
