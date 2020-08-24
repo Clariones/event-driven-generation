@@ -2,8 +2,7 @@ package com.terapico.query.utils;
 
 import builder.Utils;
 import builder.utils.Tree;
-import cla.edg.modelbeanv2.LogicalOperator;
-import com.terapico.query.builder.QueryBuilderV2;
+import cla.edg.modelbean.LogicalOperator;
 
 import java.util.ArrayList;
 import java.util.List;

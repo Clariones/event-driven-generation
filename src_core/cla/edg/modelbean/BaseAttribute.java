@@ -1,11 +1,12 @@
 package cla.edg.modelbean;
 
+import cla.edg.modelbean.LogicalOperator.Operator;
+
 import java.util.HashMap;
 import java.util.Map;
 
-import cla.edg.modelbean.LogicalOperator.Operator;
-
 public class BaseAttribute {
+	protected String orderByInstruction;
 	protected String name;
 	protected boolean parentDirection;
 	protected String modelTypeName;
@@ -41,10 +42,10 @@ public class BaseAttribute {
 		return LogicalOperator.create(Operator.eq, this, o);
 	}
 	public LogicalOperator not_null() {
-		return LogicalOperator.create(Operator.not_null, this, null);
+		return LogicalOperator.create(Operator.not_null, this);
 	}
 	public LogicalOperator is_null() {
-		return LogicalOperator.create(Operator.is_null, this, null);
+		return LogicalOperator.create(Operator.is_null, this);
 	}
 	public LogicalOperator not(Object o) {
 		return LogicalOperator.create(Operator.not, this, o);
@@ -79,5 +80,13 @@ public class BaseAttribute {
 	}
 	public void addExtData(String key, Object value) {
 		getExtData().put(key, value);
+	}
+
+	public String getOrderByInstruction() {
+		return orderByInstruction;
+	}
+
+	public void setOrderByInstruction(String orderByInstruction) {
+		this.orderByInstruction = orderByInstruction;
 	}
 }

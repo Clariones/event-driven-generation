@@ -2,11 +2,10 @@ package com.terapico.query.utils;
 
 import builder.Utils;
 import builder.utils.Tree;
-import cla.edg.modelbeanv2.BeanPathNode;
+import cla.edg.modelbean.BeanPathNode;
 import clariones.poc.pathmap.Connector;
 import clariones.poc.pathmap.FootHolder;
 import clariones.poc.pathmap.PathMap;
-import com.terapico.query.builder.QueryBuilderV2;
 
 import java.util.HashSet;
 import java.util.List;

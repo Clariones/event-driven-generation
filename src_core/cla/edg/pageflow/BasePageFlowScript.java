@@ -9,7 +9,6 @@ import java.util.Optional;
 import java.util.Set;
 
 import cla.edg.graphquery.terms.BaseGraphQueryDescriptor;
-import cla.edg.modelbean.CorperationPathNode;
 
 public class BasePageFlowScript extends BasePageFlowElement{
 
@@ -27,8 +26,7 @@ public class BasePageFlowScript extends BasePageFlowElement{
 	protected Map<String, Object> configuration;
 	protected transient BaseGraphQueryDescriptor graphQueryDescriptor;
 	protected UserLoginInfo userLoginInfo;
-	protected QueryActionInfo queryActionInfo;
-	
+
 	
 	
 	public UserLoginInfo getUserLoginInfo() {

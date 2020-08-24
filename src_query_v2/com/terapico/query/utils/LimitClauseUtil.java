@@ -1,10 +1,5 @@
 package com.terapico.query.utils;
 
-import cla.edg.modelbeanv2.BaseAttribute;
-import cla.edg.modelbeanv2.BeanPathNode;
-
-import java.util.LinkedList;
-
 public class LimitClauseUtil {
     public static String makeLimitClause() {
         return " LIMIT ?";

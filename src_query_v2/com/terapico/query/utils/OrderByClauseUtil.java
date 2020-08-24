@@ -1,14 +1,9 @@
 package com.terapico.query.utils;
 
-import builder.Utils;
-import builder.utils.Tree;
-import cla.edg.modelbeanv2.BaseAttribute;
-import cla.edg.modelbeanv2.BeanPathNode;
-import cla.edg.modelbeanv2.LogicalOperator;
+import cla.edg.modelbean.BaseAttribute;
+import cla.edg.modelbean.BeanPathNode;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 
 public class OrderByClauseUtil {
 

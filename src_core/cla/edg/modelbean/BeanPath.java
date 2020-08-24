@@ -1,8 +1,6 @@
-package cla.edg.modelbeanv2;
+package cla.edg.modelbean;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 
 public class BeanPath {
     protected LinkedList<BeanPathNode> nodeList;

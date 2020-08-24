@@ -1,7 +1,7 @@
 package com.terapico.query.utils;
 
 import builder.Utils;
-import cla.edg.modelbeanv2.*;
+import cla.edg.modelbean.*;
 import clariones.poc.pathmap.Connector;
 import clariones.poc.pathmap.PathMap;
 
@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
-import java.util.stream.Collectors;
 
 
 public class QueryInfoUtil extends BaseQueryInfoUtil {

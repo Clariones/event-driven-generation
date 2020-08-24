@@ -153,10 +153,10 @@ public class PageFlowGenerator extends BasicGenerator {
 			outputFile = new File(getBaseOutputFolderFile(),
 					Utils.packageNameToPath(packageName) + "/" + outputFileName);
 			System.out.println("Write to " + outputFile.getCanonicalPath());
-			tmplFileName = "pageflow/DbQuery.java.ftl";
-			if (script instanceof PageFlowScriptV2){
+//			tmplFileName = "pageflow/DbQuery.java.ftl";
+//			if (script instanceof PageFlowScriptV2){
 				tmplFileName = "pageflow/DbQueryV2.java.ftl";
-			}
+//			}
 			template = getTemplate(tmplFileName);
 			doGeneration(outputFile, data, template);
 		}
@@ -240,12 +240,12 @@ public class PageFlowGenerator extends BasicGenerator {
 					throw new RuntimeException("查询的对象名字不正常："+query.getObjectName());
 				}
 
-				if (query.getQueryActionInfo() != null) {
-					// System.out.println("add " +Utils.toJson(query.getQueryActionInfo().getExternTypesNeedKnown(), true));
-					allObjectParamTypes.addAll(query.getQueryActionInfo().getExternTypesNeedKnown());
-				}else{
-					// System.out.println("skip " + query.getName());
-				}
+//				if (query.getQueryActionInfo() != null) {
+//					// System.out.println("add " +Utils.toJson(query.getQueryActionInfo().getExternTypesNeedKnown(), true));
+//					allObjectParamTypes.addAll(query.getQueryActionInfo().getExternTypesNeedKnown());
+//				}else{
+//					// System.out.println("skip " + query.getName());
+//				}
 
 				List<AccessParameter> params = query.getParameters();
 				if (params == null || params.isEmpty()) {

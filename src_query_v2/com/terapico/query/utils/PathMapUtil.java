@@ -1,7 +1,7 @@
 package com.terapico.query.utils;
 
 import builder.Utils;
-import cla.edg.modelbeanv2.*;
+import cla.edg.modelbean.*;
 import clariones.poc.pathmap.InMemoryPathMapImpl;
 import clariones.poc.pathmap.PathMap;
 

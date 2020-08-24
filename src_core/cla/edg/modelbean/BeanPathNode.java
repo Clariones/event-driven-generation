@@ -1,4 +1,4 @@
-package cla.edg.modelbeanv2;
+package cla.edg.modelbean;
 
 public class BeanPathNode {
     protected String beanName;

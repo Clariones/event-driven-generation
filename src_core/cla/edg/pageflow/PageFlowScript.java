@@ -1,21 +1,35 @@
 package cla.edg.pageflow;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 
 import cla.edg.graphquery.terms.BaseGraphQueryDescriptor;
 import cla.edg.modelbean.BaseAttribute;
 import cla.edg.modelbean.BaseModelBean;
-import cla.edg.modelbean.CorperationPathNode;
 import cla.edg.modelbean.LogicalOperator;
-import cla.edg.modelbean.ModelBeanRoute;
 import cla.edg.modelbean.NumberAttribute;
-import com.terapico.generator.Utils;
+import com.terapico.query.utils.QueryInfoUtil;
 
 
 public class PageFlowScript extends BasePageFlowScript {
+	protected QueryInfoUtil queryInfo;
+
+	public QueryInfoUtil getQueryInfo() {
+		return queryInfo;
+	}
+
+	public void setQueryInfo(QueryInfoUtil queryInfo) {
+		this.queryInfo = queryInfo;
+	}
+
+	private void assertQueryInfo() {
+		if (currentQuery.getQueryInfo() == null){
+			throw new RuntimeException("只能在 do_it_as() 后使用");
+		}
+	}
 
 	public PageFlowScript need_login() {
 		if (currentWork == null) {
@@ -428,285 +442,190 @@ public class PageFlowScript extends BasePageFlowScript {
 		currentQuery.setQuerySingleObject(true);
 		return this;
 	}
-	public PageFlowScriptV2 do_it_as2() {
-		return ((PageFlowScriptV2) this).do_it_as2();
-	}
+
 
 	public PageFlowScript do_it_as() {
 		if (currentWork instanceof QueryInfo) {
-			queryActionInfo = new QueryActionInfo();
-			currentQuery.setQueryActionInfo(queryActionInfo);
-			queryActionInfo.setTargetModelTypeName(currentQuery.getObjectName());
-			queryActionInfo.setQuerySingle(currentQuery.isQuerySingleObject());
-			queryActionInfo.setPagination(currentQuery.isPagination());
+			queryInfo = new QueryInfoUtil();
+			currentQuery.setQueryInfo(queryInfo);
+			queryInfo.setTargetModelTypeName(currentQuery.getObjectName());
+			queryInfo.setQuerySingle(currentQuery.isQuerySingleObject());
+			queryInfo.setPagination(currentQuery.isPagination());
 		}else {
 			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能指定执行细节");
 		}
 		return this;
 	}
-	public PageFlowScript sql_is(String sql) {
-		if (currentWork instanceof QueryInfo) {
-			queryActionInfo.setSqlTemplate(sql);
-		}else {
-			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能指定SQL细节");
-		}
-		return this;
-	}
-	public PageFlowScript param_string(String param) {
-		if (currentWork instanceof QueryInfo) {
-			queryActionInfo.addParamString(param);
-		}else {
-			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能指定SQL参数细节");
-		}
-		return this;
-	}
-	public PageFlowScript param(Object param) {
-		if (currentWork instanceof QueryInfo) {
-			queryActionInfo.addParam(param);
-		}else {
-			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能指定SQL参数细节");
-		}
-		return this;
-	}
-	public PageFlowScript need_know(String typeName) {
-		if (currentWork instanceof QueryInfo) {
-			queryActionInfo.getExternTypesNeedKnown().add(typeName);
-		}else {
-			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能指定SQL参数细节");
-		}
-		return this;
-	}
-	
-	public PageFlowScript not_generate_pagination_params() {
-		if (currentWork instanceof QueryInfo) {
-			queryActionInfo.setNotGeneratePaginationParams(true);
-		}else {
-			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能指定搜索条件");
-		}
-		return this;
-	}
-	public PageFlowScript where(LogicalOperator ... conditions) {
-		return where_with(true, conditions);
-	}
-	public PageFlowScript where_any(LogicalOperator ... conditions) {
-		return where_with(false, conditions);
-	}
-	protected PageFlowScript where_with(boolean doAnd, LogicalOperator ... conditions) {
-		if (currentWork instanceof QueryInfo) {
-			// 
-		}else {
-			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能指定搜索条件");
-		}
-		
-		ModelBeanRoute beanRoute = null;
-		LogicalOperator c1 = conditions[0];
-		if (conditions.length == 1) {
-			beanRoute = c1.getBeanRoute();
-		}else {
 
-			if (doAnd) {
-				if(c1.getCollectionType().equals(LogicalOperator.CollectionType.or)){
-					throw new RuntimeException("目前有bug, 第一个条件如果很复杂,并且是OR, " +
-							"或会生成错误的SQL. 把简单条件放在第一个, 或者第一个写一个 "
-					+ "x.id.eq(x.id) 这样始终为true的条件");
-				}
-			}else{
-				if(c1.getCollectionType().equals(LogicalOperator.CollectionType.or)){
-					throw new RuntimeException("目前有bug, 第一个条件如果很复杂,并且是AND, " +
-							"或会生成错误的SQL. 把简单条件放在第一个, 或者第一个写一个 "
-							+ "x.id.not_eq(x.id) 这样始终为false的条件");
-				}
-			}
 
-			for(int i=1;i<conditions.length;i++) {
-				if (doAnd) {
-					c1.and(conditions[i]);
-				}else{
-					c1.or(conditions[i]);
-				}
-			}
-			beanRoute = c1.getBeanRoute();
-		}
-		if (beanRoute == null) {
-			throw new RuntimeException("找不到bean route");
-		}
-		
-		queryActionInfo.setBeanRoute(beanRoute);
-		queryActionInfo.setSearchWhere(c1);
-		queryActionInfo.getExternTypesNeedKnown().addAll(beanRoute.getAllNodes().values().stream()
-				.map(it -> it.getData().getFullClassName()).collect(Collectors.toSet()));
-		queryActionInfo.getExternTypesNeedKnown().addAll(c1.needKnownClasses);
-		//
-		return this;
-	}
-	public PageFlowScript wants(BaseModelBean ... endPoints) {
-		if (currentWork instanceof QueryInfo) {
-			// 
-		}else {
-			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能指定加载范围");
-		}
-		BaseModelBean b1 = endPoints[0];
-		ModelBeanRoute beanRoute = null;
-		beanRoute = b1.getBeanRoute();
-		if (endPoints.length == 1) {
-			// 不用合并了
-		}else {
-			for(int i=1;i<endPoints.length;i++) {
-				beanRoute = (ModelBeanRoute) beanRoute.mergeWith(endPoints[i].getBeanRoute());
-			}
-		}
-		if (beanRoute == null) {
-			throw new RuntimeException("找不到bean route");
-		}
-		queryActionInfo.getExternTypesNeedKnown().addAll(beanRoute.getAllNodes().values().stream()
-				.map(it -> it.getData().getFullClassName()).collect(Collectors.toSet()));
-		// System.out.println(Utils.toJson(queryActionInfo.getExternTypesNeedKnown(), true));
-		queryActionInfo.setWantedMap(beanRoute);
-		return this;
-	}
-	public PageFlowScript search_along(BaseModelBean ... modelPaths) {
-		if (currentWork instanceof QueryInfo) {
-			// 
-		}else {
-			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能指定搜索路径");
-		}
-		List<CorperationPathNode> allList = new ArrayList<>();
-		for(BaseModelBean bean : modelPaths) {
-			bean.getCorperatedPath().forEach(it->{
-				String key = it.getKey();
-				if (allList.stream().anyMatch(e->e.getKey().equals(key))) {
-					return;
-				}
-				allList.add(it);
-			});
-		}
-		queryActionInfo.setSearchAlongPath(allList);
-		return this;
-	}
+//	public PageFlowScript sql_is(String sql) {
+//		if (currentWork instanceof QueryInfo) {
+//			queryActionInfo.setSqlTemplate(sql);
+//		}else {
+//			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能指定SQL细节");
+//		}
+//		return this;
+//	}
+//	public PageFlowScript param_string(String param) {
+//		if (currentWork instanceof QueryInfo) {
+//			queryActionInfo.addParamString(param);
+//		}else {
+//			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能指定SQL参数细节");
+//		}
+//		return this;
+//	}
+//	public PageFlowScript param(Object param) {
+//		if (currentWork instanceof QueryInfo) {
+//			queryActionInfo.addParam(param);
+//		}else {
+//			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能指定SQL参数细节");
+//		}
+//		return this;
+//	}
+//	public PageFlowScript need_know(String typeName) {
+//		if (currentWork instanceof QueryInfo) {
+//			queryActionInfo.getExternTypesNeedKnown().add(typeName);
+//		}else {
+//			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能指定SQL参数细节");
+//		}
+//		return this;
+//	}
 	
-	public PageFlowScript test() {
-		String sql = queryActionInfo.getSqlFromSearchClause();
-		System.out.println(sql);
+//	public PageFlowScript not_generate_pagination_params() {
+//		if (currentWork instanceof QueryInfo) {
+//			queryActionInfo.setNotGeneratePaginationParams(true);
+//		}else {
+//			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能指定搜索条件");
+//		}
+//		return this;
+//	}
+
+	public PageFlowScript where(LogicalOperator... operators) {
+		if (operators == null || operators.length == 0) {
+			return this;
+		}
+		if (operators.length == 1){
+			queryInfo.setWhereClause(operators[0]);
+			return this;
+		}
+		queryInfo.setWhereClause(cla.edg.modelbean.LogicalOperator.create(cla.edg.modelbean.LogicalOperator.CollectionType.and, operators));
 		return this;
 	}
+
+
+	public PageFlowScript wants(BaseModelBean... endPoints) {
+		assertQueryInfo();
+		queryInfo.setWantsBeans(new LinkedList<>(Arrays.asList(endPoints)));
+		return this;
+	}
+
+
+//	public PageFlowScript search_along(BaseModelBean ... modelPaths) {
+//		if (currentWork instanceof QueryInfo) {
+//			//
+//		}else {
+//			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能指定搜索路径");
+//		}
+//		List<CorperationPathNode> allList = new ArrayList<>();
+//		for(BaseModelBean bean : modelPaths) {
+//			bean.getCorperatedPath().forEach(it->{
+//				String key = it.getKey();
+//				if (allList.stream().anyMatch(e->e.getKey().equals(key))) {
+//					return;
+//				}
+//				allList.add(it);
+//			});
+//		}
+//		queryActionInfo.setSearchAlongPath(allList);
+//		return this;
+//	}
+	
+//	public PageFlowScript test() {
+//		String sql = queryActionInfo.getSqlFromSearchClause();
+//		System.out.println(sql);
+//		return this;
+//	}
 	public PageFlowScript find(BaseModelBean bean) {
 		return find(bean.getModelTypeName());
 	}
 
 	public PageFlowScript count() {
-		if (currentWork instanceof QueryInfo && queryActionInfo != null) {
-			// 目前只支持这种场景
-			queryActionInfo.setCounting(true);
-		} else {
-			throw new RuntimeException("当前任务是" + currentWork.getClass().getSimpleName() + ", 不能指定搜索条件");
-		}
+		assertQueryInfo();
+		queryInfo.setCountAttr(new cla.edg.modelbean.BaseAttribute());
 		return this;
 	}
-	public PageFlowScript count_by(BaseAttribute countByAttr) {
-		if (currentWork instanceof QueryInfo && queryActionInfo != null) {
-			// 目前只支持这种场景
-			queryActionInfo.setCounting(true);
-			queryActionInfo.setSum(false);
-			queryActionInfo.setSumAttribute(countByAttr);
-		} else {
-			throw new RuntimeException("当前任务是" + currentWork.getClass().getSimpleName() + ", 不能指定count by条件");
-		}
+	public PageFlowScript count_by(cla.edg.modelbean.BaseAttribute attr){
+		assertQueryInfo();
+		queryInfo.setCountByAttr(attr);
 		return this;
 	}
-	public PageFlowScript count_by(BaseModelBean countByAttr) {
-		if (currentWork instanceof QueryInfo && queryActionInfo != null) {
-			// 目前只支持这种场景
-			queryActionInfo.setCounting(true);
-			queryActionInfo.setSum(false);
-			queryActionInfo.setSumAttribute(countByAttr.id());
-		} else {
-			throw new RuntimeException("当前任务是" + currentWork.getClass().getSimpleName() + ", 不能指定count_by条件");
-		}
+	public PageFlowScript count_by(cla.edg.modelbean.BaseModelBean bean){
+		assertQueryInfo();
+		queryInfo.setCountByAttr(bean.id());
 		return this;
 	}
-	public PageFlowScript sum(NumberAttribute attribute) {
-		if (currentWork instanceof QueryInfo && queryActionInfo != null) {
-			// 目前只支持这种场景
-			queryActionInfo.setSum(true);
-			queryActionInfo.setCounting(false);
-			queryActionInfo.setSumAttribute(attribute);
-		} else {
-			throw new RuntimeException("当前任务是" + currentWork.getClass().getSimpleName() + ", 不能指定求和条件");
-		}
-		return this;
-	}
-	public PageFlowScript order_by(String expr) {
-		if (currentWork instanceof QueryInfo && queryActionInfo != null) {
-			// 目前只支持这种场景
-			queryActionInfo.addSortingPath(expr, false);
-		} else {
-			throw new RuntimeException("当前任务是" + currentWork.getClass().getSimpleName() + ", 不能指定排序表达式");
-		}
-		return this;
-	}
-	public PageFlowScript order_by(BaseAttribute attr) {
-		if (currentWork instanceof QueryInfo && queryActionInfo != null) {
-			// 目前只支持这种场景
-			queryActionInfo.addSortingPath(attr, false);
-		} else {
-			throw new RuntimeException("当前任务是" + currentWork.getClass().getSimpleName() + ", 不能指定排序条件");
-		}
-		return this;
-	}
-	public PageFlowScript order_by(BaseModelBean bean) {
-		if (currentWork instanceof QueryInfo && queryActionInfo != null) {
-			// 目前只支持这种场景
-			queryActionInfo.addSortingPath(bean, false);
-		} else {
-			throw new RuntimeException("当前任务是" + currentWork.getClass().getSimpleName() + ", 不能指定排序条件");
-		}
-		return this;
-	}
-	public PageFlowScript desc() {
-		if (currentWork instanceof QueryInfo && queryActionInfo != null) {
-			// 目前只支持这种场景
-			queryActionInfo.setCurrentSortingDirectionASC(false, false);
-		} else {
-			throw new RuntimeException("当前任务是" + currentWork.getClass().getSimpleName() + ", 不能指定排序方向");
-		}
-		return this;
-	}
-	public PageFlowScript asc() {
-		if (currentWork instanceof QueryInfo && queryActionInfo != null) {
-			// 目前只支持这种场景
-			queryActionInfo.setCurrentSortingDirectionASC(true, false);
-		} else {
-			throw new RuntimeException("当前任务是" + currentWork.getClass().getSimpleName() + ", 不能指定排序方向");
-		}
+//	public PageFlowScript sum(NumberAttribute attribute) {
+//		if (currentWork instanceof QueryInfo && queryActionInfo != null) {
+//			// 目前只支持这种场景
+//			queryActionInfo.setSum(true);
+//			queryActionInfo.setCounting(false);
+//			queryActionInfo.setSumAttribute(attribute);
+//		} else {
+//			throw new RuntimeException("当前任务是" + currentWork.getClass().getSimpleName() + ", 不能指定求和条件");
+//		}
+//		return this;
+//	}
+
+	public PageFlowScript order_by(BaseAttribute attribute){
+		assertQueryInfo();
+		queryInfo.addOrderBy(attribute);
 		return this;
 	}
 
+//	public PageFlowScript order_by(String expr) {
+//		if (currentWork instanceof QueryInfo && queryActionInfo != null) {
+//			// 目前只支持这种场景
+//			queryActionInfo.addSortingPath(expr, false);
+//		} else {
+//			throw new RuntimeException("当前任务是" + currentWork.getClass().getSimpleName() + ", 不能指定排序表达式");
+//		}
+//		return this;
+//	}
+
+	public PageFlowScript order_by(BaseModelBean bean) {
+		return order_by(bean.id());
+	}
+	public PageFlowScript desc() {
+		assertQueryInfo();
+		queryInfo.setOrderByDirection("desc");
+		return this;
+	}
+	public PageFlowScript asc() {
+		assertQueryInfo();
+		queryInfo.setOrderByDirection("asc");
+		return this;
+	}
+
+
 	public PageFlowScript asc_by_pinyin() {
-		if (currentWork instanceof QueryInfo && queryActionInfo != null) {
-			// 目前只支持这种场景
-			queryActionInfo.setCurrentSortingDirectionASC(true, true);
-		} else {
-			throw new RuntimeException("当前任务是" + currentWork.getClass().getSimpleName() + ", 不能指定排序方向");
-		}
+//		if (currentWork instanceof QueryInfo && queryActionInfo != null) {
+//			// 目前只支持这种场景
+//			queryActionInfo.setCurrentSortingDirectionASC(true, true);
+//		} else {
+//			throw new RuntimeException("当前任务是" + currentWork.getClass().getSimpleName() + ", 不能指定排序方向");
+//		}
 		return this;
 	}
 	public PageFlowScript desc_by_pinyin() {
-		if (currentWork instanceof QueryInfo && queryActionInfo != null) {
-			// 目前只支持这种场景
-			queryActionInfo.setCurrentSortingDirectionASC(false, true);
-		} else {
-			throw new RuntimeException("当前任务是" + currentWork.getClass().getSimpleName() + ", 不能指定排序方向");
-		}
+//		if (currentWork instanceof QueryInfo && queryActionInfo != null) {
+//			// 目前只支持这种场景
+//			queryActionInfo.setCurrentSortingDirectionASC(false, true);
+//		} else {
+//			throw new RuntimeException("当前任务是" + currentWork.getClass().getSimpleName() + ", 不能指定排序方向");
+//		}
 		return this;
 	}
-	public PageFlowScript top(String limitExp) {
-		if (currentWork instanceof QueryInfo) {
-			queryActionInfo.setLimitExp(limitExp);
-			return this;
-		}else {
-			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能指定搜索条件");
-		}
-	}
+
 	public PageFlowScript top_3() {
 		return top("3");
 	}
@@ -715,6 +634,11 @@ public class PageFlowScript extends BasePageFlowScript {
 	}
 	public PageFlowScript top_10() {
 		return top("10");
+	}
+	public PageFlowScript top(String limitExp) {
+		assertQueryInfo();
+		queryInfo.setTopNExpression(limitExp);
+		return this;
 	}
 	public PageFlowScript got_cr_page() {
 		return got_page("general_cr_page");
@@ -742,4 +666,6 @@ public class PageFlowScript extends BasePageFlowScript {
     public PageFlowScript with_free_json_form() {
 		return with_form("free form");
     }
+
+
 }

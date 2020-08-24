@@ -1,8 +1,8 @@
 package com.terapico.query.utils;
 
 import builder.Utils;
-import cla.edg.modelbeanv2.*;
-import cla.edg.modelbeanv2.LogicalOperator.Operator;
+import cla.edg.modelbean.*;
+import cla.edg.modelbean.LogicalOperator.Operator;
 
 import java.util.*;
 import java.util.function.Function;

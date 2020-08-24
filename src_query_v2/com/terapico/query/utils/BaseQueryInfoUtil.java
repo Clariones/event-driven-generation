@@ -1,8 +1,8 @@
 package com.terapico.query.utils;
 
-import cla.edg.modelbeanv2.BaseAttribute;
-import cla.edg.modelbeanv2.BaseModelBean;
-import cla.edg.modelbeanv2.LogicalOperator;
+import cla.edg.modelbean.BaseAttribute;
+import cla.edg.modelbean.BaseModelBean;
+import cla.edg.modelbean.LogicalOperator;
 
 import java.util.LinkedList;
 
