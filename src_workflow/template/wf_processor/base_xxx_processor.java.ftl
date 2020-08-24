@@ -1,0 +1,69 @@
+package ${base_package}.${helper.nameAsThis(spec.name)?lower_case};
+
+import ${base_package}.BaseProcessor;
+import com.terapico.workflow.*;
+import java.util.*;
+
+public abstract class Base${helper.NameAsThis(spec.name)}Processor extends BaseProcessor {
+    public Actor getSystemActor() {
+        Actor actor = new Actor();
+        actor.setRole("ADMIN");
+        actor.setId("[from_"+userContext.tokenId()+"]");
+        return actor;
+    }
+
+    @Override
+    protected boolean checkEventShouldBeProcessed(ProcessInstance process, List<Node> nodes, Actor actor, Event event) {
+        return true;
+    }
+
+
+    @Override
+    protected void onEnterStatus(ProcessInstance process, Node newNode, Actor actor, Event event) throws Exception {
+        switch (newNode.getStatusName()){
+<#list spec.allNodeSpecMap?keys as statusCode>
+        case ${helper.NameAsThis(spec.name)}ProcessSpec.STATUS_${helper.NAME_AS_THIS(statusCode)}:
+            onEnter${helper.NameAsThis(statusCode)}Status(process, newNode, actor, event);
+            return;
+</#list>
+        default:
+            throw new Exception("未定义的状态"+event.getEventName());
+        }
+    }
+
+<#list spec.allNodeSpecMap?keys as statusCode>
+    protected abstract void onEnter${helper.NameAsThis(statusCode)}Status(ProcessInstance process, Node newNode, Actor actor, Event event) throws Exception;
+</#list>
+
+    @Override
+    protected void onLeaveStatus(ProcessInstance process, Node fromNode, Actor actor, Event event) throws Exception {
+        // generale speaking, nothing to do when leave some status
+    }
+
+    @Override
+    protected void eventProcessFailed(ProcessInstance process, Node node, Actor actor, Event event, String resultCode, Exception e) {
+        debug("Event [%s] handling failed: %s",
+                event.getEventName(),
+                e==null?resultCode:e.getMessage());
+        if (e != null){
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    protected String handleEvent(ProcessInstance process, Node node, Actor actor, Event event) throws Exception {
+        return RESULT_CODE_OK;
+    }
+
+    @Override
+    protected void checkEventCanBeProcessed(ProcessInstance process, Actor actor, Event event) throws Exception {
+        // if you have some special /complex rule to check some 'actor' can do some 'event', override here.
+    }
+
+    @Override
+    protected ProcessSpec getProcessingSpec() {
+        return ${helper.NameAsThis(spec.name)}ProcessSpec.getSpec();
+    }
+
+
+}

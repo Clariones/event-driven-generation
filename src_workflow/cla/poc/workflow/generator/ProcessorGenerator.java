@@ -39,8 +39,8 @@ public class ProcessorGenerator extends BasicGenerator {
 
     @Override
     public List<GenrationResult> runJob() throws Exception {
-        List<GenrationResult> resultList = new ArrayList<>();
-        resultList.addAll(generateSpecJavaFile());
+        List<GenrationResult> resultList = new ArrayList<>(generateSpecJavaFile());
+        resultList.add(generateBaseProcessorJavaFile());
         // resultList.add(generateChangeRequestXml());
         // resultList.add(generateTodoFile());
         return resultList;
@@ -57,7 +57,24 @@ public class ProcessorGenerator extends BasicGenerator {
             String fileName = this.toFileName(data,
                     folderName+"/${base_package?replace('.','/')}/${helper.NameAsThis(spec.name)?lower_case}/${helper.NameAsThis(spec.name)}ProcessSpec.java");
             resultList.add(doGeneration(data, templatePath, fileName).as_new_file().with_code("process_spec.java"));
+
+            templatePath = "/wf_processor/base_xxx_processor.java.ftl";
+            fileName = this.toFileName(data,
+                    folderName+"/${base_package?replace('.','/')}/${helper.NameAsThis(spec.name)?lower_case}/Base${helper.NameAsThis(spec.name)}Processor.java");
+            resultList.add(doGeneration(data, templatePath, fileName).as_new_file().with_code("base_xxx_processor.java"));
         }
         return resultList;
+    }
+
+    private GenrationResult generateBaseProcessorJavaFile() throws Exception {
+
+        String templatePath = "/wf_processor/base_processor.java.ftl";
+        Map<String, Object> data = Utils
+                .put("helper", new GenerationHelper())
+                .put("base_package", getBasePackageName())
+                .into_map();
+        String fileName = this.toFileName(data,
+                folderName + "/${base_package?replace('.','/')}/BaseProcessor.java");
+        return doGeneration(data, templatePath, fileName).as_new_file().with_code("base_processor.java");
     }
 }

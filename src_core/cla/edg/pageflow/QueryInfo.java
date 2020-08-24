@@ -1,5 +1,7 @@
 package cla.edg.pageflow;
 
+import com.terapico.query.utils.QueryInfoUtil;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +12,16 @@ public class QueryInfo extends BasePageFlowElement {
 	protected boolean pagination = false;
 	protected boolean querySingleObject = false;
 	protected QueryActionInfo queryActionInfo;
-	
+	protected QueryInfoUtil queryInfo;
+
+	public QueryInfoUtil getQueryInfo() {
+		return queryInfo;
+	}
+
+	public void setQueryInfo(QueryInfoUtil queryInfo) {
+		this.queryInfo = queryInfo;
+	}
+
 	public QueryActionInfo getQueryActionInfo() {
 		return queryActionInfo;
 	}

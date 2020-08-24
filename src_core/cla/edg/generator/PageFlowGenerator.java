@@ -8,14 +8,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import cla.edg.pageflow.*;
 import com.terapico.generator.Utils;
 
-import cla.edg.pageflow.AccessParameter;
-import cla.edg.pageflow.BasePageFlowScript;
-import cla.edg.pageflow.Branch;
-import cla.edg.pageflow.Page;
-import cla.edg.pageflow.QueryInfo;
-import cla.edg.pageflow.Request;
 import freemarker.template.Template;
 
 public class PageFlowGenerator extends BasicGenerator {
@@ -159,6 +154,9 @@ public class PageFlowGenerator extends BasicGenerator {
 					Utils.packageNameToPath(packageName) + "/" + outputFileName);
 			System.out.println("Write to " + outputFile.getCanonicalPath());
 			tmplFileName = "pageflow/DbQuery.java.ftl";
+			if (script instanceof PageFlowScriptV2){
+				tmplFileName = "pageflow/DbQueryV2.java.ftl";
+			}
 			template = getTemplate(tmplFileName);
 			doGeneration(outputFile, data, template);
 		}

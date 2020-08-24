@@ -428,6 +428,10 @@ public class PageFlowScript extends BasePageFlowScript {
 		currentQuery.setQuerySingleObject(true);
 		return this;
 	}
+	public PageFlowScriptV2 do_it_as2() {
+		return ((PageFlowScriptV2) this).do_it_as2();
+	}
+
 	public PageFlowScript do_it_as() {
 		if (currentWork instanceof QueryInfo) {
 			queryActionInfo = new QueryActionInfo();
