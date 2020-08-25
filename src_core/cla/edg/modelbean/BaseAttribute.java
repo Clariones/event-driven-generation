@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class BaseAttribute {
+	protected String orderByDirection;
 	protected String orderByInstruction;
 	protected String name;
 	protected boolean parentDirection;
@@ -80,6 +81,14 @@ public class BaseAttribute {
 	}
 	public void addExtData(String key, Object value) {
 		getExtData().put(key, value);
+	}
+
+	public String getOrderByDirection() {
+		return orderByDirection;
+	}
+
+	public void setOrderByDirection(String orderByDirection) {
+		this.orderByDirection = orderByDirection;
 	}
 
 	public String getOrderByInstruction() {

@@ -44,7 +44,12 @@ public class BaseQueryInfoUtil {
     }
 
     public void setOrderByDirection(String orderByWay) {
-        getOrderByAttributes().getLast().setOrderByInstruction(orderByWay);
+        getOrderByAttributes().getLast().setOrderByDirection(orderByWay);
+        getOrderByAttributes().getLast().setOrderByInstruction("native");
+    }
+    public void setOrderByPinyinDirection(String orderByWay) {
+        getOrderByAttributes().getLast().setOrderByDirection(orderByWay);
+        getOrderByAttributes().getLast().setOrderByInstruction("pinyin");
     }
 
     public LinkedList<BaseModelBean> getWantsBeans() {

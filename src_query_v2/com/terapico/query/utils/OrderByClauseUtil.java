@@ -19,9 +19,15 @@ public class OrderByClauseUtil {
                 sb.append(", ");
             }
             BeanPathNode lastNode = attr.getContainerBean().getBeanPath().getNodeList().getLast();
+            if (attr.getOrderByInstruction().equals("pinyin")){
+                sb.append("CONVERT("); //CONVERT(T1.name  USING GBK)
+            }
             sb.append(lastNode.getAliasName())
-                    .append(".").append(lastNode.getAttributeName())
-                    .append(" ").append(attr.getOrderByInstruction());
+                    .append(".").append(lastNode.getAttributeName());
+            if (attr.getOrderByInstruction().equals("pinyin")){
+                sb.append("  USING GBK)"); //CONVERT(T1.name  USING GBK)
+            }
+            sb.append(" ").append(attr.getOrderByDirection());
             isFirst = false;
         }
         return sb.toString();
@@ -47,8 +53,14 @@ public class OrderByClauseUtil {
             boolean isLastCond = i == (conditionNum-1);
             BaseAttribute attr = attrs.get(i);
             BeanPathNode lastNode = attr.getContainerBean().getBeanPath().getNodeList().getLast();
+            if (attr.getOrderByInstruction().equals("pinyin")){
+                sb.append("CONVERT("); //CONVERT(T1.name  USING GBK)
+            }
             sb.append(lastNode.getAliasName()).append('.').append(lastNode.getAttributeName());
-            if ("desc".equals(attr.getOrderByInstruction())) {
+            if (attr.getOrderByInstruction().equals("pinyin")){
+                sb.append("  USING GBK)"); //CONVERT(T1.name  USING GBK)
+            }
+            if ("desc".equals(attr.getOrderByDirection())) {
                 // 降序
                 if (isLastCond){
                     sb.append(isLast?" <= ?":" < ?");

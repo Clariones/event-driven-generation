@@ -564,17 +564,16 @@ public class PageFlowScript extends BasePageFlowScript {
 		queryInfo.setCountByAttr(bean.id());
 		return this;
 	}
-//	public PageFlowScript sum(NumberAttribute attribute) {
-//		if (currentWork instanceof QueryInfo && queryActionInfo != null) {
-//			// 目前只支持这种场景
-//			queryActionInfo.setSum(true);
-//			queryActionInfo.setCounting(false);
-//			queryActionInfo.setSumAttribute(attribute);
-//		} else {
-//			throw new RuntimeException("当前任务是" + currentWork.getClass().getSimpleName() + ", 不能指定求和条件");
-//		}
-//		return this;
-//	}
+	public PageFlowScript sum(NumberAttribute attribute) {
+		assertQueryInfo();
+		queryInfo.setSumAttr(attribute);
+		return this;
+	}
+	public PageFlowScript sum_by(BaseAttribute attribute) {
+		assertQueryInfo();
+		queryInfo.setSumByAttr(attribute);
+		return this;
+	}
 
 	public PageFlowScript order_by(BaseAttribute attribute){
 		assertQueryInfo();
@@ -608,21 +607,13 @@ public class PageFlowScript extends BasePageFlowScript {
 
 
 	public PageFlowScript asc_by_pinyin() {
-//		if (currentWork instanceof QueryInfo && queryActionInfo != null) {
-//			// 目前只支持这种场景
-//			queryActionInfo.setCurrentSortingDirectionASC(true, true);
-//		} else {
-//			throw new RuntimeException("当前任务是" + currentWork.getClass().getSimpleName() + ", 不能指定排序方向");
-//		}
+		assertQueryInfo();
+		queryInfo.setOrderByPinyinDirection("asc");
 		return this;
 	}
 	public PageFlowScript desc_by_pinyin() {
-//		if (currentWork instanceof QueryInfo && queryActionInfo != null) {
-//			// 目前只支持这种场景
-//			queryActionInfo.setCurrentSortingDirectionASC(false, true);
-//		} else {
-//			throw new RuntimeException("当前任务是" + currentWork.getClass().getSimpleName() + ", 不能指定排序方向");
-//		}
+		assertQueryInfo();
+		queryInfo.setOrderByPinyinDirection("desc");
 		return this;
 	}
 

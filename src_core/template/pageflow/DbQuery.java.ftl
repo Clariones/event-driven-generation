@@ -19,6 +19,7 @@ import ${package}pageview.*;
 
 import com.terapico.utils.TextUtil;
 <#assign imported = []>
+
 <#-- list script.queryInfoList as query >
 	<#if imported?seq_contains(query.objectName)>
 	<#else>

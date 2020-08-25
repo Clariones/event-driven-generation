@@ -1,17 +1,9 @@
 package cla.edg.generator;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
+import cla.edg.pageflow.*;
 import com.terapico.generator.BaseHelper;
 import com.terapico.generator.Utils;
 
@@ -19,11 +11,6 @@ import cla.edg.graphquery.terms.BasePathInfo;
 import cla.edg.graphquery.terms.GraphQueryInfo;
 import cla.edg.graphquery.terms.ParameterInfo;
 import cla.edg.graphquery.terms.PathInfoV2;
-import cla.edg.pageflow.AccessParameter;
-import cla.edg.pageflow.BasePageFlowScript;
-import cla.edg.pageflow.Branch;
-import cla.edg.pageflow.Page;
-import cla.edg.pageflow.Request;
 
 public class PageFlowGeneratorHelper extends BaseHelper{
 	protected BasePageFlowScript script;
@@ -541,5 +528,18 @@ public class PageFlowGeneratorHelper extends BaseHelper{
 	}
 	public void setScript(BasePageFlowScript script) {
 		this.script = script;
+	}
+
+	public List<String> collectImported(){
+		Set<String> beanNames = new TreeSet<>();
+		for (QueryInfo queryInfo : this.script.getQueryInfoList()) {
+			if (queryInfo.getQueryInfo() == null) {
+				String str = Utils.toJson(queryInfo, false);
+				System.out.println("现在统计import: " + str);
+				continue;
+			}
+			beanNames.addAll(queryInfo.getQueryInfo().getRefferedBeanNames());
+		}
+		return new ArrayList<>(beanNames);
 	}
 }

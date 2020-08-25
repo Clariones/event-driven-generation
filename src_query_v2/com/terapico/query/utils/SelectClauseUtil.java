@@ -67,22 +67,22 @@ public class SelectClauseUtil {
 
     public static String makeSingleQuerySelectClause(QueryInfoUtil info) {
         if (info.countAttr != null){
-            return "select COUNT("+info.targetAlias+".id) from ";
+            return "\"select COUNT("+info.targetAlias+".id) from ";
         }
         if (info.countByAttr != null){
             BeanPathNode lstNode = info.countByAttr.getContainerBean().getBeanPath().getNodeList().getLast();
-            return "select " + lstNode.getAliasName()+".id, COUNT(1) from ";
+            return "\"select " + lstNode.getAliasName()+".id, COUNT(1) as count from ";
         }
         if (info.sumByAttr != null){
             BeanPathNode lstByNode = info.sumByAttr.getContainerBean().getBeanPath().getNodeList().getLast();
             BeanPathNode lstNode = info.sumAttr.getContainerBean().getBeanPath().getNodeList().getLast();
-            return "select "+lstByNode.getAliasName()+"."+lstByNode.getAliasName()+", SUM("
-                    + lstNode.getAliasName()+"."+lstNode.getAliasName()+") from ";
+            return "\"select "+lstByNode.getAliasName()+"."+lstByNode.getAliasName()+" as id, SUM("
+                    + lstNode.getAliasName()+"."+lstNode.getAliasName()+") as sum from ";
         }
         if (info.sumAttr != null){
             BeanPathNode lstNode = info.sumAttr.getContainerBean().getBeanPath().getNodeList().getLast();
-            return "select SUM(" + lstNode.getAliasName()+"."+lstNode.getAliasName()+") from ";
+            return "\"select SUM(" + lstNode.getAliasName()+"."+lstNode.getAliasName()+") as sum from ";
         }
-        return null; // 没考虑到的情况, 就触发个空指针异常吧
+        return "\"select * from "; // 没考虑到的情况, 就触发个空指针异常吧
     }
 }

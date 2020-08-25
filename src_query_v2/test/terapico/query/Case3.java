@@ -144,7 +144,7 @@ public class Case3 {
 
                 .find(MODEL.demandProposal()).which("need check by user").with_string("proposal id")
                 .comments("在供应商需求详情页面加载 需求建议")
-                .do_it_as().count()
+                .do_it_as()
                 .where(MODEL.demandProposal().id().eq("${proposal id}"))
                 .wants(MODEL.demandProposal().userStatus(),
                         MODEL.demandProposal().demandProposalTradeList(),

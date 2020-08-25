@@ -4,13 +4,10 @@ package ${package};
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import ${base_package}.${context_name};
+import ${base_package}.BaseEntity;
 import ${base_package}.SmartList;
 import ${base_package}.${NAMING.toCamelCase(project_name)}BaseUtils;
 import ${base_package}.${custom_context_name};
@@ -18,6 +15,11 @@ import ${parent_class_package}.${parent_class_name};
 import ${package}pageview.*;
 
 import com.terapico.utils.TextUtil;
+
+<#list helper.collectImported() as clazz>
+import ${base_package}.${clazz?lower_case}.${clazz};
+</#list>
+
 <#assign imported = []>
 <#-- list script.queryInfoList as query >
 	<#if imported?seq_contains(query.objectName)>
@@ -59,6 +61,27 @@ public abstract class ${class_name}DBQueryHelper{
         }
         return countMap;
     }
+    protected <T extends Number> Map<String, T> toSumMap(List<Map<String, Object>> mapList, Class<T> clazz) {
+        Map<String, T> countMap = new HashMap<>();
+        for(Map<String, Object> mapData : mapList) {
+            String key = null;
+            T num = null;
+            for(Object val: mapData.values()) {
+                if (val instanceof String) {
+                    key = (String) val;
+                    continue;
+                }
+                if (val instanceof Number) {
+                    num = (T) val;
+                }
+            }
+            countMap.put(key, num);
+        }
+        return countMap;
+    }
+    protected <T extends BaseEntity> T getUpStreamBean(CustomSaleschainUserContextImpl ctx, T obj) throws Exception {
+        return (T)ctx.getDAOGroup().loadBasicData(obj.getInternalType(), obj.getId());
+    }
     protected boolean isEmpty(Object input) {
         if (input == null){
             return true;
@@ -81,6 +104,21 @@ public abstract class ${class_name}DBQueryHelper{
 	        return;
         }
 	    params.addAll(Arrays.asList(values));
+    }
+    protected <T extends BaseEntity> List<T> enhanceUpStream(${custom_context_name} ctx, SmartList<? extends BaseEntity> list, Class<T> clazz) throws Exception {
+        List<T> beans = ${NAMING.toCamelCase(project_name)}BaseUtils.collectReferencedObjectWithType(ctx, list, clazz);
+        ctx.getDAOGroup().enhanceList(beans, clazz);
+        return beans;
+    }
+    protected <T extends BaseEntity> List<T> enhanceUpStream(CustomSaleschainUserContextImpl ctx, BaseEntity data, Class<T> clazz) throws Exception {
+        List<T> beans = SaleschainBaseUtils.collectReferencedObjectWithType(ctx, data, clazz);
+        ctx.getDAOGroup().enhanceList(beans, clazz);
+        return beans;
+    }
+    protected <T extends BaseEntity> List<T> enhanceUpStream(${custom_context_name} ctx, List<? extends BaseEntity> list, Class<T> clazz) throws Exception {
+        List<T> beans = ${NAMING.toCamelCase(project_name)}BaseUtils.collectReferencedObjectWithType(ctx, list, clazz);
+        ctx.getDAOGroup().enhanceList(beans, clazz);
+        return beans;
     }
 <#-- 开始生成每一个查询 -->
 <#list script.queryInfoList as query >

@@ -173,12 +173,15 @@ public class SqlOperatorUtil {
             }
             m = ptnStringConst.matcher(var);
             if (m.matches()){
-                return '\'' + Utils.nameAsThis(m.group(1)) + '\'';
+                return '\"' + Utils.nameAsThis(m.group(1)) + '\"';
             }
-            return var;
+            return '"'+var+'"';
         }
         if (o instanceof EnumAttribute){
-            return ((EnumAttribute) o).getLiteralName();
+            return '"'+((EnumAttribute) o).getLiteralName()+'"';
+        }
+        if (o instanceof Boolean){
+            return ((Boolean)o)?"true":"false";
         }
         Utils.error("尚不支持"+o.getClass().getSimpleName()+"类型的操作数 (" + declaredPosition+")");
         return null;

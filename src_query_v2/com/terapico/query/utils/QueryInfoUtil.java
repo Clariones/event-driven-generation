@@ -5,10 +5,7 @@ import cla.edg.modelbean.*;
 import clariones.poc.pathmap.Connector;
 import clariones.poc.pathmap.PathMap;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 
 public class QueryInfoUtil extends BaseQueryInfoUtil {
@@ -35,12 +32,12 @@ public class QueryInfoUtil extends BaseQueryInfoUtil {
 //            }
 //        }
 
-        String selectClause = "select DISTINCT("+targetAlias+".*) from";// SelectClauseUtil.makeSelectClause(this);
+        String selectClause = "\"select DISTINCT("+targetAlias+".*) from";// SelectClauseUtil.makeSelectClause(this);
         String fromClause = SelectClauseUtil.makeFromClause(pathMap);
         String whereClause = WhereClauseUtil.makeWhere(this.getWhereClause());
         String paginationClause = "";
         if (needPagination()){
-            paginationClause = "\r\n            +isEmpty(lastRecord)?\"\":(\"" + OrderByClauseUtil.makePaginationWhere(targetAlias, this.getOrderByAttributes())+"\")";
+            paginationClause = "\r\n            +(isEmpty(lastRecord)?\"\":(\"" + OrderByClauseUtil.makePaginationWhere(targetAlias, this.getOrderByAttributes())+"\"))";
         }
         String orderByClause = "";
         if (needOrderBy()) {
@@ -48,7 +45,7 @@ public class QueryInfoUtil extends BaseQueryInfoUtil {
         }
         String limitClause = "";
         if (needLimit()){
-            limitClause = LEAD_SPACE + LimitClauseUtil.makeLimitClause();
+            limitClause = LEAD_SPACE + LimitClauseUtil.makeLimitClause() +"\"";
         }
 
 
@@ -108,7 +105,7 @@ public class QueryInfoUtil extends BaseQueryInfoUtil {
 	    return this.isPagination();
     }
 
-    public List<Connector> getPaginationEnhanceNodes(){
+    public List<Connector> getPaginationEnhanceNodes(String initVarName){
         List<Connector> result = new ArrayList<>();
         if (this.getOrderByAttributes() == null || this.getOrderByAttributes() == null){
             Utils.error("这个查询不应该有 翻页 的代码 ("+this.getWhereClause().getDeclaredPosition()+")");
@@ -116,7 +113,7 @@ public class QueryInfoUtil extends BaseQueryInfoUtil {
         }
         Stack<Connector> beans = new Stack<>();
         for (BaseAttribute attr : getOrderByAttributes()) {
-            handleBeanEhancement(beans, pathMap, attr.getContainerBean());
+            handleBeanEhancement(beans, pathMap, attr.getContainerBean(), initVarName);
             while(!beans.isEmpty()) {
                 Connector c = beans.pop();
                 if (alreadyInStack(result, c)) {
@@ -134,7 +131,7 @@ public class QueryInfoUtil extends BaseQueryInfoUtil {
         return result;
     }
 
-    private void handleBeanEhancement(Stack<Connector> connectorStack, PathMap pathMap, BaseModelBean targetBean) {
+    private void handleBeanEhancement(Stack<Connector> connectorStack, PathMap pathMap, BaseModelBean targetBean, String initVarName) {
         BeanPathNode lastNode = targetBean.getBeanPath().getNodeList().getLast();
         String beanConnectorName = lastNode.getAliasName();
         Connector connector = pathMap.getConnectorByAliasName(beanConnectorName);
@@ -145,7 +142,7 @@ public class QueryInfoUtil extends BaseQueryInfoUtil {
             if (connector.getUpstream() != null && !connector.getUpstream().getAliasName().equals(targetAlias)) {
                 connector.getExtraData().put("srcVar", Utils.nameAsThis(connector.getUpstream().getAliasName())+"List");
             }else{
-                connector.getExtraData().put("srcVar", "list");
+                connector.getExtraData().put("srcVar", initVarName);
             }
             if (connector.getPathType() == null){
 
@@ -187,7 +184,7 @@ public class QueryInfoUtil extends BaseQueryInfoUtil {
         return result;
     }
 
-    public List<Connector> getWantsEnhanceConnectors(){
+    public List<Connector> getWantsEnhanceConnectors(String initVarName){
         if (this.getWantsBeans() == null || this.getWantsBeans().isEmpty()){
             return new ArrayList<>();
         }
@@ -198,7 +195,7 @@ public class QueryInfoUtil extends BaseQueryInfoUtil {
         List<Connector> result = new ArrayList<>();
         Stack<Connector> beans = new Stack<>();
         for (BaseModelBean bean : getWantsBeans()) {
-            handleBeanEhancement(beans, pathMap, bean);
+            handleBeanEhancement(beans, pathMap, bean, initVarName);
             while(!beans.isEmpty()) {
                 Connector c = beans.pop();
                 if (alreadyInStack(result, c)) {
@@ -217,7 +214,7 @@ public class QueryInfoUtil extends BaseQueryInfoUtil {
     }
 
     public String getMethodPrefix(){
-        if (this.getCountAttr() != null){
+        if (this.getCountAttr() != null || this.getCountByAttr()!=null){
             return "count";
         }
         if (this.getSumAttr() != null){
@@ -249,5 +246,52 @@ public class QueryInfoUtil extends BaseQueryInfoUtil {
         }
 
         return null;
+    }
+
+    public Collection<? extends String> getRefferedBeanNames() {
+        Set<String> nameSet = new HashSet<>();
+        nameSet.add(Utils.NameAsThis(this.getTargetModelTypeName()));
+        for (Object o : this.getWhereClause().getOperandList()) {
+            addToNameSet(nameSet, o);
+        }
+        addToNameSet(nameSet, this.getCountByAttr());
+        addToNameSet(nameSet, this.getSumAttr());
+        addToNameSet(nameSet, this.getSumByAttr());
+        if (this.getOrderByAttributes() != null){
+            for (BaseAttribute orderByAttribute : getOrderByAttributes()) {
+                addToNameSet(nameSet, orderByAttribute);
+            }
+        }
+        if (this.getWantsBeans() != null){
+            for (BaseModelBean wantsBean : this.getWantsBeans()) {
+                addToNameSet(nameSet, wantsBean);
+            }
+        }
+        return nameSet;
+    }
+
+    private void addToNameSet(Set<String> nameSet, Object o) {
+        if (o == null){
+            return;
+        }
+        if (o instanceof BaseAttribute){
+            addBeanPathToNameSet(nameSet, ((BaseAttribute) o).getContainerBean());
+            return;
+        }
+        if (o instanceof BaseModelBean){
+            addBeanPathToNameSet(nameSet, ((BaseModelBean) o));
+            return;
+        }
+        if (o instanceof LogicalOperator){
+            for (Object o1 : ((LogicalOperator) o).getOperandList()) {
+                addToNameSet(nameSet, o1);
+            }
+        }
+    }
+
+    private void addBeanPathToNameSet(Set<String> nameSet, BaseModelBean bean) {
+        for (BeanPathNode beanPathNode : bean.getBeanPath().getNodeList()) {
+            nameSet.add(Utils.NameAsThis(beanPathNode.getBeanName()));
+        }
     }
 }

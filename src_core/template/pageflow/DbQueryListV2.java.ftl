@@ -60,12 +60,13 @@
     }
 
 <#if query.pagination>
-    ${pagingParamName}(${custom_context_name} ctx, ${typeClass} lastRecord, int limit, List<Object> params<@T.getRequestProcessingUrlMethodParameters query/>) throws Exception {
+    protected void ${pagingParamName}(${custom_context_name} ctx, ${typeClass} lastRecord, int limit, List<Object> params<@T.getRequestProcessingUrlMethodParameters query/>) throws Exception {
 		// 加入分页所需的参数
 		if (lastRecord == null) {
 			return;
 		}
-	<#assign enhanceConnectorList = query.queryInfo.paginationEnhanceNodes />
+  <#if query.queryInfo?has_content>
+	<#assign enhanceConnectorList = query.queryInfo.getPaginationEnhanceNodes("lastRecord") />
     <#if enhanceConnectorList?has_content>
         <#assign lastVarName = "lastRecord"/>
         <#list enhanceConnectorList as c>
@@ -83,6 +84,9 @@
     <#list query.queryInfo.orderByGetters as getter>
         params.add(${getter});
     </#list>
+  <#else>
+    // 你需要重载这个函数,来填写分页参数
+  </#if>
 	}
 </#if>
 
@@ -100,20 +104,20 @@
         }
         <#assign lastVarName = "list"/>
         <#assign lastClassName = typeClass/>
-        <#list query.queryInfo.wantsEnhanceConnectors as c>
+        <#list query.queryInfo.getWantsEnhanceConnectors(lastVarName) as c>
             <#if !(c.pathType?has_content) && helper.NameAsThis(c.footHolderName) == typeClass>
             <#else>
                 <#if c.pathType == "upstream">
         List<${helper.NameAsThis(c.footHolderName)}> ${helper.nameAsThis(c.aliasName)}List = enhanceUpStream(ctx, ${c.extraData.srcVar}, ${helper.NameAsThis(c.footHolderName)}.class);
                 <#else>
-        List<${helper.NameAsThis(c.footHolderName)}> ${helper.nameAsThis(c.aliasName)}List = ctx.getDAOGroup().get${lastClassName}DAO().loadOur${c.extraData.methodName?cap_first}(ctx, ${lastVarName}, EO);
+        List<${helper.NameAsThis(c.footHolderName)}> ${helper.nameAsThis(c.aliasName)}List = ctx.getDAOGroup().get${helper.NameAsThis(c.upstream.footHolderName)}DAO().loadOur${c.extraData.methodName?cap_first}(ctx, ${c.extraData.srcVar}, EO);
                 </#if>
             </#if>
         </#list>
     </#if>
     }
 <#macro sqlWithQueryInfo query>
-        String sql = "${query.queryInfo.sql}";
+        String sql = ${query.queryInfo.sql};
         ${query.queryInfo.paramSetters}
     <#if query.pagination>
 		// 加入分页所需的参数
@@ -121,6 +125,7 @@
 			${pagingParamName}(ctx, lastRecord, limit, params<@T.getRequestProcessingMethodParameterNames query/>);
 		}
     </#if>
+        return sql;
 </#macro>
 
 <#macro sqlWithoutQueryInfo query>
