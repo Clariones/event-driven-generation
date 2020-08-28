@@ -501,6 +501,14 @@ public class PageFlowScript extends BasePageFlowScript {
 //	}
 
 	public PageFlowScript where(LogicalOperator... operators) {
+		return where_as(LogicalOperator.CollectionType.and, operators);
+	}
+
+	public PageFlowScript where_any(LogicalOperator... operators) {
+		return where_as(LogicalOperator.CollectionType.or, operators);
+	}
+
+	protected PageFlowScript where_as(LogicalOperator.CollectionType type, LogicalOperator[] operators) {
 		if (operators == null || operators.length == 0) {
 			return this;
 		}
@@ -508,7 +516,7 @@ public class PageFlowScript extends BasePageFlowScript {
 			queryInfo.setWhereClause(operators[0]);
 			return this;
 		}
-		queryInfo.setWhereClause(cla.edg.modelbean.LogicalOperator.create(cla.edg.modelbean.LogicalOperator.CollectionType.and, operators));
+		queryInfo.setWhereClause(LogicalOperator.create(type, operators));
 		return this;
 	}
 

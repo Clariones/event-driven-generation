@@ -7,7 +7,7 @@ public enum UIStyle {
 	INPUT_URL("url"),
 	INPUT_TEXTAREA("textarea"),
 	INPUT_RICHTEXT("richtext"),
-	INPUT_LONGTEXT("longtext"),
+	INPUT_LONGTEXT("long-text"),
 	INPUT_INTEGER("integer"),
 	INPUT_DOUBLE("double"),
 	INPUT_DECIMAL("decimal"),

@@ -181,7 +181,7 @@ public class PageFlowGenerator extends BaseGenerator {
 		String className = Utils.NameAsThis(script.getName());
 		data.put("class_name", className);
 		String fileName = this.toFileName(data, "${package?replace('.','/')}/${helper.NameAsThis(script.name)}DBQueryHelper.java");
-		return doGeneration(data, "pageflow/DbQueryV2.java.ftl", fileName).when_not_exist().with_code("DbQueryV2.java");
+		return doGeneration(data, "pageflow/DbQueryV2.java.ftl", fileName).as_new_file().with_code("DbQueryV2.java");
 	}
 	private List<GenrationResult> generateViewPage() throws Exception {
 		// 第二个文件，XXXViewBizService
