@@ -9,24 +9,27 @@ import com.terapico.workflow.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * @Author Clariones
+ */
 public abstract class BaseProcessor extends BaseEventProcessor {
 
-    public static final String RESULT_CODE_SKIP = "__skip";
-    public static final String RESULT_CODE_NO_EFFECT = "__no_effect";
-    public static final String RESULT_CODE_FAIL = "__fail";
-    public static final String RESULT_CODE_OK = "OK";
-    public static final String EVENT_ENTER = "ENTER";
-    public static final String STATUS_START = "START";
-    public static final String ROLE_SYSTEM = "__system";
+    public static final String RESULT_CODE_SKIP = ProcessSpec.RESULT_CODE_SKIP;
+    public static final String RESULT_CODE_NO_EFFECT = ProcessSpec.RESULT_CODE_NO_EFFECT;
+    public static final String RESULT_CODE_FAIL = ProcessSpec.RESULT_CODE_FAIL;
+    public static final String RESULT_CODE_OK = ProcessSpec.RESULT_CODE_OK;
+    public static final String EVENT_ENTER = ProcessSpec.EVENT_ENTER;
+    public static final String STATUS_START = ProcessSpec.STATUS_START;
+    public static final String ROLE_SYSTEM = ProcessSpec.ROLE_SYSTEM;
 
-    public static final String SPLIT_TO = "split_to";
-    public static final String GO_TO = "go_to";
-    public static final String COPY_TO = "copy_to";
+    public static final String SPLIT_TO = ProcessSpec.SPLIT_TO;
+    public static final String GO_TO = ProcessSpec.GO_TO;
+    public static final String COPY_TO = ProcessSpec.COPY_TO;
 
-    public static final String MUST_ALL = "must_all";
-    public static final String MUST_ANY = "must_any";
-    public static final String OPTION_ALL = "option_all";
-    public static final String OPTION_ANY = "option_any";
+    public static final String MUST_ALL = ProcessSpec.MUST_ALL;
+    public static final String MUST_ANY = ProcessSpec.MUST_ANY;
+    public static final String OPTION_ALL = ProcessSpec.OPTION_ALL;
+    public static final String OPTION_ANY = ProcessSpec.OPTION_ANY;
 
     public Actor getSystemActor() {
         Actor actor = new Actor();
@@ -104,6 +107,13 @@ public abstract class BaseProcessor extends BaseEventProcessor {
             debug("没有任何节点实例,什么事件也不处理");
             return false;
         }
+        ProcessRecord evetLog = new ProcessRecord();
+        evetLog.setEventId(event.getEventId());
+        evetLog.setEventName("发生事件:" + event.getEventName());
+        evetLog.setStatusName(process.getStatusName());
+        evetLog.setStatusCode(process.getStatusCode());
+        process.getLog().add(evetLog);
+
         process.getNodes().values().forEach(n -> n.setWasHandled(false));
         boolean eventProcessed = false;
         ArrayList<Node> nodeList = new ArrayList<>(process.getNodes().values());
@@ -228,6 +238,15 @@ public abstract class BaseProcessor extends BaseEventProcessor {
     }
 
     protected void enterNewStatusNode(ProcessInstance process, Node fromNode, Node newNode, Actor actor, Event event) throws Exception {
+        NodeSpec nodeSpec = getProcessingSpec().getNodesSpec().get(newNode.getStatusName());
+        process.setStatusName(nodeSpec.getTitle());
+        process.setStatusCode(nodeSpec.getStatusCode());
+        ProcessRecord evetLog = new ProcessRecord();
+        evetLog.setEventId(event.getEventId());
+        evetLog.setEventName("进入状态:"+process.getStatusName());
+        evetLog.setStatusName(process.getStatusName());
+        evetLog.setStatusCode(process.getStatusCode());
+        process.getLog().add(evetLog);
         onEnterStatus(process, newNode, actor, event);
 
         Actor autoActor = new Actor();
@@ -239,6 +258,7 @@ public abstract class BaseProcessor extends BaseEventProcessor {
         } else {
             enterEvent.setRootEvent(event.getRootEvent());
         }
+        enterEvent.setEventId("AUTO_"+process.getLog().size()+1);
         enterEvent.setEventName(EVENT_ENTER);
         enterEvent.setParams(MapUtil.put("triggerEvent", event)
                 .put("triggerActor", actor)

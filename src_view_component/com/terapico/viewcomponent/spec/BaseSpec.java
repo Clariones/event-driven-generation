@@ -1,9 +1,10 @@
 package com.terapico.viewcomponent.spec;
 
+import clariones.tool.builder.Utils;
+
 import java.util.HashMap;
 import java.util.Map;
 
-import com.terapico.generator.Utils;
 
 public class BaseSpec {
 	protected static Map<String, ComponentInfo> allComponents = new HashMap<>();

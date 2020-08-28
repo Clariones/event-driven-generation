@@ -4,7 +4,6 @@ import cla.edg.generator.PageFlowGenerator;
 import cla.edg.pageflow.BasePageFlowDescriptionScript;
 import cla.edg.pageflow.BasePageFlowScript;
 import com.terapico.changerequest.generator.ChangeRequestGenerator;
-import com.terapico.generator.GenrationResult;
 import com.terapico.generator.Utils;
 
 import java.io.File;

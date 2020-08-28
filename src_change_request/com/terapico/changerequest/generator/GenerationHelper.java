@@ -5,16 +5,16 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import clariones.tool.builder.BaseGeneratorHelper;
+import clariones.tool.builder.Utils;
 import com.terapico.changerequest.builder.FieldType;
 import com.terapico.changerequest.builder.OutputName;
 import com.terapico.changerequest.builder.UIStyle;
-import com.terapico.generator.BaseHelper;
-import com.terapico.generator.Utils;
 
 import javax.naming.Name;
 
 @SuppressWarnings("unchecked")
-public class GenerationHelper extends BaseHelper {
+public class GenerationHelper extends BaseGeneratorHelper {
 	public String getCRName(Map<String, Object> crSpec) {
 		return Utils.toJavaConstStyle((String) crSpec.get(OutputName.CHANGE_REQUEST.TYPE)).toLowerCase();
 	}

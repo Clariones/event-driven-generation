@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
+import clariones.tool.builder.Utils;
 import com.terapico.changerequest.builder.OutputName.CHANGE_REQUEST;
 import com.terapico.changerequest.builder.OutputName.CHANGE_REQUEST.STEP;
 import com.terapico.changerequest.builder.OutputName.CHANGE_REQUEST.STEP.EVENT;
@@ -16,7 +17,6 @@ import com.terapico.changerequest.spec.EventSpec;
 import com.terapico.changerequest.spec.FieldSpec;
 import com.terapico.changerequest.spec.ProjectChangeRequestSpec;
 import com.terapico.changerequest.spec.StepSpec;
-import com.terapico.generator.Utils;
 
 public abstract class CRSBuildingServiceBaseLocalImpl implements ChangeRequestSpecBuildingService {
 	protected ProjectChangeRequestSpec projectSpec;

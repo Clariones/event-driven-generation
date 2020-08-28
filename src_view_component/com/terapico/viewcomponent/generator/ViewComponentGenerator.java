@@ -5,13 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.terapico.generator.BasicGenerator;
-import com.terapico.generator.GenrationResult;
-import com.terapico.generator.Utils;
+import clariones.tool.builder.BaseGenerator;
+import clariones.tool.builder.GenrationResult;
+import clariones.tool.builder.Utils;
 import com.terapico.viewcomponent.spec.AllSpec;
 import com.terapico.viewcomponent.spec.ComponentInfo;
 
-public class ViewComponentGenerator extends BasicGenerator {
+public class ViewComponentGenerator extends BaseGenerator {
 
 	public List<GenrationResult> runJob() throws Exception {
 		List<GenrationResult> resultList = new ArrayList<>();
@@ -62,7 +62,7 @@ public class ViewComponentGenerator extends BasicGenerator {
 		ViewComponentGenerator generator = new ViewComponentGenerator();
 		List<GenrationResult> results = generator.runJob();
 
-		String tgtFolder = "/Users/jarryzhou/codebase/yrzx-biz-suite/bizcore/WEB-INF";
+		String tgtFolder = "/works/jobs/yrzx_v3/workspace/yrzx-biz-suite/bizcore/WEB-INF";
 		generator.saveToFiles(new File(tgtFolder), results);
 	}
 }

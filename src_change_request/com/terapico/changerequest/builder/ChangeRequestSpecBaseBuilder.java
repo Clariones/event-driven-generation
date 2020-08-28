@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Map;
 
 import cla.edg.modelbean.BaseAttribute;
-import com.terapico.generator.Utils;
+import clariones.tool.builder.Utils;
 
 public class ChangeRequestSpecBaseBuilder<T extends ChangeRequestSpecBaseBuilder<T>>
 		extends  ChangeRequestSpecBuilderUtil{

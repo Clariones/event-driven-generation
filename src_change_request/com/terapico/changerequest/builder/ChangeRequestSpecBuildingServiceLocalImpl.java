@@ -6,12 +6,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import clariones.tool.builder.Utils;
 import com.terapico.changerequest.spec.ChangeRequestSpec;
 import com.terapico.changerequest.spec.EventSpec;
 import com.terapico.changerequest.spec.FieldSpec;
 import com.terapico.changerequest.spec.ProjectChangeRequestSpec;
 import com.terapico.changerequest.spec.StepSpec;
-import com.terapico.generator.Utils;
 
 public class ChangeRequestSpecBuildingServiceLocalImpl extends CRSBuildingServiceBaseLocalImpl {
 

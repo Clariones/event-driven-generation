@@ -1,15 +1,16 @@
 package cla.poc.workflow.generator;
 
 import cla.poc.workflow.spec.ProcessingSpec;
-import com.terapico.generator.BasicGenerator;
-import com.terapico.generator.GenrationResult;
-import com.terapico.generator.Utils;
+import clariones.tool.builder.BaseGenerator;
+import clariones.tool.builder.GenrationResult;
+import clariones.tool.builder.Utils;
+
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class ProcessorGenerator extends BasicGenerator {
+public class ProcessorGenerator extends BaseGenerator {
     protected Map<String, ProcessingSpec> allSpec;
     protected String folderName;
     protected String basePackageName;

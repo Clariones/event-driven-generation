@@ -3,13 +3,13 @@ package cla.poc.workflow.generator;
 import cla.poc.workflow.spec.EventSpec;
 import cla.poc.workflow.spec.NodeSpec;
 import cla.poc.workflow.spec.ProcessingSpec;
-import com.terapico.generator.BaseHelper;
-import com.terapico.generator.Utils;
+import clariones.tool.builder.BaseGeneratorHelper;
+import clariones.tool.builder.Utils;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class GenerationHelper extends BaseHelper {
+public class GenerationHelper extends BaseGeneratorHelper {
 
     public Map<String, String> allConstants(ProcessingSpec proSpec) {
         Map<String, String> result = new TreeMap<>();

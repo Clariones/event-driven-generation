@@ -193,63 +193,45 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 	}
 
 	protected ChangeRequest loadCrDataByGroups(String crType, BaseEntity currentUserInfo, List<CRGroupSpec> groupSpecList) throws Exception {
-            List<Object> params = new ArrayList<>();
-            String sql = "select * from event_info_in_cr_data E " +
-                    " where E.initiator_type=? and E.initiator_id=? and E.change_request_type=? " +
-                    "    order by E.id desc limit ?";
-    //		StringBuilder sb = new StringBuilder(
-    //				"select * from change_request_data CR where CR.request_type=? and commited is false and (");
+        List<Object> params = new ArrayList<>();
+        String sql = "select * from event_info_in_cr_data E " +
+                " where E.initiator_type=? and E.initiator_id=? and E.change_request_type=? " +
+                "    order by E.id desc limit ?";
+//		StringBuilder sb = new StringBuilder(
+//				"select * from change_request_data CR where CR.request_type=? and commited is false and (");
 
-            params.add(currentUserInfo.getInternalType());
-            params.add(currentUserInfo.getId());
-            params.add(crType);
-            params.add(1);
-            SmartList<EventInfoInCr> list = getUserContext().getDAOGroup().getEventInfoInCrDAO().queryList(sql, params.toArray());
-            if (list == null || list.isEmpty()) {
-                return null;
-            }
-
-            EventInfoInCr info = list.first();
-            // 如果是正在填写的,直接返回
-            if (info.getStatus().equals(STATUS_OPENING)){
-                String crId = info.getChangeRequest().getId();
-                ChangeRequest cr = getUserContext().getDAOGroup().getChangeRequestDAO().load(crId, ChangeRequestTokens.withoutLists());
-                enhanceChangeRequest(cr, groupSpecList);
-                return cr;
-            }
-
-            // 如果是 已提交 , 那么就返回空CR
-            if (info.getStatus().equals(STATUS_COMMITTED)){
-                return null;
-            }
-
-            // 如果是: 提交并且作为下一次的 样本, 那么就应该复制所有的event, 现在暂时没做. 还是返回空
+        params.add(currentUserInfo.getInternalType());
+        params.add(currentUserInfo.getId());
+        params.add(crType);
+        params.add(1);
+        SmartList<EventInfoInCr> list = getUserContext().getDAOGroup().getEventInfoInCrDAO().queryList(sql, params.toArray());
+        if (list == null || list.isEmpty()) {
             return null;
+        }
 
-        //		final int paramsLen = params.size();
-        //		ALL_GROUPS(CR(crType)).forEach(group -> {
-        //			if (params.size() > paramsLen) {
-        //				// 不是循环第一次
-        //				sb.append(" or ");
-        //			}
-        //			sb.append(" exists (select * from ").append(toEventTableName(group))
-        //					.append(" E where E.change_request = CR.id and event_initiator_type=? and event_initiator_id=? and E.field_group=?) \n");
-        //			params.add(currentUserInfo.getInternalType());
-        //			params.add(currentUserInfo.getId());
-        //			params.add(group.getName());
-        //		});
-        //		sb.append(" ) order by id desc limit ?");
-        //		params.add(1);
-        //		SmartList<ChangeRequest> qList = userContext.getDAOGroup().getChangeRequestDAO().queryList(sb.toString(),
-        //				params.toArray());
-        //		if (qList==null||qList.isEmpty()) {
-        //			return null;
-        //		}
-        //
-        //		ChangeRequest cr = qList.first();
-        //		enhanceChangeRequest(cr, groupSpecList);
-        //		return cr;
-        // }
+        EventInfoInCr info = list.first();
+        // 如果是正在填写的,直接返回
+        if (info.getStatus().equals(STATUS_OPENING)){
+            String crId = info.getChangeRequest().getId();
+            ChangeRequest cr = getUserContext().getDAOGroup().getChangeRequestDAO().load(crId, ChangeRequestTokens.withoutLists());
+            enhanceChangeRequest(cr, groupSpecList);
+            return cr;
+        }
+
+        // 如果是 已提交 , 那么就返回空CR
+        if (info.getStatus().equals(STATUS_COMMITTED)){
+            return null;
+        }
+
+        // 如果是: 提交并且作为下一次的 样本, 那么就应该复制所有的event, 现在暂时没做. 还是返回空
+        ChangeRequest cr =  createFromPresetCr(info.getChangeRequest().getId(), crType, currentUserInfo,groupSpecList);
+        enhanceChangeRequest(cr, groupSpecList);
+        return cr;
+	}
+
+    /** 复制一个已经存在的CR */
+    protected ChangeRequest createFromPresetCr(String crId, String crType, BaseEntity currentUserInfo, List<CRGroupSpec> groupSpecList) throws Exception{
+		return null;
 	}
 
 	protected void addHiddenField(GenericFormPage requestData, String fieldShortName, String value) {

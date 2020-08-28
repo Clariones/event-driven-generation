@@ -1,6 +1,7 @@
 package com.terapico.viewcomponent.spec;
 
-import com.terapico.generator.Utils;
+
+import clariones.tool.builder.Utils;
 
 import java.util.HashSet;
 import java.util.LinkedList;

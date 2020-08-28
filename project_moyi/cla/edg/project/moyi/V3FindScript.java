@@ -15,22 +15,10 @@ public class V3FindScript extends PieceOfScript {
 	@Override
 	public PageFlowScript makeSequel(PageFlowScript script) {
 		return script
-				// 写法1: 整个SQL手写,参数手写
-				// 参数可以用名字引用, 写法为 ?{参数名}, 会自动在Params里正确位置追加. 
-				// param(xxx) 中的xxx 会原样写入代码. 例如要写常量, 就写 param("MyConstant.X"), 生成代码就是 params.add(MyConstant.X), 也可以写变量
-				// 例如 param("\"%\" + artworkId + \"%\""), 就会生成 params.add("%"+artworkId+"%"). 就是简单的填入.
-				// param_string("xxx")是个简写, 会把写入的内容,最后包含在一个字符串中, 例如 param_string("甲说:\"你好\"") 就会生成params.add("甲说:\"你好\"");
-				// 如果用 param("\"甲说:\\\"你好\\\"\"") 就太麻烦
 				.find(MODEL.artworkOwnershipCertificate()).which("available for artwork").with_string("artwork id")
 					.do_it_as()
-						.sql_is("select AC.* from artwork_ownership_certificate_data AC left join certificate_status_data CS on AC.certificate_status=CS.id\n" + 
-								"	where AC.artwork=?{artwork id} and CS.code = ?\n" + 
-								"    order by AC.id desc \n" + 
-								"    limit ? ")
-						.param("CertificateStatus.CERTIFICATED").param(1)
-						.need_know("com.terapico.moyi.certificatestatus.CertificateStatus")
-				// 写法2(单个搜索,不带分页): 只描述搜索条件, 脚本自己分析sql,组装条件. 
-				// param的写法: ${xxx} 会转成Java变量名; ${'xxx'} 会包在字符串里  直接写xxx,会直接输出到代码
+						.where(MODEL.artworkOwnershipCertificate().artwork().eq("${artwork id}"),
+							MODEL.artworkOwnershipCertificate().certificateStatus().code().eq(CertificateStatus.CERTIFICATED))
 				.find(MODEL.artworkAuction()).which("not finished").with_string("artwork id")
 					.do_it_as()
 						.where(MODEL.artworkAuction().artwork().eq("${artwork id}"),
@@ -79,7 +67,7 @@ public class V3FindScript extends PieceOfScript {
 							)
 						.order_by(MODEL.inkDeed().purchasePrice()).asc().order_by(MODEL.inkDeed().id()).desc()
 						.wants(MODEL.inkDeed().auction(), MODEL.inkDeed().holder())
-						.need_know("com.terapico.utils.DateTimeUtil")
+						//.need_know("com.terapico.utils.DateTimeUtil")
 				.find(MODEL.auctionStartNotification()).which("user reserved").with_string("artwork auction id").with_string("user id")
 					.comments("找出用户对某场拍卖的开拍提醒")
 					.do_it_as()
@@ -90,7 +78,7 @@ public class V3FindScript extends PieceOfScript {
 							MODEL.auctionStartNotification().auction().eq("${artwork auction id}")
 						)
 					.wants(MODEL.auctionStartNotification().auction(), MODEL.auctionStartNotification().bidder())
-					.not_generate_pagination_params()
+					//.not_generate_pagination_params()
 				.query(MODEL.paymentLineItem()).which("available in payment").with_string("payment id")
 					.comments("查询支付详情相关的,目前有效的支付条目")
 					.do_it_as()

@@ -1,7 +1,7 @@
 package com.terapico.viewcomponent.generator;
 
-import com.terapico.generator.BaseHelper;
-import com.terapico.generator.Utils;
+import clariones.tool.builder.BaseGeneratorHelper;
+import clariones.tool.builder.Utils;
 import com.terapico.viewcomponent.spec.AttributeInfo;
 import com.terapico.viewcomponent.spec.ComponentInfo;
 
@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 @SuppressWarnings("unchecked")
-public class VCGenerationHelper extends BaseHelper {
+public class VCGenerationHelper extends BaseGeneratorHelper {
 	public String JavaType(String name) {
 		switch (name) {
 		case "string":

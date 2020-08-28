@@ -1,7 +1,5 @@
 package cla.poc.workflow;
 
-import cla.edg.pageflow.PageFlowScript;
-import cla.edg.project.saleschain.workprocessor.DemandWorkProcessor;
 import cla.poc.workflow.spec.ProcessingSpec;
 import cla.poc.workflow.spec.SpecFactory;
 

@@ -5,16 +5,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.function.BiFunction;
 import java.util.function.Function;
-import java.util.function.Supplier;
 
-import com.terapico.generator.BasicGenerator;
-import com.terapico.generator.GenrationResult;
-import com.terapico.generator.Utils;
+import clariones.tool.builder.BaseGenerator;
+import clariones.tool.builder.GenrationResult;
+import clariones.tool.builder.Utils;
 
 @SuppressWarnings("unchecked")
-public class ChangeRequestGenerator extends BasicGenerator {
+public class ChangeRequestGenerator extends BaseGenerator {
 	protected String projectName;
 	protected String orgName;
 	protected String changeRequestModelName = "change_request";

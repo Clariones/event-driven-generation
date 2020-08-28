@@ -189,7 +189,7 @@ public class V4FindScript extends PieceOfScript {
 					.where(MODEL.artistFans().artist().artworkList().artworkAuctionList().moyiShop().eq("${shop id}"))
 					
 			.query(MODEL.artwork()).list_of("order by rank").pagination()
-				.comments("按照2020-06-08新定义的顺序,查询所有的艺术品").need_know(MODEL.artworkRank().getFullClassName())
+				.comments("按照2020-06-08新定义的顺序,查询所有的艺术品")// .need_know(MODEL.artworkRank().getFullClassName())
 				.do_it_as()
 					.where(MODEL.artwork().active().code().eq(SurvivalStatus.NORMAL))
 					.order_by(MODEL.artwork().artworkRankList().rankPoint()).desc()

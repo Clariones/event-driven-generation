@@ -5,7 +5,11 @@ import cla.edg.generator.EventScriptGenerator;
 import cla.edg.generator.PageFlowGenerator;
 import cla.edg.pageflow.BasePageFlowDescriptionScript;
 import cla.edg.pageflow.BasePageFlowScript;
-import com.terapico.generator.Utils;
+import clariones.tool.builder.GenrationResult;
+import clariones.tool.builder.Utils;
+
+import java.io.File;
+import java.util.List;
 
 public class Main {
 
@@ -30,33 +34,33 @@ public class Main {
 		// System.out.println(jsonStr);
 		
 		PageFlowGenerator generator = new PageFlowGenerator();
-		generator.setBaseOutputFolder("/works/jobs/moyi_v4/workspace/moyi-biz-suite/bizcore/WEB-INF/moyi_v2_src");
-		generator.setBaseTempalteFolder("./template");
-		generator.generateWithScript(script);
+		generator.setScript(script);
+		List<GenrationResult> list = generator.runJob();
+		generator.saveToFiles(new File("/works/jobs/moyi_v4/workspace/moyi-biz-suite/bizcore/WEB-INF/moyi_v2_src"), list);
 	}
 	private static void testV3EventService(BaseMoyiEventScript testScript) throws Exception {
-		BaseMoyiEventScript  test = testScript;
-		EventScript script = test.getScript();
+		EventScript script = testScript.getScript();
 		String jsonStr = Utils.toJson(script, true);
 		
 		// System.out.println(jsonStr);
 		
 		EventScriptGenerator generator = new EventScriptGenerator();
-		generator.setBaseOutputFolder("/works/jobs/moyi_v4/workspace/moyi-biz-suite/bizcore/WEB-INF/moyi_v3_src");
-		generator.setBaseTempalteFolder("./template");
-		generator.generateWithScript(script);
+		generator.setBaseOutputFolder("");
+		generator.setScript(script);
+		List<GenrationResult> list = generator.runJob();
+		generator.saveToFiles(new File("/works/jobs/moyi_v4/workspace/moyi-biz-suite/bizcore/WEB-INF/moyi_v3_src"), list);
 	}
 	
 	private static void testEventService(BaseMoyiEventScript testScript) throws Exception {
-		BaseMoyiEventScript  test = testScript;
-		EventScript script = test.getScript();
-		String jsonStr = Utils.toJson(script, true);
-		
-		System.out.println(jsonStr);
-		
-		EventScriptGenerator generator = new EventScriptGenerator();
-		generator.setBaseOutputFolder("/works/jobs/moyi_v4/workspace/moyi-biz-suite/bizcore/WEB-INF/moyi_v2_src");
-		generator.setBaseTempalteFolder("./template");
-		generator.generateWithScript(script);
+//		BaseMoyiEventScript  test = testScript;
+//		EventScript script = test.getScript();
+//		String jsonStr = Utils.toJson(script, true);
+//
+//		System.out.println(jsonStr);
+//
+//		EventScriptGenerator generator = new EventScriptGenerator();
+//		generator.setBaseOutputFolder("/works/jobs/moyi_v4/workspace/moyi-biz-suite/bizcore/WEB-INF/moyi_v2_src");
+//		generator.setBaseTempalteFolder("./template");
+//		generator.generateWithScript(script);
 	}
 }
