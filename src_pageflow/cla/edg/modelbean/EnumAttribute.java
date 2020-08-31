@@ -3,6 +3,7 @@ package cla.edg.modelbean;
 public class EnumAttribute {
 	protected String className;
 	protected String literalName;
+	protected String chineseName;
 	
 	public String getClassName() {
 		return className;
@@ -30,4 +31,16 @@ public class EnumAttribute {
 		return className.substring(pos+1)+"."+literalName;
 	}
 
+	public String getChineseName() {
+		return chineseName;
+	}
+
+	public void setChineseName(String chineseName) {
+		this.chineseName = chineseName;
+	}
+
+	public EnumAttribute chineseName(String chineseNam){
+		setChineseName(chineseNam);
+		return this;
+	}
 }

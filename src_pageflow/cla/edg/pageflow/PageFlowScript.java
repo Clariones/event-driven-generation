@@ -73,7 +73,7 @@ public class PageFlowScript extends BasePageFlowScript {
 	}
 	public PageFlowScript request(String pathName) {
 		Request request = new Request();
-		request.setName(pathName);
+		request.setName(pathName.trim());
 		request.setNeedLogin(needLoginByDefault);
 		request.setHasFootprint(hasFootPrintDefault);
 		addNewRequest(request);
@@ -98,6 +98,7 @@ public class PageFlowScript extends BasePageFlowScript {
 			Page page = findPageByName(pageName);
 			if (page == null) {
 				page = new Page();
+				page.recordLocation();
 				page.setName(pageName);
 				addNewPage(page);
 			}

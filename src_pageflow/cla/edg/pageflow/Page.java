@@ -1,5 +1,7 @@
 package cla.edg.pageflow;
 
+import cla.edg.page.PageBuilder;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +13,7 @@ public class Page extends BasePageFlowElement {
 	protected String pageTitle;
 	protected String renderClassName;
 	protected Map<String, String> additionalField;
+	protected PageBuilder pageBuilder;
 	
 	
 	public Map<String, String> getAdditionalField() {
@@ -80,5 +83,11 @@ public class Page extends BasePageFlowElement {
 		
 	}
 
+	public PageBuilder getPageBuilder() {
+		return pageBuilder;
+	}
 
+	public void setPageBuilder(PageBuilder pageBuilder) {
+		this.pageBuilder = pageBuilder;
+	}
 }

@@ -832,7 +832,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
             if (!isFieldNeedQueryForCandidates(fieldSpec)) {
               if (fieldSpec.getUiStyle().equals("text")
                   && DataTypeUtil.getInt(fieldSpec.getMaximum(), 40) > 100) {
-                fieldData.setType("longtext");
+                fieldData.setType("textarea");
               } else if (fieldSpec.getUiStyle().equals("richtext")
                   && DataTypeUtil.getInt(fieldSpec.getMaximum(), 40) > 100) {
                 fieldData.setType("richtext");

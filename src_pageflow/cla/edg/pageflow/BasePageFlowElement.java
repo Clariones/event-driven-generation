@@ -1,9 +1,10 @@
 package cla.edg.pageflow;
 
 
+import clariones.tool.builder.BaseScriptElement;
 import clariones.tool.builder.Utils;
 
-public class BasePageFlowElement {
+public class BasePageFlowElement extends BaseScriptElement {
 	protected String name;
 	protected String comments;
 	public String getName() {

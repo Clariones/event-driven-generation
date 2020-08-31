@@ -5,7 +5,6 @@ import clariones.tool.builder.BaseGenerator;
 import clariones.tool.builder.GenrationResult;
 import clariones.tool.builder.Utils;
 
-import java.io.File;
 import java.util.*;
 
 public class PageFlowGenerator extends BaseGenerator {
@@ -63,6 +62,7 @@ public class PageFlowGenerator extends BaseGenerator {
 		// 1. 所有page 的 may_request都被声明了
 		// 2. 所有的request，至少有一个返回结果
 		// 3. 所有的请求，不能重复定义
+		// 4. page builder 里的query必须被定义
 		Set<String> mayRequestUrls = new HashSet<>();
 		Set<String> allRequestUrls = new HashSet<>();
 		Set<String> redundantRequestUrls = new HashSet<>();
@@ -84,7 +84,10 @@ public class PageFlowGenerator extends BaseGenerator {
 			}
 		}
 		for(Page page: script.getPages().values()) {
-			if (page.getPossibleRequests() == null) {
+			if (page.getPageBuilder() != null) {
+				verifyPageBuilder((PageFlowScript) script, page.getPageBuilder());
+			}
+ 			if (page.getPossibleRequests() == null) {
 				continue;
 			}
 			mayRequestUrls.addAll(page.getPossibleRequests());
@@ -149,6 +152,8 @@ public class PageFlowGenerator extends BaseGenerator {
 		}
 	}
 
+
+
 	@Override
 	public List<GenrationResult> runJob() throws Exception {
 		List<GenrationResult> files = new ArrayList<>();
@@ -157,6 +162,7 @@ public class PageFlowGenerator extends BaseGenerator {
 		files.add(generateBizService());
 		files.add(generateViewService());
 		files.add(generateCustomBaseViewPage());
+		files.add(generateBaseListOfViewPage());
 		files.addAll(generateViewPage());
 		if (script.getQueryInfoList() != null && script.getQueryInfoList().size() > 0){
 			files.add(generateDbQueryV2());
@@ -183,6 +189,12 @@ public class PageFlowGenerator extends BaseGenerator {
 		String fileName = this.toFileName(data, "${package?replace('.','/')}/${helper.NameAsThis(script.name)}DBQueryHelper.java");
 		return doGeneration(data, "pageflow/DbQueryV2.java.ftl", fileName).as_new_file().with_code("DbQueryV2.java");
 	}
+	private GenrationResult generateBaseListOfViewPage() throws Exception {
+		Map<String, Object> data = makeData("pageview");
+			String fileName = this.toFileName(data, "${package?replace('.','/')}/BaseListOfViewPage.java");
+			return doGeneration(data, "pageflow/ListOfViewPage.java.ftl", fileName)
+					.as_new_file().with_code("ListOfViewPage.java");
+	}
 	private List<GenrationResult> generateViewPage() throws Exception {
 		// 第二个文件，XXXViewBizService
 		List<GenrationResult> files = new ArrayList<>();
@@ -194,8 +206,12 @@ public class PageFlowGenerator extends BaseGenerator {
 			data.put("class_name", Utils.NameAsThis(page.getName()));
 			data.put("page", page);
 			String fileName = this.toFileName(data, "${package?replace('.','/')}/${helper.NameAsThis(page.name)}Page.java");
-			files.add(doGeneration(data, "pageflow/ViewPage.java.ftl", fileName)
-					.when_not_exist().with_code("CustomBaseViewPage.java"));
+			GenrationResult file = doGeneration(data, "pageflow/ViewPage.java.ftl", fileName)
+					.when_not_exist().with_code("ViewPage.java");
+			if (page.getName().equals("demo")){
+				file.as_new_file();
+			}
+			files.add(file);
 		}
 		return files;
 	}
@@ -240,6 +256,7 @@ public class PageFlowGenerator extends BaseGenerator {
 		String fileNameEtyma = Utils.NameAsThis(script.getName());
 
 		Map<String, Object> data = prepareData(script, packageName, fileNameEtyma);
+		data.put("script", script);
 		data.put("parent_class_name", getParentClassName());
 		data.put("parent_class_package", getParentClassPackage());
 		data.put("project_name", getProjectName());

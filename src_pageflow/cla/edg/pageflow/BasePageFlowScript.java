@@ -9,6 +9,8 @@ import java.util.Optional;
 import java.util.Set;
 
 import cla.edg.graphquery.terms.BaseGraphQueryDescriptor;
+import cla.edg.page.PageBuilder;
+import clariones.tool.builder.utils.InternalNaming;
 
 public class BasePageFlowScript extends BasePageFlowElement{
 
@@ -26,7 +28,7 @@ public class BasePageFlowScript extends BasePageFlowElement{
 	protected Map<String, Object> configuration;
 	protected transient BaseGraphQueryDescriptor graphQueryDescriptor;
 	protected UserLoginInfo userLoginInfo;
-
+	protected PageBuilder pageBuilder;
 	
 	
 	public UserLoginInfo getUserLoginInfo() {
@@ -214,5 +216,35 @@ public class BasePageFlowScript extends BasePageFlowElement{
 	}
 	public String bean_name() {
 		return getConfigureValue("bean_name");
+	}
+
+    public PageBuilder assemble_page_as() {
+		if (!(currentWork instanceof Page)) {
+			throw new RuntimeException("只能在Page中使用assemble_page_as()");
+		}
+		pageBuilder = new PageBuilder();
+		pageBuilder.recordLocation();
+		pageBuilder.setParentScript((PageFlowScript) this);
+		currentPage.setPageBuilder(pageBuilder);
+		return pageBuilder;
+    }
+
+	public QueryInfo findQueryByName(String targetQueryName) {
+		if(getQueryInfoList() == null) {
+			return null;
+		}
+		for (QueryInfo queryInfo : getQueryInfoList()) {
+			if (queryInfo.getQueryInfo() == null){
+				continue;
+			}
+			if (queryInfo.isQuerySingleObject()){
+				continue;
+			}
+			String qName = InternalNaming.makeQueryName(queryInfo.getQueryInfo().getTargetModelTypeName(), queryInfo.getName());
+			if (qName.equals(targetQueryName)){
+				return queryInfo;
+			}
+		}
+		return null;
 	}
 }

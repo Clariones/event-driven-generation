@@ -144,4 +144,5 @@ public abstract class BaseModelBean {
 	public void setBeanPath(BeanPath beanPath) {
 		this.beanPath = beanPath;
 	}
+	public EnumAttribute[] getEnumNameList() { return null;}
 }
