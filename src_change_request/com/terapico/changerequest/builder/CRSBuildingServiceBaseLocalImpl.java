@@ -244,6 +244,7 @@ public abstract class CRSBuildingServiceBaseLocalImpl implements ChangeRequestSp
 		putIfNotNull(result, FIELD.PLACE_HOLDER, fieldSpec.getPlaceholder());
 		putIfNotNull(result, FIELD.TIPS_CONTENT, fieldSpec.getTipsContext());
 		putIfNotNull(result, FIELD.TIPS_TITLE, fieldSpec.getTipsTitle());
+		putIfNotNull(result, FIELD.ON_CHANGE, fieldSpec.getOnChangeApi());
 		putIfNotNull(result, FIELD.FORCE_VALUE, fieldSpec.getForceValue());
 		putIfNotNull(result, FIELD.DEFAULT_VALUE, fieldSpec.getDefaultValue());
 		putIfNotNull(result, FIELD.AUTO_FILL_EXPRESSION, fieldSpec.getAutoFillExpression());

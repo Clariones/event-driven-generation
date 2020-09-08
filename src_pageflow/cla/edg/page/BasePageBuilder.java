@@ -4,7 +4,6 @@ import cla.edg.modelbean.BaseModelBean;
 import cla.edg.modelbean.BeanPath;
 import cla.edg.pageflow.PageFlowScript;
 import cla.edg.pageflow.QueryInfo;
-import cla.edg.project.saleschain.gen.dbquery.KeypairIdentity;
 import clariones.tool.builder.BaseScriptElement;
 import clariones.tool.builder.KV;
 import clariones.tool.builder.utils.InternalNaming;

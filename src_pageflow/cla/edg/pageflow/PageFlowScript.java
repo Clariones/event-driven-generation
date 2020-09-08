@@ -1,6 +1,5 @@
 package cla.edg.pageflow;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -11,6 +10,7 @@ import cla.edg.modelbean.BaseAttribute;
 import cla.edg.modelbean.BaseModelBean;
 import cla.edg.modelbean.LogicalOperator;
 import cla.edg.modelbean.NumberAttribute;
+import cla.edg.pageflow.spec.Request;
 import com.terapico.query.utils.QueryInfoUtil;
 
 
@@ -71,21 +71,8 @@ public class PageFlowScript extends BasePageFlowScript {
 		}
 		return this;
 	}
-	public PageFlowScript request(String pathName) {
-		Request request = new Request();
-		request.setName(pathName.trim());
-		request.setNeedLogin(needLoginByDefault);
-		request.setHasFootprint(hasFootPrintDefault);
-		addNewRequest(request);
-		setCurrentWork(request);
-		return this.comments("这个程序员很懒,什么也没留下");
-	}
-	public PageFlowScript comments(String string) {
-		if (currentWork instanceof BasePageFlowElement) {
-			((BasePageFlowElement) currentWork).setComments(string);
-		}
-		return this;
-	}
+
+
 	
 	public PageFlowScript got_page(String pageName) {
 		if (currentWork instanceof Request) {
@@ -95,7 +82,7 @@ public class PageFlowScript extends BasePageFlowScript {
 			return when("by default").got_page(pageName);
 		}
 		if (currentWork instanceof Branch) {
-			Page page = findPageByName(pageName);
+			Page page = PageflowUtil.findPageByName(this,pageName);
 			if (page == null) {
 				page = new Page();
 				page.recordLocation();
@@ -253,7 +240,7 @@ public class PageFlowScript extends BasePageFlowScript {
 	
 	
 	public PageFlowScript in_page(String pageName) {
-		Page page = findPageByName(pageName);
+		Page page = PageflowUtil.findPageByName(this,pageName);
 		if (page == null) {
 			page = new Page();
 			page.setName(pageName);
@@ -458,48 +445,6 @@ public class PageFlowScript extends BasePageFlowScript {
 		return this;
 	}
 
-
-//	public PageFlowScript sql_is(String sql) {
-//		if (currentWork instanceof QueryInfo) {
-//			queryActionInfo.setSqlTemplate(sql);
-//		}else {
-//			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能指定SQL细节");
-//		}
-//		return this;
-//	}
-//	public PageFlowScript param_string(String param) {
-//		if (currentWork instanceof QueryInfo) {
-//			queryActionInfo.addParamString(param);
-//		}else {
-//			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能指定SQL参数细节");
-//		}
-//		return this;
-//	}
-//	public PageFlowScript param(Object param) {
-//		if (currentWork instanceof QueryInfo) {
-//			queryActionInfo.addParam(param);
-//		}else {
-//			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能指定SQL参数细节");
-//		}
-//		return this;
-//	}
-//	public PageFlowScript need_know(String typeName) {
-//		if (currentWork instanceof QueryInfo) {
-//			queryActionInfo.getExternTypesNeedKnown().add(typeName);
-//		}else {
-//			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能指定SQL参数细节");
-//		}
-//		return this;
-//	}
-	
-//	public PageFlowScript not_generate_pagination_params() {
-//		if (currentWork instanceof QueryInfo) {
-//			queryActionInfo.setNotGeneratePaginationParams(true);
-//		}else {
-//			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能指定搜索条件");
-//		}
-//		return this;
-//	}
 
 	public PageFlowScript where(LogicalOperator... operators) {
 		return where_as(LogicalOperator.CollectionType.and, operators);

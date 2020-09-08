@@ -79,7 +79,7 @@ public abstract class ${class_name}DBQueryHelper{
         }
         return countMap;
     }
-    protected <T extends BaseEntity> T getUpStreamBean(CustomSaleschainUserContextImpl ctx, T obj) throws Exception {
+    protected <T extends BaseEntity> T getUpStreamBean(${custom_context_name} ctx, T obj) throws Exception {
         return (T)ctx.getDAOGroup().loadBasicData(obj.getInternalType(), obj.getId());
     }
     protected boolean isEmpty(Object input) {

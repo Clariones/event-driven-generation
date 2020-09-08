@@ -44,12 +44,7 @@ import cn.binarywang.wx.miniapp.bean.WxMaJscode2SessionResult;
 
 import ${parent_class_package}.${parent_class_name};
 import ${package}pageview.*;
-import com.terapico.utils.DateTimeUtil;
-import com.terapico.utils.JWTUtil;
-import com.terapico.utils.MapUtil;
-import com.terapico.utils.DebugUtil;
-import com.terapico.utils.RandomUtil;
-import com.terapico.utils.TextUtil;
+import com.terapico.utils.*;
 
 import com.terapico.uccaf.BaseUserContext;
 import com.terapico.caf.baseelement.LoginParam;
@@ -237,6 +232,11 @@ public abstract class Base${class_name}ViewService extends ${parent_class_name} 
 
 		ChangeRequestHelper crHelper = ChangeRequestHelper.of(ctx);
 		ChangeRequestPostData postedData = crHelper.parsePostedData(ctx.getRequestParameters());
+		if (postedData.getActionCode().equals(CR.ACTION_REFRESH_ON_CHANGE)){
+            Object response = crHelper.assemblerChangeRequstResponse(ctx.getCurrentUserInfo(), postedData, make${NAMING.toCamelCase(request.name)}Url(ctx));
+            ctx.setResultObject(response);
+            return $PRC_RESULT_OBJECT_WAS_SET;
+        }
 		ChangeRequestProcessResult crResult = crHelper.processChangeRequest(postedData, ctx.getCurrentUserInfo());
 		ctx.setChangeRequestProcessResult(crResult);
 		if (crResult.getResultCode().equals(ChangeRequestProcessResult.CODE_NOT_COMMITTED)) {

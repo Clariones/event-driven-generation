@@ -117,7 +117,9 @@ public class ChangeRequestSpecBuilder extends ChangeRequestSpecBaseBuilder<Chang
 		return factory.makeSequel(this);
 	}
 
-	
+	public ChangeRequestSpecBuilder watch_change() {
+		return if_change_affect("_all");
+	}
 
 	
 	

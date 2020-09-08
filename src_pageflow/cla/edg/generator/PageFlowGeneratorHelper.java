@@ -4,6 +4,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import cla.edg.pageflow.*;
+import cla.edg.pageflow.spec.Request;
 import clariones.tool.builder.BaseGeneratorHelper;
 
 import cla.edg.graphquery.terms.BasePathInfo;

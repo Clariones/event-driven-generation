@@ -463,4 +463,14 @@ public class ChangeRequestSpecBaseBuilder<T extends ChangeRequestSpecBaseBuilder
 		error("只有change request才可以设定不需要登录");
 		return null;
 	}
+
+	public T if_change_affect(String targetName) {
+		if(workingBoard.isBuildingField()) {
+			service.setOnChangeApi($CR(),$STEP(),$EVENT(),$FIELD(), targetName);
+			workingBoard.onJob(WorkingBoard.ON_CHANGE_API);
+		}else {
+			error("只有Field支持设定on-change参数");
+		}
+		return me;
+	}
 }

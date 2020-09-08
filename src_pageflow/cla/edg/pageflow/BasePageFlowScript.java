@@ -2,14 +2,13 @@ package cla.edg.pageflow;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.Set;
 
 import cla.edg.graphquery.terms.BaseGraphQueryDescriptor;
 import cla.edg.page.PageBuilder;
+import cla.edg.pageflow.spec.Request;
 import clariones.tool.builder.utils.InternalNaming;
 
 public class BasePageFlowScript extends BasePageFlowElement{
@@ -144,11 +143,6 @@ public class BasePageFlowScript extends BasePageFlowElement{
 		}
 	}
 
-	protected Page findPageByName(String pageName) {
-		ensurePages();
-		return pages.get(pageName);
-	}
-
 	protected void addQueryInfo(QueryInfo qInfo) {
 		if (queryInfoList == null) {
 			queryInfoList = new ArrayList<>();
@@ -156,7 +150,7 @@ public class BasePageFlowScript extends BasePageFlowElement{
 		queryInfoList.add(qInfo);
 	}
 
-	protected Request findRequestByName(String requestName) {
+	public Request findRequestByName(String requestName) {
 		ensureRequests();
 		Optional<Request> rst = requests.stream().filter(it->it.getName().equals(requestName)).findFirst();
 		if (rst.isPresent()) {
@@ -165,7 +159,7 @@ public class BasePageFlowScript extends BasePageFlowElement{
 		return null;
 	}
 
-	protected PageFlowScript addConfiuration(String key, Object value) {
+	protected PageFlowScript addConfiguration(String key, Object value) {
 		if (currentWork != this.getConfiguration()) {
 			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+",不能设置"+key);
 		}
@@ -181,34 +175,34 @@ public class BasePageFlowScript extends BasePageFlowElement{
 	}
 
 	public PageFlowScript base_package_name(String value) {
-		return addConfiuration("base_package_name", value);
+		return addConfiguration("base_package_name", value);
 	}
 	public String base_package_name() {
 		return getConfigureValue("base_package_name");
 	}
 	
 	public PageFlowScript project_name(String value) {
-		return addConfiuration("project_name", value);
+		return addConfiguration("project_name", value);
 	}
 	public String project_name() {
 		return getConfigureValue("project_name");
 	}
 	
 	public PageFlowScript parent_class_name(String value) {
-		return addConfiuration("parent_class_name", value);
+		return addConfiguration("parent_class_name", value);
 	}
 	public PageFlowScript bean_name(String value) {
-		return addConfiuration("bean_name", value);
+		return addConfiguration("bean_name", value);
 	}
 	public String parent_class_name() {
 		return getConfigureValue("parent_class_name");
 	}
 	
 	public PageFlowScript parent_class_package(String value) {
-		return addConfiuration("parent_class_package", value);
+		return addConfiguration("parent_class_package", value);
 	}
 	public PageFlowScript addTag(String key, String value) {
-		return addConfiuration(key, value);
+		return addConfiguration(key, value);
 	}
 	
 	public String parent_class_package() {
@@ -247,4 +241,30 @@ public class BasePageFlowScript extends BasePageFlowElement{
 		}
 		return null;
 	}
+
+	public PageFlowScript request(String pathName) {
+		Request request = new Request();
+		request.setName(pathName.trim());
+		request.setNeedLogin(needLoginByDefault);
+		request.setHasFootprint(hasFootPrintDefault);
+		addNewRequest(request);
+		setCurrentWork(request);
+		return this.comments("这个程序员很懒,什么也没留下");
+	}
+
+	public PageFlowScript comments(String string) {
+		if (currentWork instanceof BasePageFlowElement) {
+			((BasePageFlowElement) currentWork).setComments(string);
+		}
+		return (PageFlowScript) this;
+	}
+
+    public PageFlowScript for_request(String name) {
+		Request req = findRequestByName(name);
+		if (req != null){
+			this.setCurrentWork(req);
+			return (PageFlowScript) this;
+		}
+		return request(name);
+    }
 }

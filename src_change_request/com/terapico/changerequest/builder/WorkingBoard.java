@@ -20,6 +20,7 @@ public class WorkingBoard {
 	public static final String MODEL_TYPE = "model_type";
 	public static final String DEFAULT_VALUE = "default_value";
 	public static final String VALUES_API = "values_api";
+	public static final String ON_CHANGE_API = "on_change_api";
 	public static final String SAMPLE_DATA = "sample_data";
 	public static final String UI_STYLE = "ui_style";
 	

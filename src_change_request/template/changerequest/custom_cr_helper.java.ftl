@@ -7,7 +7,9 @@ import com.terapico.caf.viewcomponent.GenericFormPage;
 import com.terapico.changerequest.CRFieldSpec;
 import com.terapico.utils.DebugUtil;
 /**
- * 在这里定制项目的ChangeRequestHelper
+ * 在这里定制项目的ChangeRequestHelper.
+ * 注意几个重载函数:
+ * <li> afterFieldFulfilled() : 每个字段被填写后触发 </li>
  *
  */
 @SuppressWarnings("unchecked")

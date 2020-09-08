@@ -47,6 +47,9 @@ import com.${orgName?lower_case}.${projectName?lower_case}.${helper.CamelName(mo
 </#list>
 
 public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeRequestHelper{
+    protected boolean inProductEnv(){
+		return getUserContext().isProductEnvironment();
+	}
     protected class AnonymousUser extends BaseEntity{
         public AnonymousUser(String id) {
             this.id = id;
@@ -131,18 +134,62 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 		List<CRGroupSpec> groupSpecList = GROUPS(crSpec, sceneCode);
 		// 再用这些Group spec, 找到系统中相关的已经存在的cr和event数据
 		ChangeRequest cr = loadCrDataByGroups(crType, currentUserInfo, groupSpecList);
+
+		ChangeRequestProcessingContext crContext = new ChangeRequestProcessingContext();
+        crContext.setCrSpec(crSpec);
+        crContext.setSceneCode(sceneCode);
+        crContext.setPostData(null);
+        crContext.setCrId(cr.getId());
+        userContext.setChangeRequest(cr);
+        userContext.setChangeRequestProcessingContext(crContext);
+
 		// 然后根据需要,补足fields,填充field的默认值
-		GenericFormPage crData = fulfillChangeRequestFields(cr, crSpec, sceneCode, groupSpecList, recordIndexInfo, processUrl);
+		GenericFormPage crData = fulfillChangeRequestFields(crContext, cr, groupSpecList, recordIndexInfo, processUrl);
 		// 最后要交给业务模块,让业务模块有机会修正准备好的数据: 目前用返回值给业务模块来实现,没做回调
-		// adjustChangeRequestResponse(cr, crSpec, sceneCode, groupSpecList);
+		afterCRDataFulfilled(userContext, crContext, crData);
 		return crData;
 	}
+	// 根据提交的数据,在字段被change的时候,重新组装一个 cr 的response
+    public GenericFormPage assemblerChangeRequstResponse(BaseEntity currentUserInfo, ChangeRequestPostData postData, String processUrl) throws Exception {
+        if (currentUserInfo == null) {
+            currentUserInfo = anonymousUser();
+        }
+        // 先拿到CR spec
+        CRSpec crSpec = CR(postData.getChangeRequestType());
+        // 再根据scene code, 找到有哪几个group的spec被需要
+        List<CRGroupSpec> groupSpecList = GROUPS(crSpec, postData.getSceneCode());
+        // 再用这些Group spec, 找到系统中相关的已经存在的cr和event数据
+        ChangeRequest cr = loadCrDataByGroups(postData.getChangeRequestType(), currentUserInfo, groupSpecList);
+
+        ChangeRequestProcessingContext crContext = new ChangeRequestProcessingContext();
+        crContext.setCrSpec(crSpec);
+        crContext.setSceneCode(postData.getSceneCode());
+        crContext.setPostData(postData);
+        crContext.setActionCode(postData.getActionCode());
+        crContext.setChangingFieldName(postData.getUpdatingField());
+        crContext.setCrId(cr.getId());
+        userContext.setChangeRequest(cr);
+        userContext.setChangeRequestProcessingContext(crContext);
+
+        // 然后根据需要,补足fields,填充field的默认值
+        GenericFormPage crData = fulfillChangeRequestFields(crContext, cr, groupSpecList, postData.getGroupIds(), processUrl);
+        // 最后要交给业务模块,让业务模块有机会修正准备好的数据: 目前用返回值给业务模块来实现,没做回调
+        afterCRDataFulfilled(userContext, crContext, crData);
+        return crData;
+    }
+    protected void afterCRDataFulfilled(Custom${projectName?cap_first}UserContextImpl userContext, ChangeRequestProcessingContext crContext, GenericFormPage crData) {
+        // by default, nothing to do
+    }
 	protected List<CRGroupSpec> ALL_GROUPS(CRSpec crSpec) {
         return crSpec.getSceneList().stream().flatMap(scSpec->scSpec.getGroups().stream()).collect(Collectors.toList());
     }
 	// 根据 group spec list, 把这个cr装满
-	protected GenericFormPage fulfillChangeRequestFields(ChangeRequest InputCR, CRSpec crSpec, String sceneCode,
+	protected GenericFormPage fulfillChangeRequestFields(ChangeRequestProcessingContext crContext, ChangeRequest InputCR,
 			List<CRGroupSpec> groupSpecList, Map<String, Integer> recordIndexInfo, String processUrl) throws Exception {
+        CRSpec crSpec = crContext.getCrSpec();
+        String sceneCode = crContext.getSceneCode();
+        ChangeRequestPostData postData = crContext.getPostData();
+
 		final ChangeRequest cr = ensureChangeRequest(InputCR, crSpec);
 		// 先建立一个CR
 		GenericFormPage requestData = new GenericFormPage();
@@ -151,6 +198,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 		requestData.setBrief(crSpec.getBrief());
 		requestData.setType(crSpec.getChangeRequestType());
 		requestData.setGroupList(new ArrayList<>(groupSpecList.size()+1));
+		crContext.setRequestData(requestData);
 		// 然后填 hidden 的基础信息 
 		{
 			CRGroupData hiddenGroup = new CRGroupData();
@@ -177,6 +225,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 		}
 		// 然后填所有的字段
 		for(CRGroupSpec groupSpec: groupSpecList) {
+		    crContext.setGroupSpec(groupSpec);
 			CRGroupData groupData = new CRGroupData();
 			groupData.setName(groupSpec.getName());
 			groupData.setId(groupSpec.getName());
@@ -185,7 +234,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 			requestData.getGroupList().add(groupData);
 			
 			int groupRecordIndex = getIndexOfGroup(requestData, groupSpec);
-			fulfillChangeRequestField(requestData, cr, crSpec, groupData, groupSpec, crSpec.getFieldList(), groupRecordIndex, processUrl, sceneCode);
+			fulfillChangeRequestField(crContext, InputCR, groupData, groupRecordIndex, processUrl);
 		}
 		// 最后是CR级别的actions
 		fulfillChangeRequestActions(cr.getId(), requestData, crSpec, sceneCode, processUrl);
@@ -303,17 +352,17 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 	}
 	
 </#list>
-	protected void fulfillChangeRequestField(GenericFormPage requestData, ChangeRequest dbCrData, CRSpec crSpec, CRGroupData groupData, CRGroupSpec groupSpec,
-			List<CRFieldSpec> fieldSpecList, int groupRecordIndex, String processUrl, String sceneCode) throws Exception {
-		int curRecordIdx = groupRecordIndex;
+	protected void fulfillChangeRequestField(ChangeRequestProcessingContext crContext, ChangeRequest dbCrData, CRGroupData groupData, int groupRecordIndex, String processUrl) throws Exception {
+        int curRecordIdx = groupRecordIndex;
+        CRGroupSpec groupSpec = crContext.getGroupSpec();
 		switch (groupSpec.getName()) {
 <#list projectSpec.changeRequestList as crSpec>
 	<#list crSpec.stepList as scene>
 		<#list scene.eventList as group>
 		case CR.${helper.JAVA_CONST(crSpec.changeRequestType)}.SCENE_${helper.JAVA_CONST(scene.name)}.GROUP_${helper.JAVA_CONST(group.name)}.NAME:
-			curRecordIdx = fulfillChangeRequestFieldByGroup(requestData, dbCrData, groupData, fieldSpecList, dbCrData.getEvent${helper.CamelName(group.eventType)}List(), groupRecordIndex, groupSpec.getName());
+			curRecordIdx = fulfillChangeRequestFieldByGroup(crContext, dbCrData, groupData, dbCrData.getEvent${helper.CamelName(group.eventType)}List(), groupRecordIndex, groupSpec.getName(), processUrl);
 			<#if group.multiple >
-			fulfillExistsGroupData(requestData, dbCrData, groupData, fieldSpecList, dbCrData.getEvent${helper.CamelName(group.eventType)}List(), curRecordIdx, ${group.showPrevious}, ${group.showNext});
+			fulfillExistsGroupData(crContext, dbCrData, groupData, dbCrData.getEvent${helper.CamelName(group.eventType)}List(), curRecordIdx, ${group.showPrevious}, ${group.showNext});
 			</#if>
 			break;
 		</#list>
@@ -325,16 +374,21 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 		if (groupSpec.isMultiple()) {
 			groupData.setTitle(groupData.getTitle()+" "+curRecordIdx);
 		}
-		fulfillGroupActions(crSpec, dbCrData.getId(), groupData, groupSpec, curRecordIdx, processUrl, sceneCode);
+		fulfillGroupActions(crContext, dbCrData.getId(), groupData, curRecordIdx, processUrl);
 	}
 	
-	protected int fulfillChangeRequestFieldByGroup(GenericFormPage requestData, ChangeRequest dbCrData,
-			CRGroupData groupData, List<CRFieldSpec> fieldSpecList, SmartList<? extends BaseEntity> eventList, int groupRecordIndex, String groupName) throws Exception {
+	protected int fulfillChangeRequestFieldByGroup(ChangeRequestProcessingContext crContext, ChangeRequest dbCrData,
+			CRGroupData groupData, SmartList<? extends BaseEntity> eventList, int groupRecordIndex, String groupName, String processUrl) throws Exception {
+		CRSpec crSpec = crContext.getCrSpec();
+		GenericFormPage requestData = crContext.getRequestData();
+		ChangeRequestPostData postData = crContext.getPostData();
+		List<CRFieldSpec> fieldSpecList = crSpec.getFieldList();
+
 		String gName = CR.GROUP_HIDDEN+"_indexof_"+groupData.getName();
 		CRFieldData gidField = HIDDEN_GROUP(requestData).getFieldList().stream().filter(it -> it.getName().equals(gName))
 				.findFirst().orElse(null);
 		if (eventList == null || eventList.isEmpty()) {
-			fullFillNewFields(requestData, dbCrData, groupData, groupName, fieldSpecList);
+			fullFillNewFields(crContext, dbCrData, groupData, groupName, fieldSpecList, processUrl);
 			if (gidField != null) {
 				gidField.setValue("1");
 			}
@@ -359,10 +413,14 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 				if (!GROUP_NAME(fieldSpec).equals(groupData.getName())){
 					continue;
 				}
-				
+				crContext.setFieldSpec(fieldSpec);
 				CRFieldData fieldData = new CRFieldData();
 				fieldData.setName(fieldSpec.getName()+"_"+evtData.getId());
-				if (fieldSpec.getInteractionMode().equals("display")) {
+				Object postValue = getValueFromPostedData(postData, groupData.getName(), FIELD_NAME(fieldSpec));
+                if (postValue != null) {
+                    Object suggestedDefaultValue = calcSuggestedDefaultValue(groupName, fieldSpec, postValue);
+                    fieldData.setValue(TO_VALUE(getFieldValueWhenFillResponse(suggestedDefaultValue,requestData, dbCrData, groupData, fieldSpec)));
+                }else if (fieldSpec.getInteractionMode().equals("display")) {
 				    Object suggestedDefaultValue = calcSuggestedDefaultValue(groupName, fieldSpec, fieldSpec.getDefaultValue());
 					fieldData.setValue(TO_VALUE(getFieldValueWhenFillResponse(suggestedDefaultValue,requestData, dbCrData, groupData, fieldSpec)));
 				}else {
@@ -376,14 +434,14 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
                     	fieldData.setValue(TO_VALUE(getFieldValueWhenFillResponse(suggestedDefaultValue,requestData, dbCrData, groupData, fieldSpec)));
 					}
 				}
-				setFieldSpecInfo(requestData, dbCrData, groupData, fieldData, fieldSpec);
+				setFieldSpecInfo(crContext, dbCrData, groupData, fieldData, processUrl);
 				afterFieldFulfilled(getUserContext(), requestData, dbCrData, fieldSpec, groupData, fieldData);
 				groupData.addField(fieldData);
 				fillAny = true;
 			}
 		}
 		if (!fillAny) {
-			fullFillNewFields(requestData, dbCrData, groupData, groupName, fieldSpecList);
+			fullFillNewFields(crContext, dbCrData, groupData, groupName, fieldSpecList, processUrl);
 			if (gidField != null) {
 				gidField.setValue(String.valueOf(foundAny+1));
 			}
@@ -394,15 +452,24 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 	}
 
 
-	protected void fullFillNewFields(GenericFormPage requestData, ChangeRequest dbCrData, CRGroupData groupData, String groupName, List<CRFieldSpec> fieldSpecList) throws Exception{
+	protected void fullFillNewFields(ChangeRequestProcessingContext crContext, ChangeRequest dbCrData,
+    	                    CRGroupData groupData, String groupName, List<CRFieldSpec> fieldSpecList, String processUrl) throws Exception{
+        CRSpec crSpec = crContext.getCrSpec();
+        GenericFormPage requestData = crContext.getRequestData();
+        ChangeRequestPostData postData = crContext.getPostData();
+
 		for(CRFieldSpec fieldSpec: fieldSpecList) {
 			if (!GROUP_NAME(fieldSpec).equals(groupData.getName())){
 				continue;
 			}
-		
+		    crContext.setFieldSpec(fieldSpec);
 			CRFieldData fieldData = new CRFieldData();
 			fieldData.setName(fieldSpec.getName()+"_new");
-			if (fieldSpec.getValue() != null) {
+			Object postValue = getValueFromPostedData(postData, groupData.getName(), FIELD_NAME(fieldSpec));
+            if (postValue != null) {
+                Object suggestedDefaultValue = calcSuggestedDefaultValue(groupName, fieldSpec, postValue);
+                fieldData.setValue(TO_VALUE(getFieldValueWhenFillResponse(suggestedDefaultValue,requestData, dbCrData, groupData, fieldSpec)));
+            }else if (fieldSpec.getValue() != null) {
 				Object suggestedDefaultValue = calcSuggestedDefaultValue(groupName, fieldSpec, fieldSpec.getValue());
                 fieldData.setValue(TO_VALUE(getFieldValueWhenFillResponse(suggestedDefaultValue,requestData, dbCrData, groupData, fieldSpec)));
 			}else {
@@ -413,7 +480,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 			    Object suggestedDefaultValue = calcSuggestedDefaultValue(groupName, fieldSpec, dv==null?fieldSpec.getDefaultValue():dv);
                 fieldData.setValue(TO_VALUE(getFieldValueWhenFillResponse(suggestedDefaultValue,requestData, dbCrData, groupData, fieldSpec)));
 			}
-			setFieldSpecInfo(requestData, dbCrData, groupData, fieldData, fieldSpec);
+			setFieldSpecInfo(crContext, dbCrData, groupData, fieldData, processUrl);
 			afterFieldFulfilled(getUserContext(), requestData, dbCrData, fieldSpec, groupData, fieldData);
 			groupData.addField(fieldData);
 		}
@@ -815,12 +882,19 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
         return makeFieldCandidateValues(groupData, fieldData, fieldSpec);
     }
 
-    protected void setFieldSpecInfo(GenericFormPage requestData, ChangeRequest dbCrData, CRGroupData groupData,
-            CRFieldData fieldData, CRFieldSpec fieldSpec) throws Exception {
+    protected void setFieldSpecInfo(ChangeRequestProcessingContext crContext, ChangeRequest dbCrData, CRGroupData groupData,
+                CRFieldData fieldData, String processUrl) throws Exception {
+        CRSpec crSpec = crContext.getCrSpec();
+        GenericFormPage requestData = crContext.getRequestData();
+        CRFieldSpec fieldSpec = crContext.getFieldSpec();
+
         fieldData.setRequired(fieldSpec.getRequired());
         fieldData.setDisabled(!fieldSpec.getInteractionMode().equals("input"));
         if (fieldData.isDisabled()) {
             fieldData.setRequired(false);
+        }
+        if (fieldSpec.getOnChange() != null) {
+            fieldData.setOnChangeLinkToUrl(makeFieldChangeUrl(crContext, processUrl, fieldData.getName()));
         }
         if (fieldSpec.getInteractionMode().equals("display")) {
             fieldData.setType("prompt_message");
@@ -867,17 +941,20 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
         updateFieldCandidateValueSelected(fieldData, fieldSpec);
     }
 
-    protected void fulfillExistsGroupData(GenericFormPage requestData, ChangeRequest dbCrData, CRGroupData groupData,
-			List<CRFieldSpec> fieldSpecList, SmartList<? extends BaseEntity> eventList, int groupRecordIndex, int showPrevious, int showNext) throws Exception {
-		fulfillPreviousGroupData(requestData, dbCrData, groupData, fieldSpecList, eventList, groupRecordIndex, showPrevious);
-		fulfillNextGroupData(requestData, dbCrData, groupData, fieldSpecList, eventList, groupRecordIndex, showNext);
+    protected void fulfillExistsGroupData(ChangeRequestProcessingContext crContext, ChangeRequest dbCrData, CRGroupData groupData,
+			SmartList<? extends BaseEntity> eventList, int groupRecordIndex, int showPrevious, int showNext) throws Exception {
+		fulfillPreviousGroupData(crContext, dbCrData, groupData, eventList, groupRecordIndex, showPrevious);
+		fulfillNextGroupData(crContext, dbCrData, groupData, eventList, groupRecordIndex, showNext);
 	}
 
-	protected void fulfillPreviousGroupData(GenericFormPage requestData, ChangeRequest dbCrData, CRGroupData groupData,
-			            List<CRFieldSpec> fieldSpecList, SmartList<? extends BaseEntity> eventList, int groupRecordIndex, int showRecordCnt) throws Exception {
+	protected void fulfillPreviousGroupData(ChangeRequestProcessingContext crContext, ChangeRequest dbCrData, CRGroupData groupData,
+			            SmartList<? extends BaseEntity> eventList, int groupRecordIndex, int showRecordCnt) throws Exception {
 		if (showRecordCnt == 0){
 			return;
 		}
+		CRSpec crSpec = crContext.getCrSpec();
+        GenericFormPage requestData = crContext.getRequestData();
+        List<CRFieldSpec> fieldSpecList = crSpec.getFieldList();
 		List<Object> existsRecordList = new ArrayList<>();
 		for(int i=0;i<eventList.size();i++){
 			if (!shouldShowPreviousRecord(i+1,groupRecordIndex, showRecordCnt)){
@@ -889,11 +966,14 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 		groupData.addPreviousExistsInList(existsRecordList);
 	}
 
-	protected void fulfillNextGroupData(GenericFormPage requestData, ChangeRequest dbCrData, CRGroupData groupData,
-			            List<CRFieldSpec> fieldSpecList, SmartList<? extends BaseEntity> eventList, int groupRecordIndex, int showRecordCnt) throws Exception {
+	protected void fulfillNextGroupData(ChangeRequestProcessingContext crContext, ChangeRequest dbCrData, CRGroupData groupData,
+			           SmartList<? extends BaseEntity> eventList, int groupRecordIndex, int showRecordCnt) throws Exception {
 		if (showRecordCnt == 0){
 			return;
 		}
+		CRSpec crSpec = crContext.getCrSpec();
+        GenericFormPage requestData = crContext.getRequestData();
+        List<CRFieldSpec> fieldSpecList = crSpec.getFieldList();
 		List<Object> existsRecordList = new ArrayList<>();
 		for(int i=0;i<eventList.size();i++){
 			if (!shouldShowNextRecord(i+1,groupRecordIndex, showRecordCnt)){

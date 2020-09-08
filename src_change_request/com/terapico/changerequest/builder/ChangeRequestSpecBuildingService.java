@@ -103,4 +103,6 @@ public interface ChangeRequestSpecBuildingService {
 	void setFieldAutoFillExpression(String crName, String stepName, String eventName, String fieldName, String expression);
 
 	void referToModel(String modelTypeName);
+
+    void setOnChangeApi(String crName, String stepName, String eventName, String fieldName, String targetName);
 }

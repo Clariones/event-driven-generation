@@ -59,6 +59,7 @@ public interface OutputName {
 					String SAMPLE_DATA = "sampleData";
 					String REGULAR_EXPRESSION = "regExp";
 					String UI_STYLE = "uiStyle";
+					String ON_CHANGE = "onChange";
 				}
 			}
 		}

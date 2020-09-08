@@ -1,6 +1,7 @@
 package cla.edg.generator;
 
 import cla.edg.pageflow.*;
+import cla.edg.pageflow.spec.Request;
 import clariones.tool.builder.BaseGenerator;
 import clariones.tool.builder.GenrationResult;
 import clariones.tool.builder.Utils;

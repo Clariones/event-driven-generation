@@ -409,4 +409,10 @@ public class ChangeRequestSpecBuildingServiceLocalImpl extends CRSBuildingServic
 	public void referToModel(String modelTypeName) {
 		projectSpec.addReferModelName(modelTypeName.replaceAll("_"," ").replaceAll("\\s+"," ").trim());
 	}
+
+	@Override
+	public void setOnChangeApi(String crName, String stepName, String eventName, String fieldName, String targetName){
+		sureField(crName, stepName, eventName, fieldName).setOnChangeApi(targetName);
+		prototypeField(crName, stepName, eventName, fieldName).setOnChangeApiIfNeed(targetName);
+	}
 }

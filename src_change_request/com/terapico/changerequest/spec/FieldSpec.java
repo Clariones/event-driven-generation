@@ -28,6 +28,7 @@ public class FieldSpec extends CommonSpec<FieldSpec> implements Cloneable{
 	protected String modelName;
 	protected UIStyle uiStyle;
 	protected String regularExpression;
+	protected String onChangeApi;
 
 	/**
 	 * 自动填充的表达式.<p/>
@@ -125,10 +126,23 @@ public class FieldSpec extends CommonSpec<FieldSpec> implements Cloneable{
 	public void setModelName(String modelName) {
 		this.modelName = modelName;
 	}
-	
-	
-	
-	
+
+	public String getOnChangeApi() {
+		return onChangeApi;
+	}
+
+	public void setOnChangeApi(String onChangeApi) {
+		this.onChangeApi = onChangeApi;
+	}
+
+	public HashMap<String, String> getSetTags() {
+		return setTags;
+	}
+
+	public void setSetTags(HashMap<String, String> setTags) {
+		this.setTags = setTags;
+	}
+
 	public String getRegularExpression() {
 		return regularExpression;
 	}
@@ -213,6 +227,9 @@ public class FieldSpec extends CommonSpec<FieldSpec> implements Cloneable{
 		}
 		if (this.getTipsContext() == null) {
 			this.setTipsContext(baseData.getTipsContext());
+		}
+		if (this.getOnChangeApi() == null) {
+			this.setOnChangeApi(baseData.getOnChangeApi());
 		}
 		if (this.getSelectable() == null) {
 			this.setSelectable(baseData.getSelectable());
@@ -354,7 +371,11 @@ public class FieldSpec extends CommonSpec<FieldSpec> implements Cloneable{
 		if (notSet("autoFillExpression")) {
 			setAutoFillExpression(expStr);
 		}
-
+	}
+	public void setOnChangeApiIfNeed(String expStr) {
+		if (notSet("onChangeApi")) {
+			setOnChangeApi(expStr);
+		}
 	}
 	public void setRegularExpressionIfNeed(String regExp) {
 		if (notSet("regExp")) {
