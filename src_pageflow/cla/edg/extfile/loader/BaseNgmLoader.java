@@ -34,7 +34,7 @@ public abstract class BaseNgmLoader {
         for (String str : fileContent) {
             decodedContent.add(decode(str));
         }
-//        Utils.debug("got content: " + decodedContent);
+        Utils.debug("got content: " + decodedContent);
         List<Node> nodeList = new ArrayList<>();
         for (String str : decodedContent) {
             parseFromMxfileXml(nodeList, str);
@@ -48,7 +48,7 @@ public abstract class BaseNgmLoader {
             Node n = createNodeFromXmlData(data, datas);
             nodeList.add(n);
         }
-        Utils.debug(Utils.toJson(nodeList, true));
+        // Utils.debug(Utils.toJson(nodeList, true));
     }
 
     protected Node createNodeFromXmlData(LightXmlData data, List<LightXmlData> allXmlDatas) throws Exception {
@@ -93,7 +93,15 @@ public abstract class BaseNgmLoader {
         }
         List<String> x = Arrays.asList(o.toString().split(separator));
 //        Utils.debug("split %s to %s", o, x);
-        return x;
+        List<String> result = new ArrayList<>();
+        for (String s : x) {
+            if (Utils.isBlank(s)){
+                result.add(null);
+                continue;
+            }
+            result.add(s);
+        }
+        return result;
     }
 
     protected abstract String parseNodeType(LightXmlData data, List<LightXmlData> allXmlDatas) throws Exception;

@@ -1,5 +1,7 @@
 package cla.edg.extfile.pageflow;
 
+import clariones.tool.builder.Utils;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,6 +30,9 @@ public class Node {
     }
 
     public void setName(String name) {
+        if (name != null && name.equals("&nbsp")){
+            Utils.error(name);
+        }
         this.name = name;
     }
 

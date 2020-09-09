@@ -8,7 +8,10 @@ import java.util.Optional;
 
 import cla.edg.graphquery.terms.BaseGraphQueryDescriptor;
 import cla.edg.page.PageBuilder;
+import cla.edg.pageflow.spec.BasePageFlowSpecElement;
 import cla.edg.pageflow.spec.Request;
+import clariones.tool.builder.BaseSpecElement;
+import clariones.tool.builder.Utils;
 import clariones.tool.builder.utils.InternalNaming;
 
 public class BasePageFlowScript extends BasePageFlowElement{
@@ -152,7 +155,7 @@ public class BasePageFlowScript extends BasePageFlowElement{
 
 	public Request findRequestByName(String requestName) {
 		ensureRequests();
-		Optional<Request> rst = requests.stream().filter(it->it.getName().equals(requestName)).findFirst();
+		Optional<Request> rst = requests.stream().filter(it->Utils.nameEquals(it.getName(), requestName)).findFirst();
 		if (rst.isPresent()) {
 			return rst.get();
 		}
@@ -255,6 +258,8 @@ public class BasePageFlowScript extends BasePageFlowElement{
 	public PageFlowScript comments(String string) {
 		if (currentWork instanceof BasePageFlowElement) {
 			((BasePageFlowElement) currentWork).setComments(string);
+		}else if(currentWork instanceof BasePageFlowSpecElement){
+			((BasePageFlowSpecElement) currentWork).setComments(string);
 		}
 		return (PageFlowScript) this;
 	}

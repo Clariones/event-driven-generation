@@ -41,6 +41,7 @@ public class PageFlowParser {
             for (Node node : allNodes) {
                 beforeApplyNode(script, node, nodeMap);
             }
+            Utils.debug("开始构造的数据:" + Utils.toJson(nodeMap.values(), true));
             for (Node node : allNodes) {
                 applyNodeToScript(script, node, nodeMap);
             }
@@ -74,10 +75,26 @@ public class PageFlowParser {
         }
 
         if (node.getNodeType().equals("request") && TextUtil.isBlank(node.getName())){
+            if (node.getId().equals("5PQoWfJMQA1bLqQOxnqX-10")){
+                Utils.debug("原始数据: %s", Utils.toJson(node));
+            }
             Node toNode = nodeMap.get(node.getToNode());
             if (toNode != null && toNode.getNodeType().equals("page")){
-                node.setName("view "+ toNode.getName());
-                node.setTitle("查看"+toNode.getTitle());
+                if (toNode.getName().endsWith(" form")){
+                    node.setName("submit cr " + getFormName(toNode.getName()));
+                    node.setTitle("提交表单 " + toNode.getTitle());
+                }else {
+                    node.setName("view " + removePrefix(toNode.getName()));
+                    node.setTitle("查看" + toNode.getTitle());
+                }
+            }
+
+            Node fromNode = nodeMap.get(node.getFromNode());
+            if (fromNode != null && fromNode.getNodeType().equals("page")) {
+                if (fromNode.getName().endsWith(" form")){
+                    node.setName("submit cr " + getFormName(fromNode.getName()));
+                    node.setTitle("提交表单 " + fromNode.getTitle());
+                }
             }
         }
     }
@@ -107,24 +124,31 @@ public class PageFlowParser {
         Node reqNode = findLinkedFromNode(node, "request", nodeMap);
         Node pageNode = findLinkedToNode(node, "page", nodeMap);
         applyRequestNodeToScript(script, reqNode, nodeMap);
-        script.when(node.getName()).comments(node.getTitle()).got_page(pageNode.getName());
+        script.when(node.getName()).comments(node.getTitle());
+        script.got_page(pageNode.getName());
         Utils.debug("  当 %s 时, 访问 %s", node.getName(), pageNode.getName());
         applyPageNodeToScript(script, pageNode, nodeMap);
     }
 
     private void applyPageNodeToScript(PageFlowScript script, Node node, Map<String, Node> nodeMap) {
         Page page = PageflowUtil.findPageByName(script, node.getName());
-        if (page != null){
+        if (page != null && page.getComments() != null){
             script.in_page(node.getName());
-            Utils.debug("  页面 %s", node.getName());
+            Utils.debug("  页面 %s:%s", node.getName(), page.getPageTitle());
+            return;
+        }
+        if (node.getNodeType().endsWith(" form")){
+            // form 页面统一处理
             return;
         }
         Node reqNode = findLinkedFromNode(node, "request", nodeMap);
         if (reqNode != null){
             applyRequestNodeToScript(script, reqNode, nodeMap);
         }
-        script.in_page(node.getName()).comments(node.getTitle()+"页面").title(node.getTitle())
-                .list_of("card");
+        script.in_page(node.getName()).comments(node.getTitle()+"页面").title(node.getTitle());
+        if (node.getName().endsWith(" list")) {
+            script.list_of("card");
+        }
         Utils.debug("  得到页面 %s", node.getName());
     }
 
@@ -132,7 +156,7 @@ public class PageFlowParser {
 
     private void applyRequestNodeToScript(PageFlowScript script, Node node, Map<String, Node> nodeMap) {
         Request req = script.findRequestByName(node.getName());
-        if (req != null){
+        if (req != null && !node.getName().startsWith("submit cr ")){
             script.for_request(node.getName());
             Utils.debug("  当请求 %s", node.getName());
             return;
@@ -140,28 +164,56 @@ public class PageFlowParser {
         String name = node.getName();
         if (Utils.isBlank(name)){
             Utils.error("节点未命名:"+node.getId());
-            // 没名字, 根据结果来找
-            Node tgtNode = findLinkedToNode(node, "page", nodeMap);
-            if(tgtNode == null){
-                name = "unnamed";
-                node.setName(name);
-                node.setTitle("未命名");
-            }else{
-                name = "view " + tgtNode.getName();
-                node.setName(name);
-                node.setTitle("查看"+tgtNode.getTitle());
-            }
-
         }
 
         script.for_request(name).comments(node.getTitle());
         Node toNode = nodeMap.get(node.getToNode());
         if (toNode != null && toNode.getNodeType().equals("page")){
-            script.got_page(node.getName());
+            String pageName = toNode.getName();
+            if (pageName.endsWith(" list")){
+                script.with_string("tab name").with_last_record_id();
+            }else if (pageName.endsWith(" form")){
+                script.with_changerequest(getFormName(pageName));
+            }else if (pageName.endsWith(" detail")){
+                script.with_string(getDetailName(pageName)+" id");
+                Utils.debug("add param '%s id' by %s",  getDetailName(pageName), node.getId());
+            }
+
+            if (pageName.equals("me")){
+                // me 页面要特殊处理
+                script.no_login();
+            }else if (pageName.startsWith("user ") || pageName.startsWith("customer ") || pageName.startsWith("my ")){
+                script.need_login();
+            }else{
+                script.no_login();
+            }
+            if (!toNode.getName().endsWith(" form")) {
+                script.got_page(toNode.getName());
+            }
             Utils.debug("  请求 %s, 得到页面 %s", node.getName(), toNode.getName());
         }else {
             Utils.debug("  请求 %s", node.getName());
         }
+    }
+
+    private String getDetailName(String name) {
+        name = removePrefix(name);
+        return name.replaceAll("detail$","").trim();
+    }
+
+    private String removePrefix(String name) {
+        String[] knownPrefix = {"my ", "user ", "customer "};
+        for (String prefix : knownPrefix) {
+            if (name.startsWith(prefix)){
+                return name.substring(prefix.length());
+            }
+        }
+        return name;
+    }
+
+    private String getFormName(String name) {
+        name = removePrefix(name);
+        return name.replaceAll("form$","").trim();
     }
 
     private Node findLinkedToNode(Node fromNode, String tgtNodeType, Map<String, Node> nodeMap) {

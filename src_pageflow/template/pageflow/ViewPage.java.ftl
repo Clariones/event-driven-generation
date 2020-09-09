@@ -50,18 +50,6 @@ public class ${class_name}Page extends <#if page.listOfTemplate?has_content>Base
 		}
 	}
 </#if>
-<#if page.listOfTemplate?has_content || page.renderClassName?has_content>
-	@Override
-	protected void afterDoRendering() {
-		super.afterDoRendering();
-	<#if page.listOfTemplate?has_content>
-		forceResponseAsListOfPage();
-	</#if>
-	<#if page.renderClassName?has_content>
-		userContext.forceResponseXClassHeader("${page.renderClassName}");
-	</#if>
-	}
-</#if>
 	@Override
 	public void assemblerContent(${context_name} userContext, String requestName)throws Exception {
 	    this.userContext = userContext;

@@ -429,4 +429,6 @@ public abstract class BaseProcessor extends BaseEventProcessor {
      * @return
      */
     protected abstract boolean checkEventShouldBeProcessed(ProcessInstance process, List<Node> nodes, Actor actor, Event event);
+
+    protected abstract String getType();
 }

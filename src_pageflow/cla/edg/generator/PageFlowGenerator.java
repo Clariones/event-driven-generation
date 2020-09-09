@@ -164,6 +164,7 @@ public class PageFlowGenerator extends BaseGenerator {
 		files.add(generateViewService());
 		files.add(generateCustomBaseViewPage());
 		files.add(generateBaseListOfViewPage());
+		files.add(generateBaseDetailViewPage());
 		files.addAll(generateViewPage());
 		if (script.getQueryInfoList() != null && script.getQueryInfoList().size() > 0){
 			files.add(generateDbQueryV2());
@@ -195,6 +196,12 @@ public class PageFlowGenerator extends BaseGenerator {
 			String fileName = this.toFileName(data, "${package?replace('.','/')}/BaseListOfViewPage.java");
 			return doGeneration(data, "pageflow/ListOfViewPage.java.ftl", fileName)
 					.as_new_file().with_code("ListOfViewPage.java");
+	} //
+	private GenrationResult generateBaseDetailViewPage() throws Exception {
+		Map<String, Object> data = makeData("pageview");
+		String fileName = this.toFileName(data, "${package?replace('.','/')}/BaseDetailViewPage.java");
+		return doGeneration(data, "pageflow/DetailViewPage.java.ftl", fileName)
+				.as_new_file().with_code("ListOfViewPage.java");
 	}
 	private List<GenrationResult> generateViewPage() throws Exception {
 		// 第二个文件，XXXViewBizService

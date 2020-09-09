@@ -151,8 +151,11 @@ public class PageFlowScript extends BasePageFlowScript {
 		return this;
 	}
 	public PageFlowScript with_integer(String paramName) {
+		return with_integer(Integer.MAX_VALUE, paramName);
+	}
+	public PageFlowScript with_integer(int position, String paramName) {
 		if (currentWork instanceof Request) {
-			AccessParameter p = currentRequest.addIntegerParameter(paramName);
+			AccessParameter p = currentRequest.addParam(position, paramName, "Integer", null);
 		}else if (currentWork instanceof QueryInfo) {
 			currentQuery.addIntegerParameter(paramName);
 		}else {
@@ -161,8 +164,11 @@ public class PageFlowScript extends BasePageFlowScript {
 		return this;
 	}
 	public PageFlowScript with_float(String paramName) {
+		return with_float(Integer.MAX_VALUE, paramName);
+	}
+	public PageFlowScript with_float(int position, String paramName) {
 		if (currentWork instanceof Request) {
-			AccessParameter p = currentRequest.addFloatParameter(paramName);
+			AccessParameter p = currentRequest.addParam(position, paramName, "BigDecimal", null);
 		}else if (currentWork instanceof QueryInfo) {
 			currentQuery.addFloatParameter(paramName);
 		}else {
@@ -171,8 +177,11 @@ public class PageFlowScript extends BasePageFlowScript {
 		return this;
 	}
 	public PageFlowScript with_boolean(String paramName) {
+		return with_boolean(Integer.MAX_VALUE, paramName);
+	}
+	public PageFlowScript with_boolean(int position,String paramName) {
 		if (currentWork instanceof Request) {
-			AccessParameter p = currentRequest.addBooleanParameter(paramName);
+			AccessParameter p = currentRequest.addParam(position, paramName,"Boolean", null);
 		}else if (currentWork instanceof QueryInfo) {
 			currentQuery.addBooleanParameter(paramName);
 		}else {
@@ -183,10 +192,25 @@ public class PageFlowScript extends BasePageFlowScript {
 	public PageFlowScript with_last_record_id() {
 		return with_string("last record id");
 	}
-	
-	public PageFlowScript with_string(String paramName) {
+
+
+	public PageFlowScript with_param(int position, String paramName, String paramType, String className){
 		if (currentWork instanceof Request) {
-			AccessParameter p = currentRequest.addStringParameter(paramName);
+			AccessParameter p = currentRequest.addParam(position, paramName, paramType, className);
+		}else if (currentWork instanceof QueryInfo) {
+			currentQuery.addStringParameter(paramName);
+		}else {
+			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能指定字符串参数"+paramName);
+		}
+		return this;
+	}
+
+	public PageFlowScript with_string(String paramName) {
+		return with_string(Integer.MAX_VALUE, paramName);
+	}
+	public PageFlowScript with_string(int position, String paramName) {
+		if (currentWork instanceof Request) {
+			AccessParameter p = currentRequest.addParam(position, paramName, "String", null);
 		}else if (currentWork instanceof QueryInfo) {
 			currentQuery.addStringParameter(paramName);
 		}else {
@@ -195,8 +219,11 @@ public class PageFlowScript extends BasePageFlowScript {
 		return this;
 	}
 	public PageFlowScript with_date(String paramName) {
+		return with_date(Integer.MAX_VALUE, paramName);
+	}
+	public PageFlowScript with_date(int position, String paramName) {
 		if (currentWork instanceof Request) {
-			AccessParameter p = currentRequest.addDateParameter(paramName);
+			AccessParameter p = currentRequest.addParam(position, paramName, "Date", null);
 		}else if (currentWork instanceof QueryInfo) {
 			currentQuery.addDateParameter(paramName);
 		}else {
@@ -205,12 +232,15 @@ public class PageFlowScript extends BasePageFlowScript {
 		return this;
 	}
 	public PageFlowScript with_object(String paramName) {
+		return with_object(Integer.MAX_VALUE, paramName);
+	}
+	public PageFlowScript with_object(int position, String paramName) {
 		if (currentWork instanceof QueryInfo) {
 			String[] names = paramName.split("\\s+as\\s+");
 			currentQuery.addObjectParameter(names[1], names[0]);
 		}else if (currentWork instanceof Request) {
 			String[] names = paramName.split("\\s+as\\s+");
-			currentRequest.addObjectParameter(names[1], names[0]);
+			currentRequest.addParam(position, names[0], names[1], names[1]);
 		}else {
 			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能指定对象参数"+paramName);
 		}
@@ -601,6 +631,10 @@ public class PageFlowScript extends BasePageFlowScript {
 		return this;
 	}
 
+	public PageFlowScript with_changerequest(String crName) {
+		currentRequest.setChangeRequestName(crName);
+		return this;
+	}
 
     public PageFlowScript request_homepage() {
 		return this.request("view home page").comments("打开首页").no_login();
