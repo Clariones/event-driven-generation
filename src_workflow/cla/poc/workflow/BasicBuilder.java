@@ -69,6 +69,10 @@ public class BasicBuilder<T extends BasicBuilder<T>> {
         return (T) this;
     }
 
+    public T can_do_nothing(){
+        return (T) this;
+    }
+
     public T as_role(String roleName) {
         factory.defineRole(roleName);
         return (T)this;

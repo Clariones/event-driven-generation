@@ -5,7 +5,7 @@ import com.terapico.workflow.*;
 public class ${helper.NameAsThis(spec.name)}ProcessSpec extends ProcessSpec {
 <#assign curKey=""/>
 <#list helper.allConstants(spec) as key,value>
-    <#if helper.keyTypeChanged(curKey, key)>
+    <#if helper.keyTypeChanged(curKey, key)><#-- 需要一个空行 -->
 
     </#if>
     <#assign curKey=key/>
@@ -28,7 +28,9 @@ public class ${helper.NameAsThis(spec.name)}ProcessSpec extends ProcessSpec {
         status = spec.addStatus(STATUS_${helper.NAME_AS_THIS(statusCode)}, "${nodeSpec.zhName!nodeSpec.name}");
     <#list nodeSpec.allRoleSpecMap?keys as roleName>
         <#assign roleSpec=nodeSpec.allRoleSpecMap[roleName]/>
+        <#if roleSpec.actions?has_content>
         status.addActions(ROLE_${helper.NAME_AS_THIS(roleName)}, <#list roleSpec.actions as action>ACTION_${helper.NAME_AS_THIS(action)}<#if action?has_next>,</#if></#list>);
+        </#if>
     <#else>
     </#list>
     <#if nodeSpec.allRoleSpecMap?has_content>

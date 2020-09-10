@@ -144,6 +144,9 @@ public abstract class Base${class_name}ViewService extends ${parent_class_name} 
 		toast.put("position", "center");
 		return toast;
 	}
+	protected void throwExceptionWithMessage(${custom_context_name} ctx, String message) throws Exception {
+    	throw new Exception(message);
+    }
 	protected static String makeUrl(String methodName, Object ... params) {
 		return makeUrlF(methodName, true, params);
 	}

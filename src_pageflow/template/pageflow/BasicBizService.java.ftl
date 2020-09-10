@@ -12,6 +12,7 @@ import ${base_package}.${context_name};
 import ${base_package}.${custom_context_name};
 import ${base_package}.Footprint;
 import ${base_package}.FootprintProducer;
+import ${package}pageview.*;
 
 /**
  * 此类负责：所有的基础设施服务。 例如重复提交的基础方法，权限认证，异常包装，本服务内的通用工具方法等。

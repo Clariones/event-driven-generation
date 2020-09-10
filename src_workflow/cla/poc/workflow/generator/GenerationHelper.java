@@ -55,6 +55,7 @@ public class GenerationHelper extends BaseGeneratorHelper {
 
         // 所有的action
         Set<String> actionNames = proSpec.getAllNodeSpecMap().values().stream().flatMap(n->n.getAllRoleSpecMap().values().stream())
+                .filter(r->r.getActions() != null)
                 .flatMap(r->r.getActions().stream()).collect(Collectors.toSet());
         actionNames.forEach(n->result.put("action "+n, "\""+nameAsThis(n)+"\"; // " +n));
 
