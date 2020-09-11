@@ -10,6 +10,7 @@ public class NodeSpec extends BaseSpec {
     protected Map<String, EventSpec> allEventSpecMap;
     protected Map<String, RoleSpec> allRoleSpecMap;
     protected Map<String, String> enterChecking = new HashMap<>();
+    protected Map<String, ConditionSpec> allConditionMap = new HashMap<>();
 
     public Map<String, String> getEnterChecking() {
         return enterChecking;
@@ -41,6 +42,14 @@ public class NodeSpec extends BaseSpec {
         this.allRoleSpecMap = allRoleSpecMap;
     }
 
+    public Map<String, ConditionSpec> getAllConditionMap() {
+        return allConditionMap;
+    }
+
+    public void setAllConditionMap(Map<String, ConditionSpec> allConditionMap) {
+        this.allConditionMap = allConditionMap;
+    }
+
     public EventSpec createEvent(String eventName) {
         if (allEventSpecMap == null){
             allEventSpecMap = new LinkedHashMap<>();
@@ -65,5 +74,16 @@ public class NodeSpec extends BaseSpec {
             allRoleSpecMap.put(roleName, spec);
         }
         return spec;
+    }
+
+    public ConditionSpec defineCondition(String condition) {
+        ConditionSpec cspec = getAllConditionMap().get(condition);
+        if (cspec != null) {
+            return cspec;
+        }
+        cspec = new ConditionSpec();
+        cspec.setName(condition);
+        getAllConditionMap().put(condition, cspec);
+        return cspec;
     }
 }

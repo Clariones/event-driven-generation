@@ -17,6 +17,10 @@ public abstract class Base${helper.NameAsThis(spec.name)}Processor extends BaseP
         return true;
     }
 
+    @Override
+    public String getType() {
+        return "${helper.NameAsThis(spec.name)}";
+    }
 
     @Override
     protected void onEnterStatus(ProcessInstance process, Node newNode, Actor actor, Event event) throws Exception {

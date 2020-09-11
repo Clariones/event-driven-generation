@@ -1,5 +1,7 @@
 package cla.poc.workflow.spec;
 
+import clariones.tool.builder.Utils;
+
 import java.util.*;
 
 public class SpecFactory extends BaseSpecFactory{
@@ -42,6 +44,9 @@ public class SpecFactory extends BaseSpecFactory{
         if (workingOnResultLevel()){
             curResult.setZhName(text);
         }
+        if (curCondition != null){
+            curCondition.setZhName(text);
+        }
     }
 
     public void defineStatus(String statusCode) {
@@ -68,23 +73,6 @@ public class SpecFactory extends BaseSpecFactory{
         }
         ProcessResultSpec spec = curEvent.defineResultCode(resultCode);
         workingOn(spec);
-    }
-
-    public void setTargetStatus(String type, String[] tgtStatusArray) {
-        if (curNode == null){
-            error("split_to(), go_to() 和 copy_to() 必须在 in_status() 之后");
-        }
-        if (curEvent == null){
-            this.defineEvent("enter");
-            this.setI18N("zh_CN","进入");
-        }
-        if (curResult == null) {
-            this.defineProcessResultCode("ok");
-            this.setI18N("zh_CN","成功");
-        }
-        curResult.setTransferType(type);
-        curResult.setTargetStatusCode(new ArrayList<>(Arrays.asList(tgtStatusArray)));
-        workingOnTargetStatus();
     }
 
 
@@ -170,5 +158,59 @@ public class SpecFactory extends BaseSpecFactory{
             return;
         }
         throw new RuntimeException("只支持 must_any 或者 option_any");
+    }
+
+    public void resultCondition(String condition) {
+        if (curNode == null){
+            error("reach_condition() 必须在 in_status() 之后");
+        }
+        if (curEvent == null){
+            error("reach_condition() 必须在 on_event() 之后");
+        }
+        if (curResult == null) {
+            error("reach_condition() 必须在 when() 之后");
+        }
+        curResult.setResultCondition(condition);
+        defineCondition(condition);
+        workingOnTargetCondition();
+        curCondition = null;
+    }
+
+    public void setTargetStatus(String type, String[] tgtStatusArray) {
+        if (curNode == null){
+            error("split_to(), go_to() 和 copy_to() 必须在 in_status() 之后");
+        }
+        if (curEvent == null){
+            this.defineEvent("enter");
+            this.setI18N("zh_CN","进入");
+        }
+        if (curResult == null) {
+            this.defineProcessResultCode("ok");
+            this.setI18N("zh_CN","成功");
+        }
+
+        if (curCondition == null) {
+            curResult.setResultCondition(curResult.getName());
+            defineCondition(curResult.getName());
+        }
+        curCondition.setTransferType(type);
+        curCondition.setTargetStatusCode(new ArrayList<>(Arrays.asList(tgtStatusArray)));
+        workingOnTargetStatus();
+        curCondition = null;
+    }
+
+    private void defineCondition(String condition) {
+        curCondition = curNode.defineCondition(condition);
+    }
+
+    protected void workingOnTargetCondition() {
+        // nothing do now
+    }
+
+    public void forCondition(String condition) {
+        curCondition = curNode.getAllConditionMap().get(condition);
+        if(curCondition == null){
+            Utils.error("条件"+condition+"未定义");
+        }
     }
 }

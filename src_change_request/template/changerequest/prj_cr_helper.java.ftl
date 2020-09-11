@@ -139,7 +139,6 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
         crContext.setCrSpec(crSpec);
         crContext.setSceneCode(sceneCode);
         crContext.setPostData(null);
-        crContext.setCrId(cr.getId());
         userContext.setChangeRequest(cr);
         userContext.setChangeRequestProcessingContext(crContext);
 
@@ -167,8 +166,6 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
         crContext.setPostData(postData);
         crContext.setActionCode(postData.getActionCode());
         crContext.setChangingFieldName(postData.getUpdatingField());
-        crContext.setCrId(cr.getId());
-        userContext.setChangeRequest(cr);
         userContext.setChangeRequestProcessingContext(crContext);
 
         // 然后根据需要,补足fields,填充field的默认值
@@ -191,6 +188,8 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
         ChangeRequestPostData postData = crContext.getPostData();
 
 		final ChangeRequest cr = ensureChangeRequest(InputCR, crSpec);
+		crContext.setCrId(cr.getId());
+		userContext.setChangeRequest(cr);
 		// 先建立一个CR
 		GenericFormPage requestData = new GenericFormPage();
 		requestData.setId(cr.getId());
@@ -234,7 +233,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 			requestData.getGroupList().add(groupData);
 			
 			int groupRecordIndex = getIndexOfGroup(requestData, groupSpec);
-			fulfillChangeRequestField(crContext, InputCR, groupData, groupRecordIndex, processUrl);
+			fulfillChangeRequestField(crContext, cr, groupData, groupRecordIndex, processUrl);
 		}
 		// 最后是CR级别的actions
 		fulfillChangeRequestActions(cr.getId(), requestData, crSpec, sceneCode, processUrl);

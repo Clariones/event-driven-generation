@@ -3,22 +3,13 @@ package cla.poc.workflow.spec;
 import java.util.List;
 
 public class ProcessResultSpec extends BaseSpec{
-    String transferType;
-    List<String> targetStatusCode;
+    protected String resultCondition;
 
-    public String getTransferType() {
-        return transferType;
+    public String getResultCondition() {
+        return resultCondition;
     }
 
-    public void setTransferType(String transferType) {
-        this.transferType = transferType;
-    }
-
-    public List<String> getTargetStatusCode() {
-        return targetStatusCode;
-    }
-
-    public void setTargetStatusCode(List<String> targetStatusCode) {
-        this.targetStatusCode = targetStatusCode;
+    public void setResultCondition(String resultCondition) {
+        this.resultCondition = resultCondition;
     }
 }

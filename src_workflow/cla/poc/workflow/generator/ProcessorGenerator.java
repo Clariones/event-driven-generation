@@ -51,6 +51,7 @@ public class ProcessorGenerator extends BaseGenerator {
 
     @Override
     public List<GenrationResult> runJob() throws Exception {
+        Utils.debug("根据脚本生成工作流处理代码:"+Utils.toJson(getAllSpec()));
         List<GenrationResult> resultList = new ArrayList<>(generateSpecJavaFile());
         resultList.add(generateBaseProcessorJavaFile());
         resultList.add(generateProcessXmlFile());

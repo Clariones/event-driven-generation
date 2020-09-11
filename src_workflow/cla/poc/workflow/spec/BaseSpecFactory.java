@@ -6,6 +6,7 @@ public class BaseSpecFactory {
     protected EventSpec curEvent;
     protected ProcessResultSpec curResult;
     protected RoleSpec curRole;
+    protected ConditionSpec curCondition;
     protected boolean bSettingTargetStatus = false;
     protected boolean bSettingEnterCondition = false;
 

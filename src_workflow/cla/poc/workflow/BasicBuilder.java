@@ -100,9 +100,17 @@ public class BasicBuilder<T extends BasicBuilder<T>> {
         return (T)this;
     }
 
+    public T reach_condition(String condition) {
+        factory.resultCondition(condition);
+        return (T)this;
+    }
 
     public Map<String, ProcessingSpec> build() {
         return factory.getAllProcessing();
     }
 
+    public T when_condition(String condition) {
+        factory.forCondition(condition);
+        return (T)this;
+    }
 }

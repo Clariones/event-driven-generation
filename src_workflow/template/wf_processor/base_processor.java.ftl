@@ -165,7 +165,8 @@ public abstract class BaseProcessor extends BaseEventProcessor {
             return false;
         }
         // 来到这里, 说明处理完成了, 可能会有一个变化
-        EventProcessingResultSpec proRstSpec = evtSpec.getProcessingSpec().get(resultCode);
+        String targetCondition = evtSpec.getResultConditionMap().get(resultCode);
+        TargetConditionSpec proRstSpec = nodeSpec.getTargetConditionSpecMap().get(targetCondition);
         if (proRstSpec == null) {
             throw new Exception("未定义" + node.getStatusName() + "时,对事件" + event.getEventName() + "处理结果为" + resultCode + "的后续");
         }
@@ -188,7 +189,8 @@ public abstract class BaseProcessor extends BaseEventProcessor {
             newNode.setResultCode("");
 
             try {
-                removePreviousNodesIfNeeded(process, node, tgtNodeSpec, proRstSpec, actor, event);
+                removePreviousNodesIfNeeded(process, node, proRstSpec.getCode(), tgtNodeSpec, proRstSpec, actor, event);
+                onConditionMet(process, node, targetCondition, actor, event);
                 enterNewStatusNode(process, node, newNode, actor, event);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -201,40 +203,71 @@ public abstract class BaseProcessor extends BaseEventProcessor {
         return true;
     }
 
-    protected void removePreviousNodesIfNeeded(ProcessInstance process, Node fromNode, NodeSpec tgtNodeSpec, EventProcessingResultSpec proRstSpec, Actor actor, Event event) throws Exception {
-        if (COPY_TO.equals(proRstSpec.getTransferType())) {
-            // 是复制新node, 直接返回
-            return;
+    /**
+     * 在到达新状态节点后, 将需要移除的节点删除.
+     *
+     * 常见的移除情况是:
+     * 1. 从 A 迁移到 B, 那么在进入B时, 应该删除A
+     * 2. 需要 A+B 同时完成, 才能到 C, 那么在进入C时, 就移除 A和B
+     * 3. A满足条件时, 拆分成B和C, 那么进入B或者C时,要检查A是否已经被删除, 如果没有, 要删除
+     * 常见的不需要移除的情况是:
+     * 1. A满足某条件后, 新建一个节点B, 那么进入B时不需要删除A
+     *
+     * 特殊的删除场景是:
+     * 1. 业务需要, 进入某个状态后, 需要联动删除其他节点: 这个需要业务重载函数 "isNodeShouldRemove"
+     * 2. 业务需要, 某个状态和前一个节点有对应关系, 需要从一组节点中删除某个
+     * @param process
+     * @param fromNode
+     * @param condition
+     * @param tgtNodeSpec
+     * @param proRstSpec
+     * @param actor
+     * @param event
+     * @throws Exception
+     */
+    protected void removePreviousNodesIfNeeded(ProcessInstance process, Node fromNode, String condition, NodeSpec tgtNodeSpec, TargetConditionSpec proRstSpec, Actor actor, Event event) throws Exception {
+        Iterator<Map.Entry<String, Node>> it = process.getNodes().entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry<String, Node> checkingNodeEnt = it.next();
+            Node checkingNode = checkingNodeEnt.getValue();
+            if (isNodeShouldRemove(checkingNode, fromNode, tgtNodeSpec, proRstSpec, actor, event)) {
+                it.remove();
+                onLeaveStatus(process, checkingNode, actor, event);
+            }
+        }
+    }
+
+    /**
+     * 判断一个节点是否应该被删除.
+     * @param checkingNode 被检查是否移除的节点
+     * @param currentNode  当前节点
+     * @param tgtNodeSpec 要迁移去的节点
+     * @param conditionSpec 导致迁移的 条件规格
+     * @param actor 当前事件的actor
+     * @param event 当前事件
+     * @return
+     */
+    protected boolean isNodeShouldRemove(Node checkingNode, Node currentNode, NodeSpec tgtNodeSpec, TargetConditionSpec conditionSpec, Actor actor, Event event) {
+        if (COPY_TO.equals(conditionSpec.getTransferType())) {
+            return false; // 是复制新node, 不需要删除任何节点
         }
         if (tgtNodeSpec.getEnterCheckingNodes().isEmpty()){
-            if (process.removeNode(fromNode)){
-                onLeaveStatus(process, fromNode, actor, event);
+            if (checkingNode.getId().equals(currentNode.getId())
+                    && checkingNode.getStatusName().equals(currentNode.getStatusName())) {
+                return true; // 如果是'上一跳节点', 并且不是 COPY_TO, 而且无检查条件, 这个是最常见的情况, 需要删除
             }
-            return;
+            return false; // 不是上一跳, 跳过
         }
-        for (String statusCode : tgtNodeSpec.getEnterCheckingNodes().keySet()) {
-            List<Node> srcNode = process.getNodesByStatus(statusCode);
-            if (srcNode == null || srcNode.isEmpty()){
-                continue;
-            }
-            NodeSpec nodeSpec = getProcessingSpec().getNodesSpec().get(statusCode);
-            EventSpec evtSpec = nodeSpec.getEventsSpec().get(event.getEventName());
-            if (evtSpec == null) {
-                continue;
-            }
-            EventProcessingResultSpec pstSpec = evtSpec.getProcessingSpec().get(proRstSpec.getResultCode());
-            if (pstSpec == null) {
-                continue;
-            }
-            if (pstSpec.getTransferType().equals(COPY_TO)) {
-                continue;
-            }
-            for (Node node : srcNode) {
-                if (process.removeNode(node)){
-                    onLeaveStatus(process, node, actor, event);
-                }
-            }
+        // 现在是有进入条件的情况. 如果是 ANY_MATCH,
+        if (!tgtNodeSpec.getEnterCheckingNodes().keySet().contains(checkingNode.getStatusName())) {
+            return false; // 不是来源之一, 直接跳过
         }
+        return true; // 如果是来源之一
+    }
+
+    /** 在 node 的状态下, 达成 condition 的条件 */
+    protected void onConditionMet(ProcessInstance process, Node node, String condition, Actor actor, Event event) {
+        // 默认没有什么事情要做
     }
 
     protected void enterNewStatusNode(ProcessInstance process, Node fromNode, Node newNode, Actor actor, Event event) throws Exception {
@@ -283,7 +316,7 @@ public abstract class BaseProcessor extends BaseEventProcessor {
         return result;
     }
 
-    protected boolean checkCanEnterNewStatus(String eventName, EventProcessingResultSpec proRstSpec, NodeSpec tgtNodeSpec, ProcessInstance process) {
+    protected boolean checkCanEnterNewStatus(String eventName, TargetConditionSpec proRstSpec, NodeSpec tgtNodeSpec, ProcessInstance process) {
         if (tgtNodeSpec.getEnterCheckingNodes() == null) {
             debug("%s 无需检查进入条件", tgtNodeSpec.getTitle());
             return true;  // 没有特别的进入条件
@@ -430,5 +463,5 @@ public abstract class BaseProcessor extends BaseEventProcessor {
      */
     protected abstract boolean checkEventShouldBeProcessed(ProcessInstance process, List<Node> nodes, Actor actor, Event event);
 
-    protected abstract String getType();
+    public abstract String getType();
 }

@@ -51,11 +51,17 @@ public class ${helper.NameAsThis(spec.name)}ProcessSpec extends ProcessSpec {
         </#if>
         <#list eventSpec.allResultMap?keys as resultCode>
             <#assign resultSpec = eventSpec.allResultMap[resultCode] />
-        event.addResult(RESULT_CODE_${helper.NAME_AS_THIS(resultCode)}, "${resultSpec.zhName!resultSpec.name}",
-            ${helper.NAME_AS_THIS(resultSpec.transferType)}, new String[]{<#list resultSpec.targetStatusCode as code>STATUS_${helper.NAME_AS_THIS(code)}<#if code?has_next>,</#if></#list>});
+        event.addResult(RESULT_CODE_${helper.NAME_AS_THIS(resultCode)}, "${resultSpec.zhName!resultSpec.name}", CONDITION_${helper.NAME_AS_THIS(resultSpec.resultCondition)});
         </#list>
+
     <#else>
         // 没有任何事件需要处理
+    </#list>
+    <#list nodeSpec.allConditionMap?keys as conditionCode>
+        <#assign condSpec = nodeSpec.allConditionMap[conditionCode] />
+        status.addConditionTarget(CONDITION_${helper.NAME_AS_THIS(condSpec.name)}, ${helper.NAME_AS_THIS(condSpec.transferType)}, new String[]{<#list condSpec.targetStatusCode as code>STATUS_${helper.NAME_AS_THIS(code)}<#if code?has_next>,</#if></#list>});
+    <#else>
+        // 没有任何跳转条件
     </#list>
 
 
