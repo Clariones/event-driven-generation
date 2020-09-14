@@ -28,7 +28,7 @@ public class QueryInfoUtil extends BaseQueryInfoUtil {
 
         Set<String> arc = new HashSet<>();
         pathMap = PathMapUtil.makePathMap(this.getWhereClause(), false, arc);
-        targetAlias = PathMapUtil.mergeIntoPathMap(pathMap, this.getTargetModelTypeName());
+        targetAlias = PathMapUtil.mergeIntoPathMap(pathMap, this.getTargetModelTypeName(), this.getQueryName());
         if (this.getOrderByAttributes() != null){
             for (BaseAttribute attr : getOrderByAttributes()) {
                 PathMapUtil.mergeIntoPathMap(pathMap, attr, arc);
@@ -72,7 +72,7 @@ public class QueryInfoUtil extends BaseQueryInfoUtil {
     public String getSingleSql() {
         Set<String> arc = new HashSet<>();
         pathMap = PathMapUtil.makePathMap(this.getWhereClause(), false, arc);
-        targetAlias = PathMapUtil.mergeIntoPathMap(pathMap, this.getTargetModelTypeName());
+        targetAlias = PathMapUtil.mergeIntoPathMap(pathMap, this.getTargetModelTypeName(), this.getQueryName());
         if (this.getOrderByAttributes() != null){
             for (BaseAttribute attr : getOrderByAttributes()) {
                 PathMapUtil.mergeIntoPathMap(pathMap, attr, arc);

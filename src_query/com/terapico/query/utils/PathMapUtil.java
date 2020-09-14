@@ -72,7 +72,7 @@ public class PathMapUtil {
         boolean isFirst = true;
         for (BeanPathNode node : beanPath.getNodeList()) {
             if (isFirst){
-                String t1 = resultMap.startFrom(node.getBeanName(), beRelated);
+                String t1 = resultMap.startFrom(node.getBeanName(), beRelated, bean.declaredPostion());
                 if (t1 == null){
                     Utils.error("找不到%s, 请检查指定的路径(%s)", node.getBeanName(), bean.declaredPostion());
                 }
@@ -85,8 +85,8 @@ public class PathMapUtil {
         }
     }
 
-    public static String mergeIntoPathMap(PathMap pathMap, String nodeName) {
-        return pathMap.startFrom(nodeName, true);
+    public static String mergeIntoPathMap(PathMap pathMap, String nodeName, String declaredPostion) {
+        return pathMap.startFrom(nodeName, true, declaredPostion);
     }
     public static void mergeIntoPathMap(PathMap pathMap, BaseAttribute attr,Set<String> attrRelatedConnectors) {
         if (attr == null){

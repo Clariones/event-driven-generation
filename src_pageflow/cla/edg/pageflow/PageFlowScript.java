@@ -1,16 +1,22 @@
 package cla.edg.pageflow;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 
+import cla.edg.extfile.element.BaseElement;
+import cla.edg.extfile.loader.DCJsonLoader;
+import cla.edg.extfile.loader.PageFlowScriptMaker;
 import cla.edg.graphquery.terms.BaseGraphQueryDescriptor;
 import cla.edg.modelbean.BaseAttribute;
 import cla.edg.modelbean.BaseModelBean;
 import cla.edg.modelbean.LogicalOperator;
 import cla.edg.modelbean.NumberAttribute;
 import cla.edg.pageflow.spec.Request;
+import clariones.tool.builder.Utils;
 import com.terapico.query.utils.QueryInfoUtil;
 
 
@@ -466,6 +472,7 @@ public class PageFlowScript extends BasePageFlowScript {
 		if (currentWork instanceof QueryInfo) {
 			queryInfo = new QueryInfoUtil();
 			currentQuery.setQueryInfo(queryInfo);
+			queryInfo.setQueryName(currentQuery.getName());
 			queryInfo.setTargetModelTypeName(currentQuery.getObjectName());
 			queryInfo.setQuerySingle(currentQuery.isQuerySingleObject());
 			queryInfo.setPagination(currentQuery.isPagination());
@@ -652,4 +659,23 @@ public class PageFlowScript extends BasePageFlowScript {
     }
 
 
+    public PageFlowScript detail_of(String name) {
+		return this;
+    }
+
+	public PageFlowScript load_page_flow_from(File baseFolder, String fileName) {
+		DCJsonLoader loader = new DCJsonLoader();
+		loader.setInputFile(baseFolder, fileName);
+		System.out.println("load file [" + loader.getInputFile().getAbsolutePath()+"]");
+
+		Map<String, Map<String, BaseElement>> allElements = loader.doJob();
+		Utils.debug(Utils.toJson(allElements));
+
+		PageFlowScriptMaker maker = new PageFlowScriptMaker();
+		PageFlowScript script = new PageFlowScript();
+		script.setName("DC Json Loader Test");
+		maker.processInputElements(allElements);
+		maker.makeScript(script);
+		return script;
+	}
 }

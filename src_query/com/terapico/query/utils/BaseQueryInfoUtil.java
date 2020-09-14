@@ -8,6 +8,7 @@ import java.util.LinkedList;
 
 public class BaseQueryInfoUtil {
     protected String targetModelTypeName;
+    protected String queryName;
     protected boolean querySingle;
     protected boolean pagination;
     protected LogicalOperator whereClause;
@@ -19,6 +20,14 @@ public class BaseQueryInfoUtil {
     protected BaseAttribute sumAttr;
     protected String topNExpression;
 
+
+    public String getQueryName() {
+        return queryName;
+    }
+
+    public void setQueryName(String queryName) {
+        this.queryName = queryName;
+    }
 
     public LogicalOperator getWhereClause() {
         return whereClause;

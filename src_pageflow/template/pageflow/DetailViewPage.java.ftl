@@ -29,12 +29,11 @@ public abstract class BaseDetailViewPage extends CustomBaseViewPage{
         return "pp_" + (++fieldsNum);
     }
 
-    private Map<String, Object> addProperty(String id, String label, Object content, String type, String displayMode) {
+    protected Map<String, Object> addProperty(String propKey, String label, Object content, String type, String displayMode) {
         if (propList == null) {
             propList = new ArrayList<>();
             put("propList", propList);
         }
-        String propKey = id;
         if (displayMode == null) {
             displayMode = "{}";
         }
@@ -51,43 +50,73 @@ public abstract class BaseDetailViewPage extends CustomBaseViewPage{
     }
 
     protected void addStatusProperty(String label, BaseEntity content) {
-        addProperty(propId(), label, content, "status", STATUS_DISPLAY_MODE);
+        addStatusProperty(propId(), label, content);
+    }
+    protected void addStatusProperty(String propName, String label, BaseEntity content) {
+        addProperty(propName, label, content, "status", STATUS_DISPLAY_MODE);
     }
 
     protected void addTextProperty(String label, String content) {
-        addProperty(propId(), label, content, "text", null);
+        addTextProperty(propId(), label, content);
+    }
+    protected void addTextProperty(String propName, String label, String content) {
+        addProperty(propName, label, content, "text", null);
     }
 
     protected void addCenterTextProperty(String content) {
-        addProperty(propId(), null, content, "section", null);
+        addCenterTextProperty(propId(), content);
+    }
+    protected void addCenterTextProperty(String propName, String content) {
+        addProperty(propName, null, content, "section", null);
     }
 
     protected void addRichTextProperty(String label, String content) {
-        addProperty(propId(), label, content, "richtext", null);
+        addRichTextProperty(propId(), label, content);
+    }
+    protected void addRichTextProperty(String propName, String label, String content) {
+        addProperty(propName, label, content, "richtext", null);
     }
 
     protected void addDateTimeProperty(String label, Date content) {
-        addProperty(propId(), label, content, "datetime", null);
+        addDateTimeProperty(propId(), label, content);
+    }
+    protected void addDateTimeProperty(String propName, String label, Date content) {
+        addProperty(propName, label, content, "datetime", null);
     }
 
     protected void addImagesProperty(String label, Images content) {
-        addProperty(propId(), label, content, "image-list", null);
+        addImagesProperty(propId(), label, content);
+    }
+    protected void addImagesProperty(String propName, String label, Images content) {
+        addProperty(propName, label, content, "image-list", null);
     }
 
     protected void addImageProperty(String label, String imageUrl) {
-        addProperty(propId(), label, imageUrl, "image", null);
+        addImageProperty(propId(), label, imageUrl);
+    }
+    protected void addImageProperty(String propName, String label, String imageUrl) {
+        addProperty(propName, label, imageUrl, "image", null);
     }
 
     protected void addTextMoneyProperty(String label, BigDecimal content) {
-        addProperty(propId(), label, ${project_name?cap_first}BaseUtils.formatCash(content), "money", null);
+        addTextMoneyProperty(propId(), label, content);
+    }
+    protected void addTextMoneyProperty(String propName, String label, BigDecimal content) {
+        addProperty(propName, label, RepairchainBaseUtils.formatCash(content), "money", null);
     }
 
     protected void addDocumentProperty(String label, String content) {
-        addProperty(propId(), label, content, "document", null);
+        addDocumentProperty(propId(), label, content);
+    }
+    protected void addDocumentProperty(String propName, String label, String content) {
+        addProperty(propName, label, content, "document", null);
     }
 
     protected void addLongTextProperty(String label, String content) {
-        addProperty(propId(), label, content, "longtext", null);
+        addLongTextProperty(propId(), label, content);
+    }
+    protected void addLongTextProperty(String propName, String label, String content) {
+        addProperty(propName, label, content, "longtext", null);
     }
 
 
