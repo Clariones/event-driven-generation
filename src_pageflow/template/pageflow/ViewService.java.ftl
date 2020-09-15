@@ -186,6 +186,9 @@ public abstract class ${class_name}ViewService extends Base${class_name}ViewServ
 			${prefix}case PRC_BY_DEFAULT:</#if> {
 			<#if branch.page=="general_cr_page">
 				${prefix}return ctx.getChangeRequestResponse();
+			<#elseif branch.page?starts_with("form: ")>
+			    <#assign formName=branch.page?substring(6)/>
+			    return ${helper.startCrMethodNameInBranch(formName)}(ctx);
 			<#else>
 				${prefix}page = assembler${NAMING.toCamelCase(branch.page)}Page(ctx, "${T.getRequestProcessingMethodName(request)}");
 				${prefix}break;

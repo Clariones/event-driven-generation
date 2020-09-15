@@ -19,6 +19,11 @@ public class BasicBuilder<T extends BasicBuilder<T>> {
         return (T) this;
     }
 
+    public T comments(String comments) {
+        factory.setComments(comments);
+        return (T) this;
+    }
+
     public T in_status(String statusCode) {
         factory.defineStatus(statusCode);
         return (T) this;

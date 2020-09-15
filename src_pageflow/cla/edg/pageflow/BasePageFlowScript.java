@@ -272,4 +272,15 @@ public class BasePageFlowScript extends BasePageFlowElement{
 		}
 		return request(name);
     }
+
+	public PageFlowScript for_change_request(String name) {
+		String reqName = "submit cr " + name;
+		Request req = findRequestByName(reqName);
+		if (req != null){
+			this.setCurrentWork(req);
+			return (PageFlowScript) this;
+		}
+		throw new RuntimeException("找不到CR: " + name);
+	}
+
 }

@@ -102,7 +102,7 @@ public abstract class BaseDetailViewPage extends CustomBaseViewPage{
         addTextMoneyProperty(propId(), label, content);
     }
     protected void addTextMoneyProperty(String propName, String label, BigDecimal content) {
-        addProperty(propName, label, RepairchainBaseUtils.formatCash(content), "money", null);
+        addProperty(propName, label, ${project_name?cap_first}BaseUtils.formatCash(content), "money", null);
     }
 
     protected void addDocumentProperty(String label, String content) {

@@ -232,7 +232,7 @@ public class QueryInfoUtil extends BaseQueryInfoUtil {
             return "count";
         }
         if (this.getSumAttr() != null){
-            return "sum";
+            return "sum" + Utils.NameAsThis(this.getSumAttr().getName()) + "Of";
         }
         return "find";
     }

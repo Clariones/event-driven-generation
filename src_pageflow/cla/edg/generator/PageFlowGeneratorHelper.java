@@ -543,4 +543,17 @@ public class PageFlowGeneratorHelper extends BaseGeneratorHelper {
 		}
 		return new ArrayList<>(beanNames);
 	}
+
+	public String startCrMethodNameInBranch(String formName) {
+		String tgtRequestName = "submit cr " + formName;
+		Request req = script.getRequests().stream().filter(r -> r.getName().equals(tgtRequestName)).findFirst().orElse(null);
+		if (req == null){
+			Utils.error_on(1, "找不到提交表单 " + formName+" 的请求");
+		}
+		if (req.isNeedLogin()){
+			return "customerStartCr" + Utils.NameAsThis(formName);
+		}else{
+			return "startCr" + Utils.NameAsThis(formName);
+		}
+	}
 }

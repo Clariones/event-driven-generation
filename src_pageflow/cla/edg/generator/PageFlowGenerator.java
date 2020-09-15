@@ -195,13 +195,13 @@ public class PageFlowGenerator extends BaseGenerator {
 		Map<String, Object> data = makeData("pageview");
 			String fileName = this.toFileName(data, "${package?replace('.','/')}/BaseListOfViewPage.java");
 			return doGeneration(data, "pageflow/ListOfViewPage.java.ftl", fileName)
-					.as_new_file().with_code("ListOfViewPage.java");
+					.when_not_exist().with_code("ListOfViewPage.java");
 	} //
 	private GenrationResult generateBaseDetailViewPage() throws Exception {
 		Map<String, Object> data = makeData("pageview");
 		String fileName = this.toFileName(data, "${package?replace('.','/')}/BaseDetailViewPage.java");
 		return doGeneration(data, "pageflow/DetailViewPage.java.ftl", fileName)
-				.as_new_file().with_code("ListOfViewPage.java");
+				.when_not_exist().with_code("ListOfViewPage.java");
 	}
 	private List<GenrationResult> generateViewPage() throws Exception {
 		// 第二个文件，XXXViewBizService

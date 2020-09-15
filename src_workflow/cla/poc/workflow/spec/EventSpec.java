@@ -1,9 +1,6 @@
 package cla.poc.workflow.spec;
 
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class EventSpec extends BaseSpec{
     protected Map<String, ProcessResultSpec> allResultMap;
@@ -26,6 +23,9 @@ public class EventSpec extends BaseSpec{
     }
 
     public Map<String, ProcessResultSpec> getAllResultMap() {
+        if (allResultMap == null){
+            allResultMap = new HashMap<>();
+        }
         return allResultMap;
     }
 

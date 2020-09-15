@@ -1,10 +1,7 @@
 package cla.edg.pageflow;
 
 import java.io.File;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 
 import cla.edg.extfile.element.BaseElement;
@@ -672,10 +669,17 @@ public class PageFlowScript extends BasePageFlowScript {
 		Utils.debug(Utils.toJson(allElements));
 
 		PageFlowScriptMaker maker = new PageFlowScriptMaker();
-		PageFlowScript script = new PageFlowScript();
-		script.setName("DC Json Loader Test");
 		maker.processInputElements(allElements);
-		maker.makeScript(script);
-		return script;
+		maker.makeScript(this);
+		return this;
 	}
+
+    public PageFlowScript reset_params() {
+		currentRequest.setParameters(new ArrayList<>());
+		return this;
+    }
+
+    public PageFlowScript start_cr(String crName) {
+		return got_page("form: "+crName);
+    }
 }

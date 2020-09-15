@@ -1,64 +1,76 @@
 package cla.poc.workflow.spec;
 
-public class BaseSpecFactory {
+public class BaseSpecFactory extends BaseTreeStyleLaborDivisionFactory{
+    protected static final String PATH_PROCESSING = "/process";
+    protected static final String PATH_NODE = PATH_PROCESSING+"/node";
+    protected static final String PATH_EVENT = PATH_NODE+"/event";
+    protected static final String PATH_ENTER_CONDITION = PATH_NODE+"/enterCondition";
+    protected static final String PATH_PROCESS_RESULT = PATH_EVENT+"/result";
+    protected static final String PATH_ROLE = PATH_NODE+"/role";
+    protected static final String PATH_CONDITION = PATH_NODE+"/condition";
+    protected static final String PATH_TARGET_STATUS_BY_RESULT = PATH_PROCESS_RESULT+"/target";
+    protected static final String PATH_TARGET_STATUS_BY_CONDITION = PATH_CONDITION+"/target";
+
+
     protected ProcessingSpec curProcessing;
     protected NodeSpec curNode;
     protected EventSpec curEvent;
     protected ProcessResultSpec curResult;
     protected RoleSpec curRole;
     protected ConditionSpec curCondition;
-    protected boolean bSettingTargetStatus = false;
+//    protected boolean bSettingTargetStatus = false;
     protected boolean bSettingEnterCondition = false;
 
     // WORKING ON
     ///////////////
     protected void workingOn(ProcessingSpec proc) {
         curProcessing = proc;
-        resetBelowProcess();
+        workingOn(PATH_PROCESSING, proc);
     }
     protected void workingOn(NodeSpec spec) {
         curNode = spec;
-        resetBelowNode();
+        workingOn(PATH_NODE, spec);
     }
     protected void workingOn(EventSpec spec) {
         curEvent = spec;
-        resetBelowEvent();
+        workingOn(PATH_EVENT, spec);
     }
     protected void workingOn(ProcessResultSpec spec) {
         curResult = spec;
-        resetBelowResult();
+        workingOn(PATH_PROCESS_RESULT, spec);
     }
-
     protected void workingOn(RoleSpec spec) {
         curRole = spec;
-        resetBelowRole();
+        workingOn(PATH_ROLE, spec);
     }
     protected void workingOnTargetStatus() {
-        bSettingTargetStatus = true;
+        workingOn(PATH_TARGET_STATUS_BY_CONDITION, curCondition);
+    }
+    protected void workingOnTargetStatusByResult(){
+        workingOn(PATH_TARGET_STATUS_BY_RESULT, curCondition);
     }
     protected void workingOnEnterCondition() {
-        bSettingEnterCondition = true;
-        resetBelowEnterCondtion();
+        workingOn(PATH_ENTER_CONDITION, curNode);
     }
     // WORKING ON
     ///////////////
     protected boolean workingOnProcessingLevel() {
-        return curProcessing != null && !isInsideProcessing();
+        return isWorkingOn(PATH_PROCESSING);
     }
     protected boolean workingOnNodeLevel() {
-        return curNode != null && !isInsideNode();
+        return isWorkingOn(PATH_NODE);
     }
     protected boolean workingOnEventLevel() {
-        return curEvent != null && !isInsideEvent();
+        return isWorkingOn(PATH_EVENT);
     }
     protected boolean workingOnResultLevel() {
-        return curResult != null && !isInsideResult();
+        return isWorkingOn(PATH_PROCESS_RESULT);
     }
     protected boolean workingOnRoleLevel() {
-        return curRole != null && bSettingTargetStatus;
+        return isWorkingOn(PATH_ROLE);
     }
     protected boolean workingOnConditionLevel() {
-        return curRole != null && bSettingEnterCondition;
+        return isWorkingOn(PATH_CONDITION);
     }
 
 
@@ -66,46 +78,23 @@ public class BaseSpecFactory {
 
     // RESET
     ///////////////
-    protected void resetBelowProcess() {
-        curNode = null;
-        resetBelowNode();
-    }
-    protected void resetBelowNode() {
-        curEvent = null;
-        resetBelowEvent();
-        curRole = null;
-        resetBelowRole();
-    }
-    private void resetBelowEvent() {
-        curResult = null;
-        resetBelowResult();
-    }
-    private void resetBelowResult() {
-        bSettingTargetStatus = false;
-    }
-    protected void resetBelowRole() {
-        // TODO
-    }
-    protected void resetBelowEnterCondtion() {
-        // TODO
-    }
 
     // IS INSIDE
     ///////////////
     protected boolean isInsideProcessing() {
-        return curNode != null;
+        return isWorkingUnder(PATH_PROCESSING);
     }
     protected boolean isInsideNode() {
-        return curEvent != null;
+        return isWorkingUnder(PATH_NODE);
     }
     protected boolean isInsideEvent() {
-        return curResult != null;
+        return isWorkingUnder(PATH_EVENT);
     }
     protected boolean isInsideResult() {
-        return bSettingTargetStatus;
+        return isWorkingUnder(PATH_PROCESS_RESULT);
     }
     protected boolean isInsideRole() {
-        return true; // TODO
+        return isWorkingUnder(PATH_ROLE);
     }
 
 
@@ -115,4 +104,6 @@ public class BaseSpecFactory {
     protected void error(String message) {
         throw new RuntimeException(message);
     }
+
+
 }

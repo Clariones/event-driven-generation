@@ -3,6 +3,7 @@ package cla.poc.workflow.spec;
 public class BaseSpec {
     protected String name;
     protected String zhName;
+    protected String comments;
 
     public String getName() {
         return name;
@@ -18,5 +19,13 @@ public class BaseSpec {
 
     public void setZhName(String zhName) {
         this.zhName = zhName;
+    }
+
+    public String getComments() {
+        return comments;
+    }
+
+    public void setComments(String comments) {
+        this.comments = comments;
     }
 }

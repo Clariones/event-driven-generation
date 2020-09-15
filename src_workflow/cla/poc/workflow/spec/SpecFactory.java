@@ -49,6 +49,25 @@ public class SpecFactory extends BaseSpecFactory{
         }
     }
 
+    public void setComments(String comments) {
+        if (workingOnProcessingLevel()){
+            curProcessing.setComments(comments);
+            return;
+        }
+        if (workingOnNodeLevel()){
+            curNode.setComments(comments);
+        }
+        if (workingOnEventLevel()){
+            curEvent.setComments(comments);
+        }
+        if (workingOnResultLevel()){
+            curResult.setComments(comments);
+        }
+        if (curCondition != null){
+            curCondition.setComments(comments);
+        }
+    }
+
     public void defineStatus(String statusCode) {
         NodeSpec spec = curProcessing.createStatusNode(statusCode);
         workingOn(spec);
@@ -192,10 +211,13 @@ public class SpecFactory extends BaseSpecFactory{
         if (curCondition == null) {
             curResult.setResultCondition(curResult.getName());
             defineCondition(curResult.getName());
+            workingOnTargetStatusByResult();
+        }else{
+            workingOnTargetStatus();
         }
         curCondition.setTransferType(type);
         curCondition.setTargetStatusCode(new ArrayList<>(Arrays.asList(tgtStatusArray)));
-        workingOnTargetStatus();
+
         curCondition = null;
     }
 

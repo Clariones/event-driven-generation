@@ -15,7 +15,7 @@ single 查询的情况可能有这么几种:
 <#assign enhanceName="enhance" + typeClass + "Which" +  helper.NameAsThis(query.name)  />
 <#assign unifiedEnhanceName="enhance" + typeClass?cap_first  />
 
-    public ${query.queryInfo.singleQueryResultType!typeClass} ${queryName}(${custom_context_name} ctx <@T.getRequestProcessingUrlMethodParameters query/><#if query.pagination>, String lastRecordId</#if>) throws Exception {
+    public ${query.queryInfo.singleQueryResultType!typeClass} ${queryName}(${custom_context_name} ctx <@T.getRequestProcessingUrlMethodParameters query/>) throws Exception {
         List<Object> params = new ArrayList<>();
         String sql = ${prepareSQLName}(ctx, params<@T.getRequestProcessingMethodParameterNames query/>);
 <#if methodPrefix == "find">

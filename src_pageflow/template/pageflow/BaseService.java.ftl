@@ -199,7 +199,7 @@ public abstract class Base${class_name}ViewService extends ${parent_class_name} 
 		<#else>
 			<#assign methodName = "startCr"+NAMING.toCamelCase(request.changeRequestName) />
 		</#if>
-	public static String makeStartCr${NAMING.toCamelCase(request.changeRequestName)}Url(${custom_context_name} ctx<@T.getRequestProcessingUrlMethodParameters request/>){
+	public static String makeStartCr${NAMING.NameAsThis(request.changeRequestName)}Url(${custom_context_name} ctx<@T.getRequestProcessingUrlMethodParameters request/>){
 		return makeUrl("${methodName}"<@T.getRequestProcessingMethodParameterNames request/>);
 	}
 	public static String make${NAMING.toCamelCase(request.name)}Url(${custom_context_name} ctx){
