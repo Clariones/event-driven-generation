@@ -51,20 +51,20 @@ public class SpecFactory extends BaseSpecFactory{
 
     public void setComments(String comments) {
         if (workingOnProcessingLevel()){
-            curProcessing.setComments(comments);
+            curProcessing.addComments(comments);
             return;
         }
         if (workingOnNodeLevel()){
-            curNode.setComments(comments);
+            curNode.addComments(comments);
         }
         if (workingOnEventLevel()){
-            curEvent.setComments(comments);
+            curEvent.addComments(comments);
         }
         if (workingOnResultLevel()){
-            curResult.setComments(comments);
+            curResult.addComments(comments);
         }
         if (curCondition != null){
-            curCondition.setComments(comments);
+            curCondition.addComments(comments);
         }
     }
 
@@ -199,13 +199,15 @@ public class SpecFactory extends BaseSpecFactory{
         if (curNode == null){
             error("split_to(), go_to() 和 copy_to() 必须在 in_status() 之后");
         }
-        if (curEvent == null){
+        if (this.isWorkingAbove(PATH_EVENT)){
             this.defineEvent("enter");
             this.setI18N("zh_CN","进入");
+            this.workingOnEventLevel();
         }
-        if (curResult == null) {
+        if (this.isWorkingAbove(PATH_PROCESS_RESULT)) {
             this.defineProcessResultCode("ok");
             this.setI18N("zh_CN","成功");
+            this.workingOnProcessingLevel();
         }
 
         if (curCondition == null) {

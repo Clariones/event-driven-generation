@@ -1,7 +1,16 @@
 package cla.edg.pageflow;
 
+import cla.edg.modelbean.LogicalOperator;
+
 public class PieceOfScript {
-	
+
+	protected LogicalOperator EXISTS(LogicalOperator condition) {
+		return LogicalOperator.create(LogicalOperator.CollectionType.exists, condition);
+	}
+
+	protected LogicalOperator NOT_EXISTS(LogicalOperator condition) {
+		return LogicalOperator.create(LogicalOperator.CollectionType.not_exists, condition);
+	}
 	public PageFlowScript makeSequel(PageFlowScript pageFlowScript) {
 		return pageFlowScript;
 	}

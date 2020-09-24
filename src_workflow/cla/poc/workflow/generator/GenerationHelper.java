@@ -63,6 +63,9 @@ public class GenerationHelper extends BaseGeneratorHelper {
         map2.clear();
         proSpec.getAllNodeSpecMap().values().stream().flatMap(n->n.getAllConditionMap().values().stream())
                 .forEach(c->{
+                    if (c.getName().equalsIgnoreCase("ok")){
+                        return;
+                    }
                     map2.computeIfAbsent(c.getName(), k->new HashSet<>()).add(c.getZhName()==null?c.getName():c.getZhName());
                 });
         map2.forEach((k,v)->result.put("condition "+k, "\""+nameAsThis(k)+"\"; // " + String.join(",", v)));

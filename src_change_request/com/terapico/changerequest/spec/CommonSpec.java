@@ -1,5 +1,7 @@
 package com.terapico.changerequest.spec;
 
+import clariones.tool.builder.Utils;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -96,7 +98,7 @@ public abstract class CommonSpec <T extends CommonSpec<T>>{
 		return "zh_CN".equals(localeCode);
 	}
 	protected void log(String message) {
-		System.out.println(String.format("[%20s]: %s", this.getClass().getSimpleName(),message));
+		Utils.debug_on(2,message);
 	}
 	public void rename(String newName) {
 		log("改名 "+this.getSpecType()+":"+name+" rename to "+newName);

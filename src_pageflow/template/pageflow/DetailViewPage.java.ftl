@@ -148,4 +148,13 @@ public abstract class BaseDetailViewPage extends CustomBaseViewPage{
         }
         actionList.add(action);
     }
+
+    protected void addCardInSection(String sectionKey, Object card) {
+        List<Object> list = (List<Object>) this.get(sectionKey);
+        if (list == null){
+            list = new ArrayList<>();
+            this.put(sectionKey, list);
+        }
+        list.add(card);
+    }
 }

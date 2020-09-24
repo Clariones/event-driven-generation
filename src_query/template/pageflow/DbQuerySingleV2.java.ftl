@@ -16,6 +16,7 @@ single 查询的情况可能有这么几种:
 <#assign unifiedEnhanceName="enhance" + typeClass?cap_first  />
 
     public ${query.queryInfo.singleQueryResultType!typeClass} ${queryName}(${custom_context_name} ctx <@T.getRequestProcessingUrlMethodParameters query/>) throws Exception {
+        debug("run query ${queryName}()");
         List<Object> params = new ArrayList<>();
         String sql = ${prepareSQLName}(ctx, params<@T.getRequestProcessingMethodParameterNames query/>);
 <#if methodPrefix == "find">
@@ -83,6 +84,7 @@ single 查询的情况可能有这么几种:
     </#if>
 </#if>
     }
+<#if methodPrefix == "find">
     protected void ${enhanceName}(${custom_context_name} ctx, ${typeClass} data, String queryName<@T.getRequestProcessingUrlMethodParameters query/>) throws Exception {
 	<#if query.queryInfo?has_content>
 		if (data == null){
@@ -104,7 +106,7 @@ single 查询的情况可能有这么几种:
 		enhance${typeClass}(ctx, data, queryName);
 	</#if>
 	}
-
+</#if>
 <#if helper.record('singleClass', typeClass)>
     protected void enhance${typeClass}(${custom_context_name} ctx, ${typeClass} data, String queryName) throws Exception {
         // 默认什么都不增强. 需要额外增强请重载此函数

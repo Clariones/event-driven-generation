@@ -115,7 +115,7 @@ public class SqlOperatorUtil {
         info.put(Operator.less, $("<"));
         info.put(Operator.bigger, $(">"));
         info.put(Operator.in, $("in", SqlOperatorUtil::prepareInOperand));
-        info.put(Operator.not_in, $("not in", SqlOperatorUtil::prepareSimpleOneOperand));
+        info.put(Operator.not_in, $("not in", SqlOperatorUtil::prepareInOperand));
         info.put(Operator.is_null, $("is null", SqlOperatorUtil::prepareSimpleOneOperand));
         info.put(Operator.not_null, $("is not null", SqlOperatorUtil::prepareSimpleOneOperand));
     }

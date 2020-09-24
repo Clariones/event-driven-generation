@@ -5,6 +5,7 @@ import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.net.URLEncoder;
 import java.util.*;
+import java.util.function.Function;
 
 import ${base_package}.${context_name};
 import ${base_package}.BaseEntity;
@@ -12,7 +13,6 @@ import ${base_package}.SmartList;
 import ${base_package}.${NAMING.toCamelCase(project_name)}BaseUtils;
 import ${base_package}.${custom_context_name};
 import ${parent_class_package}.${parent_class_name};
-import ${package}pageview.*;
 
 import com.terapico.utils.TextUtil;
 
@@ -43,6 +43,9 @@ public abstract class ${class_name}DBQueryHelper{
 	public int getPageSize(${custom_context_name} ctx, String queryName) {
 		return 20;
 	}
+    protected String existsSelect(String queryName, int i) {
+        return "1";
+    }
 	protected Map<String, Integer> toCountMap(List<Map<String, Object>> mapList) {
         Map<String, Integer> countMap = new HashMap<>();
         for(Map<String, Object> mapData : mapList) {
@@ -82,6 +85,11 @@ public abstract class ${class_name}DBQueryHelper{
     protected <T extends BaseEntity> T getUpStreamBean(${custom_context_name} ctx, T obj) throws Exception {
         return (T)ctx.getDAOGroup().loadBasicData(obj.getInternalType(), obj.getId());
     }
+    protected <T extends BaseEntity, R extends BaseEntity> R getDownStreamBean(${custom_context_name} ctx, T obj, Class<R> clazz, Function<T, R> getter) throws Exception {
+        List<R> list = ${project_name?cap_first}BaseUtils.collectReferencedObjectWithType(ctx, obj, clazz);
+        ctx.getDAOGroup().enhanceList(list, clazz);
+        return getter.apply(obj);
+    }
     protected boolean isEmpty(Object input) {
         if (input == null){
             return true;
@@ -104,6 +112,9 @@ public abstract class ${class_name}DBQueryHelper{
 	        return;
         }
 	    params.addAll(Arrays.asList(values));
+    }
+    protected void debug(String message){
+        System.out.println("[ ${class_name}DBQueryHelper ]: " + message);
     }
 <#-- 开始生成每一个查询 -->
 <#list script.queryInfoList as query >

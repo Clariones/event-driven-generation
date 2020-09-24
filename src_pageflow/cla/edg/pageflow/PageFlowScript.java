@@ -295,6 +295,7 @@ public class PageFlowScript extends BasePageFlowScript {
 		return query(bean.getModelTypeName());
 	}
 	public PageFlowScript query(String tgtName) {
+		queryInfo = null;
 		QueryInfo qInfo = new QueryInfo();
 		qInfo.setObjectName(tgtName);
 		addQueryInfo(qInfo);
@@ -492,6 +493,9 @@ public class PageFlowScript extends BasePageFlowScript {
 		if (operators == null || operators.length == 0) {
 			return this;
 		}
+		if (queryInfo == null){
+			Utils.error("where() 应该在 do_it_as() 后使用");
+		}
 		if (operators.length == 1){
 			queryInfo.setWhereClause(operators[0]);
 			return this;
@@ -663,10 +667,10 @@ public class PageFlowScript extends BasePageFlowScript {
 	public PageFlowScript load_page_flow_from(File baseFolder, String fileName) {
 		DCJsonLoader loader = new DCJsonLoader();
 		loader.setInputFile(baseFolder, fileName);
-		System.out.println("load file [" + loader.getInputFile().getAbsolutePath()+"]");
+		Utils.debug("load file [" + loader.getInputFile().getAbsolutePath()+"]");
 
 		Map<String, Map<String, BaseElement>> allElements = loader.doJob();
-		Utils.debug(Utils.toJson(allElements));
+		// Utils.debug(Utils.toJson(allElements));
 
 		PageFlowScriptMaker maker = new PageFlowScriptMaker();
 		maker.processInputElements(allElements);

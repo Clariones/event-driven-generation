@@ -62,6 +62,7 @@ public interface ChangeRequestSpecBuildingService {
 
 	public void setFieldInputType(String crName, String stepName, String eventName, String fieldName, FieldType fieldType);
 	public void setFieldUIStyle(String crName, String stepName, String eventName, String fieldName, UIStyle uiStyle);
+
 	public void setFieldModelType(String crName, String stepName, String eventName, String fieldName, String modelName);
 	public void setFieldSelectable(String crName, String stepName, String eventName, String fieldName, boolean selectable, boolean multiSelection);
 	public void setRegularExpression(String crName, String stepName, String eventName, String fieldName, String regularExpression);

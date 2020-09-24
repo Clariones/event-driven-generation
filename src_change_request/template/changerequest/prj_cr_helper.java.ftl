@@ -418,19 +418,19 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 				Object postValue = getValueFromPostedData(postData, groupData.getName(), FIELD_NAME(fieldSpec));
                 if (postValue != null) {
                     Object suggestedDefaultValue = calcSuggestedDefaultValue(groupName, fieldSpec, postValue);
-                    fieldData.setValue(TO_VALUE(getFieldValueWhenFillResponse(suggestedDefaultValue,requestData, dbCrData, groupData, fieldSpec)));
+                    fieldData.setValue(TO_VALUE(getFieldValueWhenFillResponse(suggestedDefaultValue,requestData, dbCrData, groupData, fieldSpec),fieldSpec));
                 }else if (fieldSpec.getInteractionMode().equals("display")) {
-				    Object suggestedDefaultValue = calcSuggestedDefaultValue(groupName, fieldSpec, fieldSpec.getDefaultValue());
-					fieldData.setValue(TO_VALUE(getFieldValueWhenFillResponse(suggestedDefaultValue,requestData, dbCrData, groupData, fieldSpec)));
+				    Object suggestedDefaultValue = calcSuggestedDefaultValue(groupName, fieldSpec, fieldSpec.getValue());
+					fieldData.setValue(TO_VALUE(getFieldValueWhenFillResponse(suggestedDefaultValue,requestData, dbCrData, groupData, fieldSpec),fieldSpec));
 				}else {
 					String memberName = FIELD_NAME(fieldSpec);
 					KeyValuePair kv = kvList.stream().filter(entry->entry.getKey().equals(memberName)).findAny().orElse(null);
 					if (kv == null || kv.getValue() == null) {
 					    Object suggestedDefaultValue = calcSuggestedDefaultValue(groupName, fieldSpec, fieldSpec.getDefaultValue());
-                        fieldData.setValue(TO_VALUE(getFieldValueWhenFillResponse(suggestedDefaultValue,requestData, dbCrData, groupData, fieldSpec)));
+                        fieldData.setValue(TO_VALUE(getFieldValueWhenFillResponse(suggestedDefaultValue,requestData, dbCrData, groupData, fieldSpec),fieldSpec));
 					}else {
 					    Object suggestedDefaultValue = calcSuggestedDefaultValue(groupName, fieldSpec, kv.getValue());
-                    	fieldData.setValue(TO_VALUE(getFieldValueWhenFillResponse(suggestedDefaultValue,requestData, dbCrData, groupData, fieldSpec)));
+                    	fieldData.setValue(TO_VALUE(getFieldValueWhenFillResponse(suggestedDefaultValue,requestData, dbCrData, groupData, fieldSpec),fieldSpec));
 					}
 				}
 				setFieldSpecInfo(crContext, dbCrData, groupData, fieldData, processUrl);
@@ -467,17 +467,17 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 			Object postValue = getValueFromPostedData(postData, groupData.getName(), FIELD_NAME(fieldSpec));
             if (postValue != null) {
                 Object suggestedDefaultValue = calcSuggestedDefaultValue(groupName, fieldSpec, postValue);
-                fieldData.setValue(TO_VALUE(getFieldValueWhenFillResponse(suggestedDefaultValue,requestData, dbCrData, groupData, fieldSpec)));
+                fieldData.setValue(TO_VALUE(getFieldValueWhenFillResponse(suggestedDefaultValue,requestData, dbCrData, groupData, fieldSpec),fieldSpec));
             }else if (fieldSpec.getValue() != null) {
 				Object suggestedDefaultValue = calcSuggestedDefaultValue(groupName, fieldSpec, fieldSpec.getValue());
-                fieldData.setValue(TO_VALUE(getFieldValueWhenFillResponse(suggestedDefaultValue,requestData, dbCrData, groupData, fieldSpec)));
+                fieldData.setValue(TO_VALUE(getFieldValueWhenFillResponse(suggestedDefaultValue,requestData, dbCrData, groupData, fieldSpec),fieldSpec));
 			}else {
 			    Object dv = null;
 			    if (userContext.getChangeRequestProcessResult() != null) {
 			        dv = getValueFromPostedData(userContext.getChangeRequestProcessResult().getPostedData(), groupName, fieldSpec.getName());
 			    }
 			    Object suggestedDefaultValue = calcSuggestedDefaultValue(groupName, fieldSpec, dv==null?fieldSpec.getDefaultValue():dv);
-                fieldData.setValue(TO_VALUE(getFieldValueWhenFillResponse(suggestedDefaultValue,requestData, dbCrData, groupData, fieldSpec)));
+                fieldData.setValue(TO_VALUE(getFieldValueWhenFillResponse(suggestedDefaultValue,requestData, dbCrData, groupData, fieldSpec),fieldSpec));
 			}
 			setFieldSpecInfo(crContext, dbCrData, groupData, fieldData, processUrl);
 			afterFieldFulfilled(getUserContext(), requestData, dbCrData, fieldSpec, groupData, fieldData);
@@ -769,10 +769,13 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 	}
 	
 	@Override
-	protected Object queryCandidatesForModel(CRGroupData groupData, CRFieldData fieldData, CRFieldSpec fieldSpec) {
-		String modelType = TextUtil.toCamelCase(fieldSpec.getModelName());
-		try {
-			List<Object> params = prepareParamsForQueryCandidatesBySpec(groupData, fieldData, fieldSpec);
+    protected Object queryCandidatesForModel(CRGroupData groupData, CRFieldData fieldData, CRFieldSpec fieldSpec) {
+        List<Object> params = prepareParamsForQueryCandidatesBySpec(groupData, fieldData, fieldSpec);
+        String modelType = TextUtil.toCamelCase(fieldSpec.getModelName());
+        return queryCandidatesForModel(groupData, fieldData, fieldSpec, modelType, params);
+    }
+    protected Object queryCandidatesForModel(CRGroupData groupData, CRFieldData fieldData, CRFieldSpec fieldSpec, String modelType, List<Object> params) {
+        try {
 			CandidateQuery query = new CandidateQuery();
 			query.setTargetType(modelType);
 			switch (modelType) {
@@ -789,27 +792,40 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 			return null;
 		}
 	}
-	
+
 	@Override
-	protected String getCandidateDataTitle(CRFieldSpec fieldSpec, Object val) {
-		if (val instanceof Map) {
-			return (String) ((Map) val).get("name");
-		}
-		if (val instanceof BaseEntity) {
-			return ((BaseEntity)val).getDisplayName();
-		}
-		return null;
-	}
-	@Override
-	protected String getCandidateDataValue(CRFieldSpec fieldSpec, Object val) {
-		if (val instanceof Map) {
-			return (String) ((Map) val).get("id");
-		}
-		if (val instanceof BaseEntity) {
-			return ((BaseEntity)val).getId();
-		}
-		return null;
-	}
+    protected String getCandidateDataTitle(CRFieldSpec fieldSpec, Object val) {
+        if (val instanceof Map) {
+            if (((Map) val).containsKey("title")) {
+                return (String) ((Map) val).get("title");
+            }
+            if (((Map) val).containsKey("name")) {
+                return (String) ((Map) val).get("name");
+            }
+        }
+        if (val instanceof BaseEntity) {
+            return ((BaseEntity)val).getDisplayName();
+        }
+        return null;
+    }
+    @Override
+    protected String getCandidateDataValue(CRFieldSpec fieldSpec, Object val) {
+        if (val instanceof Map) {
+            if (((Map) val).containsKey("id")) {
+                return (String) ((Map) val).get("id");
+            }
+            if (((Map) val).containsKey("key")) {
+                return (String) ((Map) val).get("key");
+            }
+            if (((Map) val).containsKey("value")) {
+                return (String) ((Map) val).get("value");
+            }
+        }
+        if (val instanceof BaseEntity) {
+            return ((BaseEntity)val).getId();
+        }
+        return null;
+    }
 
 <#--
     protected Object calcSuggestedDefaultValue(String groupName, CRFieldSpec fieldSpec, Object defaultValue){
@@ -896,7 +912,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
             fieldData.setOnChangeLinkToUrl(makeFieldChangeUrl(crContext, processUrl, fieldData.getName()));
         }
         if (fieldSpec.getInteractionMode().equals("display")) {
-            fieldData.setType("prompt_message");
+            fieldData.setType("prompt-message");
             fieldData.setRequired(false);
         } else if (fieldSpec.getInteractionMode().equals("hidden")) {
             fieldData.setHidden(true);
@@ -935,6 +951,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
         fieldData.setMinimum(fieldSpec.getMinimum());
         fieldData.setMaximum(fieldSpec.getMaximum());
         fieldData.setRules(getFiledRules(fieldSpec));
+        fieldData.setLinkToUrl(fieldSpec.getValuesRetrieveApi());
 
         //	所有数据填充完毕后的一些处理
         updateFieldCandidateValueSelected(fieldData, fieldSpec);
@@ -1005,7 +1022,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
                 if (crFieldSpec.getName().endsWith("_" + name)) {
                     fieldValues.add(MapUtil.put("id", name)
                             .put("title", crFieldSpec.getLabel())
-                            .put("value", TO_VALUE(keyValuePair.getValue()))
+                            .put("value", TO_VALUE(keyValuePair.getValue(),crFieldSpec))
                             .into_map()
                     );
                     break;

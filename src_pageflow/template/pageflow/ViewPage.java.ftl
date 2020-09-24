@@ -50,12 +50,49 @@ public class ${class_name}Page extends <#if page.listOfTemplate?has_content>Base
 		}
 	}
 </#if>
+<#if page.renderClassName?has_content>
+    @Override
+	protected void afterDoRendering() {
+		super.afterDoRendering();
+		userContext.forceResponseXClassHeader("${page.renderClassName}");
+	}
+</#if>
 	@Override
 	public void assemblerContent(${context_name} userContext, String requestName)throws Exception {
 	    this.userContext = userContext;
 		${custom_context_name} ctx = (${custom_context_name})userContext;
 	<#if class_name=="SimpleToast">
 	    set("toast", ctx.getToast());
+	<#elseif class_name=="Me">
+	    setPageTitle("我的-尚未实现");
+//		PersonalUser user = ctx.getCurrentPersonalUser();
+//		setLinkToUrl(WxappClientViewService.makeViewMePageUrl(ctx));
+//		set("toast", ctx.getToast());
+//		set("userLike", true);
+//		set("useMobile", true);
+//		set("name", user.getName());
+//		set("avatar", user.getAvatar());
+//		set("brief", user.getMaskedMobile());
+//
+//      // 上边的一排按钮
+//      List<Object> list = new ArrayList<>();
+//      list.add(action("checkin", "签到打卡", icon(IconConfiguration.CHECK_IN), WxappClientViewService.makeCheckInUrl(ctx)));
+//		list.add(action("invite","邀请好友", icon(IconConfiguration.INVITE), WxappClientViewService.makeInviteUrl(ctx)));
+//		list.add(action("my-account", "余额管理", icon(IconConfiguration.ACCOUNT_BOOK), WxappClientViewService.makeAccountManagementUrl(ctx, null, null)));
+//		list.add(action("message", "消息通知", icon(IconConfiguration.MESSAGE), WxappClientViewService.makeViewMessagesUrl(ctx, null, null)));
+//		set("actionList", list);
+//
+//      // 下边的一列导航列表
+//		String sectionKey = "sectionList";
+//		list = new ArrayList<>();
+//		list.add(action("contact-us", "联系我们", null, WxappClientViewService.makeViewContactInfoUrl(ctx)));  // TODO: URL
+//		list.add(action("feedback", "意见反馈", null, WxappClientViewService.makeStartCrPostFeedbackUrl(ctx)));
+//		list.add(action("logout", "退出登录", null, WxappClientViewService.makeLogoutUrl(ctx)));
+//		set(sectionKey, list);
+//	}
+//
+//	protected VComponentAction action(String code, String title, String icon, String url){
+//		return new VComponentAction().code(code).title(title).imageUrl(icon).linkToUrl(url);
 	<#else>
 		// TODO: 需要实现
 		setPageTitle("尚未实现");

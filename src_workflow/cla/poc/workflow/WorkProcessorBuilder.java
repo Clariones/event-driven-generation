@@ -43,5 +43,7 @@ public class WorkProcessorBuilder extends BasicBuilder<WorkProcessorBuilder>{
     }
 
 
-
+    public WorkProcessorBuilder stay_here() {
+        return go_to("just_not_go_any_where");
+    }
 }

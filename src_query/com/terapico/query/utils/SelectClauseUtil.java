@@ -102,12 +102,12 @@ public class SelectClauseUtil {
         if (info.sumByAttr != null){
             BeanPathNode lstByNode = info.sumByAttr.getContainerBean().getBeanPath().getNodeList().getLast();
             BeanPathNode lstNode = info.sumAttr.getContainerBean().getBeanPath().getNodeList().getLast();
-            return "\"select "+lstByNode.getAliasName()+"."+lstByNode.getAliasName()+" as id, SUM("
+            return "\"select "+lstByNode.getAliasName()+"."+lstByNode.getAttributeName()+" as id, SUM("
                     + lstNode.getAliasName()+"."+lstNode.getAliasName()+") as sum from ";
         }
         if (info.sumAttr != null){
             BeanPathNode lstNode = info.sumAttr.getContainerBean().getBeanPath().getNodeList().getLast();
-            return "\"select SUM(" + lstNode.getAliasName()+"."+lstNode.getAliasName()+") as sum from ";
+            return "\"select SUM(" + lstNode.getAliasName()+"."+lstNode.getAttributeName()+") as sum from ";
         }
         return "\"select * from "; // 没考虑到的情况, 就触发个空指针异常吧
     }

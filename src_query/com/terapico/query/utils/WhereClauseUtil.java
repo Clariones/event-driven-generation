@@ -9,11 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WhereClauseUtil {
+    private static int exitsCnt = 1;
     public static String makeWhere(LogicalOperator lgExpr) {
         if (lgExpr == null){
             Utils.error("没有指定where条件");
         }
-
+        exitsCnt = 1;
         Tree<WhereSegment> tree = new Tree<>();
         addToTree(tree, null, lgExpr);
 
@@ -89,6 +90,14 @@ public class WhereClauseUtil {
             logicalType = " AND ";
         }else if (data.type.equals("logical_or")){
             logicalType = " OR ";
+        }else if (data.type.equals("where_exists")){
+            logicalType = " EXISTS ";
+        }else if (data.type.equals("where_not_exists")){
+            logicalType = " NOT EXISTS ";
+        }else if (data.type.equals("condition")){
+            //
+        }else{
+            throw new RuntimeException("不支持 " + data.type);
         }
         if (node.isLeaf()){
             if (data.condition != null){
@@ -105,8 +114,18 @@ public class WhereClauseUtil {
             }
         }
 
+        switch (logicalType){
+            case " AND ":
+            case " OR ":
+            case "":
+                return String.join("\"\r\n            "+prefix+logicalType, childExp);
+        }
+        Utils.debug("now node=%s", Utils.toJson(node));
+        Utils.debug("it's %s", node.getChildren().get(0).getData().getClass());
+        return "\"\r\n            "+prefix+logicalType+"(select "
+                + "\"+existsSelect(queryName,"+ exitsCnt++ +")+\""//  + makeWhere(node.getChildren().get(0).getData());
+                +" where "+childExp.get(0)+")";
 
-        return String.join("\"\r\n            "+prefix+logicalType, childExp);
     }
 
 
@@ -114,6 +133,9 @@ public class WhereClauseUtil {
         WhereSegment newNode = new WhereSegment();
         if (lgExpr.getOperator() == null) {
             newNode.type = andOr(lgExpr);
+            if (newNode.type.contains("exists")){
+                Utils.debug("now add it to tree: %s", Utils.toJson(lgExpr));
+            }
             Tree.Node<WhereSegment> curTreeNode = null;
             if (parentNode == null) {
                 WhereSegment root = new WhereSegment();
@@ -172,6 +194,12 @@ public class WhereClauseUtil {
 
 
     private static String andOr(LogicalOperator whereScript) {
-        return LogicalOperator.CollectionType.and.equals(whereScript.getCollectionType()) ? "logical_and" : "logical_or";
+        switch (whereScript.getCollectionType()){
+            case and: return "logical_and";
+            case or: return "logical_or";
+            case exists: return "where_exists";
+            case not_exists: return "where_not_exists";
+        }
+        throw new RuntimeException("无法处理"+ whereScript.getCollectionType());
     }
 }

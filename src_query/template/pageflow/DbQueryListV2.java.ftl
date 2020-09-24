@@ -6,6 +6,7 @@
 <#assign pagingParamName="fillPaginationParamsForQuery" + typeClass + "ListOf" +  helper.NameAsThis(query.name) />
 
     public SmartList<${typeClass}> ${queryName}(${custom_context_name} ctx <@T.getRequestProcessingUrlMethodParameters query/><#if query.pagination>, String lastRecordId</#if>) throws Exception {
+        debug("run query ${queryName}()");
     <#if query.pagination>
         ${typeClass} lastRecord = null;
         if (!isEmpty(lastRecordId)) {
@@ -80,7 +81,7 @@
                 <#if c.pathType == "upstream">
         ${helper.NameAsThis(c.footHolderName)} ${helper.nameAsThis(c.aliasName)} = getUpStreamBean(ctx, ${lastVarName}.get${helper.NameAsThis(c.pathName)}());
                 <#else>
-        ${helper.NameAsThis(c.footHolderName)} ${helper.nameAsThis(c.aliasName)} = getDownStreamBean(ctx, ${lastVarName}, ${helper.NameAsThis(c.footHolderName)}.class, it->it.get${helper.NameAsThis(c.extraData.attrName)}());
+        ${helper.NameAsThis(c.footHolderName)} ${helper.nameAsThis(c.aliasName)} = getDownStreamBean(ctx, ${lastVarName}, ${helper.NameAsThis(c.footHolderName)}.class, it->it.get${helper.NameAsThis(c.memberName)}().first());
                 </#if>
                 <#assign lastVarName = helper.nameAsThis(c.aliasName)/>
             </#if>
@@ -122,7 +123,7 @@
     </#if>
     }
 <#macro sqlWithQueryInfo query>
-
+        String queryName="${queryName}";
         String sql = ${query.queryInfo.sql};
         ${query.queryInfo.paramSetters}
     <#if query.pagination>

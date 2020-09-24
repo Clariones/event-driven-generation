@@ -1,8 +1,8 @@
 	
-	public Object sendVerifyCode(${custom_context_name} ctx, String mobile) throws Exception {
-		mobile = TextUtil.formatChinaMobile(mobile);
+	public Object sendVerifyCode(${custom_context_name} ctx, String inputMobile) throws Exception {
+		String mobile = TextUtil.formatChinaMobile(inputMobile);
 		if (mobile == null) {
-			throw new Exception("您输入的" + mobile + "不是有效的手机号");
+			throw new Exception("您输入的" + inputMobile + "不是有效的手机号");
 		}
 		String verifyCode = RandomUtil.randomNum(6);
 		cacheVerifyCode(ctx, mobile, verifyCode);

@@ -420,6 +420,15 @@ public class ChangeRequestSpecBaseBuilder<T extends ChangeRequestSpecBaseBuilder
 		return me;
 	}
 
+	public T by_url(String  linkToUrl) {
+		if (workingBoard.isBuildingField()) {
+			service.setFieldValuesRetrieveApi($CR(),$STEP(),$EVENT(),$FIELD(), "Action://" + linkToUrl);
+			workingBoard.onJob(WorkingBoard.UI_STYLE);
+			return me;
+		}
+		error("不支持在此时设置字段的URL");
+		return null; // 如果走到这里了,直接异常
+	}
 	public T with_style(UIStyle uiStyle) {
 		if (workingBoard.isBuildingField()) {
 			service.setFieldUIStyle($CR(),$STEP(),$EVENT(),$FIELD(), uiStyle);

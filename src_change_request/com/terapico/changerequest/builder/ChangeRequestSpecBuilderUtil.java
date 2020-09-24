@@ -1,5 +1,7 @@
 package com.terapico.changerequest.builder;
 
+import clariones.tool.builder.Utils;
+
 public abstract class ChangeRequestSpecBuilderUtil {
 
 	protected ChangeRequestSpecBuildingService service;
@@ -9,7 +11,7 @@ public abstract class ChangeRequestSpecBuilderUtil {
 		throw new RuntimeException(message);
 	}
 	protected void log(String string) {
-		System.out.println(String.format("[%20s]: %s", "Builder", string));
+		Utils.debug_on(1,  string);
 	}
 	protected String $CR() {
 		return workingBoard.getCurrentChangeRequestName();

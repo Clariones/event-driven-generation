@@ -63,6 +63,7 @@ public abstract class BaseProcessor extends BaseEventProcessor {
         startNode.setStatusName(STATUS_START);
         startNode.setId(id);
         startNode.setBrief("初始化");
+        onNewNodeCreated(startNode, newInstance, null, null);
         newInstance.getNodes().put(STATUS_START, startNode);
 
         saveInstance(newInstance);
@@ -187,11 +188,14 @@ public abstract class BaseProcessor extends BaseEventProcessor {
             newNode.setId(actor.getRole() + "_" + actor.getId());
             newNode.setBrief(statusCode);
             newNode.setResultCode("");
+            onNewNodeCreated(node, process, actor, event);
 
             try {
                 removePreviousNodesIfNeeded(process, node, proRstSpec.getCode(), tgtNodeSpec, proRstSpec, actor, event);
                 onConditionMet(process, node, targetCondition, actor, event);
-                enterNewStatusNode(process, node, newNode, actor, event);
+                if (!ProcessSpec.STATUS_JUST_NOT_GO_ANY_WHERE.equals(statusCode)) {
+                    enterNewStatusNode(process, node, newNode, actor, event);
+                }
             } catch (Exception e) {
                 e.printStackTrace();
                 // 失败通知
@@ -201,6 +205,10 @@ public abstract class BaseProcessor extends BaseEventProcessor {
         }
         saveInstance(process);
         return true;
+    }
+
+    protected void onNewNodeCreated(Node node, ProcessInstance process, Actor actor, Event event){
+        // 默认不需要做什么
     }
 
     /**

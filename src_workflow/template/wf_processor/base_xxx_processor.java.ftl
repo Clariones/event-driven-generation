@@ -36,6 +36,18 @@ public abstract class Base${helper.NameAsThis(spec.name)}Processor extends BaseP
     }
 
 <#list spec.allNodeSpecMap?keys as statusCode>
+    <#assign nodeSpec=spec.allNodeSpecMap[statusCode]/>
+    <#if nodeSpec.detailComments?has_content>
+    /**
+     * ${nodeSpec.comments!nodeSpec.name}
+     *
+        <#list nodeSpec.detailComments as cmts>
+     * ${cmts}
+        </#list>
+     */
+    <#else>
+    /** ${nodeSpec.comments!nodeSpec.name} */
+    </#if>
     protected abstract void onEnter${helper.NameAsThis(statusCode)}Status(ProcessInstance process, Node newNode, Actor actor, Event event) throws Exception;
 </#list>
 

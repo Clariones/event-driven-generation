@@ -175,7 +175,9 @@ public abstract class ${class_name}ViewService extends Base${class_name}ViewServ
 				${prefix}// ${branch.comments!}
 			<#if branch.page=="general_cr_page">
 				${prefix}return ctx.getChangeRequestResponse();
-			<#else>
+			<#elseif branch.page?starts_with("form:")>
+			    <@startCR prefix, branch/>
+            <#else>
 				${prefix}page = assembler${NAMING.toCamelCase(branch.page)}Page(ctx, "${T.getRequestProcessingMethodName(request)}");
 				${prefix}break;
 			</#if>
@@ -186,9 +188,8 @@ public abstract class ${class_name}ViewService extends Base${class_name}ViewServ
 			${prefix}case PRC_BY_DEFAULT:</#if> {
 			<#if branch.page=="general_cr_page">
 				${prefix}return ctx.getChangeRequestResponse();
-			<#elseif branch.page?starts_with("form: ")>
-			    <#assign formName=branch.page?substring(6)/>
-			    return ${helper.startCrMethodNameInBranch(formName)}(ctx);
+			<#elseif branch.page?starts_with("form:")>
+			    <@startCR prefix, branch/>
 			<#else>
 				${prefix}page = assembler${NAMING.toCamelCase(branch.page)}Page(ctx, "${T.getRequestProcessingMethodName(request)}");
 				${prefix}break;
@@ -230,4 +231,15 @@ public abstract class ${class_name}ViewService extends Base${class_name}ViewServ
 			</#if>
 		</#if>
 	</#if>
+</#macro>
+
+<#macro startCR prefix, branch>
+<#assign formName=branch.page?substring(6)/>
+                <#assign crReq=helper.getCrRequestByName(formName)/>
+                <#if crReq.needLogin>
+                    <#assign methodName = "customerStartCr"+helper.NameAsThis(crReq.changeRequestName) />
+                <#else>
+                    <#assign methodName = "startCr"+helper.NameAsThis(crReq.changeRequestName) />
+                </#if>
+                ${prefix}return ${methodName}(ctx<@T.getRequestRequestMethodParameterNames crReq/>);
 </#macro>

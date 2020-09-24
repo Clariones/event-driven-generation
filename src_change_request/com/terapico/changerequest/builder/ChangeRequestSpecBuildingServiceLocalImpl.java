@@ -265,8 +265,8 @@ public class ChangeRequestSpecBuildingServiceLocalImpl extends CRSBuildingServic
 	@Override
 	public void setFieldSelectable(String crName, String stepName, String eventName, String fieldName,
 			boolean selectable, boolean multiSelection) {
-		FieldSpec curFieldSpec = null;
-		(curFieldSpec=sureField(crName, stepName, eventName, fieldName)).setSelectable(selectable);
+		FieldSpec curFieldSpec = sureField(crName, stepName, eventName, fieldName);
+		curFieldSpec.setSelectable(selectable);
 		sureField(crName, stepName, eventName, fieldName).setMultiSelection(multiSelection);
 		prototypeField(crName, stepName, eventName, fieldName).setSelectableIfNeed(selectable, curFieldSpec);
 		prototypeField(crName, stepName, eventName, fieldName).setMultiSelectionIfNeed(multiSelection, curFieldSpec);
@@ -329,6 +329,7 @@ public class ChangeRequestSpecBuildingServiceLocalImpl extends CRSBuildingServic
 			String apiUrl) {
 		apiUrl = Utils.toCamelCase(apiUrl).replaceAll("\\$\\{(.+)\\}", ":$1");
 		sureField(crName, stepName, eventName, fieldName).setDataRetrieveApiUrl(apiUrl);
+		prototypeField(crName, stepName, eventName, fieldName).setDataRetrieveApiUrlIfNeed(apiUrl);
 	}
 
 	@Override

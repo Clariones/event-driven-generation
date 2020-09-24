@@ -67,12 +67,17 @@ public class PageFlowGenerator extends BaseGenerator {
 		Set<String> mayRequestUrls = new HashSet<>();
 		Set<String> allRequestUrls = new HashSet<>();
 		Set<String> redundantRequestUrls = new HashSet<>();
+		Map<String, String> reqPosition = new HashMap<>();
 		
 		Set<String> anyRequestNoResponse = new HashSet<>();
 		for(Request req : script.getRequests()) {
+
 			if (!allRequestUrls.add(req.getName())) {
+				Utils.debug("%s already existed: %s,%s", req.getName(), req.getDeclaredPosition(),reqPosition.get(req.getName()));
 				redundantRequestUrls.add(req.getName());
 			}
+			reqPosition.put(req.getName(), req.getDeclaredPosition());
+
 			if (req.getBranches() == null || req.getBranches().isEmpty()) {
 				anyRequestNoResponse.add(req.getName());
 				continue;
@@ -209,6 +214,9 @@ public class PageFlowGenerator extends BaseGenerator {
 		Map<String, Object> data = makeData("pageview");
 		for(Page page: script.getPages().values()) {
 			if ("general_cr_page".equals(page.getName())) {
+				continue;
+			}
+			if (page.getName().startsWith("form:")){
 				continue;
 			}
 			data.put("class_name", Utils.NameAsThis(page.getName()));

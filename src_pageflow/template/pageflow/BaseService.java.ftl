@@ -258,6 +258,9 @@ public abstract class Base${class_name}ViewService extends ${parent_class_name} 
 	<#if page.name == "general_cr_page">
 		<#continue>
 	</#if>
+	<#if page.name?starts_with("form:")>
+        <#continue>
+    </#if>
 	protected ${NAMING.toCamelCase(page.name)}Page assembler${NAMING.toCamelCase(page.name)}Page(${custom_context_name} ctx, String requestName)throws Exception {
 		${NAMING.toCamelCase(page.name)}Page page = new ${NAMING.toCamelCase(page.name)}Page();
 		page.assemblerContent(ctx, requestName);

@@ -239,7 +239,7 @@ public class GenerationHelper extends BaseGeneratorHelper {
 		});
 
 		result.addAll((Collection<? extends String>) projectSpec.get("referModelName"));
-		System.out.println("refer to models: " + result);
+//		System.out.println("refer to models: " + result);
 		return result;
 	}
 

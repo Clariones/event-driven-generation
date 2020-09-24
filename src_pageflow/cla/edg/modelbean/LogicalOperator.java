@@ -18,7 +18,7 @@ public class LogicalOperator {
 		like,eq,not,less_or_eq,bigger_or_eq,less,bigger,in,not_in,is_null,not_null
 	}
 	public enum CollectionType {
-		and, or
+		and, or, exists, not_exists
 	}
 
 	protected List<Object> operandList;

@@ -377,11 +377,16 @@ public class FieldSpec extends CommonSpec<FieldSpec> implements Cloneable{
 			setOnChangeApi(expStr);
 		}
 	}
+	public void setDataRetrieveApiUrlIfNeed(String expStr) {
+		if (notSet("dataRetrieveApiUrl")) {
+			setDataRetrieveApiUrl(expStr);
+		}
+	}
+
 	public void setRegularExpressionIfNeed(String regExp) {
 		if (notSet("regExp")) {
 			setRegularExpression(regExp);
 		}
-		
 	}
 	public void setSelectableIfNeed(boolean selectable, FieldSpec curFieldSpec) {
 		String setterKey = curFieldSpec.hashCode()+"";

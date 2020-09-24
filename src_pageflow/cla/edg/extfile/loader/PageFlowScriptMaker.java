@@ -149,11 +149,19 @@ public class PageFlowScriptMaker {
     private void appendResultFormInfo(PageFlowScript script, Set<String> declaredPages, StringBuilder sb, String crName) {
         script.start_cr(crName);
         sb.append(".start_cr(").append(crName).append(")");
+        java.sql.Date a;
     }
 
     private void appendPageInfo(PageFlowScript script, Set<String> declaredPages, StringBuilder sb, String tgtPageId, PageElement tgtPage) {
         script.got_page(tgtPage.getName());
         sb.append(".got_page(").append(tgtPage.getName()).append(")");
+        if (tgtPage.getName().equals("home page") || tgtPage.getName().equals("home")){
+            script.as_class("com.terapico.appview.HomePage");
+            sb.append(".as_class(com.terapico.appview.HomePage)");
+        }else if (tgtPage.getName().equals("me page") || tgtPage.getName().equals("me")) {
+            script.as_class("com.terapico.appview.MePage");
+            sb.append(".as_class(com.terapico.appview.MePage)");
+        }
         if (!declaredPages.contains(tgtPageId)){
             script.title(tgtPage.getTitle());
             sb.append(".title(").append(tgtPage.getTitle()).append(")");
@@ -180,7 +188,7 @@ public class PageFlowScriptMaker {
 
         processPages(allElements);
         Map<String, BaseElement> nodes = allElements.get(CONST.LINKS);
-        Utils.debug("开始时的所有link:"+Utils.toJson(nodes));
+//        Utils.debug("开始时的所有link:"+Utils.toJson(nodes));
         // 先处理3种 request 起点
         for (BaseElement value : nodes.values()) {
             LinkElement link = (LinkElement) value;
@@ -209,7 +217,7 @@ public class PageFlowScriptMaker {
                     break;
             }
         }
-        Utils.debug("第一次,全是请求"+Utils.toJson(requests));
+//        Utils.debug("第一次,全是请求"+Utils.toJson(requests));
 
         // 再处理 form-result 这种唯一的一个 '三段中'
         for (BaseElement value : nodes.values()) {
@@ -223,18 +231,15 @@ public class PageFlowScriptMaker {
                     break;
             }
         }
-        Utils.debug("第二次,只处理form result: "+Utils.toJson(requests));
+//        Utils.debug("第二次,只处理form result: "+Utils.toJson(requests));
 
         // 最后处理分支
         for (BaseElement value : nodes.values()) {
             LinkElement link = (LinkElement) value;
             switch (link.getLinkType()) {
                 case CONST.LINK_TYPE.RESPONSE_BRANCH:
-                case CONST.LINK_TYPE.FORM_RESPONSE_BRANCH: {
-                    processBranchLink(link);
-                }
-                break;
-                case CONST.LINK_TYPE.FORM_START_FROM_BRANCH:{
+                case CONST.LINK_TYPE.FORM_RESPONSE_BRANCH:
+                case CONST.LINK_TYPE.FORM_START_FROM_BRANCH: {
                     processBranchLink(link);
                 }
                 break;
@@ -243,12 +248,12 @@ public class PageFlowScriptMaker {
                 }
                 break;
                 default:
-                    Utils.debug("跳过"+link.getTitle()+":"+link.getId());
+//                    Utils.debug("跳过"+link.getTitle()+":"+link.getId());
                     break;
             }
         }
 
-        Utils.debug(Utils.toJson(requests));
+//        Utils.debug(Utils.toJson(requests));
     }
 
     private void processFormResponseLink(LinkElement link) {
@@ -345,7 +350,11 @@ public class PageFlowScriptMaker {
         requestElement.setRequestType(tgtPage.getPageType());
 
         if (Utils.isBlank(link.getName())){
-            requestElement.setName("view " + tgtPage.getName());
+            if (tgtPage.getName().trim().equals("home")){
+                requestElement.setName("view home page");
+            }else {
+                requestElement.setName("view " + tgtPage.getName());
+            }
         }else{
             requestElement.setName(link.getName());
         }
@@ -355,7 +364,13 @@ public class PageFlowScriptMaker {
             requestElement.setTitle(link.getTitle());
         }
         requestElement.setNeedLogin(link.isNeedLogin());
-        return requestElement;
+
+        RequestElement existReq = requests.values().stream().filter(it -> it.getName().equals(requestElement.getName())).findFirst().orElse(null);
+        if (existReq == null) {
+            return requestElement;
+        }
+        // 本来应该判断参数是否相同的
+        return existReq;
     }
 
     private RequestElement findRequest(String tgtPageId) {

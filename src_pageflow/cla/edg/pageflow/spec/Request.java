@@ -17,6 +17,7 @@ public class Request extends BasePageFlowSpecElement {
     protected List<AccessParameter> parameters;
 
     public Request() {
+        recordLocation(0);
         parameters = new ArrayList<>();
     }
 
