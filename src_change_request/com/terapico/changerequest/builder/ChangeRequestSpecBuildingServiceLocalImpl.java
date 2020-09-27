@@ -125,7 +125,7 @@ public class ChangeRequestSpecBuildingServiceLocalImpl extends CRSBuildingServic
 		if (isGlobalNewEvent(eventType)) {
 			root().addEvent(new EventSpec().withType(eventType).withName(eventType+" prototype"));
 		}
-		String tmpName = getTempEventName(eventType);
+		String tmpName = getTempEventName(crName, stepName, eventType);
 		EventSpec newEvent = new EventSpec().withName(tmpName).withPrototype(getEvent(eventType)).withType(eventType);
 		stepSpec.addEvent(newEvent);
 		EventSpec spec = sureEvent(crName, stepName, tmpName);

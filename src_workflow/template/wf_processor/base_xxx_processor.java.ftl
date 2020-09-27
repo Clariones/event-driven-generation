@@ -13,21 +13,16 @@ public abstract class Base${helper.NameAsThis(spec.name)}Processor extends BaseP
     }
 
     @Override
-    protected boolean checkEventShouldBeProcessed(ProcessInstance process, List<Node> nodes, Actor actor, Event event) {
-        return true;
-    }
-
-    @Override
     public String getType() {
         return "${helper.NameAsThis(spec.name)}";
     }
 
     @Override
-    protected void onEnterStatus(ProcessInstance process, Node newNode, Actor actor, Event event) throws Exception {
+    protected void onEnterStatus(ProcessInstance process, Node fromNode, String onCondition, Node newNode, Actor actor, Event event) throws Exception {
         switch (newNode.getStatusName()){
 <#list spec.allNodeSpecMap?keys as statusCode>
         case ${helper.NameAsThis(spec.name)}ProcessSpec.STATUS_${helper.NAME_AS_THIS(statusCode)}:
-            onEnter${helper.NameAsThis(statusCode)}Status(process, newNode, actor, event);
+            onEnter${helper.NameAsThis(statusCode)}Status(process, fromNode, onCondition, newNode, actor, event);
             return;
 </#list>
         default:
@@ -48,7 +43,7 @@ public abstract class Base${helper.NameAsThis(spec.name)}Processor extends BaseP
     <#else>
     /** ${nodeSpec.comments!nodeSpec.name} */
     </#if>
-    protected abstract void onEnter${helper.NameAsThis(statusCode)}Status(ProcessInstance process, Node newNode, Actor actor, Event event) throws Exception;
+    protected abstract void onEnter${helper.NameAsThis(statusCode)}Status(ProcessInstance process, Node fromNode, String onCondition, Node newNode, Actor actor, Event event) throws Exception;
 </#list>
 
     @Override
@@ -72,8 +67,9 @@ public abstract class Base${helper.NameAsThis(spec.name)}Processor extends BaseP
     }
 
     @Override
-    protected void checkEventCanBeProcessed(ProcessInstance process, Actor actor, Event event) throws Exception {
+    protected boolean checkEventCanBeProcessed(ProcessInstance process, Node node, Actor actor, Event event) throws Exception {
         // if you have some special /complex rule to check some 'actor' can do some 'event', override here.
+        return true;
     }
 
     @Override

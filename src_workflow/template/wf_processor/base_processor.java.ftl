@@ -131,6 +131,9 @@ public abstract class BaseProcessor extends BaseEventProcessor {
         if (!checkEventShouldBeProcessed(process, node, actor, event)) {
             return false;
         }
+        if (!checkEventCanBeProcessed(process, node, actor, event)){
+            return false;
+        }
         node.setWasHandled(true);
         ProcessSpec spec = getProcessingSpec();
         NodeSpec nodeSpec = spec.getNodesSpec().get(node.getStatusName());
@@ -183,28 +186,38 @@ public abstract class BaseProcessor extends BaseEventProcessor {
                 continue;
             }
             // 进入条件满足
-            Node newNode = new Node();
-            newNode.setStatusName(statusCode);
-            newNode.setId(actor.getRole() + "_" + actor.getId());
-            newNode.setBrief(statusCode);
-            newNode.setResultCode("");
-            onNewNodeCreated(node, process, actor, event);
-
-            try {
-                removePreviousNodesIfNeeded(process, node, proRstSpec.getCode(), tgtNodeSpec, proRstSpec, actor, event);
-                onConditionMet(process, node, targetCondition, actor, event);
-                if (!ProcessSpec.STATUS_JUST_NOT_GO_ANY_WHERE.equals(statusCode)) {
-                    enterNewStatusNode(process, node, newNode, actor, event);
+            List<Node> newNodeList = createNewNodeList(process, actor, event, node, statusCode, targetCondition);
+            if (newNodeList == null){
+                continue;
+            }
+            for (Node newNode : newNodeList) {
+                try {
+                    onNewNodeCreated(node, process, actor, event);
+                    removePreviousNodesIfNeeded(process, node, proRstSpec.getCode(), tgtNodeSpec, proRstSpec, actor, event);
+                    onConditionMet(process, node, targetCondition, actor, event);
+                    if (!ProcessSpec.STATUS_JUST_NOT_GO_ANY_WHERE.equals(statusCode)) {
+                        enterNewStatusNode(process, node, targetCondition, newNode, actor, event);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    // 失败通知
+                    eventProcessFailed(process, node, actor, event, resultCode, e);
+                    break;
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
-                // 失败通知
-                eventProcessFailed(process, node, actor, event, resultCode, e);
-                break;
             }
         }
         saveInstance(process);
         return true;
+    }
+
+    protected List<Node> createNewNodeList(ProcessInstance process, Actor actor, Event event, Node node, String targetStatusCode, String targetCondition) throws Exception {
+        Node newNode = new Node();
+        newNode.setStatusName(targetStatusCode);
+        newNode.setId(actor.getRole() + "_" + actor.getId());
+        newNode.setBrief(targetStatusCode);
+        newNode.setResultCode("");
+        // onNewNodeCreated(node, process, actor, event);
+        return CollectionUtils.toList(newNode);
     }
 
     protected void onNewNodeCreated(Node node, ProcessInstance process, Actor actor, Event event){
@@ -278,7 +291,7 @@ public abstract class BaseProcessor extends BaseEventProcessor {
         // 默认没有什么事情要做
     }
 
-    protected void enterNewStatusNode(ProcessInstance process, Node fromNode, Node newNode, Actor actor, Event event) throws Exception {
+    protected void enterNewStatusNode(ProcessInstance process, Node fromNode, String onCondition, Node newNode, Actor actor, Event event) throws Exception {
         NodeSpec nodeSpec = getProcessingSpec().getNodesSpec().get(newNode.getStatusName());
         process.setStatusName(nodeSpec.getTitle());
         process.setStatusCode(nodeSpec.getStatusCode());
@@ -288,7 +301,7 @@ public abstract class BaseProcessor extends BaseEventProcessor {
         evetLog.setStatusName(process.getStatusName());
         evetLog.setStatusCode(process.getStatusCode());
         process.getLog().add(evetLog);
-        onEnterStatus(process, newNode, actor, event);
+        onEnterStatus(process, fromNode, onCondition, newNode, actor, event);
 
         Actor autoActor = new Actor();
         autoActor.setRole(ROLE_SYSTEM);
@@ -310,16 +323,16 @@ public abstract class BaseProcessor extends BaseEventProcessor {
         this.handleEventOnNode(process, newNode, actor, enterEvent);
     }
 
-    protected abstract void onEnterStatus(ProcessInstance process, Node newNode, Actor actor, Event event) throws Exception;
+    protected abstract void onEnterStatus(ProcessInstance process, Node fromNode, String onCondition, Node newNode, Actor actor, Event event) throws Exception;
 
     protected abstract void onLeaveStatus(ProcessInstance process, Node fromNode, Actor actor, Event event) throws Exception;
 
-    public Set<String> getAvailableActions(ProcessInstance processInstance, String roleUser) {
+    public List<String> getAvailableActions(ProcessInstance processInstance, String roleUser) {
         ProcessSpec spec = this.getProcessingSpec();
-        Set<String> result = new HashSet<>();
+        List<String> result = new ArrayList<>();
         processInstance.getNodes().values().forEach(n->{
             NodeSpec nodeSpec = spec.getNodesSpec().get(n.getStatusName());
-            result.addAll(nodeSpec.getRoleActions().getOrDefault(roleUser, new HashSet<>()));
+            result.addAll(nodeSpec.getRoleActions().getOrDefault(roleUser, new ArrayList<String>()));
         });
         return result;
     }
@@ -423,13 +436,16 @@ public abstract class BaseProcessor extends BaseEventProcessor {
      * 检查业务事件是否可以被处理. 包括权限校验等.
      * <p>
      * 默认啥也不做, 认为 checkEventShouldBeProcessed() 通过了就可以做. 这个只是一个重载点.
+     * "能够" 的意思是业务上确认能处理. 通常是指数据有效性的验证.
      *
      * @param process
      * @param actor
      * @param event
      * @throws Exception
      */
-    protected abstract void checkEventCanBeProcessed(ProcessInstance process, Actor actor, Event event) throws Exception;
+    protected boolean checkEventCanBeProcessed(ProcessInstance process, Node node, Actor actor, Event event) throws Exception {
+        return true;
+    }
 
     protected abstract ProcessSpec getProcessingSpec();
 
@@ -438,6 +454,7 @@ public abstract class BaseProcessor extends BaseEventProcessor {
      * 检查事件是不是应该被处理.
      * <p>
      * 默认的规则是,只要有任意node的当前状态注册了的事件, 都处理
+     * "应该" 的意思是,根据约定, 这个状态下,这个角色,发起的这个事件, 应该被系统接收, 进行处理
      *
      * @param process
      * @param actor
@@ -457,19 +474,6 @@ public abstract class BaseProcessor extends BaseEventProcessor {
         }
         return node.getStatusName().equals(event.getTargetNode());
     }
-
-    /**
-     * 检查事件是否应该被处理.
-     * <p>
-     * 默认返回true, 不考虑角色. 这个函数被调用的前提,是已经根据 node 的 statusName 过滤掉了注册了此消息的node
-     *
-     * @param process
-     * @param actor
-     * @param event
-     * @param nodes
-     * @return
-     */
-    protected abstract boolean checkEventShouldBeProcessed(ProcessInstance process, List<Node> nodes, Actor actor, Event event);
 
     public abstract String getType();
 }

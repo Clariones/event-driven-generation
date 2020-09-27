@@ -87,25 +87,48 @@ public abstract class CRSBuildingServiceBaseLocalImpl implements ChangeRequestSp
 		return true;
 	}
 
-	protected String getTempEventName(String eventType) {
+	protected String getTempEventName(String crName, String stepName, String eventType) {
 		// 如果现有的events没有这个名字,默认用这个type作为名字
-		if (root().getChangeRequestSpecs().values().stream()
-				.flatMap(itStep->{
-					if (itStep.getStepSpecs() == null) {
-						return new ArrayList<StepSpec>().stream();
-					}
-					return itStep.getStepSpecs().stream();
-				})
-				.flatMap(itEvent->{
-					if (itEvent.getEventSpecs() == null) {
-						return new ArrayList<EventSpec>().stream();
-					}
-					return itEvent.getEventSpecs().stream();
-				})
-				.anyMatch(it->it.getName().equals(eventType))) {
-			return String.format("evt_%s_%d", eventType, eventCount.incrementAndGet());
+		ChangeRequestSpec crSpec = root().getChangeRequestSpecs().get(crName);
+		if (crSpec == null || crSpec.getStepSpecs() == null){
+			return eventType;
 		}
-		return eventType;
+		StepSpec stepSpec = crSpec.getStepSpecs().stream().filter(it -> it.getName().equals(stepName))
+				.findFirst().orElse(null);
+		if (stepSpec == null || stepSpec.getEventSpecs() == null){
+			return eventType;
+		}
+		int exists = stepSpec.getEventSpecs().stream().map(it -> {
+				if (it.getName().equals(eventType)){
+					return 1;
+				}
+				if (it.getName().startsWith("evt_"+eventType+"_")){
+					return 1;
+				}
+				return 0;
+			}).reduce(0, Integer::sum);
+		if (exists == 0){
+			return eventType;
+		}
+		return String.format("evt_%s_%d", eventType, exists);
+
+//		if (root().getChangeRequestSpecs().values().stream()
+//				.flatMap(itStep->{
+//					if (itStep.getStepSpecs() == null) {
+//						return new ArrayList<StepSpec>().stream();
+//					}
+//					return itStep.getStepSpecs().stream();
+//				})
+//				.flatMap(itEvent->{
+//					if (itEvent.getEventSpecs() == null) {
+//						return new ArrayList<EventSpec>().stream();
+//					}
+//					return itEvent.getEventSpecs().stream();
+//				})
+//				.anyMatch(it->it.getName().equals(eventType))) {
+//			return String.format("evt_%s_%d", eventType, eventCount.incrementAndGet());
+//		}
+//		return eventType;
 	}
 
 	protected FieldSpec sureField(String crName, String stepName, String eventName, String fieldName) {

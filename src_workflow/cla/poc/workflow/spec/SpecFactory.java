@@ -107,7 +107,7 @@ public class SpecFactory extends BaseSpecFactory{
         if (curRole == null){
             error("can_do() 必须在 as_role() 之后");
         }
-        curRole.setActions(new HashSet<>(Arrays.asList(actionArray)));
+        curRole.setActions(new ArrayList<>(Arrays.asList(actionArray)));
     }
 
     public void setAllowedRole(String[] roleNameArray) {
@@ -186,9 +186,12 @@ public class SpecFactory extends BaseSpecFactory{
         if (curEvent == null){
             error("reach_condition() 必须在 on_event() 之后");
         }
-        if (curResult == null) {
-            error("reach_condition() 必须在 when() 之后");
+
+        if(isWorkingAbove(PATH_PROCESS_RESULT)){
+            this.defineProcessResultCode("ok");
+            this.setI18N("zh_CN","成功");
         }
+
         curResult.setResultCondition(condition);
         defineCondition(condition);
         workingOnTargetCondition();
@@ -208,6 +211,8 @@ public class SpecFactory extends BaseSpecFactory{
             this.defineProcessResultCode("ok");
             this.setI18N("zh_CN","成功");
             this.workingOnProcessingLevel();
+            curResult.setResultCondition(curEvent.getName());
+            defineCondition(curEvent.getName());
         }
 
         if (curCondition == null) {
@@ -221,6 +226,7 @@ public class SpecFactory extends BaseSpecFactory{
         curCondition.setTargetStatusCode(new ArrayList<>(Arrays.asList(tgtStatusArray)));
 
         curCondition = null;
+        curResult = null;
     }
 
     private void defineCondition(String condition) {

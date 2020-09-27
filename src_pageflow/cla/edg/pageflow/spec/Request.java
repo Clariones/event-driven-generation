@@ -88,6 +88,10 @@ public class Request extends BasePageFlowSpecElement {
         if (branches == null) {
             branches = new ArrayList<>();
         }
+        Branch existed = branches.stream().filter(it -> it.getName().equals(code)).findFirst().orElse(null);
+        if (existed != null){
+            return existed;
+        }
         Branch bch = new Branch();
         bch.setName(code);
         branches.add(bch);
