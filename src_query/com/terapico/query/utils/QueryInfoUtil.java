@@ -92,14 +92,18 @@ public class QueryInfoUtil extends BaseQueryInfoUtil {
         String fromClause = SelectClauseUtil.makeFromClause(pathMap, arc);
         String whereClause = WhereClauseUtil.makeWhere(this.getWhereClause());
         String groupByClause = WhereClauseUtil.makeGroupBy(this);
-
+        String orderByClause = " ORDER BY " + targetAlias+".id desc ";
+        if (this.getOrderByAttributes() != null && this.getOrderByAttributes().size() > 0){
+            orderByClause = OrderByClauseUtil.makeOrderByClause(targetAlias, this.getOrderByAttributes());
+        }
 
 
         return selectClause+"\"\r\n"
                 +"            +\"" + fromClause
                 +" where (" + whereClause +")\""
                 + (groupByClause.isEmpty() ? "" : ("\r\n            +\"" + groupByClause+"\""))
-                ;
+                + "\r\n            +\"" + orderByClause+"\""
+                + "\r\n            +\" LIMIT 1\"";
     }
 
     public String getParamSetters() {

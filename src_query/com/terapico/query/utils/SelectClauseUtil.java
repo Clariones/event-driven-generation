@@ -109,7 +109,7 @@ public class SelectClauseUtil {
             BeanPathNode lstNode = info.sumAttr.getContainerBean().getBeanPath().getNodeList().getLast();
             return "\"select SUM(" + lstNode.getAliasName()+"."+lstNode.getAttributeName()+") as sum from ";
         }
-        return "\"select * from "; // 没考虑到的情况, 就触发个空指针异常吧
+        return "\"select DISTINCT "+info.targetAlias+".* from ";// 没考虑到的情况, 就触发个空指针异常吧
     }
 
     public static String makeSelectClause(QueryInfoUtil queryInfo, String targetAlias) {

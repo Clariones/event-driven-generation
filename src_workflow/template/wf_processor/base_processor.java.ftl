@@ -176,6 +176,9 @@ public abstract class BaseProcessor extends BaseEventProcessor {
         }
         List<String> statusList = proRstSpec.getTargetStatusCode();
         for (String statusCode : statusList) {
+            if (statusCode.equals(ProcessSpec.STATUS_JUST_NOT_GO_ANY_WHERE)){
+                continue;
+            }
             NodeSpec tgtNodeSpec = spec.getNodesSpec().get(statusCode);
             if (tgtNodeSpec == null) {
                 throw new Exception("未定义" + spec.getTitle() + "的状态" + statusCode + "的规格");
