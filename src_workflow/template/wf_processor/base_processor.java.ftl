@@ -109,12 +109,7 @@ public abstract class BaseProcessor extends BaseEventProcessor {
             debug("没有任何节点实例,什么事件也不处理");
             return false;
         }
-        ProcessRecord evetLog = new ProcessRecord();
-        evetLog.setEventId(event.getEventId());
-        evetLog.setEventName("发生事件:" + event.getEventName());
-        evetLog.setStatusName(process.getStatusName());
-        evetLog.setStatusCode(process.getStatusCode());
-        process.getLog().add(evetLog);
+        process.log(event.getEventId(), "发生事件:" + event.getEventName());
 
         process.getNodes().values().forEach(n -> n.setWasHandled(false));
         boolean eventProcessed = false;
@@ -297,12 +292,7 @@ public abstract class BaseProcessor extends BaseEventProcessor {
         NodeSpec nodeSpec = getProcessingSpec().getNodesSpec().get(newNode.getStatusName());
         process.setStatusName(nodeSpec.getTitle());
         process.setStatusCode(nodeSpec.getStatusCode());
-        ProcessRecord evetLog = new ProcessRecord();
-        evetLog.setEventId(event.getEventId());
-        evetLog.setEventName("进入状态:"+process.getStatusName());
-        evetLog.setStatusName(process.getStatusName());
-        evetLog.setStatusCode(process.getStatusCode());
-        process.getLog().add(evetLog);
+        process.log(event.getEventId(), "进入状态:"+process.getStatusName());
         onEnterStatus(process, fromNode, onCondition, newNode, actor, event);
 
         Actor autoActor = new Actor();
@@ -459,6 +449,32 @@ public abstract class BaseProcessor extends BaseEventProcessor {
 
     protected abstract ProcessSpec getProcessingSpec();
 
+    protected  List<Node> transferNode(ProcessInstance process, String fromNodeId, String toNodeId) throws Exception {
+        List<Node> affectedNodes = removeNodesById(process, fromNodeId);
+        if (affectedNodes.isEmpty()) {
+            return affectedNodes;
+        }
+        for (Node node : affectedNodes) {
+            node.setId(toNodeId);
+            process.addNode(node);
+        }
+        process.log("发生事件: transferNode(" + fromNodeId+"->"+toNodeId+"), 迁移了"+affectedNodes+"个节点");
+        return affectedNodes;
+    }
+
+    protected List<Node> removeNodesById(ProcessInstance process, String nodeId){
+        List<Node> result = new ArrayList<>();
+        Iterator<Map.Entry<String, Node>> it = process.getNodes().entrySet().iterator();
+        while(it.hasNext()){
+            Map.Entry<String, Node> entry = it.next();
+            Node node = entry.getValue();
+            if (node.getId().equals(nodeId)){
+                result.add(node);
+                it.remove();
+            }
+        }
+        return result;
+    }
 
     /**
      * 检查事件是不是应该被处理.
