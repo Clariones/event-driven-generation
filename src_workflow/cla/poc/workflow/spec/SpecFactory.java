@@ -139,6 +139,12 @@ public class SpecFactory extends BaseSpecFactory{
         }
         curNode.getEnterChecking().put(statusCode, "must_all");
     }
+    public void enterMustHaveNo(String statusCode) {
+        if (curNode == null){
+            error("has_no_any() 必须在 in_status() 之后");
+        }
+        curNode.getEnterChecking().put(statusCode, "must_no");
+    }
     public void enterIfHave(String statusCode) {
         if (curNode == null){
             error("if_have() 必须在 in_status() 之后");

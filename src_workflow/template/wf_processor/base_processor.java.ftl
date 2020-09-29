@@ -28,6 +28,7 @@ public abstract class BaseProcessor extends BaseEventProcessor {
 
     public static final String MUST_ALL = ProcessSpec.MUST_ALL;
     public static final String MUST_ANY = ProcessSpec.MUST_ANY;
+    public static final String MUST_NO = ProcessSpec.MUST_NO;
     public static final String OPTION_ALL = ProcessSpec.OPTION_ALL;
     public static final String OPTION_ANY = ProcessSpec.OPTION_ANY;
 
@@ -174,6 +175,7 @@ public abstract class BaseProcessor extends BaseEventProcessor {
         if (proRstSpec == null) {
             throw new Exception("未定义" + node.getStatusName() + "时,对事件" + event.getEventName() + "处理结果为" + resultCode + "的后续");
         }
+        onConditionMet(process, node, targetCondition, actor, event);
         List<String> statusList = proRstSpec.getTargetStatusCode();
         for (String statusCode : statusList) {
             if (statusCode.equals(ProcessSpec.STATUS_JUST_NOT_GO_ANY_WHERE)){
@@ -197,7 +199,6 @@ public abstract class BaseProcessor extends BaseEventProcessor {
                 try {
                     onNewNodeCreated(node, process, actor, event);
                     removePreviousNodesIfNeeded(process, node, proRstSpec.getCode(), tgtNodeSpec, proRstSpec, actor, event);
-                    onConditionMet(process, node, targetCondition, actor, event);
                     if (!ProcessSpec.STATUS_JUST_NOT_GO_ANY_WHERE.equals(statusCode)) {
                         enterNewStatusNode(process, node, targetCondition, newNode, actor, event);
                     }
@@ -256,7 +257,7 @@ public abstract class BaseProcessor extends BaseEventProcessor {
             Node checkingNode = checkingNodeEnt.getValue();
             if (isNodeShouldRemove(checkingNode, fromNode, tgtNodeSpec, proRstSpec, actor, event)) {
                 it.remove();
-                onLeaveStatus(process, checkingNode, actor, event);
+                onLeaveStatus(process, fromNode, condition, checkingNode, actor, event);
             }
         }
     }
@@ -290,9 +291,7 @@ public abstract class BaseProcessor extends BaseEventProcessor {
     }
 
     /** 在 node 的状态下, 达成 condition 的条件 */
-    protected void onConditionMet(ProcessInstance process, Node node, String condition, Actor actor, Event event) {
-        // 默认没有什么事情要做
-    }
+    protected abstract void onConditionMet(ProcessInstance process, Node node, String condition, Actor actor, Event event) throws Exception;
 
     protected void enterNewStatusNode(ProcessInstance process, Node fromNode, String onCondition, Node newNode, Actor actor, Event event) throws Exception {
         NodeSpec nodeSpec = getProcessingSpec().getNodesSpec().get(newNode.getStatusName());
@@ -328,7 +327,7 @@ public abstract class BaseProcessor extends BaseEventProcessor {
 
     protected abstract void onEnterStatus(ProcessInstance process, Node fromNode, String onCondition, Node newNode, Actor actor, Event event) throws Exception;
 
-    protected abstract void onLeaveStatus(ProcessInstance process, Node fromNode, Actor actor, Event event) throws Exception;
+    protected abstract void onLeaveStatus(ProcessInstance process, Node fromNode, String onCondition, Node newNode, Actor actor, Event event) throws Exception;
 
     public List<String> getAvailableActions(ProcessInstance processInstance, String roleUser) {
         ProcessSpec spec = this.getProcessingSpec();
@@ -389,6 +388,14 @@ public abstract class BaseProcessor extends BaseEventProcessor {
                         break;
                     }
                     debug("%s must_any失败: 没有成功的%s",tgtNodeSpec.getTitle(), statusCode);
+                    return false;
+                }
+                case MUST_NO: {
+                    if (nodes.isEmpty()) {
+                        debug("%s must_no成功: 没有%s",tgtNodeSpec.getTitle() ,statusCode);
+                        return true;
+                    }
+                    debug("%s must_no失败: 存在%s的节点",tgtNodeSpec.getTitle(), statusCode);
                     return false;
                 }
                 case OPTION_ALL: {

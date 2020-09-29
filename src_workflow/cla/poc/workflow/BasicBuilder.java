@@ -85,6 +85,11 @@ public class BasicBuilder<T extends BasicBuilder<T>> {
 
 
 
+    public T has_no_any(String statusCode) {
+        factory.enterMustHaveNo(statusCode);
+        this.statusCode = statusCode;
+        return (T)this;
+    }
     public T must_have(String statusCode) {
         factory.enterMustHave(statusCode);
         this.statusCode = statusCode;

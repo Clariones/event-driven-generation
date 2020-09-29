@@ -1,5 +1,7 @@
 package cla.poc.workflow.spec;
 
+import cla.edg.project.repairchain.Main;
+
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -26,5 +28,23 @@ public class ProcessingSpec extends BaseSpec {
         spec.setName(statusCode);
         allNodeSpecMap.put(statusCode, spec);
         return spec;
+    }
+
+    public Map<String, EventSpec> getAllEventSpecMap() {
+        return allNodeSpecMap.values().stream()
+                .map(NodeSpec::getAllEventSpecMap)
+                .reduce(new HashMap<>(), (a,b)->{
+                    a.putAll(b);
+                    return a;
+                });
+    }
+
+    public Map<String, ConditionSpec> getAllConditionMap() {
+        return allNodeSpecMap.values().stream()
+                .map(NodeSpec::getAllConditionMap)
+                .reduce(new HashMap<>(), (a,b)->{
+                    a.putAll(b);
+                    return a;
+                });
     }
 }
