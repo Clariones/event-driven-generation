@@ -141,6 +141,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
         crContext.setPostData(null);
         userContext.setChangeRequest(cr);
         userContext.setChangeRequestProcessingContext(crContext);
+        userContext.putIntoContextLocalStorage("_cr_current_user_info_", currentUserInfo);
 
 		// 然后根据需要,补足fields,填充field的默认值
 		GenericFormPage crData = fulfillChangeRequestFields(crContext, cr, groupSpecList, recordIndexInfo, processUrl);
@@ -167,6 +168,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
         crContext.setActionCode(postData.getActionCode());
         crContext.setChangingFieldName(postData.getUpdatingField());
         userContext.setChangeRequestProcessingContext(crContext);
+        userContext.putIntoContextLocalStorage("_cr_current_user_info_", currentUserInfo);
 
         // 然后根据需要,补足fields,填充field的默认值
         GenericFormPage crData = fulfillChangeRequestFields(crContext, cr, groupSpecList, postData.getGroupIds(), processUrl);
@@ -387,7 +389,8 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 		CRFieldData gidField = HIDDEN_GROUP(requestData).getFieldList().stream().filter(it -> it.getName().equals(gName))
 				.findFirst().orElse(null);
 		if (eventList == null || eventList.isEmpty()) {
-			fullFillNewFields(crContext, dbCrData, groupData, groupName, fieldSpecList, processUrl);
+		    BaseEntity emptyEvent = createEmptyEvent(dbCrData, groupName);
+			fullFillNewFields(crContext, dbCrData, groupData, groupName, emptyEvent.getId(), fieldSpecList, processUrl);
 			if (gidField != null) {
 				gidField.setValue("1");
 			}
@@ -440,7 +443,8 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 			}
 		}
 		if (!fillAny) {
-			fullFillNewFields(crContext, dbCrData, groupData, groupName, fieldSpecList, processUrl);
+		    BaseEntity emptyEvent = createEmptyEvent(dbCrData, groupName);
+			fullFillNewFields(crContext, dbCrData, groupData, groupName, emptyEvent.getId(), fieldSpecList, processUrl);
 			if (gidField != null) {
 				gidField.setValue(String.valueOf(foundAny+1));
 			}
@@ -450,9 +454,33 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 		}
 	}
 
+	protected BaseEntity createEmptyEvent(ChangeRequest dbCrData, String groupName) throws Exception{
+	    BaseEntity eventRcd = null;
+		switch (groupName) {
+<#list projectSpec.changeRequestList as crSpec>
+	<#list crSpec.stepList as scene>
+		<#list scene.eventList as group>
+            case CR.${helper.JAVA_CONST(crSpec.changeRequestType)}.SCENE_${helper.JAVA_CONST(scene.name)}.GROUP_${helper.JAVA_CONST(group.name)}.NAME:{
+                Event${helper.CamelName(group.eventType)} event = new Event${helper.CamelName(group.eventType)}();
+                event.setChangeRequest(dbCrData);
+                eventRcd = userContext.getDAOGroup().getEvent${helper.CamelName(group.eventType)}DAO().save(event, EO);
+            }
+            break;
+		</#list>
+	</#list>
+</#list>
+            default:
+                throw new Exception("不支持自动创建"+groupName+"的空数据");
+		}
+        BaseEntity currentUserInfo = (BaseEntity)getUserContext().getFromContextLocalStorage("_cr_current_user_info_");
+		String eventInitiatorType = currentUserInfo.getInternalType();
+        String eventInitiatorId = currentUserInfo.getId();
+        updateEventInfoInCR(getUserContext(), dbCrData.getId(), dbCrData.getRequestType().getId(), eventRcd, groupName, eventInitiatorType, eventInitiatorId);
+        return eventRcd;
+    }
 
 	protected void fullFillNewFields(ChangeRequestProcessingContext crContext, ChangeRequest dbCrData,
-    	                    CRGroupData groupData, String groupName, List<CRFieldSpec> fieldSpecList, String processUrl) throws Exception{
+    	                    CRGroupData groupData, String groupName, String rcdId, List<CRFieldSpec> fieldSpecList, String processUrl) throws Exception{
         CRSpec crSpec = crContext.getCrSpec();
         GenericFormPage requestData = crContext.getRequestData();
         ChangeRequestPostData postData = crContext.getPostData();
@@ -463,7 +491,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 			}
 		    crContext.setFieldSpec(fieldSpec);
 			CRFieldData fieldData = new CRFieldData();
-			fieldData.setName(fieldSpec.getName()+"_new");
+			fieldData.setName(fieldSpec.getName()+"_"+rcdId);
 			Object postValue = getValueFromPostedData(postData, groupData.getName(), FIELD_NAME(fieldSpec));
             if (postValue != null) {
                 Object suggestedDefaultValue = calcSuggestedDefaultValue(groupName, fieldSpec, postValue);
@@ -651,6 +679,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 		}
 		for(Map<String, Object> fieldValue: fieldValues) {
 			String id = (String) fieldValue.get("id");
+			<#--
 			if (id == null) {
 			<#list group.fieldList as field>
 				<#if field.interactionMode == "display">
@@ -679,21 +708,22 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 			</@compress> changeRequestId);
 				updateEventInfoInCR(getUserContext(), changeRequestId, crType, eventRcd, fieldGroup, eventInitiatorType, eventInitiatorId);
 			}else{
-				Event${helper.CamelName(group.eventType)} event = getUserContext().getDAOGroup().getEvent${helper.CamelName(group.eventType)}DAO().load(id, EO);
-			<#list group.fieldList as field>
-				<#if field.interactionMode == "display">
-					<#continue>
-				</#if>
-				<#if field.selectable == "multi_selectable">
-				event.update${helper.CamelName(field.name)}(toJsonString(getStringList(fieldValue.get("${helper.javaVar(field.name)}"))));
-				<#elseif field.inputType == "baseEntity">
-				event.update${helper.CamelName(field.name)}(${helper.CamelName(field.modelName)}.refById(getStringValue(fieldValue.get("${helper.javaVar(field.name)}"))));
-				<#else>
-				event.update${helper.CamelName(field.name)}(get${helper.CamelName(field.inputType)}Value(fieldValue.get("${helper.javaVar(field.name)}")));
-				</#if>
-			</#list>
-				getUserContext().getManagerGroup().getEvent${helper.CamelName(group.eventType)}Manager().internalSaveEvent${helper.CamelName(group.eventType)}(getUserContext(), event, EO);
-			}
+			-->
+            Event${helper.CamelName(group.eventType)} event = getUserContext().getDAOGroup().getEvent${helper.CamelName(group.eventType)}DAO().load(id, EO);
+        <#list group.fieldList as field>
+            <#if field.interactionMode == "display">
+                <#continue>
+            </#if>
+            <#if field.selectable == "multi_selectable">
+            event.update${helper.CamelName(field.name)}(toJsonString(getStringList(fieldValue.get("${helper.javaVar(field.name)}"))));
+            <#elseif field.inputType == "baseEntity">
+            event.update${helper.CamelName(field.name)}(${helper.CamelName(field.modelName)}.refById(getStringValue(fieldValue.get("${helper.javaVar(field.name)}"))));
+            <#else>
+            event.update${helper.CamelName(field.name)}(get${helper.CamelName(field.inputType)}Value(fieldValue.get("${helper.javaVar(field.name)}")));
+            </#if>
+        </#list>
+            getUserContext().getManagerGroup().getEvent${helper.CamelName(group.eventType)}Manager().internalSaveEvent${helper.CamelName(group.eventType)}(getUserContext(), event, EO);
+			//}
 		}
 	}
 		</#list>
