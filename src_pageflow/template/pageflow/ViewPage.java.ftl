@@ -13,6 +13,17 @@ public class ${class_name}Page extends <#if page.listOfTemplate?has_content>Base
 	private static ${NAMING.toCamelCase(project_name)}ViewScope ViewScope = ${NAMING.toCamelCase(project_name)}ViewScope.getInstance();
 -->
 	protected static final SerializeScope SCOPE = SerializeScope.EXCLUDE();
+	protected String[] getMayRequestUrls() {
+	<#if page.possibleRequests?has_content>
+	    return new String[]{
+        <#list page.possibleRequests as reqName>
+            "${helper.calcRequestDummyUrl(bean_name, reqName)}"<#if !reqName?is_last>,</#if>
+        </#list>
+        };
+	<#else>
+	    return EMPTY_STRING_ARRAY;
+	</#if>
+	}
 <#--
 			.field("title")
 			.field("popup")
@@ -96,6 +107,7 @@ public class ${class_name}Page extends <#if page.listOfTemplate?has_content>Base
 	<#else>
 		// TODO: 需要实现
 		setPageTitle("尚未实现");
+		addDummyActions();
 	    <#if page.pageBuilder?has_content>
 	    // boolean isEnterPage = TextUtil.isBlank(ctx.getLastRecordId());
             <#if page.pageBuilder.tabInfos?has_content>

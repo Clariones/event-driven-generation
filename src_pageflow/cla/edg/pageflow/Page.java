@@ -69,7 +69,9 @@ public class Page extends BasePageFlowElement {
 
 	public void addPossibleRequest(String requestName) {
 		ensurePossibleRequests();
-		possibleRequests.add(requestName);
+		if (!possibleRequests.contains(requestName)) {
+			possibleRequests.add(requestName);
+		}
 	}
 
 	private void ensurePossibleRequests() {

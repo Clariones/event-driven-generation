@@ -7,6 +7,7 @@ import clariones.tool.builder.utils.Tree;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class WhereClauseUtil {
     private static int exitsCnt = 1;
@@ -145,6 +146,7 @@ public class WhereClauseUtil {
             } else {
                 curTreeNode = tree.addLeaf(parentNode, newNode);
             }
+
             for (Object childOperand : lgExpr.getOperandList()) {
                 addToTree(tree, curTreeNode, (LogicalOperator) childOperand);
             }

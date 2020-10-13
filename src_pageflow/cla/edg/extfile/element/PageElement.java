@@ -2,11 +2,15 @@ package cla.edg.extfile.element;
 
 import clariones.tool.builder.CONST;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class PageElement extends BaseElement{
     protected int cacheInSecond;
     protected boolean canRefresh;
     protected boolean hasFootPrint;
     protected String  pageType = CONST.PAGE_TYPE.OTHER;
+    protected Set<String> mayRequest = new HashSet<>();
 
     public int getCacheInSecond() {
         return cacheInSecond;
@@ -38,5 +42,13 @@ public class PageElement extends BaseElement{
 
     public void setPageType(String pageType) {
         this.pageType = pageType;
+    }
+
+    public Set<String> getMayRequest() {
+        return mayRequest;
+    }
+
+    public void setMayRequest(Set<String> mayRequest) {
+        this.mayRequest = mayRequest;
     }
 }

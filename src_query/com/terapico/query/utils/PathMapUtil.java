@@ -43,6 +43,9 @@ public class PathMapUtil {
             if (o instanceof BaseModelBean){
                 BaseModelBean mbean = (BaseModelBean)o;
                 getAliasNameByMergeIntoPathMap(resultMap, mbean, beRelated);
+                for (BeanPathNode beanPathNode : mbean.getBeanPath().getNodeList()) {
+                    attrRelatedConnectors.add(beanPathNode.getAliasName());
+                }
                 continue;
             }
             if (o instanceof BaseAttribute){

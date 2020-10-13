@@ -44,6 +44,8 @@ public class QueryInfoUtil extends BaseQueryInfoUtil {
 //            }
 //        }
 
+
+
         String selectClause = SelectClauseUtil.makeSelectClause(this, targetAlias);// "\"select DISTINCT "+targetAlias+".* from ";//
         String fromClause = SelectClauseUtil.makeFromClause(pathMap, arc);
         String whereClause = WhereClauseUtil.makeWhere(this.getWhereClause());

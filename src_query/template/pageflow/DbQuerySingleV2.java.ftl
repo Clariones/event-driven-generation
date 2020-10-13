@@ -114,6 +114,7 @@ single 查询的情况可能有这么几种:
 </#if>
 
 <#macro sqlWithQueryInfo query>
+        String queryName = "${queryName}";
         String sql = ${query.queryInfo.singleSql};
         ${query.queryInfo.paramSetters}
         return sql;

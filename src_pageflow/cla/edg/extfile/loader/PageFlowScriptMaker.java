@@ -20,7 +20,7 @@ public class PageFlowScriptMaker {
         for (RequestElement req : requests.values()) {
             StringBuilder sb = new StringBuilder();
             if (req.getFormId() == null) {
-                script.request(req.getName());
+                script.for_request(req.getName());
                 sb.append(".request(").append(req.getName()).append(')');
             } else {
                 script.request_with_changerequest(req.getFormName());
@@ -149,7 +149,6 @@ public class PageFlowScriptMaker {
     private void appendResultFormInfo(PageFlowScript script, Set<String> declaredPages, StringBuilder sb, String crName) {
         script.start_cr(crName);
         sb.append(".start_cr(").append(crName).append(")");
-        java.sql.Date a;
     }
 
     private void appendPageInfo(PageFlowScript script, Set<String> declaredPages, StringBuilder sb, String tgtPageId, PageElement tgtPage) {
@@ -178,15 +177,49 @@ public class PageFlowScriptMaker {
         }else{
             // nothing
         }
+        if (tgtPage.getMayRequest().size() > 0){
+            sb.append(".may_request(");
+            for (String reqName : tgtPage.getMayRequest()) {
+                script.may_request(reqName);
+                sb.append(reqName).append(", ");
+            }
+            sb.append(")");
+        }
     }
 
 
-
+    /**
+     * 生成页面流脚本之前, 做一些预处理.
+     *
+     * 主要包括: 把nodes转换成page, 把link转换成请求等
+     * @param allElements
+     */
     public void processInputElements(Map<String, Map<String, BaseElement>> allElements) {
         this.inputNodes = allElements.get(CONST.NODES);
         this.inputLinks = allElements.get(CONST.LINKS);
 
         processPages(allElements);
+        processLinks(allElements);
+
+//        Utils.debug(Utils.toJson(requests));
+    }
+
+    private void addMayRequestToPage(LinkElement link, RequestElement requestElement) {
+        String fromId = link.getFromElement();
+        if (fromId == null){
+            return;
+        }
+//        Utils.debug("request %s is from %s", link.getId(), fromId);
+        PageElement page = this.pages.get(fromId);
+        if (page == null){
+//            Utils.debug("%s不是个页面", fromId);
+            return;
+        }
+        page.getMayRequest().add(requestElement.getName());
+//        Utils.debug("%s是页面%s:%s", fromId, page, page.getMayRequest());
+    }
+
+    private void processLinks(Map<String, Map<String, BaseElement>> allElements) {
         Map<String, BaseElement> nodes = allElements.get(CONST.LINKS);
 //        Utils.debug("开始时的所有link:"+Utils.toJson(nodes));
         // 先处理3种 request 起点
@@ -196,16 +229,19 @@ public class PageFlowScriptMaker {
                 case CONST.LINK_TYPE.REQUEST_RESPONSE: {
                     RequestElement requestElement = processRequestResponseLink(link);
                     requests.put(requestElement.getId(), requestElement);
+                    addMayRequestToPage(link, requestElement);
                 }
                 break;
                 case CONST.LINK_TYPE.REQUEST:{
                     RequestElement requestElement = processRequestLink(link);
                     requests.put(requestElement.getId(), requestElement);
+                    addMayRequestToPage(link, requestElement);
                 }
                 break;
                 case CONST.LINK_TYPE.FORM_REQUEST:{
                     RequestElement requestElement = processFormRequestLink(allElements, link);
                     requests.put(requestElement.getId(), requestElement);
+                    addMayRequestToPage(link, requestElement);
                 }
                 break;
                 case CONST.LINK_TYPE.FORM_START_FROM_BRANCH:{
@@ -252,9 +288,9 @@ public class PageFlowScriptMaker {
                     break;
             }
         }
-
-//        Utils.debug(Utils.toJson(requests));
     }
+
+
 
     private void processFormResponseLink(LinkElement link) {
         String formId = link.getFromElement();

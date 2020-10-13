@@ -49,7 +49,7 @@ public class SelectClauseUtil {
                 if (attrRelatedConnectors.contains(c.getAliasName())){
                     return;
                 }
-                Utils.debug(Utils.toJson(c, true));
+                // Utils.debug(Utils.toJson(c, true));
                 leafAlias.add(c.getAliasName());
                 // Utils.debug(c.getAliasName()+" lllllll");
             }
@@ -63,7 +63,7 @@ public class SelectClauseUtil {
 
             if (leafAlias.contains(connector.getAliasName())){
                 Utils.debug(connector.getAliasName()+" 111111");
-                continue;
+                // continue;
             }
 
             sb.append(" LEFT JOIN ").append(TABLE_NAME(connector.getFootHolderName())).append(' ')

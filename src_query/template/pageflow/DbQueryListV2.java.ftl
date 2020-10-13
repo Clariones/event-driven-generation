@@ -135,6 +135,9 @@
     <#if query.pagination>
         addParam(params,limit);
     </#if>
+    <#if query.queryInfo.topNExpression?has_content>
+        addParam(params,${query.queryInfo.topNExpression});
+    </#if>
         return sql;
 </#macro>
 

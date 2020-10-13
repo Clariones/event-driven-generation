@@ -170,6 +170,7 @@ public abstract class BaseProcessor extends BaseEventProcessor {
         if (proRstSpec == null) {
             throw new Exception("未定义" + node.getStatusName() + "时,对事件" + event.getEventName() + "处理结果为" + resultCode + "的后续");
         }
+        process.log(event.getEventId(), "达成条件"+targetCondition);
         onConditionMet(process, node, targetCondition, actor, event);
         List<String> statusList = proRstSpec.getTargetStatusCode();
         for (String statusCode : statusList) {
@@ -212,8 +213,8 @@ public abstract class BaseProcessor extends BaseEventProcessor {
     protected List<Node> createNewNodeList(ProcessInstance process, Actor actor, Event event, Node node, String targetStatusCode, String targetCondition) throws Exception {
         Node newNode = new Node();
         newNode.setStatusName(targetStatusCode);
-        newNode.setId(actor.getRole() + "_" + actor.getId());
-        newNode.setBrief(targetStatusCode);
+        newNode.setId(actor.getRole() + "_" + actor.getId()+"_"+targetStatusCode);
+        newNode.setBrief(getProcessingSpec().getNodesSpec().get(targetStatusCode).getTitle());
         newNode.setResultCode("");
         // onNewNodeCreated(node, process, actor, event);
         return CollectionUtils.toList(newNode);

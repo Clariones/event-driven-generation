@@ -546,7 +546,7 @@ public class PageFlowGeneratorHelper extends BaseGeneratorHelper {
 
 	public Request getCrRequestByName(String formName) {
 		String tgtRequestName = "submit cr " + formName;
-		Request req = script.getRequests().stream().filter(r -> r.getName().equals(tgtRequestName)).findFirst().orElse(null);
+		Request req = getRequestByName(tgtRequestName);
 		if (req == null){
 			Utils.error_on(1, "找不到提交表单 " + formName+" 的请求");
 		}
@@ -556,5 +556,37 @@ public class PageFlowGeneratorHelper extends BaseGeneratorHelper {
 //		}else{
 //			return "startCr" + Utils.NameAsThis(formName);
 //		}
+	}
+
+	private Request getRequestByName(String tgtRequestName) {
+		Request req = script.getRequests().stream().filter(r -> r.getName().equals(tgtRequestName)).findFirst().orElse(null);
+		return req;
+	}
+
+	public String calcRequestDummyUrl(String beanName, String reqName){
+		Request req = getRequestByName(reqName);
+		StringBuilder rst = new StringBuilder(req.getComments()==null?req.getName():req.getComments()).append(":");
+		if (!Utils.isBlank(beanName)){
+			rst.append(beanName).append("/");
+		}
+		if (req.isNeedLogin() && !req.getName().equalsIgnoreCase("view me page")){
+			if (req.getChangeRequestName() != null){
+				rst.append("customerStartCr").append(NameAsThis(req.getChangeRequestName())).append("/");
+			}else{
+				rst.append("customer").append(NameAsThis(req.getName())).append("/");
+			}
+		}else{
+			if (req.getChangeRequestName() != null){
+				rst.append("startCr").append(NameAsThis(req.getChangeRequestName())).append("/");
+			}else{
+				rst.append(nameAsThis(req.getName())).append("/");
+			}
+		}
+		if (req.getParameters() != null){
+			for (AccessParameter parameter : req.getParameters()) {
+				rst.append("+/");
+			}
+		}
+		return rst.toString();
 	}
 }
