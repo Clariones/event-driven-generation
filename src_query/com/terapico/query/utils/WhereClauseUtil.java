@@ -121,8 +121,8 @@ public class WhereClauseUtil {
             case "":
                 return String.join("\"\r\n            "+prefix+logicalType, childExp);
         }
-        Utils.debug("now node=%s", Utils.toJson(node));
-        Utils.debug("it's %s", node.getChildren().get(0).getData().getClass());
+//        Utils.debug("now node=%s", Utils.toJson(node));
+//        Utils.debug("it's %s", node.getChildren().get(0).getData().getClass());
         return "\"\r\n            "+prefix+logicalType+"(select "
                 + "\"+existsSelect(queryName,"+ exitsCnt++ +")+\""//  + makeWhere(node.getChildren().get(0).getData());
                 +" where "+childExp.get(0)+")";
@@ -134,9 +134,9 @@ public class WhereClauseUtil {
         WhereSegment newNode = new WhereSegment();
         if (lgExpr.getOperator() == null) {
             newNode.type = andOr(lgExpr);
-            if (newNode.type.contains("exists")){
-                Utils.debug("now add it to tree: %s", Utils.toJson(lgExpr));
-            }
+//            if (newNode.type.contains("exists")){
+//                Utils.debug("now add it to tree: %s", Utils.toJson(lgExpr));
+//            }
             Tree.Node<WhereSegment> curTreeNode = null;
             if (parentNode == null) {
                 WhereSegment root = new WhereSegment();

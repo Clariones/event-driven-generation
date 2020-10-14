@@ -28,7 +28,7 @@ public class PageFlowScriptMaker {
             }
             // 参数部分
             if (req.getParams() == null || req.getParams().isEmpty()) {
-                if (isPresetRequest(req, script, sb)){
+                if (isPresetRequest(req, script, sb)) {
                     //
                 }else if (req.getRequestType().equals(CONST.PAGE_TYPE.LIST)) {
                     script.with_string("tab name").with_last_record_id();
@@ -45,6 +45,43 @@ public class PageFlowScriptMaker {
                     }
                 }
             } else {
+                // 有自带参数
+                for (ParamElement param : req.getParams()) {
+                    switch (param.getLevel2Type()){
+                        case "string":
+                            script.with_string(param.getName());
+                            sb.append(".with_string(").append(param.getName()).append(")");
+                            break;
+                        case "tab":
+                            script.with_string("tab name");
+                            sb.append(".with_string(tab name)");
+                            break;
+                        case "pagination":
+                            script.with_last_record_id();
+                            sb.append(".with_last_record_id()");
+                            break;
+                        case "integer":
+                            script.with_integer(param.getName());
+                            sb.append(".with_integer(").append(param.getName()).append(")");
+                            break;
+                        case "decimal":
+                            script.with_float(param.getName());
+                            sb.append(".with_float(").append(param.getName()).append(")");
+                            break;
+                        case "date":
+                            script.with_date(param.getName());
+                            sb.append(".with_date(").append(param.getName()).append(")");
+                            break;
+                        case "boolean":
+                            script.with_boolean(param.getName());
+                            sb.append(".with_boolean(").append(param.getName()).append(")");
+                            break;
+                        case "NA":
+                            break;
+                        default:
+                            Utils.error("没处理"+param.getLevel2Type()+"类型的参数");
+                    }
+                }
             }
 
             Utils.debug(sb.toString());
@@ -223,35 +260,43 @@ public class PageFlowScriptMaker {
         Map<String, BaseElement> nodes = allElements.get(CONST.LINKS);
 //        Utils.debug("开始时的所有link:"+Utils.toJson(nodes));
         // 先处理3种 request 起点
-        for (BaseElement value : nodes.values()) {
+        for(String key: nodes.keySet()){
+            BaseElement value = nodes.get(key);
             LinkElement link = (LinkElement) value;
+            RequestElement requestElement = null;
             switch (link.getLinkType()){
                 case CONST.LINK_TYPE.REQUEST_RESPONSE: {
-                    RequestElement requestElement = processRequestResponseLink(link);
-                    requests.put(requestElement.getId(), requestElement);
+                    requestElement = processRequestResponseLink(link);
                     addMayRequestToPage(link, requestElement);
                 }
                 break;
                 case CONST.LINK_TYPE.REQUEST:{
-                    RequestElement requestElement = processRequestLink(link);
-                    requests.put(requestElement.getId(), requestElement);
+                    requestElement = processRequestLink(link);
                     addMayRequestToPage(link, requestElement);
                 }
                 break;
                 case CONST.LINK_TYPE.FORM_REQUEST:{
-                    RequestElement requestElement = processFormRequestLink(allElements, link);
-                    requests.put(requestElement.getId(), requestElement);
+                    requestElement = processFormRequestLink(allElements, link);
                     addMayRequestToPage(link, requestElement);
                 }
                 break;
                 case CONST.LINK_TYPE.FORM_START_FROM_BRANCH:{
-                    RequestElement requestElement = processFormRequestLink(allElements, link);
+                    requestElement = processFormRequestLink(allElements, link);
                     requestElement.setId(requestElement.getId()+"_cr");
-                    requests.put(requestElement.getId(), requestElement);
                 }
                 default:
                     break;
             }
+            if (requestElement != null){
+                // 可能存在多个link表示一个请求的情况, 此时要合并
+                RequestElement existRequest = requests.get(requestElement.getId());
+                if(existRequest == null) {
+                    requests.put(requestElement.getId(), requestElement);
+                }else{
+                    existRequest.mergeWith(requestElement);
+                }
+            }
+
         }
 //        Utils.debug("第一次,全是请求"+Utils.toJson(requests));
 
@@ -322,6 +367,7 @@ public class PageFlowScriptMaker {
 
     private RequestElement processFormRequestLink(Map<String, Map<String, BaseElement>> allElements, LinkElement link) {
         RequestElement requestElement = new RequestElement();
+        requestElement.setParams(link.getParams());
         String tgtFormId = link.getToElement();
         NodeElement formNode = (NodeElement) allElements.get(CONST.NODES).get(tgtFormId);
         RequestElement existRequestElement = findFormRequest(tgtFormId);
@@ -358,6 +404,7 @@ public class PageFlowScriptMaker {
 
     private RequestElement processRequestLink(LinkElement link) {
         RequestElement requestElement = new RequestElement();
+        requestElement.setParams(link.getParams());
         requestElement.setId(link.getId());
         requestElement.setType(CONST.REQUEST);
         requestElement.setSplitNodeId(link.getToElement());
@@ -380,6 +427,7 @@ public class PageFlowScriptMaker {
 //        }
 
         RequestElement requestElement = new RequestElement();
+        requestElement.setParams(link.getParams());
         requestElement.setId(link.getId());
         requestElement.setType(CONST.REQUEST);
         requestElement.getTargetPages().put(CONST.BRANCH_BY_DEFAULT, tgtPage.getId());
@@ -406,6 +454,7 @@ public class PageFlowScriptMaker {
             return requestElement;
         }
         // 本来应该判断参数是否相同的
+        existReq.mergeWith(requestElement);
         return existReq;
     }
 

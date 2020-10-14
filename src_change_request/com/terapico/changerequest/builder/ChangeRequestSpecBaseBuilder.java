@@ -323,7 +323,7 @@ public class ChangeRequestSpecBaseBuilder<T extends ChangeRequestSpecBaseBuilder
 			workingBoard.onStep(stepName);
 		}
 		if (workingBoard.getCurrentStepName() == null) {
-			System.out.println(Utils.toJson(workingBoard, true));
+			Utils.debug(Utils.toJson(workingBoard, true));
 			error("只有在Step中才能描述vent");
 		}
 		String eventTempName = service.addEventIntoStep($CR(), $STEP(), eventTypeName);

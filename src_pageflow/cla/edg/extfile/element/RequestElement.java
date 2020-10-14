@@ -10,7 +10,7 @@ public class RequestElement extends BaseElement{
     protected String formName;  // type=form时才有
     protected String splitNodeId;
     protected String formId;
-    protected List<Map<String, Object>> params = new ArrayList<>(); // 请求的参数
+    protected List<ParamElement> params = new ArrayList<>(); // 请求的参数
     protected boolean needLogin;
     protected String requestType = "";
 
@@ -33,11 +33,11 @@ public class RequestElement extends BaseElement{
         this.formName = formName;
     }
 
-    public List<Map<String, Object>> getParams() {
+    public List<ParamElement> getParams() {
         return params;
     }
 
-    public void setParams(List<Map<String, Object>> params) {
+    public void setParams(List<ParamElement> params) {
         this.params = params;
     }
 
@@ -71,5 +71,29 @@ public class RequestElement extends BaseElement{
 
     public void setRequestType(String requestType) {
         this.requestType = requestType;
+    }
+
+    public void mergeWith(RequestElement other) {
+        if (this == other){
+            return;
+        }
+        if (this.getName() == null){
+            this.setName(other.getName());
+        }
+        if (this.getParams() == null || this.getParams().isEmpty()){
+            this.setParams(other.getParams());
+        }else if (this.getParams().size() == 1 && this.getParams().get(0).getLevel2Type().equalsIgnoreCase("NA")){
+            this.setParams(other.getParams());
+        }else {
+            for (ParamElement param : other.getParams()) {
+                if (this.getParams().stream().anyMatch(it->it.getLevel2Type().equals(param.getLevel2Type()) && it.getName().equals(param.getName()))){
+                    continue;
+                }
+                this.getParams().add(param);
+            }
+        }
+        if (other.isNeedLogin()){
+            this.setNeedLogin(true);
+        }
     }
 }

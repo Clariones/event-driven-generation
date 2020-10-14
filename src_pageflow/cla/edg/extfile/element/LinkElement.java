@@ -1,10 +1,14 @@
 package cla.edg.extfile.element;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LinkElement extends BaseElement {
     protected String fromElement;
     protected String toElement;
     protected boolean needLogin;
+    protected List<ParamElement> params;
 
     /**
      * @see clariones.tool.builder.CONST.LINK_TYPE
@@ -41,5 +45,16 @@ public class LinkElement extends BaseElement {
 
     public void setNeedLogin(boolean needLogin) {
         this.needLogin = needLogin;
+    }
+
+    public List<ParamElement> getParams() {
+        if (params == null) {
+            params = new ArrayList<>();
+        }
+        return params;
+    }
+
+    public void setParams(List<ParamElement> params) {
+        this.params = params;
     }
 }

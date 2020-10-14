@@ -3,10 +3,12 @@ package cla.edg.extfile.loader;
 import cla.edg.extfile.element.BaseElement;
 import cla.edg.extfile.element.LinkElement;
 import cla.edg.extfile.element.NodeElement;
+import cla.edg.extfile.element.ParamElement;
 import clariones.tool.builder.CONST;
 import clariones.tool.builder.Utils;
 import clariones.tool.builder.utils.FileUtil;
 
+import javax.rmi.CORBA.Util;
 import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
@@ -62,11 +64,11 @@ public class DCJsonLoader {
             NodeElement fromNode = (NodeElement) allNodes.get(fromId);
             NodeElement toNode = (NodeElement) allNodes.get(toId);
             if (fromNode == null) {
-                Utils.error("连接%s:%s[%s->%s]的起点没找到", id, title);
+                Utils.error("连接%s:%s[%s->%s]的起点没找到", id, title, fromId, toId);
                 return null;
             }
             if (toNode == null) {
-                Utils.error("连接%s:%s[%s->%s]的终点没找到", id, title);
+                Utils.error("连接%s:%s[%s->%s]的终点没找到", id, title, fromId, toId);
                 return null;
             }
 
@@ -102,7 +104,23 @@ public class DCJsonLoader {
             default:
                 break;
         }
-        // TODO: 加参数
+        if (curNode.get("extra") != null){
+            List<Map<String, String>> params = (List<Map<String, String>>) curNode.get("extra");
+            for (Map<String, String> param : params) {
+                String type = param.get("type");
+                if (type == null){
+                    continue;
+                }
+                String name = param.get("name");
+                if (name == null){
+                    Utils.error("链接%s:%s(%s->%s)参数没有设置name", id, title, fromNode.getTitle(), toNode.getTitle());
+                }
+                ParamElement pElement = new ParamElement();
+                pElement.setLevel2Type(type);
+                pElement.setName(name);
+                rst.getParams().add(pElement);
+            }
+        }
         return rst;
     }
 
