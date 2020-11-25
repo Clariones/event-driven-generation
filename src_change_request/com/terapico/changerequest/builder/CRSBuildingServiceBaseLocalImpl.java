@@ -320,7 +320,7 @@ public abstract class CRSBuildingServiceBaseLocalImpl implements ChangeRequestSp
 			fixFieldRangeIfNeeded(fieldSpec, "0", "9");
 			return "images()";
 		case IMAGE:
-			fixFieldRangeIfNeeded(fieldSpec, "0", "1");
+			// fixFieldRangeIfNeeded(fieldSpec, "0", "512");
 			return String.format("%s.jpg", Utils.toJavaVariableName(fieldSpec.getName()));
 		case VIDEO:
 			fixFieldRangeIfNeeded(fieldSpec, "0", "1024");
@@ -360,6 +360,9 @@ public abstract class CRSBuildingServiceBaseLocalImpl implements ChangeRequestSp
 		if (fieldSpec.getRangeArgs() != null) {
 			return;
 		}
+		if (fieldSpec.getSampleData() != null){
+			return;
+		}
 		fieldSpec.setRangeArgs(new Serializable[] {minExp, maxExp});
 	}
 
@@ -387,11 +390,14 @@ public abstract class CRSBuildingServiceBaseLocalImpl implements ChangeRequestSp
 		if (fieldSpec.getUiStyle() != null) {
 			return fieldSpec.getUiStyle().getName();
 		}
+		if (fieldSpec.getModelName() != null) {
+			if (ifUseObjectPicker(fieldSpec)) {
+				return UIStyle.INPUT_OBJECT_PICKER.getName();
+			}
+			return UIStyle.INPUT_OBJECT_SELECT.getName();
+		}
 		if (fieldSpec.getMultiSelection() != null && fieldSpec.getMultiSelection().booleanValue()) {
 			return UIStyle.INPUT_MULTI_SELECT.getName();
-		}
-		if (fieldSpec.getModelName() != null) {
-			return UIStyle.INPUT_OBJECT_SELECT.getName();
 		}
 		if (fieldSpec.getSelectable() != null && fieldSpec.getSelectable().booleanValue()) {  // fieldSpec.getMultiSelection() is false now
 			return UIStyle.INPUT_SINGLE_SELECT.getName();
@@ -420,8 +426,12 @@ public abstract class CRSBuildingServiceBaseLocalImpl implements ChangeRequestSp
 			return UIStyle.INPUT_DECIMAL.getName();
 		case MONEY:
 			return UIStyle.INPUT_MONEY.getName();
-		case BASE_ENTITY:
+		case BASE_ENTITY: {
+			if (ifUseObjectPicker(fieldSpec)) {
+				return UIStyle.INPUT_OBJECT_PICKER.getName();
+			}
 			return UIStyle.INPUT_OBJECT_SELECT.getName();
+		}
 		case ARTICLE:
 			return UIStyle.INPUT_ARTICLE.getName();
 		case MOBILE:
@@ -438,6 +448,20 @@ public abstract class CRSBuildingServiceBaseLocalImpl implements ChangeRequestSp
 			return UIStyle.INPUT_SINGLE_SELECT.getName();
 		}
 		return UIStyle.INPUT_TEXT.getName();
+	}
+
+	protected boolean ifUseObjectPicker(FieldSpec fieldSpec){
+		if (fieldSpec.getDataRetrieveApiUrl() == null){
+			return false;
+		}
+		String url = fieldSpec.getDataRetrieveApiUrl();
+		if (!url.startsWith("Query(")){
+			return false;
+		}
+		if (url.contains("/") && !url.contains(",")){
+			return true;
+		}
+		return false;
 	}
 
 	@Override

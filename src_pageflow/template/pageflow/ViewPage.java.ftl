@@ -7,7 +7,11 @@ import ${base_package}.${context_name};
 import ${base_package}.${custom_context_name};
 import ${base_package}.${NAMING.toCamelCase(project_name)}ViewScope;
 
-public class ${class_name}Page extends <#if page.listOfTemplate?has_content>BaseListOfViewPage<#else>BaseDetailViewPage</#if>{
+public class ${class_name}Page extends <@compress single-line=true>
+    <#if page.listOfTemplate?has_content>BaseListOfViewPage
+    <#elseif page.pageTemplateType=='detail'>BaseDetailViewPage
+    <#else>CustomBaseViewPage
+    </#if></@>{
 <#--
 	private static final long serialVersionUID = -1L;
 	private static ${NAMING.toCamelCase(project_name)}ViewScope ViewScope = ${NAMING.toCamelCase(project_name)}ViewScope.getInstance();
@@ -108,6 +112,11 @@ public class ${class_name}Page extends <#if page.listOfTemplate?has_content>Base
 		// TODO: 需要实现
 		setPageTitle("尚未实现");
 		addDummyActions();
+        <#if page.listOfTemplate?has_content>
+        set("content", "${page.pageTitle}<br/>${class_name}Page.java");
+        <#else>
+        set("richContent", "${page.pageTitle}<br/>${class_name}Page.java");
+        </#if>
 	    <#if page.pageBuilder?has_content>
 	    // boolean isEnterPage = TextUtil.isBlank(ctx.getLastRecordId());
             <#if page.pageBuilder.tabInfos?has_content>

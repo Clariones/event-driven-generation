@@ -1,30 +1,34 @@
 package com.terapico.changerequest.builder;
 
 public enum FieldType {
-	TEXT("string","String"), 
-	MULTI_TEXT("longtext", "String"),
-	RICH_TEXT("richText", "String"),
-	BOOLEAN("boolean", "Boolean"), 
-	IMAGES("images", "Images"), 
-	IMAGE("image", "String"),
-	VIDEO("video", "String"),
-	ATTACHMENT("file", "String"),
-	DATE("date", "Date"), 
-	DATE_TIME("datetime", "DateTime"), 
-	TIME("time", "Date"), 
-	INTEGER("integer", "Integer"), 
-	DECIMAL("decimal", "BigDecimal"), 
-	MONEY("money", "BigDecimal"),
-	ARTICLE("article", "String"),
-	BASE_ENTITY("baseEntity", "BaseEntity"), 
-	MOBILE("mobile", "String");
+	TEXT("string","String", "[1,30]", UIStyle.INPUT_TEXT),
+	MULTI_TEXT("longtext", "String", null, UIStyle.INPUT_TEXTAREA),
+	RICH_TEXT("richText", "String", null, UIStyle.INPUT_RICHTEXT),
+	BOOLEAN("boolean", "Boolean", null, UIStyle.INPUT_BOOLEAN),
+	IMAGES("images", "Images", "[1,9]", UIStyle.INPUT_IMAGE),
+	IMAGE("image", "String", null, UIStyle.INPUT_IMAGE),
+	VIDEO("video", "String", null, UIStyle.INPUT_VIDEO),
+	ATTACHMENT("file", "String", null, UIStyle.INPUT_ATTACHMENT),
+	DATE("date", "Date", null, UIStyle.INPUT_DATE),
+	DATE_TIME("datetime", "DateTime", null, UIStyle.INPUT_DATETIME),
+	TIME("time", "Date", null, UIStyle.INPUT_TEXT),
+	INTEGER("integer", "Integer", "[-99999999,99999999]", UIStyle.INPUT_INTEGER),
+	DECIMAL("decimal", "BigDecimal", "[-99999999.9999,99999999.9999]", UIStyle.INPUT_DECIMAL),
+	MONEY("money", "BigDecimal", "[-99999999.9999,99999999.9999]", UIStyle.INPUT_MONEY),
+	ARTICLE("article", "String", null, UIStyle.INPUT_RICHTEXT),
+	BASE_ENTITY("baseEntity", "BaseEntity", null, UIStyle.INPUT_SINGLE_SELECT),
+	MOBILE("mobile", "String", "[11,11]", UIStyle.INPUT_TEXT);
 	
 	protected String systemTypeName;
 	protected String javaTypeName;
+	protected String defaultRangeExpression;
+	protected UIStyle defaultUiStyle;
 	
-	private FieldType(String systemTypeName, String javaTypeName) {
+	private FieldType(String systemTypeName, String javaTypeName, String rangeExpression, UIStyle uiStyle) {
 		this.setSystemTypeName(systemTypeName);
 		this.setJavaTypeName(javaTypeName);
+		this.defaultRangeExpression = rangeExpression;
+		this.defaultUiStyle = uiStyle;
 	}
 
 	public String getSystemTypeName() {
@@ -41,6 +45,13 @@ public enum FieldType {
 
 	public void setJavaTypeName(String javaTypeName) {
 		this.javaTypeName = javaTypeName;
+	}
+
+	public String[] getDefaultRange() {
+		if (defaultRangeExpression == null){
+			return null;
+		}
+		return defaultRangeExpression.substring(1, defaultRangeExpression.length()-1).split("\\s*,\\s*");
 	}
 
 	public boolean isEquals(Object another) {
@@ -60,6 +71,8 @@ public enum FieldType {
 		}
 		return null;
 	}
-	
-	
+
+	public UIStyle getDefaultUiStyle() {
+		return defaultUiStyle;
+	}
 }

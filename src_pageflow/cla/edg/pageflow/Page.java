@@ -14,6 +14,7 @@ public class Page extends BasePageFlowElement {
 	protected String renderClassName;
 	protected Map<String, String> additionalField;
 	protected PageBuilder pageBuilder;
+	protected String pageTemplateType = "others";
 	
 	
 	public Map<String, String> getAdditionalField() {
@@ -57,6 +58,7 @@ public class Page extends BasePageFlowElement {
 
 	public void setListOfTemplate(String listOfTemplate) {
 		this.listOfTemplate = listOfTemplate;
+		this.setPageTemplateType("list-of");
 	}
 
 	public List<String> getPossibleRequests() {
@@ -91,5 +93,13 @@ public class Page extends BasePageFlowElement {
 
 	public void setPageBuilder(PageBuilder pageBuilder) {
 		this.pageBuilder = pageBuilder;
+	}
+
+	public String getPageTemplateType() {
+		return pageTemplateType;
+	}
+
+	public void setPageTemplateType(String pageTemplateType) {
+		this.pageTemplateType = pageTemplateType;
 	}
 }

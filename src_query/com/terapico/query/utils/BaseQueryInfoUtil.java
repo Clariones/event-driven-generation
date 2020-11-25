@@ -3,6 +3,7 @@ package com.terapico.query.utils;
 import cla.edg.modelbean.BaseAttribute;
 import cla.edg.modelbean.BaseModelBean;
 import cla.edg.modelbean.LogicalOperator;
+import clariones.tool.builder.Utils;
 
 import java.util.LinkedList;
 
@@ -134,6 +135,10 @@ public class BaseQueryInfoUtil {
 
     public void setTopNExpression(String topNExpression) {
         this.topNExpression = topNExpression;
+    }
+
+    public String getTopN(){
+        return Utils.asELVariable(getTopNExpression());
     }
 
     protected boolean needOrderBy() {

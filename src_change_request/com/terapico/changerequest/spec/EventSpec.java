@@ -20,6 +20,9 @@ public class EventSpec extends CommonSpec<EventSpec>{
 		this.type = type;
 	}
 	public List<FieldSpec> getFieldSpecs() {
+		if (fieldSpecs == null){
+			fieldSpecs = new ArrayList<>();
+		}
 		return fieldSpecs;
 	}
 	public void setFieldSpecs(List<FieldSpec> fieldSpecs) {

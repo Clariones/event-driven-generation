@@ -136,7 +136,7 @@
         addParam(params,limit);
     </#if>
     <#if query.queryInfo.topNExpression?has_content>
-        addParam(params,${query.queryInfo.topNExpression});
+        addParam(params,${query.queryInfo.topN});
     </#if>
         return sql;
 </#macro>

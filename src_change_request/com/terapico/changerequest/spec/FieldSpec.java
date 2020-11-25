@@ -20,8 +20,10 @@ public class FieldSpec extends CommonSpec<FieldSpec> implements Cloneable{
 	protected String placeholder;
 	protected String tipsTitle;
 	protected String tipsContext;
+
 	protected Boolean selectable; // radio, option, check-box
 	protected Boolean multiSelection;	// option, check-box
+
 	protected Map<String, Serializable> valuesMapping;
 	protected String dataRetrieveApiUrl;
 	protected String sampleData;

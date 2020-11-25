@@ -32,7 +32,7 @@ public class ChangeRequestSpecBuilder extends ChangeRequestSpecBaseBuilder<Chang
 	}
 
 	public ChangeRequestSpecBuilder has_field(String fieldName) {
-		return for_field(fieldName);
+		return for_field(fieldName, true);
 	}
 	public ChangeRequestSpecBuilder which_model_of(BaseModelBean bean) {
 		return which_model_of(bean.getModelTypeName());
@@ -53,7 +53,9 @@ public class ChangeRequestSpecBuilder extends ChangeRequestSpecBaseBuilder<Chang
 	public ChangeRequestSpecBuilder unhidden() {
 		return interaction_mode("input");
 	}
-
+	public ChangeRequestSpecBuilder normal_input() {
+		return interaction_mode("input");
+	}
 
 	public ChangeRequestSpecBuilder must_one() {
 		return is_required(true).only_one();
@@ -97,6 +99,7 @@ public class ChangeRequestSpecBuilder extends ChangeRequestSpecBaseBuilder<Chang
 		return this.or_another_value(key, value, false);
 	}
 	public ChangeRequestSpecBuilder values_canbe(boolean key, Serializable value) {
+		service.setFieldInputType($CR(),$STEP(),$EVENT(),$FIELD(), FieldType.BOOLEAN);
 		return has_values(key?"true":"false", value, true);
 	}
 	public ChangeRequestSpecBuilder and(boolean key, Serializable value) {
@@ -107,10 +110,10 @@ public class ChangeRequestSpecBuilder extends ChangeRequestSpecBaseBuilder<Chang
 	}
 
 	public ChangeRequestSpecBuilder values_can_check_from_query_by(String relatedFieldName) {
-		return this.values_can_get_from("query(" + (relatedFieldName==null?"NA":relatedFieldName) +")").do_multiple_select();
+		return this.values_can_get_from("Query(" + (relatedFieldName==null?"NA":relatedFieldName) +")").do_multiple_select();
 	}
 	public ChangeRequestSpecBuilder values_can_select_from_query_by(String relatedFieldName) {
-		return this.values_can_get_from("query(" + (relatedFieldName==null?"NA":relatedFieldName) +")");
+		return this.values_can_get_from("Query(" + (relatedFieldName==null?"NA":relatedFieldName) +")");
 	}
 
 	public ChangeRequestSpecBuilder import_from(ChangeRequestSpecFactory factory) {

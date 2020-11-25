@@ -661,7 +661,15 @@ public class PageFlowScript extends BasePageFlowScript {
 
 
     public PageFlowScript detail_of(String name) {
-		return this;
+		if (this.currentWork instanceof Page) {
+			this.currentPage.setPageTemplateType("detail");
+			if (Utils.isBlank(name)){
+				this.currentPage.setRenderClassName(name);
+			}
+			return this;
+		} else {
+			throw new RuntimeException("当前任务是" + this.currentWork.getClass().getSimpleName() + ", 不能增加页面请求");
+		}
     }
 
 	public PageFlowScript load_page_flow_from(File baseFolder, String fileName) {

@@ -96,6 +96,8 @@ public class DCJsonLoader {
         // 校验必须有name的几种情况
         switch (linkType){
             case CONST.LINK_TYPE.REQUEST:
+            case CONST.LINK_TYPE.FORM_RESPONSE_BRANCH:
+            case CONST.LINK_TYPE.FORM_START_FROM_BRANCH:
             case CONST.LINK_TYPE.RESPONSE_BRANCH:{
                 if (Utils.isBlank(rst.getName())){
                     Utils.error("链接%s:%s(%s->%s)必须设置name", id, title, fromNode.getTitle(), toNode.getTitle());

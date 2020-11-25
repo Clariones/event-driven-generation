@@ -287,7 +287,7 @@ public class GenerationHelper extends BaseGeneratorHelper {
 		String modelName = afePieces[0];
 		String param = afePieces[1];
 		String member = afePieces[2];
-		sb.append("userContext.get").append(NameAsThis(param)).append("() == null ? defaultValue : ");
+		sb.append("TextUtil.isBlank(userContext.get").append(NameAsThis(param)).append("()) ? defaultValue : ");
 		sb.append("((").append(NameAsThis(modelName)).append(")(")
 				.append(NameAsThis(projectName)).append("BaseUtils.loadBaseEntityById(userContext, ")
 				.append(NameAsThis(modelName)).append(".INTERNAL_TYPE, userContext.get")

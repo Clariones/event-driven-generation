@@ -119,6 +119,9 @@ public class SelectClauseUtil {
             return selectClause.append("from ").toString();
         }
         for (BaseAttribute orderByAttribute : queryInfo.getOrderByAttributes()) {
+            if (orderByAttribute instanceof ExpressionAttr){
+                continue;
+            }
             String name = QueryInfoUtil.getLeafAttrName(orderByAttribute);
             if (name.startsWith(targetAlias)){
                 continue;

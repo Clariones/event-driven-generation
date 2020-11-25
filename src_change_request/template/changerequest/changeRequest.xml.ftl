@@ -19,6 +19,7 @@
 	    name="名称:注册|开始考试|答题|[1,50]"
 	    create_time="创建时间:createTime()"
 	    remote_ip="remoteIp()"
+	    city_by_ip="访问地址:四川省成都市|新疆维吾尔自治区阿卡大礼县?"
 	    request_type="类型:$(change_request_type)"
 	    commited="已提交:false"
 	    platform="$(platform)"

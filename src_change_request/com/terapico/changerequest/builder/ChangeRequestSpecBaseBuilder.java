@@ -238,7 +238,7 @@ public class ChangeRequestSpecBaseBuilder<T extends ChangeRequestSpecBaseBuilder
 		return me;
 	}
 
-	public T for_field(String fieldName) {
+	public T for_field(String fieldName, boolean mustBeNew) {
 		verifyFieldName(fieldName);
 		// 现在开始建立 field.
 		// 如果 现在还在建立 changRequest, 那么自动建立 step 和 event
@@ -261,6 +261,9 @@ public class ChangeRequestSpecBaseBuilder<T extends ChangeRequestSpecBaseBuilder
 		}
 		if (service.checkFieldExists($CR(),$STEP(),$EVENT(),fieldName)) {
 			// 找到就算了
+			if (mustBeNew){
+				error("字段"+fieldName+"已经存在");
+			}
 		}else if (service.checkFieldExistsInPrototype($CR(),$STEP(),$EVENT(),fieldName)) {
 			// 原来不存在,但是prototype里存在,那就clone一份
 			service.cloneFieldFromPrototype($CR(),$STEP(),$EVENT(),fieldName);

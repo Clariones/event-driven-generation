@@ -3,7 +3,9 @@ package com.terapico.changerequest.builder;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import clariones.tool.builder.Utils;
@@ -27,7 +29,9 @@ public class ChangeRequestSpecBuildingServiceLocalImpl extends CRSBuildingServic
 //		System.out.println(Utils.toJson(root(), true));
 //		System.exit(0);
 		makeChangeRequestShortName();
-		
+
+
+
 		root().getChangeRequestSpecs().forEach((cName, cr)->{
 			cr.getStepSpecs().forEach(step->{
 				step.getEventSpecs().forEach(event->{
@@ -35,7 +39,15 @@ public class ChangeRequestSpecBuildingServiceLocalImpl extends CRSBuildingServic
 				});
 			});
 		});
-		
+
+//		root().getChangeRequestSpecs().forEach((cName, cr)->{
+//			cr.getStepSpecs().forEach(step->{
+//				step.getEventSpecs().forEach(event->{
+//					event.getFieldSpecs().forEach(field->inferFieldProperties(field));
+//				});
+//			});
+//		});
+
 		Map<String, Object> allEventSpec = new HashMap<String, Object>();
 		root().getAllEventSpecs().forEach((name,spec)->{
 			allEventSpec.put(name, this.makeEventOutput(null, null, spec));
@@ -49,6 +61,10 @@ public class ChangeRequestSpecBuildingServiceLocalImpl extends CRSBuildingServic
 		result.put("assist", assistInfo);
 
 		return result;
+	}
+
+	private void inferFieldProperties(FieldSpec field) {
+		new FieldPropertyAnalyzer().process(field);
 	}
 
 	protected void makeChangeRequestShortName() {
@@ -327,7 +343,13 @@ public class ChangeRequestSpecBuildingServiceLocalImpl extends CRSBuildingServic
 	@Override
 	public void setFieldValuesRetrieveApi(String crName, String stepName, String eventName, String fieldName,
 			String apiUrl) {
-		apiUrl = Utils.toCamelCase(apiUrl).replaceAll("\\$\\{(.+)\\}", ":$1");
+		apiUrl = apiUrl.replaceAll("\\$\\{(.+)\\}", ":$1");
+		List<String> segs = Utils.findAllMatched(apiUrl, Pattern.compile(":[^,/)]+"));
+		if (segs.size() > 0){
+			for (String seg : segs) {
+				apiUrl = apiUrl.replace(seg, ":"+Utils.nameAsThis(seg.substring(1)));
+			}
+		}
 		sureField(crName, stepName, eventName, fieldName).setDataRetrieveApiUrl(apiUrl);
 		prototypeField(crName, stepName, eventName, fieldName).setDataRetrieveApiUrlIfNeed(apiUrl);
 	}

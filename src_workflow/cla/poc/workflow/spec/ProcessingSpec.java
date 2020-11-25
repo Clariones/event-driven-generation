@@ -1,7 +1,5 @@
 package cla.poc.workflow.spec;
 
-import cla.edg.project.repairchain.Main;
-
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;

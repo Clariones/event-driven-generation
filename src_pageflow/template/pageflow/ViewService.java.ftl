@@ -72,7 +72,7 @@ public abstract class ${class_name}ViewService extends Base${class_name}ViewServ
 		ctx.set${NAMING.toCamelCase(param.paramName)}(${NAMING.toCamelCase(param.paramName)?uncap_first});
 		</#list>
 	</#if>
-		commonLog(ctx, "${T.getRequestProcessingMethodName(request)}", "${request.comments!}", ctx.getRemoteIP(), ctx.tokenId(), makeUrlF("", false<@T.getRequestProcessingUrlMethodParametersWithoutType request/>), null);
+		commonLog(ctx, "${T.getRequestProcessingMethodName(request)}", "${request.comments!}", ctx.getRemoteIP(), ctx.tokenId(), makeUrlF("${T.getRequestProcessingMethodName(request)}", false<@T.getRequestProcessingUrlMethodParametersWithoutType request/>), null);
 	<@requestProcessAndReturn request>
 	</@>
 	}

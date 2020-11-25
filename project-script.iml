@@ -26,7 +26,8 @@
       <sourceFolder url="file://$MODULE_DIR$/src_core_v2" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src_view_component" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/project_saleschain" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/projects/project_repairchain" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/projects/project_xuntuexam" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/projects/project_repairchain/resource" />
     </content>
     <orderEntry type="jdk" jdkName="1.8" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />

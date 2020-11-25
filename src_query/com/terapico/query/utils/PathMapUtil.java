@@ -43,16 +43,23 @@ public class PathMapUtil {
             if (o instanceof BaseModelBean){
                 BaseModelBean mbean = (BaseModelBean)o;
                 getAliasNameByMergeIntoPathMap(resultMap, mbean, beRelated);
-                for (BeanPathNode beanPathNode : mbean.getBeanPath().getNodeList()) {
-                    attrRelatedConnectors.add(beanPathNode.getAliasName());
+                // 记住它们免得后面优化的时候被踢掉了
+                for (int i = 0; i < mbean.getBeanPath().getNodeList().size(); i++) {
+                    BeanPathNode beanPathNode = mbean.getBeanPath().getNodeList().get(i);
+                    if (i < mbean.getBeanPath().getNodeList().size()-1) {
+                        attrRelatedConnectors.add(beanPathNode.getAliasName());
+                    }
                 }
                 continue;
             }
             if (o instanceof BaseAttribute){
                 BaseAttribute attr = (BaseAttribute) o;
                 getAliasNameByMergeIntoPathMap(resultMap, attr.getContainerBean(), beRelated);
-                for (BeanPathNode beanPathNode : attr.getContainerBean().getBeanPath().getNodeList()) {
-                    attrRelatedConnectors.add(beanPathNode.getAliasName());
+                for (int i = 0; i < attr.getContainerBean().getBeanPath().getNodeList().size(); i++) {
+                    BeanPathNode beanPathNode = attr.getContainerBean().getBeanPath().getNodeList().get(i);
+                    if (i < attr.getContainerBean().getBeanPath().getNodeList().size()-1) {
+                        attrRelatedConnectors.add(beanPathNode.getAliasName());
+                    }
                 }
                 continue;
             }

@@ -11,12 +11,8 @@ import com.${orgName?lower_case}.${projectName?lower_case}.changerequest.ChangeR
 import com.${orgName?lower_case}.${projectName?lower_case}.changerequest.ChangeRequestTokens;
 import com.${orgName?lower_case}.${projectName?lower_case}.eventinfoincr.EventInfoInCr;
 import com.${orgName?lower_case}.${projectName?lower_case}.eventinfoincr.EventInfoInCrTable;
-import com.terapico.caf.appview.CRFieldData;
-import com.terapico.caf.appview.CRGroupData;
-import com.terapico.caf.appview.CRSceneData;
-import com.terapico.caf.viewcomponent.GenericFormPage;
-import com.terapico.caf.appview.ChangeRequestPostData;
-import com.terapico.caf.appview.ChangeRequestProcessResult;
+import com.terapico.caf.appview.*;
+import com.terapico.caf.viewcomponent.*;
 import com.terapico.changerequest.*;
 
 import com.terapico.utils.DebugUtil;
@@ -299,7 +295,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 			return cr;
 		}
 		ChangeRequest newCr = getUserContext().getManagerGroup().getChangeRequestManager()
-				.createChangeRequest(userContext, crSpec.getTitle(), crSpec.getChangeRequestType(), false, "P000001");
+				.createChangeRequest(userContext, crSpec.getTitle(), userContext.getCityByIp(), crSpec.getChangeRequestType(), false, "P000001");
 		// 这个会导致 changeRequestManager 的 onNewInstanceCreated, 注意这个扩展点
 		return newCr;
 	}
@@ -423,7 +419,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
                     Object suggestedDefaultValue = calcSuggestedDefaultValue(groupName, fieldSpec, postValue);
                     fieldData.setValue(TO_VALUE(getFieldValueWhenFillResponse(suggestedDefaultValue,requestData, dbCrData, groupData, fieldSpec),fieldSpec));
                 }else if (fieldSpec.getInteractionMode().equals("display")) {
-				    Object suggestedDefaultValue = calcSuggestedDefaultValue(groupName, fieldSpec, fieldSpec.getValue());
+				    Object suggestedDefaultValue = calcSuggestedDefaultValue(groupName, fieldSpec, fieldSpec.getValue()==null?fieldSpec.getDefaultValue():fieldSpec.getValue());
 					fieldData.setValue(TO_VALUE(getFieldValueWhenFillResponse(suggestedDefaultValue,requestData, dbCrData, groupData, fieldSpec),fieldSpec));
 				}else {
 					String memberName = FIELD_NAME(fieldSpec);
@@ -888,7 +884,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 		           <#assign field_name_const = "CR."+helper.JAVA_CONST(crSpec.changeRequestType)+".FIELD_"+helper.NAME_AS_THIS(field.name)+"_IN_"+helper.JAVA_CONST(group.name)+"_OF_"+helper.JAVA_CONST(scene.name)/>
 		        <#if helper.canFillFromRequest(field)>
 		case ${field_name_const}:
-		    if (userContext.get${helper.NameAsThis(field.autoFillExpression?substring(10))}() == null) {
+		    if (TextUtil.isBlank(userContext.get${helper.NameAsThis(field.autoFillExpression?substring(10))}())) {
 		        return defaultValue;
 		    }
 		    return userContext.get${helper.NameAsThis(field.autoFillExpression?substring(10))}();
@@ -935,6 +931,11 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 
         fieldData.setRequired(fieldSpec.getRequired());
         fieldData.setDisabled(!fieldSpec.getInteractionMode().equals("input"));
+        // fieldData.setCandidateValuesApi(formatApiUrl(fieldSpec.getValuesRetrieveApi()));
+        fieldData.setMinimum(fieldSpec.getMinimum());
+        fieldData.setMaximum(fieldSpec.getMaximum());
+        fieldData.setRules(getFiledRules(fieldSpec));
+        fieldData.setLinkToUrl(formatApiUrl(fieldSpec.getValuesRetrieveApi()));
         if (fieldData.isDisabled()) {
             fieldData.setRequired(false);
         }
@@ -948,7 +949,8 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
             fieldData.setHidden(true);
             fieldData.setType("hidden");
         } else {
-            if (!isFieldNeedQueryForCandidates(fieldSpec)) {
+            String queryCandidateWay = getFieldNeedQueryForCandidates(fieldSpec);
+            if (queryCandidateWay == null) {
               if (fieldSpec.getUiStyle().equals("text")
                   && DataTypeUtil.getInt(fieldSpec.getMaximum(), 40) > 100) {
                 fieldData.setType("textarea");
@@ -960,9 +962,31 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
               }
             } else {
               if (CRFieldSpec.MULTI_SELECTABLE.equals(fieldSpec.getSelectable())) {
-                fieldData.setType("multi-select");
+                if (queryCandidateWay.equals("picker")) {
+                    fieldData.setType("object-picker");
+                    fieldData.setMaxSelectCount(DataTypeUtil.getInt(fieldSpec.getMaximum(), 10));
+                    String url = fillRequestParameters(crContext, fieldSpec, groupData, fieldData);
+                    fieldData.setSearchAction(new VComponentAction().code("search")
+                            .title(fieldSpec.getTipsContent()==null?"搜索":fieldSpec.getTipsContent())
+                            .linkToUrl(url)
+                    );
+                    fieldData.setLinkToUrl(url.replace(":keyword","+"));
+                }else{
+                    fieldData.setType("multi-select");
+                }
               } else {
-                fieldData.setType("single-select");
+                  if (queryCandidateWay.equals("picker")) {
+                      fieldData.setType("object-picker");
+                      fieldData.setMaxSelectCount(1);
+                      String url = fillRequestParameters(crContext, fieldSpec, groupData, fieldData);
+                      fieldData.setSearchAction(new VComponentAction().code("search")
+                              .title(fieldSpec.getTipsContent()==null?"搜索":fieldSpec.getTipsContent())
+                              .linkToUrl(url)
+                      );
+                      fieldData.setLinkToUrl(url.replace(":keyword","+"));
+                  }else{
+                      fieldData.setType("single-select");
+                  }
               }
             }
         }
@@ -977,11 +1001,6 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
         fieldData.setIcon(fieldSpec.getIcon());
 
         fieldData.setMultiple(CRFieldSpec.MULTI_SELECTABLE.equals(fieldSpec.getSelectable()));
-        fieldData.setCandidateValuesApi(fieldSpec.getValuesRetrieveApi());
-        fieldData.setMinimum(fieldSpec.getMinimum());
-        fieldData.setMaximum(fieldSpec.getMaximum());
-        fieldData.setRules(getFiledRules(fieldSpec));
-        fieldData.setLinkToUrl(fieldSpec.getValuesRetrieveApi());
 
         //	所有数据填充完毕后的一些处理
         updateFieldCandidateValueSelected(fieldData, fieldSpec);

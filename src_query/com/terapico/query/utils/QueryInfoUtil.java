@@ -31,6 +31,9 @@ public class QueryInfoUtil extends BaseQueryInfoUtil {
         targetAlias = PathMapUtil.mergeIntoPathMap(pathMap, this.getTargetModelTypeName(), this.getQueryName());
         if (this.getOrderByAttributes() != null){
             for (BaseAttribute attr : getOrderByAttributes()) {
+                if (attr instanceof ExpressionAttr){
+                    continue;
+                }
                 PathMapUtil.mergeIntoPathMap(pathMap, attr, arc);
             }
         }
@@ -291,6 +294,9 @@ public class QueryInfoUtil extends BaseQueryInfoUtil {
         addToNameSet(nameSet, this.getSumByAttr());
         if (this.getOrderByAttributes() != null){
             for (BaseAttribute orderByAttribute : getOrderByAttributes()) {
+                if (orderByAttribute instanceof ExpressionAttr){
+                    continue; // 跳过 ExpressionAttr
+                }
                 addToNameSet(nameSet, orderByAttribute);
             }
         }
