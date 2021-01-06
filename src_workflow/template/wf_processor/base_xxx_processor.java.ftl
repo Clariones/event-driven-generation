@@ -88,6 +88,7 @@ public abstract class Base${helper.NameAsThis(spec.name)}Processor extends BaseP
                 e==null?resultCode:e.getMessage());
         if (e != null){
             e.printStackTrace();
+            throw new RuntimeException(e.getMessage(), e);
         }
     }
 

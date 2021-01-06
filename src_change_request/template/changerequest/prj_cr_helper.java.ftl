@@ -66,9 +66,14 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 	public void setUserContext(Custom${projectName?cap_first}UserContextImpl userContext) {
 		this.userContext = userContext;
 	}
-	protected void loadCrSpec() throws Exception {
-		loadCrSpecFromJar("/META-INF/${projectName?lower_case}_cr_spec.json");
-	}
+	protected void loadCrSpec() {
+        try {
+            loadCrSpecFromJar("/META-INF/${projectName?lower_case}_cr_spec.json");
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
 
 	protected Object toEventTableName(CRGroupSpec groupSpec) {
 		return "event_" + (groupSpec.getModelName().trim().replace(' ', '_').toLowerCase())+"_data";
@@ -883,23 +888,23 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 		    <#list group.fieldList as field>
 		           <#assign field_name_const = "CR."+helper.JAVA_CONST(crSpec.changeRequestType)+".FIELD_"+helper.NAME_AS_THIS(field.name)+"_IN_"+helper.JAVA_CONST(group.name)+"_OF_"+helper.JAVA_CONST(scene.name)/>
 		        <#if helper.canFillFromRequest(field)>
-		case ${field_name_const}:
+		case ${field_name_const}: // from request
 		    if (TextUtil.isBlank(userContext.get${helper.NameAsThis(field.autoFillExpression?substring(10))}())) {
 		        return defaultValue;
 		    }
 		    return userContext.get${helper.NameAsThis(field.autoFillExpression?substring(10))}();
 		        </#if>
 		        <#if helper.canFillFromRequestObject(field)>
-        case ${field_name_const}:
+        case ${field_name_const}:   // from request object
             return ${helper.getFillFromRequestCode(projectName, field)};
                 </#if>
 		        <#if helper.canFillFromSubmitted(field)>
-		case ${field_name_const}: {
+		case ${field_name_const}: { // from submitted
             ${helper.getFillFromSubmittedCode(projectName, field)}
         }
                  </#if>
                  <#if helper.canFillFromSubmittedMember(field)>
-        case ${field_name_const}: {
+        case ${field_name_const}: { // from submitted member
             ${helper.getFillFromSubmittedMemberCode(projectName, field)}
         }
                   </#if>
@@ -935,6 +940,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
         fieldData.setMinimum(fieldSpec.getMinimum());
         fieldData.setMaximum(fieldSpec.getMaximum());
         fieldData.setRules(getFiledRules(fieldSpec));
+        fieldData.setInline(fieldSpec.isInline());
         fieldData.setLinkToUrl(formatApiUrl(fieldSpec.getValuesRetrieveApi()));
         if (fieldData.isDisabled()) {
             fieldData.setRequired(false);
@@ -942,6 +948,19 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
         if (fieldSpec.getOnChange() != null) {
             fieldData.setOnChangeLinkToUrl(makeFieldChangeUrl(crContext, processUrl, fieldData.getName()));
         }
+
+        fieldData.setType(fieldSpec.getUiStyle());
+        fieldData.setRequired(fieldSpec.getRequired());
+        fieldData.setHidden(fieldSpec.getUiStyle().equals("hidden"));
+        String url = fillRequestParameters(crContext, fieldSpec, groupData, fieldData);
+        if (!TextUtil.isBlank(url)){
+            fieldData.setSearchAction(new VComponentAction().code("search")
+                    .title(fieldSpec.getTipsContent()==null?"搜索":fieldSpec.getTipsContent())
+                    .linkToUrl(url)
+            );
+            fieldData.setLinkToUrl(url.replace(":keyword","+"));
+        }
+        /*
         if (fieldSpec.getInteractionMode().equals("display")) {
             fieldData.setType("prompt-message");
             fieldData.setRequired(false);
@@ -990,6 +1009,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
               }
             }
         }
+        */
 
         fieldData.setCandidateValues(
                 convertToUiCandidateValues(fieldSpec,

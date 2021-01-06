@@ -118,7 +118,15 @@ public abstract class Base${class_name}ViewService extends ${parent_class_name} 
 			e.printStackTrace();
 		}
 	}
-	
+	protected Map<String, Object> requestDetail(${custom_context_name} ctx){
+        byte[] body = ctx.getRequestBody();
+        return MapUtil.put("params",ctx.getRequestParameters())
+                .putIf(body != null && body.length < 4000,
+                        "body",
+                        orElse(()->new String(body), "byte["+body.length+"]"))
+                .putIf(body != null && body.length >= 4000, "body", "byte["+body.length+"]")
+                .into_map();
+    }
 	@Override
 	public void onAccess(BaseUserContext baseUserContext, String methodName, Object[] parameters) {
 		super.onAccess(baseUserContext, methodName, parameters);

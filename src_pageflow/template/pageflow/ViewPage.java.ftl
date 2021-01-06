@@ -5,7 +5,6 @@ import com.terapico.caf.viewpage.SerializeScope;
 import ${package}.CustomBaseViewPage;
 import ${base_package}.${context_name};
 import ${base_package}.${custom_context_name};
-import ${base_package}.${NAMING.toCamelCase(project_name)}ViewScope;
 
 public class ${class_name}Page extends <@compress single-line=true>
     <#if page.listOfTemplate?has_content>BaseListOfViewPage

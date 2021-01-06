@@ -10,11 +10,11 @@ public abstract class BaseListOfViewPage extends CustomBaseViewPage{
         forceResponseAsListOfPage();
     }
 
-    protected void makeTab(String code, String title, boolean isEnterPage, String activeTabCode, String nextPageUrl, Runnable tabContentMaker) {
+    protected void makeTab(String code, String title, boolean isEnterPage, String activeTabCode, String linkToUrl, Runnable tabContentMaker) {
        ${custom_context_name} ctx = (${custom_context_name}) userContext;
         boolean active = code.equals(activeTabCode);
         if (isEnterPage) {
-            addTab(code, title, nextPageUrl, active);
+            addTab(code, title, linkToUrl, active);
         }
         if (active) {
             tabContentMaker.run();

@@ -1,6 +1,9 @@
 package com.terapico.changerequest.builder;
 
 public enum UIStyle {
+
+	INPUT_PROMPT("prompt-message", FieldType.TEXT,"[0,200]"),
+	INPUT_HIDDEN("hidden", FieldType.TEXT,"[0,200]"),
 	INPUT_TEXT("text", FieldType.TEXT,"[1,30]"),
 	INPUT_VERIFY_CODE("vcode", FieldType.TEXT, "[1,18]"),
 	INPUT_CODE_SCAN("qr-scan", FieldType.TEXT,"[1,512]"),

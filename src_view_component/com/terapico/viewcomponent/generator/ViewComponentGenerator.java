@@ -13,11 +13,14 @@ import com.terapico.viewcomponent.spec.ComponentInfo;
 
 public class ViewComponentGenerator extends BaseGenerator {
 
+	protected static String FILE_NAME_PREFIX;
+	protected static String PACKAGE_NAME;
+
 	public List<GenrationResult> runJob() throws Exception {
 		List<GenrationResult> resultList = new ArrayList<>();
 		resultList.addAll(generateComponentFile());
-		resultList.add(generateBuilderFile());
-		resultList.add(generateInterfaceFile());
+//		resultList.add(generateBuilderFile());
+//		resultList.add(generateInterfaceFile());
 		return resultList;
 	}
 	
@@ -48,9 +51,10 @@ public class ViewComponentGenerator extends BaseGenerator {
 		for (ComponentInfo info : components.values()) {
 
 			Map<String, Object> data = Utils.put("allSpec", components).put("component", info)
+					.put("packageName", PACKAGE_NAME)
 					.put("helper", new VCGenerationHelper()).into_map();
 			String fileName = this.toFileName(data,
-					"caf_custom_src/com/terapico/caf/viewcomponent/VComponent${helper.NameAsThis(component.name)}.java");
+					FILE_NAME_PREFIX+"/VComponent${helper.NameAsThis(component.name)}.java");
 			GenrationResult gr = doGeneration(data, templatePath, fileName).as_new_file().with_code("component");
 			resultList.add(gr);
 		}
@@ -59,10 +63,14 @@ public class ViewComponentGenerator extends BaseGenerator {
 	}
 
 	public static void main(String[] args) throws Exception {
+		String tgtFolder = "/works/jobs/xt20_v1/workspace/xt20-biz-suite/bizcore/WEB-INF/xt20_client_src/com/doublechaintech/xt20/viewcomponent";
+		FILE_NAME_PREFIX = "";
+		PACKAGE_NAME = "com.doublechaintech.xt20.viewcomponent";
+
 		ViewComponentGenerator generator = new ViewComponentGenerator();
 		List<GenrationResult> results = generator.runJob();
 
-		String tgtFolder = "/works/jobs/yrzx_v3/workspace/yrzx-biz-suite/bizcore/WEB-INF";
+
 		generator.saveToFiles(new File(tgtFolder), results);
 	}
 }

@@ -94,8 +94,22 @@ public class SqlOperatorUtil {
             return null;
         }
         String op =  getSqlSymbolOfOperator(logicalOperator.getOperator());
-        String paramExp = Utils.makeSqlParamPlaceholder(operands.size()-1) ;
+        String paramExp = Utils.makeSqlParamPlaceholder(operands.size()-1);
+
+        // 临时加的, 如果是 in 一个外部变量, 要根据它的类型来添加占位符
+        if (isInInputParam(logicalOperator)) {
+            paramExp = "\" + numberOf(" + Utils.asELVariable((String) logicalOperator.getOperandList().get(1)) +") + \"";
+        }
+
         return makeOperand(logicalOperator.getOperandList().get(0)) + " " + op +" (" +paramExp+")";
+    }
+
+    private static boolean isInInputParam(LogicalOperator logicalOperator) {
+        if (logicalOperator.getOperandList().size() != 2) {
+            return false;
+        }
+        Matcher m = ptnVariable.matcher(logicalOperator.getOperandList().get(1).toString());
+        return m.matches();
     }
 
     private static OperatorInfo $(String op, Function<LogicalOperator, String> operandsMaker) {

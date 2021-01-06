@@ -54,6 +54,7 @@ public class ChangeRequestSpecBuildingServiceLocalImpl extends CRSBuildingServic
 		});
 		
 		Map<String, Map<String, Object>> result = new HashMap<>();
+		// 生成CR SPEC 在这里
 		result.put("projectSpec", makeOutput());
 		result.put("allEventSpec", allEventSpec);
 		Map<String, Object> assistInfo = new HashMap<>();
@@ -323,6 +324,11 @@ public class ChangeRequestSpecBuildingServiceLocalImpl extends CRSBuildingServic
 									String autoFillExpression) {
 		sureField(crName, stepName, eventName, fieldName).setAutoFillExpression(autoFillExpression);
 		prototypeField(crName, stepName, eventName, fieldName).setAutoFillExpressionIfNeed(autoFillExpression);
+	}
+
+	@Override
+	public void setFieldInline(String crName, String stepName, String eventName, String fieldName, boolean inline) {
+		sureField(crName, stepName, eventName, fieldName).setInline(inline);
 	}
 
 	@Override

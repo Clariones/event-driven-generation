@@ -1,8 +1,7 @@
-package com.terapico.caf.viewcomponent;
+package ${packageName!'com.terapico.caf.viewcomponent'};
 
-import java.util.Date;
-import java.util.ArrayList;
-import java.util.List;
+import com.terapico.caf.viewcomponent.*;
+import java.util.*;
 
 public class VComponent${helper.NameAsThis(component.name)} extends BaseVC{
 <#list component.attributes as attribute>
@@ -13,7 +12,7 @@ public class VComponent${helper.NameAsThis(component.name)} extends BaseVC{
 	
 	public VComponent${helper.NameAsThis(component.name)}() {
 		super();
-		this.setComponentType(VComponent.${helper.NAME_AS_THIS(component.name)});
+		this.setComponentType("${helper.NameAsThis(component.name)}");
 	}
 	public VComponent${helper.NameAsThis(component.name)} id(String id) {
         this.setId(id);

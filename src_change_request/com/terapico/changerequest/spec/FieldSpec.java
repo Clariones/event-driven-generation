@@ -31,6 +31,7 @@ public class FieldSpec extends CommonSpec<FieldSpec> implements Cloneable{
 	protected UIStyle uiStyle;
 	protected String regularExpression;
 	protected String onChangeApi;
+	protected boolean inline = true;
 
 	/**
 	 * 自动填充的表达式.<p/>
@@ -129,6 +130,14 @@ public class FieldSpec extends CommonSpec<FieldSpec> implements Cloneable{
 		this.modelName = modelName;
 	}
 
+	public boolean isInline() {
+		return inline;
+	}
+
+	public void setInline(boolean inline) {
+		this.inline = inline;
+	}
+
 	public String getOnChangeApi() {
 		return onChangeApi;
 	}
@@ -199,6 +208,7 @@ public class FieldSpec extends CommonSpec<FieldSpec> implements Cloneable{
 		newOne.sampleData = this.sampleData;
 		newOne.regularExpression = this.regularExpression;
 		newOne.uiStyle = this.uiStyle;
+		newOne.inline = this.inline;
 		return newOne;
 	}
 	
@@ -290,6 +300,7 @@ public class FieldSpec extends CommonSpec<FieldSpec> implements Cloneable{
 		if (this.getRegularExpression() == null) {
 			this.setRegularExpression(baseData.getRegularExpression());
 		}
+		// inline不merge;
 	}
 	
 	protected transient HashMap<String, String> setTags = new HashMap<>();

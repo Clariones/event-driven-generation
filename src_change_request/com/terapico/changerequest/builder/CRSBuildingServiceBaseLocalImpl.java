@@ -229,7 +229,6 @@ public abstract class CRSBuildingServiceBaseLocalImpl implements ChangeRequestSp
 		result.put(EVENT.SHOW_PREVIOUS, eventSpec.getShowPreviousCount());
 		result.put(EVENT.SHOW_NEXT, eventSpec.getShowNextCount());
 
-
 		if (eventSpec.getIsCollection()) {
 			if (eventSpec.getMinCollectionSize()==null) {
 				result.put(EVENT.MIN, eventSpec.getIsRequired()?1:0);
@@ -252,7 +251,9 @@ public abstract class CRSBuildingServiceBaseLocalImpl implements ChangeRequestSp
 		Map<String, Object> result = new HashMap<>();
 		result.put(FIELD.NAME, fieldSpec.getName());
 		result.put(FIELD.TITLE, fieldSpec.getTitle());
+		putIfNotNull(result, FIELD.UI_STYLE, calaFieldUiStyle(fieldSpec));
 		result.put(FIELD.INTER_ACTION_MODE,fieldSpec.getInteractionMode());
+		result.put(FIELD.INLINE,fieldSpec.isInline());
 		if (fieldSpec.getSelectable() == null || fieldSpec.getSelectable().booleanValue() ==  false) {
 			result.put(FIELD.SELECTABLE, FIELD.SELECTABLE_NOT);
 		}else if(fieldSpec.getMultiSelection() == null || fieldSpec.getMultiSelection().booleanValue() == false){
@@ -274,9 +275,12 @@ public abstract class CRSBuildingServiceBaseLocalImpl implements ChangeRequestSp
 		putIfNotNull(result, FIELD.VALUES, fieldSpec.getValuesMapping());
 		putIfNotNull(result, FIELD.VALUES_RETRIEVE_API, fieldSpec.getDataRetrieveApiUrl());
 		putIfNotNull(result, FIELD.SAMPLE_DATA,  calcSampleData(fieldSpec));//fieldSpec.getSampleData());
-		putIfNotNull(result, FIELD.UI_STYLE, calaFieldUiStyle(fieldSpec));
+
 		putIfNotNull(result, FIELD.REGULAR_EXPRESSION, calaFieldRegExp(fieldSpec));
 		if (fieldSpec.getRangeArgs() != null) {
+			if (fieldSpec.getRangeArgs().length < 2){
+				error(fieldSpec.getName()+" range should be (x,y), not (\"x,\"y)");
+			}
 			putIfNotNull(result, FIELD.MIN, fieldSpec.getRangeArgs()[0]);
 			putIfNotNull(result, FIELD.MAX, fieldSpec.getRangeArgs()[1]);
 		}
@@ -305,7 +309,7 @@ public abstract class CRSBuildingServiceBaseLocalImpl implements ChangeRequestSp
 					break;
 				}
 			}
-			fixFieldRangeIfNeeded(fieldSpec, fieldSpec.getIsRequired()?"1":null, "30");
+			fixFieldRangeIfNeeded(fieldSpec, fieldSpec.getIsRequired()?"1":"0", "60");
 			return String.format("%s|%s", fieldSpec.getName(), fieldSpec.getTitle());
 		}
 		case MULTI_TEXT:
@@ -386,16 +390,40 @@ public abstract class CRSBuildingServiceBaseLocalImpl implements ChangeRequestSp
 		return null;
 	}
 
+	/**
+	 * 计算字段的 UIStyle.
+	 *
+	 * UI style 对应最终在前台使用的 type 字段,基本原则是这样:
+	 * 1. 如果在脚本中定义了它的UI style, 那么就用这个, 否则按下面的规则处理:
+	 * 2. 如果 定义了 display(), 那么type=prompt-message, required=false,不入数据库
+	 * 3. 如果 定义了 hidden(), 那么type=hidden, required 不变, 以下都要入数据库
+	 * 4. 如果 查询定义为 Query(wxappService/xxxx ) 类似这样的 请求查询, type=object-picker, required 不涉及,
+	 * 5. 如果 查询定义为 Query(:xxx)这种根据变量来的, type就根据是否 multiple 来设置
+	 * 6. 如果 设置了 multi-select, type=multi-select
+	 * 7. 如果 设置了 single-select, type=single-select
+	 * 8. 剩下的, 就根据数据类型来:
+	 * @param fieldSpec
+	 * @return
+	 */
 	protected String calaFieldUiStyle(FieldSpec fieldSpec) {
 		if (fieldSpec.getUiStyle() != null) {
 			return fieldSpec.getUiStyle().getName();
 		}
-		if (fieldSpec.getModelName() != null) {
-			if (ifUseObjectPicker(fieldSpec)) {
-				return UIStyle.INPUT_OBJECT_PICKER.getName();
-			}
-			return UIStyle.INPUT_OBJECT_SELECT.getName();
+		if (fieldSpec.getInteractionMode().equals("display")){
+			fieldSpec.setIsRequired(false);
+			return UIStyle.INPUT_PROMPT.getName();
 		}
+		if (fieldSpec.getInteractionMode().equals("hidden")){
+			fieldSpec.setIsRequired(false);
+			return UIStyle.INPUT_HIDDEN.getName();
+		}
+
+		if (ifUseObjectPicker(fieldSpec)) {
+			return UIStyle.INPUT_OBJECT_PICKER.getName();
+		}
+//		if (fieldSpec.getModelName() != null) {
+//			return UIStyle.INPUT_OBJECT_SELECT.getName();
+//		}
 		if (fieldSpec.getMultiSelection() != null && fieldSpec.getMultiSelection().booleanValue()) {
 			return UIStyle.INPUT_MULTI_SELECT.getName();
 		}

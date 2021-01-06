@@ -23,7 +23,7 @@ public class SelectClauseUtil {
             if (!isStartNode(node)){
                 continue;
             }
-            Connector connector = node.getConnectors().values().iterator().next();
+            Connector connector = node.getConnectors().values().stream().filter(it->it.getType().equals(PathMap.CONNECTOR_BEGIN)).findFirst().get();
             Tree<Connector> tree = pathMap.getTreeFrom(connector);
             makeFromClauseByTree(sb, first, tree, attrRelatedConnectors);
             first = false;

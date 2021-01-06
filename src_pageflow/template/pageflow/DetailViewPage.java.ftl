@@ -120,7 +120,7 @@ public abstract class BaseDetailViewPage extends CustomBaseViewPage{
     }
 
 
-    protected void addSection(String sectionKey, String displayMode, String title, String linkToUrl) {
+    protected VComponentSection addSection(String sectionKey, String displayMode, String title, String linkToUrl) {
         VComponentSection section = new VComponentSection()
                 .id(sectionKey)
                 .title(title)
@@ -131,6 +131,7 @@ public abstract class BaseDetailViewPage extends CustomBaseViewPage{
             put("sectionList", sectionList);
         }
         sectionList.add(section);
+        return section;
     }
 
 

@@ -103,6 +103,8 @@ public interface ChangeRequestSpecBuildingService {
 
 	void setFieldAutoFillExpression(String crName, String stepName, String eventName, String fieldName, String expression);
 
+	void setFieldInline(String crName, String stepName, String eventName, String fieldName, boolean inline);
+
 	void referToModel(String modelTypeName);
 
     void setOnChangeApi(String crName, String stepName, String eventName, String fieldName, String targetName);

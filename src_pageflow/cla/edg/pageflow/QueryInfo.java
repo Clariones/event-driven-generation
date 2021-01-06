@@ -69,6 +69,9 @@ public class QueryInfo extends BasePageFlowElement {
 	public AccessParameter addStringParameter(String paramName) {
 		return newParam("String", paramName, null);
 	}
+	public AccessParameter addListParameter(String paramName) {
+		return newParam("List<?>", paramName, null);
+	}
 	public AccessParameter addDateParameter(String paramName) {
 		return newParam("Date", paramName, null);
 	}

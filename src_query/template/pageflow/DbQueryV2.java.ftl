@@ -108,10 +108,26 @@ public abstract class ${class_name}DBQueryHelper{
 	        return;
         }
 	    if (values.length == 1){
+	        if (values[0] instanceof List){
+                params.addAll((Collection<?>) values[0]);
+                return;
+            }
 	        params.add(values[0]);
 	        return;
         }
 	    params.addAll(Arrays.asList(values));
+    }
+    protected String numberOf(Object inputParam) {
+        if (inputParam == null){
+            return "?"; // 空 也用一个占位符
+        }
+        if (inputParam instanceof List){
+            return TextUtil.repeat("?", ((List<?>) inputParam).size(), ",");
+        }
+        if (inputParam.getClass().isArray()){
+            TextUtil.repeat("?", ((Object[]) inputParam).length, ",");
+        }
+        return "?";
     }
     protected void debug(String message){
         System.out.println("[ ${class_name}DBQueryHelper ]: " + message);

@@ -162,7 +162,7 @@ public class BasePageFlowScript extends BasePageFlowElement{
 		return null;
 	}
 
-	protected PageFlowScript addConfiguration(String key, Object value) {
+	public PageFlowScript addConfiguration(String key, Object value) {
 		if (currentWork != this.getConfiguration()) {
 			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+",不能设置"+key);
 		}
@@ -204,6 +204,7 @@ public class BasePageFlowScript extends BasePageFlowElement{
 	public PageFlowScript parent_class_package(String value) {
 		return addConfiguration("parent_class_package", value);
 	}
+
 	public PageFlowScript addTag(String key, String value) {
 		return addConfiguration(key, value);
 	}
@@ -283,4 +284,7 @@ public class BasePageFlowScript extends BasePageFlowElement{
 		throw new RuntimeException("找不到CR: " + name);
 	}
 
+	public PageFlowScript resource_base_folder(String value) {
+		return addConfiguration("resource_base_folder", value);
+	}
 }

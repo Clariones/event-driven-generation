@@ -40,11 +40,13 @@ public abstract class BaseProcessor extends BaseEventProcessor {
     }
 
     public boolean onEvent(String processIdentity, Actor actor, Event event) throws Exception {
-        ProcessInstance proces = ensureProcessInstance(processIdentity);
+        ProcessInstance proces = ensureProcessInstance(processIdentity, actor, event);
         return onEvent(proces, actor, event);
     }
-
     protected ProcessInstance ensureProcessInstance(String id) throws Exception {
+        return ensureProcessInstance(id, null, null);
+    }
+    protected ProcessInstance ensureProcessInstance(String id, Actor actor, Event event) throws Exception {
         String key = getType() + "_" + id;
         try {
             SystemProcessingInstance instance = userContext.getDAOGroup().getSystemProcessingInstanceDAO().loadByTargetIdentity(key, EO);
@@ -66,8 +68,15 @@ public abstract class BaseProcessor extends BaseEventProcessor {
         startNode.setBrief("初始化");
         onNewNodeCreated(startNode, newInstance, null, null);
         newInstance.getNodes().put(STATUS_START, startNode);
-
         saveInstance(newInstance);
+
+        if (event != null && actor != null){
+            Event enterEvent = new Event();
+            enterEvent.setParams(event.getParams());
+            enterEvent.setEventName(EVENT_ENTER);
+            enterEvent.setEventId(event.getEventId());
+            onEvent(newInstance, actor, enterEvent);
+        }
         return newInstance;
     }
 
@@ -429,7 +438,11 @@ public abstract class BaseProcessor extends BaseEventProcessor {
         return true;
     }
 
-    protected abstract void eventProcessFailed(ProcessInstance process, Node node, Actor actor, Event event, String resultCode, Exception e);
+    protected void eventProcessFailed(ProcessInstance process, Node node, Actor actor, Event event, String resultCode, Exception e){
+        if (e != null){
+            throw new RuntimeException(e.getMessage(), e);
+        }
+    }
 
     protected abstract String handleEvent(ProcessInstance process, Node node, Actor actor, Event event) throws Exception;
 

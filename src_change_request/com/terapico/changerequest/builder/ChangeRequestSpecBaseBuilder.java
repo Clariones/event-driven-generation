@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Map;
 
 import cla.edg.modelbean.BaseAttribute;
+import cla.edg.modelbean.BaseModelBean;
 import clariones.tool.builder.Utils;
 
 public class ChangeRequestSpecBaseBuilder<T extends ChangeRequestSpecBaseBuilder<T>>
@@ -186,6 +187,20 @@ public class ChangeRequestSpecBaseBuilder<T extends ChangeRequestSpecBaseBuilder
 		service.referToModel(attribute.getContainerBean().getModelTypeName());
 		return auto_fill_expression("request_member_of://"+attribute.getContainerBean().getModelTypeName()+"/"+expression+"/"+attribute.getName());
 	}
+	public T fill_by_request(String expression, BaseModelBean bean) {
+		service.referToModel(bean.getModelTypeName());
+		return auto_fill_expression("request_member_of://"+bean.getBeanPath().getNodeList().get(0).getBeanName()+"/"+expression+"/"+bean.getMemberName()+"");
+	}
+
+	public T input_at_next_line(){
+		if(workingBoard.isBuildingField()) {
+			service.setFieldInline($CR(),$STEP(),$EVENT(),$FIELD(), false);
+			workingBoard.onJob(WorkingBoard.DEFAULT_VALUE);
+		}else {
+			error("目前只有字段才能指定输入框是否另起一行");
+		}
+		return me;
+	}
 
 
 	public T fill_by_submitted(String expression) {
@@ -315,6 +330,11 @@ public class ChangeRequestSpecBaseBuilder<T extends ChangeRequestSpecBaseBuilder
 		service.createNewStep($CR(), stepName);
 		workingBoard.onStep(stepName);
 		log("开始描述 Step:"+$STEP());
+		return me;
+	}
+
+	public T comments(String comments) {
+		// 只是留着看, 不生成代码
 		return me;
 	}
 

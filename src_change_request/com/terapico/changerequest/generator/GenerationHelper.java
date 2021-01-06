@@ -293,6 +293,9 @@ public class GenerationHelper extends BaseGeneratorHelper {
 				.append(NameAsThis(modelName)).append(".INTERNAL_TYPE, userContext.get")
 				.append(NameAsThis(param)).append("()))).get")
 				.append(NameAsThis(member)).append("()");
+		if (afePieces.length > 3){
+			sb.append(".getId()");
+		}
 		return sb.toString();
 	}
 	public boolean canFillFromSubmitted(Map<String, Object> fieldSpec) {

@@ -1,17 +1,15 @@
 <#import "tools.ftl" as T/>
 package ${package};
 
-import com.terapico.utils.DebugUtil;
-import com.terapico.utils.MapUtil;
-import com.terapico.utils.RandomUtil;
-import com.terapico.utils.TextUtil;
+import cn.binarywang.wx.miniapp.api.WxMaService;
+import cn.binarywang.wx.miniapp.bean.WxMaJscode2SessionResult;
+import cn.binarywang.wx.miniapp.bean.WxMaPhoneNumberInfo;
+import cn.binarywang.wx.miniapp.util.crypt.WxMaCryptUtils;
+import com.terapico.utils.*;
 
 import com.skynet.infrastructure.StorageService;
 
-import ${base_package}.${context_name};
-import ${base_package}.${custom_context_name};
-import ${base_package}.Footprint;
-import ${base_package}.FootprintProducer;
+import ${base_package}.*;
 import ${package}pageview.*;
 
 /**
@@ -20,7 +18,14 @@ import ${package}pageview.*;
  *
  */
 public abstract class Basic${class_name}ViewBizService extends ${class_name}ViewService implements FootprintProducer {
-	
+    private WxMaService wxMaService;
+    public WxMaService getWxMaService() {
+        return wxMaService;
+    }
+    public void setWxMaService(WxMaService wxMaService) {
+        this.wxMaService = wxMaService;
+    }
+
 	@Override
 	public boolean canReplaceFootPrint(Footprint fp1, Footprint fp2) {
 		if (!fp1.getMethodName().equals(fp2.getMethodName())) {
@@ -63,5 +68,36 @@ public abstract class Basic${class_name}ViewBizService extends ${class_name}View
         StorageService storageService = (StorageService) ctx.getBean("storageService");
         return storageService.genToken(userUploadHome);
 
+    }
+
+    public Object getPhoneNoInfo(${custom_context_name} ctx, String code, String encryptedData, String iv) throws Exception {
+        String sessionKey;
+        String userSessionKey = null;
+        String appId = wxMaService.getWxMaConfig().getAppid();
+        WxMaJscode2SessionResult sessionInfo = wxMaService.jsCode2SessionInfo(code);
+        if (sessionInfo == null) {
+            throw new Exception("获取session 失败");
+        }
+        String openId = sessionInfo.getOpenid();
+        userSessionKey = sessionInfo.getSessionKey();
+        ctx.log("getPhoneNoInfo()=userSessionKey="+userSessionKey);
+        String cacheKey = this.getWechatSessionKeyCacheKey(ctx, appId, openId);
+        ctx.putToCache(cacheKey, userSessionKey, (int) (1 * DateTimeUtil.HOUR_IN_MS / DateTimeUtil.SECOND_IN_MS));
+        String x = WxMaCryptUtils.decrypt(userSessionKey, encryptedData, iv);
+        ctx.log("getPhoneNoInfo()="+x);
+        WxMaPhoneNumberInfo phoneNoInfo = WxMaPhoneNumberInfo.fromJson(x);
+        updateCurrentUserMobile(ctx, phoneNoInfo.getPurePhoneNumber());
+        return x;
+    }
+
+    protected void updateCurrentUserMobile(${custom_context_name} ctx, String mobile) throws Exception {
+//		根据业务确定是否要更新当前用户的手机号,例如:
+//		PersonalUser user = (PersonalUser) ctx.getCurrentUserInfo();
+//		user.updateMobile(mobile);
+//		ctx.getManagerGroup().getPersonalUserManager().internalSavePersonalUser(ctx, user, EO);
+    }
+
+    protected String getWechatSessionKeyCacheKey(${custom_context_name} ctx, String appId, String openId) {
+        return String.format("wechatSession:%s:%s:%s", openId, appId, ctx.tokenId());
     }
 }

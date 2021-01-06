@@ -80,6 +80,9 @@ public class QueryInfoUtil extends BaseQueryInfoUtil {
         targetAlias = PathMapUtil.mergeIntoPathMap(pathMap, this.getTargetModelTypeName(), this.getQueryName());
         if (this.getOrderByAttributes() != null){
             for (BaseAttribute attr : getOrderByAttributes()) {
+                if (attr instanceof ExpressionAttr){
+                    continue;
+                }
                 PathMapUtil.mergeIntoPathMap(pathMap, attr, arc);
             }
         }

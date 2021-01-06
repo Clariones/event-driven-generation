@@ -221,6 +221,19 @@ public class PageFlowScript extends BasePageFlowScript {
 		}
 		return this;
 	}
+	public PageFlowScript with_list(String paramName) {
+		return with_list(Integer.MAX_VALUE, paramName);
+	}
+	public PageFlowScript with_list(int position, String paramName) {
+		if (currentWork instanceof Request) {
+			AccessParameter p = currentRequest.addParam(position, paramName, "List<String>", null);
+		}else if (currentWork instanceof QueryInfo) {
+			currentQuery.addListParameter(paramName);
+		}else {
+			throw new RuntimeException("当前任务是"+currentWork.getClass().getSimpleName()+", 不能指定List参数"+paramName);
+		}
+		return this;
+	}
 	public PageFlowScript with_date(String paramName) {
 		return with_date(Integer.MAX_VALUE, paramName);
 	}

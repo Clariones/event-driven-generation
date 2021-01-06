@@ -18,6 +18,7 @@ import ${base_package}.CR;
 import ${base_package}.ChangeRequestHelper;
 </#if>
 import com.terapico.utils.DebugUtil;
+import org.springframework.transaction.annotation.Transactional;
 
 
 <#list helper.getAllForms(script) as form>
@@ -39,6 +40,7 @@ import ${base_package}.${NAMING.toCamelCase(form.formName)?lower_case}.${helper.
 public abstract class ${class_name}ViewService extends Base${class_name}ViewService{
 <#list script.requests as request>
 	// ${request.comments!}(${request.name})
+	@Transactional
 	<#if request.changeRequestName?has_content>
 		<@changeRequestHanlingMethod request />
 	<#elseif request.handleForm>
@@ -72,7 +74,7 @@ public abstract class ${class_name}ViewService extends Base${class_name}ViewServ
 		ctx.set${NAMING.toCamelCase(param.paramName)}(${NAMING.toCamelCase(param.paramName)?uncap_first});
 		</#list>
 	</#if>
-		commonLog(ctx, "${T.getRequestProcessingMethodName(request)}", "${request.comments!}", ctx.getRemoteIP(), ctx.tokenId(), makeUrlF("${T.getRequestProcessingMethodName(request)}", false<@T.getRequestProcessingUrlMethodParametersWithoutType request/>), null);
+		commonLog(ctx, "${T.getRequestProcessingMethodName(request)}", "${request.comments!request.name}", ctx.getRemoteIP(), ctx.tokenId(), makeUrlF("${T.getRequestProcessingMethodName(request)}", false<@T.getRequestProcessingUrlMethodParametersWithoutType request/>), requestDetail(ctx));
 	<@requestProcessAndReturn request>
 	</@>
 	}
@@ -100,7 +102,7 @@ public abstract class ${class_name}ViewService extends Base${class_name}ViewServ
 			form.verifyInputs();
 			ctx.setInputFormData(form);
 		</#if>
-			commonLog(ctx, "${T.getRequestProcessingMethodName(request)}", "${request.comments!}", ctx.getRemoteIP(), ctx.tokenId(), formData, null);
+			commonLog(ctx, "${T.getRequestProcessingMethodName(request)}", "${request.comments!request.name}", ctx.getRemoteIP(), ctx.tokenId(), formData, requestDetail(ctx));
 		<@requestProcessAndReturn request "	">
 		</@>
 		}finally {
@@ -125,7 +127,7 @@ public abstract class ${class_name}ViewService extends Base${class_name}ViewServ
         </#list>
     </#if>
 		<@getRequestUser request ""/>
-		commonLog(ctx, "${methodName}", "开始:${request.comments!}", ctx.getRemoteIP(), ctx.tokenId(), accessUrl, null);
+		commonLog(ctx, "${methodName}", "开始:${request.comments!}", ctx.getRemoteIP(), ctx.tokenId(), accessUrl, requestDetail(ctx));
 		int resultCode = processRequest${methodName?cap_first}(ctx);
 		if (returnRightNow(resultCode)){
 			return ctx.getResultObject();
@@ -143,7 +145,7 @@ public abstract class ${class_name}ViewService extends Base${class_name}ViewServ
 			ctx.setAccessUrl(accessUrl);
 			<@getRequestUser request "	"/>
 		<#assign crName = request.changeRequestName/>
-			commonLog(ctx, "${T.getRequestProcessingMethodName(request)}", "${request.comments!}", ctx.getRemoteIP(), ctx.tokenId(), null, ctx.getRequestParameters());
+			commonLog(ctx, "${T.getRequestProcessingMethodName(request)}", "${request.comments!request.name}", ctx.getRemoteIP(), ctx.tokenId(), null, ctx.getRequestParameters());
 		<@requestProcessAndReturn request "	">
 		</@>
 		}finally {
@@ -196,7 +198,7 @@ public abstract class ${class_name}ViewService extends Base${class_name}ViewServ
 			</#if>
 			${prefix}}
 			${prefix}default: {
-				${prefix}throw new Exception("未定义的分支代码"+resultCode);
+				${prefix}throwExceptionWithMessage(ctx, "未定义的分支代码"+resultCode);
 			${prefix}}
 		${prefix}}
 		<#if request.canRefresh>

@@ -39,6 +39,7 @@ public interface OutputName {
 					String NAME = "name";
 					String TITLE = "title";
 					String INTER_ACTION_MODE = "interactionMode";
+					String INLINE = "inline";
 					String TYPE = "inputType";
 					String MODEL_NAME = "modelName";
 					String SELECTABLE = "selectable";
