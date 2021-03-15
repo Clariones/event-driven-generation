@@ -2,6 +2,8 @@ package com.terapico.changerequest.builder;
 
 import clariones.tool.builder.Utils;
 
+import java.util.Map;
+
 public abstract class ChangeRequestSpecBuilderUtil {
 
 	protected ChangeRequestSpecBuildingService service;
@@ -28,6 +30,5 @@ public abstract class ChangeRequestSpecBuilderUtil {
 	protected String $STEP() {
 		return workingBoard.getCurrentStepName();
 	}
-
 
 }

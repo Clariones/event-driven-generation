@@ -72,8 +72,9 @@ public class ChangeRequestGenerator extends BaseGenerator {
 	}
 
 	protected GenrationResult generateFullySpecFile() throws Exception {
-		String fileName = this.toFileName(Utils.put("projectName", this.getProjectName()).into_map(),
-				"${projectName?lower_case}_core_src/META-INF/${projectName?lower_case}_fully_cr_spec.json");
+		String fileName = this.toFileName(Utils.put("projectName", this.getProjectName())
+						.put("helper", new GenerationHelper()).put("scopeName", this.getScopeName()).into_map(),
+				"${projectName?lower_case}_core_src/META-INF/${projectName?lower_case}_${helper.name_as_this(scopeName)}_full_cr_spec.json");
 		GenrationResult result = new GenrationResult().as_new_file();
 		result.setFileName(fileName);
 		result.setContent(Utils.toJson(this.getChangeRequestSpec().get("projectSpec"), true));
@@ -86,23 +87,26 @@ public class ChangeRequestGenerator extends BaseGenerator {
 				.put("projectName", this.getProjectName())
 				.put("crModelName", this.getChangeRequestModelName())
 				.put("userModelName", this.getUserModelName())
+				.put("scopeName", this.getScopeName())
 				.put("helper", new GenerationHelper())
 				.put("allEventSpec", this.getChangeRequestSpec().get("allEventSpec"))
 				.put("assist", this.getChangeRequestSpec().get("assist"))
 				.into_map();
 		String templatePath = "/changerequest/changeRequest.xml.ftl";
 		String fileName = this.toFileName(data,
-				"modeling/project_${helper.name_as_this(projectName)}/change_request.xml");
+				"modeling/project_${helper.name_as_this(projectName)}/${helper.name_as_this(scopeName)}_change_request.xml");
 		return this.doGeneration(data, templatePath, fileName).as_new_file().with_code("changeRequest.xml");
 	}
 	
 	protected GenrationResult generateBackendSpecFile() throws Exception {
 		Map<String, Object> data = Utils.put("projectSpec", this.getChangeRequestSpec().get("projectSpec"))
 				.put("helper", new GenerationHelper())
+				.put("scopeName", this.getScopeName())
 				.into_map();
 		String templatePath = "/changerequest/backend_spec.json.ftl";
-		String fileName = this.toFileName(Utils.put("projectName", this.getProjectName()).into_map(),
-				"${projectName?lower_case}_core_src/META-INF/${projectName?lower_case}_cr_spec.json");
+		String fileName = this.toFileName(Utils.put("projectName", this.getProjectName()).put("helper", new GenerationHelper())
+						.put("scopeName", this.getScopeName()).into_map(),
+				"${projectName?lower_case}_core_src/META-INF/${helper.name_as_this(scopeName)}_cr_spec.json");
 		return this.doGeneration(data, templatePath, fileName).as_new_file().with_code("backend_spec.json");
 	}
 
@@ -110,11 +114,12 @@ public class ChangeRequestGenerator extends BaseGenerator {
 		Map<String, Object> data = Utils.put("projectSpec", this.getChangeRequestSpec().get("projectSpec"))
 				.put("projectName", this.getProjectName())
 				.put("orgName", this.getOrgName())
+				.put("scopeName", this.getScopeName())
 				.put("helper", new GenerationHelper())
 				.into_map();
 		String templatePath = "/changerequest/cr_const.java.ftl";
 		String fileName = this.toFileName(data,
-				"${projectName?lower_case}_core_src/com/${orgName?lower_case}/${projectName?lower_case}/CR.java");
+				"${projectName?lower_case}_core_src/com/${orgName?lower_case}/${projectName?lower_case}/${helper.NameAsThis(scopeName)}CR.java");
 		return this.doGeneration(data, templatePath, fileName).as_new_file().with_code("cr_const.java");
 	}
 	
@@ -123,11 +128,12 @@ public class ChangeRequestGenerator extends BaseGenerator {
 				.put("projectName", this.getProjectName())
 				.put("orgName", this.getOrgName())
 				.put("helper", new GenerationHelper())
+				.put("scopeName", this.getScopeName())
 				.put("allEventSpec", this.getChangeRequestSpec().get("allEventSpec"))
 				.into_map();
 		String templatePath = "/changerequest/prj_cr_helper.java.ftl";
 		String fileName = this.toFileName(data,
-				"${projectName?lower_case}_core_src/com/${orgName?lower_case}/${projectName?lower_case}/${projectName?cap_first}ChangeRequestHelper.java");
+				"${projectName?lower_case}_core_src/com/${orgName?lower_case}/${projectName?lower_case}/${projectName?cap_first}${helper.NameAsThis(scopeName)}ChangeRequestHelper.java");
 		return this.doGeneration(data, templatePath, fileName).as_new_file().with_code("prj_cr_helper.java");
 	}
 	
@@ -136,11 +142,12 @@ public class ChangeRequestGenerator extends BaseGenerator {
 				.put("projectName", this.getProjectName())
 				.put("orgName", this.getOrgName())
 				.put("helper", new GenerationHelper())
+				.put("scopeName", this.getScopeName())
 				.put("allEventSpec", this.getChangeRequestSpec().get("allEventSpec"))
 				.into_map();
 		String templatePath = "/changerequest/custom_cr_helper.java.ftl";
 		String fileName = this.toFileName(data,
-				"${projectName?lower_case}_custom_src/com/${orgName?lower_case}/${projectName?lower_case}/ChangeRequestHelper.java");
+				"${projectName?lower_case}_custom_src/com/${orgName?lower_case}/${projectName?lower_case}/${helper.NameAsThis(scopeName)}ChangeRequestHelper.java");
 		return this.doGeneration(data, templatePath, fileName).when_not_exist().with_code("custom_cr_helper.java");
 	}
 	
@@ -150,6 +157,7 @@ public class ChangeRequestGenerator extends BaseGenerator {
 				.put("crModelName", this.getChangeRequestModelName())
 				.put("userModelName", this.getUserModelName())
 				.put("helper", new GenerationHelper())
+				.put("scopeName", this.getScopeName())
 				.put("allEventSpec", this.getChangeRequestSpec().get("allEventSpec"))
 				.into_map();
 		String templatePath = "/changerequest/todo.txt.ftl";

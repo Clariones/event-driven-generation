@@ -2,7 +2,7 @@ package com.${orgName?lower_case}.${projectName?lower_case};
 
 import com.terapico.changerequest.BaseCrConst;
 
-public interface CR extends BaseCrConst {
+public interface ${helper.NameAsThis(scopeName)}CR extends BaseCrConst {
 
 <#list projectSpec.changeRequestList as crSpec>
 	interface ${helper.JAVA_CONST(crSpec.changeRequestType)} {

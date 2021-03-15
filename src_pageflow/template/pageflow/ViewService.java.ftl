@@ -10,16 +10,11 @@ import com.terapico.caf.appview.ChangeRequestProcessResult;
 import com.terapico.caf.viewcomponent.GenericFormPage;
 </#if>
 
-import ${base_package}.${context_name};
-import ${base_package}.${custom_context_name};
-import ${base_package}.BaseViewPage;
-<#if helper.support("change_request")>
-import ${base_package}.CR;
-import ${base_package}.ChangeRequestHelper;
-</#if>
+import ${base_package}.*;
 import com.terapico.utils.DebugUtil;
+<#if script.configuration["transaction_config"] != "disable">
 import org.springframework.transaction.annotation.Transactional;
-
+</#if>
 
 <#list helper.getAllForms(script) as form>
     <#if form.formName == "free form">
@@ -40,7 +35,9 @@ import ${base_package}.${NAMING.toCamelCase(form.formName)?lower_case}.${helper.
 public abstract class ${class_name}ViewService extends Base${class_name}ViewService{
 <#list script.requests as request>
 	// ${request.comments!}(${request.name})
-	@Transactional
+	<#if script.configuration["transaction_config"] != "disable">
+	@Transactional<#if script.configuration["transaction_config"]?has_content>(${script.configuration["transaction_config"]})</#if>
+	</#if>
 	<#if request.changeRequestName?has_content>
 		<@changeRequestHanlingMethod request />
 	<#elseif request.handleForm>
@@ -134,7 +131,10 @@ public abstract class ${class_name}ViewService extends Base${class_name}ViewServ
 		}
 		return ctx.getChangeRequestResponse();
 	}
-	
+
+    <#if script.configuration["transaction_config"] != "disable">
+	@Transactional<#if script.configuration["transaction_config"]?has_content>(${script.configuration["transaction_config"]})</#if>
+	</#if>
 	public Object ${T.getRequestProcessingMethodName(request)}(${context_name} userContext) throws Exception {
 		${custom_context_name} ctx = (${custom_context_name}) userContext;
 		if (hasFormResubmitFlag(ctx)) {

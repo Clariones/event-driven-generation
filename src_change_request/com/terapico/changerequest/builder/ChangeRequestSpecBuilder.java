@@ -124,9 +124,10 @@ public class ChangeRequestSpecBuilder extends ChangeRequestSpecBaseBuilder<Chang
 		return if_change_affect("_all");
 	}
 
-	
-	
 
+	public ChangeRequestSpecBuilder then_hide() {
+		return this.then_do_action("hide");
+	}
 	
 	
 

@@ -13,21 +13,21 @@ import com.terapico.utils.DebugUtil;
  *
  */
 @SuppressWarnings("unchecked")
-public class ChangeRequestHelper extends ${projectName?cap_first}ChangeRequestHelper{
-	private ChangeRequestHelper() {}
+public class ${helper.NameAsThis(scopeName)}ChangeRequestHelper extends ${projectName?cap_first}${helper.NameAsThis(scopeName)}ChangeRequestHelper{
+	private ${helper.NameAsThis(scopeName)}ChangeRequestHelper() {}
 	
-	public static ChangeRequestHelper of(Custom${projectName?cap_first}UserContextImpl ctx){
-		ChangeRequestHelper instance = (ChangeRequestHelper) ctx.getFromContextLocalStorage(key(ctx));
+	public static ${helper.NameAsThis(scopeName)}ChangeRequestHelper of(Custom${projectName?cap_first}UserContextImpl ctx){
+		${helper.NameAsThis(scopeName)}ChangeRequestHelper instance = (${helper.NameAsThis(scopeName)}ChangeRequestHelper) ctx.getFromContextLocalStorage(key(ctx));
 		if (instance != null) {
 			return instance;
 		}
-		synchronized (ChangeRequestHelper.class) {
-			instance = (ChangeRequestHelper) ctx.getFromContextLocalStorage(key(ctx));
+		synchronized (${helper.NameAsThis(scopeName)}ChangeRequestHelper.class) {
+			instance = (${helper.NameAsThis(scopeName)}ChangeRequestHelper) ctx.getFromContextLocalStorage(key(ctx));
 			if (instance != null) {
 				return instance;
 			}
 			
-			instance = new ChangeRequestHelper();
+			instance = new ${helper.NameAsThis(scopeName)}ChangeRequestHelper();
 			instance.setUserContext(ctx);
 			instance.loadCrSpec();
 			// System.out.println(DebugUtil.dumpAsJson(instance.getSpec(), true));

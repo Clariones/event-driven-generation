@@ -14,6 +14,7 @@ public abstract class CommonSpec <T extends CommonSpec<T>>{
 	protected Integer minCollectionSize;
 	protected Integer maxCollectionSize;
 	protected Boolean isCollection = false;
+	protected Map<String, Object> extraData;
 	
 	public String getName() {
 		return name;
@@ -63,8 +64,15 @@ public abstract class CommonSpec <T extends CommonSpec<T>>{
 	public void setIsCollection(Boolean isCollection) {
 		this.isCollection = isCollection;
 	}
-	
-	
+
+	public Map<String, Object> getExtraData() {
+		return extraData;
+	}
+
+	public void setExtraData(Map<String, Object> extraData) {
+		this.extraData = extraData;
+	}
+
 	public abstract String getSpecType();
 	
 	public T withName(String name) {
@@ -106,5 +114,23 @@ public abstract class CommonSpec <T extends CommonSpec<T>>{
 	}
 	protected void whereami(String message) {
 		new Throwable(message).printStackTrace();
+	}
+
+    public void addInteraction(String refFieldName, String refOperation, Object refValue, String actionCode){
+		Map<String, Object>  data = Utils.ensureMap(ensureExtraData(), "interaction", Object.class);
+		Map<String, Object>  infoData = Utils.ensureMap(data, refFieldName, Object.class);
+		// cla_TODO: 还没写完
+		String key = refOperation+"_"+String.valueOf(refValue);
+		Map<String, Object> newData = Utils.ensureMap(infoData, key, Object.class);
+		newData.put("operation",refOperation );
+		newData.put("refValue",refValue );
+		newData.put("action",actionCode );
+	}
+
+	protected Map<String, Object> ensureExtraData(){
+		if (getExtraData() == null){
+			setExtraData(new HashMap<>());
+		}
+		return getExtraData();
 	}
 }

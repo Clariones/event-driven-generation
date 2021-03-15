@@ -60,6 +60,7 @@ public class ChangeRequestSpecBuildingServiceLocalImpl extends CRSBuildingServic
 		Map<String, Object> assistInfo = new HashMap<>();
 		assistInfo.put("allEventNames", root().getAllEventNames());
 		result.put("assist", assistInfo);
+		result.put("config", (Map)getConfig());
 
 		return result;
 	}
@@ -444,4 +445,10 @@ public class ChangeRequestSpecBuildingServiceLocalImpl extends CRSBuildingServic
 		sureField(crName, stepName, eventName, fieldName).setOnChangeApi(targetName);
 		prototypeField(crName, stepName, eventName, fieldName).setOnChangeApiIfNeed(targetName);
 	}
+
+	@Override
+	public void addFieldInteraction(String crName, String stepName, String eventName, String fieldName, String refFieldName, String refOperation, Object refValue, String actionCode) {
+		sureField(crName, stepName, eventName, fieldName).addInteraction(refFieldName, refOperation, refValue, actionCode);
+	}
+
 }

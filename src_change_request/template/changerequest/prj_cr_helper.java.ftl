@@ -42,7 +42,7 @@ import com.${orgName?lower_case}.${projectName?lower_case}.event${helper.CamelNa
 import com.${orgName?lower_case}.${projectName?lower_case}.${helper.CamelName(modelName)?lower_case}.${helper.CamelName(modelName)};
 </#list>
 
-public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeRequestHelper{
+public class ${projectName?cap_first}${helper.NameAsThis(scopeName)}ChangeRequestHelper extends BaseChangeRequestHelper{
     protected boolean inProductEnv(){
 		return getUserContext().isProductEnvironment();
 	}
@@ -57,7 +57,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 	protected Custom${projectName?cap_first}UserContextImpl userContext;
 	
 	protected static String key(${projectName?cap_first}UserContextImpl ctx) {
-		return "_key_for_thread_scope_ChangeRequestHelper";
+		return "_key_for_thread_scope_${helper.NameAsThis(scopeName)}ChangeRequestHelper";
 	}
 
 	public Custom${projectName?cap_first}UserContextImpl getUserContext() {
@@ -68,7 +68,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 	}
 	protected void loadCrSpec() {
         try {
-            loadCrSpecFromJar("/META-INF/${projectName?lower_case}_cr_spec.json");
+            loadCrSpecFromJar("/META-INF/${helper.name_as_this(scopeName)}_cr_spec.json");
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException(e);
@@ -105,7 +105,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 		
 		savePostedData(postedData, currentUserInfo);
 		String nextScene = calcSceneCode(postedData);
-		if (nextScene.equals(CR.NEXT_COMMIT)) {
+		if (nextScene.equals(${helper.NameAsThis(scopeName)}CR.NEXT_COMMIT)) {
 			processResult.setResultCode(ChangeRequestProcessResult.CODE_COMMITTED);
 			processResult.setChangeRequest(loadWholeChangeRequest(postedData.getChangeRequestId()));
 		}else {
@@ -204,13 +204,13 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 		// 然后填 hidden 的基础信息 
 		{
 			CRGroupData hiddenGroup = new CRGroupData();
-			hiddenGroup.setName(CR.GROUP_HIDDEN);
-			hiddenGroup.setId(CR.GROUP_HIDDEN);
+			hiddenGroup.setName(${helper.NameAsThis(scopeName)}CR.GROUP_HIDDEN);
+			hiddenGroup.setId(${helper.NameAsThis(scopeName)}CR.GROUP_HIDDEN);
 			hiddenGroup.setTitle("隐藏字段");
 			hiddenGroup.setHidden(true);
 			requestData.getGroupList().add(hiddenGroup);
-			addHiddenField(requestData, CR.FIELD_CR_ID, cr.getId());
-			addHiddenField(requestData, CR.FIELD_SCENE_CODE, sceneCode);
+			addHiddenField(requestData, ${helper.NameAsThis(scopeName)}CR.FIELD_CR_ID, cr.getId());
+			addHiddenField(requestData, ${helper.NameAsThis(scopeName)}CR.FIELD_SCENE_CODE, sceneCode);
 			for(CRGroupSpec groupSpec: groupSpecList) {
 				String gName = groupSpec.getName();
 				if (recordIndexInfo != null && recordIndexInfo.containsKey(groupSpec.getName())) {
@@ -249,7 +249,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
                 " where E.initiator_type=? and E.initiator_id=? and E.change_request_type=? " +
                 "    order by E.id desc limit ?";
 //		StringBuilder sb = new StringBuilder(
-//				"select * from change_request_data CR where CR.request_type=? and commited is false and (");
+//				"select * from change_request_data CR where ${helper.NameAsThis(scopeName)}CR.request_type=? and commited is false and (");
 
         params.add(currentUserInfo.getInternalType());
         params.add(currentUserInfo.getId());
@@ -288,7 +288,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 	protected void addHiddenField(GenericFormPage requestData, String fieldShortName, String value) {
 		CRGroupData group = HIDDEN_GROUP(requestData);
 		CRFieldData fieldData = new CRFieldData();
-		fieldData.setName(CR.GROUP_HIDDEN+"_"+fieldShortName);
+		fieldData.setName(${helper.NameAsThis(scopeName)}CR.GROUP_HIDDEN+"_"+fieldShortName);
 		fieldData.setValue(value);
 		fieldData.setHidden(true);
 		fieldData.setRules(hiddenFieldRules(fieldShortName));
@@ -302,6 +302,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 		ChangeRequest newCr = getUserContext().getManagerGroup().getChangeRequestManager()
 				.createChangeRequest(userContext, crSpec.getTitle(), userContext.getCityByIp(), crSpec.getChangeRequestType(), false, "P000001");
 		// 这个会导致 changeRequestManager 的 onNewInstanceCreated, 注意这个扩展点
+		newCr.setRequestType(userContext.getDAOGroup().getChangeRequestTypeDAO().load(crSpec.getChangeRequestType(),EO));
 		return newCr;
 	}
 	
@@ -311,7 +312,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 		}
 		switch(cr.getRequestType().getId()) {
 <#list projectSpec.changeRequestList as crSpec>
-		case CR.${helper.JAVA_CONST(crSpec.changeRequestType)}.NAME:
+		case ${helper.NameAsThis(scopeName)}CR.${helper.JAVA_CONST(crSpec.changeRequestType)}.NAME:
 			enhance${helper.CamelName(crSpec.changeRequestType)}ChangeRequest(cr, groupSpecList);
 			break;
 </#list>
@@ -340,7 +341,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 			switch (group.getName()) {
 		<#list crSpec.stepList as scene>
 			<#list scene.eventList as group>
-			case CR.${helper.JAVA_CONST(crSpec.changeRequestType)}.SCENE_${helper.JAVA_CONST(scene.name)}.GROUP_${helper.JAVA_CONST(group.name)}.NAME: {
+			case ${helper.NameAsThis(scopeName)}CR.${helper.JAVA_CONST(crSpec.changeRequestType)}.SCENE_${helper.JAVA_CONST(scene.name)}.GROUP_${helper.JAVA_CONST(group.name)}.NAME: {
 				SmartList<Event${helper.CamelName(group.eventType)}> eventList = getUserContext().getDAOGroup().getEvent${helper.CamelName(group.eventType)}DAO().queryList(sql, params);
 				cr.addEvent${helper.CamelName(group.eventType)}List(eventList);
 				}
@@ -361,7 +362,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 <#list projectSpec.changeRequestList as crSpec>
 	<#list crSpec.stepList as scene>
 		<#list scene.eventList as group>
-		case CR.${helper.JAVA_CONST(crSpec.changeRequestType)}.SCENE_${helper.JAVA_CONST(scene.name)}.GROUP_${helper.JAVA_CONST(group.name)}.NAME:
+		case ${helper.NameAsThis(scopeName)}CR.${helper.JAVA_CONST(crSpec.changeRequestType)}.SCENE_${helper.JAVA_CONST(scene.name)}.GROUP_${helper.JAVA_CONST(group.name)}.NAME:
 			curRecordIdx = fulfillChangeRequestFieldByGroup(crContext, dbCrData, groupData, dbCrData.getEvent${helper.CamelName(group.eventType)}List(), groupRecordIndex, groupSpec.getName(), processUrl);
 			<#if group.multiple >
 			fulfillExistsGroupData(crContext, dbCrData, groupData, dbCrData.getEvent${helper.CamelName(group.eventType)}List(), curRecordIdx, ${group.showPrevious}, ${group.showNext});
@@ -386,7 +387,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 		ChangeRequestPostData postData = crContext.getPostData();
 		List<CRFieldSpec> fieldSpecList = crSpec.getFieldList();
 
-		String gName = CR.GROUP_HIDDEN+"_indexof_"+groupData.getName();
+		String gName = ${helper.NameAsThis(scopeName)}CR.GROUP_HIDDEN+"_indexof_"+groupData.getName();
 		CRFieldData gidField = HIDDEN_GROUP(requestData).getFieldList().stream().filter(it -> it.getName().equals(gName))
 				.findFirst().orElse(null);
 		if (eventList == null || eventList.isEmpty()) {
@@ -429,7 +430,11 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 				}else {
 					String memberName = FIELD_NAME(fieldSpec);
 					KeyValuePair kv = kvList.stream().filter(entry->entry.getKey().equals(memberName)).findAny().orElse(null);
-					if (kv == null || kv.getValue() == null) {
+					if (fieldSpec.getValue() != null) {
+                        // 如果有 forceValue
+                        Object suggestedDefaultValue = calcSuggestedDefaultValue(groupName, fieldSpec, fieldSpec.getValue());
+                        fieldData.setValue(TO_VALUE(getFieldValueWhenFillResponse(suggestedDefaultValue,requestData, dbCrData, groupData, fieldSpec),fieldSpec));
+                    }else if (kv == null || kv.getValue() == null) {
 					    Object suggestedDefaultValue = calcSuggestedDefaultValue(groupName, fieldSpec, fieldSpec.getDefaultValue());
                         fieldData.setValue(TO_VALUE(getFieldValueWhenFillResponse(suggestedDefaultValue,requestData, dbCrData, groupData, fieldSpec),fieldSpec));
 					}else {
@@ -461,7 +466,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 <#list projectSpec.changeRequestList as crSpec>
 	<#list crSpec.stepList as scene>
 		<#list scene.eventList as group>
-            case CR.${helper.JAVA_CONST(crSpec.changeRequestType)}.SCENE_${helper.JAVA_CONST(scene.name)}.GROUP_${helper.JAVA_CONST(group.name)}.NAME:{
+            case ${helper.NameAsThis(scopeName)}CR.${helper.JAVA_CONST(crSpec.changeRequestType)}.SCENE_${helper.JAVA_CONST(scene.name)}.GROUP_${helper.JAVA_CONST(group.name)}.NAME:{
                 Event${helper.CamelName(group.eventType)} event = new Event${helper.CamelName(group.eventType)}();
                 event.setChangeRequest(dbCrData);
                 eventRcd = userContext.getDAOGroup().getEvent${helper.CamelName(group.eventType)}DAO().save(event, EO);
@@ -557,8 +562,8 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 	</#list>
 </#list>
 
-	protected ${projectName?cap_first}Exception wrapTo${projectName?cap_first}Exception(ChangeRequestPostData postedData, String msg) {
-		${projectName?cap_first}Exception exception = new ${projectName?cap_first}Exception(msg);
+	protected ErrorMessageException wrapTo${projectName?cap_first}Exception(ChangeRequestPostData postedData, String msg) {
+		ErrorMessageException exception = new ErrorMessageException(msg);
 		for(Map<String, Object> vmsg : postedData.getVerifyMessage()) {
 			Message fmsg = new Message();
 			fmsg.setBody((String) vmsg.get("message"));
@@ -571,13 +576,13 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 	
 	protected void savePostedData(ChangeRequestPostData postedData, BaseEntity currentUserInfo) throws Exception {
 		switch (postedData.getActionCode()) {
-		case CR.ACTION_COMMIT:
-		case CR.ACTION_NEXT_STEP:
-		case CR.ACTION_NEXT_RECORD:
-		case CR.ACTION_DELETE_RECORD:
+		case ${helper.NameAsThis(scopeName)}CR.ACTION_COMMIT:
+		case ${helper.NameAsThis(scopeName)}CR.ACTION_NEXT_STEP:
+		case ${helper.NameAsThis(scopeName)}CR.ACTION_NEXT_RECORD:
+		case ${helper.NameAsThis(scopeName)}CR.ACTION_DELETE_RECORD:
 			break;
-		case CR.ACTION_PREV_STEP:
-		case CR.ACTION_PREV_RECORD:
+		case ${helper.NameAsThis(scopeName)}CR.ACTION_PREV_STEP:
+		case ${helper.NameAsThis(scopeName)}CR.ACTION_PREV_RECORD:
 		default:
 			// 这些情况不需要保存提交的数据
 			return;
@@ -586,10 +591,9 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 		CRSpec crSpec = CR(postedData.getChangeRequestType());
 		if (postedData.getVerifyMessage() != null && postedData.getVerifyMessage().size()>0) {
 			String msg = SCENE(crSpec, postedData.getSceneCode()).getTitle()+"输入参数错误";
-			${projectName?cap_first}Exception exception = wrapTo${projectName?cap_first}Exception(postedData, msg);
-			throw exception;
+			throw wrapTo${projectName?cap_first}Exception(postedData, msg);
 		}
-		if (CR.ACTION_DELETE_RECORD.equals(postedData.getActionCode())){
+		if (${helper.NameAsThis(scopeName)}CR.ACTION_DELETE_RECORD.equals(postedData.getActionCode())){
             CRGroupSpec groupSpec = GROUP_SPEC(postedData.getActionGroup());
             deleteEvent(groupSpec, postedData.getChangeRequestId(), postedData.getRecordId());
         }
@@ -611,7 +615,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 			if (groupSpec == null) {
 				error("无法处理提交的 "+groupName+" 的数据");
 			}
-			if (groupSpec.getName().equals(postedData.getActionGroup()) && CR.ACTION_DELETE_RECORD.equals(postedData.getActionCode())) {
+			if (groupSpec.getName().equals(postedData.getActionGroup()) && ${helper.NameAsThis(scopeName)}CR.ACTION_DELETE_RECORD.equals(postedData.getActionCode())) {
 				// deleteGroup(groupSpec, postedData.getChangeRequestId(),fieldValues);
 				continue;
 			}
@@ -620,7 +624,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 <#list projectSpec.changeRequestList as crSpec>
 	<#list crSpec.stepList as scene>
 		<#list scene.eventList as group>
-			case CR.${helper.JAVA_CONST(crSpec.changeRequestType)}.SCENE_${helper.JAVA_CONST(scene.name)}.GROUP_${helper.JAVA_CONST(group.name)}.NAME:
+			case ${helper.NameAsThis(scopeName)}CR.${helper.JAVA_CONST(crSpec.changeRequestType)}.SCENE_${helper.JAVA_CONST(scene.name)}.GROUP_${helper.JAVA_CONST(group.name)}.NAME:
 				save${helper.CamelName(crSpec.changeRequestType)}${helper.CamelName(scene.name)}${helper.CamelName(group.name)}(crId, crSpec.getChangeRequestType(), fieldValues,currentUserInfo);
 				break;
 		</#list>
@@ -650,7 +654,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 <#list projectSpec.changeRequestList as crSpec>
 	<#list crSpec.stepList as scene>
 		<#list scene.eventList as group>
-			case CR.${helper.JAVA_CONST(crSpec.changeRequestType)}.SCENE_${helper.JAVA_CONST(scene.name)}.GROUP_${helper.JAVA_CONST(group.name)}.NAME:{
+			case ${helper.NameAsThis(scopeName)}CR.${helper.JAVA_CONST(crSpec.changeRequestType)}.SCENE_${helper.JAVA_CONST(scene.name)}.GROUP_${helper.JAVA_CONST(group.name)}.NAME:{
 				Event${helper.CamelName(group.eventType)} event = getUserContext().getDAOGroup().getEvent${helper.CamelName(group.eventType)}DAO().load(eventId, EO);
 				getUserContext().getManagerGroup().getChangeRequestManager().removeEvent${helper.CamelName(group.eventType)}(getUserContext(), crId, eventId, event.getVersion(), new String[]{});
 				removeEventInfoFromCR(eventsInfo, event.getInternalType()+"_"+event.getId());
@@ -694,7 +698,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 				${helper.getJavaType(field.inputType)} ${helper.javaVar(field.name)} = get${helper.CamelName(field.inputType)}Value(fieldValue.get("${helper.javaVar(field.name)}"));
 				</#if>
 			</#list>
-				String fieldGroup = CR.${helper.JAVA_CONST(crSpec.changeRequestType)}.SCENE_${helper.JAVA_CONST(scene.name)}.GROUP_${helper.JAVA_CONST(group.name)}.NAME; //"${helper.javaVar(scene.name)}_${helper.javaVar(group.name)}";
+				String fieldGroup = ${helper.NameAsThis(scopeName)}CR.${helper.JAVA_CONST(crSpec.changeRequestType)}.SCENE_${helper.JAVA_CONST(scene.name)}.GROUP_${helper.JAVA_CONST(group.name)}.NAME; //"${helper.javaVar(scene.name)}_${helper.javaVar(group.name)}";
 				String eventInitiatorType = currentUserInfo.getInternalType();
 				String eventInitiatorId = currentUserInfo.getId();
 				String changeRequestId = crId;
@@ -886,7 +890,7 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
 	<#list crSpec.stepList as scene>
 		<#list scene.eventList as group>
 		    <#list group.fieldList as field>
-		           <#assign field_name_const = "CR."+helper.JAVA_CONST(crSpec.changeRequestType)+".FIELD_"+helper.NAME_AS_THIS(field.name)+"_IN_"+helper.JAVA_CONST(group.name)+"_OF_"+helper.JAVA_CONST(scene.name)/>
+		           <#assign field_name_const = "${helper.NameAsThis(scopeName)}CR."+helper.JAVA_CONST(crSpec.changeRequestType)+".FIELD_"+helper.NAME_AS_THIS(field.name)+"_IN_"+helper.JAVA_CONST(group.name)+"_OF_"+helper.JAVA_CONST(scene.name)/>
 		        <#if helper.canFillFromRequest(field)>
 		case ${field_name_const}: // from request
 		    if (TextUtil.isBlank(userContext.get${helper.NameAsThis(field.autoFillExpression?substring(10))}())) {
@@ -950,6 +954,11 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
         }
 
         fieldData.setType(fieldSpec.getUiStyle());
+        if (fieldData.getType().equals("prompt-message")){
+            fieldData.setType("display-field");
+            fieldData.setValue(makePromptValue(String.valueOf(fieldData.getValue())));
+            fieldData.setRules(null);
+        }
         fieldData.setRequired(fieldSpec.getRequired());
         fieldData.setHidden(fieldSpec.getUiStyle().equals("hidden"));
         String url = fillRequestParameters(crContext, fieldSpec, groupData, fieldData);
@@ -960,56 +969,6 @@ public class ${projectName?cap_first}ChangeRequestHelper extends BaseChangeReque
             );
             fieldData.setLinkToUrl(url.replace(":keyword","+"));
         }
-        /*
-        if (fieldSpec.getInteractionMode().equals("display")) {
-            fieldData.setType("prompt-message");
-            fieldData.setRequired(false);
-        } else if (fieldSpec.getInteractionMode().equals("hidden")) {
-            fieldData.setHidden(true);
-            fieldData.setType("hidden");
-        } else {
-            String queryCandidateWay = getFieldNeedQueryForCandidates(fieldSpec);
-            if (queryCandidateWay == null) {
-              if (fieldSpec.getUiStyle().equals("text")
-                  && DataTypeUtil.getInt(fieldSpec.getMaximum(), 40) > 100) {
-                fieldData.setType("textarea");
-              } else if (fieldSpec.getUiStyle().equals("richtext")
-                  && DataTypeUtil.getInt(fieldSpec.getMaximum(), 40) > 100) {
-                fieldData.setType("richtext");
-              } else {
-                fieldData.setType(fieldSpec.getUiStyle());
-              }
-            } else {
-              if (CRFieldSpec.MULTI_SELECTABLE.equals(fieldSpec.getSelectable())) {
-                if (queryCandidateWay.equals("picker")) {
-                    fieldData.setType("object-picker");
-                    fieldData.setMaxSelectCount(DataTypeUtil.getInt(fieldSpec.getMaximum(), 10));
-                    String url = fillRequestParameters(crContext, fieldSpec, groupData, fieldData);
-                    fieldData.setSearchAction(new VComponentAction().code("search")
-                            .title(fieldSpec.getTipsContent()==null?"搜索":fieldSpec.getTipsContent())
-                            .linkToUrl(url)
-                    );
-                    fieldData.setLinkToUrl(url.replace(":keyword","+"));
-                }else{
-                    fieldData.setType("multi-select");
-                }
-              } else {
-                  if (queryCandidateWay.equals("picker")) {
-                      fieldData.setType("object-picker");
-                      fieldData.setMaxSelectCount(1);
-                      String url = fillRequestParameters(crContext, fieldSpec, groupData, fieldData);
-                      fieldData.setSearchAction(new VComponentAction().code("search")
-                              .title(fieldSpec.getTipsContent()==null?"搜索":fieldSpec.getTipsContent())
-                              .linkToUrl(url)
-                      );
-                      fieldData.setLinkToUrl(url.replace(":keyword","+"));
-                  }else{
-                      fieldData.setType("single-select");
-                  }
-              }
-            }
-        }
-        */
 
         fieldData.setCandidateValues(
                 convertToUiCandidateValues(fieldSpec,

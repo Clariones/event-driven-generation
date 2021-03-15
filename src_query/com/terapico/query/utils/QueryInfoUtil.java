@@ -50,6 +50,11 @@ public class QueryInfoUtil extends BaseQueryInfoUtil {
 
 
         String selectClause = SelectClauseUtil.makeSelectClause(this, targetAlias);// "\"select DISTINCT "+targetAlias+".* from ";//
+        if (this.getQueryName().contains("absent in customer")){
+            System.out.println(Utils.toJson(pathMap));
+            System.out.println(Utils.toJson(getWhereClause()));
+            SqlMakerV2.test(pathMap, getWhereClause());
+        }
         String fromClause = SelectClauseUtil.makeFromClause(pathMap, arc);
         String whereClause = WhereClauseUtil.makeWhere(this.getWhereClause());
         String paginationClause = "";

@@ -1,6 +1,9 @@
 package com.terapico.changerequest.builder;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import cla.edg.modelbean.BaseAttribute;
@@ -503,6 +506,66 @@ public class ChangeRequestSpecBaseBuilder<T extends ChangeRequestSpecBaseBuilder
 		}else {
 			error("只有Field支持设定on-change参数");
 		}
+		return me;
+	}
+
+	protected Map<String, Object> cachedCommand;
+	protected T startCommand(String methodCode){
+		cachedCommand = new HashMap<>();
+		cachedCommand.put("_$method", methodCode);
+		return me;
+	}
+	protected T argInQueue(String name, Object value){
+		cachedCommand.put(name, value);
+		return me;
+	}
+	protected String cachedMethodName(){
+		return (String) cachedCommand.get("_$method");
+	}
+	protected <AT> AT cachedArg(String name){
+		return (AT) cachedCommand.get(name);
+	}
+	public T when_value_of(String fieldName){
+		if(workingBoard.isBuildingField()) {
+//			service.setOnChangeApi($CR(),$STEP(),$EVENT(),$FIELD(), targetName);
+//			workingBoard.onJob(WorkingBoard.ON_CHANGE_API);
+			return startCommand("appendFieldInteraction").argInQueue("fieldName", fieldName);
+		}else {
+			error("只有Field支持设定字段间互动");
+		}
+		return me;
+	}
+
+	public T eq(Object value) {
+		if(workingBoard.isBuildingField()) {
+			return argInQueue("operation", "eq").argInQueue("value", value);
+		}else {
+			error("只有Field支持设定字段间互动");
+		}
+		return me;
+	}
+	public T not(Object value) {
+		if(workingBoard.isBuildingField()) {
+			return argInQueue("operation", "not_eq").argInQueue("value", value);
+		}else {
+			error("只有Field支持设定字段间互动");
+		}
+		return me;
+	}
+	public T then_do_action(String actionName) {
+		String methodName = cachedMethodName();
+		switch (methodName){
+			case "appendFieldInteraction":
+				service.addFieldInteraction($CR(),$STEP(),$EVENT(),$FIELD(),
+						cachedArg("fieldName"), cachedArg("operation"), cachedArg("value"), actionName);
+				return me;
+			default:
+				throw new RuntimeException("不支持的方法"+methodName);
+		}
+	}
+
+	public T config(Map<String, String> envVars) {
+		service.setConfig(envVars);
 		return me;
 	}
 }

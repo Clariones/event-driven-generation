@@ -58,9 +58,9 @@ public abstract class Basic${class_name}ViewBizService extends ${class_name}View
 	}
 
 	public Object customGetOssToken(${custom_context_name} ctx) throws Exception {
-        String userUploadHome = "upload/anonymous";
+        String userUploadHome = "upload/${helper.nameAsThis(project_name)?lower_case}/anonymous";
         if (ctx.getCurrentUserInfo() != null) {
-            userUploadHome = "upload/" + ctx.getCurrentUserInfo().getId();
+            userUploadHome = "upload/${helper.nameAsThis(project_name)?lower_case}/" + ctx.getCurrentUserInfo().getId();
         }
         // we will output json only
         ctx.forceRenderingAsJson();

@@ -20,12 +20,22 @@ import com.terapico.changerequest.spec.StepSpec;
 
 public abstract class CRSBuildingServiceBaseLocalImpl implements ChangeRequestSpecBuildingService {
 	protected ProjectChangeRequestSpec projectSpec;
+	protected Map<String, String> config;
 	protected static final AtomicLong eventCount = new AtomicLong(0);
 
 	protected void error(String message) {
 		throw new RuntimeException(message);
 	}
-	
+
+	public Map<String, String> getConfig() {
+		return config;
+	}
+
+	@Override
+	public void setConfig(Map<String, String> config) {
+		this.config = config;
+	}
+
 	public ProjectChangeRequestSpec getProjectSpec() {
 		return projectSpec;
 	}
@@ -265,6 +275,7 @@ public abstract class CRSBuildingServiceBaseLocalImpl implements ChangeRequestSp
 		
 		result.put(FIELD.TYPE, fieldSpec.getInputType().getSystemTypeName());
 		putIfNotNull(result, FIELD.MODEL_NAME, fieldSpec.getModelName());
+		putIfNotNull(result, "extraData", fieldSpec.getExtraData());
 		putIfNotNull(result, FIELD.PLACE_HOLDER, fieldSpec.getPlaceholder());
 		putIfNotNull(result, FIELD.TIPS_CONTENT, fieldSpec.getTipsContext());
 		putIfNotNull(result, FIELD.TIPS_TITLE, fieldSpec.getTipsTitle());

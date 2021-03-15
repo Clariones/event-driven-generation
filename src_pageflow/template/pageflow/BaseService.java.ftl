@@ -52,9 +52,7 @@ import com.terapico.caf.baseelement.LoginParam;
 import com.terapico.caf.appview.ChangeRequestPostData;
 import com.terapico.caf.appview.ChangeRequestProcessResult;
 import com.terapico.caf.viewcomponent.GenericFormPage;
-import ${base_package}.ChangeRequestHelper;
-import ${base_package}.CR;
-import ${base_package}.ChangeRequestHelper;
+import ${base_package}.*;
 	<#if has_cr_need_process>
 import com.terapico.uccaf.CafEntity;
 import ${base_package}.changerequest.ChangeRequest;
@@ -95,6 +93,9 @@ public abstract class Base${class_name}ViewService extends ${parent_class_name} 
 <#list helper.getAllBrachNames(script) as branchName>
 	public static final int PRC_${NAMING.toJavaConstStyle(branchName)} = ${branchName?index};
 </#list>
+
+
+
 	protected boolean returnRightNow(int resultCode) {
 		return $PRC_RESULT_OBJECT_WAS_SET == resultCode;
 	}
@@ -230,9 +231,9 @@ public abstract class Base${class_name}ViewService extends ${parent_class_name} 
 		<#assign crName = request.changeRequestName/>
 	/** 处理请求：开始:${request.comments!}. */
 	protected int processRequest${methodName?cap_first}(${custom_context_name} ctx) throws Exception {
-		ChangeRequestHelper crHelper = ChangeRequestHelper.of(ctx);
+		${helper.NameAsThis(bean_name)}ChangeRequestHelper crHelper = ${helper.NameAsThis(bean_name)}ChangeRequestHelper.of(ctx);
 		GenericFormPage response = crHelper.assemblerChangeRequstFirstStepResponse(ctx.getCurrentUserInfo(),
-					CR.${helper.NAME_AS_THIS(crName)}.NAME, make${NAMING.toCamelCase(request.name)}Url(ctx));
+					${helper.NameAsThis(bean_name)}CR.${helper.NAME_AS_THIS(crName)}.NAME, make${NAMING.toCamelCase(request.name)}Url(ctx));
 		ctx.setChangeRequestResponse(response);
 		return PRC_BY_DEFAULT;
 	}
@@ -241,9 +242,9 @@ public abstract class Base${class_name}ViewService extends ${parent_class_name} 
 	protected int processRequest${T.getRequestProcessingMethodName(request)?cap_first}(${custom_context_name} ctx) throws Exception { <#if !request.changeRequestName?has_content>return PRC_BY_DEFAULT;}
 	<#else>
 
-		ChangeRequestHelper crHelper = ChangeRequestHelper.of(ctx);
+		${helper.NameAsThis(bean_name)}ChangeRequestHelper crHelper = ${helper.NameAsThis(bean_name)}ChangeRequestHelper.of(ctx);
 		ChangeRequestPostData postedData = crHelper.parsePostedData(ctx.getRequestParameters());
-		if (postedData.getActionCode().equals(CR.ACTION_REFRESH_ON_CHANGE)){
+		if (postedData.getActionCode().equals(${helper.NameAsThis(bean_name)}CR.ACTION_REFRESH_ON_CHANGE)){
             Object response = crHelper.assemblerChangeRequstResponse(ctx.getCurrentUserInfo(), postedData, make${NAMING.toCamelCase(request.name)}Url(ctx));
             ctx.setResultObject(response);
             return $PRC_RESULT_OBJECT_WAS_SET;

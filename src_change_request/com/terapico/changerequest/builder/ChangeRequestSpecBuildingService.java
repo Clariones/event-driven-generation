@@ -108,4 +108,8 @@ public interface ChangeRequestSpecBuildingService {
 	void referToModel(String modelTypeName);
 
     void setOnChangeApi(String crName, String stepName, String eventName, String fieldName, String targetName);
+
+    void addFieldInteraction(String crName, String stepName, String eventName, String fieldName, String refFieldName, String refOperation, Object refValue, String actionCode);
+
+    void setConfig(Map<String, String> envVars);
 }

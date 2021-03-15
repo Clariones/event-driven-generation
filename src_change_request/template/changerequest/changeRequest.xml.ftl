@@ -1,16 +1,6 @@
 <root>
   	
-  <change_request_type
-	name="名称:value()|[1,100]"
-	code="代码:value()|[1,100]"
-    icon="图标:value()|[1,100]"
-    display_order="显示顺序:1|2|3|4|5|6"
-    bind_types="text()"
-    step_configuration="text()"
-    platform="$(platform)"
-    _features="cr_type"
-    _identified_by="code"
-  >
+  <change_request_type>
 <#list projectSpec.changeRequestList as crSpec>
     <${'#'}value name="${crSpec.title}" code="${helper.NAME_AS_THIS(crSpec.changeRequestType!"what?")}" icon="${crSpec.icon}"/>
 </#list>
