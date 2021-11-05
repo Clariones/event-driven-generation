@@ -1,5 +1,0 @@
-platform()
-	.config()
-		.config(slide)).by(merchant type).with_order()
-		.config(marketing type).for(wxapp)only
-			.config(artile list).with_order

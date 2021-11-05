@@ -1,9 +1,8 @@
 package cla.edg.graph;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-
-import com.terapico.generator.Utils;
+import cla.edg.Utils;
 
 class InMemoryGraphTest {
 	@Test
